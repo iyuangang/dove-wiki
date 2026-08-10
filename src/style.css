@@ -945,19 +945,21 @@ input:focus {
 
 .detail-portrait {
   display: grid;
-  width: 112px;
-  height: 112px;
+  width: 182px;
+  height: 175px;
   flex: 0 0 auto;
   place-items: center;
   border: 1px solid var(--line-bright);
-  border-radius: 50%;
+  border-radius: 14px;
   background: radial-gradient(circle, rgba(229, 185, 104, 0.16), transparent 70%);
   box-shadow: inset 0 0 0 6px rgba(229, 185, 104, 0.025);
+  overflow: hidden;
 }
 
 .detail-portrait img {
   width: 100%;
   height: 100%;
+  object-fit: contain;
 }
 
 .detail-hero h2 {

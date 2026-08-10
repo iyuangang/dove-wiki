@@ -39,6 +39,12 @@ export interface Tower {
   families: TowerFamily[]
   roles: string[]
   image: string
+  encyclopediaImage: string
+  encyclopediaOrder: number
+  encyclopediaListed: boolean
+  encyclopediaSprite: string | null
+  encyclopediaThumbSprite: string | null
+  sourceGame: number | null
   portraitSprite: string | null
   price: number | null
   level: number | null
@@ -60,6 +66,7 @@ export interface Tower {
     descriptionKey: string | null
     localization: string
     portrait: string
+    encyclopedia: string | null
     unlock: string
   }
 }
@@ -99,6 +106,8 @@ export interface DoveData {
   summary: {
     towerCount: number
     portraitCount: number
+    encyclopediaImageCount: number
+    portraitFallbackCount: number
     supportTowerCount: number
     supportEffectCount: number
     levelUnlockCount: number

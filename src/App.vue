@@ -87,7 +87,7 @@ function openTower(tower: Tower) {
     <footer class="site-footer">
       <span>Dove 数据驱动塔典</span>
       <span>提交 {{ doveData.metadata.commitHash.slice(0, 8) }}</span>
-      <span>93 张游戏原生头像 · 无科技树修正</span>
+      <span>{{ doveData.summary.encyclopediaImageCount }} 套百科图 · {{ doveData.summary.portraitFallbackCount }} 张基础塔头像回退 · 无科技树修正</span>
     </footer>
 
     <DetailPanel :tower="selectedTower" @close="selectedTowerId = null" />

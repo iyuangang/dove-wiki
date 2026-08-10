@@ -40,7 +40,7 @@ function latestPowerDescription(tower: Tower, powerIndex: number) {
 
           <div class="detail-hero">
             <div class="detail-portrait">
-              <img :src="tower.image" :alt="`${tower.name}头像`" />
+              <img :src="tower.encyclopediaImage" :alt="`${tower.name}${tower.encyclopediaListed ? '百科插图' : '头像'}`" />
             </div>
             <div>
               <div class="eyebrow">TOWER DOSSIER · {{ tower.attack.confidence }}</div>
@@ -48,6 +48,7 @@ function latestPowerDescription(tower: Tower, powerIndex: number) {
               <code>{{ tower.id }}</code>
               <div class="detail-family-row">
                 <span v-for="family in tower.families" :key="family">{{ familyLabels[family] }}</span>
+                <span v-if="tower.encyclopediaListed">百科 #{{ tower.encyclopediaOrder }}</span>
                 <span>等级 {{ tower.level ?? '—' }}</span>
                 <span v-if="tower.price !== null">造价 {{ tower.price }}</span>
               </div>
@@ -133,7 +134,11 @@ function latestPowerDescription(tower: Tower, powerIndex: number) {
               <div><dt>模板</dt><dd>{{ tower.sources.template || '运行时注册' }}</dd></div>
               <div><dt>中文</dt><dd>{{ tower.sources.descriptionKey || tower.sources.localization }}</dd></div>
               <div><dt>解锁</dt><dd>{{ tower.sources.unlock }}</dd></div>
-              <div><dt>头像</dt><dd>{{ tower.portraitSprite }}</dd></div>
+              <div>
+                <dt>图像</dt>
+                <dd>{{ tower.encyclopediaSprite || tower.portraitSprite }}</dd>
+              </div>
+              <div><dt>排序</dt><dd>{{ tower.encyclopediaListed ? `游戏百科 #${tower.encyclopediaOrder}` : `基础塔后置 #${tower.encyclopediaOrder}` }}</dd></div>
             </dl>
           </section>
         </section>

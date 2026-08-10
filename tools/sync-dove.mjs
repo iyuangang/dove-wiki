@@ -31,6 +31,8 @@ const rawPath = join(rawDir, 'dove-raw.json')
 const dataDir = join(projectRoot, 'src', 'data')
 const dataPath = join(dataDir, 'dove-data.json')
 const portraitDir = join(projectRoot, 'public', 'portraits')
+const encyclopediaDir = join(projectRoot, 'public', 'encyclopedia')
+const encyclopediaThumbDir = join(encyclopediaDir, 'thumbs')
 
 function assertFile(path, label) {
   if (!existsSync(path)) {
@@ -425,7 +427,14 @@ function inferRoles(tower, supportIds) {
   return unique
 }
 
-function normalizeTower(rawTower, localization, unlock, source, supportIds) {
+function normalizeTower(
+  rawTower,
+  localization,
+  unlock,
+  source,
+  supportIds,
+  encyclopediaOrder,
+) {
   const localized = localizeTower(localization, rawTower.id)
   rawTower.localized = localized
   const info = rawTower.computed_info || {}
@@ -447,13 +456,24 @@ function normalizeTower(rawTower, localization, unlock, source, supportIds) {
     ? rawTower.template.barrack.rally_range
     : null
   const canBeBuffed = rawTower.template?.tower?.can_be_mod !== false
+  const encyclopediaListed = Boolean(rawTower.encyclopedia)
   const tower = {
     id: rawTower.id,
     name: localized.name,
     description: localized.description,
     families: rawTower.families,
     roles: [],
-    image: `/portraits/${rawTower.id}.png`,
+    image: encyclopediaListed
+      ? `/encyclopedia/thumbs/${rawTower.id}.png`
+      : `/portraits/${rawTower.id}.png`,
+    encyclopediaImage: encyclopediaListed
+      ? `/encyclopedia/${rawTower.id}.png`
+      : `/portraits/${rawTower.id}.png`,
+    encyclopediaOrder,
+    encyclopediaListed,
+    encyclopediaSprite: rawTower.encyclopedia?.detail_sprite || null,
+    encyclopediaThumbSprite: rawTower.encyclopedia?.thumb_sprite || null,
+    sourceGame: rawTower.encyclopedia?.from_kr || null,
     portraitSprite: rawTower.template?.info?.portrait || null,
     price: Number.isFinite(rawTower.template?.tower?.price)
       ? rawTower.template.tower.price
@@ -495,6 +515,9 @@ function normalizeTower(rawTower, localization, unlock, source, supportIds) {
       descriptionKey: localized.descriptionKey,
       localization: '_assets/kr1-desktop/strings/zh-Hans.lua',
       portrait: '_assets/kr1-desktop/images/fullhd/gui_portraits.lua',
+      encyclopedia: encyclopediaListed
+        ? 'kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua'
+        : null,
       unlock: unlock.source,
     },
   }
@@ -516,12 +539,30 @@ async function cleanupPortraits(rawTowers) {
   }
 }
 
+async function cleanupEncyclopediaImages(rawTowers) {
+  const expected = new Set(
+    rawTowers
+      .filter((tower) => tower.encyclopedia)
+      .map((tower) => `${tower.id}.png`),
+  )
+
+  for (const directory of [encyclopediaDir, encyclopediaThumbDir]) {
+    const resolvedDirectory = resolve(directory)
+    for (const filename of await readdir(directory)) {
+      const fullPath = resolve(directory, filename)
+      if (dirname(fullPath) !== resolvedDirectory) continue
+      if (filename.endsWith('.png') && !expected.has(filename)) await unlink(fullPath)
+    }
+  }
+}
+
 async function main() {
   assertFile(join(gameDir, 'kr1', 'game_settings.lua'), 'Dove 游戏目录')
   assertFile(loveExe, 'Dove 自带 lovec.exe')
   await mkdir(rawDir, { recursive: true })
   await mkdir(dataDir, { recursive: true })
   await mkdir(portraitDir, { recursive: true })
+  await mkdir(encyclopediaThumbDir, { recursive: true })
 
   console.log(`[dove-wiki] 读取游戏：${gameDir}`)
   run(loveExe, [join(toolsDir, 'love-extractor')], {
@@ -531,6 +572,7 @@ async function main() {
       DOVE_GAME_DIR: gameDir,
       DOVE_RAW_OUTPUT: rawPath,
       DOVE_PORTRAIT_DIR: portraitDir,
+      DOVE_ENCYCLOPEDIA_DIR: encyclopediaDir,
     },
   })
 
@@ -545,17 +587,23 @@ async function main() {
     supportIds.get(effect.sourceTowerId).push(effect)
   }
 
-  const towers = raw.towers.map((tower) =>
-    normalizeTower(
-      tower,
-      raw.localization,
-      unlocks.get(tower.id),
-      sourceIndex.get(tower.id),
-      supportIds,
-    ),
-  )
+  const encyclopediaCount = raw.towers.filter((tower) => tower.encyclopedia).length
+  let fallbackOrder = encyclopediaCount
+  const towers = raw.towers
+    .map((tower) =>
+      normalizeTower(
+        tower,
+        raw.localization,
+        unlocks.get(tower.id),
+        sourceIndex.get(tower.id),
+        supportIds,
+        tower.encyclopedia?.order || ++fallbackOrder,
+      ),
+    )
+    .sort((a, b) => a.encyclopediaOrder - b.encyclopediaOrder)
 
   await cleanupPortraits(raw.towers)
+  await cleanupEncyclopediaImages(raw.towers)
 
   const versionSource = await readFile(join(gameDir, 'version.lua'), 'utf8')
   const commitHash = (
@@ -584,6 +632,8 @@ async function main() {
     summary: {
       towerCount: towers.length,
       portraitCount: raw.towers.filter((tower) => tower.portrait_atlas).length,
+      encyclopediaImageCount: encyclopediaCount,
+      portraitFallbackCount: towers.length - encyclopediaCount,
       supportTowerCount,
       supportEffectCount: supportEffects.length,
       levelUnlockCount: towers.filter((tower) => tower.unlock.status === 'level').length,
@@ -614,7 +664,7 @@ async function main() {
   await writeFile(dataPath, `${JSON.stringify(data, null, 2)}\n`, 'utf8')
   const dataSize = await stat(dataPath)
   console.log(
-    `[dove-wiki] 完成：${towers.length} 座塔、${raw.towers.length} 张头像、${Math.round(dataSize.size / 1024)} KiB 数据`,
+    `[dove-wiki] 完成：${towers.length} 座塔、${encyclopediaCount} 套百科图、${towers.length - encyclopediaCount} 张头像回退、${Math.round(dataSize.size / 1024)} KiB 数据`,
   )
   console.log(`[dove-wiki] 解锁异常：${missingUnlocks.length}；不可统一折算伤害：${missingDamage.length}`)
 }
