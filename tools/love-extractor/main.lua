@@ -1,6 +1,7 @@
 local game_root = os.getenv("DOVE_GAME_DIR")
 local raw_output = os.getenv("DOVE_RAW_OUTPUT")
 local portrait_output = os.getenv("DOVE_PORTRAIT_DIR")
+local encyclopedia_output = os.getenv("DOVE_ENCYCLOPEDIA_DIR")
 
 local function fail(message)
 	io.stderr:write("[dove-wiki] " .. message .. "\n")
@@ -252,10 +253,47 @@ local function load_lua_table(path)
 	return chunk()
 end
 
+local function load_encyclopedia_index()
+	local path = join_path(game_root, "kr1-desktop/data/map_data.lua")
+	local handle = assert(io.open(path, "rb"))
+	local source = handle:read("*a")
+	handle:close()
+
+	local tower_data = assert(source:match("tower_data=(%b{})"), "map_data.lua is missing tower_data")
+	local entries = {}
+	local order = 0
+
+	for item in tower_data:gmatch("{([^{}]+)}") do
+		local tower_id = item:match('name="([^"]+)"')
+		local icon = tonumber(item:match("icon=(%d+)"))
+		local detail_icon = tonumber(item:match("detail_icon=(%d+)"))
+
+		if tower_id and icon and detail_icon then
+			order = order + 1
+			local from_kr = tonumber(item:match("from_kr=(%d+)")) or 1
+			local prefix = from_kr == 1 and "" or "kr" .. from_kr .. "_"
+
+			entries[tower_id] = {
+				order = order,
+				from_kr = from_kr,
+				icon = icon,
+				detail_icon = detail_icon,
+				thumb_sprite = prefix .. string.format("encyclopedia_tower_thumbs_%04i", icon),
+				detail_sprite = prefix .. string.format("encyclopedia_towers_%04i", detail_icon)
+			}
+		end
+	end
+
+	return entries
+end
+
 local function build_raw_export(entity_db)
 	local settings = require("game_settings")
 	local localization = load_lua_table("_assets/kr1-desktop/strings/zh-Hans.lua")
 	local portrait_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/gui_portraits.lua")
+	local encyclopedia_thumb_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/encyclopedia.lua")
+	local encyclopedia_detail_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/encyclopedia_creeps.lua")
+	local encyclopedia_index = load_encyclopedia_index()
 	local family_lists = {
 		{name = "archer", towers = settings.archer_towers},
 		{name = "mage", towers = settings.mage_towers},
@@ -345,6 +383,19 @@ local function build_raw_export(entity_db)
 			end
 		end
 
+		local encyclopedia = encyclopedia_index[tower_id]
+		if encyclopedia then
+			record.encyclopedia = copy_jsonable(encyclopedia, 4)
+			record.encyclopedia.thumb_atlas = copy_jsonable(
+				encyclopedia_thumb_atlas[encyclopedia.thumb_sprite],
+				4
+			)
+			record.encyclopedia.detail_atlas = copy_jsonable(
+				encyclopedia_detail_atlas[encyclopedia.detail_sprite],
+				4
+			)
+		end
+
 		towers[#towers + 1] = record
 	end
 
@@ -354,56 +405,62 @@ local function build_raw_export(entity_db)
 	}
 end
 
+local function export_atlas_crop(atlas, output_path, image_cache)
+	if not atlas or not atlas.a_name or not atlas.f_quad or not atlas.size then
+		error("missing atlas metadata for " .. output_path)
+	end
+
+	local image = image_cache[atlas.a_name]
+	if not image then
+		local atlas_path = join_path(game_root, "_assets/kr1-desktop/images/fullhd/" .. atlas.a_name)
+		local input = assert(io.open(atlas_path, "rb"))
+		local contents = input:read("*a")
+		input:close()
+
+		local file_data = love.filesystem.newFileData(contents, atlas.a_name)
+		image = love.graphics.newImage(file_data)
+		image:setFilter("nearest", "nearest")
+		image_cache[atlas.a_name] = image
+	end
+
+	local x, y, width, height = unpack(atlas.f_quad)
+	local canvas_width, canvas_height = unpack(atlas.size)
+	local left = atlas.trim and atlas.trim[1] or 0
+	local top = atlas.trim and atlas.trim[2] or 0
+	local atlas_width = atlas.a_size and atlas.a_size[1] or image:getWidth()
+	local atlas_height = atlas.a_size and atlas.a_size[2] or image:getHeight()
+	local quad = love.graphics.newQuad(x, y, width, height, atlas_width, atlas_height)
+	local canvas = love.graphics.newCanvas(canvas_width, canvas_height, {format = "rgba8"})
+
+	love.graphics.push("all")
+	love.graphics.setCanvas(canvas)
+	love.graphics.clear(0, 0, 0, 0)
+	love.graphics.setColor(1, 1, 1, 1)
+	love.graphics.draw(image, quad, left, top)
+	love.graphics.setCanvas()
+	love.graphics.pop()
+
+	local image_data = canvas:newImageData()
+	local png_data = image_data:encode("png")
+	local output = assert(io.open(output_path, "wb"))
+	output:write(png_data:getString())
+	output:close()
+
+	quad:release()
+	canvas:release()
+	image_data:release()
+	png_data:release()
+end
+
 local function export_portraits(towers)
 	local image_cache = {}
 
 	for index, tower in ipairs(towers) do
-		local atlas = tower.portrait_atlas
-		if not atlas or not atlas.a_name or not atlas.f_quad or not atlas.size then
-			error(tower.id .. " is missing portrait atlas metadata")
-		end
-
-		local image = image_cache[atlas.a_name]
-		if not image then
-			local atlas_path = join_path(game_root, "_assets/kr1-desktop/images/fullhd/" .. atlas.a_name)
-			local input = assert(io.open(atlas_path, "rb"))
-			local contents = input:read("*a")
-			input:close()
-
-			local file_data = love.filesystem.newFileData(contents, atlas.a_name)
-			image = love.graphics.newImage(file_data)
-			image:setFilter("nearest", "nearest")
-			image_cache[atlas.a_name] = image
-		end
-
-		local x, y, width, height = unpack(atlas.f_quad)
-		local canvas_width, canvas_height = unpack(atlas.size)
-		local left = atlas.trim and atlas.trim[1] or 0
-		local top = atlas.trim and atlas.trim[2] or 0
-		local atlas_width = atlas.a_size and atlas.a_size[1] or image:getWidth()
-		local atlas_height = atlas.a_size and atlas.a_size[2] or image:getHeight()
-		local quad = love.graphics.newQuad(x, y, width, height, atlas_width, atlas_height)
-		local canvas = love.graphics.newCanvas(canvas_width, canvas_height, {format = "rgba8"})
-
-		love.graphics.push("all")
-		love.graphics.setCanvas(canvas)
-		love.graphics.clear(0, 0, 0, 0)
-		love.graphics.setColor(1, 1, 1, 1)
-		love.graphics.draw(image, quad, left, top)
-		love.graphics.setCanvas()
-		love.graphics.pop()
-
-		local image_data = canvas:newImageData()
-		local png_data = image_data:encode("png")
-		local output_path = join_path(portrait_output, tower.id .. ".png")
-		local output = assert(io.open(output_path, "wb"))
-		output:write(png_data:getString())
-		output:close()
-
-		quad:release()
-		canvas:release()
-		image_data:release()
-		png_data:release()
+		export_atlas_crop(
+			tower.portrait_atlas,
+			join_path(portrait_output, tower.id .. ".png"),
+			image_cache
+		)
 
 		if index % 20 == 0 or index == #towers then
 			print(string.format("DOVE_WIKI_PORTRAITS=%d/%d", index, #towers))
@@ -413,6 +470,37 @@ local function export_portraits(towers)
 	for _, image in pairs(image_cache) do
 		image:release()
 	end
+end
+
+local function export_encyclopedia_images(towers)
+	local image_cache = {}
+	local exported = 0
+
+	for _, tower in ipairs(towers) do
+		if tower.encyclopedia then
+			export_atlas_crop(
+				tower.encyclopedia.thumb_atlas,
+				join_path(encyclopedia_output, "thumbs/" .. tower.id .. ".png"),
+				image_cache
+			)
+			export_atlas_crop(
+				tower.encyclopedia.detail_atlas,
+				join_path(encyclopedia_output, tower.id .. ".png"),
+				image_cache
+			)
+			exported = exported + 1
+
+			if exported % 20 == 0 then
+				print(string.format("DOVE_WIKI_ENCYCLOPEDIA=%d", exported))
+			end
+		end
+	end
+
+	for _, image in pairs(image_cache) do
+		image:release()
+	end
+
+	print(string.format("DOVE_WIKI_ENCYCLOPEDIA=%d", exported))
 end
 
 function love.load()
@@ -453,7 +541,8 @@ function love.load()
 		print("DOVE_WIKI_ENTITY_COUNT=" .. count)
 
 		local raw_export
-		if (raw_output and raw_output ~= "") or (portrait_output and portrait_output ~= "") then
+		if (raw_output and raw_output ~= "") or (portrait_output and portrait_output ~= "") or
+			(encyclopedia_output and encyclopedia_output ~= "") then
 			raw_export = build_raw_export(entity_db)
 		end
 
@@ -466,6 +555,10 @@ function love.load()
 
 		if portrait_output and portrait_output ~= "" then
 			export_portraits(raw_export.towers)
+		end
+
+		if encyclopedia_output and encyclopedia_output ~= "" then
+			export_encyclopedia_images(raw_export.towers)
 		end
 
 		local debug_tower = os.getenv("DOVE_DEBUG_TOWER")

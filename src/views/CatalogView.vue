@@ -10,13 +10,13 @@ const props = defineProps<{
 }>()
 defineEmits<{ open: [tower: Tower] }>()
 
-type SortId = 'name' | 'damage' | 'range' | 'unlock'
+type SortId = 'encyclopedia' | 'name' | 'damage' | 'range' | 'unlock'
 
 const search = ref('')
 const family = ref<'all' | TowerFamily>('all')
 const role = ref('all')
 const unlock = ref<'all' | UnlockStatus>('all')
-const sort = ref<SortId>('name')
+const sort = ref<SortId>('encyclopedia')
 
 const roles = computed(() =>
   [...new Set(props.towers.flatMap((tower) => tower.roles))].sort((a, b) =>
@@ -47,6 +47,7 @@ const filteredTowers = computed(() => {
   })
 
   return result.sort((a, b) => {
+    if (sort.value === 'encyclopedia') return a.encyclopediaOrder - b.encyclopediaOrder
     if (sort.value === 'damage') return (b.attack.dps ?? -1) - (a.attack.dps ?? -1)
     if (sort.value === 'range') {
       return (b.attack.range ?? b.attack.rallyRange ?? -1) - (a.attack.range ?? a.attack.rallyRange ?? -1)
@@ -68,7 +69,7 @@ function resetFilters() {
   family.value = 'all'
   role.value = 'all'
   unlock.value = 'all'
-  sort.value = 'name'
+  sort.value = 'encyclopedia'
 }
 </script>
 
@@ -98,7 +99,7 @@ function resetFilters() {
           <div class="warning"><strong>{{ summary.unlockAnomalyCount }}</strong><small>解锁异常</small></div>
         </div>
         <div class="ledger-foot">
-          <span><i></i>{{ summary.portraitCount }} 张头像已校验</span>
+          <span><i></i>{{ summary.encyclopediaImageCount }} 套百科图已还原</span>
           <span>{{ summary.exactDamageCount }}/{{ summary.towerCount }} 基础伤害可精确读取</span>
         </div>
       </div>
@@ -134,6 +135,7 @@ function resetFilters() {
         <label>
           <span>排序</span>
           <select v-model="sort">
+            <option value="encyclopedia">游戏百科顺序</option>
             <option value="name">名称</option>
             <option value="damage">理论 DPS</option>
             <option value="range">范围</option>
@@ -144,7 +146,10 @@ function resetFilters() {
     </div>
 
     <div class="result-line">
-      <p>找到 <strong>{{ filteredTowers.length }}</strong> 座塔</p>
+      <p>
+        找到 <strong>{{ filteredTowers.length }}</strong> 座塔
+        <span v-if="sort === 'encyclopedia'"> · 按游戏百科顺序</span>
+      </p>
       <button v-if="filteredTowers.length !== towers.length" type="button" @click="resetFilters">清除筛选</button>
     </div>
 
