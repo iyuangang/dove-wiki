@@ -33,6 +33,7 @@ const dataPath = join(dataDir, 'dove-data.json')
 const portraitDir = join(projectRoot, 'public', 'portraits')
 const encyclopediaDir = join(projectRoot, 'public', 'encyclopedia')
 const encyclopediaThumbDir = join(encyclopediaDir, 'thumbs')
+const skillIconDir = join(projectRoot, 'public', 'skills')
 
 function assertFile(path, label) {
   if (!existsSync(path)) {
@@ -79,33 +80,42 @@ function quotedValues(source) {
   )
 }
 
-function findTableBody(source, fieldName) {
-  const startMatch = new RegExp(`${fieldName}\\s*=\\s*\\{`).exec(source)
-  if (!startMatch) return ''
+function findTableBodies(source, fieldName) {
+  const bodies = []
+  const pattern = new RegExp(`\\b${fieldName}\\s*=\\s*\\{`, 'g')
 
-  const start = startMatch.index + startMatch[0].length
-  let depth = 1
-  let quote = null
-  let escaped = false
+  for (const startMatch of source.matchAll(pattern)) {
+    const start = startMatch.index + startMatch[0].length
+    let depth = 1
+    let quote = null
+    let escaped = false
 
-  for (let index = start; index < source.length; index += 1) {
-    const char = source[index]
-    if (quote) {
-      if (escaped) escaped = false
-      else if (char === '\\') escaped = true
-      else if (char === quote) quote = null
-      continue
-    }
+    for (let index = start; index < source.length; index += 1) {
+      const char = source[index]
+      if (quote) {
+        if (escaped) escaped = false
+        else if (char === '\\') escaped = true
+        else if (char === quote) quote = null
+        continue
+      }
 
-    if (char === '"' || char === "'") quote = char
-    else if (char === '{') depth += 1
-    else if (char === '}') {
-      depth -= 1
-      if (depth === 0) return source.slice(start, index)
+      if (char === '"' || char === "'") quote = char
+      else if (char === '{') depth += 1
+      else if (char === '}') {
+        depth -= 1
+        if (depth === 0) {
+          bodies.push(source.slice(start, index))
+          break
+        }
+      }
     }
   }
 
-  return ''
+  return bodies
+}
+
+function findTableBody(source, fieldName) {
+  return findTableBodies(source, fieldName)[0] || ''
 }
 
 async function buildUnlockIndex(towerIds) {
@@ -117,16 +127,22 @@ async function buildUnlockIndex(towerIds) {
   const unlockLevels = new Map()
 
   for (const filename of levelEntries) {
-    const match = /^level(\d+)_data\.lua$/.exec(filename)
+    const match = /^level(\d+)(?:_data)?\.lua$/.exec(filename)
     if (!match) continue
     const source = await readFile(join(levelDir, filename), 'utf8')
-    const body = findTableBody(source, 'unlock_towers')
-    if (!body) continue
+    const level = Number(match[1])
+    const sourcePath = `kr1/data/levels/${filename}`
 
-    for (const towerId of quotedValues(body)) {
-      const level = Number(match[1])
-      if (!unlockLevels.has(towerId) || level < unlockLevels.get(towerId)) {
-        unlockLevels.set(towerId, level)
+    for (const body of findTableBodies(source, 'unlock_towers')) {
+      for (const towerId of quotedValues(body)) {
+        const current = unlockLevels.get(towerId)
+        if (
+          !current ||
+          level < current.level ||
+          (level === current.level && sourcePath < current.source)
+        ) {
+          unlockLevels.set(towerId, { level, source: sourcePath })
+        }
       }
     }
   }
@@ -134,14 +150,14 @@ async function buildUnlockIndex(towerIds) {
   return new Map(
     towerIds.map((towerId) => {
       if (unlockLevels.has(towerId)) {
-        const level = unlockLevels.get(towerId)
+        const { level, source } = unlockLevels.get(towerId)
         return [
           towerId,
           {
             status: 'level',
             level,
             label: `第 ${level} 关开始可用，通关后永久解锁`,
-            source: `kr1/data/levels/level${level}_data.lua`,
+            source,
           },
         ]
       }
@@ -211,7 +227,7 @@ function cleanDynamicText(value) {
   return value?.replace(/%\$[^%]+%\$/g, '动态数值').replace(/\s+/g, ' ').trim()
 }
 
-function localizePowers(localization, towerId, powers = {}) {
+function localizePowers(localization, towerId, powers = {}, powerIcons = {}) {
   const exactBase = towerId.toUpperCase()
   const bases = [...new Set([exactBase, exactBase.replace(/_LVL4$/, '')])]
 
@@ -236,6 +252,8 @@ function localizePowers(localization, towerId, powers = {}) {
     return {
       id: powerId,
       name: nameKey ? localization[nameKey] : powerId.replaceAll('_', ' '),
+      icon: powerIcons[powerId] ? `/skills/${towerId}--${powerId}.png` : null,
+      iconSprite: powerIcons[powerId]?.sprite || null,
       maxLevel: Number(power.max_level || 0),
       priceBase: Number.isFinite(power.price_base) ? power.price_base : null,
       priceIncrement: Number.isFinite(power.price_inc) ? power.price_inc : null,
@@ -508,7 +526,12 @@ function normalizeTower(
           respawn: Number.isFinite(info.respawn) ? info.respawn : null,
         }
       : null,
-    powers: localizePowers(localization, rawTower.id, rawTower.template?.powers),
+    powers: localizePowers(
+      localization,
+      rawTower.id,
+      rawTower.template?.powers,
+      rawTower.power_icons,
+    ),
     sources: {
       template: source || null,
       nameKey: localized.nameKey,
@@ -556,6 +579,23 @@ async function cleanupEncyclopediaImages(rawTowers) {
   }
 }
 
+async function cleanupSkillIcons(rawTowers) {
+  const expected = new Set(
+    rawTowers.flatMap((tower) =>
+      Object.keys(tower.power_icons || {}).map(
+        (powerId) => `${tower.id}--${powerId}.png`,
+      ),
+    ),
+  )
+  const resolvedDirectory = resolve(skillIconDir)
+
+  for (const filename of await readdir(skillIconDir)) {
+    const fullPath = resolve(skillIconDir, filename)
+    if (dirname(fullPath) !== resolvedDirectory) continue
+    if (filename.endsWith('.png') && !expected.has(filename)) await unlink(fullPath)
+  }
+}
+
 async function main() {
   assertFile(join(gameDir, 'kr1', 'game_settings.lua'), 'Dove 游戏目录')
   assertFile(loveExe, 'Dove 自带 lovec.exe')
@@ -563,6 +603,7 @@ async function main() {
   await mkdir(dataDir, { recursive: true })
   await mkdir(portraitDir, { recursive: true })
   await mkdir(encyclopediaThumbDir, { recursive: true })
+  await mkdir(skillIconDir, { recursive: true })
 
   console.log(`[dove-wiki] 读取游戏：${gameDir}`)
   run(loveExe, [join(toolsDir, 'love-extractor')], {
@@ -573,6 +614,7 @@ async function main() {
       DOVE_RAW_OUTPUT: rawPath,
       DOVE_PORTRAIT_DIR: portraitDir,
       DOVE_ENCYCLOPEDIA_DIR: encyclopediaDir,
+      DOVE_SKILL_ICON_DIR: skillIconDir,
     },
   })
 
@@ -604,6 +646,7 @@ async function main() {
 
   await cleanupPortraits(raw.towers)
   await cleanupEncyclopediaImages(raw.towers)
+  await cleanupSkillIcons(raw.towers)
 
   const versionSource = await readFile(join(gameDir, 'version.lua'), 'utf8')
   const commitHash = (
@@ -615,6 +658,7 @@ async function main() {
   const missingDamage = towers.filter((tower) => tower.attack.damageMin === null)
   const missingSources = towers.filter((tower) => !tower.sources.template)
   const supportTowerCount = new Set(supportEffects.map((effect) => effect.sourceTowerId)).size
+  const skillIconCount = towers.flatMap((tower) => tower.powers).filter((power) => power.icon).length
   const data = {
     metadata: {
       title: 'Dove 防御塔 Wiki',
@@ -634,6 +678,7 @@ async function main() {
       portraitCount: raw.towers.filter((tower) => tower.portrait_atlas).length,
       encyclopediaImageCount: encyclopediaCount,
       portraitFallbackCount: towers.length - encyclopediaCount,
+      skillIconCount,
       supportTowerCount,
       supportEffectCount: supportEffects.length,
       levelUnlockCount: towers.filter((tower) => tower.unlock.status === 'level').length,
@@ -664,7 +709,7 @@ async function main() {
   await writeFile(dataPath, `${JSON.stringify(data, null, 2)}\n`, 'utf8')
   const dataSize = await stat(dataPath)
   console.log(
-    `[dove-wiki] 完成：${towers.length} 座塔、${encyclopediaCount} 套百科图、${towers.length - encyclopediaCount} 张头像回退、${Math.round(dataSize.size / 1024)} KiB 数据`,
+    `[dove-wiki] 完成：${towers.length} 座塔、${encyclopediaCount} 套百科图、${skillIconCount} 张技能图标、${towers.length - encyclopediaCount} 张头像回退、${Math.round(dataSize.size / 1024)} KiB 数据`,
   )
   console.log(`[dove-wiki] 解锁异常：${missingUnlocks.length}；不可统一折算伤害：${missingDamage.length}`)
 }

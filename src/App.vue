@@ -1,7 +1,9 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import DetailPanel from './components/DetailPanel.vue'
-import { doveData, towerById, towers } from './data'
+import { Badge } from './components/ui/badge'
+import { Tabs, TabsList, TabsTrigger } from './components/ui/tabs'
+import { doveData, siteVersion, towerById, towers } from './data'
 import CalculatorView from './views/CalculatorView.vue'
 import CatalogView from './views/CatalogView.vue'
 import CompareView from './views/CompareView.vue'
@@ -23,13 +25,18 @@ const selectedTower = computed<Tower | null>(() =>
   selectedTowerId.value ? towerById.get(selectedTowerId.value) || null : null,
 )
 
+watch(activeTab, async () => {
+  await nextTick()
+  window.scrollTo({ top: 0 })
+})
+
 function openTower(tower: Tower) {
   selectedTowerId.value = tower.id
 }
 </script>
 
 <template>
-  <div class="app-shell">
+  <Tabs v-model="activeTab" class="app-shell">
     <header class="site-header">
       <button class="brand" type="button" aria-label="返回塔典" @click="activeTab = 'catalog'">
         <span class="brand-mark" aria-hidden="true"><span>Ⅱ</span></span>
@@ -39,24 +46,23 @@ function openTower(tower: Tower) {
         </span>
       </button>
 
-      <nav class="main-nav" aria-label="主导航">
-        <button
+      <TabsList class="main-nav" variant="line" aria-label="主导航">
+        <TabsTrigger
           v-for="tab in tabs"
           :key="tab.id"
-          type="button"
+          :value="tab.id"
           :class="{ active: activeTab === tab.id }"
-          @click="activeTab = tab.id"
         >
           <small>{{ tab.eyebrow }}</small>
           <span>{{ tab.label }}</span>
-        </button>
-      </nav>
+        </TabsTrigger>
+      </TabsList>
 
-      <div class="version-badge">
+      <Badge variant="outline" class="version-badge">
         <span class="status-dot"></span>
-        <span>Cycle 2</span>
-        <strong>v{{ doveData.metadata.gameVersion }}</strong>
-      </div>
+        <span>Game v{{ doveData.metadata.gameVersion }}</span>
+        <strong>Site {{ siteVersion }}</strong>
+      </Badge>
     </header>
 
     <main>
@@ -80,16 +86,17 @@ function openTower(tower: Tower) {
       <DataView
         v-else
         :data="doveData"
+        :site-version="siteVersion"
         @open="openTower"
       />
     </main>
 
     <footer class="site-footer">
       <span>Dove 数据驱动塔典</span>
-      <span>提交 {{ doveData.metadata.commitHash.slice(0, 8) }}</span>
+      <span>站点 {{ siteVersion }} · 数据提交 {{ doveData.metadata.commitHash.slice(0, 8) }}</span>
       <span>{{ doveData.summary.encyclopediaImageCount }} 套百科图 · {{ doveData.summary.portraitFallbackCount }} 张基础塔头像回退 · 无科技树修正</span>
     </footer>
 
     <DetailPanel :tower="selectedTower" @close="selectedTowerId = null" />
-  </div>
+  </Tabs>
 </template>
