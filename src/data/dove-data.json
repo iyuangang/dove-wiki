@@ -2,9 +2,9 @@
   "metadata": {
     "title": "Dove 防御塔 Wiki",
     "gameVersion": "5.6.12",
-    "gameId": "2.0.5.7",
-    "commitHash": "b760e4256634c057c617e08f304a89e8eb1a30f3",
-    "generatedAt": "2026-08-10T09:09:52.289Z",
+    "gameId": "2.0.5.8",
+    "commitHash": "ab027397630eacb500dade515b111605b252d79e",
+    "generatedAt": "2026-08-11T02:52:48.563Z",
     "sourceRoot": "D:\\KingdomRushDove-Windows-Cycle2-v0.1.5\\KingdomRushDove",
     "assumptions": [
       "不计算星级科技、英雄、地图环境与外部配置修改。",
@@ -17,35 +17,19 @@
     "portraitCount": 93,
     "encyclopediaImageCount": 81,
     "portraitFallbackCount": 12,
+    "skillIconCount": 196,
     "supportTowerCount": 6,
     "supportEffectCount": 7,
-    "levelUnlockCount": 44,
+    "levelUnlockCount": 59,
     "defaultUnlockCount": 34,
-    "unlockAnomalyCount": 15,
+    "unlockAnomalyCount": 0,
     "exactDamageCount": 92
   },
   "validation": {
     "warnings": [
-      "15 座初始锁定塔没有关卡解锁记录。",
       "1 座塔没有可统一折算的基础伤害。"
     ],
-    "unlockAnomalies": [
-      "tower_crossbow",
-      "tower_assassin",
-      "tower_archmage",
-      "tower_dwaarp",
-      "tower_totem",
-      "tower_templar",
-      "tower_necromancer",
-      "tower_mech",
-      "tower_barrack_mercenaries",
-      "tower_barrack_pirates",
-      "tower_barrack_amazonas",
-      "tower_barrack_dwarf",
-      "tower_archer_dwarf",
-      "tower_pirate_watchtower",
-      "tower_frankenstein"
-    ],
+    "unlockAnomalies": [],
     "noUnifiedDamage": [
       "tower_baby_ashbite"
     ],
@@ -253,7 +237,7 @@
         "status": "level",
         "level": 5,
         "label": "第 5 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level5_data.lua"
+        "source": "kr1/data/levels/level05_data.lua"
       },
       "attack": {
         "damageMin": 13,
@@ -273,6 +257,8 @@
         {
           "id": "poison",
           "name": "剧毒箭矢",
+          "icon": "/skills/tower_ranger--poison.png",
+          "iconSprite": "special_icons_0008",
           "maxLevel": 3,
           "priceBase": 225,
           "priceIncrement": 175,
@@ -298,6 +284,8 @@
         {
           "id": "thorn",
           "name": "森林之怒",
+          "icon": "/skills/tower_ranger--thorn.png",
+          "iconSprite": "special_icons_0002",
           "maxLevel": 3,
           "priceBase": 225,
           "priceIncrement": 175,
@@ -328,7 +316,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level5_data.lua"
+        "unlock": "kr1/data/levels/level05_data.lua"
       }
     },
     {
@@ -360,7 +348,7 @@
         "status": "level",
         "level": 6,
         "label": "第 6 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level6_data.lua"
+        "source": "kr1/data/levels/level06_data.lua"
       },
       "attack": {
         "damageMin": 12,
@@ -386,6 +374,8 @@
         {
           "id": "healing",
           "name": "治愈祷告",
+          "icon": "/skills/tower_paladin--healing.png",
+          "iconSprite": "special_icons_0007",
           "maxLevel": 3,
           "priceBase": 150,
           "priceIncrement": 100,
@@ -419,6 +409,8 @@
         {
           "id": "holystrike",
           "name": "神圣打击",
+          "icon": "/skills/tower_paladin--holystrike.png",
+          "iconSprite": "special_icons_0006",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 150,
@@ -440,6 +432,8 @@
         {
           "id": "shield",
           "name": "勇气之盾",
+          "icon": "/skills/tower_paladin--shield.png",
+          "iconSprite": "special_icons_0009",
           "maxLevel": 1,
           "priceBase": 175,
           "priceIncrement": 100,
@@ -458,7 +452,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level6_data.lua"
+        "unlock": "kr1/data/levels/level06_data.lua"
       }
     },
     {
@@ -488,7 +482,7 @@
         "status": "level",
         "level": 6,
         "label": "第 6 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level6_data.lua"
+        "source": "kr1/data/levels/level06_data.lua"
       },
       "attack": {
         "damageMin": 92,
@@ -508,6 +502,8 @@
         {
           "id": "disintegrate",
           "name": "死亡射线",
+          "icon": "/skills/tower_arcane_wizard--disintegrate.png",
+          "iconSprite": "special_icons_0015",
           "maxLevel": 3,
           "priceBase": 350,
           "priceIncrement": 225,
@@ -545,6 +541,8 @@
         {
           "id": "teleport",
           "name": "传送",
+          "icon": "/skills/tower_arcane_wizard--teleport.png",
+          "iconSprite": "special_icons_0016",
           "maxLevel": 3,
           "priceBase": 250,
           "priceIncrement": 125,
@@ -571,7 +569,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level6_data.lua"
+        "unlock": "kr1/data/levels/level06_data.lua"
       }
     },
     {
@@ -602,7 +600,7 @@
         "status": "level",
         "level": 8,
         "label": "第 8 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level8_data.lua"
+        "source": "kr1/data/levels/level08_data.lua"
       },
       "attack": {
         "damageMin": 66,
@@ -622,6 +620,8 @@
         {
           "id": "cluster",
           "name": "群簇轰炸",
+          "icon": "/skills/tower_bfg--cluster.png",
+          "iconSprite": "special_icons_0018",
           "maxLevel": 3,
           "priceBase": 175,
           "priceIncrement": 210,
@@ -643,6 +643,8 @@
         {
           "id": "missile",
           "name": "龙息导弹",
+          "icon": "/skills/tower_bfg--missile.png",
+          "iconSprite": "special_icons_0017",
           "maxLevel": 3,
           "priceBase": 175,
           "priceIncrement": 150,
@@ -669,7 +671,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level8_data.lua"
+        "unlock": "kr1/data/levels/level08_data.lua"
       }
     },
     {
@@ -700,7 +702,7 @@
         "status": "level",
         "level": 7,
         "label": "第 7 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level7_data.lua"
+        "source": "kr1/data/levels/level07_data.lua"
       },
       "attack": {
         "damageMin": 35,
@@ -720,6 +722,8 @@
         {
           "id": "shrapnel",
           "name": "霰弹射击",
+          "icon": "/skills/tower_musketeer--shrapnel.png",
+          "iconSprite": "special_icons_0005",
           "maxLevel": 3,
           "priceBase": 275,
           "priceIncrement": 300,
@@ -741,6 +745,8 @@
         {
           "id": "sniper",
           "name": "狙击",
+          "icon": "/skills/tower_musketeer--sniper.png",
+          "iconSprite": "special_icons_0003",
           "maxLevel": 3,
           "priceBase": 300,
           "priceIncrement": 250,
@@ -767,7 +773,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level7_data.lua"
+        "unlock": "kr1/data/levels/level07_data.lua"
       }
     },
     {
@@ -799,7 +805,7 @@
         "status": "level",
         "level": 8,
         "label": "第 8 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level8_data.lua"
+        "source": "kr1/data/levels/level08_data.lua"
       },
       "attack": {
         "damageMin": 16,
@@ -825,6 +831,8 @@
         {
           "id": "dual",
           "name": "多重战斧",
+          "icon": "/skills/tower_barbarian--dual.png",
+          "iconSprite": "special_icons_0012",
           "maxLevel": 3,
           "priceBase": 225,
           "priceIncrement": 100,
@@ -846,6 +854,8 @@
         {
           "id": "throwing",
           "name": "投掷战斧",
+          "icon": "/skills/tower_barbarian--throwing.png",
+          "iconSprite": "special_icons_0019",
           "maxLevel": 3,
           "priceBase": 150,
           "priceIncrement": 100,
@@ -867,6 +877,8 @@
         {
           "id": "twister",
           "name": "旋风斩",
+          "icon": "/skills/tower_barbarian--twister.png",
+          "iconSprite": "special_icons_0013",
           "maxLevel": 3,
           "priceBase": 150,
           "priceIncrement": 100,
@@ -893,7 +905,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level8_data.lua"
+        "unlock": "kr1/data/levels/level08_data.lua"
       }
     },
     {
@@ -925,7 +937,7 @@
         "status": "level",
         "level": 9,
         "label": "第 9 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level9_data.lua"
+        "source": "kr1/data/levels/level09_data.lua"
       },
       "attack": {
         "damageMin": 30,
@@ -945,6 +957,8 @@
         {
           "id": "elemental",
           "name": "召唤元素",
+          "icon": "/skills/tower_sorcerer--elemental.png",
+          "iconSprite": "special_icons_0004",
           "maxLevel": 3,
           "priceBase": 325,
           "priceIncrement": 150,
@@ -970,6 +984,8 @@
         {
           "id": "polymorph",
           "name": "变形术",
+          "icon": "/skills/tower_sorcerer--polymorph.png",
+          "iconSprite": "special_icons_0001",
           "maxLevel": 3,
           "priceBase": 300,
           "priceIncrement": 100,
@@ -1000,7 +1016,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level9_data.lua"
+        "unlock": "kr1/data/levels/level09_data.lua"
       }
     },
     {
@@ -1051,6 +1067,8 @@
         {
           "id": "bolt",
           "name": "连锁闪电",
+          "icon": "/skills/tower_tesla--bolt.png",
+          "iconSprite": "special_icons_0011",
           "maxLevel": 3,
           "priceBase": 170,
           "priceIncrement": 170,
@@ -1076,6 +1094,8 @@
         {
           "id": "overcharge",
           "name": "过载",
+          "icon": "/skills/tower_tesla--overcharge.png",
+          "iconSprite": "special_icons_0010",
           "maxLevel": 3,
           "priceBase": 160,
           "priceIncrement": 140,
@@ -1133,7 +1153,7 @@
         "status": "level",
         "level": 5,
         "label": "第 5 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level5_data.lua"
+        "source": "kr1/data/levels/level05_data.lua"
       },
       "attack": {
         "damageMin": 25,
@@ -1159,6 +1179,8 @@
         {
           "id": "bleed",
           "name": "血翎",
+          "icon": "/skills/tower_elf--bleed.png",
+          "iconSprite": "special_icons_0014",
           "maxLevel": 3,
           "priceBase": 100,
           "priceIncrement": 100,
@@ -1180,6 +1202,8 @@
         {
           "id": "cripple",
           "name": "残废",
+          "icon": "/skills/tower_elf--cripple.png",
+          "iconSprite": "special_icons_0024",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 125,
@@ -1206,7 +1230,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level5_data.lua"
+        "unlock": "kr1/data/levels/level05_data.lua"
       }
     },
     {
@@ -1236,7 +1260,7 @@
         "status": "level",
         "level": 9,
         "label": "第 9 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level9_data.lua"
+        "source": "kr1/data/levels/level09_data.lua"
       },
       "attack": {
         "damageMin": 500,
@@ -1256,6 +1280,8 @@
         {
           "id": "charge",
           "name": "能量回收",
+          "icon": "/skills/tower_sunray--charge.png",
+          "iconSprite": "special_icons_0015",
           "maxLevel": 1,
           "priceBase": 250,
           "priceIncrement": 0,
@@ -1269,6 +1295,8 @@
         {
           "id": "gold",
           "name": "点石成金",
+          "icon": "/skills/tower_sunray--gold.png",
+          "iconSprite": "special_icons_0022",
           "maxLevel": 1,
           "priceBase": 200,
           "priceIncrement": 0,
@@ -1282,6 +1310,8 @@
         {
           "id": "ray",
           "name": "能量回收",
+          "icon": "/skills/tower_sunray--ray.png",
+          "iconSprite": "main_icons_0018",
           "maxLevel": 4,
           "priceBase": 0,
           "priceIncrement": 100,
@@ -1324,7 +1354,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level9_data.lua"
+        "unlock": "kr1/data/levels/level09_data.lua"
       }
     },
     {
@@ -1352,9 +1382,10 @@
       "towerType": "crossbow",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 30,
+        "label": "第 30 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level30.lua"
       },
       "attack": {
         "damageMin": 15,
@@ -1374,6 +1405,8 @@
         {
           "id": "eagle",
           "name": "驯鹰者",
+          "icon": "/skills/tower_crossbow--eagle.png",
+          "iconSprite": "special_icons_0029",
           "maxLevel": 3,
           "priceBase": 225,
           "priceIncrement": 225,
@@ -1395,6 +1428,8 @@
         {
           "id": "multishot",
           "name": "弹幕",
+          "icon": "/skills/tower_crossbow--multishot.png",
+          "iconSprite": "special_icons_0028",
           "maxLevel": 3,
           "priceBase": 250,
           "priceIncrement": 150,
@@ -1421,7 +1456,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level30.lua"
       }
     },
     {
@@ -1449,9 +1484,10 @@
       "towerType": "assassin",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 30,
+        "label": "第 30 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level30.lua"
       },
       "attack": {
         "damageMin": 10,
@@ -1477,6 +1513,8 @@
         {
           "id": "counter",
           "name": "反击",
+          "icon": "/skills/tower_assassin--counter.png",
+          "iconSprite": "special_icons_0023",
           "maxLevel": 3,
           "priceBase": 125,
           "priceIncrement": 125,
@@ -1498,6 +1536,8 @@
         {
           "id": "pickpocket",
           "name": "缴获",
+          "icon": "/skills/tower_assassin--pickpocket.png",
+          "iconSprite": "special_icons_0022",
           "maxLevel": 3,
           "priceBase": 100,
           "priceIncrement": 75,
@@ -1519,6 +1559,8 @@
         {
           "id": "sneak",
           "name": "偷袭",
+          "icon": "/skills/tower_assassin--sneak.png",
+          "iconSprite": "special_icons_0024",
           "maxLevel": 3,
           "priceBase": 225,
           "priceIncrement": 150,
@@ -1545,7 +1587,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level30.lua"
       }
     },
     {
@@ -1573,9 +1615,10 @@
       "towerType": "archmage",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 32,
+        "label": "第 32 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level32.lua"
       },
       "attack": {
         "damageMin": 44,
@@ -1595,6 +1638,8 @@
         {
           "id": "blast",
           "name": "临界质量",
+          "icon": "/skills/tower_archmage--blast.png",
+          "iconSprite": "special_icons_0033",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 200,
@@ -1616,6 +1661,8 @@
         {
           "id": "twister",
           "name": "旋风",
+          "icon": "/skills/tower_archmage--twister.png",
+          "iconSprite": "special_icons_0032",
           "maxLevel": 3,
           "priceBase": 300,
           "priceIncrement": 225,
@@ -1642,7 +1689,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level32.lua"
       }
     },
     {
@@ -1669,9 +1716,10 @@
       "towerType": "dwaarp",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 31,
+        "label": "第 31 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level31.lua"
       },
       "attack": {
         "damageMin": 33,
@@ -1691,6 +1739,8 @@
         {
           "id": "drill",
           "name": "岩芯钻",
+          "icon": "/skills/tower_dwaarp--drill.png",
+          "iconSprite": "special_icons_0036",
           "maxLevel": 3,
           "priceBase": 400,
           "priceIncrement": 175,
@@ -1712,6 +1762,8 @@
         {
           "id": "lava",
           "name": "熔炉爆裂",
+          "icon": "/skills/tower_dwaarp--lava.png",
+          "iconSprite": "special_icons_0037",
           "maxLevel": 3,
           "priceBase": 375,
           "priceIncrement": 275,
@@ -1738,7 +1790,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level31.lua"
       }
     },
     {
@@ -1766,9 +1818,10 @@
       "towerType": "totem",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 34,
+        "label": "第 34 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level34.lua"
       },
       "attack": {
         "damageMin": 25,
@@ -1788,6 +1841,8 @@
         {
           "id": "silence",
           "name": "精神图腾",
+          "icon": "/skills/tower_totem--silence.png",
+          "iconSprite": "special_icons_0031",
           "maxLevel": 3,
           "priceBase": 150,
           "priceIncrement": 150,
@@ -1809,6 +1864,8 @@
         {
           "id": "weakness",
           "name": "虚弱图腾",
+          "icon": "/skills/tower_totem--weakness.png",
+          "iconSprite": "special_icons_0030",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 200,
@@ -1839,7 +1896,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level34.lua"
       }
     },
     {
@@ -1867,9 +1924,10 @@
       "towerType": "templar",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 33,
+        "label": "第 33 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level33.lua"
       },
       "attack": {
         "damageMin": 30,
@@ -1895,6 +1953,8 @@
         {
           "id": "blood",
           "name": "动脉打击",
+          "icon": "/skills/tower_templar--blood.png",
+          "iconSprite": "special_icons_0026",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 150,
@@ -1920,6 +1980,8 @@
         {
           "id": "extralife",
           "name": "强韧",
+          "icon": "/skills/tower_templar--extralife.png",
+          "iconSprite": "special_icons_0027",
           "maxLevel": 3,
           "priceBase": 150,
           "priceIncrement": 150,
@@ -1945,6 +2007,8 @@
         {
           "id": "holygrail",
           "name": "圣杯",
+          "icon": "/skills/tower_templar--holygrail.png",
+          "iconSprite": "special_icons_0025",
           "maxLevel": 3,
           "priceBase": 180,
           "priceIncrement": 150,
@@ -1971,7 +2035,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level33.lua"
       }
     },
     {
@@ -1998,9 +2062,10 @@
       "towerType": "necromancer",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 35,
+        "label": "第 35 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level35.lua"
       },
       "attack": {
         "damageMin": 22,
@@ -2020,6 +2085,8 @@
         {
           "id": "pestilence",
           "name": "瘟疫",
+          "icon": "/skills/tower_necromancer--pestilence.png",
+          "iconSprite": "special_icons_0035",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 180,
@@ -2045,6 +2112,8 @@
         {
           "id": "rider",
           "name": "亡灵骑士",
+          "icon": "/skills/tower_necromancer--rider.png",
+          "iconSprite": "special_icons_0034",
           "maxLevel": 3,
           "priceBase": 275,
           "priceIncrement": 150,
@@ -2087,7 +2156,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level35.lua"
       }
     },
     {
@@ -2115,9 +2184,10 @@
       "towerType": "mecha",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 36,
+        "label": "第 36 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level36.lua"
       },
       "attack": {
         "damageMin": 27,
@@ -2137,6 +2207,8 @@
         {
           "id": "missile",
           "name": "大黄蜂导弹",
+          "icon": "/skills/tower_mech--missile.png",
+          "iconSprite": "special_icons_0038",
           "maxLevel": 3,
           "priceBase": 260,
           "priceIncrement": 280,
@@ -2158,6 +2230,8 @@
         {
           "id": "oil",
           "name": "废料处理",
+          "icon": "/skills/tower_mech--oil.png",
+          "iconSprite": "special_icons_0039",
           "maxLevel": 3,
           "priceBase": 250,
           "priceIncrement": 200,
@@ -2184,7 +2258,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level36.lua"
       }
     },
     {
@@ -2211,9 +2285,10 @@
       "towerType": "mercenaries_desert",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 30,
+        "label": "第 30 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level30.lua"
       },
       "attack": {
         "damageMin": 20,
@@ -2239,6 +2314,8 @@
         {
           "id": "djshock",
           "name": "蜃咒",
+          "icon": "/skills/tower_barrack_mercenaries--djshock.png",
+          "iconSprite": "special_icons_0016",
           "maxLevel": 3,
           "priceBase": 150,
           "priceIncrement": 100,
@@ -2260,6 +2337,8 @@
         {
           "id": "djspell",
           "name": "阿拉丁神杯",
+          "icon": "/skills/tower_barrack_mercenaries--djspell.png",
+          "iconSprite": "special_icons_0025",
           "maxLevel": 3,
           "priceBase": 300,
           "priceIncrement": 200,
@@ -2286,7 +2365,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level30.lua"
       }
     },
     {
@@ -2314,9 +2393,10 @@
       "towerType": "mercenaries_pirates",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 31,
+        "label": "第 31 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level31.lua"
       },
       "attack": {
         "damageMin": 15,
@@ -2342,6 +2422,8 @@
         {
           "id": "bigbomb",
           "name": "大宝贝",
+          "icon": "/skills/tower_barrack_pirates--bigbomb.png",
+          "iconSprite": "special_icons_0018",
           "maxLevel": 3,
           "priceBase": 225,
           "priceIncrement": 125,
@@ -2363,6 +2445,8 @@
         {
           "id": "quickup",
           "name": "神秘库存",
+          "icon": "/skills/tower_barrack_pirates--quickup.png",
+          "iconSprite": "special_icons_0025",
           "maxLevel": 2,
           "priceBase": 110,
           "priceIncrement": 110,
@@ -2385,7 +2469,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level31.lua"
       }
     },
     {
@@ -2413,9 +2497,10 @@
       "towerType": "mercenaries_amazonas",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 33,
+        "label": "第 33 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level33.lua"
       },
       "attack": {
         "damageMin": 14,
@@ -2441,6 +2526,8 @@
         {
           "id": "valkyrie",
           "name": "武神",
+          "icon": "/skills/tower_barrack_amazonas--valkyrie.png",
+          "iconSprite": "special_icons_0014",
           "maxLevel": 1,
           "priceBase": 175,
           "priceIncrement": 0,
@@ -2454,6 +2541,8 @@
         {
           "id": "whirlwind",
           "name": "旋风",
+          "icon": "/skills/tower_barrack_amazonas--whirlwind.png",
+          "iconSprite": "special_icons_0013",
           "maxLevel": 1,
           "priceBase": 250,
           "priceIncrement": 0,
@@ -2472,7 +2561,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level33.lua"
       }
     },
     {
@@ -2499,9 +2588,10 @@
       "towerType": "barrack_dwarf",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 40,
+        "label": "第 40 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level40.lua"
       },
       "attack": {
         "damageMin": 12,
@@ -2527,6 +2617,8 @@
         {
           "id": "armor",
           "name": "秘银甲",
+          "icon": "/skills/tower_barrack_dwarf--armor.png",
+          "iconSprite": "special_icons_0041",
           "maxLevel": 2,
           "priceBase": 125,
           "priceIncrement": 125,
@@ -2548,6 +2640,8 @@
         {
           "id": "beer",
           "name": "矮人秘药",
+          "icon": "/skills/tower_barrack_dwarf--beer.png",
+          "iconSprite": "special_icons_0042",
           "maxLevel": 3,
           "priceBase": 160,
           "priceIncrement": 140,
@@ -2569,6 +2663,8 @@
         {
           "id": "hammer",
           "name": "秘银锤",
+          "icon": "/skills/tower_barrack_dwarf--hammer.png",
+          "iconSprite": "special_icons_0040",
           "maxLevel": 3,
           "priceBase": 100,
           "priceIncrement": 100,
@@ -2595,7 +2691,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level40.lua"
       }
     },
     {
@@ -2623,9 +2719,10 @@
       "towerType": "archer_dwarf",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 40,
+        "label": "第 40 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level40.lua"
       },
       "attack": {
         "damageMin": 40,
@@ -2645,6 +2742,8 @@
         {
           "id": "barrel",
           "name": "火药桶",
+          "icon": "/skills/tower_archer_dwarf--barrel.png",
+          "iconSprite": "special_icons_0044",
           "maxLevel": 3,
           "priceBase": 225,
           "priceIncrement": 125,
@@ -2666,6 +2765,8 @@
         {
           "id": "extra_damage",
           "name": "秘银子弹",
+          "icon": "/skills/tower_archer_dwarf--extra_damage.png",
+          "iconSprite": "special_icons_0043",
           "maxLevel": 3,
           "priceBase": 185,
           "priceIncrement": 185,
@@ -2692,7 +2793,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level40.lua"
       }
     },
     {
@@ -2720,9 +2821,10 @@
       "towerType": "pirate_watchtower",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 42,
+        "label": "第 42 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level42.lua"
       },
       "attack": {
         "damageMin": 45,
@@ -2742,6 +2844,8 @@
         {
           "id": "parrot",
           "name": "鹦鹉轰炸机",
+          "icon": "/skills/tower_pirate_watchtower--parrot.png",
+          "iconSprite": "special_icons_0046",
           "maxLevel": 3,
           "priceBase": 150,
           "priceIncrement": 150,
@@ -2763,6 +2867,8 @@
         {
           "id": "reduce_cooldown",
           "name": "迅速装填",
+          "icon": "/skills/tower_pirate_watchtower--reduce_cooldown.png",
+          "iconSprite": "special_icons_0045",
           "maxLevel": 3,
           "priceBase": 40,
           "priceIncrement": 40,
@@ -2784,6 +2890,8 @@
         {
           "id": "watcher",
           "name": "眺望",
+          "icon": "/skills/tower_pirate_watchtower--watcher.png",
+          "iconSprite": "kr5_special_icons_0004",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 200,
@@ -2810,7 +2918,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level42.lua"
       }
     },
     {
@@ -2838,9 +2946,10 @@
       "towerType": "frankenstein",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 45,
+        "label": "第 45 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level45.lua"
       },
       "attack": {
         "damageMin": 80,
@@ -2860,6 +2969,8 @@
         {
           "id": "frankie",
           "name": "血肉傀儡",
+          "icon": "/skills/tower_frankenstein--frankie.png",
+          "iconSprite": "special_icons_0049",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 200,
@@ -2881,6 +2992,8 @@
         {
           "id": "lightning",
           "name": "闪电打击",
+          "icon": "/skills/tower_frankenstein--lightning.png",
+          "iconSprite": "special_icons_0048",
           "maxLevel": 3,
           "priceBase": 160,
           "priceIncrement": 160,
@@ -2907,7 +3020,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level45.lua"
       }
     },
     {
@@ -2958,6 +3071,8 @@
         {
           "id": "nature",
           "name": "符文巨熊",
+          "icon": "/skills/tower_druid--nature.png",
+          "iconSprite": "kr3_special_icons_0011",
           "maxLevel": 2,
           "priceBase": 250,
           "priceIncrement": 250,
@@ -2975,6 +3090,8 @@
         {
           "id": "sylvan",
           "name": "森林诅咒",
+          "icon": "/skills/tower_druid--sylvan.png",
+          "iconSprite": "kr3_special_icons_0012",
           "maxLevel": 3,
           "priceBase": 250,
           "priceIncrement": 250,
@@ -3052,6 +3169,8 @@
         {
           "id": "clobber",
           "name": "痛击",
+          "icon": "/skills/tower_entwood--clobber.png",
+          "iconSprite": "kr3_special_icons_0013",
           "maxLevel": 3,
           "priceBase": 225,
           "priceIncrement": 225,
@@ -3073,6 +3192,8 @@
         {
           "id": "fiery_nuts",
           "name": "燃烧坚果",
+          "icon": "/skills/tower_entwood--fiery_nuts.png",
+          "iconSprite": "kr3_special_icons_0014",
           "maxLevel": 3,
           "priceBase": 290,
           "priceIncrement": 235,
@@ -3152,6 +3273,8 @@
         {
           "id": "sentinel",
           "name": "元素赐福",
+          "icon": "/skills/tower_high_elven--sentinel.png",
+          "iconSprite": "kr3_special_icons_0018",
           "maxLevel": 3,
           "priceBase": 250,
           "priceIncrement": 250,
@@ -3173,6 +3296,8 @@
         {
           "id": "timelapse",
           "name": "时光流转",
+          "icon": "/skills/tower_high_elven--timelapse.png",
+          "iconSprite": "kr3_special_icons_0017",
           "maxLevel": 3,
           "priceBase": 225,
           "priceIncrement": 125,
@@ -3249,6 +3374,8 @@
         {
           "id": "eldritch",
           "name": "异能厄运",
+          "icon": "/skills/tower_wild_magus--eldritch.png",
+          "iconSprite": "kr3_special_icons_0015",
           "maxLevel": 3,
           "priceBase": 325,
           "priceIncrement": 185,
@@ -3270,6 +3397,8 @@
         {
           "id": "ward",
           "name": "破坏守卫",
+          "icon": "/skills/tower_wild_magus--ward.png",
+          "iconSprite": "kr3_special_icons_0016",
           "maxLevel": 3,
           "priceBase": 75,
           "priceIncrement": 150,
@@ -3347,6 +3476,8 @@
         {
           "id": "burst",
           "name": "爆裂箭矢",
+          "icon": "/skills/tower_arcane--burst.png",
+          "iconSprite": "kr3_special_icons_0002",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 200,
@@ -3368,6 +3499,8 @@
         {
           "id": "slumber",
           "name": "睡眠箭矢",
+          "icon": "/skills/tower_arcane--slumber.png",
+          "iconSprite": "kr3_special_icons_0001",
           "maxLevel": 3,
           "priceBase": 225,
           "priceIncrement": 75,
@@ -3444,6 +3577,8 @@
         {
           "id": "mark",
           "name": "猎人印记",
+          "icon": "/skills/tower_silver--mark.png",
+          "iconSprite": "kr3_special_icons_0004",
           "maxLevel": 3,
           "priceBase": 225,
           "priceIncrement": 150,
@@ -3465,6 +3600,8 @@
         {
           "id": "sentence",
           "name": "血色审判",
+          "icon": "/skills/tower_silver--sentence.png",
+          "iconSprite": "kr3_special_icons_0003",
           "maxLevel": 3,
           "priceBase": 250,
           "priceIncrement": 250,
@@ -3547,6 +3684,8 @@
         {
           "id": "circle",
           "name": "生命之环",
+          "icon": "/skills/tower_forest--circle.png",
+          "iconSprite": "kr3_special_icons_0008",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 185,
@@ -3568,6 +3707,8 @@
         {
           "id": "eerie",
           "name": "诡异园丁",
+          "icon": "/skills/tower_forest--eerie.png",
+          "iconSprite": "kr3_special_icons_0009",
           "maxLevel": 2,
           "priceBase": 200,
           "priceIncrement": 200,
@@ -3585,6 +3726,8 @@
         {
           "id": "oak",
           "name": "远古橡木矛",
+          "icon": "/skills/tower_forest--oak.png",
+          "iconSprite": "kr3_special_icons_0010",
           "maxLevel": 3,
           "priceBase": 190,
           "priceIncrement": 240,
@@ -3667,6 +3810,8 @@
         {
           "id": "blade_dance",
           "name": "剑刃乱舞",
+          "icon": "/skills/tower_blade--blade_dance.png",
+          "iconSprite": "kr3_special_icons_0005",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 225,
@@ -3688,6 +3833,8 @@
         {
           "id": "perfect_parry",
           "name": "完美闪避",
+          "icon": "/skills/tower_blade--perfect_parry.png",
+          "iconSprite": "kr3_special_icons_0006",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 200,
@@ -3709,6 +3856,8 @@
         {
           "id": "swirling",
           "name": "利刃大师",
+          "icon": "/skills/tower_blade--swirling.png",
+          "iconSprite": "kr3_special_icons_0007",
           "maxLevel": 1,
           "priceBase": 250,
           "priceIncrement": 150,
@@ -3783,6 +3932,8 @@
         {
           "id": "armor",
           "name": "大树护甲",
+          "icon": "/skills/tower_ewok--armor.png",
+          "iconSprite": "special_icons_0041",
           "maxLevel": 3,
           "priceBase": 100,
           "priceIncrement": 100,
@@ -3804,6 +3955,8 @@
         {
           "id": "shield",
           "name": "盾势",
+          "icon": "/skills/tower_ewok--shield.png",
+          "iconSprite": "special_icons_0009",
           "maxLevel": 2,
           "priceBase": 150,
           "priceIncrement": 150,
@@ -3821,6 +3974,8 @@
         {
           "id": "tear",
           "name": "碎甲投索",
+          "icon": "/skills/tower_ewok--tear.png",
+          "iconSprite": "kr3_special_icons_0010",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 100,
@@ -3897,6 +4052,8 @@
         {
           "id": "improve_shot",
           "name": "坚硬水晶",
+          "icon": "/skills/tower_faerie_dragon--improve_shot.png",
+          "iconSprite": "kr3_special_icons_0025",
           "maxLevel": 2,
           "priceBase": 175,
           "priceIncrement": 175,
@@ -3914,6 +4071,8 @@
         {
           "id": "more_dragons",
           "name": "孵化飞龙",
+          "icon": "/skills/tower_faerie_dragon--more_dragons.png",
+          "iconSprite": "kr3_special_icons_0024",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 200,
@@ -3992,6 +4151,8 @@
         {
           "id": "cream",
           "name": "奶油麦片粥",
+          "icon": "/skills/tower_pixie--cream.png",
+          "iconSprite": "kr3_special_icons_0022",
           "maxLevel": 2,
           "priceBase": 250,
           "priceIncrement": 250,
@@ -4009,6 +4170,8 @@
         {
           "id": "total",
           "name": "绝对恶搞",
+          "icon": "/skills/tower_pixie--total.png",
+          "iconSprite": "kr3_special_icons_0023",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 100,
@@ -4091,6 +4254,8 @@
         {
           "id": "blazing_breath",
           "name": "炽烈吐息",
+          "icon": "/skills/tower_baby_ashbite--blazing_breath.png",
+          "iconSprite": "kr3_special_icons_0026",
           "maxLevel": 3,
           "priceBase": 275,
           "priceIncrement": 225,
@@ -4112,6 +4277,8 @@
         {
           "id": "fiery_mist",
           "name": "炽热烟雾",
+          "icon": "/skills/tower_baby_ashbite--fiery_mist.png",
+          "iconSprite": "kr3_special_icons_0027",
           "maxLevel": 1,
           "priceBase": 275,
           "priceIncrement": 0,
@@ -4186,6 +4353,8 @@
         {
           "id": "blade_mail",
           "name": "利刃盔甲",
+          "icon": "/skills/tower_drow--blade_mail.png",
+          "iconSprite": "kr3_special_icons_0019",
           "maxLevel": 3,
           "priceBase": 125,
           "priceIncrement": 125,
@@ -4207,6 +4376,8 @@
         {
           "id": "double_dagger",
           "name": "双重飞刀",
+          "icon": "/skills/tower_drow--double_dagger.png",
+          "iconSprite": "kr3_special_icons_0021",
           "maxLevel": 1,
           "priceBase": 170,
           "priceIncrement": 170,
@@ -4228,6 +4399,8 @@
         {
           "id": "life_drain",
           "name": "吸血打击",
+          "icon": "/skills/tower_drow--life_drain.png",
+          "iconSprite": "kr3_special_icons_0020",
           "maxLevel": 3,
           "priceBase": 225,
           "priceIncrement": 200,
@@ -4304,6 +4477,8 @@
         {
           "id": "disintegrate",
           "name": "死亡射线",
+          "icon": "/skills/tower_arcane_wizard_lvl4--disintegrate.png",
+          "iconSprite": "kr5_special_icons_0005",
           "maxLevel": 3,
           "priceBase": 250,
           "priceIncrement": 150,
@@ -4341,6 +4516,8 @@
         {
           "id": "empowerment",
           "name": "强化光环",
+          "icon": "/skills/tower_arcane_wizard_lvl4--empowerment.png",
+          "iconSprite": "kr5_special_icons_0006",
           "maxLevel": 3,
           "priceBase": 275,
           "priceIncrement": 200,
@@ -4423,6 +4600,8 @@
         {
           "id": "healing_prayer",
           "name": "治愈祷告",
+          "icon": "/skills/tower_paladin_covenant_lvl4--healing_prayer.png",
+          "iconSprite": "kr5_special_icons_0001",
           "maxLevel": 3,
           "priceBase": 175,
           "priceIncrement": 150,
@@ -4444,6 +4623,8 @@
         {
           "id": "lead",
           "name": "身先士卒",
+          "icon": "/skills/tower_paladin_covenant_lvl4--lead.png",
+          "iconSprite": "kr5_special_icons_0002",
           "maxLevel": 1,
           "priceBase": 200,
           "priceIncrement": 200,
@@ -4512,6 +4693,8 @@
         {
           "id": "armor_piercer",
           "name": "穿甲射击",
+          "icon": "/skills/tower_royal_archers_lvl4--armor_piercer.png",
+          "iconSprite": "kr5_special_icons_0003",
           "maxLevel": 3,
           "priceBase": 125,
           "priceIncrement": 120,
@@ -4533,6 +4716,8 @@
         {
           "id": "rapacious_hunter",
           "name": "贪婪猎手",
+          "icon": "/skills/tower_royal_archers_lvl4--rapacious_hunter.png",
+          "iconSprite": "kr5_special_icons_0004",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 110,
@@ -4610,6 +4795,8 @@
         {
           "id": "bombardment",
           "name": "猛烈轰炸",
+          "icon": "/skills/tower_tricannon_lvl4--bombardment.png",
+          "iconSprite": "kr5_special_icons_0007",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 250,
@@ -4631,6 +4818,8 @@
         {
           "id": "overheat",
           "name": "过热模式",
+          "icon": "/skills/tower_tricannon_lvl4--overheat.png",
+          "iconSprite": "kr5_special_icons_0008",
           "maxLevel": 3,
           "priceBase": 210,
           "priceIncrement": 210,
@@ -4708,6 +4897,8 @@
         {
           "id": "skill_bomb",
           "name": "废品炸弹",
+          "icon": "/skills/tower_ballista_lvl4--skill_bomb.png",
+          "iconSprite": "kr5_special_icons_0021",
           "maxLevel": 3,
           "priceBase": 150,
           "priceIncrement": 175,
@@ -4729,6 +4920,8 @@
         {
           "id": "skill_final_shot",
           "name": "终结一钉",
+          "icon": "/skills/tower_ballista_lvl4--skill_final_shot.png",
+          "iconSprite": "kr5_special_icons_0019",
           "maxLevel": 3,
           "priceBase": 315,
           "priceIncrement": 210,
@@ -4805,6 +4998,8 @@
         {
           "id": "gift_of_nature",
           "name": "自然馈赠",
+          "icon": "/skills/tower_arborean_emissary_lvl4--gift_of_nature.png",
+          "iconSprite": "kr5_special_icons_0010",
           "maxLevel": 3,
           "priceBase": 120,
           "priceIncrement": 120,
@@ -4826,6 +5021,8 @@
         {
           "id": "wave_of_roots",
           "name": "荆棘缠绕",
+          "icon": "/skills/tower_arborean_emissary_lvl4--wave_of_roots.png",
+          "iconSprite": "kr5_special_icons_0009",
           "maxLevel": 3,
           "priceBase": 160,
           "priceIncrement": 160,
@@ -4904,6 +5101,8 @@
         {
           "id": "big_guy",
           "name": "天降魔头",
+          "icon": "/skills/tower_demon_pit_lvl4--big_guy.png",
+          "iconSprite": "kr5_special_icons_0012",
           "maxLevel": 3,
           "priceBase": 225,
           "priceIncrement": 125,
@@ -4925,6 +5124,8 @@
         {
           "id": "master_exploders",
           "name": "爆炸大师",
+          "icon": "/skills/tower_demon_pit_lvl4--master_exploders.png",
+          "iconSprite": "kr5_special_icons_0011",
           "maxLevel": 3,
           "priceBase": 150,
           "priceIncrement": 200,
@@ -5004,6 +5205,8 @@
         {
           "id": "skill_barrel",
           "name": "劲爆秘饮",
+          "icon": "/skills/tower_barrel_lvl4--skill_barrel.png",
+          "iconSprite": "kr5_special_icons_0027",
           "maxLevel": 3,
           "priceBase": 225,
           "priceIncrement": 175,
@@ -5025,6 +5228,8 @@
         {
           "id": "skill_warrior",
           "name": "神奇药酒",
+          "icon": "/skills/tower_barrel_lvl4--skill_warrior.png",
+          "iconSprite": "kr5_special_icons_0026",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 150,
@@ -5101,6 +5306,8 @@
         {
           "id": "skill_debuff",
           "name": "颤骨图腾",
+          "icon": "/skills/tower_necromancer_lvl4--skill_debuff.png",
+          "iconSprite": "kr5_special_icons_0017",
           "maxLevel": 3,
           "priceBase": 120,
           "priceIncrement": 120,
@@ -5122,6 +5329,8 @@
         {
           "id": "skill_rider",
           "name": "亡灵骑士",
+          "icon": "/skills/tower_necromancer_lvl4--skill_rider.png",
+          "iconSprite": "kr5_special_icons_0018",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 200,
@@ -5198,6 +5407,8 @@
         {
           "id": "stars_death",
           "name": "星光涌现",
+          "icon": "/skills/tower_elven_stargazers_lvl4--stars_death.png",
+          "iconSprite": "kr5_special_icons_0014",
           "maxLevel": 3,
           "priceBase": 225,
           "priceIncrement": 225,
@@ -5219,6 +5430,8 @@
         {
           "id": "teleport",
           "name": "事件视界",
+          "icon": "/skills/tower_elven_stargazers_lvl4--teleport.png",
+          "iconSprite": "kr5_special_icons_0013",
           "maxLevel": 3,
           "priceBase": 250,
           "priceIncrement": 175,
@@ -5297,6 +5510,8 @@
         {
           "id": "skill_bomb",
           "name": "炽热轨迹",
+          "icon": "/skills/tower_flamespitter_lvl4--skill_bomb.png",
+          "iconSprite": "kr5_special_icons_0022",
           "maxLevel": 3,
           "priceBase": 225,
           "priceIncrement": 200,
@@ -5318,6 +5533,8 @@
         {
           "id": "skill_columns",
           "name": "烈焰火柱",
+          "icon": "/skills/tower_flamespitter_lvl4--skill_columns.png",
+          "iconSprite": "kr5_special_icons_0023",
           "maxLevel": 3,
           "priceBase": 225,
           "priceIncrement": 250,
@@ -5395,6 +5612,8 @@
         {
           "id": "skill_big_blade",
           "name": "厄运回旋",
+          "icon": "/skills/tower_sand_lvl4--skill_big_blade.png",
+          "iconSprite": "kr5_special_icons_0029",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 200,
@@ -5416,6 +5635,8 @@
         {
           "id": "skill_gold",
           "name": "赏金狩猎",
+          "icon": "/skills/tower_sand_lvl4--skill_gold.png",
+          "iconSprite": "kr5_special_icons_0028",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 200,
@@ -5499,6 +5720,8 @@
         {
           "id": "phosphoric",
           "name": "磷化子弹",
+          "icon": "/skills/tower_rocket_gunners_lvl4--phosphoric.png",
+          "iconSprite": "kr5_special_icons_0016",
           "maxLevel": 3,
           "priceBase": 250,
           "priceIncrement": 100,
@@ -5520,6 +5743,8 @@
         {
           "id": "sting_missiles",
           "name": "蜂刺导弹",
+          "icon": "/skills/tower_rocket_gunners_lvl4--sting_missiles.png",
+          "iconSprite": "kr5_special_icons_0015",
           "maxLevel": 3,
           "priceBase": 250,
           "priceIncrement": 100,
@@ -5596,6 +5821,8 @@
         {
           "id": "chain",
           "name": "魔力溢流",
+          "icon": "/skills/tower_ray_lvl4--chain.png",
+          "iconSprite": "kr5_special_icons_0030",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 200,
@@ -5617,6 +5844,8 @@
         {
           "id": "sheep",
           "name": "变形魔咒",
+          "icon": "/skills/tower_ray_lvl4--sheep.png",
+          "iconSprite": "kr5_special_icons_0031",
           "maxLevel": 1,
           "priceBase": 300,
           "priceIncrement": 0,
@@ -5699,6 +5928,8 @@
         {
           "id": "extra_damage",
           "name": "灵魂虹吸",
+          "icon": "/skills/tower_ghost_lvl4--extra_damage.png",
+          "iconSprite": "kr5_special_icons_0024",
           "maxLevel": 3,
           "priceBase": 150,
           "priceIncrement": 150,
@@ -5720,6 +5951,8 @@
         {
           "id": "soul_attack",
           "name": "永恒恐惧",
+          "icon": "/skills/tower_ghost_lvl4--soul_attack.png",
+          "iconSprite": "kr5_special_icons_0025",
           "maxLevel": 3,
           "priceBase": 150,
           "priceIncrement": 150,
@@ -5796,6 +6029,8 @@
         {
           "id": "skill_buff",
           "name": "猎杀戾气",
+          "icon": "/skills/tower_dark_elf_lvl4--skill_buff.png",
+          "iconSprite": "kr5_special_icons_0033",
           "maxLevel": 3,
           "priceBase": 250,
           "priceIncrement": 125,
@@ -5817,6 +6052,8 @@
         {
           "id": "skill_soldiers",
           "name": "利刃援军",
+          "icon": "/skills/tower_dark_elf_lvl4--skill_soldiers.png",
+          "iconSprite": "kr5_special_icons_0032",
           "maxLevel": 3,
           "priceBase": 100,
           "priceIncrement": 125,
@@ -5894,6 +6131,8 @@
         {
           "id": "instakill",
           "name": "黏性长舌",
+          "icon": "/skills/tower_hermit_toad_lvl4--instakill.png",
+          "iconSprite": "kr5_special_icons_0034",
           "maxLevel": 1,
           "priceBase": 300,
           "priceIncrement": 300,
@@ -5907,6 +6146,8 @@
         {
           "id": "jump",
           "name": "泰山压顶",
+          "icon": "/skills/tower_hermit_toad_lvl4--jump.png",
+          "iconSprite": "kr5_special_icons_0035",
           "maxLevel": 3,
           "priceBase": 120,
           "priceIncrement": 120,
@@ -5984,6 +6225,8 @@
         {
           "id": "crystalize",
           "name": "结晶化",
+          "icon": "/skills/tower_sparking_geode_lvl4--crystalize.png",
+          "iconSprite": "kr5_special_icons_0038",
           "maxLevel": 2,
           "priceBase": 225,
           "priceIncrement": 225,
@@ -6001,6 +6244,8 @@
         {
           "id": "spike_burst",
           "name": "电气涌流",
+          "icon": "/skills/tower_sparking_geode_lvl4--spike_burst.png",
+          "iconSprite": "kr5_special_icons_0039",
           "maxLevel": 2,
           "priceBase": 300,
           "priceIncrement": 300,
@@ -6080,6 +6325,8 @@
         {
           "id": "formation",
           "name": "队伍扩充",
+          "icon": "/skills/tower_dwarf_lvl4--formation.png",
+          "iconSprite": "kr5_special_icons_0036",
           "maxLevel": 3,
           "priceBase": 180,
           "priceIncrement": 180,
@@ -6101,6 +6348,8 @@
         {
           "id": "incendiary_ammo",
           "name": "燃烧弹药",
+          "icon": "/skills/tower_dwarf_lvl4--incendiary_ammo.png",
+          "iconSprite": "kr5_special_icons_0037",
           "maxLevel": 3,
           "priceBase": 150,
           "priceIncrement": 175,
@@ -6184,6 +6433,8 @@
         {
           "id": "hat",
           "name": "飞笠斩",
+          "icon": "/skills/tower_pandas_lvl4--hat.png",
+          "iconSprite": "kr5_special_icons_0040",
           "maxLevel": 2,
           "priceBase": 140,
           "priceIncrement": 140,
@@ -6201,6 +6452,8 @@
         {
           "id": "teleport",
           "name": "狱火劫",
+          "icon": "/skills/tower_pandas_lvl4--teleport.png",
+          "iconSprite": "kr5_special_icons_0042",
           "maxLevel": 2,
           "priceBase": 160,
           "priceIncrement": 160,
@@ -6218,6 +6471,8 @@
         {
           "id": "thunder",
           "name": "天雷破",
+          "icon": "/skills/tower_pandas_lvl4--thunder.png",
+          "iconSprite": "kr5_special_icons_0041",
           "maxLevel": 2,
           "priceBase": 150,
           "priceIncrement": 150,
@@ -6290,6 +6545,8 @@
         {
           "id": "dragon_split",
           "name": "魔法唾液",
+          "icon": "/skills/tower_dragons_lvl4--dragon_split.png",
+          "iconSprite": "kr5_special_icons_0046",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 200,
@@ -6311,6 +6568,8 @@
         {
           "id": "massive_fear",
           "name": "颤栗龙吼",
+          "icon": "/skills/tower_dragons_lvl4--massive_fear.png",
+          "iconSprite": "kr5_special_icons_0045",
           "maxLevel": 2,
           "priceBase": 200,
           "priceIncrement": 225,
@@ -6382,6 +6641,8 @@
         {
           "id": "blade",
           "name": "亡命之刃",
+          "icon": "/skills/tower_shadow_archer--blade.png",
+          "iconSprite": "kr4_special_icons_0018",
           "maxLevel": 3,
           "priceBase": 275,
           "priceIncrement": 100,
@@ -6403,6 +6664,8 @@
         {
           "id": "crow",
           "name": "乌鸦巢",
+          "icon": "/skills/tower_shadow_archer--crow.png",
+          "iconSprite": "kr4_special_icons_0020",
           "maxLevel": 2,
           "priceBase": 180,
           "priceIncrement": 180,
@@ -6420,6 +6683,8 @@
         {
           "id": "mark",
           "name": "暗影印记",
+          "icon": "/skills/tower_shadow_archer--mark.png",
+          "iconSprite": "kr4_special_icons_0019",
           "maxLevel": 3,
           "priceBase": 150,
           "priceIncrement": 150,
@@ -6495,6 +6760,8 @@
         {
           "id": "fog",
           "name": "绝望浓雾",
+          "icon": "/skills/tower_rotten_forest--fog.png",
+          "iconSprite": "kr4_special_icons_0048",
           "maxLevel": 1,
           "priceBase": 160,
           "priceIncrement": 160,
@@ -6508,6 +6775,8 @@
         {
           "id": "tree",
           "name": "邪恶树精",
+          "icon": "/skills/tower_rotten_forest--tree.png",
+          "iconSprite": "kr4_special_icons_0049",
           "maxLevel": 2,
           "priceBase": 200,
           "priceIncrement": 100,
@@ -6525,6 +6794,8 @@
         {
           "id": "warp",
           "name": "邪恶草根",
+          "icon": "/skills/tower_rotten_forest--warp.png",
+          "iconSprite": "kr4_special_icons_0047",
           "maxLevel": 2,
           "priceBase": 160,
           "priceIncrement": 160,
@@ -6596,6 +6867,8 @@
         {
           "id": "golem",
           "name": "召唤骷儡",
+          "icon": "/skills/tower_bone_flingers--golem.png",
+          "iconSprite": "kr4_special_icons_0036",
           "maxLevel": 1,
           "priceBase": 250,
           "priceIncrement": 250,
@@ -6609,6 +6882,8 @@
         {
           "id": "milk",
           "name": "钙化骨骼",
+          "icon": "/skills/tower_bone_flingers--milk.png",
+          "iconSprite": "kr4_special_icons_0038",
           "maxLevel": 3,
           "priceBase": 110,
           "priceIncrement": 110,
@@ -6630,6 +6905,8 @@
         {
           "id": "skeleton",
           "name": "行尸走肉",
+          "icon": "/skills/tower_bone_flingers--skeleton.png",
+          "iconSprite": "kr4_special_icons_0037",
           "maxLevel": 3,
           "priceBase": 160,
           "priceIncrement": 195,
@@ -6706,6 +6983,8 @@
         {
           "id": "armor",
           "name": "船员升级",
+          "icon": "/skills/tower_ogre_shipwreck--armor.png",
+          "iconSprite": "kr4_special_icons_0076",
           "maxLevel": 1,
           "priceBase": 150,
           "priceIncrement": 0,
@@ -6719,6 +6998,8 @@
         {
           "id": "goblin_launcher",
           "name": "哥布林发射器",
+          "icon": "/skills/tower_ogre_shipwreck--goblin_launcher.png",
+          "iconSprite": "kr4_special_icons_0078",
           "maxLevel": 2,
           "priceBase": 200,
           "priceIncrement": 100,
@@ -6736,6 +7017,8 @@
         {
           "id": "multishoot",
           "name": "火枪之怒",
+          "icon": "/skills/tower_ogre_shipwreck--multishoot.png",
+          "iconSprite": "kr4_special_icons_0077",
           "maxLevel": 2,
           "priceBase": 150,
           "priceIncrement": 150,
@@ -6813,6 +7096,8 @@
         {
           "id": "bloodlust",
           "name": "战欲难耐",
+          "icon": "/skills/tower_orc_warriors--bloodlust.png",
+          "iconSprite": "kr4_special_icons_0004",
           "maxLevel": 3,
           "priceBase": 125,
           "priceIncrement": 125,
@@ -6834,6 +7119,8 @@
         {
           "id": "promotion",
           "name": "擢升队长",
+          "icon": "/skills/tower_orc_warriors--promotion.png",
+          "iconSprite": "kr4_special_icons_0005",
           "maxLevel": 1,
           "priceBase": 200,
           "priceIncrement": 200,
@@ -6847,6 +7134,8 @@
         {
           "id": "seal",
           "name": "血之缄印",
+          "icon": "/skills/tower_orc_warriors--seal.png",
+          "iconSprite": "kr4_special_icons_0006",
           "maxLevel": 2,
           "priceBase": 150,
           "priceIncrement": 150,
@@ -6924,6 +7213,8 @@
         {
           "id": "instakill",
           "name": "野蛮一击",
+          "icon": "/skills/tower_dark_knights--instakill.png",
+          "iconSprite": "kr4_special_icons_0028",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 200,
@@ -6945,6 +7236,8 @@
         {
           "id": "shield",
           "name": "结阵",
+          "icon": "/skills/tower_dark_knights--shield.png",
+          "iconSprite": "kr4_special_icons_0027",
           "maxLevel": 1,
           "priceBase": 250,
           "priceIncrement": 250,
@@ -6958,6 +7251,8 @@
         {
           "id": "spike",
           "name": "荆棘护甲",
+          "icon": "/skills/tower_dark_knights--spike.png",
+          "iconSprite": "kr4_special_icons_0029",
           "maxLevel": 3,
           "priceBase": 130,
           "priceIncrement": 130,
@@ -7034,6 +7329,8 @@
         {
           "id": "curse",
           "name": "灼心符文",
+          "icon": "/skills/tower_infernal_mage--curse.png",
+          "iconSprite": "kr4_special_icons_0022",
           "maxLevel": 2,
           "priceBase": 150,
           "priceIncrement": 150,
@@ -7051,6 +7348,8 @@
         {
           "id": "fissure",
           "name": "岩浆裂隙",
+          "icon": "/skills/tower_infernal_mage--fissure.png",
+          "iconSprite": "kr4_special_icons_0021",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 200,
@@ -7072,6 +7371,8 @@
         {
           "id": "teleport",
           "name": "炼狱传送门",
+          "icon": "/skills/tower_infernal_mage--teleport.png",
+          "iconSprite": "kr4_special_icons_0023",
           "maxLevel": 2,
           "priceBase": 225,
           "priceIncrement": 115,
@@ -7145,6 +7446,8 @@
         {
           "id": "meteor",
           "name": "陨石雨",
+          "icon": "/skills/tower_orc_shaman--meteor.png",
+          "iconSprite": "kr4_special_icons_0002",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 200,
@@ -7166,6 +7469,8 @@
         {
           "id": "shock",
           "name": "连锁震击",
+          "icon": "/skills/tower_orc_shaman--shock.png",
+          "iconSprite": "kr4_special_icons_0003",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 200,
@@ -7187,6 +7492,8 @@
         {
           "id": "vines",
           "name": "治愈根须",
+          "icon": "/skills/tower_orc_shaman--vines.png",
+          "iconSprite": "kr4_special_icons_0001",
           "maxLevel": 3,
           "priceBase": 210,
           "priceIncrement": 175,
@@ -7263,6 +7570,8 @@
         {
           "id": "engine",
           "name": "爆裂引擎",
+          "icon": "/skills/tower_rocket_riders--engine.png",
+          "iconSprite": "kr4_special_icons_0010",
           "maxLevel": 2,
           "priceBase": 270,
           "priceIncrement": 150,
@@ -7280,6 +7589,8 @@
         {
           "id": "mine",
           "name": "雷区",
+          "icon": "/skills/tower_rocket_riders--mine.png",
+          "iconSprite": "kr4_special_icons_0012",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 175,
@@ -7301,6 +7612,8 @@
         {
           "id": "nitro",
           "name": "硝基火箭",
+          "icon": "/skills/tower_rocket_riders--nitro.png",
+          "iconSprite": "kr4_special_icons_0011",
           "maxLevel": 2,
           "priceBase": 200,
           "priceIncrement": 150,
@@ -7378,6 +7691,8 @@
         {
           "id": "big",
           "name": "僵尸X肌酸",
+          "icon": "/skills/tower_grim_cemetery--big.png",
+          "iconSprite": "kr4_special_icons_0033",
           "maxLevel": 1,
           "priceBase": 150,
           "priceIncrement": 150,
@@ -7391,6 +7706,8 @@
         {
           "id": "hands",
           "name": "恐怖尸手",
+          "icon": "/skills/tower_grim_cemetery--hands.png",
+          "iconSprite": "kr4_special_icons_0034",
           "maxLevel": 2,
           "priceBase": 240,
           "priceIncrement": 120,
@@ -7408,6 +7725,8 @@
         {
           "id": "pestilence",
           "name": "浮肿尸体",
+          "icon": "/skills/tower_grim_cemetery--pestilence.png",
+          "iconSprite": "kr4_special_icons_0035",
           "maxLevel": 2,
           "priceBase": 110,
           "priceIncrement": 110,
@@ -7480,6 +7799,8 @@
         {
           "id": "bomber",
           "name": "空降兵",
+          "icon": "/skills/tower_balloon--bomber.png",
+          "iconSprite": "kr4_special_icons_0014",
           "maxLevel": 1,
           "priceBase": 150,
           "priceIncrement": 0,
@@ -7493,6 +7814,8 @@
         {
           "id": "oil",
           "name": "焦油桶",
+          "icon": "/skills/tower_balloon--oil.png",
+          "iconSprite": "kr4_special_icons_0013",
           "maxLevel": 3,
           "priceBase": 120,
           "priceIncrement": 120,
@@ -7514,6 +7837,8 @@
         {
           "id": "watcher",
           "name": "传奇机长",
+          "icon": "/skills/tower_balloon--watcher.png",
+          "iconSprite": "kr4_special_icons_0015",
           "maxLevel": 1,
           "priceBase": 200,
           "priceIncrement": 0,
@@ -7581,6 +7906,8 @@
         {
           "id": "gargoyles",
           "name": "守墓石像鬼",
+          "icon": "/skills/tower_spirit_mausoleum--gargoyles.png",
+          "iconSprite": "kr4_special_icons_0025",
           "maxLevel": 2,
           "priceBase": 250,
           "priceIncrement": 250,
@@ -7598,6 +7925,8 @@
         {
           "id": "possession",
           "name": "灵魂附体",
+          "icon": "/skills/tower_spirit_mausoleum--possession.png",
+          "iconSprite": "kr4_special_icons_0024",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 100,
@@ -7619,6 +7948,8 @@
         {
           "id": "spectral_communion",
           "name": "通灵",
+          "icon": "/skills/tower_spirit_mausoleum--spectral_communion.png",
+          "iconSprite": "kr4_special_icons_0026",
           "maxLevel": 1,
           "priceBase": 250,
           "priceIncrement": 0,
@@ -7692,6 +8023,8 @@
         {
           "id": "arrow_storm",
           "name": "箭矢风暴",
+          "icon": "/skills/tower_twilight_elves_barrack--arrow_storm.png",
+          "iconSprite": "kr4_special_icons_0050",
           "maxLevel": 3,
           "priceBase": 140,
           "priceIncrement": 140,
@@ -7713,6 +8046,8 @@
         {
           "id": "backstab",
           "name": "背刺",
+          "icon": "/skills/tower_twilight_elves_barrack--backstab.png",
+          "iconSprite": "kr4_special_icons_0051",
           "maxLevel": 3,
           "priceBase": 180,
           "priceIncrement": 180,
@@ -7734,6 +8069,8 @@
         {
           "id": "last_breath",
           "name": "黄昏之怒",
+          "icon": "/skills/tower_twilight_elves_barrack--last_breath.png",
+          "iconSprite": "kr4_special_icons_0052",
           "maxLevel": 1,
           "priceBase": 220,
           "priceIncrement": 0,
@@ -7802,6 +8139,8 @@
         {
           "id": "bees",
           "name": "愤怒蜂群",
+          "icon": "/skills/tower_goblirang--bees.png",
+          "iconSprite": "kr4_special_icons_0007",
           "maxLevel": 3,
           "priceBase": 250,
           "priceIncrement": 200,
@@ -7823,6 +8162,8 @@
         {
           "id": "big",
           "name": "大回旋镖",
+          "icon": "/skills/tower_goblirang--big.png",
+          "iconSprite": "kr4_special_icons_0009",
           "maxLevel": 3,
           "priceBase": 200,
           "priceIncrement": 100,
@@ -7844,6 +8185,8 @@
         {
           "id": "stun",
           "name": "震荡回旋镖",
+          "icon": "/skills/tower_goblirang--stun.png",
+          "iconSprite": "kr4_special_icons_0008",
           "maxLevel": 1,
           "priceBase": 200,
           "priceIncrement": 0,
@@ -7912,6 +8255,8 @@
         {
           "id": "dragon",
           "name": "神龙大侠",
+          "icon": "/skills/tower_shaolin--dragon.png",
+          "iconSprite": "kr4_special_icons_0062",
           "maxLevel": 1,
           "priceBase": 225,
           "priceIncrement": 0,
@@ -7925,6 +8270,8 @@
         {
           "id": "lion",
           "name": "丰饶之狮",
+          "icon": "/skills/tower_shaolin--lion.png",
+          "iconSprite": "kr4_special_icons_0061",
           "maxLevel": 1,
           "priceBase": 200,
           "priceIncrement": 0,
@@ -7938,6 +8285,8 @@
         {
           "id": "total",
           "name": "人多势众",
+          "icon": "/skills/tower_shaolin--total.png",
+          "iconSprite": "kr4_special_icons_0063",
           "maxLevel": 3,
           "priceBase": 175,
           "priceIncrement": 175,
@@ -8013,6 +8362,8 @@
         {
           "id": "amph",
           "name": "海选之人",
+          "icon": "/skills/tower_deep_devils--amph.png",
+          "iconSprite": "kr4_special_icons_0059",
           "maxLevel": 1,
           "priceBase": 200,
           "priceIncrement": 0,
@@ -8026,6 +8377,8 @@
         {
           "id": "net",
           "name": "掷网",
+          "icon": "/skills/tower_deep_devils--net.png",
+          "iconSprite": "kr4_special_icons_0058",
           "maxLevel": 2,
           "priceBase": 100,
           "priceIncrement": 120,
@@ -8043,6 +8396,8 @@
         {
           "id": "storm",
           "name": "完美风暴",
+          "icon": "/skills/tower_deep_devils--storm.png",
+          "iconSprite": "kr4_special_icons_0057",
           "maxLevel": 3,
           "priceBase": 175,
           "priceIncrement": 150,
@@ -8120,6 +8475,8 @@
         {
           "id": "burning_elemental",
           "name": "炽热元素",
+          "icon": "/skills/tower_ignis_altar--burning_elemental.png",
+          "iconSprite": "kr4_special_icons_0068",
           "maxLevel": 1,
           "priceBase": 225,
           "priceIncrement": 0,
@@ -8133,6 +8490,8 @@
         {
           "id": "single_extinction",
           "name": "单体灭绝",
+          "icon": "/skills/tower_ignis_altar--single_extinction.png",
+          "iconSprite": "kr4_special_icons_0070",
           "maxLevel": 3,
           "priceBase": 225,
           "priceIncrement": 150,
@@ -8154,6 +8513,8 @@
         {
           "id": "true_fire",
           "name": "迟滞真炎",
+          "icon": "/skills/tower_ignis_altar--true_fire.png",
+          "iconSprite": "kr4_special_icons_0069",
           "maxLevel": 1,
           "priceBase": 300,
           "priceIncrement": 0,
@@ -8222,6 +8583,8 @@
         {
           "id": "charging",
           "name": "充能",
+          "icon": "/skills/tower_blazing_watcher--charging.png",
+          "iconSprite": "kr4_special_icons_0039",
           "maxLevel": 1,
           "priceBase": 200,
           "priceIncrement": 0,
@@ -8235,6 +8598,8 @@
         {
           "id": "disintegrate",
           "name": "溢能聚爆",
+          "icon": "/skills/tower_blazing_watcher--disintegrate.png",
+          "iconSprite": "kr4_special_icons_0041",
           "maxLevel": 3,
           "priceBase": 250,
           "priceIncrement": 160,
@@ -8256,6 +8621,8 @@
         {
           "id": "explosion",
           "name": "不稳定的力量",
+          "icon": "/skills/tower_blazing_watcher--explosion.png",
+          "iconSprite": "kr4_special_icons_0040",
           "maxLevel": 2,
           "priceBase": 225,
           "priceIncrement": 200,
@@ -8328,6 +8695,8 @@
         {
           "id": "eat",
           "name": "肉食动物",
+          "icon": "/skills/tower_swamp_monster--eat.png",
+          "iconSprite": "kr4_special_icons_0067",
           "maxLevel": 1,
           "priceBase": 140,
           "priceIncrement": 0,
@@ -8341,6 +8710,8 @@
         {
           "id": "instakill",
           "name": "粉碎",
+          "icon": "/skills/tower_swamp_monster--instakill.png",
+          "iconSprite": "kr4_special_icons_0066",
           "maxLevel": 3,
           "priceBase": 240,
           "priceIncrement": 180,
@@ -8362,6 +8733,8 @@
         {
           "id": "stun",
           "name": "致盲毒液",
+          "icon": "/skills/tower_swamp_monster--stun.png",
+          "iconSprite": "kr4_special_icons_0065",
           "maxLevel": 3,
           "priceBase": 120,
           "priceIncrement": 125,
@@ -8440,6 +8813,8 @@
         {
           "id": "coal",
           "name": "灼热煤块",
+          "icon": "/skills/tower_melting_furnace--coal.png",
+          "iconSprite": "kr4_special_icons_0031",
           "maxLevel": 2,
           "priceBase": 360,
           "priceIncrement": 210,
@@ -8457,6 +8832,8 @@
         {
           "id": "fuel",
           "name": "燃料",
+          "icon": "/skills/tower_melting_furnace--fuel.png",
+          "iconSprite": "kr4_special_icons_0030",
           "maxLevel": 1,
           "priceBase": 250,
           "priceIncrement": 0,
@@ -8470,6 +8847,8 @@
         {
           "id": "heat",
           "name": "摩擦生热",
+          "icon": "/skills/tower_melting_furnace--heat.png",
+          "iconSprite": "kr4_special_icons_0032",
           "maxLevel": 2,
           "priceBase": 250,
           "priceIncrement": 250,
@@ -8500,7 +8879,6 @@
       "name": "女巫姐妹花",
       "description": "加量不加价！这对女巫姐妹花能用黑魔法让敌人中毒或眩晕，带来双倍的凶险。",
       "families": [
-        "archer",
         "mage"
       ],
       "roles": [
@@ -8543,6 +8921,8 @@
         {
           "id": "frog",
           "name": "青蛙化",
+          "icon": "/skills/tower_wicked_sisters--frog.png",
+          "iconSprite": "kr4_special_icons_0045",
           "maxLevel": 2,
           "priceBase": 230,
           "priceIncrement": 180,
@@ -8560,6 +8940,8 @@
         {
           "id": "range",
           "name": "灵光4000",
+          "icon": "/skills/tower_wicked_sisters--range.png",
+          "iconSprite": "kr4_special_icons_0046",
           "maxLevel": 2,
           "priceBase": 100,
           "priceIncrement": 100,
@@ -8577,6 +8959,8 @@
         {
           "id": "silent",
           "name": "迷惑图腾",
+          "icon": "/skills/tower_wicked_sisters--silent.png",
+          "iconSprite": "kr4_special_icons_0044",
           "maxLevel": 1,
           "priceBase": 180,
           "priceIncrement": 0,
@@ -8646,6 +9030,8 @@
         {
           "id": "eat",
           "name": "小吃时间",
+          "icon": "/skills/tower_sandworm--eat.png",
+          "iconSprite": "kr4_special_icons_0072",
           "maxLevel": 3,
           "priceBase": 250,
           "priceIncrement": 50,
@@ -8667,6 +9053,8 @@
         {
           "id": "slime",
           "name": "粘液球",
+          "icon": "/skills/tower_sandworm--slime.png",
+          "iconSprite": "kr4_special_icons_0073",
           "maxLevel": 2,
           "priceBase": 200,
           "priceIncrement": 200,
@@ -8684,6 +9072,8 @@
         {
           "id": "worm",
           "name": "小吃时间",
+          "icon": "/skills/tower_sandworm--worm.png",
+          "iconSprite": "kr4_special_icons_0071",
           "maxLevel": 2,
           "priceBase": 170,
           "priceIncrement": 170,

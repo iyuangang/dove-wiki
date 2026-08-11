@@ -2,6 +2,7 @@ local game_root = os.getenv("DOVE_GAME_DIR")
 local raw_output = os.getenv("DOVE_RAW_OUTPUT")
 local portrait_output = os.getenv("DOVE_PORTRAIT_DIR")
 local encyclopedia_output = os.getenv("DOVE_ENCYCLOPEDIA_DIR")
+local skill_icon_output = os.getenv("DOVE_SKILL_ICON_DIR")
 
 local function fail(message)
 	io.stderr:write("[dove-wiki] " .. message .. "\n")
@@ -253,6 +254,21 @@ local function load_lua_table(path)
 	return chunk()
 end
 
+local function collect_menu_images(value, result, seen)
+	if type(value) ~= "table" or seen[value] then
+		return
+	end
+
+	seen[value] = true
+	if type(value.action_arg) == "string" and type(value.image) == "string" then
+		result[value.action_arg] = value.image
+	end
+
+	for _, child in pairs(value) do
+		collect_menu_images(child, result, seen)
+	end
+end
+
 local function load_encyclopedia_index()
 	local path = join_path(game_root, "kr1-desktop/data/map_data.lua")
 	local handle = assert(io.open(path, "rb"))
@@ -290,10 +306,14 @@ end
 local function build_raw_export(entity_db)
 	local settings = require("game_settings")
 	local localization = load_lua_table("_assets/kr1-desktop/strings/zh-Hans.lua")
+	local i18n = require("i18n")
+	i18n.msgs[i18n.current_locale] = localization
 	local portrait_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/gui_portraits.lua")
+	local gui_icon_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/gui_ico.lua")
 	local encyclopedia_thumb_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/encyclopedia.lua")
 	local encyclopedia_detail_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/encyclopedia_creeps.lua")
 	local encyclopedia_index = load_encyclopedia_index()
+	local tower_menus = require("data.tower_menus_data")
 	local family_lists = {
 		{name = "archer", towers = settings.archer_towers},
 		{name = "mage", towers = settings.mage_towers},
@@ -338,6 +358,21 @@ local function build_raw_export(entity_db)
 					record.computed_info = copy_jsonable(computed_info, 6)
 				else
 					record.computed_info_error = tostring(computed_info)
+				end
+			end
+
+			record.power_icons = {}
+			local menu_key = template.tower and template.tower.type
+			local menu_images = {}
+			collect_menu_images(tower_menus[menu_key], menu_images, {})
+
+			for power_id in pairs(template.powers or {}) do
+				local sprite = menu_images[power_id]
+				if sprite and gui_icon_atlas[sprite] then
+					record.power_icons[power_id] = {
+						sprite = sprite,
+						atlas = copy_jsonable(gui_icon_atlas[sprite], 4)
+					}
 				end
 			end
 
@@ -503,6 +538,28 @@ local function export_encyclopedia_images(towers)
 	print(string.format("DOVE_WIKI_ENCYCLOPEDIA=%d", exported))
 end
 
+local function export_skill_icons(towers)
+	local image_cache = {}
+	local exported = 0
+
+	for _, tower in ipairs(towers) do
+		for power_id, icon in pairs(tower.power_icons or {}) do
+			export_atlas_crop(
+				icon.atlas,
+				join_path(skill_icon_output, tower.id .. "--" .. power_id .. ".png"),
+				image_cache
+			)
+			exported = exported + 1
+		end
+	end
+
+	for _, image in pairs(image_cache) do
+		image:release()
+	end
+
+	print(string.format("DOVE_WIKI_SKILL_ICONS=%d", exported))
+end
+
 function love.load()
 	if not game_root or game_root == "" then
 		return fail("DOVE_GAME_DIR is required")
@@ -542,7 +599,8 @@ function love.load()
 
 		local raw_export
 		if (raw_output and raw_output ~= "") or (portrait_output and portrait_output ~= "") or
-			(encyclopedia_output and encyclopedia_output ~= "") then
+			(encyclopedia_output and encyclopedia_output ~= "") or
+			(skill_icon_output and skill_icon_output ~= "") then
 			raw_export = build_raw_export(entity_db)
 		end
 
@@ -559,6 +617,10 @@ function love.load()
 
 		if encyclopedia_output and encyclopedia_output ~= "" then
 			export_encyclopedia_images(raw_export.towers)
+		end
+
+		if skill_icon_output and skill_icon_output ~= "" then
+			export_skill_icons(raw_export.towers)
 		end
 
 		local debug_tower = os.getenv("DOVE_DEBUG_TOWER")
