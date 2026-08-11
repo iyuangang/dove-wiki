@@ -116,10 +116,10 @@ describe('游戏百科顺序与图像', () => {
 
   it('extracts all four six-level technology trees from upgrades.lua', () => {
     expect(doveData.technologyTrees).toHaveLength(4)
-    expect(doveData.summary.technologyCount).toBe(96)
+    expect(doveData.summary.technologyCount).toBe(144)
     expect(
       doveData.technologyTrees.every(
-        (tree) => tree.maxLevel === 6 && tree.technologies.length === 24,
+        (tree) => tree.maxLevel === 6 && tree.technologies.length === 36,
       ),
     ).toBe(true)
     expect(doveData.technologyTrees.map((tree) => tree.name)).toEqual([
@@ -128,6 +128,22 @@ describe('游戏百科顺序与图像', () => {
       '科技三',
       '科技四',
     ])
+    expect(
+      doveData.technologyTrees.every((tree) =>
+        ['archer', 'barrack', 'mage', 'engineer', 'rain', 'reinforcement'].every(
+          (family) =>
+            tree.technologies.filter((technology) => technology.family === family).length === 6,
+        ),
+      ),
+    ).toBe(true)
+    expect(
+      doveData.technologyTrees.every((tree) =>
+        tree.technologies.every(
+          (technology) =>
+            technology.icon.startsWith('/technologies/') && Boolean(technology.iconSprite),
+        ),
+      ),
+    ).toBe(true)
   })
 
   it('同时识别关卡主脚本和数据脚本中的塔解锁记录', () => {

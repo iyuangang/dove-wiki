@@ -1,11 +1,11 @@
 {
   "metadata": {
-    "title": "Dove 防御塔 Wiki",
+    "title": "王国保卫战鸽子版 WIKI",
     "gameVersion": "2.0.5.8",
     "contentVersion": "5.6.12",
     "gameId": "kingdom_rush_dove",
     "commitHash": "ab027397630eacb500dade515b111605b252d79e",
-    "generatedAt": "2026-08-11T08:10:16.478Z",
+    "generatedAt": "2026-08-11T08:46:42.209Z",
     "sourceRoot": "D:\\KingdomRushDove-Windows-Cycle2-v0.1.5\\KingdomRushDove",
     "assumptions": [
       "科技树可在辅助计算中选择；条件触发、概率与特殊目标效果不强行折算进基础面板。",
@@ -21,7 +21,7 @@
     "portraitFallbackCount": 12,
     "skillIconCount": 196,
     "technologyTreeCount": 4,
-    "technologyCount": 96,
+    "technologyCount": 144,
     "heroCount": 75,
     "enemyCount": 299,
     "uniqueEnemyCount": 295,
@@ -498,6 +498,8 @@
           "family": "archer",
           "level": 1,
           "price": 1,
+          "icon": "/technologies/1/archer_salvage.png",
+          "iconSprite": "Upgrades_Icons_0013",
           "name": "资源回收",
           "description": "神射手防御塔价格下降5%。",
           "modifiers": [
@@ -514,6 +516,8 @@
           "family": "archer",
           "level": 2,
           "price": 1,
+          "icon": "/technologies/1/archer_eagle_eye.png",
+          "iconSprite": "Upgrades_Icons_0014",
           "name": "鹰眼",
           "description": "提高箭塔25%攻击范围。",
           "modifiers": [
@@ -529,6 +533,8 @@
           "family": "archer",
           "level": 3,
           "price": 2,
+          "icon": "/technologies/1/archer_piercing.png",
+          "iconSprite": "Upgrades_Icons_0015",
           "name": "穿刺射击",
           "description": "箭矢忽略敌人10点护甲。",
           "modifiers": []
@@ -538,6 +544,8 @@
           "family": "archer",
           "level": 4,
           "price": 2,
+          "icon": "/technologies/1/archer_far_shots.png",
+          "iconSprite": "Upgrades_Icons_0016",
           "name": "远程射击",
           "description": "提高箭塔5%攻击范围。",
           "modifiers": [
@@ -553,6 +561,8 @@
           "family": "archer",
           "level": 5,
           "price": 3,
+          "icon": "/technologies/1/archer_precision.png",
+          "iconSprite": "Upgrades_Icons_0017",
           "name": "精准射击",
           "description": "神射手攻击时有10%几率造成双倍伤害。",
           "modifiers": [
@@ -568,6 +578,8 @@
           "family": "archer",
           "level": 6,
           "price": 4,
+          "icon": "/technologies/1/archer_el_bloodletting_shoot.png",
+          "iconSprite": "kr3_Upgrades_Icons_0005",
           "name": "放血射击",
           "description": "弓箭手攻击时有15%几率导致重伤流血，在3秒内造成箭矢造成伤害230%的真实伤害。",
           "modifiers": []
@@ -577,6 +589,8 @@
           "family": "barrack",
           "level": 1,
           "price": 1,
+          "icon": "/technologies/1/barrack_survival.png",
+          "iconSprite": "Upgrades_Icons_0008",
           "name": "体魄训练",
           "description": "提高士兵10%生命值。",
           "modifiers": [
@@ -592,6 +606,8 @@
           "family": "barrack",
           "level": 2,
           "price": 1,
+          "icon": "/technologies/1/barrack_better_armor.png",
+          "iconSprite": "Upgrades_Icons_0009",
           "name": "精良护甲",
           "description": "提高士兵10点护甲。",
           "modifiers": [
@@ -607,6 +623,8 @@
           "family": "barrack",
           "level": 3,
           "price": 2,
+          "icon": "/technologies/1/barrack_improved_deployment.png",
+          "iconSprite": "Upgrades_Icons_0010",
           "name": "部署改良",
           "description": "增加20%调集范围，并缩短士兵训练时间20%。",
           "modifiers": [
@@ -627,6 +645,8 @@
           "family": "barrack",
           "level": 4,
           "price": 2,
+          "icon": "/technologies/1/barrack_survival_2.png",
+          "iconSprite": "Upgrades_Icons_0011",
           "name": "耐力训练",
           "description": "提高士兵9%生命值。",
           "modifiers": [
@@ -642,6 +662,8 @@
           "family": "barrack",
           "level": 5,
           "price": 3,
+          "icon": "/technologies/1/barrack_barbed_armor.png",
+          "iconSprite": "Upgrades_Icons_0012",
           "name": "尖刺护甲",
           "description": "所有友方单位在受到攻击时，回敬攻击原数值10%的真实伤害。",
           "modifiers": []
@@ -651,6 +673,8 @@
           "family": "barrack",
           "level": 6,
           "price": 4,
+          "icon": "/technologies/1/barrack_el_enchanted_armor.png",
+          "iconSprite": "kr3_Upgrades_Icons_0008",
           "name": "附魔护甲",
           "description": "提高士兵10点魔抗和10%免伤。",
           "modifiers": [
@@ -666,6 +690,8 @@
           "family": "mage",
           "level": 1,
           "price": 1,
+          "icon": "/technologies/1/mage_spell_reach.png",
+          "iconSprite": "Upgrades_Icons_0018",
           "name": "法术延伸",
           "description": "提高法师塔15%攻击范围。",
           "modifiers": [
@@ -681,6 +707,8 @@
           "family": "mage",
           "level": 2,
           "price": 1,
+          "icon": "/technologies/1/mage_arcane_shatter.png",
+          "iconSprite": "Upgrades_Icons_0019",
           "name": "奥术粉碎",
           "description": "魔法攻击每次命中，都会摧毁敌人一部分物理护甲。",
           "modifiers": []
@@ -690,6 +718,8 @@
           "family": "mage",
           "level": 3,
           "price": 2,
+          "icon": "/technologies/1/mage_hermetic_study.png",
+          "iconSprite": "Upgrades_Icons_0020",
           "name": "玄奥研究",
           "description": "法师塔建造和升级费用降低9%。",
           "modifiers": [
@@ -706,6 +736,8 @@
           "family": "mage",
           "level": 4,
           "price": 2,
+          "icon": "/technologies/1/mage_empowered_magic.png",
+          "iconSprite": "Upgrades_Icons_0021",
           "name": "强化魔力",
           "description": "提高法师塔15%攻击伤害。",
           "modifiers": [
@@ -721,6 +753,8 @@
           "family": "mage",
           "level": 5,
           "price": 3,
+          "icon": "/technologies/1/mage_slow_curse.png",
+          "iconSprite": "Upgrades_Icons_0022",
           "name": "缓慢诅咒",
           "description": "魔法攻击在一定时间内使敌人减速50%。",
           "modifiers": []
@@ -730,6 +764,8 @@
           "family": "mage",
           "level": 6,
           "price": 4,
+          "icon": "/technologies/1/mage_brilliance.png",
+          "iconSprite": "kr2_Upgrades_Icons_0015",
           "name": "魔法闪耀",
           "description": "法师塔根据已有法师塔数量获得18%-36%的普攻伤害加成。",
           "modifiers": [
@@ -755,6 +791,8 @@
           "family": "engineer",
           "level": 1,
           "price": 1,
+          "icon": "/technologies/1/engineer_concentrated_fire.png",
+          "iconSprite": "Upgrades_Icons_0023",
           "name": "集中火力",
           "description": "提高火炮25%攻击伤害。",
           "modifiers": [
@@ -770,6 +808,8 @@
           "family": "engineer",
           "level": 2,
           "price": 1,
+          "icon": "/technologies/1/engineer_range_finder.png",
+          "iconSprite": "Upgrades_Icons_0024",
           "name": "测距仪",
           "description": "提高火炮10%攻击范围。",
           "modifiers": [
@@ -789,6 +829,8 @@
           "family": "engineer",
           "level": 3,
           "price": 2,
+          "icon": "/technologies/1/engineer_field_logistics.png",
+          "iconSprite": "Upgrades_Icons_0025",
           "name": "战地后勤",
           "description": "火炮建造和升级费用降低10%。",
           "modifiers": [
@@ -805,6 +847,8 @@
           "family": "engineer",
           "level": 4,
           "price": 3,
+          "icon": "/technologies/1/engineer_industrialization.png",
+          "iconSprite": "Upgrades_Icons_0026",
           "name": "工业化",
           "description": "火炮技能费用降低20%。",
           "modifiers": []
@@ -814,6 +858,8 @@
           "family": "engineer",
           "level": 5,
           "price": 3,
+          "icon": "/technologies/1/engineer_efficiency.png",
+          "iconSprite": "Upgrades_Icons_0027",
           "name": "智能瞄准",
           "description": "火炮的溅射和连锁闪电伤害不会递减。",
           "modifiers": [
@@ -834,6 +880,8 @@
           "family": "engineer",
           "level": 6,
           "price": 4,
+          "icon": "/technologies/1/engineer_gnomish_tinkering.png",
+          "iconSprite": "kr2_Upgrades_Icons_0019",
           "name": "侏儒技术",
           "description": "火炮技能冷却速度提高12%，雷电攻击冷却速度提高10%。",
           "modifiers": [
@@ -847,6 +895,144 @@
               ]
             }
           ]
+        },
+        {
+          "id": "rain_blazing_skies",
+          "family": "rain",
+          "level": 1,
+          "price": 2,
+          "icon": "/technologies/1/rain_blazing_skies.png",
+          "iconSprite": "Upgrades_Icons_0003",
+          "name": "炽焰天空",
+          "description": "陨石伤害提升至60-90点，数量提升至5颗。",
+          "modifiers": []
+        },
+        {
+          "id": "rain_scorched_earth",
+          "family": "rain",
+          "level": 2,
+          "price": 2,
+          "icon": "/technologies/1/rain_scorched_earth.png",
+          "iconSprite": "Upgrades_Icons_0004",
+          "name": "焦土大地",
+          "description": "陨石点燃地面，灼烧经过的敌人，持续5秒，每秒造成10-20点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "rain_bigger_and_meaner",
+          "family": "rain",
+          "level": 3,
+          "price": 3,
+          "icon": "/technologies/1/rain_bigger_and_meaner.png",
+          "iconSprite": "Upgrades_Icons_0005",
+          "name": "速度与激情",
+          "description": "陨石伤害提高至90-120点，爆炸半径提高25%。火雨冷却时间缩短至70秒。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.25
+            }
+          ]
+        },
+        {
+          "id": "rain_blazing_earth",
+          "family": "rain",
+          "level": 4,
+          "price": 3,
+          "icon": "/technologies/1/rain_blazing_earth.png",
+          "iconSprite": "Upgrades_Icons_0006",
+          "name": "炽焰大地",
+          "description": "焦土持续时间提升至10秒，每秒造成20-30点物理伤害。火雨冷却时间缩短至60秒。",
+          "modifiers": []
+        },
+        {
+          "id": "rain_cataclysm",
+          "family": "rain",
+          "level": 5,
+          "price": 3,
+          "icon": "/technologies/1/rain_cataclysm.png",
+          "iconSprite": "Upgrades_Icons_0007",
+          "name": "大灾变",
+          "description": "陨石伤害提高至150-180点，并在随机位置降下相同数量的额外陨石。",
+          "modifiers": []
+        },
+        {
+          "id": "rain_armaggedon",
+          "family": "rain",
+          "level": 6,
+          "price": 4,
+          "icon": "/technologies/1/rain_armaggedon.png",
+          "iconSprite": "kr2_Upgrades_Icons_0025",
+          "name": "末日浩劫",
+          "description": "陨石、额外陨石数量提升至6枚，并使额外陨石瞄准敌人落下。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_1",
+          "family": "reinforcement",
+          "level": 1,
+          "price": 2,
+          "icon": "/technologies/1/reinforcement_level_1.png",
+          "iconSprite": "Upgrades_Icons_0028",
+          "name": "营养良好",
+          "description": "营养良好的农夫具有50点生命值，攻击造成1-3点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_2",
+          "family": "reinforcement",
+          "level": 2,
+          "price": 3,
+          "icon": "/technologies/1/reinforcement_level_2.png",
+          "iconSprite": "Upgrades_Icons_0029",
+          "name": "义勇部队",
+          "description": "义勇部队具有70点生命值与10点护甲，攻击造成2-4点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_3",
+          "family": "reinforcement",
+          "level": 3,
+          "price": 3,
+          "icon": "/technologies/1/reinforcement_level_3.png",
+          "iconSprite": "Upgrades_Icons_0030",
+          "name": "勇士部队",
+          "description": "勇士部队具有90点生命值与20点护甲，攻击造成3-6点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_4",
+          "family": "reinforcement",
+          "level": 4,
+          "price": 3,
+          "icon": "/technologies/1/reinforcement_level_4.png",
+          "iconSprite": "Upgrades_Icons_0001",
+          "name": "军团士兵",
+          "description": "军团士兵具有110点生命值与30点护甲，攻击造成6-10点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_5",
+          "family": "reinforcement",
+          "level": 5,
+          "price": 4,
+          "icon": "/technologies/1/reinforcement_level_5.png",
+          "iconSprite": "Upgrades_Icons_0002",
+          "name": "长矛投掷",
+          "description": "军团士兵学会投矛，可瞄准地面和飞行敌人，造成24-40点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_6",
+          "family": "reinforcement",
+          "level": 6,
+          "price": 4,
+          "icon": "/technologies/1/reinforcement_level_6.png",
+          "iconSprite": "kr3_Upgrades_Icons_0029",
+          "name": "胜利呼唤",
+          "description": "提升援军在场的时间2秒，并加快援军技能的冷却1秒。",
+          "modifiers": []
         }
       ]
     },
@@ -861,6 +1047,8 @@
           "family": "archer",
           "level": 1,
           "price": 1,
+          "icon": "/technologies/2/archer_far_shots.png",
+          "iconSprite": "kr2_Upgrades_Icons_0001",
           "name": "远程射击",
           "description": "提高箭塔25%攻击范围。",
           "modifiers": [
@@ -876,6 +1064,8 @@
           "family": "archer",
           "level": 2,
           "price": 1,
+          "icon": "/technologies/2/archer_logger.png",
+          "iconSprite": "kr2_Upgrades_Icons_0002",
           "name": "伐木工",
           "description": "降低箭塔技能价格10%。",
           "modifiers": []
@@ -885,6 +1075,8 @@
           "family": "archer",
           "level": 3,
           "price": 2,
+          "icon": "/technologies/2/archer_critical.png",
+          "iconSprite": "kr2_Upgrades_Icons_0003",
           "name": "致命射击",
           "description": "提高箭塔10%伤害。",
           "modifiers": [
@@ -900,6 +1092,8 @@
           "family": "archer",
           "level": 4,
           "price": 2,
+          "icon": "/technologies/2/archer_tear.png",
+          "iconSprite": "kr2_Upgrades_Icons_0004",
           "name": "撕裂射击",
           "description": "箭矢依据伤害，降低敌人0.16到1点护甲。",
           "modifiers": []
@@ -909,6 +1103,8 @@
           "family": "archer",
           "level": 5,
           "price": 3,
+          "icon": "/technologies/2/archer_fast_shots.png",
+          "iconSprite": "kr2_Upgrades_Icons_0005",
           "name": "快速射击",
           "description": "提高箭塔攻速10%。",
           "modifiers": [
@@ -924,6 +1120,8 @@
           "family": "archer",
           "level": 6,
           "price": 4,
+          "icon": "/technologies/2/archer_el_bloodletting_shoot.png",
+          "iconSprite": "kr3_Upgrades_Icons_0005",
           "name": "放血射击",
           "description": "弓箭手攻击时有15%几率导致重伤流血，在3秒内造成箭矢造成伤害230%的真实伤害。",
           "modifiers": []
@@ -933,6 +1131,8 @@
           "family": "barrack",
           "level": 1,
           "price": 1,
+          "icon": "/technologies/2/barrack_bodies.png",
+          "iconSprite": "kr2_Upgrades_Icons_0006",
           "name": "人海战术",
           "description": "士兵生命上限降低20%，但是兵营的人数上限提升一名。特殊兵营的人数不提升，但是伤害提升30%。",
           "modifiers": [
@@ -974,6 +1174,8 @@
           "family": "barrack",
           "level": 2,
           "price": 1,
+          "icon": "/technologies/2/barrack_march.png",
+          "iconSprite": "kr2_Upgrades_Icons_0007",
           "name": "行军号角",
           "description": "调集范围提高10%，士兵移速提升12点。",
           "modifiers": [
@@ -989,6 +1191,8 @@
           "family": "barrack",
           "level": 3,
           "price": 2,
+          "icon": "/technologies/2/barrack_rally.png",
+          "iconSprite": "kr2_Upgrades_Icons_0008",
           "name": "部署改良",
           "description": "增加20%调集范围。",
           "modifiers": [
@@ -1004,6 +1208,8 @@
           "family": "barrack",
           "level": 4,
           "price": 2,
+          "icon": "/technologies/2/barrack_weapon.png",
+          "iconSprite": "kr2_Upgrades_Icons_0009",
           "name": "武器改良",
           "description": "提升士兵10%攻击力。",
           "modifiers": [
@@ -1019,6 +1225,8 @@
           "family": "barrack",
           "level": 5,
           "price": 3,
+          "icon": "/technologies/2/barrack_go_on.png",
+          "iconSprite": "kr2_Upgrades_Icons_0010",
           "name": "前仆后继",
           "description": "士兵的训练速度提升20%。",
           "modifiers": [
@@ -1034,6 +1242,8 @@
           "family": "barrack",
           "level": 6,
           "price": 4,
+          "icon": "/technologies/2/barrack_el_enchanted_armor.png",
+          "iconSprite": "kr3_Upgrades_Icons_0008",
           "name": "附魔护甲",
           "description": "提高士兵10点魔抗和10%免伤。",
           "modifiers": [
@@ -1049,6 +1259,8 @@
           "family": "mage",
           "level": 1,
           "price": 1,
+          "icon": "/technologies/2/mage_arcane_spell.png",
+          "iconSprite": "kr2_Upgrades_Icons_0011",
           "name": "奥术符文",
           "description": "提高法师塔15%攻击伤害。",
           "modifiers": [
@@ -1064,6 +1276,8 @@
           "family": "mage",
           "level": 2,
           "price": 1,
+          "icon": "/technologies/2/mage_strike.png",
+          "iconSprite": "kr2_Upgrades_Icons_0012",
           "name": "法术打击",
           "description": "法球对无法抗敌人造成额外20%伤害。",
           "modifiers": []
@@ -1073,6 +1287,8 @@
           "family": "mage",
           "level": 3,
           "price": 2,
+          "icon": "/technologies/2/mage_spell_reach.png",
+          "iconSprite": "kr2_Upgrades_Icons_0013",
           "name": "法术延伸",
           "description": "提高法师塔10%攻击范围。",
           "modifiers": [
@@ -1088,6 +1304,8 @@
           "family": "mage",
           "level": 4,
           "price": 2,
+          "icon": "/technologies/2/mage_old_folk.png",
+          "iconSprite": "kr2_Upgrades_Icons_0014",
           "name": "古老智慧",
           "description": "法师塔技能价格降低15%。",
           "modifiers": []
@@ -1097,6 +1315,8 @@
           "family": "mage",
           "level": 5,
           "price": 3,
+          "icon": "/technologies/2/mage_unsteady.png",
+          "iconSprite": "Upgrades_Icons_0021",
           "name": "不稳定魔力",
           "description": "法师攻击时有10%几率无视法抗并造成额外100%伤害。",
           "modifiers": []
@@ -1106,6 +1326,8 @@
           "family": "mage",
           "level": 6,
           "price": 4,
+          "icon": "/technologies/2/mage_brilliance.png",
+          "iconSprite": "kr2_Upgrades_Icons_0015",
           "name": "魔法闪耀",
           "description": "法师塔根据已有法师塔数量获得18%-36%的普攻伤害加成。",
           "modifiers": [
@@ -1131,6 +1353,8 @@
           "family": "engineer",
           "level": 1,
           "price": 1,
+          "icon": "/technologies/2/engineer_range_finder.png",
+          "iconSprite": "kr2_Upgrades_Icons_0016",
           "name": "测距仪",
           "description": "提高火炮15%攻击范围。",
           "modifiers": [
@@ -1150,6 +1374,8 @@
           "family": "engineer",
           "level": 2,
           "price": 1,
+          "icon": "/technologies/2/engineer_magic_dust.png",
+          "iconSprite": "kr2_Upgrades_Icons_0017",
           "name": "魔法粉尘",
           "description": "炮弹攻击有10%几率造成基于攻击力和敌人最大生命值百分比的伤害。",
           "modifiers": [
@@ -1172,6 +1398,8 @@
           "family": "engineer",
           "level": 3,
           "price": 2,
+          "icon": "/technologies/2/engineer_concentrated_fire.png",
+          "iconSprite": "kr2_Upgrades_Icons_0018",
           "name": "集中火力",
           "description": "提高火炮10%攻击伤害。",
           "modifiers": [
@@ -1187,6 +1415,8 @@
           "family": "engineer",
           "level": 4,
           "price": 3,
+          "icon": "/technologies/2/engineer_industrialization.png",
+          "iconSprite": "Upgrades_Icons_0026",
           "name": "工业化",
           "description": "火炮技能费用降低20%。",
           "modifiers": []
@@ -1196,6 +1426,8 @@
           "family": "engineer",
           "level": 5,
           "price": 3,
+          "icon": "/technologies/2/engineer_efficiency.png",
+          "iconSprite": "Upgrades_Icons_0027",
           "name": "智能瞄准",
           "description": "火炮的溅射和连锁闪电伤害不会递减。",
           "modifiers": [
@@ -1216,6 +1448,8 @@
           "family": "engineer",
           "level": 6,
           "price": 4,
+          "icon": "/technologies/2/engineer_gnomish_tinkering.png",
+          "iconSprite": "kr2_Upgrades_Icons_0019",
           "name": "侏儒技术",
           "description": "火炮技能冷却速度提高12%，雷电攻击冷却速度提高10%。",
           "modifiers": [
@@ -1229,6 +1463,144 @@
               ]
             }
           ]
+        },
+        {
+          "id": "rain_blazing_skies",
+          "family": "rain",
+          "level": 1,
+          "price": 2,
+          "icon": "/technologies/2/rain_blazing_skies.png",
+          "iconSprite": "Upgrades_Icons_0003",
+          "name": "炽焰天空",
+          "description": "陨石伤害提升至50-80点，数量提升至6颗。",
+          "modifiers": []
+        },
+        {
+          "id": "rain_scorched_earth",
+          "family": "rain",
+          "level": 2,
+          "price": 2,
+          "icon": "/technologies/2/rain_scorched_earth.png",
+          "iconSprite": "Upgrades_Icons_0004",
+          "name": "焦土大地",
+          "description": "陨石点燃地面，灼烧经过的敌人，持续5秒，每秒造成10-20点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "rain_bigger_and_meaner",
+          "family": "rain",
+          "level": 3,
+          "price": 3,
+          "icon": "/technologies/2/rain_bigger_and_meaner.png",
+          "iconSprite": "Upgrades_Icons_0005",
+          "name": "速度与激情",
+          "description": "陨石伤害提高至75-105点，爆炸半径提高25%。火雨冷却时间缩短至68秒。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.25
+            }
+          ]
+        },
+        {
+          "id": "rain_blazing_earth",
+          "family": "rain",
+          "level": 4,
+          "price": 3,
+          "icon": "/technologies/2/rain_blazing_earth.png",
+          "iconSprite": "Upgrades_Icons_0006",
+          "name": "炽焰大地",
+          "description": "焦土持续时间提升至10秒，每秒造成20-30点物理伤害。火雨冷却时间缩短至58秒。",
+          "modifiers": []
+        },
+        {
+          "id": "rain_cataclysm",
+          "family": "rain",
+          "level": 5,
+          "price": 3,
+          "icon": "/technologies/2/rain_cataclysm.png",
+          "iconSprite": "Upgrades_Icons_0007",
+          "name": "大灾变",
+          "description": "陨石伤害提高至120-150点，并在随机位置降下相同数量的额外陨石。",
+          "modifiers": []
+        },
+        {
+          "id": "rain_armaggedon",
+          "family": "rain",
+          "level": 6,
+          "price": 4,
+          "icon": "/technologies/2/rain_armaggedon.png",
+          "iconSprite": "kr2_Upgrades_Icons_0025",
+          "name": "末日浩劫",
+          "description": "陨石、额外陨石数量提升至8枚，并使额外陨石瞄准敌人落下。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_1",
+          "family": "reinforcement",
+          "level": 1,
+          "price": 2,
+          "icon": "/technologies/2/reinforcement_level_1.png",
+          "iconSprite": "Upgrades_Icons_0028",
+          "name": "营养良好",
+          "description": "营养良好的农夫具有50点生命值，攻击造成1-3点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_2",
+          "family": "reinforcement",
+          "level": 2,
+          "price": 3,
+          "icon": "/technologies/2/reinforcement_level_2.png",
+          "iconSprite": "Upgrades_Icons_0029",
+          "name": "义勇部队",
+          "description": "义勇部队具有70点生命值与10点护甲，攻击造成2-4点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_3",
+          "family": "reinforcement",
+          "level": 3,
+          "price": 3,
+          "icon": "/technologies/2/reinforcement_level_3.png",
+          "iconSprite": "Upgrades_Icons_0030",
+          "name": "勇士部队",
+          "description": "勇士部队具有90点生命值与20点护甲，攻击造成3-6点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_4",
+          "family": "reinforcement",
+          "level": 4,
+          "price": 3,
+          "icon": "/technologies/2/reinforcement_level_4.png",
+          "iconSprite": "Upgrades_Icons_0001",
+          "name": "军团士兵",
+          "description": "军团士兵具有110点生命值与30点护甲，攻击造成6-10点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_5",
+          "family": "reinforcement",
+          "level": 5,
+          "price": 4,
+          "icon": "/technologies/2/reinforcement_level_5.png",
+          "iconSprite": "Upgrades_Icons_0002",
+          "name": "长矛投掷",
+          "description": "军团士兵学会投矛，可瞄准地面和飞行敌人，造成24-40点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_6",
+          "family": "reinforcement",
+          "level": 6,
+          "price": 4,
+          "icon": "/technologies/2/reinforcement_level_6.png",
+          "iconSprite": "kr3_Upgrades_Icons_0029",
+          "name": "胜利呼唤",
+          "description": "提升援军在场的时间1秒，并加快援军技能的冷却2秒。",
+          "modifiers": []
         }
       ]
     },
@@ -1243,6 +1615,8 @@
           "family": "archer",
           "level": 1,
           "price": 1,
+          "icon": "/technologies/3/archer_salvage.png",
+          "iconSprite": "Upgrades_Icons_0013",
           "name": "资源回收",
           "description": "神射手防御塔价格下降5%。",
           "modifiers": [
@@ -1259,6 +1633,8 @@
           "family": "archer",
           "level": 2,
           "price": 1,
+          "icon": "/technologies/3/archer_eagle_eye.png",
+          "iconSprite": "kr3_Upgrades_Icons_0004",
           "name": "鹰眼",
           "description": "提高箭塔25%攻击范围。",
           "modifiers": [
@@ -1274,6 +1650,8 @@
           "family": "archer",
           "level": 3,
           "price": 2,
+          "icon": "/technologies/3/archer_obsidian.png",
+          "iconSprite": "kr3_Upgrades_Icons_0002",
           "name": "黑曜石箭矢",
           "description": "使箭矢对护甲低于10点的敌人造成额外27%伤害。",
           "modifiers": []
@@ -1283,6 +1661,8 @@
           "family": "archer",
           "level": 4,
           "price": 2,
+          "icon": "/technologies/3/archer_far_shots.png",
+          "iconSprite": "Upgrades_Icons_0016",
           "name": "远程射击",
           "description": "提高箭塔5%攻击范围。",
           "modifiers": [
@@ -1298,6 +1678,8 @@
           "family": "archer",
           "level": 5,
           "price": 3,
+          "icon": "/technologies/3/archer_magic.png",
+          "iconSprite": "kr3_Upgrades_Icons_0003",
           "name": "附魔箭矢",
           "description": "使箭矢附带原伤害12%的魔法伤害。",
           "modifiers": []
@@ -1307,6 +1689,8 @@
           "family": "archer",
           "level": 6,
           "price": 4,
+          "icon": "/technologies/3/archer_el_bloodletting_shoot.png",
+          "iconSprite": "kr3_Upgrades_Icons_0005",
           "name": "放血射击",
           "description": "弓箭手攻击时有15%几率导致重伤流血，在3秒内造成箭矢造成伤害230%的真实伤害。",
           "modifiers": []
@@ -1316,6 +1700,8 @@
           "family": "barrack",
           "level": 1,
           "price": 1,
+          "icon": "/technologies/3/barrack_survival.png",
+          "iconSprite": "Upgrades_Icons_0008",
           "name": "体魄训练",
           "description": "提高士兵10%生命值。",
           "modifiers": [
@@ -1331,6 +1717,8 @@
           "family": "barrack",
           "level": 2,
           "price": 1,
+          "icon": "/technologies/3/barrack_better_armor.png",
+          "iconSprite": "Upgrades_Icons_0009",
           "name": "精良护甲",
           "description": "提高士兵10点护甲。",
           "modifiers": [
@@ -1346,6 +1734,8 @@
           "family": "barrack",
           "level": 3,
           "price": 2,
+          "icon": "/technologies/3/barrack_go_on.png",
+          "iconSprite": "kr2_Upgrades_Icons_0010",
           "name": "前仆后继",
           "description": "士兵的训练速度提升25%。",
           "modifiers": [
@@ -1361,6 +1751,8 @@
           "family": "barrack",
           "level": 4,
           "price": 2,
+          "icon": "/technologies/3/barrack_survival_2.png",
+          "iconSprite": "Upgrades_Icons_0011",
           "name": "耐力训练",
           "description": "提高士兵5%生命值。",
           "modifiers": [
@@ -1376,6 +1768,8 @@
           "family": "barrack",
           "level": 5,
           "price": 3,
+          "icon": "/technologies/3/barrack_mobilize.png",
+          "iconSprite": "kr2_Upgrades_Icons_0007",
           "name": "紧急动员",
           "description": "兵营的建造和升级费用降低20%。",
           "modifiers": [
@@ -1392,6 +1786,8 @@
           "family": "barrack",
           "level": 6,
           "price": 4,
+          "icon": "/technologies/3/barrack_dominant.png",
+          "iconSprite": "kr3_Upgrades_Icons_0007",
           "name": "绝对统率",
           "description": "调集范围提升至2倍，士兵移动速度提升20%。",
           "modifiers": [
@@ -1407,6 +1803,8 @@
           "family": "mage",
           "level": 1,
           "price": 1,
+          "icon": "/technologies/3/mage_spell_reach.png",
+          "iconSprite": "kr3_Upgrades_Icons_0011",
           "name": "法术延伸",
           "description": "提高法师塔15%攻击范围。",
           "modifiers": [
@@ -1422,6 +1820,8 @@
           "family": "mage",
           "level": 2,
           "price": 1,
+          "icon": "/technologies/3/mage_empowered_magic.png",
+          "iconSprite": "kr3_Upgrades_Icons_0012",
           "name": "强化魔力",
           "description": "提高法师塔15%攻击伤害。",
           "modifiers": [
@@ -1437,6 +1837,8 @@
           "family": "mage",
           "level": 3,
           "price": 2,
+          "icon": "/technologies/3/mage_spell_reach_2.png",
+          "iconSprite": "kr3_Upgrades_Icons_0015",
           "name": "法术折跃",
           "description": "提高法师塔5%攻击范围。",
           "modifiers": [
@@ -1452,6 +1854,8 @@
           "family": "mage",
           "level": 4,
           "price": 2,
+          "icon": "/technologies/3/mage_old_folk.png",
+          "iconSprite": "kr2_Upgrades_Icons_0014",
           "name": "古老智慧",
           "description": "法师塔技能价格降低10%。",
           "modifiers": []
@@ -1461,6 +1865,8 @@
           "family": "mage",
           "level": 5,
           "price": 3,
+          "icon": "/technologies/3/mage_treasure.png",
+          "iconSprite": "kr3_Upgrades_Icons_0013",
           "name": "奥术结晶",
           "description": "被法球命中的敌人赏金提高，多次命中最高提升10%。",
           "modifiers": []
@@ -1470,6 +1876,8 @@
           "family": "mage",
           "level": 6,
           "price": 4,
+          "icon": "/technologies/3/mage_brilliance.png",
+          "iconSprite": "kr2_Upgrades_Icons_0015",
           "name": "魔法闪耀",
           "description": "法师塔根据已有法师塔数量获得18%-36%的普攻伤害加成。",
           "modifiers": [
@@ -1495,6 +1903,8 @@
           "family": "engineer",
           "level": 1,
           "price": 1,
+          "icon": "/technologies/3/engineer_concentrated_fire.png",
+          "iconSprite": "kr3_Upgrades_Icons_0016",
           "name": "集中火力",
           "description": "提高火炮25%攻击伤害。",
           "modifiers": [
@@ -1510,6 +1920,8 @@
           "family": "engineer",
           "level": 2,
           "price": 1,
+          "icon": "/technologies/3/engineer_diffusion.png",
+          "iconSprite": "kr3_Upgrades_Icons_0017",
           "name": "动能扩散",
           "description": "炮弹溅射范围提升15%。",
           "modifiers": [
@@ -1530,6 +1942,8 @@
           "family": "engineer",
           "level": 3,
           "price": 2,
+          "icon": "/technologies/3/engineer_range_finder.png",
+          "iconSprite": "kr3_Upgrades_Icons_0018",
           "name": "测距仪",
           "description": "提高火炮15%攻击范围。",
           "modifiers": [
@@ -1549,6 +1963,8 @@
           "family": "engineer",
           "level": 4,
           "price": 3,
+          "icon": "/technologies/3/engineer_field_logistics.png",
+          "iconSprite": "Upgrades_Icons_0025",
           "name": "战地后勤",
           "description": "火炮建造和升级费用降低12%。",
           "modifiers": [
@@ -1565,6 +1981,8 @@
           "family": "engineer",
           "level": 5,
           "price": 3,
+          "icon": "/technologies/3/engineer_efficiency.png",
+          "iconSprite": "kr3_Upgrades_Icons_0020",
           "name": "智能瞄准",
           "description": "火炮的溅射和连锁闪电伤害不会递减。",
           "modifiers": [
@@ -1585,6 +2003,8 @@
           "family": "engineer",
           "level": 6,
           "price": 4,
+          "icon": "/technologies/3/engineer_gnomish_tinkering.png",
+          "iconSprite": "kr2_Upgrades_Icons_0019",
           "name": "侏儒技术",
           "description": "火炮技能冷却速度提高12%，雷电攻击冷却速度提高10%。",
           "modifiers": [
@@ -1598,6 +2018,138 @@
               ]
             }
           ]
+        },
+        {
+          "id": "thunder_level_1",
+          "family": "rain",
+          "level": 1,
+          "price": 2,
+          "icon": "/technologies/3/thunder_level_1.png",
+          "iconSprite": "kr3_Upgrades_Icons_0021",
+          "name": "闪电箭",
+          "description": "闪电箭数量提高至6发。",
+          "modifiers": []
+        },
+        {
+          "id": "thunder_level_2",
+          "family": "rain",
+          "level": 2,
+          "price": 2,
+          "icon": "/technologies/3/thunder_level_2.png",
+          "iconSprite": "kr3_Upgrades_Icons_0022",
+          "name": "咆哮狂风",
+          "description": "闪电箭伤害提升至80-100点，冷却时间缩短至60秒。",
+          "modifiers": []
+        },
+        {
+          "id": "thunder_level_3",
+          "family": "rain",
+          "level": 3,
+          "price": 3,
+          "icon": "/technologies/3/thunder_level_3.png",
+          "iconSprite": "kr3_Upgrades_Icons_0023",
+          "name": "闪电风暴",
+          "description": "闪电箭数量提升至8发，同时伴有狂风，减速所有敌人40%。",
+          "modifiers": []
+        },
+        {
+          "id": "thunder_level_4",
+          "family": "rain",
+          "level": 4,
+          "price": 3,
+          "icon": "/technologies/3/thunder_level_4.png",
+          "iconSprite": "kr3_Upgrades_Icons_0024",
+          "name": "季风来袭",
+          "description": "闪电箭伤害提升至110-130点，狂风减速效果提升至60%。",
+          "modifiers": []
+        },
+        {
+          "id": "thunder_level_5",
+          "family": "rain",
+          "level": 5,
+          "price": 3,
+          "icon": "/technologies/3/thunder_level_5.png",
+          "iconSprite": "kr3_Upgrades_Icons_0025",
+          "name": "狂怒风暴",
+          "description": "闪电箭伤害提升至150-200点，随机对其他敌人施放6发闪电箭。额外闪电箭每发造成50-90点伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "thunder_level_6",
+          "family": "rain",
+          "level": 6,
+          "price": 4,
+          "icon": "/technologies/3/thunder_level_6.png",
+          "iconSprite": "kr3_Upgrades_Icons_0010",
+          "name": "艾纳尼祝福",
+          "description": "闪电来临的瞬间，所有士兵复活并恢复全部生命值。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_1",
+          "family": "reinforcement",
+          "level": 1,
+          "price": 2,
+          "icon": "/technologies/3/reinforcement_level_1.png",
+          "iconSprite": "Upgrades_Icons_0028",
+          "name": "营养良好",
+          "description": "营养良好的农夫具有50点生命值，攻击造成1-3点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_2",
+          "family": "reinforcement",
+          "level": 2,
+          "price": 3,
+          "icon": "/technologies/3/reinforcement_level_2.png",
+          "iconSprite": "Upgrades_Icons_0029",
+          "name": "义勇部队",
+          "description": "义勇部队具有70点生命值与10点护甲，攻击造成2-4点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_3",
+          "family": "reinforcement",
+          "level": 3,
+          "price": 3,
+          "icon": "/technologies/3/reinforcement_level_3.png",
+          "iconSprite": "Upgrades_Icons_0030",
+          "name": "勇士部队",
+          "description": "勇士部队具有90点生命值与20点护甲，攻击造成3-6点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_4",
+          "family": "reinforcement",
+          "level": 4,
+          "price": 3,
+          "icon": "/technologies/3/reinforcement_level_4.png",
+          "iconSprite": "Upgrades_Icons_0001",
+          "name": "军团士兵",
+          "description": "军团士兵具有110点生命值与30点护甲，攻击造成6-10点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_5",
+          "family": "reinforcement",
+          "level": 5,
+          "price": 4,
+          "icon": "/technologies/3/reinforcement_level_5.png",
+          "iconSprite": "Upgrades_Icons_0002",
+          "name": "长矛投掷",
+          "description": "军团士兵学会投矛，可瞄准地面和飞行敌人，造成24-40点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_6",
+          "family": "reinforcement",
+          "level": 6,
+          "price": 4,
+          "icon": "/technologies/3/reinforcement_level_6.png",
+          "iconSprite": "kr3_Upgrades_Icons_0029",
+          "name": "胜利呼唤",
+          "description": "提升援军在场的时间2秒，并加快援军技能的冷却1秒。",
+          "modifiers": []
         }
       ]
     },
@@ -1612,6 +2164,8 @@
           "family": "archer",
           "level": 1,
           "price": 1,
+          "icon": "/technologies/4/archer_salvage.png",
+          "iconSprite": "Upgrades_Icons_0013",
           "name": "资源回收",
           "description": "神射手防御塔价格下降5%。",
           "modifiers": [
@@ -1628,6 +2182,8 @@
           "family": "archer",
           "level": 2,
           "price": 1,
+          "icon": "/technologies/4/archer_eagle_eye.png",
+          "iconSprite": "Upgrades_Icons_0014",
           "name": "鹰眼",
           "description": "提高箭塔25%攻击范围。",
           "modifiers": [
@@ -1643,6 +2199,8 @@
           "family": "archer",
           "level": 3,
           "price": 2,
+          "icon": "/technologies/4/archer_logger.png",
+          "iconSprite": "kr2_Upgrades_Icons_0002",
           "name": "伐木工",
           "description": "降低箭塔技能价格10%。",
           "modifiers": []
@@ -1652,6 +2210,8 @@
           "family": "archer",
           "level": 4,
           "price": 2,
+          "icon": "/technologies/4/archer_far_shots.png",
+          "iconSprite": "Upgrades_Icons_0016",
           "name": "远程射击",
           "description": "提高箭塔5%攻击范围。",
           "modifiers": [
@@ -1667,6 +2227,8 @@
           "family": "archer",
           "level": 5,
           "price": 3,
+          "icon": "/technologies/4/archer_fly_killer.png",
+          "iconSprite": "kr2_Upgrades_Icons_0004",
           "name": "防空特训",
           "description": "箭塔伤害提高8%，且所有箭矢瞄准空军时额外提高25%伤害。",
           "modifiers": [
@@ -1682,6 +2244,8 @@
           "family": "archer",
           "level": 6,
           "price": 4,
+          "icon": "/technologies/4/archer_el_bloodletting_shoot.png",
+          "iconSprite": "kr3_Upgrades_Icons_0005",
           "name": "放血射击",
           "description": "弓箭手攻击时有15%几率导致重伤流血，在3秒内造成箭矢造成伤害230%的真实伤害。",
           "modifiers": []
@@ -1691,6 +2255,8 @@
           "family": "barrack",
           "level": 1,
           "price": 1,
+          "icon": "/technologies/4/barrack_survival.png",
+          "iconSprite": "Upgrades_Icons_0008",
           "name": "体魄训练",
           "description": "提高士兵10%生命值。",
           "modifiers": [
@@ -1706,6 +2272,8 @@
           "family": "barrack",
           "level": 2,
           "price": 1,
+          "icon": "/technologies/4/barrack_better_armor.png",
+          "iconSprite": "Upgrades_Icons_0009",
           "name": "精良护甲",
           "description": "提高士兵10点护甲。",
           "modifiers": [
@@ -1721,6 +2289,8 @@
           "family": "barrack",
           "level": 3,
           "price": 2,
+          "icon": "/technologies/4/barrack_improved_deployment.png",
+          "iconSprite": "Upgrades_Icons_0010",
           "name": "部署改良",
           "description": "增加25%调集范围，并缩短士兵训练时间20%。",
           "modifiers": [
@@ -1741,6 +2311,8 @@
           "family": "barrack",
           "level": 4,
           "price": 2,
+          "icon": "/technologies/4/barrack_survival_2.png",
+          "iconSprite": "Upgrades_Icons_0011",
           "name": "耐力训练",
           "description": "提高士兵5%生命值。",
           "modifiers": [
@@ -1756,6 +2328,8 @@
           "family": "barrack",
           "level": 5,
           "price": 3,
+          "icon": "/technologies/4/barrack_skill_master.png",
+          "iconSprite": "kr2_Upgrades_Icons_0007",
           "name": "王牌教官",
           "description": "兵营的建造和升级费用、技能费用降低10%。",
           "modifiers": [
@@ -1772,6 +2346,8 @@
           "family": "barrack",
           "level": 6,
           "price": 4,
+          "icon": "/technologies/4/barrack_el_enchanted_armor.png",
+          "iconSprite": "kr3_Upgrades_Icons_0008",
           "name": "附魔护甲",
           "description": "提高士兵10点魔抗和10%免伤。",
           "modifiers": [
@@ -1787,6 +2363,8 @@
           "family": "mage",
           "level": 1,
           "price": 1,
+          "icon": "/technologies/4/mage_spell_reach.png",
+          "iconSprite": "Upgrades_Icons_0018",
           "name": "法术延伸",
           "description": "提高法师塔15%攻击范围。",
           "modifiers": [
@@ -1802,6 +2380,8 @@
           "family": "mage",
           "level": 2,
           "price": 1,
+          "icon": "/technologies/4/mage_empowered_magic.png",
+          "iconSprite": "Upgrades_Icons_0019",
           "name": "强化魔力",
           "description": "提高法师塔15%攻击伤害。",
           "modifiers": [
@@ -1817,6 +2397,8 @@
           "family": "mage",
           "level": 3,
           "price": 2,
+          "icon": "/technologies/4/mage_rune_analysis.png",
+          "iconSprite": "Upgrades_Icons_0020",
           "name": "符文解析",
           "description": "法师塔建造和升级费用、技能价格降低6%。",
           "modifiers": [
@@ -1833,6 +2415,8 @@
           "family": "mage",
           "level": 4,
           "price": 2,
+          "icon": "/technologies/4/mage_slow_curse.png",
+          "iconSprite": "Upgrades_Icons_0022",
           "name": "缓慢诅咒",
           "description": "魔法攻击在一定时间内使敌人减速50%。",
           "modifiers": []
@@ -1842,6 +2426,8 @@
           "family": "mage",
           "level": 5,
           "price": 3,
+          "icon": "/technologies/4/mage_harmony.png",
+          "iconSprite": "kr2_Upgrades_Icons_0011",
           "name": "和谐本征",
           "description": "法师塔攻击范围提高7%，伤害提高7%，且法球伤害不再浮动。",
           "modifiers": [
@@ -1862,6 +2448,8 @@
           "family": "mage",
           "level": 6,
           "price": 4,
+          "icon": "/technologies/4/mage_purge_field.png",
+          "iconSprite": "Upgrades_Icons_0021",
           "name": "肃清立场",
           "description": "法师塔根据射程范围内人数，提高全伤害14%-30%。",
           "modifiers": []
@@ -1871,6 +2459,8 @@
           "family": "engineer",
           "level": 1,
           "price": 1,
+          "icon": "/technologies/4/engineer_concentrated_fire.png",
+          "iconSprite": "Upgrades_Icons_0023",
           "name": "集中火力",
           "description": "提高火炮25%攻击伤害。",
           "modifiers": [
@@ -1886,6 +2476,8 @@
           "family": "engineer",
           "level": 2,
           "price": 1,
+          "icon": "/technologies/4/engineer_range_finder.png",
+          "iconSprite": "Upgrades_Icons_0024",
           "name": "测距仪",
           "description": "提高火炮10%攻击范围。",
           "modifiers": [
@@ -1905,6 +2497,8 @@
           "family": "engineer",
           "level": 3,
           "price": 2,
+          "icon": "/technologies/4/engineer_emergency_expansion.png",
+          "iconSprite": "Upgrades_Icons_0025",
           "name": "紧急扩建",
           "description": "火炮建造和升级费用降低25%，攻击伤害下降12%。",
           "modifiers": [
@@ -1926,6 +2520,8 @@
           "family": "engineer",
           "level": 4,
           "price": 3,
+          "icon": "/technologies/4/engineer_industrialization.png",
+          "iconSprite": "Upgrades_Icons_0026",
           "name": "工业化",
           "description": "火炮技能费用降低20%。",
           "modifiers": []
@@ -1935,6 +2531,8 @@
           "family": "engineer",
           "level": 5,
           "price": 3,
+          "icon": "/technologies/4/engineer_efficiency.png",
+          "iconSprite": "Upgrades_Icons_0027",
           "name": "智能瞄准",
           "description": "火炮的溅射和连锁闪电伤害不会递减。",
           "modifiers": [
@@ -1955,6 +2553,8 @@
           "family": "engineer",
           "level": 6,
           "price": 4,
+          "icon": "/technologies/4/engineer_gnomish_tinkering.png",
+          "iconSprite": "kr2_Upgrades_Icons_0019",
           "name": "侏儒技术",
           "description": "火炮技能冷却速度提高12%，雷电攻击冷却速度提高10%。",
           "modifiers": [
@@ -1968,6 +2568,138 @@
               ]
             }
           ]
+        },
+        {
+          "id": "thunder_level_1",
+          "family": "rain",
+          "level": 1,
+          "price": 2,
+          "icon": "/technologies/4/thunder_level_1.png",
+          "iconSprite": "kr3_Upgrades_Icons_0021",
+          "name": "闪电箭",
+          "description": "闪电箭数量提高至6发。",
+          "modifiers": []
+        },
+        {
+          "id": "thunder_level_2",
+          "family": "rain",
+          "level": 2,
+          "price": 2,
+          "icon": "/technologies/4/thunder_level_2.png",
+          "iconSprite": "kr3_Upgrades_Icons_0022",
+          "name": "咆哮狂风",
+          "description": "闪电箭伤害提升至80-100点，冷却时间缩短至60秒。",
+          "modifiers": []
+        },
+        {
+          "id": "thunder_level_3",
+          "family": "rain",
+          "level": 3,
+          "price": 3,
+          "icon": "/technologies/4/thunder_level_3.png",
+          "iconSprite": "kr3_Upgrades_Icons_0023",
+          "name": "闪电风暴",
+          "description": "闪电箭数量提升至8发，同时伴有狂风，减速所有敌人40%。",
+          "modifiers": []
+        },
+        {
+          "id": "thunder_level_4",
+          "family": "rain",
+          "level": 4,
+          "price": 3,
+          "icon": "/technologies/4/thunder_level_4.png",
+          "iconSprite": "kr3_Upgrades_Icons_0024",
+          "name": "季风来袭",
+          "description": "闪电箭伤害提升至110-130点，狂风减速效果提升至60%。",
+          "modifiers": []
+        },
+        {
+          "id": "thunder_level_5",
+          "family": "rain",
+          "level": 5,
+          "price": 3,
+          "icon": "/technologies/4/thunder_level_5.png",
+          "iconSprite": "kr3_Upgrades_Icons_0025",
+          "name": "狂怒风暴",
+          "description": "闪电箭伤害提升至150-200点，随机对其他敌人施放6发闪电箭。额外闪电箭每发造成50-90点伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "thunder_typhoon",
+          "family": "rain",
+          "level": 6,
+          "price": 4,
+          "icon": "/technologies/4/thunder_typhoon.png",
+          "iconSprite": "kr3_Upgrades_Icons_0021",
+          "name": "洗礼",
+          "description": "闪电箭与额外闪电箭的数量提升至10发，狂风减速效果提升至75%。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_1",
+          "family": "reinforcement",
+          "level": 1,
+          "price": 2,
+          "icon": "/technologies/4/reinforcement_level_1.png",
+          "iconSprite": "Upgrades_Icons_0028",
+          "name": "营养良好",
+          "description": "营养良好的农夫具有50点生命值，攻击造成1-3点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_2",
+          "family": "reinforcement",
+          "level": 2,
+          "price": 3,
+          "icon": "/technologies/4/reinforcement_level_2.png",
+          "iconSprite": "Upgrades_Icons_0029",
+          "name": "义勇部队",
+          "description": "义勇部队具有70点生命值与10点护甲，攻击造成2-4点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_3",
+          "family": "reinforcement",
+          "level": 3,
+          "price": 3,
+          "icon": "/technologies/4/reinforcement_level_3.png",
+          "iconSprite": "Upgrades_Icons_0030",
+          "name": "勇士部队",
+          "description": "勇士部队具有90点生命值与20点护甲，攻击造成3-6点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_4",
+          "family": "reinforcement",
+          "level": 4,
+          "price": 3,
+          "icon": "/technologies/4/reinforcement_level_4.png",
+          "iconSprite": "Upgrades_Icons_0001",
+          "name": "军团士兵",
+          "description": "军团士兵具有110点生命值与30点护甲，攻击造成6-10点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_5",
+          "family": "reinforcement",
+          "level": 5,
+          "price": 4,
+          "icon": "/technologies/4/reinforcement_level_5.png",
+          "iconSprite": "Upgrades_Icons_0002",
+          "name": "长矛投掷",
+          "description": "军团士兵学会投矛，可瞄准地面和飞行敌人，造成24-40点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_6",
+          "family": "reinforcement",
+          "level": 6,
+          "price": 4,
+          "icon": "/technologies/4/reinforcement_level_6.png",
+          "iconSprite": "kr3_Upgrades_Icons_0029",
+          "name": "胜利呼唤",
+          "description": "提升援军在场的时间1秒，并加快援军技能的冷却2秒。",
+          "modifiers": []
         }
       ]
     }

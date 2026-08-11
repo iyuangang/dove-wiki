@@ -1,5 +1,6 @@
 import type {
   SupportEffect,
+  Technology,
   TechnologyModifier,
   TechnologyTree,
   Tower,
@@ -79,6 +80,10 @@ function modifierAppliesToTower(modifier: TechnologyModifier, towerId: string) {
   return true
 }
 
+function isTowerFamily(family: string): family is TowerFamily {
+  return ['archer', 'barrack', 'mage', 'engineer'].includes(family)
+}
+
 function multiply(value: number | null, factor: number) {
   return value === null ? null : value * factor
 }
@@ -154,7 +159,8 @@ export function calculateBuffs(
 
   if (selectedTree && technologySelection) {
     const technologies = selectedTree.technologies.filter(
-      (technology) =>
+      (technology): technology is Technology & { family: TowerFamily } =>
+        isTowerFamily(technology.family) &&
         tower.families.includes(technology.family) &&
         technology.level <= (technologySelection.levels[technology.family] || 0),
     )

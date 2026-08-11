@@ -5,6 +5,7 @@ local encyclopedia_output = os.getenv("DOVE_ENCYCLOPEDIA_DIR")
 local skill_icon_output = os.getenv("DOVE_SKILL_ICON_DIR")
 local hero_output = os.getenv("DOVE_HERO_DIR")
 local enemy_output = os.getenv("DOVE_ENEMY_DIR")
+local technology_output = os.getenv("DOVE_TECHNOLOGY_DIR")
 
 local function fail(message)
 	io.stderr:write("[dove-wiki] " .. message .. "\n")
@@ -356,6 +357,7 @@ local function build_raw_export(entity_db)
 	local encyclopedia_detail_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/encyclopedia_creeps.lua")
 	local encyclopedia_index = load_encyclopedia_index()
 	local hero_room_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/hero_room.lua")
+	local upgrades_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/upgrades.lua")
 	local hero_index = load_hero_index()
 	local hero_skill_descriptions = load_lua_table(
 		"_assets/kr1-desktop/strings/hero_room_special.lua"
@@ -580,11 +582,22 @@ local function build_raw_export(entity_db)
 		enemies[#enemies + 1] = record
 	end
 
+	local technology_lists = copy_jsonable(upgrades.list, 5)
+	for _, technology_list in ipairs(technology_lists) do
+		for _, technology in pairs(technology_list) do
+			local from_kr = tonumber(technology.from_kr) or 1
+			local prefix = from_kr == 1 and "" or "kr" .. from_kr .. "_"
+			local icon_sprite = prefix .. string.format("Upgrades_Icons_%04i", technology.icon)
+			technology.icon_sprite = icon_sprite
+			technology.icon_atlas = copy_jsonable(upgrades_atlas[icon_sprite], 4)
+		end
+	end
+
 	return {
 		localization = localization,
 		technology = {
 			display_order = copy_jsonable(upgrades.display_order, 3),
-			lists = copy_jsonable(upgrades.list, 5)
+			lists = technology_lists
 		},
 		towers = towers,
 		heroes = heroes,
@@ -712,6 +725,33 @@ local function export_skill_icons(towers)
 	print(string.format("DOVE_WIKI_SKILL_ICONS=%d", exported))
 end
 
+local function export_technology_icons(technology)
+	local image_cache = {}
+	local exported = 0
+
+	for tree_index, technology_list in ipairs(technology.lists or {}) do
+		for technology_id, technology_entry in pairs(technology_list) do
+			if technology_entry.icon_atlas then
+				export_atlas_crop(
+					technology_entry.icon_atlas,
+					join_path(
+						technology_output,
+						tostring(tree_index) .. "/" .. technology_id .. ".png"
+					),
+					image_cache
+				)
+				exported = exported + 1
+			end
+		end
+	end
+
+	for _, image in pairs(image_cache) do
+		image:release()
+	end
+
+	print(string.format("DOVE_WIKI_TECHNOLOGIES=%d", exported))
+end
+
 local function export_hero_images(heroes)
 	local image_cache = {}
 
@@ -816,7 +856,7 @@ function love.load()
 		if (raw_output and raw_output ~= "") or (portrait_output and portrait_output ~= "") or
 			(encyclopedia_output and encyclopedia_output ~= "") or
 			(skill_icon_output and skill_icon_output ~= "") or (hero_output and hero_output ~= "") or
-			(enemy_output and enemy_output ~= "") then
+			(enemy_output and enemy_output ~= "") or (technology_output and technology_output ~= "") then
 			raw_export = build_raw_export(entity_db)
 		end
 
@@ -837,6 +877,10 @@ function love.load()
 
 		if skill_icon_output and skill_icon_output ~= "" then
 			export_skill_icons(raw_export.towers)
+		end
+
+		if technology_output and technology_output ~= "" then
+			export_technology_icons(raw_export.technology)
 		end
 
 		if hero_output and hero_output ~= "" then

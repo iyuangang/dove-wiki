@@ -6,6 +6,13 @@ const sourceData = rawData as DoveData
 
 export const doveData: DoveData = {
   ...sourceData,
+  technologyTrees: sourceData.technologyTrees.map((tree) => ({
+    ...tree,
+    technologies: tree.technologies.map((technology) => ({
+      ...technology,
+      icon: publicAssetUrl(technology.icon),
+    })),
+  })),
   heroes: sourceData.heroes.map((hero) => ({
     ...hero,
     image: publicAssetUrl(hero.image),
