@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { towers } from './data'
+import { doveData, towerById, towers } from './data'
 
 describe('游戏百科顺序与图像', () => {
   it('按 map_data.tower_data 的开头顺序排列', () => {
@@ -42,5 +42,45 @@ describe('游戏百科顺序与图像', () => {
       'tower_barrack_3',
     ])
     expect(fallback.every((tower) => tower.image.startsWith('/portraits/'))).toBe(true)
+  })
+
+  it('从游戏塔菜单图集关联技能图标', () => {
+    const powers = towers.flatMap((tower) => tower.powers)
+    const powersWithIcons = powers.filter((power) => power.icon)
+
+    expect(powersWithIcons.length).toBeGreaterThan(100)
+    expect(powersWithIcons.every((power) => power.icon?.startsWith('/skills/'))).toBe(true)
+    expect(powersWithIcons.every((power) => power.iconSprite)).toBe(true)
+  })
+
+  it('同时识别关卡主脚本和数据脚本中的塔解锁记录', () => {
+    const expectedUnlocks = [
+      ['tower_ranger', 5, 'kr1/data/levels/level05_data.lua'],
+      ['tower_crossbow', 30, 'kr1/data/levels/level30.lua'],
+      ['tower_barrack_mercenaries', 30, 'kr1/data/levels/level30.lua'],
+      ['tower_assassin', 30, 'kr1/data/levels/level30.lua'],
+      ['tower_dwaarp', 31, 'kr1/data/levels/level31.lua'],
+      ['tower_barrack_pirates', 31, 'kr1/data/levels/level31.lua'],
+      ['tower_archmage', 32, 'kr1/data/levels/level32.lua'],
+      ['tower_barrack_amazonas', 33, 'kr1/data/levels/level33.lua'],
+      ['tower_templar', 33, 'kr1/data/levels/level33.lua'],
+      ['tower_totem', 34, 'kr1/data/levels/level34.lua'],
+      ['tower_necromancer', 35, 'kr1/data/levels/level35.lua'],
+      ['tower_mech', 36, 'kr1/data/levels/level36.lua'],
+      ['tower_barrack_dwarf', 40, 'kr1/data/levels/level40.lua'],
+      ['tower_archer_dwarf', 40, 'kr1/data/levels/level40.lua'],
+      ['tower_pirate_watchtower', 42, 'kr1/data/levels/level42.lua'],
+      ['tower_frankenstein', 45, 'kr1/data/levels/level45.lua'],
+    ] as const
+
+    for (const [towerId, level, source] of expectedUnlocks) {
+      expect(towerById.get(towerId)?.unlock).toMatchObject({
+        status: 'level',
+        level,
+        source,
+      })
+    }
+
+    expect(doveData.validation.unlockAnomalies).toEqual([])
   })
 })

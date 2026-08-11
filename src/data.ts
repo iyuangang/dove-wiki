@@ -1,7 +1,23 @@
 import rawData from './data/dove-data.json'
+import { publicAssetUrl } from './lib/public-assets'
 import type { DoveData } from './types'
 
-export const doveData = rawData as DoveData
+const sourceData = rawData as DoveData
+
+export const doveData: DoveData = {
+  ...sourceData,
+  towers: sourceData.towers.map((tower) => ({
+    ...tower,
+    image: publicAssetUrl(tower.image),
+    encyclopediaImage: publicAssetUrl(tower.encyclopediaImage),
+    powers: tower.powers.map((power) => ({
+      ...power,
+      icon: power.icon ? publicAssetUrl(power.icon) : null,
+    })),
+  })),
+}
+
+export const siteVersion = import.meta.env.VITE_APP_VERSION?.trim() || 'dev'
 export const towers = doveData.towers
 export const towerById = new Map(towers.map((tower) => [tower.id, tower]))
 
