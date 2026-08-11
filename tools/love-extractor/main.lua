@@ -314,6 +314,7 @@ local function build_raw_export(entity_db)
 	local encyclopedia_detail_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/encyclopedia_creeps.lua")
 	local encyclopedia_index = load_encyclopedia_index()
 	local tower_menus = require("data.tower_menus_data")
+	local upgrades = require("kr1.upgrades")
 	local family_lists = {
 		{name = "archer", towers = settings.archer_towers},
 		{name = "mage", towers = settings.mage_towers},
@@ -436,6 +437,10 @@ local function build_raw_export(entity_db)
 
 	return {
 		localization = localization,
+		technology = {
+			display_order = copy_jsonable(upgrades.display_order, 3),
+			lists = copy_jsonable(upgrades.list, 5)
+		},
 		towers = towers
 	}
 end

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { formatPercent } from '../lib/calculator'
-import type { DoveData, SupportLevel, Tower } from '../types'
+import type { DoveData, SupportEffect, SupportLevel, Tower } from '../types'
 
 const props = defineProps<{ data: DoveData; siteVersion: string }>()
 defineEmits<{ open: [tower: Tower] }>()
@@ -21,6 +21,11 @@ function describeLevel(level: SupportLevel) {
   if (level.rangeBonus) parts.push(`范围 +${formatPercent(level.rangeBonus)}`)
   if (level.speedBonus) parts.push(`攻速 +${formatPercent(level.speedBonus)}`)
   return parts.join(' · ')
+}
+
+function supportIcon(effect: SupportEffect) {
+  const tower = towerById.value.get(effect.sourceTowerId)
+  return tower?.powers.find((power) => power.id === effect.skillId)?.icon || tower?.image
 }
 </script>
 
@@ -63,7 +68,7 @@ function describeLevel(level: SupportLevel) {
           <div class="support-matrix">
             <article v-for="effect in data.supportEffects" :key="effect.id">
               <button type="button" @click="$emit('open', towerById.get(effect.sourceTowerId)!)">
-                <img :src="towerById.get(effect.sourceTowerId)?.image" :alt="effect.name" />
+                <img :src="supportIcon(effect)" :alt="`${effect.name}技能图标`" />
                 <span><strong>{{ effect.name }}</strong><small>{{ towerById.get(effect.sourceTowerId)?.name }}</small></span>
               </button>
               <div class="level-pills">
@@ -83,6 +88,7 @@ function describeLevel(level: SupportLevel) {
             <div><span>名称描述</span><code>_assets/kr1-desktop/strings/zh-Hans.lua</code></div>
             <div><span>解锁关系</span><code>kr1/data/slot_template.lua + levels/level*.lua / level*_data.lua</code></div>
             <div><span>辅助算法</span><code>all/script_utils.lua + tower_scripts.lua</code></div>
+            <div><span>科技树</span><code>kr1/upgrades.lua（{{ data.summary.technologyTreeCount }} 套 / {{ data.summary.technologyCount }} 项）</code></div>
             <div><span>技能图标</span><code>tower_menus_data.lua + gui_ico.lua（{{ data.summary.skillIconCount }} 张）</code></div>
             <div><span>百科图集</span><code>encyclopedia.lua + encyclopedia_creeps.lua</code></div>
             <div><span>回退头像</span><code>gui_portraits.lua（{{ data.summary.portraitFallbackCount }} 座基础塔）</code></div>
@@ -119,6 +125,7 @@ function describeLevel(level: SupportLevel) {
           <dl>
             <div><dt>站点版本</dt><dd>{{ siteVersion }}</dd></div>
             <div><dt>游戏版本</dt><dd>{{ data.metadata.gameVersion }}</dd></div>
+            <div><dt>内容版本</dt><dd>{{ data.metadata.contentVersion }}</dd></div>
             <div><dt>内部 ID</dt><dd>{{ data.metadata.gameId }}</dd></div>
             <div><dt>提交</dt><dd>{{ data.metadata.commitHash.slice(0, 12) }}</dd></div>
             <div><dt>游戏目录</dt><dd>{{ data.metadata.sourceRoot }}</dd></div>

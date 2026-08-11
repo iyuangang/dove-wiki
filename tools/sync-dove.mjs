@@ -384,6 +384,244 @@ const supportEffects = [
   },
 ]
 
+const technologyClassFamilies = {
+  archers: 'archer',
+  barracks: 'barrack',
+  mages: 'mage',
+  engineers: 'engineer',
+}
+
+const directDamageTechnologies = new Set([
+  'archer_critical',
+  'archer_fly_killer',
+  'barrack_weapon',
+  'mage_arcane_spell',
+  'mage_empowered_magic',
+  'mage_power',
+  'engineer_concentrated_fire',
+  'engineer_emergency_expansion',
+])
+
+const ceilPriceTechnologies = new Set([
+  'archer_salvage',
+  'mage_hermetic_study',
+  'mage_rune_analysis',
+])
+
+const floorPriceTechnologies = new Set([
+  'barrack_mobilize',
+  'barrack_skill_master',
+  'engineer_field_logistics',
+  'engineer_emergency_expansion',
+])
+
+function technologyModifier(metric, operation, value, options = {}) {
+  return { metric, operation, value, ...options }
+}
+
+function normalizeTechnologyModifiers(technologyId, technology) {
+  const modifiers = []
+
+  if (ceilPriceTechnologies.has(technologyId) && Number.isFinite(technology.cost_factor)) {
+    modifiers.push(
+      technologyModifier('price', 'multiply', technology.cost_factor, { rounding: 'ceil' }),
+    )
+  }
+  if (floorPriceTechnologies.has(technologyId)) {
+    const factor = technology.cost_factor ?? technology.price_factor
+    if (Number.isFinite(factor)) {
+      modifiers.push(technologyModifier('price', 'multiply', factor, { rounding: 'floor' }))
+    }
+  }
+
+  if (Number.isFinite(technology.range_factor)) {
+    if (technology.class === 'barracks') {
+      modifiers.push(technologyModifier('rallyRange', 'multiply', technology.range_factor))
+    } else {
+      const options = technologyId === 'engineer_range_finder'
+        ? { excludeTowerIds: ['tower_mech', 'tower_balloon'] }
+        : {}
+      modifiers.push(technologyModifier('range', 'multiply', technology.range_factor, options))
+    }
+  }
+  if (Number.isFinite(technology.rally_range_factor)) {
+    modifiers.push(
+      technologyModifier('rallyRange', 'multiply', technology.rally_range_factor),
+    )
+  }
+
+  if (
+    directDamageTechnologies.has(technologyId) &&
+    Number.isFinite(technology.damage_factor)
+  ) {
+    modifiers.push(technologyModifier('damage', 'multiply', technology.damage_factor))
+  }
+  if (technologyId === 'mage_harmony' && Number.isFinite(technology.damage_factor)) {
+    modifiers.push(
+      technologyModifier('damage', 'average', technology.damage_factor),
+    )
+  }
+  if (
+    technologyId === 'archer_precision' &&
+    Number.isFinite(technology.chance) &&
+    Number.isFinite(technology.damage_factor)
+  ) {
+    modifiers.push(
+      technologyModifier(
+        'expectedDps',
+        'multiply',
+        1 + technology.chance * (technology.damage_factor - 1),
+      ),
+    )
+  }
+  if (technologyId === 'mage_brilliance' && Array.isArray(technology.damage_factors)) {
+    modifiers.push({
+      metric: 'damage',
+      operation: 'table',
+      values: technology.damage_factors.map(Number),
+    })
+  }
+
+  if (technologyId === 'archer_fast_shots' && Number.isFinite(technology.cooldown_factor)) {
+    modifiers.push(
+      technologyModifier('cooldown', 'multiply', 1 / (2 - technology.cooldown_factor)),
+    )
+  }
+  if (technologyId === 'engineer_gnomish_tinkering') {
+    modifiers.push(
+      technologyModifier(
+        'cooldown',
+        'multiply',
+        technology.cooldown_factor_electric,
+        { includeTowerIds: ['tower_tesla', 'tower_frankenstein'] },
+      ),
+    )
+  }
+  if (
+    ['barrack_go_on', 'barrack_improved_deployment'].includes(technologyId) &&
+    Number.isFinite(technology.cooldown_factor)
+  ) {
+    modifiers.push(
+      technologyModifier('respawn', 'multiply', technology.cooldown_factor),
+    )
+  }
+
+  if (Number.isFinite(technology.health_factor)) {
+    modifiers.push(
+      technologyModifier('soldierHp', 'multiply', technology.health_factor),
+    )
+  }
+  if (Number.isFinite(technology.armor_increase)) {
+    modifiers.push(
+      technologyModifier('soldierArmor', 'add', technology.armor_increase),
+    )
+  }
+  if (Number.isFinite(technology.magic_armor_inc)) {
+    modifiers.push(
+      technologyModifier('soldierMagicArmor', 'add', technology.magic_armor_inc),
+    )
+  }
+
+  if (technologyId === 'barrack_bodies') {
+    const specialTowerIds = [
+      'tower_baby_ashbite',
+      'tower_pandas_lvl4',
+      'tower_ogre_shipwreck',
+      'tower_swamp_monster',
+    ]
+    modifiers.push(
+      technologyModifier('soldierCount', 'add', 1, {
+        excludeTowerIds: ['tower_baby_ashbite', 'tower_pandas_lvl4'],
+      }),
+      technologyModifier('soldierHp', 'multiply', 0.8, {
+        excludeTowerIds: specialTowerIds,
+      }),
+      technologyModifier('damage', 'multiply', 1.3, {
+        includeTowerIds: specialTowerIds,
+      }),
+    )
+  }
+
+  if (technologyId === 'engineer_magic_dust' && Number.isFinite(technology.damage_factor)) {
+    modifiers.push(
+      technologyModifier('damage', 'multiply', technology.damage_factor, {
+        includeTowerIds: [
+          'tower_tesla',
+          'tower_frankenstein',
+          'tower_rotten_forest',
+          'tower_ignis_altar',
+          'tower_sandworm',
+        ],
+      }),
+    )
+  }
+  if (technologyId === 'engineer_diffusion' && Number.isFinite(technology.radius_factor)) {
+    modifiers.push(
+      technologyModifier('range', 'multiply', technology.radius_factor, {
+        includeTowerIds: [
+          'tower_rotten_forest',
+          'tower_dwaarp',
+          'tower_melting_furnace',
+        ],
+      }),
+    )
+  }
+  if (technologyId === 'engineer_efficiency') {
+    modifiers.push(
+      technologyModifier('damage', 'multiply', 1.25, {
+        includeTowerIds: [
+          'tower_rotten_forest',
+          'tower_ignis_altar',
+          'tower_sandworm',
+        ],
+      }),
+    )
+  }
+
+  return modifiers.filter((modifier) =>
+    modifier.operation === 'table' || Number.isFinite(modifier.value),
+  )
+}
+
+function buildTechnologyTrees(rawTechnology, localization) {
+  const lists = Array.isArray(rawTechnology?.lists) ? rawTechnology.lists : []
+
+  return lists.map((technologyList, index) => {
+    const treeId = index + 1
+    const technologies = Object.entries(technologyList)
+      .filter(([, technology]) => technologyClassFamilies[technology.class])
+      .map(([technologyId, technology]) => ({
+        id: technologyId,
+        family: technologyClassFamilies[technology.class],
+        level: Number(technology.level),
+        price: Number(technology.price),
+        name:
+          localization[`UPGRADE_${treeId}_${technologyId}_NAME`] ||
+          technologyId.replaceAll('_', ' '),
+        description:
+          localization[`UPGRADE_${treeId}_${technologyId}_DESCRIPTION`] ||
+          '游戏脚本未提供中文说明。',
+        modifiers: normalizeTechnologyModifiers(technologyId, technology),
+      }))
+      .sort((left, right) => {
+        const familyOrder = ['archer', 'barrack', 'mage', 'engineer']
+        return (
+          familyOrder.indexOf(left.family) - familyOrder.indexOf(right.family) ||
+          left.level - right.level ||
+          left.id.localeCompare(right.id, 'en')
+        )
+      })
+
+    return {
+      id: treeId,
+      name: localization[`UPGRADES_${treeId}`] || `科技 ${treeId}`,
+      source: 'kr1/upgrades.lua',
+      maxLevel: Math.max(0, ...technologies.map((technology) => technology.level)),
+      technologies,
+    }
+  })
+}
+
 function inferRoles(tower, supportIds) {
   const roles = []
   const info = tower.computed_info || {}
@@ -652,23 +890,26 @@ async function main() {
   const commitHash = (
     await readFile(join(gameDir, 'current_version_commit_hash.txt'), 'utf8')
   ).trim()
-  const gameVersion = /string_short\s*=\s*["']([^"']+)/.exec(versionSource)?.[1] || 'unknown'
-  const gameId = /^\s*id\s*=\s*["']([^"']+)/m.exec(versionSource)?.[1] || 'unknown'
   const missingUnlocks = towers.filter((tower) => tower.unlock.status === 'missing')
   const missingDamage = towers.filter((tower) => tower.attack.damageMin === null)
   const missingSources = towers.filter((tower) => !tower.sources.template)
   const supportTowerCount = new Set(supportEffects.map((effect) => effect.sourceTowerId)).size
   const skillIconCount = towers.flatMap((tower) => tower.powers).filter((power) => power.icon).length
+  const technologyTrees = buildTechnologyTrees(raw.technology, raw.localization)
+  const contentVersion = /string_short\s*=\s*["']([^"']+)/.exec(versionSource)?.[1] || 'unknown'
+  const gameVersion = /^\s*id\s*=\s*["']([^"']+)/m.exec(versionSource)?.[1] || 'unknown'
+  const gameId = /^\s*identity\s*=\s*["']([^"']+)/m.exec(versionSource)?.[1] || 'unknown'
   const data = {
     metadata: {
       title: 'Dove 防御塔 Wiki',
       gameVersion,
+      contentVersion,
       gameId,
       commitHash,
       generatedAt: new Date().toISOString(),
       sourceRoot: gameDir,
       assumptions: [
-        '不计算星级科技、英雄、地图环境与外部配置修改。',
+        '科技树可在辅助计算中选择；条件触发、概率与特殊目标效果不强行折算进基础面板。',
         '基础 DPS 是单目标理论值；范围伤害、召唤物与技能效果单独理解。',
         '兵营塔的增距结果表示集结范围。',
       ],
@@ -679,6 +920,11 @@ async function main() {
       encyclopediaImageCount: encyclopediaCount,
       portraitFallbackCount: towers.length - encyclopediaCount,
       skillIconCount,
+      technologyTreeCount: technologyTrees.length,
+      technologyCount: technologyTrees.reduce(
+        (total, tree) => total + tree.technologies.length,
+        0,
+      ),
       supportTowerCount,
       supportEffectCount: supportEffects.length,
       levelUnlockCount: towers.filter((tower) => tower.unlock.status === 'level').length,
@@ -703,6 +949,7 @@ async function main() {
       missingTemplateSources: missingSources.map((tower) => tower.id),
     },
     supportEffects,
+    technologyTrees,
     towers,
   }
 

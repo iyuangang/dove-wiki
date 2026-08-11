@@ -76,6 +76,7 @@ function openTower(tower: Tower) {
         v-else-if="activeTab === 'calculator'"
         :towers="towers"
         :effects="doveData.supportEffects"
+        :technology-trees="doveData.technologyTrees"
         @open="openTower"
       />
       <CompareView
@@ -94,7 +95,7 @@ function openTower(tower: Tower) {
     <footer class="site-footer">
       <span>Dove 数据驱动塔典</span>
       <span>站点 {{ siteVersion }} · 数据提交 {{ doveData.metadata.commitHash.slice(0, 8) }}</span>
-      <span>{{ doveData.summary.encyclopediaImageCount }} 套百科图 · {{ doveData.summary.portraitFallbackCount }} 张基础塔头像回退 · 无科技树修正</span>
+      <span>{{ doveData.summary.encyclopediaImageCount }} 套百科图 · {{ doveData.summary.portraitFallbackCount }} 张基础塔头像回退 · {{ doveData.summary.technologyTreeCount }} 套科技方案</span>
     </footer>
 
     <DetailPanel :tower="selectedTower" @close="selectedTowerId = null" />
