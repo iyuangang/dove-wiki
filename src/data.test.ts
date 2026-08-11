@@ -78,6 +78,16 @@ describe('游戏百科顺序与图像', () => {
     expect(heroes.every((hero) => hero.name && hero.description && hero.sources.template)).toBe(true)
     expect(heroes.every((hero) => hero.image.startsWith('/heroes/'))).toBe(true)
     expect(heroes.every((hero) => hero.thumbnail.startsWith('/heroes/thumbs/'))).toBe(true)
+    expect(heroes.every((hero) => hero.abilities.length === hero.specialties.length)).toBe(true)
+    expect(heroes.flatMap((hero) => hero.abilities).every((ability) => ability.description)).toBe(true)
+    expect(
+      heroes.flatMap((hero) => hero.abilities).every(
+        (ability) => !ability.description.includes('未提供可直接展示'),
+      ),
+    ).toBe(true)
+    expect(heroes.find((hero) => hero.id === 'hero_gerald')?.abilities).toContainEqual(
+      expect.objectContaining({ name: '神圣打击' }),
+    )
     expect(doveData.summary.supportHeroCount).toBe(7)
     expect(doveData.supportEffects.filter((effect) => effect.sourceType === 'hero')).toHaveLength(8)
   })

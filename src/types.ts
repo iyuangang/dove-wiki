@@ -108,6 +108,11 @@ export interface HeroSkill {
   unlockLevels: Array<{ heroLevel: number; skillLevel: number }>
 }
 
+export interface HeroAbility {
+  name: string
+  description: string
+}
+
 export interface Hero {
   id: string
   name: string
@@ -129,6 +134,7 @@ export interface Hero {
     rangedDamageMax: number | null
   }
   skills: HeroSkill[]
+  abilities: HeroAbility[]
   sources: {
     template: string | null
     roster: string
