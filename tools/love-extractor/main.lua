@@ -357,6 +357,9 @@ local function build_raw_export(entity_db)
 	local encyclopedia_index = load_encyclopedia_index()
 	local hero_room_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/hero_room.lua")
 	local hero_index = load_hero_index()
+	local hero_skill_descriptions = load_lua_table(
+		"_assets/kr1-desktop/strings/hero_room_special.lua"
+	)
 	local bit_lib = require("bit")
 	local tower_menus = require("data.tower_menus_data")
 	local upgrades = require("kr1.upgrades")
@@ -490,6 +493,10 @@ local function build_raw_export(entity_db)
 			4
 		)
 		record.thumb_atlas = copy_jsonable(hero_room_atlas[hero_entry.thumb_sprite], 4)
+		record.skill_descriptions = copy_jsonable(
+			hero_skill_descriptions[hero_entry.id] or hero_skill_descriptions.default or {},
+			3
+		)
 
 		if template then
 			record.template = {

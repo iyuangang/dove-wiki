@@ -758,10 +758,37 @@ function heroSkillMaxLevel(skill) {
   return Math.max(1, ...mappedLevels, ...arrayLengths)
 }
 
+const heroAbilityDescriptionAliases = {
+  'hero_hacksaw:伐伐伐木！': '伐伐伐木',
+  'hero_monk:蛇形拳': '蛇型拳',
+  'hero_bruce:流血利爪': '流血利刃',
+  'hero_builder:加班加点': '正在施工',
+  'hero_builder:拆迁专家': '拆迁达人',
+  'hero_builder:防御炮台': '防御塔楼',
+  'hero_builder:铁球横扫': '破城钢球',
+  'hero_lava:烈焰席卷': '烈炎席卷',
+  'hero_dianyun:至尊波': '势崩江河',
+  'hero_beresad:龙息术': '爆炎',
+  'hero_beresad:恐惧之龙': '惧龙',
+  'hero_beresad:龙之爪牙': '龙生',
+  'hero_beresad:湮灭射线': '片甲不留',
+  'hero_beresad:地狱火雨': '地狱火',
+}
+
+function heroAbilityDescription(rawHero, name) {
+  const descriptions = rawHero.skill_descriptions || {}
+  const alias = heroAbilityDescriptionAliases[`${rawHero.id}:${name}`]
+  return descriptions[name] || descriptions[alias] || '游戏脚本未提供可直接展示的技能说明。'
+}
+
 function normalizeHero(rawHero, localization) {
   const token = rawHero.id.replace(/^hero_/, '').toUpperCase()
   const levelStats = rawHero.template?.hero?.level_stats || {}
   const specialText = localization[`HERO_${token}_SPECIAL`] || ''
+  const specialties = specialText
+    .split(/[，,]/)
+    .map((item) => item.trim())
+    .filter(Boolean)
   const skills = Object.entries(rawHero.template?.hero?.skills || {})
     .map(([skillId, skill]) => ({
       id: skillId,
@@ -791,10 +818,11 @@ function normalizeHero(rawHero, localization) {
     id: rawHero.id,
     name: localization[`HERO_${token}_NAME`] || rawHero.id.replaceAll('_', ' '),
     description: localization[`HERO_${token}_DESCRIPTION`] || '游戏脚本未提供中文描述。',
-    specialties: specialText
-      .split(/[，,]/)
-      .map((item) => item.trim())
-      .filter(Boolean),
+    specialties,
+    abilities: specialties.map((name) => ({
+      name,
+      description: heroAbilityDescription(rawHero, name),
+    })),
     image: `/heroes/${rawHero.id}.png`,
     thumbnail: `/heroes/thumbs/${rawHero.id}.png`,
     sourceGame: Number(rawHero.from_kr || 1),
