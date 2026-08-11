@@ -79,26 +79,110 @@ export interface SupportLevel {
   damageBonus?: number
   rangeBonus?: number
   speedBonus?: number
+  cooldownMultiplier?: number
   damagePerTrigger?: number
   triggerCap?: number
   duration?: number
   cycle?: number
+  priceMultiplier?: number
+  flatDps?: number
 }
 
 export interface SupportEffect {
   id: string
-  sourceTowerId: string
+  sourceType: 'tower' | 'hero'
+  sourceTowerId?: string
+  sourceHeroId?: string
   skillId: string
   name: string
-  mode: 'aura' | 'temporary' | 'triggered'
+  mode: 'aura' | 'temporary' | 'triggered' | 'passive'
   levels: SupportLevel[]
   note: string
+  icon: string | null
+  requiresBuffable?: boolean
+}
+
+export interface HeroSkill {
+  id: string
+  maxLevel: number
+  unlockLevels: Array<{ heroLevel: number; skillLevel: number }>
+}
+
+export interface Hero {
+  id: string
+  name: string
+  description: string
+  specialties: string[]
+  image: string
+  thumbnail: string
+  sourceGame: number
+  availableLevel: number
+  startingLevel: number
+  profileStats: number[]
+  maxStats: {
+    hp: number | null
+    armor: number | null
+    magicArmor: number | null
+    meleeDamageMin: number | null
+    meleeDamageMax: number | null
+    rangedDamageMin: number | null
+    rangedDamageMax: number | null
+  }
+  skills: HeroSkill[]
+  sources: {
+    template: string | null
+    roster: string
+    localization: string
+    portrait: string
+  }
+}
+
+export type TechnologyMetric =
+  | 'damage'
+  | 'expectedDps'
+  | 'range'
+  | 'cooldown'
+  | 'price'
+  | 'rallyRange'
+  | 'soldierHp'
+  | 'soldierArmor'
+  | 'soldierMagicArmor'
+  | 'respawn'
+  | 'soldierCount'
+
+export interface TechnologyModifier {
+  metric: TechnologyMetric
+  operation: 'multiply' | 'add' | 'average' | 'table'
+  value?: number
+  values?: number[]
+  rounding?: 'ceil' | 'floor'
+  includeTowerIds?: string[]
+  excludeTowerIds?: string[]
+}
+
+export interface Technology {
+  id: string
+  family: TowerFamily
+  level: number
+  price: number
+  name: string
+  description: string
+  modifiers: TechnologyModifier[]
+}
+
+export interface TechnologyTree {
+  id: number
+  name: string
+  source: string
+  maxLevel: number
+  technologies: Technology[]
 }
 
 export interface DoveData {
   metadata: {
     title: string
     gameVersion: string
+    contentVersion: string
     gameId: string
     commitHash: string
     generatedAt: string
@@ -111,7 +195,11 @@ export interface DoveData {
     encyclopediaImageCount: number
     portraitFallbackCount: number
     skillIconCount: number
+    technologyTreeCount: number
+    technologyCount: number
+    heroCount: number
     supportTowerCount: number
+    supportHeroCount: number
     supportEffectCount: number
     levelUnlockCount: number
     defaultUnlockCount: number
@@ -125,5 +213,7 @@ export interface DoveData {
     missingTemplateSources: string[]
   }
   supportEffects: SupportEffect[]
+  technologyTrees: TechnologyTree[]
+  heroes: Hero[]
   towers: Tower[]
 }

@@ -6,6 +6,15 @@ const sourceData = rawData as DoveData
 
 export const doveData: DoveData = {
   ...sourceData,
+  heroes: sourceData.heroes.map((hero) => ({
+    ...hero,
+    image: publicAssetUrl(hero.image),
+    thumbnail: publicAssetUrl(hero.thumbnail),
+  })),
+  supportEffects: sourceData.supportEffects.map((effect) => ({
+    ...effect,
+    icon: effect.icon ? publicAssetUrl(effect.icon) : null,
+  })),
   towers: sourceData.towers.map((tower) => ({
     ...tower,
     image: publicAssetUrl(tower.image),
@@ -20,6 +29,8 @@ export const doveData: DoveData = {
 export const siteVersion = import.meta.env.VITE_APP_VERSION?.trim() || 'dev'
 export const towers = doveData.towers
 export const towerById = new Map(towers.map((tower) => [tower.id, tower]))
+export const heroes = doveData.heroes
+export const heroById = new Map(heroes.map((hero) => [hero.id, hero]))
 
 export const familyLabels = {
   archer: '弓箭塔',
