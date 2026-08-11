@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { formatPercent } from '../lib/calculator'
 import type { DoveData, SupportLevel, Tower } from '../types'
 
-const props = defineProps<{ data: DoveData }>()
+const props = defineProps<{ data: DoveData; siteVersion: string }>()
 defineEmits<{ open: [tower: Tower] }>()
 
 const towerById = computed(() => new Map(props.data.towers.map((tower) => [tower.id, tower])))
@@ -117,7 +117,8 @@ function describeLevel(level: SupportLevel) {
         <section class="data-card version-card">
           <div class="section-title"><span>数据快照</span><small>VERSION</small></div>
           <dl>
-            <div><dt>显示版本</dt><dd>{{ data.metadata.gameVersion }}</dd></div>
+            <div><dt>站点版本</dt><dd>{{ siteVersion }}</dd></div>
+            <div><dt>游戏版本</dt><dd>{{ data.metadata.gameVersion }}</dd></div>
             <div><dt>内部 ID</dt><dd>{{ data.metadata.gameId }}</dd></div>
             <div><dt>提交</dt><dd>{{ data.metadata.commitHash.slice(0, 12) }}</dd></div>
             <div><dt>游戏目录</dt><dd>{{ data.metadata.sourceRoot }}</dd></div>
