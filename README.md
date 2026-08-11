@@ -37,6 +37,7 @@ npm run sync:dove -- --game-dir "D:\KingdomRushDove-Windows-Cycle2-v0.1.5\Kingdo
 - `src/data/dove-data.json`：浏览器使用的规范化数据和校验报告；
 - `public/encyclopedia/*.png`：游戏百科详情插图；
 - `public/encyclopedia/thumbs/*.png`：游戏百科列表图标；
+- `public/skills/*.png`：从塔菜单配置与 `gui_ico` 图集恢复的技能图标；
 - `public/portraits/*.png`：从 `gui_portraits-1.dds` 恢复的透明头像；
 - `tools/.tmp/dove-raw.json`：被 Git 忽略的中间数据。
 

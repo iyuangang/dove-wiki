@@ -83,6 +83,7 @@ function describeLevel(level: SupportLevel) {
             <div><span>名称描述</span><code>_assets/kr1-desktop/strings/zh-Hans.lua</code></div>
             <div><span>解锁关系</span><code>kr1/data/slot_template.lua + level*_data.lua</code></div>
             <div><span>辅助算法</span><code>all/script_utils.lua + tower_scripts.lua</code></div>
+            <div><span>技能图标</span><code>tower_menus_data.lua + gui_ico.lua（{{ data.summary.skillIconCount }} 张）</code></div>
             <div><span>百科图集</span><code>encyclopedia.lua + encyclopedia_creeps.lua</code></div>
             <div><span>回退头像</span><code>gui_portraits.lua（{{ data.summary.portraitFallbackCount }} 座基础塔）</code></div>
           </div>

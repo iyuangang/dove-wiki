@@ -45,7 +45,9 @@ function statClass(leftValue: number | null, rightValue: number | null, side: 'l
 
     <div class="compare-board">
       <button class="compare-tower-head left" type="button" @click="$emit('open', left)">
-        <div class="compare-portrait"><img :src="left.image" :alt="left.name" /></div>
+        <div class="compare-portrait" :class="{ 'encyclopedia-icon': left.encyclopediaListed }">
+          <img :src="left.image" :alt="left.name" />
+        </div>
         <div>
           <small>{{ left.families.map((family) => familyLabels[family]).join(' / ') }}</small>
           <h2>{{ left.name }}</h2>
@@ -59,7 +61,9 @@ function statClass(leftValue: number | null, rightValue: number | null, side: 'l
           <h2>{{ right.name }}</h2>
           <code>{{ right.id }}</code>
         </div>
-        <div class="compare-portrait"><img :src="right.image" :alt="right.name" /></div>
+        <div class="compare-portrait" :class="{ 'encyclopedia-icon': right.encyclopediaListed }">
+          <img :src="right.image" :alt="right.name" />
+        </div>
       </button>
 
       <div class="compare-value" :class="statClass(left.attack.damageMin, right.attack.damageMin, 'left')">
