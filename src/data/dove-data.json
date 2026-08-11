@@ -1,13 +1,14 @@
 {
   "metadata": {
     "title": "Dove 防御塔 Wiki",
-    "gameVersion": "5.6.12",
-    "gameId": "2.0.5.8",
+    "gameVersion": "2.0.5.8",
+    "contentVersion": "5.6.12",
+    "gameId": "kingdom_rush_dove",
     "commitHash": "ab027397630eacb500dade515b111605b252d79e",
-    "generatedAt": "2026-08-11T02:52:48.563Z",
+    "generatedAt": "2026-08-11T04:48:40.264Z",
     "sourceRoot": "D:\\KingdomRushDove-Windows-Cycle2-v0.1.5\\KingdomRushDove",
     "assumptions": [
-      "不计算星级科技、英雄、地图环境与外部配置修改。",
+      "科技树可在辅助计算中选择；条件触发、概率与特殊目标效果不强行折算进基础面板。",
       "基础 DPS 是单目标理论值；范围伤害、召唤物与技能效果单独理解。",
       "兵营塔的增距结果表示集结范围。"
     ]
@@ -18,6 +19,8 @@
     "encyclopediaImageCount": 81,
     "portraitFallbackCount": 12,
     "skillIconCount": 196,
+    "technologyTreeCount": 4,
+    "technologyCount": 96,
     "supportTowerCount": 6,
     "supportEffectCount": 7,
     "levelUnlockCount": 59,
@@ -206,6 +209,1492 @@
         }
       ],
       "note": "每次击杀随机选择范围内一座塔；计算值是目标获得指定次数后的潜在增伤。"
+    }
+  ],
+  "technologyTrees": [
+    {
+      "id": 1,
+      "name": "科技一",
+      "source": "kr1/upgrades.lua",
+      "maxLevel": 6,
+      "technologies": [
+        {
+          "id": "archer_salvage",
+          "family": "archer",
+          "level": 1,
+          "price": 1,
+          "name": "资源回收",
+          "description": "神射手防御塔价格下降5%。",
+          "modifiers": [
+            {
+              "metric": "price",
+              "operation": "multiply",
+              "value": 0.95,
+              "rounding": "ceil"
+            }
+          ]
+        },
+        {
+          "id": "archer_eagle_eye",
+          "family": "archer",
+          "level": 2,
+          "price": 1,
+          "name": "鹰眼",
+          "description": "提高箭塔25%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.25
+            }
+          ]
+        },
+        {
+          "id": "archer_piercing",
+          "family": "archer",
+          "level": 3,
+          "price": 2,
+          "name": "穿刺射击",
+          "description": "箭矢忽略敌人10点护甲。",
+          "modifiers": []
+        },
+        {
+          "id": "archer_far_shots",
+          "family": "archer",
+          "level": 4,
+          "price": 2,
+          "name": "远程射击",
+          "description": "提高箭塔5%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.05
+            }
+          ]
+        },
+        {
+          "id": "archer_precision",
+          "family": "archer",
+          "level": 5,
+          "price": 3,
+          "name": "精准射击",
+          "description": "神射手攻击时有10%几率造成双倍伤害。",
+          "modifiers": [
+            {
+              "metric": "expectedDps",
+              "operation": "multiply",
+              "value": 1.1
+            }
+          ]
+        },
+        {
+          "id": "archer_el_bloodletting_shoot",
+          "family": "archer",
+          "level": 6,
+          "price": 4,
+          "name": "放血射击",
+          "description": "弓箭手攻击时有15%几率导致重伤流血，在3秒内造成箭矢造成伤害230%的真实伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "barrack_survival",
+          "family": "barrack",
+          "level": 1,
+          "price": 1,
+          "name": "体魄训练",
+          "description": "提高士兵10%生命值。",
+          "modifiers": [
+            {
+              "metric": "soldierHp",
+              "operation": "multiply",
+              "value": 1.1
+            }
+          ]
+        },
+        {
+          "id": "barrack_better_armor",
+          "family": "barrack",
+          "level": 2,
+          "price": 1,
+          "name": "精良护甲",
+          "description": "提高士兵10点护甲。",
+          "modifiers": [
+            {
+              "metric": "soldierArmor",
+              "operation": "add",
+              "value": 0.1
+            }
+          ]
+        },
+        {
+          "id": "barrack_improved_deployment",
+          "family": "barrack",
+          "level": 3,
+          "price": 2,
+          "name": "部署改良",
+          "description": "增加20%调集范围，并缩短士兵训练时间20%。",
+          "modifiers": [
+            {
+              "metric": "rallyRange",
+              "operation": "multiply",
+              "value": 1.2
+            },
+            {
+              "metric": "respawn",
+              "operation": "multiply",
+              "value": 0.8
+            }
+          ]
+        },
+        {
+          "id": "barrack_survival_2",
+          "family": "barrack",
+          "level": 4,
+          "price": 2,
+          "name": "耐力训练",
+          "description": "提高士兵9%生命值。",
+          "modifiers": [
+            {
+              "metric": "soldierHp",
+              "operation": "multiply",
+              "value": 1.09
+            }
+          ]
+        },
+        {
+          "id": "barrack_barbed_armor",
+          "family": "barrack",
+          "level": 5,
+          "price": 3,
+          "name": "尖刺护甲",
+          "description": "所有友方单位在受到攻击时，回敬攻击原数值10%的真实伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "barrack_el_enchanted_armor",
+          "family": "barrack",
+          "level": 6,
+          "price": 4,
+          "name": "附魔护甲",
+          "description": "提高士兵10点魔抗和10%免伤。",
+          "modifiers": [
+            {
+              "metric": "soldierMagicArmor",
+              "operation": "add",
+              "value": 0.1
+            }
+          ]
+        },
+        {
+          "id": "mage_spell_reach",
+          "family": "mage",
+          "level": 1,
+          "price": 1,
+          "name": "法术延伸",
+          "description": "提高法师塔15%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.15
+            }
+          ]
+        },
+        {
+          "id": "mage_arcane_shatter",
+          "family": "mage",
+          "level": 2,
+          "price": 1,
+          "name": "奥术粉碎",
+          "description": "魔法攻击每次命中，都会摧毁敌人一部分物理护甲。",
+          "modifiers": []
+        },
+        {
+          "id": "mage_hermetic_study",
+          "family": "mage",
+          "level": 3,
+          "price": 2,
+          "name": "玄奥研究",
+          "description": "法师塔建造和升级费用降低9%。",
+          "modifiers": [
+            {
+              "metric": "price",
+              "operation": "multiply",
+              "value": 0.91,
+              "rounding": "ceil"
+            }
+          ]
+        },
+        {
+          "id": "mage_empowered_magic",
+          "family": "mage",
+          "level": 4,
+          "price": 2,
+          "name": "强化魔力",
+          "description": "提高法师塔15%攻击伤害。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.15
+            }
+          ]
+        },
+        {
+          "id": "mage_slow_curse",
+          "family": "mage",
+          "level": 5,
+          "price": 3,
+          "name": "缓慢诅咒",
+          "description": "魔法攻击在一定时间内使敌人减速50%。",
+          "modifiers": []
+        },
+        {
+          "id": "mage_brilliance",
+          "family": "mage",
+          "level": 6,
+          "price": 4,
+          "name": "魔法闪耀",
+          "description": "法师塔根据已有法师塔数量获得18%-36%的普攻伤害加成。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "table",
+              "values": [
+                1.18,
+                1.21,
+                1.24,
+                1.27,
+                1.29,
+                1.31,
+                1.33,
+                1.35,
+                1.36
+              ]
+            }
+          ]
+        },
+        {
+          "id": "engineer_concentrated_fire",
+          "family": "engineer",
+          "level": 1,
+          "price": 1,
+          "name": "集中火力",
+          "description": "提高火炮25%攻击伤害。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.25
+            }
+          ]
+        },
+        {
+          "id": "engineer_range_finder",
+          "family": "engineer",
+          "level": 2,
+          "price": 1,
+          "name": "测距仪",
+          "description": "提高火炮10%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.1,
+              "excludeTowerIds": [
+                "tower_mech",
+                "tower_balloon"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "engineer_field_logistics",
+          "family": "engineer",
+          "level": 3,
+          "price": 2,
+          "name": "战地后勤",
+          "description": "火炮建造和升级费用降低10%。",
+          "modifiers": [
+            {
+              "metric": "price",
+              "operation": "multiply",
+              "value": 0.9,
+              "rounding": "floor"
+            }
+          ]
+        },
+        {
+          "id": "engineer_industrialization",
+          "family": "engineer",
+          "level": 4,
+          "price": 3,
+          "name": "工业化",
+          "description": "火炮技能费用降低20%。",
+          "modifiers": []
+        },
+        {
+          "id": "engineer_efficiency",
+          "family": "engineer",
+          "level": 5,
+          "price": 3,
+          "name": "智能瞄准",
+          "description": "火炮的溅射和连锁闪电伤害不会递减。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.25,
+              "includeTowerIds": [
+                "tower_rotten_forest",
+                "tower_ignis_altar",
+                "tower_sandworm"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "engineer_gnomish_tinkering",
+          "family": "engineer",
+          "level": 6,
+          "price": 4,
+          "name": "侏儒技术",
+          "description": "火炮技能冷却速度提高12%，雷电攻击冷却速度提高10%。",
+          "modifiers": [
+            {
+              "metric": "cooldown",
+              "operation": "multiply",
+              "value": 0.9,
+              "includeTowerIds": [
+                "tower_tesla",
+                "tower_frankenstein"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "科技二",
+      "source": "kr1/upgrades.lua",
+      "maxLevel": 6,
+      "technologies": [
+        {
+          "id": "archer_far_shots",
+          "family": "archer",
+          "level": 1,
+          "price": 1,
+          "name": "远程射击",
+          "description": "提高箭塔25%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.25
+            }
+          ]
+        },
+        {
+          "id": "archer_logger",
+          "family": "archer",
+          "level": 2,
+          "price": 1,
+          "name": "伐木工",
+          "description": "降低箭塔技能价格10%。",
+          "modifiers": []
+        },
+        {
+          "id": "archer_critical",
+          "family": "archer",
+          "level": 3,
+          "price": 2,
+          "name": "致命射击",
+          "description": "提高箭塔10%伤害。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.1
+            }
+          ]
+        },
+        {
+          "id": "archer_tear",
+          "family": "archer",
+          "level": 4,
+          "price": 2,
+          "name": "撕裂射击",
+          "description": "箭矢依据伤害，降低敌人0.16到1点护甲。",
+          "modifiers": []
+        },
+        {
+          "id": "archer_fast_shots",
+          "family": "archer",
+          "level": 5,
+          "price": 3,
+          "name": "快速射击",
+          "description": "提高箭塔攻速10%。",
+          "modifiers": [
+            {
+              "metric": "cooldown",
+              "operation": "multiply",
+              "value": 0.9090909090909091
+            }
+          ]
+        },
+        {
+          "id": "archer_el_bloodletting_shoot",
+          "family": "archer",
+          "level": 6,
+          "price": 4,
+          "name": "放血射击",
+          "description": "弓箭手攻击时有15%几率导致重伤流血，在3秒内造成箭矢造成伤害230%的真实伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "barrack_bodies",
+          "family": "barrack",
+          "level": 1,
+          "price": 1,
+          "name": "人海战术",
+          "description": "士兵生命上限降低20%，但是兵营的人数上限提升一名。特殊兵营的人数不提升，但是伤害提升30%。",
+          "modifiers": [
+            {
+              "metric": "soldierCount",
+              "operation": "add",
+              "value": 1,
+              "excludeTowerIds": [
+                "tower_baby_ashbite",
+                "tower_pandas_lvl4"
+              ]
+            },
+            {
+              "metric": "soldierHp",
+              "operation": "multiply",
+              "value": 0.8,
+              "excludeTowerIds": [
+                "tower_baby_ashbite",
+                "tower_pandas_lvl4",
+                "tower_ogre_shipwreck",
+                "tower_swamp_monster"
+              ]
+            },
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.3,
+              "includeTowerIds": [
+                "tower_baby_ashbite",
+                "tower_pandas_lvl4",
+                "tower_ogre_shipwreck",
+                "tower_swamp_monster"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "barrack_march",
+          "family": "barrack",
+          "level": 2,
+          "price": 1,
+          "name": "行军号角",
+          "description": "调集范围提高10%，士兵移速提升12点。",
+          "modifiers": [
+            {
+              "metric": "rallyRange",
+              "operation": "multiply",
+              "value": 1.1
+            }
+          ]
+        },
+        {
+          "id": "barrack_rally",
+          "family": "barrack",
+          "level": 3,
+          "price": 2,
+          "name": "部署改良",
+          "description": "增加20%调集范围。",
+          "modifiers": [
+            {
+              "metric": "rallyRange",
+              "operation": "multiply",
+              "value": 1.2
+            }
+          ]
+        },
+        {
+          "id": "barrack_weapon",
+          "family": "barrack",
+          "level": 4,
+          "price": 2,
+          "name": "武器改良",
+          "description": "提升士兵10%攻击力。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.1
+            }
+          ]
+        },
+        {
+          "id": "barrack_go_on",
+          "family": "barrack",
+          "level": 5,
+          "price": 3,
+          "name": "前仆后继",
+          "description": "士兵的训练速度提升20%。",
+          "modifiers": [
+            {
+              "metric": "respawn",
+              "operation": "multiply",
+              "value": 0.8
+            }
+          ]
+        },
+        {
+          "id": "barrack_el_enchanted_armor",
+          "family": "barrack",
+          "level": 6,
+          "price": 4,
+          "name": "附魔护甲",
+          "description": "提高士兵10点魔抗和10%免伤。",
+          "modifiers": [
+            {
+              "metric": "soldierMagicArmor",
+              "operation": "add",
+              "value": 0.1
+            }
+          ]
+        },
+        {
+          "id": "mage_arcane_spell",
+          "family": "mage",
+          "level": 1,
+          "price": 1,
+          "name": "奥术符文",
+          "description": "提高法师塔15%攻击伤害。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.15
+            }
+          ]
+        },
+        {
+          "id": "mage_strike",
+          "family": "mage",
+          "level": 2,
+          "price": 1,
+          "name": "法术打击",
+          "description": "法球对无法抗敌人造成额外20%伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "mage_spell_reach",
+          "family": "mage",
+          "level": 3,
+          "price": 2,
+          "name": "法术延伸",
+          "description": "提高法师塔10%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.1
+            }
+          ]
+        },
+        {
+          "id": "mage_old_folk",
+          "family": "mage",
+          "level": 4,
+          "price": 2,
+          "name": "古老智慧",
+          "description": "法师塔技能价格降低15%。",
+          "modifiers": []
+        },
+        {
+          "id": "mage_unsteady",
+          "family": "mage",
+          "level": 5,
+          "price": 3,
+          "name": "不稳定魔力",
+          "description": "法师攻击时有10%几率无视法抗并造成额外100%伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "mage_brilliance",
+          "family": "mage",
+          "level": 6,
+          "price": 4,
+          "name": "魔法闪耀",
+          "description": "法师塔根据已有法师塔数量获得18%-36%的普攻伤害加成。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "table",
+              "values": [
+                1.18,
+                1.21,
+                1.24,
+                1.27,
+                1.29,
+                1.31,
+                1.33,
+                1.35,
+                1.36
+              ]
+            }
+          ]
+        },
+        {
+          "id": "engineer_range_finder",
+          "family": "engineer",
+          "level": 1,
+          "price": 1,
+          "name": "测距仪",
+          "description": "提高火炮15%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.15,
+              "excludeTowerIds": [
+                "tower_mech",
+                "tower_balloon"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "engineer_magic_dust",
+          "family": "engineer",
+          "level": 2,
+          "price": 1,
+          "name": "魔法粉尘",
+          "description": "炮弹攻击有10%几率造成基于攻击力和敌人最大生命值百分比的伤害。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.2,
+              "includeTowerIds": [
+                "tower_tesla",
+                "tower_frankenstein",
+                "tower_rotten_forest",
+                "tower_ignis_altar",
+                "tower_sandworm"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "engineer_concentrated_fire",
+          "family": "engineer",
+          "level": 3,
+          "price": 2,
+          "name": "集中火力",
+          "description": "提高火炮10%攻击伤害。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.1
+            }
+          ]
+        },
+        {
+          "id": "engineer_industrialization",
+          "family": "engineer",
+          "level": 4,
+          "price": 3,
+          "name": "工业化",
+          "description": "火炮技能费用降低20%。",
+          "modifiers": []
+        },
+        {
+          "id": "engineer_efficiency",
+          "family": "engineer",
+          "level": 5,
+          "price": 3,
+          "name": "智能瞄准",
+          "description": "火炮的溅射和连锁闪电伤害不会递减。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.25,
+              "includeTowerIds": [
+                "tower_rotten_forest",
+                "tower_ignis_altar",
+                "tower_sandworm"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "engineer_gnomish_tinkering",
+          "family": "engineer",
+          "level": 6,
+          "price": 4,
+          "name": "侏儒技术",
+          "description": "火炮技能冷却速度提高12%，雷电攻击冷却速度提高10%。",
+          "modifiers": [
+            {
+              "metric": "cooldown",
+              "operation": "multiply",
+              "value": 0.9,
+              "includeTowerIds": [
+                "tower_tesla",
+                "tower_frankenstein"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "科技三",
+      "source": "kr1/upgrades.lua",
+      "maxLevel": 6,
+      "technologies": [
+        {
+          "id": "archer_salvage",
+          "family": "archer",
+          "level": 1,
+          "price": 1,
+          "name": "资源回收",
+          "description": "神射手防御塔价格下降5%。",
+          "modifiers": [
+            {
+              "metric": "price",
+              "operation": "multiply",
+              "value": 0.95,
+              "rounding": "ceil"
+            }
+          ]
+        },
+        {
+          "id": "archer_eagle_eye",
+          "family": "archer",
+          "level": 2,
+          "price": 1,
+          "name": "鹰眼",
+          "description": "提高箭塔25%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.25
+            }
+          ]
+        },
+        {
+          "id": "archer_obsidian",
+          "family": "archer",
+          "level": 3,
+          "price": 2,
+          "name": "黑曜石箭矢",
+          "description": "使箭矢对护甲低于10点的敌人造成额外27%伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "archer_far_shots",
+          "family": "archer",
+          "level": 4,
+          "price": 2,
+          "name": "远程射击",
+          "description": "提高箭塔5%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.05
+            }
+          ]
+        },
+        {
+          "id": "archer_magic",
+          "family": "archer",
+          "level": 5,
+          "price": 3,
+          "name": "附魔箭矢",
+          "description": "使箭矢附带原伤害12%的魔法伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "archer_el_bloodletting_shoot",
+          "family": "archer",
+          "level": 6,
+          "price": 4,
+          "name": "放血射击",
+          "description": "弓箭手攻击时有15%几率导致重伤流血，在3秒内造成箭矢造成伤害230%的真实伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "barrack_survival",
+          "family": "barrack",
+          "level": 1,
+          "price": 1,
+          "name": "体魄训练",
+          "description": "提高士兵10%生命值。",
+          "modifiers": [
+            {
+              "metric": "soldierHp",
+              "operation": "multiply",
+              "value": 1.1
+            }
+          ]
+        },
+        {
+          "id": "barrack_better_armor",
+          "family": "barrack",
+          "level": 2,
+          "price": 1,
+          "name": "精良护甲",
+          "description": "提高士兵10点护甲。",
+          "modifiers": [
+            {
+              "metric": "soldierArmor",
+              "operation": "add",
+              "value": 0.1
+            }
+          ]
+        },
+        {
+          "id": "barrack_go_on",
+          "family": "barrack",
+          "level": 3,
+          "price": 2,
+          "name": "前仆后继",
+          "description": "士兵的训练速度提升25%。",
+          "modifiers": [
+            {
+              "metric": "respawn",
+              "operation": "multiply",
+              "value": 0.75
+            }
+          ]
+        },
+        {
+          "id": "barrack_survival_2",
+          "family": "barrack",
+          "level": 4,
+          "price": 2,
+          "name": "耐力训练",
+          "description": "提高士兵5%生命值。",
+          "modifiers": [
+            {
+              "metric": "soldierHp",
+              "operation": "multiply",
+              "value": 1.05
+            }
+          ]
+        },
+        {
+          "id": "barrack_mobilize",
+          "family": "barrack",
+          "level": 5,
+          "price": 3,
+          "name": "紧急动员",
+          "description": "兵营的建造和升级费用降低20%。",
+          "modifiers": [
+            {
+              "metric": "price",
+              "operation": "multiply",
+              "value": 0.8,
+              "rounding": "floor"
+            }
+          ]
+        },
+        {
+          "id": "barrack_dominant",
+          "family": "barrack",
+          "level": 6,
+          "price": 4,
+          "name": "绝对统率",
+          "description": "调集范围提升至2倍，士兵移动速度提升20%。",
+          "modifiers": [
+            {
+              "metric": "rallyRange",
+              "operation": "multiply",
+              "value": 2
+            }
+          ]
+        },
+        {
+          "id": "mage_spell_reach",
+          "family": "mage",
+          "level": 1,
+          "price": 1,
+          "name": "法术延伸",
+          "description": "提高法师塔15%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.15
+            }
+          ]
+        },
+        {
+          "id": "mage_empowered_magic",
+          "family": "mage",
+          "level": 2,
+          "price": 1,
+          "name": "强化魔力",
+          "description": "提高法师塔15%攻击伤害。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.15
+            }
+          ]
+        },
+        {
+          "id": "mage_spell_reach_2",
+          "family": "mage",
+          "level": 3,
+          "price": 2,
+          "name": "法术折跃",
+          "description": "提高法师塔5%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.05
+            }
+          ]
+        },
+        {
+          "id": "mage_old_folk",
+          "family": "mage",
+          "level": 4,
+          "price": 2,
+          "name": "古老智慧",
+          "description": "法师塔技能价格降低10%。",
+          "modifiers": []
+        },
+        {
+          "id": "mage_treasure",
+          "family": "mage",
+          "level": 5,
+          "price": 3,
+          "name": "奥术结晶",
+          "description": "被法球命中的敌人赏金提高，多次命中最高提升10%。",
+          "modifiers": []
+        },
+        {
+          "id": "mage_brilliance",
+          "family": "mage",
+          "level": 6,
+          "price": 4,
+          "name": "魔法闪耀",
+          "description": "法师塔根据已有法师塔数量获得18%-36%的普攻伤害加成。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "table",
+              "values": [
+                1.18,
+                1.21,
+                1.24,
+                1.27,
+                1.29,
+                1.31,
+                1.33,
+                1.35,
+                1.36
+              ]
+            }
+          ]
+        },
+        {
+          "id": "engineer_concentrated_fire",
+          "family": "engineer",
+          "level": 1,
+          "price": 1,
+          "name": "集中火力",
+          "description": "提高火炮25%攻击伤害。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.25
+            }
+          ]
+        },
+        {
+          "id": "engineer_diffusion",
+          "family": "engineer",
+          "level": 2,
+          "price": 1,
+          "name": "动能扩散",
+          "description": "炮弹溅射范围提升15%。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.15,
+              "includeTowerIds": [
+                "tower_rotten_forest",
+                "tower_dwaarp",
+                "tower_melting_furnace"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "engineer_range_finder",
+          "family": "engineer",
+          "level": 3,
+          "price": 2,
+          "name": "测距仪",
+          "description": "提高火炮15%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.15,
+              "excludeTowerIds": [
+                "tower_mech",
+                "tower_balloon"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "engineer_field_logistics",
+          "family": "engineer",
+          "level": 4,
+          "price": 3,
+          "name": "战地后勤",
+          "description": "火炮建造和升级费用降低12%。",
+          "modifiers": [
+            {
+              "metric": "price",
+              "operation": "multiply",
+              "value": 0.88,
+              "rounding": "floor"
+            }
+          ]
+        },
+        {
+          "id": "engineer_efficiency",
+          "family": "engineer",
+          "level": 5,
+          "price": 3,
+          "name": "智能瞄准",
+          "description": "火炮的溅射和连锁闪电伤害不会递减。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.25,
+              "includeTowerIds": [
+                "tower_rotten_forest",
+                "tower_ignis_altar",
+                "tower_sandworm"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "engineer_gnomish_tinkering",
+          "family": "engineer",
+          "level": 6,
+          "price": 4,
+          "name": "侏儒技术",
+          "description": "火炮技能冷却速度提高12%，雷电攻击冷却速度提高10%。",
+          "modifiers": [
+            {
+              "metric": "cooldown",
+              "operation": "multiply",
+              "value": 0.9,
+              "includeTowerIds": [
+                "tower_tesla",
+                "tower_frankenstein"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "科技四",
+      "source": "kr1/upgrades.lua",
+      "maxLevel": 6,
+      "technologies": [
+        {
+          "id": "archer_salvage",
+          "family": "archer",
+          "level": 1,
+          "price": 1,
+          "name": "资源回收",
+          "description": "神射手防御塔价格下降5%。",
+          "modifiers": [
+            {
+              "metric": "price",
+              "operation": "multiply",
+              "value": 0.95,
+              "rounding": "ceil"
+            }
+          ]
+        },
+        {
+          "id": "archer_eagle_eye",
+          "family": "archer",
+          "level": 2,
+          "price": 1,
+          "name": "鹰眼",
+          "description": "提高箭塔25%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.25
+            }
+          ]
+        },
+        {
+          "id": "archer_logger",
+          "family": "archer",
+          "level": 3,
+          "price": 2,
+          "name": "伐木工",
+          "description": "降低箭塔技能价格10%。",
+          "modifiers": []
+        },
+        {
+          "id": "archer_far_shots",
+          "family": "archer",
+          "level": 4,
+          "price": 2,
+          "name": "远程射击",
+          "description": "提高箭塔5%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.05
+            }
+          ]
+        },
+        {
+          "id": "archer_fly_killer",
+          "family": "archer",
+          "level": 5,
+          "price": 3,
+          "name": "防空特训",
+          "description": "箭塔伤害提高8%，且所有箭矢瞄准空军时额外提高25%伤害。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.08
+            }
+          ]
+        },
+        {
+          "id": "archer_el_bloodletting_shoot",
+          "family": "archer",
+          "level": 6,
+          "price": 4,
+          "name": "放血射击",
+          "description": "弓箭手攻击时有15%几率导致重伤流血，在3秒内造成箭矢造成伤害230%的真实伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "barrack_survival",
+          "family": "barrack",
+          "level": 1,
+          "price": 1,
+          "name": "体魄训练",
+          "description": "提高士兵10%生命值。",
+          "modifiers": [
+            {
+              "metric": "soldierHp",
+              "operation": "multiply",
+              "value": 1.1
+            }
+          ]
+        },
+        {
+          "id": "barrack_better_armor",
+          "family": "barrack",
+          "level": 2,
+          "price": 1,
+          "name": "精良护甲",
+          "description": "提高士兵10点护甲。",
+          "modifiers": [
+            {
+              "metric": "soldierArmor",
+              "operation": "add",
+              "value": 0.1
+            }
+          ]
+        },
+        {
+          "id": "barrack_improved_deployment",
+          "family": "barrack",
+          "level": 3,
+          "price": 2,
+          "name": "部署改良",
+          "description": "增加25%调集范围，并缩短士兵训练时间20%。",
+          "modifiers": [
+            {
+              "metric": "rallyRange",
+              "operation": "multiply",
+              "value": 1.25
+            },
+            {
+              "metric": "respawn",
+              "operation": "multiply",
+              "value": 0.8
+            }
+          ]
+        },
+        {
+          "id": "barrack_survival_2",
+          "family": "barrack",
+          "level": 4,
+          "price": 2,
+          "name": "耐力训练",
+          "description": "提高士兵5%生命值。",
+          "modifiers": [
+            {
+              "metric": "soldierHp",
+              "operation": "multiply",
+              "value": 1.05
+            }
+          ]
+        },
+        {
+          "id": "barrack_skill_master",
+          "family": "barrack",
+          "level": 5,
+          "price": 3,
+          "name": "王牌教官",
+          "description": "兵营的建造和升级费用、技能费用降低10%。",
+          "modifiers": [
+            {
+              "metric": "price",
+              "operation": "multiply",
+              "value": 0.9,
+              "rounding": "floor"
+            }
+          ]
+        },
+        {
+          "id": "barrack_el_enchanted_armor",
+          "family": "barrack",
+          "level": 6,
+          "price": 4,
+          "name": "附魔护甲",
+          "description": "提高士兵10点魔抗和10%免伤。",
+          "modifiers": [
+            {
+              "metric": "soldierMagicArmor",
+              "operation": "add",
+              "value": 0.1
+            }
+          ]
+        },
+        {
+          "id": "mage_spell_reach",
+          "family": "mage",
+          "level": 1,
+          "price": 1,
+          "name": "法术延伸",
+          "description": "提高法师塔15%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.15
+            }
+          ]
+        },
+        {
+          "id": "mage_empowered_magic",
+          "family": "mage",
+          "level": 2,
+          "price": 1,
+          "name": "强化魔力",
+          "description": "提高法师塔15%攻击伤害。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.15
+            }
+          ]
+        },
+        {
+          "id": "mage_rune_analysis",
+          "family": "mage",
+          "level": 3,
+          "price": 2,
+          "name": "符文解析",
+          "description": "法师塔建造和升级费用、技能价格降低6%。",
+          "modifiers": [
+            {
+              "metric": "price",
+              "operation": "multiply",
+              "value": 0.94,
+              "rounding": "ceil"
+            }
+          ]
+        },
+        {
+          "id": "mage_slow_curse",
+          "family": "mage",
+          "level": 4,
+          "price": 2,
+          "name": "缓慢诅咒",
+          "description": "魔法攻击在一定时间内使敌人减速50%。",
+          "modifiers": []
+        },
+        {
+          "id": "mage_harmony",
+          "family": "mage",
+          "level": 5,
+          "price": 3,
+          "name": "和谐本征",
+          "description": "法师塔攻击范围提高7%，伤害提高7%，且法球伤害不再浮动。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.07
+            },
+            {
+              "metric": "damage",
+              "operation": "average",
+              "value": 1.07
+            }
+          ]
+        },
+        {
+          "id": "mage_purge_field",
+          "family": "mage",
+          "level": 6,
+          "price": 4,
+          "name": "肃清立场",
+          "description": "法师塔根据射程范围内人数，提高全伤害14%-30%。",
+          "modifiers": []
+        },
+        {
+          "id": "engineer_concentrated_fire",
+          "family": "engineer",
+          "level": 1,
+          "price": 1,
+          "name": "集中火力",
+          "description": "提高火炮25%攻击伤害。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.25
+            }
+          ]
+        },
+        {
+          "id": "engineer_range_finder",
+          "family": "engineer",
+          "level": 2,
+          "price": 1,
+          "name": "测距仪",
+          "description": "提高火炮10%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.1,
+              "excludeTowerIds": [
+                "tower_mech",
+                "tower_balloon"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "engineer_emergency_expansion",
+          "family": "engineer",
+          "level": 3,
+          "price": 2,
+          "name": "紧急扩建",
+          "description": "火炮建造和升级费用降低25%，攻击伤害下降12%。",
+          "modifiers": [
+            {
+              "metric": "price",
+              "operation": "multiply",
+              "value": 0.75,
+              "rounding": "floor"
+            },
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 0.88
+            }
+          ]
+        },
+        {
+          "id": "engineer_industrialization",
+          "family": "engineer",
+          "level": 4,
+          "price": 3,
+          "name": "工业化",
+          "description": "火炮技能费用降低20%。",
+          "modifiers": []
+        },
+        {
+          "id": "engineer_efficiency",
+          "family": "engineer",
+          "level": 5,
+          "price": 3,
+          "name": "智能瞄准",
+          "description": "火炮的溅射和连锁闪电伤害不会递减。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.25,
+              "includeTowerIds": [
+                "tower_rotten_forest",
+                "tower_ignis_altar",
+                "tower_sandworm"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "engineer_gnomish_tinkering",
+          "family": "engineer",
+          "level": 6,
+          "price": 4,
+          "name": "侏儒技术",
+          "description": "火炮技能冷却速度提高12%，雷电攻击冷却速度提高10%。",
+          "modifiers": [
+            {
+              "metric": "cooldown",
+              "operation": "multiply",
+              "value": 0.9,
+              "includeTowerIds": [
+                "tower_tesla",
+                "tower_frankenstein"
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "towers": [

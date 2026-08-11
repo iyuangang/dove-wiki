@@ -95,10 +95,52 @@ export interface SupportEffect {
   note: string
 }
 
+export type TechnologyMetric =
+  | 'damage'
+  | 'expectedDps'
+  | 'range'
+  | 'cooldown'
+  | 'price'
+  | 'rallyRange'
+  | 'soldierHp'
+  | 'soldierArmor'
+  | 'soldierMagicArmor'
+  | 'respawn'
+  | 'soldierCount'
+
+export interface TechnologyModifier {
+  metric: TechnologyMetric
+  operation: 'multiply' | 'add' | 'average' | 'table'
+  value?: number
+  values?: number[]
+  rounding?: 'ceil' | 'floor'
+  includeTowerIds?: string[]
+  excludeTowerIds?: string[]
+}
+
+export interface Technology {
+  id: string
+  family: TowerFamily
+  level: number
+  price: number
+  name: string
+  description: string
+  modifiers: TechnologyModifier[]
+}
+
+export interface TechnologyTree {
+  id: number
+  name: string
+  source: string
+  maxLevel: number
+  technologies: Technology[]
+}
+
 export interface DoveData {
   metadata: {
     title: string
     gameVersion: string
+    contentVersion: string
     gameId: string
     commitHash: string
     generatedAt: string
@@ -111,6 +153,8 @@ export interface DoveData {
     encyclopediaImageCount: number
     portraitFallbackCount: number
     skillIconCount: number
+    technologyTreeCount: number
+    technologyCount: number
     supportTowerCount: number
     supportEffectCount: number
     levelUnlockCount: number
@@ -125,5 +169,6 @@ export interface DoveData {
     missingTemplateSources: string[]
   }
   supportEffects: SupportEffect[]
+  technologyTrees: TechnologyTree[]
   towers: Tower[]
 }
