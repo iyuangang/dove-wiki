@@ -36,6 +36,8 @@ const encyclopediaThumbDir = join(encyclopediaDir, 'thumbs')
 const skillIconDir = join(projectRoot, 'public', 'skills')
 const heroDir = join(projectRoot, 'public', 'heroes')
 const heroThumbDir = join(heroDir, 'thumbs')
+const enemyDir = join(projectRoot, 'public', 'enemies')
+const enemyThumbDir = join(enemyDir, 'thumbs')
 
 function assertFile(path, label) {
   if (!existsSync(path)) {
@@ -756,10 +758,37 @@ function heroSkillMaxLevel(skill) {
   return Math.max(1, ...mappedLevels, ...arrayLengths)
 }
 
+const heroAbilityDescriptionAliases = {
+  'hero_hacksaw:伐伐伐木！': '伐伐伐木',
+  'hero_monk:蛇形拳': '蛇型拳',
+  'hero_bruce:流血利爪': '流血利刃',
+  'hero_builder:加班加点': '正在施工',
+  'hero_builder:拆迁专家': '拆迁达人',
+  'hero_builder:防御炮台': '防御塔楼',
+  'hero_builder:铁球横扫': '破城钢球',
+  'hero_lava:烈焰席卷': '烈炎席卷',
+  'hero_dianyun:至尊波': '势崩江河',
+  'hero_beresad:龙息术': '爆炎',
+  'hero_beresad:恐惧之龙': '惧龙',
+  'hero_beresad:龙之爪牙': '龙生',
+  'hero_beresad:湮灭射线': '片甲不留',
+  'hero_beresad:地狱火雨': '地狱火',
+}
+
+function heroAbilityDescription(rawHero, name) {
+  const descriptions = rawHero.skill_descriptions || {}
+  const alias = heroAbilityDescriptionAliases[`${rawHero.id}:${name}`]
+  return descriptions[name] || descriptions[alias] || '游戏脚本未提供可直接展示的技能说明。'
+}
+
 function normalizeHero(rawHero, localization) {
   const token = rawHero.id.replace(/^hero_/, '').toUpperCase()
   const levelStats = rawHero.template?.hero?.level_stats || {}
   const specialText = localization[`HERO_${token}_SPECIAL`] || ''
+  const specialties = specialText
+    .split(/[，,]/)
+    .map((item) => item.trim())
+    .filter(Boolean)
   const skills = Object.entries(rawHero.template?.hero?.skills || {})
     .map(([skillId, skill]) => ({
       id: skillId,
@@ -789,10 +818,11 @@ function normalizeHero(rawHero, localization) {
     id: rawHero.id,
     name: localization[`HERO_${token}_NAME`] || rawHero.id.replaceAll('_', ' '),
     description: localization[`HERO_${token}_DESCRIPTION`] || '游戏脚本未提供中文描述。',
-    specialties: specialText
-      .split(/[，,]/)
-      .map((item) => item.trim())
-      .filter(Boolean),
+    specialties,
+    abilities: specialties.map((name) => ({
+      name,
+      description: heroAbilityDescription(rawHero, name),
+    })),
     image: `/heroes/${rawHero.id}.png`,
     thumbnail: `/heroes/thumbs/${rawHero.id}.png`,
     sourceGame: Number(rawHero.from_kr || 1),
@@ -814,6 +844,62 @@ function normalizeHero(rawHero, localization) {
       roster: 'kr1-desktop/data/map_data.lua → hero_data',
       localization: '_assets/kr1-desktop/strings/zh-Hans.lua',
       portrait: '_assets/kr1-desktop/images/fullhd/hero_room.lua',
+    },
+  }
+}
+
+function normalizeEnemy(rawEnemy, localization) {
+  const i18nKey = rawEnemy.template?.info?.i18n_key || rawEnemy.id.toUpperCase()
+  const specialKey = `${rawEnemy.id.toUpperCase()}_SPECIAL`
+  const extraText = localization[`${i18nKey}_EXTRA`] || ''
+  const info = rawEnemy.computed_info || {}
+  const boss = /(^|_)(eb|boss|miniboss)(_|$)/i.test(rawEnemy.id) ||
+    rawEnemy.id.startsWith('controller_')
+
+  return {
+    entryId: `${rawEnemy.id}--${rawEnemy.order}`,
+    id: rawEnemy.id,
+    order: Number(rawEnemy.order),
+    name: localization[`${i18nKey}_NAME`] || rawEnemy.id.replaceAll('_', ' '),
+    description:
+      localization[`${i18nKey}_DESCRIPTION`] || '游戏百科未提供中文描述。',
+    special: localization[specialKey] || '',
+    traits: extraText
+      .split(/\r?\n/)
+      .map((item) => item.replace(/^\s*[-•]\s*/, '').trim())
+      .filter(Boolean),
+    image: `/enemies/${rawEnemy.id}.png`,
+    thumbnail: `/enemies/thumbs/${rawEnemy.id}.png`,
+    imageSprite: rawEnemy.encyclopedia?.detail_sprite || null,
+    thumbnailSprite: rawEnemy.encyclopedia?.thumb_sprite || null,
+    sourceGame: Number(rawEnemy.source_game),
+    alwaysShown: rawEnemy.always_shown === true,
+    flying: rawEnemy.is_flying === true,
+    boss,
+    stats: {
+      hp: Number.isFinite(info.hp_max) ? info.hp_max : null,
+      damageMin: Number.isFinite(info.damage_min) ? info.damage_min : null,
+      damageMax: Number.isFinite(info.damage_max) ? info.damage_max : null,
+      armor: Number.isFinite(info.armor) ? info.armor : null,
+      magicArmor: Number.isFinite(info.magic_armor) ? info.magic_armor : null,
+      speed: Number.isFinite(rawEnemy.template?.motion?.max_speed)
+        ? rawEnemy.template.motion.max_speed
+        : null,
+      lives: Number.isFinite(info.lives)
+        ? info.lives
+        : Number.isFinite(rawEnemy.template?.enemy?.lives_cost)
+          ? rawEnemy.template.enemy.lives_cost
+          : null,
+      gold: Number.isFinite(rawEnemy.template?.enemy?.gold)
+        ? rawEnemy.template.enemy.gold
+        : null,
+    },
+    sources: {
+      roster: 'kr1/game_settings.lua → encyclopedia_enemies',
+      template: rawEnemy.template_exists ? '游戏实体模板 + info.fn' : null,
+      localization: '_assets/kr1-desktop/strings/zh-Hans.lua',
+      encyclopedia:
+        '_assets/kr1-desktop/images/fullhd/encyclopedia.lua + encyclopedia_creeps.lua',
     },
   }
 }
@@ -1043,6 +1129,23 @@ async function cleanupHeroImages(rawHeroes) {
   }
 }
 
+async function cleanupEnemyImages(rawEnemies) {
+  const expected = new Set(
+    rawEnemies
+      .filter((enemy) => enemy.encyclopedia)
+      .map((enemy) => `${enemy.id}.png`),
+  )
+
+  for (const directory of [enemyDir, enemyThumbDir]) {
+    const resolvedDirectory = resolve(directory)
+    for (const filename of await readdir(directory)) {
+      const fullPath = resolve(directory, filename)
+      if (dirname(fullPath) !== resolvedDirectory) continue
+      if (filename.endsWith('.png') && !expected.has(filename)) await unlink(fullPath)
+    }
+  }
+}
+
 async function main() {
   assertFile(join(gameDir, 'kr1', 'game_settings.lua'), 'Dove 游戏目录')
   assertFile(loveExe, 'Dove 自带 lovec.exe')
@@ -1052,6 +1155,7 @@ async function main() {
   await mkdir(encyclopediaThumbDir, { recursive: true })
   await mkdir(skillIconDir, { recursive: true })
   await mkdir(heroThumbDir, { recursive: true })
+  await mkdir(enemyThumbDir, { recursive: true })
 
   console.log(`[dove-wiki] 读取游戏：${gameDir}`)
   run(loveExe, [join(toolsDir, 'love-extractor')], {
@@ -1064,6 +1168,7 @@ async function main() {
       DOVE_ENCYCLOPEDIA_DIR: encyclopediaDir,
       DOVE_SKILL_ICON_DIR: skillIconDir,
       DOVE_HERO_DIR: heroDir,
+      DOVE_ENEMY_DIR: enemyDir,
     },
   })
 
@@ -1098,6 +1203,7 @@ async function main() {
   await cleanupEncyclopediaImages(raw.towers)
   await cleanupSkillIcons(raw.towers)
   await cleanupHeroImages(raw.heroes)
+  await cleanupEnemyImages(raw.enemies)
 
   const versionSource = await readFile(join(gameDir, 'version.lua'), 'utf8')
   const commitHash = (
@@ -1119,6 +1225,8 @@ async function main() {
   const skillIconCount = towers.flatMap((tower) => tower.powers).filter((power) => power.icon).length
   const technologyTrees = buildTechnologyTrees(raw.technology, raw.localization)
   const heroes = raw.heroes.map((hero) => normalizeHero(hero, raw.localization))
+  const enemies = raw.enemies.map((enemy) => normalizeEnemy(enemy, raw.localization))
+  const uniqueEnemyCount = new Set(enemies.map((enemy) => enemy.id)).size
   const normalizedSupportEffects = supportEffects.map((effect) => ({
     ...effect,
     icon:
@@ -1157,6 +1265,11 @@ async function main() {
         0,
       ),
       heroCount: heroes.length,
+      enemyCount: enemies.length,
+      uniqueEnemyCount,
+      enemyImageCount: new Set(
+        raw.enemies.filter((enemy) => enemy.encyclopedia).map((enemy) => enemy.id),
+      ).size,
       supportTowerCount,
       supportHeroCount,
       supportEffectCount: normalizedSupportEffects.length,
@@ -1184,13 +1297,14 @@ async function main() {
     supportEffects: normalizedSupportEffects,
     technologyTrees,
     heroes,
+    enemies,
     towers,
   }
 
   await writeFile(dataPath, `${JSON.stringify(data, null, 2)}\n`, 'utf8')
   const dataSize = await stat(dataPath)
   console.log(
-    `[dove-wiki] 完成：${towers.length} 座塔、${heroes.length} 名英雄、${encyclopediaCount} 套百科图、${skillIconCount} 张技能图标、${towers.length - encyclopediaCount} 张头像回退、${Math.round(dataSize.size / 1024)} KiB 数据`,
+    `[dove-wiki] 完成：${towers.length} 座塔、${heroes.length} 名英雄、${enemies.length} 个敌人百科槽位（${uniqueEnemyCount} 个唯一敌人）、${encyclopediaCount} 套塔百科图、${skillIconCount} 张技能图标、${towers.length - encyclopediaCount} 张头像回退、${Math.round(dataSize.size / 1024)} KiB 数据`,
   )
   console.log(`[dove-wiki] 解锁异常：${missingUnlocks.length}；不可统一折算伤害：${missingDamage.length}`)
 }

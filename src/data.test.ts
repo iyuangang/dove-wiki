@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { doveData, heroes, towerById, towers } from './data'
+import { doveData, enemies, heroes, towerById, towers } from './data'
 
 describe('游戏百科顺序与图像', () => {
   it('uses the build id as the public game version', () => {
@@ -78,8 +78,40 @@ describe('游戏百科顺序与图像', () => {
     expect(heroes.every((hero) => hero.name && hero.description && hero.sources.template)).toBe(true)
     expect(heroes.every((hero) => hero.image.startsWith('/heroes/'))).toBe(true)
     expect(heroes.every((hero) => hero.thumbnail.startsWith('/heroes/thumbs/'))).toBe(true)
+    expect(heroes.every((hero) => hero.abilities.length === hero.specialties.length)).toBe(true)
+    expect(heroes.flatMap((hero) => hero.abilities).every((ability) => ability.description)).toBe(true)
+    expect(
+      heroes.flatMap((hero) => hero.abilities).every(
+        (ability) => !ability.description.includes('未提供可直接展示'),
+      ),
+    ).toBe(true)
+    expect(heroes.find((hero) => hero.id === 'hero_gerald')?.abilities).toContainEqual(
+      expect.objectContaining({ name: '神圣打击' }),
+    )
     expect(doveData.summary.supportHeroCount).toBe(7)
     expect(doveData.supportEffects.filter((effect) => effect.sourceType === 'hero')).toHaveLength(8)
+  })
+
+  it('mirrors the in-game enemy encyclopedia order, duplicates and images', () => {
+    expect(enemies).toHaveLength(299)
+    expect(new Set(enemies.map((enemy) => enemy.id)).size).toBe(295)
+    expect(enemies.slice(0, 4).map((enemy) => enemy.id)).toEqual([
+      'enemy_goblin',
+      'enemy_fat_orc',
+      'enemy_shaman',
+      'enemy_ogre',
+    ])
+    expect(enemies.map((enemy) => enemy.order)).toEqual(
+      Array.from({ length: 299 }, (_, index) => index + 1),
+    )
+    expect(enemies.filter((enemy) => enemy.id === 'enemy_halloween_zombie')).toHaveLength(2)
+    expect(enemies.every((enemy) => enemy.name && enemy.description)).toBe(true)
+    expect(enemies.every((enemy) => enemy.image.startsWith('/enemies/'))).toBe(true)
+    expect(enemies.every((enemy) => enemy.thumbnail.startsWith('/enemies/thumbs/'))).toBe(true)
+    expect(enemies[67]?.sourceGame).toBe(1)
+    expect(enemies[68]?.sourceGame).toBe(2)
+    expect(enemies[128]?.sourceGame).toBe(3)
+    expect(enemies[173]?.sourceGame).toBe(5)
   })
 
   it('extracts all four six-level technology trees from upgrades.lua', () => {

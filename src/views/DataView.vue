@@ -71,6 +71,7 @@ function openSupportSource(effect: SupportEffect) {
       <article><span>塔模板</span><strong>{{ data.summary.towerCount }}</strong><small>去重后的玩家可选塔</small></article>
       <article><span>百科图像</span><strong>{{ data.summary.encyclopediaImageCount }}</strong><small>缩略图与详情图均来自游戏百科</small></article>
       <article><span>英雄名录</span><strong>{{ data.summary.heroCount }}</strong><small>按游戏英雄殿堂顺序同步</small></article>
+      <article><span>敌人百科</span><strong>{{ data.summary.enemyCount }}</strong><small>{{ data.summary.uniqueEnemyCount }} 个唯一敌人，保留重复槽位</small></article>
       <article><span>精确伤害</span><strong>{{ data.summary.exactDamageCount }}</strong><small>调用游戏 info.fn 获取</small></article>
       <article class="warning"><span>解锁异常</span><strong>{{ data.summary.unlockAnomalyCount }}</strong><small>锁定但没有解锁关卡</small></article>
     </div>
@@ -119,6 +120,7 @@ function openSupportSource(effect: SupportEffect) {
             <div><span>辅助算法</span><code>all/script_utils.lua + tower_scripts.lua</code></div>
             <div><span>科技树</span><code>kr1/upgrades.lua（{{ data.summary.technologyTreeCount }} 套 / {{ data.summary.technologyCount }} 项）</code></div>
             <div><span>英雄名录</span><code>map_data.lua → hero_data + kr1/heroes.lua（{{ data.summary.heroCount }} 名）</code></div>
+            <div><span>敌人百科</span><code>game_settings.lua → encyclopedia_enemies（{{ data.summary.enemyCount }} 槽位 / {{ data.summary.uniqueEnemyCount }} 唯一）</code></div>
             <div><span>技能图标</span><code>tower_menus_data.lua + gui_ico.lua（{{ data.summary.skillIconCount }} 张）</code></div>
             <div><span>百科图集</span><code>encyclopedia.lua + encyclopedia_creeps.lua</code></div>
             <div><span>回退头像</span><code>gui_portraits.lua（{{ data.summary.portraitFallbackCount }} 座基础塔）</code></div>

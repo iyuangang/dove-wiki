@@ -3,19 +3,21 @@ import { computed, nextTick, ref, watch } from 'vue'
 import DetailPanel from './components/DetailPanel.vue'
 import { Badge } from './components/ui/badge'
 import { Tabs, TabsList, TabsTrigger } from './components/ui/tabs'
-import { doveData, heroes, siteVersion, towerById, towers } from './data'
+import { doveData, enemies, heroes, siteVersion, towerById, towers } from './data'
 import CalculatorView from './views/CalculatorView.vue'
 import CatalogView from './views/CatalogView.vue'
 import CompareView from './views/CompareView.vue'
 import DataView from './views/DataView.vue'
+import EnemyView from './views/EnemyView.vue'
 import HeroView from './views/HeroView.vue'
 import TechnologyView from './views/TechnologyView.vue'
 import type { Tower } from './types'
 
-type TabId = 'catalog' | 'heroes' | 'technology' | 'calculator' | 'compare' | 'data'
+type TabId = 'catalog' | 'enemies' | 'heroes' | 'technology' | 'calculator' | 'compare' | 'data'
 
 const tabs: Array<{ id: TabId; label: string; eyebrow: string }> = [
   { id: 'catalog', label: '塔典', eyebrow: 'CATALOG' },
+  { id: 'enemies', label: '敌人', eyebrow: 'ENEMIES' },
   { id: 'heroes', label: '英雄', eyebrow: 'HEROES' },
   { id: 'technology', label: '科技', eyebrow: 'TECH' },
   { id: 'calculator', label: '辅助计算', eyebrow: 'BUFF LAB' },
@@ -84,6 +86,10 @@ function openTower(tower: Tower) {
         :technology-trees="doveData.technologyTrees"
         @open="openTower"
       />
+      <EnemyView
+        v-else-if="activeTab === 'enemies'"
+        :enemies="enemies"
+      />
       <HeroView
         v-else-if="activeTab === 'heroes'"
         :heroes="heroes"
@@ -109,7 +115,7 @@ function openTower(tower: Tower) {
     <footer class="site-footer">
       <span>Dove 数据驱动塔典</span>
       <span>站点 {{ siteVersion }} · 数据提交 {{ doveData.metadata.commitHash.slice(0, 8) }}</span>
-      <span>{{ doveData.summary.encyclopediaImageCount }} 套百科图 · {{ doveData.summary.heroCount }} 位英雄 · {{ doveData.summary.technologyTreeCount }} 套科技方案</span>
+      <span>{{ doveData.summary.encyclopediaImageCount }} 套塔百科图 · {{ doveData.summary.enemyCount }} 个敌人槽位 · {{ doveData.summary.heroCount }} 位英雄 · {{ doveData.summary.technologyTreeCount }} 套科技方案</span>
     </footer>
 
     <DetailPanel :tower="selectedTower" @close="selectedTowerId = null" />

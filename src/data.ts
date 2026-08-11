@@ -11,6 +11,11 @@ export const doveData: DoveData = {
     image: publicAssetUrl(hero.image),
     thumbnail: publicAssetUrl(hero.thumbnail),
   })),
+  enemies: sourceData.enemies.map((enemy) => ({
+    ...enemy,
+    image: publicAssetUrl(enemy.image),
+    thumbnail: publicAssetUrl(enemy.thumbnail),
+  })),
   supportEffects: sourceData.supportEffects.map((effect) => ({
     ...effect,
     icon: effect.icon ? publicAssetUrl(effect.icon) : null,
@@ -31,6 +36,7 @@ export const towers = doveData.towers
 export const towerById = new Map(towers.map((tower) => [tower.id, tower]))
 export const heroes = doveData.heroes
 export const heroById = new Map(heroes.map((hero) => [hero.id, hero]))
+export const enemies = doveData.enemies
 
 export const familyLabels = {
   archer: '弓箭塔',
