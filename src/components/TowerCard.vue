@@ -11,7 +11,7 @@ defineEmits<{ open: [tower: Tower] }>()
   <article class="tower-card" :class="`unlock-${tower.unlock.status}`">
     <button class="card-hit-area" type="button" @click="$emit('open', tower)">
       <div class="tower-card-top">
-        <div class="portrait-frame" :class="{ 'encyclopedia-icon': tower.encyclopediaListed }">
+        <div class="portrait-frame">
           <img :src="tower.image" :alt="`${tower.name}${tower.encyclopediaListed ? '百科图标' : '头像'}`" loading="lazy" />
           <span class="portrait-level">{{ tower.level ?? '·' }}</span>
         </div>

@@ -26,8 +26,6 @@ export interface TowerAttack {
 export interface TowerPower {
   id: string
   name: string
-  icon: string | null
-  iconSprite: string | null
   maxLevel: number
   priceBase: number | null
   priceIncrement: number | null
@@ -110,7 +108,6 @@ export interface DoveData {
     portraitCount: number
     encyclopediaImageCount: number
     portraitFallbackCount: number
-    skillIconCount: number
     supportTowerCount: number
     supportEffectCount: number
     levelUnlockCount: number
