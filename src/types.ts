@@ -137,6 +137,40 @@ export interface Hero {
   }
 }
 
+export interface Enemy {
+  entryId: string
+  id: string
+  order: number
+  name: string
+  description: string
+  special: string
+  traits: string[]
+  image: string
+  thumbnail: string
+  imageSprite: string | null
+  thumbnailSprite: string | null
+  sourceGame: number
+  alwaysShown: boolean
+  flying: boolean
+  boss: boolean
+  stats: {
+    hp: number | null
+    damageMin: number | null
+    damageMax: number | null
+    armor: number | null
+    magicArmor: number | null
+    speed: number | null
+    lives: number | null
+    gold: number | null
+  }
+  sources: {
+    roster: string
+    template: string | null
+    localization: string
+    encyclopedia: string
+  }
+}
+
 export type TechnologyMetric =
   | 'damage'
   | 'expectedDps'
@@ -198,6 +232,9 @@ export interface DoveData {
     technologyTreeCount: number
     technologyCount: number
     heroCount: number
+    enemyCount: number
+    uniqueEnemyCount: number
+    enemyImageCount: number
     supportTowerCount: number
     supportHeroCount: number
     supportEffectCount: number
@@ -215,5 +252,6 @@ export interface DoveData {
   supportEffects: SupportEffect[]
   technologyTrees: TechnologyTree[]
   heroes: Hero[]
+  enemies: Enemy[]
   towers: Tower[]
 }
