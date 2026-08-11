@@ -108,6 +108,11 @@ export interface HeroSkill {
   unlockLevels: Array<{ heroLevel: number; skillLevel: number }>
 }
 
+export interface HeroAbility {
+  name: string
+  description: string
+}
+
 export interface Hero {
   id: string
   name: string
@@ -129,11 +134,46 @@ export interface Hero {
     rangedDamageMax: number | null
   }
   skills: HeroSkill[]
+  abilities: HeroAbility[]
   sources: {
     template: string | null
     roster: string
     localization: string
     portrait: string
+  }
+}
+
+export interface Enemy {
+  entryId: string
+  id: string
+  order: number
+  name: string
+  description: string
+  special: string
+  traits: string[]
+  image: string
+  thumbnail: string
+  imageSprite: string | null
+  thumbnailSprite: string | null
+  sourceGame: number
+  alwaysShown: boolean
+  flying: boolean
+  boss: boolean
+  stats: {
+    hp: number | null
+    damageMin: number | null
+    damageMax: number | null
+    armor: number | null
+    magicArmor: number | null
+    speed: number | null
+    lives: number | null
+    gold: number | null
+  }
+  sources: {
+    roster: string
+    template: string | null
+    localization: string
+    encyclopedia: string
   }
 }
 
@@ -160,11 +200,15 @@ export interface TechnologyModifier {
   excludeTowerIds?: string[]
 }
 
+export type TechnologyFamily = TowerFamily | 'rain' | 'reinforcement'
+
 export interface Technology {
   id: string
-  family: TowerFamily
+  family: TechnologyFamily
   level: number
   price: number
+  icon: string
+  iconSprite: string | null
   name: string
   description: string
   modifiers: TechnologyModifier[]
@@ -198,6 +242,9 @@ export interface DoveData {
     technologyTreeCount: number
     technologyCount: number
     heroCount: number
+    enemyCount: number
+    uniqueEnemyCount: number
+    enemyImageCount: number
     supportTowerCount: number
     supportHeroCount: number
     supportEffectCount: number
@@ -215,5 +262,6 @@ export interface DoveData {
   supportEffects: SupportEffect[]
   technologyTrees: TechnologyTree[]
   heroes: Hero[]
+  enemies: Enemy[]
   towers: Tower[]
 }

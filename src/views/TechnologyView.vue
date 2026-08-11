@@ -1,18 +1,33 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { familyLabels } from '../data'
 import { Badge } from '../components/ui/badge'
 import { Tabs, TabsList, TabsTrigger } from '../components/ui/tabs'
-import type { Technology, TechnologyTree, TowerFamily } from '../types'
+import type { Technology, TechnologyFamily, TechnologyTree } from '../types'
 
 const props = defineProps<{ trees: TechnologyTree[] }>()
 
-const families: TowerFamily[] = ['archer', 'barrack', 'mage', 'engineer']
-const familyEnglish: Record<TowerFamily, string> = {
-  archer: 'ARCHER',
-  barrack: 'BARRACK',
-  mage: 'MAGE',
+const families: TechnologyFamily[] = [
+  'archer',
+  'barrack',
+  'mage',
+  'engineer',
+  'rain',
+  'reinforcement',
+]
+const familyEnglish: Record<TechnologyFamily, string> = {
+  archer: 'ARCHERS',
+  barrack: 'BARRACKS',
+  mage: 'MAGES',
   engineer: 'ARTILLERY',
+  rain: 'RAIN / THUNDER',
+  reinforcement: 'REINFORCEMENTS',
+}
+const familyNames: Record<Exclude<TechnologyFamily, 'rain'>, string> = {
+  archer: '弓箭塔',
+  barrack: '兵营塔',
+  mage: '法师塔',
+  engineer: '工程塔',
+  reinforcement: '援军',
 }
 const metricLabels: Record<string, string> = {
   damage: '伤害',
@@ -33,27 +48,43 @@ const activeTree = computed(
   () => props.trees.find((tree) => String(tree.id) === activeTreeId.value) || props.trees[0],
 )
 
-function familyTechnologies(family: TowerFamily) {
+function familyTechnologies(family: TechnologyFamily) {
   return activeTree.value?.technologies.filter((technology) => technology.family === family) || []
+}
+
+function familyName(family: TechnologyFamily) {
+  if (family !== 'rain') return familyNames[family]
+  return familyTechnologies(family).some((technology) => technology.id.startsWith('thunder_'))
+    ? '雷电术'
+    : '火焰雨'
 }
 
 function directMetrics(technology: Technology) {
   return [...new Set(technology.modifiers.map((modifier) => metricLabels[modifier.metric]))].join(' · ')
 }
+
+function isTowerTechnology(technology: Technology) {
+  return ['archer', 'barrack', 'mage', 'engineer'].includes(technology.family)
+}
+
+function statusLabel(technology: Technology) {
+  if (!isTowerTechnology(technology)) return '独立能力'
+  return technology.modifiers.length ? '已计入塔面板' : '条件效果'
+}
 </script>
 
 <template>
-  <section class="technology-view page-width">
+  <section class="technology-view technology-page-width page-width">
     <div class="page-heading split-heading">
       <div>
         <div class="eyebrow"><span></span> TECHNOLOGY ARCHIVE</div>
         <h1>科技方案<em>全览</em></h1>
-        <p>四套科技方案均直接读取游戏脚本。标有“已计入”的项目会同步影响辅助计算台，其余条件型规则保留原始说明。</p>
+        <p>完整读取游戏科技页的六条路线：四类防御塔、范围技能与援军。桌面端按游戏顺序六列并排展示，每套方案均包含 36 项科技。</p>
       </div>
       <div class="technology-ledger">
         <span><strong>{{ trees.length }}</strong><small>套方案</small></span>
-        <span><strong>{{ trees.reduce((total, tree) => total + tree.technologies.length, 0) }}</strong><small>项科技</small></span>
-        <span><strong>{{ activeTree?.maxLevel || 0 }}</strong><small>阶上限</small></span>
+        <span><strong>{{ trees.reduce((total, tree) => total + tree.technologies.length, 0) }}</strong><small>项完整科技</small></span>
+        <span><strong>{{ families.length }}</strong><small>条科技路线</small></span>
       </div>
     </div>
 
@@ -67,35 +98,45 @@ function directMetrics(technology: Technology) {
     </Tabs>
 
     <div class="technology-family-grid">
-      <section v-for="family in families" :key="family" class="technology-family-card">
+      <section
+        v-for="(family, familyIndex) in families"
+        :key="family"
+        class="technology-family-card"
+        :class="`technology-family-${family}`"
+      >
         <header>
+          <span class="technology-family-index">{{ String(familyIndex + 1).padStart(2, '0') }}</span>
           <div>
             <small>{{ familyEnglish[family] }}</small>
-            <h2>{{ familyLabels[family] }}</h2>
+            <h2>{{ familyName(family) }}</h2>
           </div>
-          <Badge variant="outline">{{ familyTechnologies(family).length }} 项</Badge>
+          <Badge variant="outline">{{ familyTechnologies(family).length }} 阶</Badge>
         </header>
 
         <ol>
           <li v-for="technology in familyTechnologies(family)" :key="`${activeTree?.id}-${technology.id}`">
-            <span class="technology-level">{{ String(technology.level).padStart(2, '0') }}</span>
-            <div>
+            <div class="technology-icon-frame">
+              <img :src="technology.icon" :alt="`${technology.name}科技图标`" loading="lazy" />
+              <span>Lv.{{ technology.level }}</span>
+            </div>
+            <div class="technology-copy">
               <div class="technology-name-row">
                 <strong>{{ technology.name }}</strong>
-                <Badge :variant="technology.modifiers.length ? 'secondary' : 'outline'">
-                  {{ technology.modifiers.length ? '已计入' : '条件效果' }}
-                </Badge>
+                <em>{{ technology.price }} ★</em>
               </div>
               <p>{{ technology.description }}</p>
-              <small v-if="technology.modifiers.length">影响：{{ directMetrics(technology) }}</small>
-              <small v-else>保留脚本说明，不统一折算为塔面板数值</small>
+              <div class="technology-meta">
+                <Badge :variant="technology.modifiers.length ? 'secondary' : 'outline'">
+                  {{ statusLabel(technology) }}
+                </Badge>
+                <small v-if="technology.modifiers.length">{{ directMetrics(technology) }}</small>
+              </div>
             </div>
-            <em>{{ technology.price }} ★</em>
           </li>
         </ol>
       </section>
     </div>
 
-    <p class="technology-source">来源：<code>{{ activeTree?.source }}</code></p>
+    <p class="technology-source">来源：<code>{{ activeTree?.source }}</code> · 顺序：<code>upgrades.display_order</code></p>
   </section>
 </template>

@@ -6,10 +6,22 @@ const sourceData = rawData as DoveData
 
 export const doveData: DoveData = {
   ...sourceData,
+  technologyTrees: sourceData.technologyTrees.map((tree) => ({
+    ...tree,
+    technologies: tree.technologies.map((technology) => ({
+      ...technology,
+      icon: publicAssetUrl(technology.icon),
+    })),
+  })),
   heroes: sourceData.heroes.map((hero) => ({
     ...hero,
     image: publicAssetUrl(hero.image),
     thumbnail: publicAssetUrl(hero.thumbnail),
+  })),
+  enemies: sourceData.enemies.map((enemy) => ({
+    ...enemy,
+    image: publicAssetUrl(enemy.image),
+    thumbnail: publicAssetUrl(enemy.thumbnail),
   })),
   supportEffects: sourceData.supportEffects.map((effect) => ({
     ...effect,
@@ -31,6 +43,7 @@ export const towers = doveData.towers
 export const towerById = new Map(towers.map((tower) => [tower.id, tower]))
 export const heroes = doveData.heroes
 export const heroById = new Map(heroes.map((hero) => [hero.id, hero]))
+export const enemies = doveData.enemies
 
 export const familyLabels = {
   archer: '弓箭塔',
