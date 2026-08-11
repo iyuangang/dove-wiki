@@ -3,17 +3,21 @@ import { computed, nextTick, ref, watch } from 'vue'
 import DetailPanel from './components/DetailPanel.vue'
 import { Badge } from './components/ui/badge'
 import { Tabs, TabsList, TabsTrigger } from './components/ui/tabs'
-import { doveData, siteVersion, towerById, towers } from './data'
+import { doveData, heroes, siteVersion, towerById, towers } from './data'
 import CalculatorView from './views/CalculatorView.vue'
 import CatalogView from './views/CatalogView.vue'
 import CompareView from './views/CompareView.vue'
 import DataView from './views/DataView.vue'
+import HeroView from './views/HeroView.vue'
+import TechnologyView from './views/TechnologyView.vue'
 import type { Tower } from './types'
 
-type TabId = 'catalog' | 'calculator' | 'compare' | 'data'
+type TabId = 'catalog' | 'heroes' | 'technology' | 'calculator' | 'compare' | 'data'
 
 const tabs: Array<{ id: TabId; label: string; eyebrow: string }> = [
   { id: 'catalog', label: '塔典', eyebrow: 'CATALOG' },
+  { id: 'heroes', label: '英雄', eyebrow: 'HEROES' },
+  { id: 'technology', label: '科技', eyebrow: 'TECH' },
   { id: 'calculator', label: '辅助计算', eyebrow: 'BUFF LAB' },
   { id: 'compare', label: '双塔对比', eyebrow: 'COMPARE' },
   { id: 'data', label: '数据说明', eyebrow: 'SOURCES' },
@@ -75,8 +79,19 @@ function openTower(tower: Tower) {
       <CalculatorView
         v-else-if="activeTab === 'calculator'"
         :towers="towers"
+        :heroes="heroes"
         :effects="doveData.supportEffects"
+        :technology-trees="doveData.technologyTrees"
         @open="openTower"
+      />
+      <HeroView
+        v-else-if="activeTab === 'heroes'"
+        :heroes="heroes"
+        :effects="doveData.supportEffects"
+      />
+      <TechnologyView
+        v-else-if="activeTab === 'technology'"
+        :trees="doveData.technologyTrees"
       />
       <CompareView
         v-else-if="activeTab === 'compare'"
@@ -84,7 +99,7 @@ function openTower(tower: Tower) {
         @open="openTower"
       />
       <DataView
-        v-else
+        v-else-if="activeTab === 'data'"
         :data="doveData"
         :site-version="siteVersion"
         @open="openTower"
@@ -94,7 +109,7 @@ function openTower(tower: Tower) {
     <footer class="site-footer">
       <span>Dove 数据驱动塔典</span>
       <span>站点 {{ siteVersion }} · 数据提交 {{ doveData.metadata.commitHash.slice(0, 8) }}</span>
-      <span>{{ doveData.summary.encyclopediaImageCount }} 套百科图 · {{ doveData.summary.portraitFallbackCount }} 张基础塔头像回退 · 无科技树修正</span>
+      <span>{{ doveData.summary.encyclopediaImageCount }} 套百科图 · {{ doveData.summary.heroCount }} 位英雄 · {{ doveData.summary.technologyTreeCount }} 套科技方案</span>
     </footer>
 
     <DetailPanel :tower="selectedTower" @close="selectedTowerId = null" />

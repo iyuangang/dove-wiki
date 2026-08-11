@@ -1,7 +1,13 @@
 import { describe, expect, it } from 'vitest'
-import { doveData, towerById, towers } from './data'
+import { doveData, heroes, towerById, towers } from './data'
 
 describe('游戏百科顺序与图像', () => {
+  it('uses the build id as the public game version', () => {
+    expect(doveData.metadata.gameVersion).toBe('2.0.5.8')
+    expect(doveData.metadata.contentVersion).toBe('5.6.12')
+    expect(doveData.metadata.gameId).toBe('kingdom_rush_dove')
+  })
+
   it('按 map_data.tower_data 的开头顺序排列', () => {
     expect(towers.slice(0, 10).map((tower) => tower.id)).toEqual([
       'tower_ranger',
@@ -51,6 +57,45 @@ describe('游戏百科顺序与图像', () => {
     expect(powersWithIcons.length).toBeGreaterThan(100)
     expect(powersWithIcons.every((power) => power.icon?.startsWith('/skills/'))).toBe(true)
     expect(powersWithIcons.every((power) => power.iconSprite)).toBe(true)
+
+    const towerSupportIcons = doveData.supportEffects
+      .filter((effect) => effect.sourceType === 'tower')
+      .map((effect) =>
+      towerById
+        .get(effect.sourceTowerId || '')
+        ?.powers.find((power) => power.id === effect.skillId)?.icon,
+      )
+    expect(towerSupportIcons.every((icon) => icon?.startsWith('/skills/'))).toBe(true)
+
+    const heroSupportIcons = doveData.supportEffects
+      .filter((effect) => effect.sourceType === 'hero')
+      .map((effect) => effect.icon)
+    expect(heroSupportIcons.every((icon) => icon?.startsWith('/heroes/thumbs/'))).toBe(true)
+  })
+
+  it('extracts the full hero hall with portraits and calculable support heroes', () => {
+    expect(heroes).toHaveLength(75)
+    expect(heroes.every((hero) => hero.name && hero.description && hero.sources.template)).toBe(true)
+    expect(heroes.every((hero) => hero.image.startsWith('/heroes/'))).toBe(true)
+    expect(heroes.every((hero) => hero.thumbnail.startsWith('/heroes/thumbs/'))).toBe(true)
+    expect(doveData.summary.supportHeroCount).toBe(7)
+    expect(doveData.supportEffects.filter((effect) => effect.sourceType === 'hero')).toHaveLength(8)
+  })
+
+  it('extracts all four six-level technology trees from upgrades.lua', () => {
+    expect(doveData.technologyTrees).toHaveLength(4)
+    expect(doveData.summary.technologyCount).toBe(96)
+    expect(
+      doveData.technologyTrees.every(
+        (tree) => tree.maxLevel === 6 && tree.technologies.length === 24,
+      ),
+    ).toBe(true)
+    expect(doveData.technologyTrees.map((tree) => tree.name)).toEqual([
+      '科技一',
+      '科技二',
+      '科技三',
+      '科技四',
+    ])
   })
 
   it('同时识别关卡主脚本和数据脚本中的塔解锁记录', () => {
