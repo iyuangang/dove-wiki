@@ -34,6 +34,8 @@ const portraitDir = join(projectRoot, 'public', 'portraits')
 const encyclopediaDir = join(projectRoot, 'public', 'encyclopedia')
 const encyclopediaThumbDir = join(encyclopediaDir, 'thumbs')
 const skillIconDir = join(projectRoot, 'public', 'skills')
+const heroDir = join(projectRoot, 'public', 'heroes')
+const heroThumbDir = join(heroDir, 'thumbs')
 
 function assertFile(path, label) {
   if (!existsSync(path)) {
@@ -296,6 +298,7 @@ function hasPositiveKey(value, keyPattern, seen = new Set()) {
 const supportEffects = [
   {
     id: 'crossbow-eagle',
+    sourceType: 'tower',
     sourceTowerId: 'tower_crossbow',
     skillId: 'eagle',
     name: '驯鹰者',
@@ -309,6 +312,7 @@ const supportEffects = [
   },
   {
     id: 'pirate-watcher',
+    sourceType: 'tower',
     sourceTowerId: 'tower_pirate_watchtower',
     skillId: 'watcher',
     name: '眺望',
@@ -322,6 +326,7 @@ const supportEffects = [
   },
   {
     id: 'high-elven-sentinel',
+    sourceType: 'tower',
     sourceTowerId: 'tower_high_elven',
     skillId: 'sentinel',
     name: '元素赐福',
@@ -335,6 +340,7 @@ const supportEffects = [
   },
   {
     id: 'arcane-empowerment',
+    sourceType: 'tower',
     sourceTowerId: 'tower_arcane_wizard_lvl4',
     skillId: 'empowerment',
     name: '强化光环',
@@ -348,6 +354,7 @@ const supportEffects = [
   },
   {
     id: 'furnace-heat',
+    sourceType: 'tower',
     sourceTowerId: 'tower_melting_furnace',
     skillId: 'heat',
     name: '摩擦生热',
@@ -360,6 +367,7 @@ const supportEffects = [
   },
   {
     id: 'furnace-fuel',
+    sourceType: 'tower',
     sourceTowerId: 'tower_melting_furnace',
     skillId: 'fuel',
     name: '燃料爆燃',
@@ -371,6 +379,7 @@ const supportEffects = [
   },
   {
     id: 'dark-elf-hunt',
+    sourceType: 'tower',
     sourceTowerId: 'tower_dark_elf_lvl4',
     skillId: 'skill_buff',
     name: '猎杀戾气',
@@ -381,6 +390,115 @@ const supportEffects = [
       { level: 3, radius: 225, damagePerTrigger: 0.008, triggerCap: 999999 },
     ],
     note: '每次击杀随机选择范围内一座塔；计算值是目标获得指定次数后的潜在增伤。',
+  },
+  {
+    id: 'denas-resource-management',
+    sourceType: 'hero',
+    sourceHeroId: 'hero_denas',
+    skillId: 'resource_management',
+    name: '资源调配',
+    mode: 'passive',
+    requiresBuffable: false,
+    levels: [{ level: 1, radius: 0, priceMultiplier: 0.95 }],
+    note: '迪纳斯登场时将所有塔模板价格乘以 0.95 并向下取整；不受 tower.can_be_mod 限制。',
+  },
+  {
+    id: 'denas-tower-buff',
+    sourceType: 'hero',
+    sourceHeroId: 'hero_denas',
+    skillId: 'tower_buff',
+    name: '皇家号令',
+    mode: 'temporary',
+    levels: [
+      { level: 1, radius: 200, rangeBonus: 0.25, cooldownMultiplier: 0.75, duration: 5, cycle: 11.7 },
+      { level: 2, radius: 200, rangeBonus: 0.25, cooldownMultiplier: 0.75, duration: 8, cycle: 11.7 },
+      { level: 3, radius: 200, rangeBonus: 0.25, cooldownMultiplier: 0.75, duration: 11, cycle: 11.7 },
+    ],
+    note: '范围乘以 1.25，冷却缩放系数为 0.75；显示技能生效期间的峰值。',
+  },
+  {
+    id: 'priest-consecrate',
+    sourceType: 'hero',
+    sourceHeroId: 'hero_priest',
+    skillId: 'consecrate',
+    name: '神圣祝颂',
+    mode: 'temporary',
+    levels: [
+      { level: 1, radius: 160, damageBonus: 0.18, duration: 8, cycle: 8 },
+      { level: 2, radius: 160, damageBonus: 0.24, duration: 15, cycle: 8 },
+      { level: 3, radius: 160, damageBonus: 0.3, duration: 22, cycle: 8 },
+    ],
+    note: '每次选择范围内最近的一座未祝颂塔；伤害加成同时传递给兵营士兵。',
+  },
+  {
+    id: 'minotaur-roar-of-fury',
+    sourceType: 'hero',
+    sourceHeroId: 'hero_minotaur',
+    skillId: 'roaroffury',
+    name: '野牛怒吼',
+    mode: 'temporary',
+    levels: [
+      { level: 1, radius: 0, damageBonus: 0.25, duration: 4, cycle: 15 },
+      { level: 2, radius: 0, damageBonus: 0.5, duration: 4, cycle: 15 },
+      { level: 3, radius: 0, damageBonus: 0.75, duration: 4, cycle: 15 },
+    ],
+    note: '对全场所有可被强化且未封锁的塔生效，显示 4 秒持续期内的峰值。',
+  },
+  {
+    id: 'phoenix-flaming-path',
+    sourceType: 'hero',
+    sourceHeroId: 'hero_phoenix',
+    skillId: 'flaming_path',
+    name: '余烬之地',
+    mode: 'temporary',
+    levels: [
+      { level: 1, radius: 125, flatDps: 15, duration: 6.5, cycle: 30 },
+      { level: 2, radius: 125, flatDps: 30, duration: 6.5, cycle: 30 },
+      { level: 3, radius: 125, flatDps: 45, duration: 6.5, cycle: 30 },
+    ],
+    note: '附着到附近一座塔，每 2 秒造成 30/60/90 点范围真实伤害；额外 DPS 按持续期峰值计入。',
+  },
+  {
+    id: 'space-elf-spatial-distortion',
+    sourceType: 'hero',
+    sourceHeroId: 'hero_space_elf',
+    skillId: 'spatial_distortion',
+    name: '空间扭曲',
+    mode: 'temporary',
+    levels: [
+      { level: 1, radius: 0, damageBonus: 0.04, rangeBonus: 0.04, cooldownMultiplier: 0.96, duration: 6, cycle: 25 },
+      { level: 2, radius: 0, damageBonus: 0.06, rangeBonus: 0.06, cooldownMultiplier: 0.94, duration: 7, cycle: 23 },
+      { level: 3, radius: 0, damageBonus: 0.08, rangeBonus: 0.08, cooldownMultiplier: 0.92, duration: 8, cycle: 20 },
+    ],
+    note: '对全场所有可强化塔同时生效；冷却缩放系数分别为 0.96/0.94/0.92。',
+  },
+  {
+    id: 'lava-hotheaded',
+    sourceType: 'hero',
+    sourceHeroId: 'hero_lava',
+    skillId: 'hotheaded',
+    name: '烈焰之心',
+    mode: 'triggered',
+    levels: [
+      { level: 1, radius: 180, damageBonus: 0.2, duration: 6 },
+      { level: 2, radius: 180, damageBonus: 0.3, duration: 6 },
+      { level: 3, radius: 180, damageBonus: 0.4, duration: 6 },
+    ],
+    note: '喀拉托复活时强化周围塔 6 秒；结果显示触发后的峰值。',
+  },
+  {
+    id: 'oloch-hellish-infusion',
+    sourceType: 'hero',
+    sourceHeroId: 'hero_oloch',
+    skillId: 'hellish_infusion',
+    name: '地狱注入',
+    mode: 'temporary',
+    levels: [
+      { level: 1, radius: 170, damageBonus: 0.1, duration: 6, cycle: 18 },
+      { level: 2, radius: 170, damageBonus: 0.2, duration: 6, cycle: 18 },
+      { level: 3, radius: 170, damageBonus: 0.3, duration: 6, cycle: 18 },
+    ],
+    note: '强化椭圆范围内全部可强化塔；显示 6 秒持续期内的峰值。',
   },
 ]
 
@@ -622,6 +740,84 @@ function buildTechnologyTrees(rawTechnology, localization) {
   })
 }
 
+function lastFinite(values) {
+  if (!Array.isArray(values)) return null
+  for (let index = values.length - 1; index >= 0; index -= 1) {
+    if (Number.isFinite(values[index])) return values[index]
+  }
+  return null
+}
+
+function heroSkillMaxLevel(skill) {
+  const mappedLevels = Object.values(skill?.xp_level_steps || {}).filter(Number.isFinite)
+  const arrayLengths = Object.entries(skill || {})
+    .filter(([key, value]) => key !== 'xp_level_steps' && Array.isArray(value))
+    .map(([, value]) => value.length)
+  return Math.max(1, ...mappedLevels, ...arrayLengths)
+}
+
+function normalizeHero(rawHero, localization) {
+  const token = rawHero.id.replace(/^hero_/, '').toUpperCase()
+  const levelStats = rawHero.template?.hero?.level_stats || {}
+  const specialText = localization[`HERO_${token}_SPECIAL`] || ''
+  const skills = Object.entries(rawHero.template?.hero?.skills || {})
+    .map(([skillId, skill]) => ({
+      id: skillId,
+      maxLevel: heroSkillMaxLevel(skill),
+      unlockLevels: Object.entries(skill?.xp_level_steps || {})
+        .map(([heroLevel, skillLevel]) => ({
+          heroLevel: Number(heroLevel),
+          skillLevel: Number(skillLevel),
+        }))
+        .filter(
+          (entry) => Number.isFinite(entry.heroLevel) && Number.isFinite(entry.skillLevel),
+        )
+        .sort((left, right) => left.skillLevel - right.skillLevel),
+    }))
+    .sort((left, right) => {
+      const leftUnlock = left.unlockLevels[0]?.heroLevel ?? 99
+      const rightUnlock = right.unlockLevels[0]?.heroLevel ?? 99
+      return leftUnlock - rightUnlock || left.id.localeCompare(right.id, 'en')
+    })
+
+  const meleeDamageMin =
+    lastFinite(levelStats.melee_damage_min) ?? lastFinite(levelStats.damage_min)
+  const meleeDamageMax =
+    lastFinite(levelStats.melee_damage_max) ?? lastFinite(levelStats.damage_max)
+
+  return {
+    id: rawHero.id,
+    name: localization[`HERO_${token}_NAME`] || rawHero.id.replaceAll('_', ' '),
+    description: localization[`HERO_${token}_DESCRIPTION`] || '游戏脚本未提供中文描述。',
+    specialties: specialText
+      .split(/[，,]/)
+      .map((item) => item.trim())
+      .filter(Boolean),
+    image: `/heroes/${rawHero.id}.png`,
+    thumbnail: `/heroes/thumbs/${rawHero.id}.png`,
+    sourceGame: Number(rawHero.from_kr || 1),
+    availableLevel: Number(rawHero.available_level || 1),
+    startingLevel: Number(rawHero.starting_level || 1),
+    profileStats: (rawHero.stats || []).map(Number),
+    maxStats: {
+      hp: lastFinite(levelStats.hp_max),
+      armor: lastFinite(levelStats.armor),
+      magicArmor: lastFinite(levelStats.magic_armor),
+      meleeDamageMin,
+      meleeDamageMax,
+      rangedDamageMin: lastFinite(levelStats.ranged_damage_min),
+      rangedDamageMax: lastFinite(levelStats.ranged_damage_max),
+    },
+    skills,
+    sources: {
+      template: rawHero.template_exists ? 'kr1/heroes.lua + kr1/data/balance.lua' : null,
+      roster: 'kr1-desktop/data/map_data.lua → hero_data',
+      localization: '_assets/kr1-desktop/strings/zh-Hans.lua',
+      portrait: '_assets/kr1-desktop/images/fullhd/hero_room.lua',
+    },
+  }
+}
+
 function inferRoles(tower, supportIds) {
   const roles = []
   const info = tower.computed_info || {}
@@ -834,6 +1030,19 @@ async function cleanupSkillIcons(rawTowers) {
   }
 }
 
+async function cleanupHeroImages(rawHeroes) {
+  const expected = new Set(rawHeroes.map((hero) => `${hero.id}.png`))
+
+  for (const directory of [heroDir, heroThumbDir]) {
+    const resolvedDirectory = resolve(directory)
+    for (const filename of await readdir(directory)) {
+      const fullPath = resolve(directory, filename)
+      if (dirname(fullPath) !== resolvedDirectory) continue
+      if (filename.endsWith('.png') && !expected.has(filename)) await unlink(fullPath)
+    }
+  }
+}
+
 async function main() {
   assertFile(join(gameDir, 'kr1', 'game_settings.lua'), 'Dove 游戏目录')
   assertFile(loveExe, 'Dove 自带 lovec.exe')
@@ -842,6 +1051,7 @@ async function main() {
   await mkdir(portraitDir, { recursive: true })
   await mkdir(encyclopediaThumbDir, { recursive: true })
   await mkdir(skillIconDir, { recursive: true })
+  await mkdir(heroThumbDir, { recursive: true })
 
   console.log(`[dove-wiki] 读取游戏：${gameDir}`)
   run(loveExe, [join(toolsDir, 'love-extractor')], {
@@ -853,6 +1063,7 @@ async function main() {
       DOVE_PORTRAIT_DIR: portraitDir,
       DOVE_ENCYCLOPEDIA_DIR: encyclopediaDir,
       DOVE_SKILL_ICON_DIR: skillIconDir,
+      DOVE_HERO_DIR: heroDir,
     },
   })
 
@@ -863,6 +1074,7 @@ async function main() {
   const supportIds = new Map()
 
   for (const effect of supportEffects) {
+    if (effect.sourceType !== 'tower') continue
     if (!supportIds.has(effect.sourceTowerId)) supportIds.set(effect.sourceTowerId, [])
     supportIds.get(effect.sourceTowerId).push(effect)
   }
@@ -885,6 +1097,7 @@ async function main() {
   await cleanupPortraits(raw.towers)
   await cleanupEncyclopediaImages(raw.towers)
   await cleanupSkillIcons(raw.towers)
+  await cleanupHeroImages(raw.heroes)
 
   const versionSource = await readFile(join(gameDir, 'version.lua'), 'utf8')
   const commitHash = (
@@ -893,9 +1106,26 @@ async function main() {
   const missingUnlocks = towers.filter((tower) => tower.unlock.status === 'missing')
   const missingDamage = towers.filter((tower) => tower.attack.damageMin === null)
   const missingSources = towers.filter((tower) => !tower.sources.template)
-  const supportTowerCount = new Set(supportEffects.map((effect) => effect.sourceTowerId)).size
+  const supportTowerCount = new Set(
+    supportEffects
+      .filter((effect) => effect.sourceType === 'tower')
+      .map((effect) => effect.sourceTowerId),
+  ).size
+  const supportHeroCount = new Set(
+    supportEffects
+      .filter((effect) => effect.sourceType === 'hero')
+      .map((effect) => effect.sourceHeroId),
+  ).size
   const skillIconCount = towers.flatMap((tower) => tower.powers).filter((power) => power.icon).length
   const technologyTrees = buildTechnologyTrees(raw.technology, raw.localization)
+  const heroes = raw.heroes.map((hero) => normalizeHero(hero, raw.localization))
+  const normalizedSupportEffects = supportEffects.map((effect) => ({
+    ...effect,
+    icon:
+      effect.sourceType === 'hero'
+        ? `/heroes/thumbs/${effect.sourceHeroId}.png`
+        : null,
+  }))
   const contentVersion = /string_short\s*=\s*["']([^"']+)/.exec(versionSource)?.[1] || 'unknown'
   const gameVersion = /^\s*id\s*=\s*["']([^"']+)/m.exec(versionSource)?.[1] || 'unknown'
   const gameId = /^\s*identity\s*=\s*["']([^"']+)/m.exec(versionSource)?.[1] || 'unknown'
@@ -910,6 +1140,7 @@ async function main() {
       sourceRoot: gameDir,
       assumptions: [
         '科技树可在辅助计算中选择；条件触发、概率与特殊目标效果不强行折算进基础面板。',
+        '英雄增益按游戏脚本的峰值生效状态计算；持续时间、冷却和触发条件单独标注。',
         '基础 DPS 是单目标理论值；范围伤害、召唤物与技能效果单独理解。',
         '兵营塔的增距结果表示集结范围。',
       ],
@@ -925,8 +1156,10 @@ async function main() {
         (total, tree) => total + tree.technologies.length,
         0,
       ),
+      heroCount: heroes.length,
       supportTowerCount,
-      supportEffectCount: supportEffects.length,
+      supportHeroCount,
+      supportEffectCount: normalizedSupportEffects.length,
       levelUnlockCount: towers.filter((tower) => tower.unlock.status === 'level').length,
       defaultUnlockCount: towers.filter((tower) => tower.unlock.status === 'default').length,
       unlockAnomalyCount: missingUnlocks.length,
@@ -948,15 +1181,16 @@ async function main() {
       noUnifiedDamage: missingDamage.map((tower) => tower.id),
       missingTemplateSources: missingSources.map((tower) => tower.id),
     },
-    supportEffects,
+    supportEffects: normalizedSupportEffects,
     technologyTrees,
+    heroes,
     towers,
   }
 
   await writeFile(dataPath, `${JSON.stringify(data, null, 2)}\n`, 'utf8')
   const dataSize = await stat(dataPath)
   console.log(
-    `[dove-wiki] 完成：${towers.length} 座塔、${encyclopediaCount} 套百科图、${skillIconCount} 张技能图标、${towers.length - encyclopediaCount} 张头像回退、${Math.round(dataSize.size / 1024)} KiB 数据`,
+    `[dove-wiki] 完成：${towers.length} 座塔、${heroes.length} 名英雄、${encyclopediaCount} 套百科图、${skillIconCount} 张技能图标、${towers.length - encyclopediaCount} 张头像回退、${Math.round(dataSize.size / 1024)} KiB 数据`,
   )
   console.log(`[dove-wiki] 解锁异常：${missingUnlocks.length}；不可统一折算伤害：${missingDamage.length}`)
 }

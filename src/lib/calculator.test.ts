@@ -122,4 +122,27 @@ describe('Dove auxiliary buff calculator', () => {
       respawn: 11.2,
     })
   })
+
+  it('applies Denas global price passive and peak tower command', () => {
+    const result = calculateBuffs(tower, doveData.supportEffects, [
+      { effectId: 'denas-resource-management', level: 1 },
+      { effectId: 'denas-tower-buff', level: 3 },
+    ])
+
+    expect(result.price).toBe(218)
+    expect(result.priceMultiplier).toBe(0.95)
+    expect(result.range).toBe(250)
+    expect(result.speedBonus).toBe(0)
+    expect(result.supportCooldownMultiplier).toBe(0.75)
+    expect(result.cooldown).toBeCloseTo(0.2925, 4)
+  })
+
+  it('adds Phoenix attached-area damage as flat peak DPS', () => {
+    const result = calculateBuffs(tower, doveData.supportEffects, [
+      { effectId: 'phoenix-flaming-path', level: 3 },
+    ])
+
+    expect(result.flatDps).toBe(45)
+    expect(result.dps).toBeCloseTo((13 + 20) / 2 / 0.39 + 45, 4)
+  })
 })
