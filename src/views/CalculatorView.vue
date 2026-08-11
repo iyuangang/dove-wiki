@@ -103,7 +103,12 @@ function reset() {
           </label>
 
           <button class="selected-target" type="button" @click="$emit('open', selectedTower)">
-            <span class="portrait-frame large"><img :src="selectedTower.image" :alt="selectedTower.name" /></span>
+            <span
+              class="portrait-frame large"
+              :class="{ 'encyclopedia-icon': selectedTower.encyclopediaListed }"
+            >
+              <img :src="selectedTower.image" :alt="selectedTower.name" />
+            </span>
             <span>
               <small>{{ selectedTower.families.map((item) => familyLabels[item]).join(' / ') }}</small>
               <strong>{{ selectedTower.name }}</strong>

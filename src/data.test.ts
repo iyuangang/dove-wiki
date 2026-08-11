@@ -43,4 +43,13 @@ describe('游戏百科顺序与图像', () => {
     ])
     expect(fallback.every((tower) => tower.image.startsWith('/portraits/'))).toBe(true)
   })
+
+  it('从游戏塔菜单图集关联技能图标', () => {
+    const powers = towers.flatMap((tower) => tower.powers)
+    const powersWithIcons = powers.filter((power) => power.icon)
+
+    expect(powersWithIcons.length).toBeGreaterThan(100)
+    expect(powersWithIcons.every((power) => power.icon?.startsWith('/skills/'))).toBe(true)
+    expect(powersWithIcons.every((power) => power.iconSprite)).toBe(true)
+  })
 })
