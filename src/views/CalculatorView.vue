@@ -9,6 +9,7 @@ import {
   type TechnologySelection,
 } from '../lib/calculator'
 import type {
+  Hero,
   SupportEffect,
   SupportLevel,
   TechnologyTree,
@@ -18,6 +19,7 @@ import type {
 
 const props = defineProps<{
   towers: Tower[]
+  heroes: Hero[]
   effects: SupportEffect[]
   technologyTrees: TechnologyTree[]
 }>()
@@ -87,6 +89,7 @@ const result = computed(() =>
   ),
 )
 const sourceById = computed(() => new Map(props.towers.map((tower) => [tower.id, tower])))
+const heroById = computed(() => new Map(props.heroes.map((hero) => [hero.id, hero])))
 const needsMageTowerCount = computed(() =>
   result.value.appliedTechnologies.some(
     (technology) => technology.technologyId === 'mage_brilliance',
@@ -106,12 +109,36 @@ function effectSummary(effect: SupportEffect) {
   if (level.damagePerTrigger) parts.push(`每次伤害 +${formatPercent(level.damagePerTrigger)}`)
   if (level.rangeBonus) parts.push(`范围 +${formatPercent(level.rangeBonus)}`)
   if (level.speedBonus) parts.push(`攻速 +${formatPercent(level.speedBonus)}`)
+  if (level.cooldownMultiplier && level.cooldownMultiplier !== 1) {
+    parts.push(`攻击间隔 ×${formatPercent(level.cooldownMultiplier)}`)
+  }
+  if (level.priceMultiplier && level.priceMultiplier !== 1) {
+    parts.push(`价格 ${formatPercent(level.priceMultiplier)}`)
+  }
+  if (level.flatDps) parts.push(`额外 DPS +${formatNumber(level.flatDps)}`)
   return parts.join(' · ')
 }
 
 function effectIcon(effect: SupportEffect) {
-  const tower = sourceById.value.get(effect.sourceTowerId)
+  if (effect.icon) return effect.icon
+  const tower = sourceById.value.get(effect.sourceTowerId || '')
   return tower?.powers.find((power) => power.id === effect.skillId)?.icon || tower?.image || ''
+}
+
+function effectSourceName(effect: SupportEffect) {
+  if (effect.sourceType === 'hero') {
+    return `英雄 · ${heroById.value.get(effect.sourceHeroId || '')?.name || effect.sourceHeroId}`
+  }
+  return `防御塔 · ${sourceById.value.get(effect.sourceTowerId || '')?.name || effect.sourceTowerId}`
+}
+
+function effectModeLabel(effect: SupportEffect) {
+  return {
+    aura: '常驻光环',
+    temporary: '临时效果',
+    triggered: '条件触发',
+    passive: '全局被动',
+  }[effect.mode]
 }
 
 function resetSupports() {
@@ -135,7 +162,7 @@ function resetTechnologies() {
       <div>
         <div class="eyebrow"><span></span> AUXILIARY EFFECT LAB</div>
         <h1>辅助增益<em>计算台</em></h1>
-        <p>选择科技树、塔族科技等级与辅助技能，按 Dove 脚本规则计算伤害、范围、价格和攻击间隔。</p>
+        <p>选择科技树、塔族科技等级，以及防御塔或英雄辅助，按 Dove 脚本规则计算伤害、范围、价格和攻击间隔。</p>
       </div>
       <div class="formula-card">
         <span>叠加速记</span>
@@ -235,13 +262,13 @@ function resetTechnologies() {
               <div class="support-copy">
                 <div>
                   <strong>{{ effect.name }}</strong>
-                  <small>{{ sourceById.get(effect.sourceTowerId)?.name }}</small>
+                  <small>{{ effectSourceName(effect) }}</small>
                 </div>
                 <p>{{ effectSummary(effect) || '条件触发型辅助' }}</p>
                 <span class="effect-meta">
-                  半径 {{ selectedLevel(effect).radius }}
-                  <template v-if="effect.mode === 'temporary'"> · 临时效果</template>
-                  <template v-if="effect.mode === 'triggered'"> · 击杀触发</template>
+                  {{ selectedLevel(effect).radius ? `半径 ${selectedLevel(effect).radius}` : '全场' }}
+                  · {{ effectModeLabel(effect) }}
+                  <template v-if="selectedLevel(effect).duration"> · {{ selectedLevel(effect).duration }}s</template>
                 </span>
               </div>
               <div class="support-inputs">
@@ -251,7 +278,7 @@ function resetTechnologies() {
                     <option v-for="level in effect.levels" :key="level.level" :value="level.level">Lv.{{ level.level }}</option>
                   </select>
                 </label>
-                <label v-if="effect.mode === 'triggered'">
+                <label v-if="selectedLevel(effect).damagePerTrigger">
                   <span>目标获益次数</span>
                   <input
                     v-model.number="state[effect.id]!.triggers"
@@ -309,7 +336,7 @@ function resetTechnologies() {
               <b>→</b>
               <strong>{{ formatNumber(result.cooldown) }}s</strong>
             </div>
-            <em>科技 ×{{ formatNumber(result.technologyCooldownMultiplier, 3) }} · 攻速 +{{ formatPercent(result.speedBonus) }}</em>
+            <em>科技 ×{{ formatNumber(result.technologyCooldownMultiplier, 3) }} · 辅助间隔 ×{{ formatNumber(result.supportCooldownMultiplier, 3) }} · 攻速 +{{ formatPercent(result.speedBonus) }}</em>
           </article>
           <article>
             <div><span>理论 DPS</span><small>SINGLE TARGET</small></div>
@@ -318,7 +345,8 @@ function resetTechnologies() {
               <b>→</b>
               <strong>{{ formatNumber(result.dps) }}</strong>
             </div>
-            <em v-if="result.expectedDpsMultiplier !== 1">期望触发 ×{{ formatNumber(result.expectedDpsMultiplier, 3) }}</em>
+            <em v-if="result.flatDps">含英雄附着技能额外 DPS +{{ formatNumber(result.flatDps) }}</em>
+            <em v-else-if="result.expectedDpsMultiplier !== 1">期望触发 ×{{ formatNumber(result.expectedDpsMultiplier, 3) }}</em>
             <em v-else>未计多目标</em>
           </article>
           <article v-if="selectedTower.price !== null">
@@ -328,7 +356,7 @@ function resetTechnologies() {
               <b>→</b>
               <strong>{{ formatNumber(result.price) }}</strong>
             </div>
-            <em>按游戏脚本取整</em>
+            <em>科技修正后，英雄价格 ×{{ formatNumber(result.priceMultiplier, 3) }} 并向下取整</em>
           </article>
         </div>
 
@@ -348,7 +376,7 @@ function resetTechnologies() {
           <div v-if="result.applied.length" class="applied-list">
             <div v-for="item in result.applied" :key="item.effectId">
               <span>{{ item.name }} · Lv.{{ item.level }}</span>
-              <b>覆盖半径 {{ item.radius }}</b>
+              <b>{{ item.radius ? `覆盖半径 ${item.radius}` : '全场生效' }}</b>
             </div>
           </div>
           <p v-else>启用辅助技能后，这里会列出实际参与计算的效果。</p>
@@ -357,7 +385,7 @@ function resetTechnologies() {
         <div v-if="result.warning" class="console-warning">{{ result.warning }}</div>
         <div class="console-footnote">
           <b>计算口径</b>
-          <p>科技先修正游戏基础模板，再叠加玩家塔辅助。标为“条件型”的科技会保留原始说明，但不会在缺少目标护甲、触发概率或技能状态时强行折算。</p>
+          <p>科技先修正游戏基础模板，再叠加防御塔与英雄辅助。临时和条件触发效果显示生效期间的峰值，并在效果卡中保留持续时间与触发条件。</p>
         </div>
       </aside>
     </div>

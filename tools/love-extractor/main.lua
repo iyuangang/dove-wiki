@@ -3,6 +3,7 @@ local raw_output = os.getenv("DOVE_RAW_OUTPUT")
 local portrait_output = os.getenv("DOVE_PORTRAIT_DIR")
 local encyclopedia_output = os.getenv("DOVE_ENCYCLOPEDIA_DIR")
 local skill_icon_output = os.getenv("DOVE_SKILL_ICON_DIR")
+local hero_output = os.getenv("DOVE_HERO_DIR")
 
 local function fail(message)
 	io.stderr:write("[dove-wiki] " .. message .. "\n")
@@ -303,6 +304,46 @@ local function load_encyclopedia_index()
 	return entries
 end
 
+local function load_hero_index()
+	local path = join_path(game_root, "kr1-desktop/data/map_data.lua")
+	local handle = assert(io.open(path, "rb"))
+	local source = handle:read("*a")
+	handle:close()
+
+	local hero_data = assert(source:match("hero_data=(%b{})"), "map_data.lua is missing hero_data")
+	local entries = {}
+
+	for prefix, hero_id, suffix, stats_source in hero_data:gmatch(
+		'{([^{}]-)name="([^"]+)"([^{}]-)stats=(%b{})'
+	) do
+		local fields = prefix .. suffix
+		local from_kr = tonumber(fields:match("from_kr=(%d+)")) or 1
+		local portrait = tonumber(fields:match("portrait=(%d+)"))
+		local thumb = tonumber(fields:match("thumb=(%d+)"))
+		local atlas_prefix = from_kr == 1 and "" or "kr" .. from_kr .. "_"
+		local stats = {}
+
+		for value in stats_source:gmatch("%d+") do
+			stats[#stats + 1] = tonumber(value)
+		end
+
+		entries[#entries + 1] = {
+			id = hero_id,
+			from_kr = from_kr,
+			portrait = portrait,
+			thumb = thumb,
+			icon = tonumber(fields:match("icon=(%d+)")),
+			available_level = tonumber(fields:match("available_level=(%d+)")),
+			starting_level = tonumber(fields:match("starting_level=(%d+)")),
+			stats = stats,
+			portrait_sprite = atlas_prefix .. string.format("portrait_notxt_%04i", portrait),
+			thumb_sprite = atlas_prefix .. string.format("hero_room_thumbs_%04i", thumb)
+		}
+	end
+
+	return entries
+end
+
 local function build_raw_export(entity_db)
 	local settings = require("game_settings")
 	local localization = load_lua_table("_assets/kr1-desktop/strings/zh-Hans.lua")
@@ -313,6 +354,8 @@ local function build_raw_export(entity_db)
 	local encyclopedia_thumb_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/encyclopedia.lua")
 	local encyclopedia_detail_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/encyclopedia_creeps.lua")
 	local encyclopedia_index = load_encyclopedia_index()
+	local hero_room_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/hero_room.lua")
+	local hero_index = load_hero_index()
 	local tower_menus = require("data.tower_menus_data")
 	local upgrades = require("kr1.upgrades")
 	local family_lists = {
@@ -435,13 +478,39 @@ local function build_raw_export(entity_db)
 		towers[#towers + 1] = record
 	end
 
+	local heroes = {}
+	for _, hero_entry in ipairs(hero_index) do
+		local template = entity_db.entities[hero_entry.id]
+		local record = copy_jsonable(hero_entry, 4)
+		record.template_exists = template ~= nil
+		record.portrait_atlas = copy_jsonable(
+			hero_room_atlas[hero_entry.portrait_sprite] or hero_room_atlas[hero_entry.thumb_sprite],
+			4
+		)
+		record.thumb_atlas = copy_jsonable(hero_room_atlas[hero_entry.thumb_sprite], 4)
+
+		if template then
+			record.template = {
+				health = copy_jsonable(template.health, 4),
+				hero = copy_jsonable(template.hero, 8),
+				info = copy_jsonable(template.info, 4),
+				melee = copy_jsonable(template.melee, 7),
+				ranged = copy_jsonable(template.ranged, 7),
+				timed_attacks = copy_jsonable(template.timed_attacks, 7)
+			}
+		end
+
+		heroes[#heroes + 1] = record
+	end
+
 	return {
 		localization = localization,
 		technology = {
 			display_order = copy_jsonable(upgrades.display_order, 3),
 			lists = copy_jsonable(upgrades.list, 5)
 		},
-		towers = towers
+		towers = towers,
+		heroes = heroes
 	}
 end
 
@@ -565,6 +634,36 @@ local function export_skill_icons(towers)
 	print(string.format("DOVE_WIKI_SKILL_ICONS=%d", exported))
 end
 
+local function export_hero_images(heroes)
+	local image_cache = {}
+
+	for index, hero in ipairs(heroes) do
+		if hero.portrait_atlas then
+			export_atlas_crop(
+				hero.portrait_atlas,
+				join_path(hero_output, hero.id .. ".png"),
+				image_cache
+			)
+		end
+
+		if hero.thumb_atlas then
+			export_atlas_crop(
+				hero.thumb_atlas,
+				join_path(hero_output, "thumbs/" .. hero.id .. ".png"),
+				image_cache
+			)
+		end
+
+		if index % 20 == 0 or index == #heroes then
+			print(string.format("DOVE_WIKI_HEROES=%d/%d", index, #heroes))
+		end
+	end
+
+	for _, image in pairs(image_cache) do
+		image:release()
+	end
+end
+
 function love.load()
 	if not game_root or game_root == "" then
 		return fail("DOVE_GAME_DIR is required")
@@ -605,7 +704,7 @@ function love.load()
 		local raw_export
 		if (raw_output and raw_output ~= "") or (portrait_output and portrait_output ~= "") or
 			(encyclopedia_output and encyclopedia_output ~= "") or
-			(skill_icon_output and skill_icon_output ~= "") then
+			(skill_icon_output and skill_icon_output ~= "") or (hero_output and hero_output ~= "") then
 			raw_export = build_raw_export(entity_db)
 		end
 
@@ -626,6 +725,10 @@ function love.load()
 
 		if skill_icon_output and skill_icon_output ~= "" then
 			export_skill_icons(raw_export.towers)
+		end
+
+		if hero_output and hero_output ~= "" then
+			export_hero_images(raw_export.heroes)
 		end
 
 		local debug_tower = os.getenv("DOVE_DEBUG_TOWER")

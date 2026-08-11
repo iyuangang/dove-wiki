@@ -79,20 +79,62 @@ export interface SupportLevel {
   damageBonus?: number
   rangeBonus?: number
   speedBonus?: number
+  cooldownMultiplier?: number
   damagePerTrigger?: number
   triggerCap?: number
   duration?: number
   cycle?: number
+  priceMultiplier?: number
+  flatDps?: number
 }
 
 export interface SupportEffect {
   id: string
-  sourceTowerId: string
+  sourceType: 'tower' | 'hero'
+  sourceTowerId?: string
+  sourceHeroId?: string
   skillId: string
   name: string
-  mode: 'aura' | 'temporary' | 'triggered'
+  mode: 'aura' | 'temporary' | 'triggered' | 'passive'
   levels: SupportLevel[]
   note: string
+  icon: string | null
+  requiresBuffable?: boolean
+}
+
+export interface HeroSkill {
+  id: string
+  maxLevel: number
+  unlockLevels: Array<{ heroLevel: number; skillLevel: number }>
+}
+
+export interface Hero {
+  id: string
+  name: string
+  description: string
+  specialties: string[]
+  image: string
+  thumbnail: string
+  sourceGame: number
+  availableLevel: number
+  startingLevel: number
+  profileStats: number[]
+  maxStats: {
+    hp: number | null
+    armor: number | null
+    magicArmor: number | null
+    meleeDamageMin: number | null
+    meleeDamageMax: number | null
+    rangedDamageMin: number | null
+    rangedDamageMax: number | null
+  }
+  skills: HeroSkill[]
+  sources: {
+    template: string | null
+    roster: string
+    localization: string
+    portrait: string
+  }
 }
 
 export type TechnologyMetric =
@@ -155,7 +197,9 @@ export interface DoveData {
     skillIconCount: number
     technologyTreeCount: number
     technologyCount: number
+    heroCount: number
     supportTowerCount: number
+    supportHeroCount: number
     supportEffectCount: number
     levelUnlockCount: number
     defaultUnlockCount: number
@@ -170,5 +214,6 @@ export interface DoveData {
   }
   supportEffects: SupportEffect[]
   technologyTrees: TechnologyTree[]
+  heroes: Hero[]
   towers: Tower[]
 }

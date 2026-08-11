@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { doveData, towerById, towers } from './data'
+import { doveData, heroes, towerById, towers } from './data'
 
 describe('游戏百科顺序与图像', () => {
   it('uses the build id as the public game version', () => {
@@ -58,12 +58,28 @@ describe('游戏百科顺序与图像', () => {
     expect(powersWithIcons.every((power) => power.icon?.startsWith('/skills/'))).toBe(true)
     expect(powersWithIcons.every((power) => power.iconSprite)).toBe(true)
 
-    const supportIcons = doveData.supportEffects.map((effect) =>
+    const towerSupportIcons = doveData.supportEffects
+      .filter((effect) => effect.sourceType === 'tower')
+      .map((effect) =>
       towerById
-        .get(effect.sourceTowerId)
+        .get(effect.sourceTowerId || '')
         ?.powers.find((power) => power.id === effect.skillId)?.icon,
-    )
-    expect(supportIcons.every((icon) => icon?.startsWith('/skills/'))).toBe(true)
+      )
+    expect(towerSupportIcons.every((icon) => icon?.startsWith('/skills/'))).toBe(true)
+
+    const heroSupportIcons = doveData.supportEffects
+      .filter((effect) => effect.sourceType === 'hero')
+      .map((effect) => effect.icon)
+    expect(heroSupportIcons.every((icon) => icon?.startsWith('/heroes/thumbs/'))).toBe(true)
+  })
+
+  it('extracts the full hero hall with portraits and calculable support heroes', () => {
+    expect(heroes).toHaveLength(75)
+    expect(heroes.every((hero) => hero.name && hero.description && hero.sources.template)).toBe(true)
+    expect(heroes.every((hero) => hero.image.startsWith('/heroes/'))).toBe(true)
+    expect(heroes.every((hero) => hero.thumbnail.startsWith('/heroes/thumbs/'))).toBe(true)
+    expect(doveData.summary.supportHeroCount).toBe(7)
+    expect(doveData.supportEffects.filter((effect) => effect.sourceType === 'hero')).toHaveLength(8)
   })
 
   it('extracts all four six-level technology trees from upgrades.lua', () => {

@@ -38,6 +38,9 @@ export interface BuffResult {
   rangeMultiplier: number
   technologyRangeMultiplier: number
   speedBonus: number
+  supportCooldownMultiplier: number
+  priceMultiplier: number
+  flatDps: number
   technologyCooldownMultiplier: number
   expectedDpsMultiplier: number
   applied: Array<{
@@ -48,6 +51,9 @@ export interface BuffResult {
     damageBonus: number
     rangeBonus: number
     speedBonus: number
+    cooldownMultiplier: number
+    priceMultiplier: number
+    flatDps: number
     triggers: number | null
     mode: SupportEffect['mode']
   }>
@@ -92,37 +98,45 @@ export function calculateBuffs(
   let damageBonus = 0
   let rangeMultiplier = 1
   let speedBonus = 0
+  let supportCooldownMultiplier = 1
+  let priceMultiplier = 1
+  let flatDps = 0
   const applied: BuffResult['applied'] = []
 
-  if (tower.canBeBuffed) {
-    for (const selection of selections) {
-      const effect = effectById.get(selection.effectId)
-      const level = effect?.levels.find((candidate) => candidate.level === selection.level)
-      if (!effect || !level) continue
+  for (const selection of selections) {
+    const effect = effectById.get(selection.effectId)
+    const level = effect?.levels.find((candidate) => candidate.level === selection.level)
+    if (!effect || !level) continue
+    if (!tower.canBeBuffed && effect.requiresBuffable !== false) continue
 
-      let selectedDamageBonus = level.damageBonus || 0
-      let triggers: number | null = null
-      if (level.damagePerTrigger) {
-        const requested = Math.max(0, Math.floor(selection.triggers || 0))
-        triggers = Math.min(requested, level.triggerCap ?? requested)
-        selectedDamageBonus += level.damagePerTrigger * triggers
-      }
-
-      damageBonus += selectedDamageBonus
-      rangeMultiplier *= 1 + (level.rangeBonus || 0)
-      speedBonus += level.speedBonus || 0
-      applied.push({
-        effectId: effect.id,
-        name: effect.name,
-        level: level.level,
-        radius: level.radius,
-        damageBonus: selectedDamageBonus,
-        rangeBonus: level.rangeBonus || 0,
-        speedBonus: level.speedBonus || 0,
-        triggers,
-        mode: effect.mode,
-      })
+    let selectedDamageBonus = level.damageBonus || 0
+    let triggers: number | null = null
+    if (level.damagePerTrigger) {
+      const requested = Math.max(0, Math.floor(selection.triggers || 0))
+      triggers = Math.min(requested, level.triggerCap ?? requested)
+      selectedDamageBonus += level.damagePerTrigger * triggers
     }
+
+    damageBonus += selectedDamageBonus
+    rangeMultiplier *= 1 + (level.rangeBonus || 0)
+    speedBonus += level.speedBonus || 0
+    supportCooldownMultiplier *= level.cooldownMultiplier || 1
+    priceMultiplier *= level.priceMultiplier || 1
+    flatDps += level.flatDps || 0
+    applied.push({
+      effectId: effect.id,
+      name: effect.name,
+      level: level.level,
+      radius: level.radius,
+      damageBonus: selectedDamageBonus,
+      rangeBonus: level.rangeBonus || 0,
+      speedBonus: level.speedBonus || 0,
+      cooldownMultiplier: level.cooldownMultiplier || 1,
+      priceMultiplier: level.priceMultiplier || 1,
+      flatDps: level.flatDps || 0,
+      triggers,
+      mode: effect.mode,
+    })
   }
 
   let technologyDamageMin = tower.attack.damageMin
@@ -238,13 +252,15 @@ export function calculateBuffs(
     tower.attack.cooldown === null
       ? null
       : round(
-          (tower.attack.cooldown * technologyCooldownMultiplier) /
-            (1 + speedBonus),
+          ((tower.attack.cooldown * technologyCooldownMultiplier) /
+            (1 + speedBonus)) * supportCooldownMultiplier,
         )
-  const dps =
+  const baseDps =
     damageMin !== null && damageMax !== null && cooldown
       ? round(((damageMin + damageMax) / 2 / cooldown) * expectedDpsMultiplier)
       : null
+  const dps = baseDps === null ? (flatDps ? round(flatDps) : null) : round(baseDps + flatDps)
+  if (price !== null && priceMultiplier !== 1) price = Math.floor(price * priceMultiplier)
   const baseDamageAverage =
     tower.attack.damageMin !== null && tower.attack.damageMax !== null
       ? (tower.attack.damageMin + tower.attack.damageMax) / 2
@@ -285,13 +301,16 @@ export function calculateBuffs(
     rangeMultiplier: round(rangeMultiplier),
     technologyRangeMultiplier: round(activeTechnologyRangeMultiplier),
     speedBonus: round(speedBonus),
+    supportCooldownMultiplier: round(supportCooldownMultiplier),
+    priceMultiplier: round(priceMultiplier),
+    flatDps: round(flatDps),
     technologyCooldownMultiplier: round(technologyCooldownMultiplier),
     expectedDpsMultiplier: round(expectedDpsMultiplier),
     applied,
     appliedTechnologies,
     warning: tower.canBeBuffed
       ? null
-      : '该塔的 tower.can_be_mod 为 false，标准辅助效果不会生效；科技仍按塔族规则计算。',
+      : '该塔的 tower.can_be_mod 为 false，常规塔增益不会生效；科技与不依赖该标记的英雄价格效果仍会计算。',
   }
 }
 
