@@ -80,33 +80,42 @@ function quotedValues(source) {
   )
 }
 
-function findTableBody(source, fieldName) {
-  const startMatch = new RegExp(`${fieldName}\\s*=\\s*\\{`).exec(source)
-  if (!startMatch) return ''
+function findTableBodies(source, fieldName) {
+  const bodies = []
+  const pattern = new RegExp(`\\b${fieldName}\\s*=\\s*\\{`, 'g')
 
-  const start = startMatch.index + startMatch[0].length
-  let depth = 1
-  let quote = null
-  let escaped = false
+  for (const startMatch of source.matchAll(pattern)) {
+    const start = startMatch.index + startMatch[0].length
+    let depth = 1
+    let quote = null
+    let escaped = false
 
-  for (let index = start; index < source.length; index += 1) {
-    const char = source[index]
-    if (quote) {
-      if (escaped) escaped = false
-      else if (char === '\\') escaped = true
-      else if (char === quote) quote = null
-      continue
-    }
+    for (let index = start; index < source.length; index += 1) {
+      const char = source[index]
+      if (quote) {
+        if (escaped) escaped = false
+        else if (char === '\\') escaped = true
+        else if (char === quote) quote = null
+        continue
+      }
 
-    if (char === '"' || char === "'") quote = char
-    else if (char === '{') depth += 1
-    else if (char === '}') {
-      depth -= 1
-      if (depth === 0) return source.slice(start, index)
+      if (char === '"' || char === "'") quote = char
+      else if (char === '{') depth += 1
+      else if (char === '}') {
+        depth -= 1
+        if (depth === 0) {
+          bodies.push(source.slice(start, index))
+          break
+        }
+      }
     }
   }
 
-  return ''
+  return bodies
+}
+
+function findTableBody(source, fieldName) {
+  return findTableBodies(source, fieldName)[0] || ''
 }
 
 async function buildUnlockIndex(towerIds) {
@@ -118,16 +127,22 @@ async function buildUnlockIndex(towerIds) {
   const unlockLevels = new Map()
 
   for (const filename of levelEntries) {
-    const match = /^level(\d+)_data\.lua$/.exec(filename)
+    const match = /^level(\d+)(?:_data)?\.lua$/.exec(filename)
     if (!match) continue
     const source = await readFile(join(levelDir, filename), 'utf8')
-    const body = findTableBody(source, 'unlock_towers')
-    if (!body) continue
+    const level = Number(match[1])
+    const sourcePath = `kr1/data/levels/${filename}`
 
-    for (const towerId of quotedValues(body)) {
-      const level = Number(match[1])
-      if (!unlockLevels.has(towerId) || level < unlockLevels.get(towerId)) {
-        unlockLevels.set(towerId, level)
+    for (const body of findTableBodies(source, 'unlock_towers')) {
+      for (const towerId of quotedValues(body)) {
+        const current = unlockLevels.get(towerId)
+        if (
+          !current ||
+          level < current.level ||
+          (level === current.level && sourcePath < current.source)
+        ) {
+          unlockLevels.set(towerId, { level, source: sourcePath })
+        }
       }
     }
   }
@@ -135,14 +150,14 @@ async function buildUnlockIndex(towerIds) {
   return new Map(
     towerIds.map((towerId) => {
       if (unlockLevels.has(towerId)) {
-        const level = unlockLevels.get(towerId)
+        const { level, source } = unlockLevels.get(towerId)
         return [
           towerId,
           {
             status: 'level',
             level,
             label: `第 ${level} 关开始可用，通关后永久解锁`,
-            source: `kr1/data/levels/level${level}_data.lua`,
+            source,
           },
         ]
       }

@@ -4,7 +4,7 @@
     "gameVersion": "5.6.12",
     "gameId": "2.0.5.8",
     "commitHash": "ab027397630eacb500dade515b111605b252d79e",
-    "generatedAt": "2026-08-11T02:10:37.156Z",
+    "generatedAt": "2026-08-11T02:52:48.563Z",
     "sourceRoot": "D:\\KingdomRushDove-Windows-Cycle2-v0.1.5\\KingdomRushDove",
     "assumptions": [
       "不计算星级科技、英雄、地图环境与外部配置修改。",
@@ -20,33 +20,16 @@
     "skillIconCount": 196,
     "supportTowerCount": 6,
     "supportEffectCount": 7,
-    "levelUnlockCount": 44,
+    "levelUnlockCount": 59,
     "defaultUnlockCount": 34,
-    "unlockAnomalyCount": 15,
+    "unlockAnomalyCount": 0,
     "exactDamageCount": 92
   },
   "validation": {
     "warnings": [
-      "15 座初始锁定塔没有关卡解锁记录。",
       "1 座塔没有可统一折算的基础伤害。"
     ],
-    "unlockAnomalies": [
-      "tower_crossbow",
-      "tower_assassin",
-      "tower_archmage",
-      "tower_dwaarp",
-      "tower_totem",
-      "tower_templar",
-      "tower_necromancer",
-      "tower_mech",
-      "tower_barrack_mercenaries",
-      "tower_barrack_pirates",
-      "tower_barrack_amazonas",
-      "tower_barrack_dwarf",
-      "tower_archer_dwarf",
-      "tower_pirate_watchtower",
-      "tower_frankenstein"
-    ],
+    "unlockAnomalies": [],
     "noUnifiedDamage": [
       "tower_baby_ashbite"
     ],
@@ -254,7 +237,7 @@
         "status": "level",
         "level": 5,
         "label": "第 5 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level5_data.lua"
+        "source": "kr1/data/levels/level05_data.lua"
       },
       "attack": {
         "damageMin": 13,
@@ -333,7 +316,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level5_data.lua"
+        "unlock": "kr1/data/levels/level05_data.lua"
       }
     },
     {
@@ -365,7 +348,7 @@
         "status": "level",
         "level": 6,
         "label": "第 6 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level6_data.lua"
+        "source": "kr1/data/levels/level06_data.lua"
       },
       "attack": {
         "damageMin": 12,
@@ -469,7 +452,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level6_data.lua"
+        "unlock": "kr1/data/levels/level06_data.lua"
       }
     },
     {
@@ -499,7 +482,7 @@
         "status": "level",
         "level": 6,
         "label": "第 6 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level6_data.lua"
+        "source": "kr1/data/levels/level06_data.lua"
       },
       "attack": {
         "damageMin": 92,
@@ -586,7 +569,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level6_data.lua"
+        "unlock": "kr1/data/levels/level06_data.lua"
       }
     },
     {
@@ -617,7 +600,7 @@
         "status": "level",
         "level": 8,
         "label": "第 8 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level8_data.lua"
+        "source": "kr1/data/levels/level08_data.lua"
       },
       "attack": {
         "damageMin": 66,
@@ -688,7 +671,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level8_data.lua"
+        "unlock": "kr1/data/levels/level08_data.lua"
       }
     },
     {
@@ -719,7 +702,7 @@
         "status": "level",
         "level": 7,
         "label": "第 7 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level7_data.lua"
+        "source": "kr1/data/levels/level07_data.lua"
       },
       "attack": {
         "damageMin": 35,
@@ -790,7 +773,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level7_data.lua"
+        "unlock": "kr1/data/levels/level07_data.lua"
       }
     },
     {
@@ -822,7 +805,7 @@
         "status": "level",
         "level": 8,
         "label": "第 8 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level8_data.lua"
+        "source": "kr1/data/levels/level08_data.lua"
       },
       "attack": {
         "damageMin": 16,
@@ -922,7 +905,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level8_data.lua"
+        "unlock": "kr1/data/levels/level08_data.lua"
       }
     },
     {
@@ -954,7 +937,7 @@
         "status": "level",
         "level": 9,
         "label": "第 9 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level9_data.lua"
+        "source": "kr1/data/levels/level09_data.lua"
       },
       "attack": {
         "damageMin": 30,
@@ -1033,7 +1016,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level9_data.lua"
+        "unlock": "kr1/data/levels/level09_data.lua"
       }
     },
     {
@@ -1170,7 +1153,7 @@
         "status": "level",
         "level": 5,
         "label": "第 5 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level5_data.lua"
+        "source": "kr1/data/levels/level05_data.lua"
       },
       "attack": {
         "damageMin": 25,
@@ -1247,7 +1230,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level5_data.lua"
+        "unlock": "kr1/data/levels/level05_data.lua"
       }
     },
     {
@@ -1277,7 +1260,7 @@
         "status": "level",
         "level": 9,
         "label": "第 9 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level9_data.lua"
+        "source": "kr1/data/levels/level09_data.lua"
       },
       "attack": {
         "damageMin": 500,
@@ -1371,7 +1354,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level9_data.lua"
+        "unlock": "kr1/data/levels/level09_data.lua"
       }
     },
     {
@@ -1399,9 +1382,10 @@
       "towerType": "crossbow",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 30,
+        "label": "第 30 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level30.lua"
       },
       "attack": {
         "damageMin": 15,
@@ -1472,7 +1456,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level30.lua"
       }
     },
     {
@@ -1500,9 +1484,10 @@
       "towerType": "assassin",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 30,
+        "label": "第 30 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level30.lua"
       },
       "attack": {
         "damageMin": 10,
@@ -1602,7 +1587,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level30.lua"
       }
     },
     {
@@ -1630,9 +1615,10 @@
       "towerType": "archmage",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 32,
+        "label": "第 32 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level32.lua"
       },
       "attack": {
         "damageMin": 44,
@@ -1703,7 +1689,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level32.lua"
       }
     },
     {
@@ -1730,9 +1716,10 @@
       "towerType": "dwaarp",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 31,
+        "label": "第 31 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level31.lua"
       },
       "attack": {
         "damageMin": 33,
@@ -1803,7 +1790,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level31.lua"
       }
     },
     {
@@ -1831,9 +1818,10 @@
       "towerType": "totem",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 34,
+        "label": "第 34 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level34.lua"
       },
       "attack": {
         "damageMin": 25,
@@ -1908,7 +1896,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level34.lua"
       }
     },
     {
@@ -1936,9 +1924,10 @@
       "towerType": "templar",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 33,
+        "label": "第 33 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level33.lua"
       },
       "attack": {
         "damageMin": 30,
@@ -2046,7 +2035,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level33.lua"
       }
     },
     {
@@ -2073,9 +2062,10 @@
       "towerType": "necromancer",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 35,
+        "label": "第 35 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level35.lua"
       },
       "attack": {
         "damageMin": 22,
@@ -2166,7 +2156,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level35.lua"
       }
     },
     {
@@ -2194,9 +2184,10 @@
       "towerType": "mecha",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 36,
+        "label": "第 36 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level36.lua"
       },
       "attack": {
         "damageMin": 27,
@@ -2267,7 +2258,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level36.lua"
       }
     },
     {
@@ -2294,9 +2285,10 @@
       "towerType": "mercenaries_desert",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 30,
+        "label": "第 30 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level30.lua"
       },
       "attack": {
         "damageMin": 20,
@@ -2373,7 +2365,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level30.lua"
       }
     },
     {
@@ -2401,9 +2393,10 @@
       "towerType": "mercenaries_pirates",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 31,
+        "label": "第 31 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level31.lua"
       },
       "attack": {
         "damageMin": 15,
@@ -2476,7 +2469,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level31.lua"
       }
     },
     {
@@ -2504,9 +2497,10 @@
       "towerType": "mercenaries_amazonas",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 33,
+        "label": "第 33 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level33.lua"
       },
       "attack": {
         "damageMin": 14,
@@ -2567,7 +2561,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level33.lua"
       }
     },
     {
@@ -2594,9 +2588,10 @@
       "towerType": "barrack_dwarf",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 40,
+        "label": "第 40 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level40.lua"
       },
       "attack": {
         "damageMin": 12,
@@ -2696,7 +2691,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level40.lua"
       }
     },
     {
@@ -2724,9 +2719,10 @@
       "towerType": "archer_dwarf",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 40,
+        "label": "第 40 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level40.lua"
       },
       "attack": {
         "damageMin": 40,
@@ -2797,7 +2793,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level40.lua"
       }
     },
     {
@@ -2825,9 +2821,10 @@
       "towerType": "pirate_watchtower",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 42,
+        "label": "第 42 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level42.lua"
       },
       "attack": {
         "damageMin": 45,
@@ -2921,7 +2918,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level42.lua"
       }
     },
     {
@@ -2949,9 +2946,10 @@
       "towerType": "frankenstein",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 45,
+        "label": "第 45 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level45.lua"
       },
       "attack": {
         "damageMin": 80,
@@ -3022,7 +3020,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level45.lua"
       }
     },
     {
