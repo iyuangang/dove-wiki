@@ -113,15 +113,11 @@ function latestPowerDescription(tower: Tower, powerIndex: number) {
             </div>
             <div v-if="tower.powers.length" class="power-list">
               <article v-for="(power, index) in tower.powers" :key="power.id">
-                <div class="power-icon" :class="{ fallback: !power.icon }" aria-hidden="true">
-                  <img v-if="power.icon" :src="power.icon" alt="" />
-                  <span v-else>{{ power.name.slice(0, 1) }}</span>
-                </div>
-                <div class="power-copy">
+                <div>
                   <strong>{{ power.name }}</strong>
                   <code>{{ power.id }}</code>
                 </div>
-                <span class="power-level">最高 {{ power.maxLevel }} 级</span>
+                <span>最高 {{ power.maxLevel }} 级</span>
                 <p>{{ latestPowerDescription(tower, index) }}</p>
               </article>
             </div>

@@ -3,7 +3,7 @@ import { computed } from 'vue'
 import { formatPercent } from '../lib/calculator'
 import type { DoveData, SupportLevel, Tower } from '../types'
 
-const props = defineProps<{ data: DoveData; siteVersion: string }>()
+const props = defineProps<{ data: DoveData }>()
 defineEmits<{ open: [tower: Tower] }>()
 
 const towerById = computed(() => new Map(props.data.towers.map((tower) => [tower.id, tower])))
@@ -81,9 +81,8 @@ function describeLevel(level: SupportLevel) {
             <div><span>百科顺序</span><code>kr1-desktop/data/map_data.lua → tower_data</code></div>
             <div><span>模板属性</span><code>kr1/*_towers.lua + kr1/data/balance.lua</code></div>
             <div><span>名称描述</span><code>_assets/kr1-desktop/strings/zh-Hans.lua</code></div>
-            <div><span>解锁关系</span><code>kr1/data/slot_template.lua + levels/level*.lua / level*_data.lua</code></div>
+            <div><span>解锁关系</span><code>kr1/data/slot_template.lua + level*_data.lua</code></div>
             <div><span>辅助算法</span><code>all/script_utils.lua + tower_scripts.lua</code></div>
-            <div><span>技能图标</span><code>tower_menus_data.lua + gui_ico.lua（{{ data.summary.skillIconCount }} 张）</code></div>
             <div><span>百科图集</span><code>encyclopedia.lua + encyclopedia_creeps.lua</code></div>
             <div><span>回退头像</span><code>gui_portraits.lua（{{ data.summary.portraitFallbackCount }} 座基础塔）</code></div>
           </div>
@@ -117,8 +116,7 @@ function describeLevel(level: SupportLevel) {
         <section class="data-card version-card">
           <div class="section-title"><span>数据快照</span><small>VERSION</small></div>
           <dl>
-            <div><dt>站点版本</dt><dd>{{ siteVersion }}</dd></div>
-            <div><dt>游戏版本</dt><dd>{{ data.metadata.gameVersion }}</dd></div>
+            <div><dt>显示版本</dt><dd>{{ data.metadata.gameVersion }}</dd></div>
             <div><dt>内部 ID</dt><dd>{{ data.metadata.gameId }}</dd></div>
             <div><dt>提交</dt><dd>{{ data.metadata.commitHash.slice(0, 12) }}</dd></div>
             <div><dt>游戏目录</dt><dd>{{ data.metadata.sourceRoot }}</dd></div>
