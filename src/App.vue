@@ -47,8 +47,8 @@ function openTower(tower: Tower) {
       <button class="brand" type="button" aria-label="返回塔典" @click="activeTab = 'catalog'">
         <span class="brand-mark" aria-hidden="true"><span>Ⅱ</span></span>
         <span>
-          <strong>DOVE TOWER WIKI</strong>
-          <small>王国保卫战 · 防御塔档案</small>
+          <strong>王国保卫战鸽子版 WIKI</strong>
+          <small>游戏百科 · 数据档案</small>
         </span>
       </button>
 
@@ -113,7 +113,7 @@ function openTower(tower: Tower) {
     </main>
 
     <footer class="site-footer">
-      <span>Dove 数据驱动塔典</span>
+      <span>王国保卫战鸽子版 WIKI</span>
       <span>站点 {{ siteVersion }} · 数据提交 {{ doveData.metadata.commitHash.slice(0, 8) }}</span>
       <span>{{ doveData.summary.encyclopediaImageCount }} 套塔百科图 · {{ doveData.summary.enemyCount }} 个敌人槽位 · {{ doveData.summary.heroCount }} 位英雄 · {{ doveData.summary.technologyTreeCount }} 套科技方案</span>
     </footer>

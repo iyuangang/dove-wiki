@@ -2646,13 +2646,18 @@ input:focus {
   font-size: 14px;
 }
 
+.technology-page-width {
+  width: min(1700px, calc(100% - 32px));
+}
+
 .technology-family-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 10px;
 }
 
 .technology-family-card {
+  min-width: 0;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 7px;
@@ -2660,24 +2665,38 @@ input:focus {
 }
 
 .technology-family-card > header {
-  display: flex;
+  display: grid;
+  min-height: 104px;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 7px 9px;
   align-items: center;
-  justify-content: space-between;
-  padding: 20px 22px;
+  padding: 14px 12px;
   border-bottom: 1px solid var(--line);
   background: linear-gradient(100deg, rgba(229, 185, 104, 0.08), transparent 65%);
+}
+
+.technology-family-card > header > [data-slot="badge"] {
+  grid-column: 2;
+  justify-self: start;
+}
+
+.technology-family-index {
+  grid-row: span 2;
+  color: rgba(229, 185, 104, 0.42);
+  font-family: Georgia, serif;
+  font-size: 19px;
 }
 
 .technology-family-card h2 {
   margin: 2px 0 0;
   font-family: Georgia, "Songti SC", serif;
-  font-size: 25px;
+  font-size: 19px;
 }
 
 .technology-family-card header small {
   color: var(--gold-soft);
-  font-size: 10px;
-  letter-spacing: 0.18em;
+  font-size: 9px;
+  letter-spacing: 0.11em;
 }
 
 .technology-family-card ol {
@@ -2689,10 +2708,11 @@ input:focus {
 
 .technology-family-card li {
   display: grid;
-  grid-template-columns: 36px minmax(0, 1fr) auto;
-  gap: 12px;
+  min-width: 0;
+  grid-template-columns: 52px minmax(0, 1fr);
+  gap: 9px;
   align-items: start;
-  padding: 17px 20px;
+  padding: 13px 10px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -2700,46 +2720,84 @@ input:focus {
   border-bottom: 0;
 }
 
-.technology-level {
+.technology-icon-frame {
+  position: relative;
   display: grid;
-  width: 32px;
-  height: 32px;
+  width: 52px;
+  height: 54px;
   place-items: center;
-  color: var(--gold);
-  font-family: Georgia, serif;
-  font-size: 13px;
+  overflow: hidden;
   border: 1px solid rgba(229, 185, 104, 0.2);
-  border-radius: 50%;
+  border-radius: 6px;
+  background: radial-gradient(circle, rgba(229, 185, 104, 0.12), transparent 70%), #101510;
+}
+
+.technology-icon-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.technology-icon-frame span {
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  padding: 2px 3px;
+  color: var(--gold-soft);
+  font-size: 8px;
+  border-radius: 2px;
+  background: rgba(10, 13, 10, 0.82);
+}
+
+.technology-copy {
+  min-width: 0;
 }
 
 .technology-name-row {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
+  min-width: 0;
+  gap: 5px;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 
 .technology-name-row strong {
-  font-size: 16px;
+  min-width: 0;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.technology-name-row em {
+  flex: 0 0 auto;
+  color: var(--gold-soft);
+  font-size: 10px;
+  font-style: normal;
+  white-space: nowrap;
 }
 
 .technology-family-card li p {
-  margin: 7px 0 6px;
+  margin: 6px 0 7px;
   color: var(--muted);
-  font-size: 14px;
-  line-height: 1.65;
+  font-size: 12px;
+  line-height: 1.6;
 }
 
-.technology-family-card li div > small {
+.technology-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+}
+
+.technology-meta > [data-slot="badge"] {
+  height: 18px;
+  padding: 0 5px;
+  font-size: 9px;
+}
+
+.technology-meta small {
   color: var(--faint);
-  font-size: 12px;
-}
-
-.technology-family-card li > em {
-  color: var(--gold-soft);
-  font-size: 12px;
-  font-style: normal;
-  white-space: nowrap;
+  font-size: 10px;
 }
 
 .technology-source {
@@ -3308,6 +3366,10 @@ input:focus {
 }
 
 @media (max-width: 1120px) {
+  .technology-family-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .hero-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -3387,12 +3449,8 @@ input:focus {
   }
 
   .technology-family-card li {
-    grid-template-columns: 32px minmax(0, 1fr);
-    padding: 15px 14px;
-  }
-
-  .technology-family-card li > em {
-    grid-column: 2;
+    grid-template-columns: 52px minmax(0, 1fr);
+    padding: 13px 12px;
   }
 
   .technology-ledger span {

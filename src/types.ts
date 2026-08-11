@@ -200,11 +200,15 @@ export interface TechnologyModifier {
   excludeTowerIds?: string[]
 }
 
+export type TechnologyFamily = TowerFamily | 'rain' | 'reinforcement'
+
 export interface Technology {
   id: string
-  family: TowerFamily
+  family: TechnologyFamily
   level: number
   price: number
+  icon: string
+  iconSprite: string | null
   name: string
   description: string
   modifiers: TechnologyModifier[]
