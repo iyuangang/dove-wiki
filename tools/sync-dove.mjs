@@ -38,6 +38,7 @@ const heroDir = join(projectRoot, 'public', 'heroes')
 const heroThumbDir = join(heroDir, 'thumbs')
 const enemyDir = join(projectRoot, 'public', 'enemies')
 const enemyThumbDir = join(enemyDir, 'thumbs')
+const technologyDir = join(projectRoot, 'public', 'technologies')
 
 function assertFile(path, label) {
   if (!existsSync(path)) {
@@ -509,6 +510,8 @@ const technologyClassFamilies = {
   barracks: 'barrack',
   mages: 'mage',
   engineers: 'engineer',
+  rain: 'rain',
+  reinforcements: 'reinforcement',
 }
 
 const directDamageTechnologies = new Set([
@@ -715,6 +718,8 @@ function buildTechnologyTrees(rawTechnology, localization) {
         family: technologyClassFamilies[technology.class],
         level: Number(technology.level),
         price: Number(technology.price),
+        icon: `/technologies/${treeId}/${technologyId}.png`,
+        iconSprite: technology.icon_sprite || null,
         name:
           localization[`UPGRADE_${treeId}_${technologyId}_NAME`] ||
           technologyId.replaceAll('_', ' '),
@@ -724,7 +729,7 @@ function buildTechnologyTrees(rawTechnology, localization) {
         modifiers: normalizeTechnologyModifiers(technologyId, technology),
       }))
       .sort((left, right) => {
-        const familyOrder = ['archer', 'barrack', 'mage', 'engineer']
+        const familyOrder = ['archer', 'barrack', 'mage', 'engineer', 'rain', 'reinforcement']
         return (
           familyOrder.indexOf(left.family) - familyOrder.indexOf(right.family) ||
           left.level - right.level ||
@@ -1146,6 +1151,20 @@ async function cleanupEnemyImages(rawEnemies) {
   }
 }
 
+async function cleanupTechnologyImages(rawTechnology) {
+  for (const [index, technologyList] of (rawTechnology?.lists || []).entries()) {
+    const directory = join(technologyDir, String(index + 1))
+    const expected = new Set(Object.keys(technologyList).map((id) => `${id}.png`))
+    const resolvedDirectory = resolve(directory)
+
+    for (const filename of await readdir(directory)) {
+      const fullPath = resolve(directory, filename)
+      if (dirname(fullPath) !== resolvedDirectory) continue
+      if (filename.endsWith('.png') && !expected.has(filename)) await unlink(fullPath)
+    }
+  }
+}
+
 async function main() {
   assertFile(join(gameDir, 'kr1', 'game_settings.lua'), 'Dove 游戏目录')
   assertFile(loveExe, 'Dove 自带 lovec.exe')
@@ -1156,6 +1175,9 @@ async function main() {
   await mkdir(skillIconDir, { recursive: true })
   await mkdir(heroThumbDir, { recursive: true })
   await mkdir(enemyThumbDir, { recursive: true })
+  for (let treeId = 1; treeId <= 4; treeId += 1) {
+    await mkdir(join(technologyDir, String(treeId)), { recursive: true })
+  }
 
   console.log(`[dove-wiki] 读取游戏：${gameDir}`)
   run(loveExe, [join(toolsDir, 'love-extractor')], {
@@ -1169,6 +1191,7 @@ async function main() {
       DOVE_SKILL_ICON_DIR: skillIconDir,
       DOVE_HERO_DIR: heroDir,
       DOVE_ENEMY_DIR: enemyDir,
+      DOVE_TECHNOLOGY_DIR: technologyDir,
     },
   })
 
@@ -1204,6 +1227,7 @@ async function main() {
   await cleanupSkillIcons(raw.towers)
   await cleanupHeroImages(raw.heroes)
   await cleanupEnemyImages(raw.enemies)
+  await cleanupTechnologyImages(raw.technology)
 
   const versionSource = await readFile(join(gameDir, 'version.lua'), 'utf8')
   const commitHash = (
@@ -1224,6 +1248,10 @@ async function main() {
   ).size
   const skillIconCount = towers.flatMap((tower) => tower.powers).filter((power) => power.icon).length
   const technologyTrees = buildTechnologyTrees(raw.technology, raw.localization)
+  const technologyCount = technologyTrees.reduce(
+    (total, tree) => total + tree.technologies.length,
+    0,
+  )
   const heroes = raw.heroes.map((hero) => normalizeHero(hero, raw.localization))
   const enemies = raw.enemies.map((enemy) => normalizeEnemy(enemy, raw.localization))
   const uniqueEnemyCount = new Set(enemies.map((enemy) => enemy.id)).size
@@ -1239,7 +1267,7 @@ async function main() {
   const gameId = /^\s*identity\s*=\s*["']([^"']+)/m.exec(versionSource)?.[1] || 'unknown'
   const data = {
     metadata: {
-      title: 'Dove 防御塔 Wiki',
+      title: '王国保卫战鸽子版 WIKI',
       gameVersion,
       contentVersion,
       gameId,
@@ -1260,10 +1288,7 @@ async function main() {
       portraitFallbackCount: towers.length - encyclopediaCount,
       skillIconCount,
       technologyTreeCount: technologyTrees.length,
-      technologyCount: technologyTrees.reduce(
-        (total, tree) => total + tree.technologies.length,
-        0,
-      ),
+      technologyCount,
       heroCount: heroes.length,
       enemyCount: enemies.length,
       uniqueEnemyCount,
@@ -1304,7 +1329,7 @@ async function main() {
   await writeFile(dataPath, `${JSON.stringify(data, null, 2)}\n`, 'utf8')
   const dataSize = await stat(dataPath)
   console.log(
-    `[dove-wiki] 完成：${towers.length} 座塔、${heroes.length} 名英雄、${enemies.length} 个敌人百科槽位（${uniqueEnemyCount} 个唯一敌人）、${encyclopediaCount} 套塔百科图、${skillIconCount} 张技能图标、${towers.length - encyclopediaCount} 张头像回退、${Math.round(dataSize.size / 1024)} KiB 数据`,
+    `[dove-wiki] 完成：${towers.length} 座塔、${heroes.length} 名英雄、${enemies.length} 个敌人百科槽位（${uniqueEnemyCount} 个唯一敌人）、${technologyCount} 张科技图标、${encyclopediaCount} 套塔百科图、${skillIconCount} 张技能图标、${towers.length - encyclopediaCount} 张头像回退、${Math.round(dataSize.size / 1024)} KiB 数据`,
   )
   console.log(`[dove-wiki] 解锁异常：${missingUnlocks.length}；不可统一折算伤害：${missingDamage.length}`)
 }
