@@ -8,6 +8,11 @@ import {
   type SupportSelection,
   type TechnologySelection,
 } from '../lib/calculator'
+import {
+  damageTypeDefinitions,
+  simulateDamage,
+  type DamageTypeId,
+} from '../lib/damage-simulator'
 import type {
   Hero,
   SupportEffect,
@@ -41,6 +46,13 @@ const technologyLevels = reactive<Record<TowerFamily, number>>({
   engineer: 0,
 })
 const mageTowerCount = ref(1)
+const demoDamageType = ref<DamageTypeId>('true')
+const demoDamage = ref(100)
+const dummy = reactive({
+  hp: 1000,
+  armor: 10,
+  magicArmor: 10,
+})
 const state = reactive<Record<string, EffectState>>(
   Object.fromEntries(
     props.effects.map((effect) => [
@@ -95,6 +107,25 @@ const needsMageTowerCount = computed(() =>
     (technology) => technology.technologyId === 'mage_brilliance',
   ),
 )
+const selectedDamageType = computed(
+  () =>
+    damageTypeDefinitions.find((damageType) => damageType.id === demoDamageType.value) ||
+    damageTypeDefinitions[0],
+)
+const damageDemo = computed(() =>
+  simulateDamage({
+    damageType: demoDamageType.value,
+    damage: demoDamage.value,
+    hp: dummy.hp,
+    armor: dummy.armor,
+    magicArmor: dummy.magicArmor,
+  }),
+)
+const damageEquation = computed(() => {
+  const damage = damageDemo.value
+  const typeMultiplier = demoDamageType.value === 'stab' ? ' × 2' : ''
+  return `${formatNumber(damage.baseDamage)}${typeMultiplier} × (1 − ${formatPercent(damage.protection)}) = ${formatNumber(damage.damageApplied)}`
+})
 
 function selectedLevel(effect: SupportEffect): SupportLevel {
   return (
@@ -153,6 +184,14 @@ function resetTechnologies() {
     technologyLevels[family] = 0
   })
   mageTowerCount.value = 1
+}
+
+function resetDamageDemo() {
+  demoDamageType.value = 'true'
+  demoDamage.value = 100
+  dummy.hp = 1000
+  dummy.armor = 10
+  dummy.magicArmor = 10
 }
 </script>
 
@@ -293,6 +332,129 @@ function resetTechnologies() {
             </article>
           </div>
           <button class="text-button" type="button" @click="resetSupports">清空全部辅助</button>
+        </section>
+
+        <section class="lab-card damage-lab-card">
+          <div class="lab-step"><span>04</span><div><b>伤害类型与傀儡演示</b><small>DAMAGE TYPE LAB</small></div></div>
+          <div class="damage-type-heading">
+            <div>
+              <strong>游戏伤害类型</strong>
+              <p>点击类型可查看规则并立即对下方傀儡结算。百分比按游戏脚本的小数护甲换算。</p>
+            </div>
+            <span>{{ damageTypeDefinitions.length }} TYPES</span>
+          </div>
+
+          <div class="damage-type-grid">
+            <button
+              v-for="damageType in damageTypeDefinitions"
+              :key="damageType.id"
+              type="button"
+              class="damage-type-card"
+              :class="[{ active: demoDamageType === damageType.id }, `type-${damageType.id}`]"
+              @click="demoDamageType = damageType.id"
+            >
+              <span><i></i>{{ damageType.code }}</span>
+              <strong>{{ damageType.name }}</strong>
+              <p>{{ damageType.description }}</p>
+              <code>{{ damageType.formula }}</code>
+            </button>
+          </div>
+
+          <div class="damage-demo-panel">
+            <div class="damage-demo-config">
+              <div class="damage-demo-title">
+                <div><strong>配置一次攻击</strong><small>ATTACK</small></div>
+                <button type="button" class="text-button" @click="resetDamageDemo">恢复示例</button>
+              </div>
+              <div class="damage-demo-fields attack-fields">
+                <label>
+                  <span>伤害类型</span>
+                  <select v-model="demoDamageType">
+                    <option
+                      v-for="damageType in damageTypeDefinitions"
+                      :key="damageType.id"
+                      :value="damageType.id"
+                    >
+                      {{ damageType.name }}
+                    </option>
+                  </select>
+                </label>
+                <label>
+                  <span>基础伤害</span>
+                  <input v-model.number="demoDamage" type="number" min="0" max="999999" step="1" />
+                </label>
+              </div>
+
+              <div class="damage-demo-title dummy-title">
+                <div><strong>配置傀儡</strong><small>TRAINING DUMMY</small></div>
+              </div>
+              <div class="damage-demo-fields dummy-fields">
+                <label>
+                  <span>生命值</span>
+                  <input v-model.number="dummy.hp" type="number" min="0" max="9999999" step="1" />
+                </label>
+                <label>
+                  <span>护甲 (%)</span>
+                  <input v-model.number="dummy.armor" type="number" min="0" max="100" step="1" />
+                </label>
+                <label>
+                  <span>魔抗 (%)</span>
+                  <input v-model.number="dummy.magicArmor" type="number" min="0" max="100" step="1" />
+                </label>
+              </div>
+            </div>
+
+            <div class="dummy-stage" aria-live="polite">
+              <div class="dummy-stage-heading">
+                <div>
+                  <span>结算结果</span>
+                  <strong>{{ selectedDamageType.name }}</strong>
+                </div>
+                <b :class="{ defeated: damageDemo.remainingHp === 0 }">
+                  {{ damageDemo.remainingHp === 0 ? '傀儡被击倒' : '傀儡存活' }}
+                </b>
+              </div>
+
+              <div class="dummy-hp-readout">
+                <div>
+                  <span>HP</span>
+                  <strong>{{ formatNumber(damageDemo.remainingHp) }} / {{ formatNumber(Math.max(0, Number(dummy.hp) || 0)) }}</strong>
+                </div>
+                <div class="dummy-hp-track">
+                  <i :style="{ width: `${damageDemo.remainingHpPercent}%` }"></i>
+                </div>
+              </div>
+
+              <div class="damage-result-primary">
+                <article>
+                  <span>造成伤害</span>
+                  <strong>{{ formatNumber(damageDemo.damageApplied) }}</strong>
+                  <small>护甲结算后</small>
+                </article>
+                <article>
+                  <span>扣除生命</span>
+                  <strong>{{ formatNumber(damageDemo.hpLost) }}</strong>
+                  <small>不超过当前生命</small>
+                </article>
+                <article>
+                  <span>剩余生命</span>
+                  <strong>{{ formatNumber(damageDemo.remainingHp) }}</strong>
+                  <small v-if="damageDemo.overkill">溢出 {{ formatNumber(damageDemo.overkill) }}</small>
+                  <small v-else>未产生溢出</small>
+                </article>
+              </div>
+
+              <div class="damage-equation">
+                <span>本次算式</span>
+                <code>{{ damageEquation }}</code>
+                <p>{{ selectedDamageType.formula }}</p>
+              </div>
+
+              <p class="damage-demo-note">
+                演示口径：无免疫、无额外易伤、无护甲穿透，目标伤害系数为 1。游戏内特殊单位与技能仍可能通过这些机制改变最终伤害。
+              </p>
+            </div>
+          </div>
         </section>
       </div>
 
