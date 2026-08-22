@@ -516,7 +516,7 @@ local function build_raw_export(entity_db)
 
 	local enemies = {}
 	for index, enemy_entry in ipairs(settings.encyclopedia_enemies or {}) do
-		local enemy_id = enemy_entry.name
+		local enemy_id = type(enemy_entry) == "table" and enemy_entry.name or enemy_entry
 		local template = entity_db.entities[enemy_id]
 		local source_game
 
@@ -534,7 +534,7 @@ local function build_raw_export(entity_db)
 			id = enemy_id,
 			order = index,
 			source_game = source_game,
-			always_shown = enemy_entry.always_shown == true,
+			always_shown = type(enemy_entry) == "table" and enemy_entry.always_shown == true or false,
 			template_exists = template ~= nil
 		}
 

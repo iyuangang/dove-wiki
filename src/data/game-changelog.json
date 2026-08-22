@@ -1,0 +1,382 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-22T02:14:26.345Z",
+  "releases": [
+    {
+      "id": "2.0.6.2-15066fd95ca1",
+      "version": "2.0.6.2",
+      "previousVersion": "2.0.5.9",
+      "contentVersion": "5.6.12",
+      "commitHash": "15066fd95ca127b2e0eab76fa5a0b688644b594e",
+      "previousCommitHash": "4c00231744ab8b866d7fca1ee4ee67f5ebe76bdf",
+      "detectedAt": "2026-08-22T02:14:26.345Z",
+      "summary": {
+        "changeCount": 11,
+        "categoryCounts": {
+          "hero": 2,
+          "tower": 7,
+          "enemy": 2,
+          "technology": 0
+        },
+        "kindCounts": {
+          "added": 2,
+          "removed": 0,
+          "balance": 5,
+          "content": 4
+        }
+      },
+      "changes": [
+        {
+          "id": "hero:hero_builder:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_builder",
+          "entityName": "托雷斯",
+          "title": "内容调整英雄：托雷斯",
+          "description": "",
+          "image": "/heroes/thumbs/hero_builder.png",
+          "details": [
+            {
+              "field": "能力说明：铁球横扫",
+              "before": "每隔40秒，奥布杜尔朝路径上扔出一个巨大钢球，造成300点破甲伤害，并使敌人眩晕2秒。",
+              "after": "每隔5秒，奥布杜尔朝路径上扔出一个巨大钢球，造成300点破甲伤害，并使敌人眩晕2秒。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_tramin:added:main",
+          "category": "hero",
+          "kind": "added",
+          "entityId": "hero_tramin",
+          "entityName": "特拉敏大师",
+          "title": "新增英雄：特拉敏大师",
+          "description": "新增可用英雄，包含 6 项能力。",
+          "image": "/heroes/thumbs/hero_tramin.png",
+          "details": []
+        },
+        {
+          "id": "tower:tower_dwaarp:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_dwaarp",
+          "entityName": "自动钻地武器平台",
+          "title": "数值调整防御塔：自动钻地武器平台",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_dwaarp.png",
+          "details": [
+            {
+              "field": "熔炉爆裂 · 基础价格",
+              "before": "375",
+              "after": "400",
+              "delta": "+25（+6.7%）",
+              "direction": "increase"
+            },
+            {
+              "field": "熔炉爆裂 · 升级价格",
+              "before": "275",
+              "after": "250",
+              "delta": "-25（-9.1%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_dwaarp:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_dwaarp",
+          "entityName": "自动钻地武器平台",
+          "title": "内容调整防御塔：自动钻地武器平台",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_dwaarp.png",
+          "details": [
+            {
+              "field": "熔炉爆裂 · 技能说明",
+              "before": "每隔15秒，灼烧范围内所有敌人3秒，每秒造成25点伤害。燃烧效果持续2秒；每隔15秒，灼烧范围内所有敌人3秒，每秒造成40点伤害。燃烧效果持续2秒；每隔15秒，灼烧范围内所有敌人3秒，每秒造成55点伤害。燃烧效果持续2秒。",
+              "after": "每隔15秒，造成1.7倍普攻伤害并灼烧范围内所有敌人3秒，每秒造成25点伤害。燃烧效果持续2秒；每隔15秒，造成2.4倍普攻伤害并灼烧范围内所有敌人3秒，每秒造成40点伤害。燃烧效果持续2秒；每隔15秒，造成3.1倍普攻伤害并灼烧范围内所有敌人3秒，每秒造成55点伤害。燃烧效果持续2秒。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_archer_dwarf:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_archer_dwarf",
+          "entityName": "矮人堡垒",
+          "title": "内容调整防御塔：矮人堡垒",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_archer_dwarf.png",
+          "details": [
+            {
+              "field": "防御塔说明",
+              "before": "矮人射手使用威力高的吓人的秘银子弹，就是听说他们大多来自金色酿酒坊。",
+              "after": "矮人射手使用威力高得吓人的秘银子弹，就是听说他们大多来自金色酿酒坊。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_drow:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_drow",
+          "entityName": "变节者岗哨",
+          "title": "数值调整防御塔：变节者岗哨",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_drow.png",
+          "details": [
+            {
+              "field": "利刃盔甲 · 基础价格",
+              "before": "125",
+              "after": "120",
+              "delta": "-5（-4.0%）",
+              "direction": "decrease"
+            },
+            {
+              "field": "利刃盔甲 · 升级价格",
+              "before": "125",
+              "after": "120",
+              "delta": "-5（-4.0%）",
+              "direction": "decrease"
+            },
+            {
+              "field": "双重飞刀 · 基础价格",
+              "before": "170",
+              "after": "165",
+              "delta": "-5（-2.9%）",
+              "direction": "decrease"
+            },
+            {
+              "field": "双重飞刀 · 升级价格",
+              "before": "170",
+              "after": "165",
+              "delta": "-5（-2.9%）",
+              "direction": "decrease"
+            },
+            {
+              "field": "吸血打击 · 基础价格",
+              "before": "225",
+              "after": "235",
+              "delta": "+10（+4.4%）",
+              "direction": "increase"
+            },
+            {
+              "field": "吸血打击 · 升级价格",
+              "before": "200",
+              "after": "210",
+              "delta": "+10（+5.0%）",
+              "direction": "increase"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_drow:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_drow",
+          "entityName": "变节者岗哨",
+          "title": "内容调整防御塔：变节者岗哨",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_drow.png",
+          "details": [
+            {
+              "field": "吸血打击 · 技能说明",
+              "before": "每隔5.7秒进行吸血打击，造成50点残暴伤害，并使变节者恢复0.8*伤害+30点生命值；每隔5.7秒进行吸血打击，造成100点残暴伤害，并使变节者恢复0.8*伤害+30点生命值；每隔5.7秒进行吸血打击，造成150点残暴伤害，并使变节者恢复0.8*伤害+30点生命值。",
+              "after": "每隔5.7秒进行吸血打击，驱散剧毒，造成70点残暴伤害，并使变节者恢复0.8*伤害+30点可溢出生命值；每隔5.7秒进行吸血打击，驱散剧毒，造成140点残暴伤害，并使变节者恢复0.8*伤害+30点可溢出生命值；每隔5.7秒进行吸血打击，驱散剧毒，造成210点残暴伤害，并使变节者恢复0.8*伤害+30点可溢出生命值。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_tricannon_lvl4:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_tricannon_lvl4",
+          "entityName": "三管加农炮",
+          "title": "数值调整防御塔：三管加农炮",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_tricannon_lvl4.png",
+          "details": [
+            {
+              "field": "最高伤害",
+              "before": "36",
+              "after": "37",
+              "delta": "+1（+2.8%）",
+              "direction": "increase"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_blazing_watcher:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_blazing_watcher",
+          "entityName": "炙热宝石",
+          "title": "数值调整防御塔：炙热宝石",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_blazing_watcher.png",
+          "details": [
+            {
+              "field": "充能 · 基础价格",
+              "before": "200",
+              "after": "190",
+              "delta": "-10（-5.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "enemy:enemy_alien_breeder:balance:main",
+          "category": "enemy",
+          "kind": "balance",
+          "entityId": "enemy_alien_breeder",
+          "entityName": "寄生怪",
+          "title": "数值调整敌人：寄生怪",
+          "description": "",
+          "image": "/enemies/thumbs/enemy_alien_breeder.png",
+          "details": [
+            {
+              "field": "最低伤害",
+              "before": "10",
+              "after": "无",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "最高伤害",
+              "before": "20",
+              "after": "无",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "enemy:enemy_tanky_draconian:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_tanky_draconian",
+          "entityName": "怒锋龙",
+          "title": "新增敌人：怒锋龙",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_tanky_draconian.png",
+          "details": []
+        }
+      ]
+    },
+    {
+      "id": "2.0.5.9-4c00231744ab",
+      "version": "2.0.5.9",
+      "previousVersion": "2.0.5.8",
+      "contentVersion": "5.6.12",
+      "commitHash": "4c00231744ab8b866d7fca1ee4ee67f5ebe76bdf",
+      "previousCommitHash": "ab027397630eacb500dade515b111605b252d79e",
+      "detectedAt": "2026-08-13T07:06:02.853Z",
+      "summary": {
+        "changeCount": 4,
+        "categoryCounts": {
+          "hero": 1,
+          "tower": 3,
+          "enemy": 0,
+          "technology": 0
+        },
+        "kindCounts": {
+          "added": 1,
+          "removed": 0,
+          "balance": 2,
+          "content": 1
+        }
+      },
+      "changes": [
+        {
+          "id": "hero:hero_jigou:added:main",
+          "category": "hero",
+          "kind": "added",
+          "entityId": "hero_jigou",
+          "entityName": "极狗",
+          "title": "新增英雄：极狗",
+          "description": "新增可用英雄，包含 6 项能力。",
+          "image": "/heroes/thumbs/hero_jigou.png",
+          "details": []
+        },
+        {
+          "id": "tower:tower_twilight_elves_barrack:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_twilight_elves_barrack",
+          "entityName": "精英骚扰者",
+          "title": "数值调整防御塔：精英骚扰者",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_twilight_elves_barrack.png",
+          "details": [
+            {
+              "field": "背刺 · 基础价格",
+              "before": "180",
+              "after": "210",
+              "delta": "+30（+16.7%）",
+              "direction": "increase"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_twilight_elves_barrack:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_twilight_elves_barrack",
+          "entityName": "精英骚扰者",
+          "title": "内容调整防御塔：精英骚扰者",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_twilight_elves_barrack.png",
+          "details": [
+            {
+              "field": "背刺 · 技能说明",
+              "before": "骚扰者有40%概率闪躲敌人的攻击并反击，造成35-40点物理伤害；骚扰者有50%概率闪躲敌人的攻击并反击，造成50-55点物理伤害；骚扰者有60%概率闪躲敌人的攻击并反击，造成65-70点物理伤害。",
+              "after": "骚扰者有40%概率闪躲敌人的攻击并反击，造成35-40点物理伤害。每次成功闪避，减少箭矢风暴1秒冷却；骚扰者有50%概率闪躲敌人的攻击并反击，造成50-55点物理伤害。每次成功闪避，减少箭矢风暴1秒冷却；骚扰者有60%概率闪躲敌人的攻击并反击，造成65-70点物理伤害。每次成功闪避，减少箭矢风暴1秒冷却。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "黄昏之怒 · 技能说明",
+              "before": "骚扰者死时会进入狂怒状态，拥有250点生命，4秒无敌，每次攻击造成35-50点物理伤害，最多战斗12秒。",
+              "after": "骚扰者生命燃尽时成为幽灵骚扰者并无敌3秒，拥有250点生命，每次攻击造成35-50点物理伤害，最多战斗12秒。幽灵骚扰者继承骚扰者的闪避能力。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_wicked_sisters:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_wicked_sisters",
+          "entityName": "女巫姐妹花",
+          "title": "数值调整防御塔：女巫姐妹花",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_wicked_sisters.png",
+          "details": [
+            {
+              "field": "最低伤害",
+              "before": "210",
+              "after": "183",
+              "delta": "-27（-12.9%）",
+              "direction": "decrease"
+            },
+            {
+              "field": "最高伤害",
+              "before": "210",
+              "after": "183",
+              "delta": "-27（-12.9%）",
+              "direction": "decrease"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

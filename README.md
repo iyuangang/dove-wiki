@@ -1,6 +1,6 @@
 # 王国保卫战鸽子版 WIKI
 
-基于 `KingdomRushDove` 游戏 Lua 模板生成的 Vue 3 + TypeScript 动态塔典。当前数据快照包含 93 座唯一玩家塔、游戏百科顺序与原生图标、解锁关卡、基础面板、技能、4 套科技树、分类标签和科技/辅助增益计算器。
+基于 `KingdomRushDove` 游戏 Lua 模板生成的 Vue 3 + TypeScript 游戏百科。当前数据快照包含 93 座唯一玩家塔、77 名英雄、300 个敌人百科槽位、4 套完整科技方案、更新记录和科技/辅助增益计算器。
 
 ## 启动
 
@@ -35,11 +35,16 @@ npm run sync:dove -- --game-dir "D:\KingdomRushDove-Windows-Cycle2-v0.1.5\Kingdo
 同步器使用游戏自带的 `lovec.exe` 展开模板继承并调用每座塔的 `info.fn`，然后生成：
 
 - `src/data/dove-data.json`：浏览器使用的规范化数据和校验报告；
+- `src/data/game-changelog.json`：按游戏版本累计的结构化更新差异；
 - `public/encyclopedia/*.png`：游戏百科详情插图；
 - `public/encyclopedia/thumbs/*.png`：游戏百科列表图标；
 - `public/skills/*.png`：从塔菜单配置与 `gui_ico` 图集恢复的技能图标；
 - `public/portraits/*.png`：从 `gui_portraits-1.dds` 恢复的透明头像；
+- `public/heroes/*.png`、`public/enemies/*.png`：英雄和敌人百科图；
+- `public/technologies/*.png`：四套方案的游戏原生科技图标；
 - `tools/.tmp/dove-raw.json`：被 Git 忽略的中间数据。
+
+同步前会保留当前数据快照；当游戏提交哈希发生变化时，同步器自动比较前后版本，记录新增、移除、关键数值、技能说明与科技变化。同一游戏提交重复同步不会产生重复记录。
 
 如果 `lovec.exe` 不在游戏目录上一级，可额外传入 `--love-exe`。
 
@@ -47,7 +52,7 @@ npm run sync:dove -- --game-dir "D:\KingdomRushDove-Windows-Cycle2-v0.1.5\Kingdo
 
 - 默认排序严格读取 `kr1-desktop/data/map_data.lua` 的 `tower_data` 数组；游戏百科未收录的 12 座 1–3 级基础塔按游戏塔族清单顺序后置。
 - 百科收录的塔使用百科缩略图与详情插图；上述 12 座基础塔使用游戏头像回退。
-- 游戏版本显示 `version.lua` 的构建 ID（当前为 `2.0.5.8`），同时在数据页保留内容短版本与内部标识。
+- 游戏版本显示 `version.lua` 的构建 ID（当前为 `2.0.6.2`），同时在数据页保留内容短版本与内部标识。
 - 科技选择直接读取 `kr1/upgrades.lua` 的 4 套方案；按塔族累计应用到所选等级，再叠加玩家塔辅助效果。
 - 能稳定映射到面板的科技会计算伤害、范围、攻击间隔、价格和驻防属性；护甲条件、技能触发与特殊目标类科技保留原始说明，不强行折算。
 - 不计算英雄、地图环境和外部配置修改。
@@ -65,7 +70,7 @@ npm run test
 npm run build
 ```
 
-单元测试覆盖版本字段、技能图标关联、科技树完整性、科技数值、伤害相加、范围相乘、攻速换算、黑暗精灵触发上限和兵营集结范围。
+单元测试覆盖版本字段、更新差异生成与去重、技能图标关联、科技树完整性、科技数值、伤害相加、范围相乘、攻速换算、黑暗精灵触发上限和兵营集结范围。
 
 ## CI/CD 与发布
 

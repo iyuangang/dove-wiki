@@ -1,6 +1,7 @@
 import rawData from './data/dove-data.json'
+import rawGameChangelog from './data/game-changelog.json'
 import { publicAssetUrl } from './lib/public-assets'
-import type { DoveData } from './types'
+import type { DoveData, GameChangelog } from './types'
 
 const sourceData = rawData as DoveData
 
@@ -39,6 +40,16 @@ export const doveData: DoveData = {
 }
 
 export const siteVersion = import.meta.env.VITE_APP_VERSION?.trim() || 'dev'
+export const gameChangelog: GameChangelog = {
+  ...(rawGameChangelog as GameChangelog),
+  releases: (rawGameChangelog as GameChangelog).releases.map((release) => ({
+    ...release,
+    changes: release.changes.map((change) => ({
+      ...change,
+      image: change.image ? publicAssetUrl(change.image) : null,
+    })),
+  })),
+}
 export const towers = doveData.towers
 export const towerById = new Map(towers.map((tower) => [tower.id, tower]))
 export const heroes = doveData.heroes
