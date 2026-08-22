@@ -3,7 +3,7 @@ import { computed, nextTick, ref, watch } from 'vue'
 import DetailPanel from './components/DetailPanel.vue'
 import { Badge } from './components/ui/badge'
 import { Tabs, TabsList, TabsTrigger } from './components/ui/tabs'
-import { doveData, enemies, heroes, siteVersion, towerById, towers } from './data'
+import { doveData, enemies, gameChangelog, heroes, siteVersion, towerById, towers } from './data'
 import CalculatorView from './views/CalculatorView.vue'
 import CatalogView from './views/CatalogView.vue'
 import CompareView from './views/CompareView.vue'
@@ -11,15 +11,17 @@ import DataView from './views/DataView.vue'
 import EnemyView from './views/EnemyView.vue'
 import HeroView from './views/HeroView.vue'
 import TechnologyView from './views/TechnologyView.vue'
+import UpdateHistoryView from './views/UpdateHistoryView.vue'
 import type { Tower } from './types'
 
-type TabId = 'catalog' | 'enemies' | 'heroes' | 'technology' | 'calculator' | 'compare' | 'data'
+type TabId = 'catalog' | 'enemies' | 'heroes' | 'technology' | 'updates' | 'calculator' | 'compare' | 'data'
 
 const tabs: Array<{ id: TabId; label: string; eyebrow: string }> = [
   { id: 'catalog', label: '塔典', eyebrow: 'CATALOG' },
   { id: 'enemies', label: '敌人', eyebrow: 'ENEMIES' },
   { id: 'heroes', label: '英雄', eyebrow: 'HEROES' },
   { id: 'technology', label: '科技', eyebrow: 'TECH' },
+  { id: 'updates', label: '更新', eyebrow: 'UPDATES' },
   { id: 'calculator', label: '辅助计算', eyebrow: 'BUFF LAB' },
   { id: 'compare', label: '双塔对比', eyebrow: 'COMPARE' },
   { id: 'data', label: '数据说明', eyebrow: 'SOURCES' },
@@ -98,6 +100,10 @@ function openTower(tower: Tower) {
       <TechnologyView
         v-else-if="activeTab === 'technology'"
         :trees="doveData.technologyTrees"
+      />
+      <UpdateHistoryView
+        v-else-if="activeTab === 'updates'"
+        :history="gameChangelog"
       />
       <CompareView
         v-else-if="activeTab === 'compare'"
