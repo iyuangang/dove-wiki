@@ -1933,6 +1933,68 @@ input:focus {
   font-size: 11px;
 }
 
+.simulation-technology-effects {
+  display: grid;
+  gap: 7px;
+  margin-top: 10px;
+  padding: 11px 12px;
+  border: 1px solid rgba(125, 178, 117, 0.2);
+  border-radius: 5px;
+  background: rgba(125, 178, 117, 0.045);
+}
+
+.simulation-technology-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+}
+
+.simulation-technology-heading span {
+  color: var(--green);
+  font-size: 10px;
+}
+
+.simulation-technology-heading small {
+  color: var(--faint);
+  font-size: 8px;
+  letter-spacing: 0.06em;
+}
+
+.simulation-technology-effects article {
+  display: grid;
+  grid-template-columns: 7px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  padding-top: 7px;
+  border-top: 1px solid rgba(125, 178, 117, 0.12);
+}
+
+.simulation-technology-effects article > i {
+  width: 6px;
+  height: 6px;
+  margin-top: 4px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 7px rgba(125, 178, 117, 0.42);
+}
+
+.simulation-technology-effects strong,
+.simulation-technology-effects article small {
+  display: block;
+}
+
+.simulation-technology-effects strong {
+  font-size: 10px;
+}
+
+.simulation-technology-effects article small {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.45;
+}
+
 .damage-demo-fields.custom-attack-fields {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -1943,6 +2005,16 @@ input:focus {
 
 .damage-demo-fields.dummy-fields {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.dummy-effective-armor {
+  margin: 9px 0 0;
+  padding: 8px 10px;
+  color: var(--gold-soft);
+  font-size: 9px;
+  line-height: 1.45;
+  border-left: 2px solid var(--gold);
+  background: rgba(229, 185, 104, 0.045);
 }
 
 .damage-demo-fields label {
@@ -2204,6 +2276,25 @@ input:focus {
 
 .attack-history-row strong {
   color: var(--paper);
+}
+
+.attack-history-row .attack-roll {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.attack-history-row .attack-roll small {
+  color: var(--gold-soft);
+  font-size: 8px;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.attack-history-row.critical {
+  background: rgba(229, 185, 104, 0.055);
+  box-shadow: inset 2px 0 rgba(229, 185, 104, 0.5);
 }
 
 .attack-history-row.lethal {
