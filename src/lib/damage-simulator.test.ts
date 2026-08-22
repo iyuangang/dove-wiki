@@ -163,4 +163,54 @@ describe('Dove damage simulator', () => {
     expect(result.defeated).toBe(true)
     expect(result.attacks.length).toBeGreaterThan(1)
   })
+
+  it('applies armor ignore before protection and doubles precision hits', () => {
+    const result = simulateAttackSequence({
+      damageType: 'physical',
+      damageMin: 100,
+      damageMax: 100,
+      hp: 1000,
+      armor: 30,
+      magicArmor: 0,
+      armorIgnore: 10,
+      criticalChance: 1,
+      criticalMultiplier: 2,
+      seed: 2058,
+    })
+
+    expect(result.armorIgnored).toBe(10)
+    expect(result.attacks[0]).toMatchObject({
+      rolledDamage: 100,
+      critical: true,
+      technologyDamageMultiplier: 2,
+      effectiveArmor: 20,
+      damageApplied: 160,
+    })
+    expect(result.criticalHits).toBe(result.attacks.length)
+  })
+
+  it('rolls precision independently at the configured ten-percent chance', () => {
+    const result = simulateAttackSequence({
+      damageType: 'true',
+      damageMin: 10,
+      damageMax: 10,
+      hp: 100_000,
+      armor: 0,
+      magicArmor: 0,
+      criticalChance: 0.1,
+      criticalMultiplier: 2,
+      seed: 2058,
+      maxAttacks: 100,
+    })
+
+    expect(result.attacks).toHaveLength(100)
+    expect(result.criticalHits).toBeGreaterThan(0)
+    expect(result.criticalHits).toBeLessThan(100)
+    expect(result.attacks.filter((attack) => attack.critical)).toHaveLength(result.criticalHits)
+    expect(
+      result.attacks.every(
+        (attack) => attack.damageApplied === (attack.critical ? 20 : 10),
+      ),
+    ).toBe(true)
+  })
 })

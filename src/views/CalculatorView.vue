@@ -37,7 +37,14 @@ interface EffectState {
   triggers: number
 }
 
+interface SimulationTechnologyEffect {
+  id: 'archer_piercing' | 'archer_precision'
+  name: string
+  description: string
+}
+
 const technologyFamilies: TowerFamily[] = ['archer', 'barrack', 'mage', 'engineer']
+const supportedSimulationTechnologyIds = new Set(['archer_piercing', 'archer_precision'])
 const targetId = ref('tower_ranger')
 const technologyTreeId = ref(props.technologyTrees[0]?.id || 1)
 const technologyLevels = reactive<Record<TowerFamily, number>>({
@@ -130,6 +137,41 @@ const activeDamageMin = computed(() =>
 const activeDamageMax = computed(() =>
   attackSource.value === 'tower' ? result.value.damageMax || 0 : customDamage.max,
 )
+const appliedTechnologyIds = computed(
+  () => new Set(result.value.appliedTechnologies.map((technology) => technology.technologyId)),
+)
+const simulationTechnologyEffects = computed<SimulationTechnologyEffect[]>(() => {
+  if (attackSource.value !== 'tower') return []
+  const effects: SimulationTechnologyEffect[] = []
+  if (appliedTechnologyIds.value.has('archer_piercing')) {
+    effects.push({
+      id: 'archer_piercing',
+      name: '穿刺射击',
+      description: '每次攻击忽略目标 10 点护甲',
+    })
+  }
+  if (appliedTechnologyIds.value.has('archer_precision')) {
+    effects.push({
+      id: 'archer_precision',
+      name: '精准射击',
+      description: '每次攻击独立有 10% 概率造成 2 倍伤害',
+    })
+  }
+  return effects
+})
+const simulationArmorIgnore = computed(() =>
+  simulationTechnologyEffects.value.some((technology) => technology.id === 'archer_piercing')
+    ? 10
+    : 0,
+)
+const simulationCriticalChance = computed(() =>
+  simulationTechnologyEffects.value.some((technology) => technology.id === 'archer_precision')
+    ? 0.1
+    : 0,
+)
+const effectiveDummyArmor = computed(() =>
+  Math.max(0, (Number(dummy.armor) || 0) - simulationArmorIgnore.value),
+)
 const selectedDamageType = computed(
   () =>
     damageTypeDefinitions.find((damageType) => damageType.id === activeDamageType.value) ||
@@ -143,6 +185,9 @@ const damageSequence = computed(() =>
     hp: dummy.hp,
     armor: dummy.armor,
     magicArmor: dummy.magicArmor,
+    armorIgnore: simulationArmorIgnore.value,
+    criticalChance: simulationCriticalChance.value,
+    criticalMultiplier: 2,
     seed: simulationSeed.value,
   }),
 )
@@ -168,9 +213,16 @@ const visibleAttackRange = computed(() => {
 const damageEquation = computed(() => {
   const damage = firstAttack.value
   if (!damage) return '当前配置无法造成有效伤害'
+  const technologyMultiplier = damage.technologyDamageMultiplier > 1
+    ? ` × ${formatNumber(damage.technologyDamageMultiplier)}`
+    : ''
   const typeMultiplier = activeDamageType.value === 'stab' ? ' × 2' : ''
-  return `${formatNumber(damage.rolledDamage)}${typeMultiplier} × (1 − ${formatPercent(damage.protection)}) = ${formatNumber(damage.damageApplied)}`
+  return `${formatNumber(damage.rolledDamage)}${technologyMultiplier}${typeMultiplier} × (1 − ${formatPercent(damage.protection)}) = ${formatNumber(damage.damageApplied)}`
 })
+
+function technologyIsSimulated(technologyId: string) {
+  return attackSource.value === 'tower' && supportedSimulationTechnologyIds.has(technologyId)
+}
 
 function selectedLevel(effect: SupportEffect): SupportLevel {
   return (
@@ -347,8 +399,10 @@ function changeAttackPage(offset: number) {
                 <strong>{{ technology.name }}</strong>
                 <p>{{ technology.description }}</p>
               </div>
-              <small :class="technology.calculated ? 'calculated' : 'conditional'">
-                {{ technology.calculated ? '已计入' : '条件型' }}
+              <small
+                :class="technology.calculated || technologyIsSimulated(technology.technologyId) ? 'calculated' : 'conditional'"
+              >
+                {{ technologyIsSimulated(technology.technologyId) ? '已计入逐击' : technology.calculated ? '已计入' : '条件型' }}
               </small>
             </article>
           </div>
@@ -456,24 +510,43 @@ function changeAttackPage(offset: number) {
                 </button>
               </div>
 
-              <div v-if="attackSource === 'tower'" class="tower-attack-source">
-                <img :src="selectedTower.image" :alt="selectedTower.name" />
-                <div>
-                  <span>当前防御塔</span>
-                  <strong>{{ selectedTower.name }}</strong>
-                  <small>实时同步科技与辅助效果</small>
+              <template v-if="attackSource === 'tower'">
+                <div class="tower-attack-source">
+                  <img :src="selectedTower.image" :alt="selectedTower.name" />
+                  <div>
+                    <span>当前防御塔</span>
+                    <strong>{{ selectedTower.name }}</strong>
+                    <small>实时同步科技与辅助效果</small>
+                  </div>
+                  <dl>
+                    <div>
+                      <dt>伤害类型</dt>
+                      <dd>{{ selectedDamageType.name }}</dd>
+                    </div>
+                    <div>
+                      <dt>实时伤害</dt>
+                      <dd>{{ formatNumber(activeDamageMin) }}–{{ formatNumber(activeDamageMax) }}</dd>
+                    </div>
+                  </dl>
                 </div>
-                <dl>
-                  <div>
-                    <dt>伤害类型</dt>
-                    <dd>{{ selectedDamageType.name }}</dd>
+
+                <div v-if="simulationTechnologyEffects.length" class="simulation-technology-effects">
+                  <div class="simulation-technology-heading">
+                    <span>当前生效科技</span>
+                    <small>逐击脚本结算</small>
                   </div>
-                  <div>
-                    <dt>实时伤害</dt>
-                    <dd>{{ formatNumber(activeDamageMin) }}–{{ formatNumber(activeDamageMax) }}</dd>
-                  </div>
-                </dl>
-              </div>
+                  <article
+                    v-for="technology in simulationTechnologyEffects"
+                    :key="technology.id"
+                  >
+                    <i></i>
+                    <div>
+                      <strong>{{ technology.name }}</strong>
+                      <small>{{ technology.description }}</small>
+                    </div>
+                  </article>
+                </div>
+              </template>
 
               <div v-else class="damage-demo-fields custom-attack-fields">
                 <label>
@@ -515,6 +588,9 @@ function changeAttackPage(offset: number) {
                   <input v-model.number="dummy.magicArmor" type="number" min="0" max="100" step="1" />
                 </label>
               </div>
+              <p v-if="simulationArmorIgnore" class="dummy-effective-armor">
+                穿刺射击：护甲 {{ formatNumber(Math.max(0, Number(dummy.armor) || 0)) }}% → 有效护甲 {{ formatNumber(effectiveDummyArmor) }}%
+              </p>
             </div>
 
             <div class="dummy-stage" aria-live="polite">
@@ -542,7 +618,8 @@ function changeAttackPage(offset: number) {
                 <article>
                   <span>攻击次数</span>
                   <strong>{{ damageSequence.attacks.length }}</strong>
-                  <small>随机区间逐击结算</small>
+                  <small v-if="simulationCriticalChance">精准射击触发 {{ damageSequence.criticalHits }} 次</small>
+                  <small v-else>随机区间逐击结算</small>
                 </article>
                 <article>
                   <span>累计伤害</span>
@@ -563,7 +640,7 @@ function changeAttackPage(offset: number) {
               </div>
 
               <p class="damage-demo-note">
-                每次攻击从 {{ formatNumber(activeDamageMin) }}–{{ formatNumber(activeDamageMax) }} 独立随机取值。演示按无免疫、无额外易伤、无护甲穿透、目标伤害系数为 1 结算。
+                每次攻击从 {{ formatNumber(activeDamageMin) }}–{{ formatNumber(activeDamageMax) }} 独立随机取值。演示按无免疫、无额外易伤、目标伤害系数为 1 结算；上方已启用科技会参与每次攻击。
               </p>
             </div>
           </div>
@@ -572,7 +649,9 @@ function changeAttackPage(offset: number) {
             <div class="attack-history-heading">
               <div>
                 <strong>逐次攻击记录</strong>
-                <small>HIT-BY-HIT LOG</small>
+                <small>
+                  HIT-BY-HIT LOG<span v-if="simulationCriticalChance"> · 精准触发 {{ damageSequence.criticalHits }} 次</span>
+                </small>
               </div>
               <button type="button" @click="rerollDamageSequence">↻ 重新模拟</button>
             </div>
@@ -589,10 +668,13 @@ function changeAttackPage(offset: number) {
                 v-for="attack in visibleAttacks"
                 :key="attack.index"
                 class="attack-history-row"
-                :class="{ lethal: attack.remainingHp === 0 }"
+                :class="{ lethal: attack.remainingHp === 0, critical: attack.critical }"
               >
                 <b>#{{ attack.index }}</b>
-                <span>{{ formatNumber(attack.rolledDamage) }}</span>
+                <span class="attack-roll">
+                  {{ formatNumber(attack.rolledDamage) }}
+                  <small v-if="attack.critical">精准 ×{{ formatNumber(attack.technologyDamageMultiplier) }}</small>
+                </span>
                 <span>{{ formatNumber(attack.damageApplied) }}</span>
                 <span>{{ formatNumber(attack.hpLost) }}</span>
                 <strong>{{ formatNumber(attack.remainingHp) }}</strong>

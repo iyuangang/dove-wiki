@@ -109,6 +109,9 @@ export interface AttackSequenceInput {
   hp: number
   armor: number
   magicArmor: number
+  armorIgnore?: number
+  criticalChance?: number
+  criticalMultiplier?: number
   seed?: number
   maxAttacks?: number
 }
@@ -116,6 +119,9 @@ export interface AttackSequenceInput {
 export interface AttackSequenceEntry extends DamageSimulationResult {
   index: number
   rolledDamage: number
+  critical: boolean
+  technologyDamageMultiplier: number
+  effectiveArmor: number
 }
 
 export interface AttackSequenceResult {
@@ -125,6 +131,8 @@ export interface AttackSequenceResult {
   totalDamageApplied: number
   totalHpLost: number
   remainingHp: number
+  criticalHits: number
+  armorIgnored: number
 }
 
 function clamp(value: number, minimum: number, maximum: number) {
@@ -256,17 +264,22 @@ export function simulateAttackSequence(input: AttackSequenceInput): AttackSequen
   const lower = Math.max(0, Math.min(finiteOrZero(input.damageMin), finiteOrZero(input.damageMax)))
   const upper = Math.max(lower, finiteOrZero(input.damageMin), finiteOrZero(input.damageMax))
   const startingHp = Math.max(0, finiteOrZero(input.hp))
+  const armorIgnored = clamp(finiteOrZero(input.armorIgnore ?? 0), 0, 100)
+  const effectiveArmor = Math.max(0, finiteOrZero(input.armor) - armorIgnored)
+  const criticalChance = clamp(finiteOrZero(input.criticalChance ?? 0), 0, 1)
+  const criticalMultiplier = Math.max(1, finiteOrZero(input.criticalMultiplier ?? 1))
   const maxAttacks = clamp(Math.trunc(finiteOrZero(input.maxAttacks ?? 10_000)), 1, 10_000)
   const random = createRandom(input.seed ?? 1)
   const attacks: AttackSequenceEntry[] = []
   let remainingHp = startingHp
   let totalDamageApplied = 0
+  let criticalHits = 0
 
   const maximumHit = simulateDamage({
     damageType: input.damageType,
-    damage: upper,
+    damage: upper * (criticalChance > 0 ? criticalMultiplier : 1),
     hp: startingHp,
-    armor: input.armor,
+    armor: effectiveArmor,
     magicArmor: input.magicArmor,
   })
   if (startingHp > 0 && maximumHit.damageApplied <= 0) {
@@ -277,16 +290,20 @@ export function simulateAttackSequence(input: AttackSequenceInput): AttackSequen
       totalDamageApplied: 0,
       totalHpLost: 0,
       remainingHp,
+      criticalHits: 0,
+      armorIgnored,
     }
   }
 
   while (remainingHp > 0 && attacks.length < maxAttacks) {
     const rolledDamage = rollDamage(lower, upper, random)
+    const critical = criticalChance > 0 && random() < criticalChance
+    const technologyDamageMultiplier = critical ? criticalMultiplier : 1
     const damage = simulateDamage({
       damageType: input.damageType,
-      damage: rolledDamage,
+      damage: rolledDamage * technologyDamageMultiplier,
       hp: remainingHp,
-      armor: input.armor,
+      armor: effectiveArmor,
       magicArmor: input.magicArmor,
     })
 
@@ -294,7 +311,11 @@ export function simulateAttackSequence(input: AttackSequenceInput): AttackSequen
       ...damage,
       index: attacks.length + 1,
       rolledDamage,
+      critical,
+      technologyDamageMultiplier,
+      effectiveArmor,
     })
+    if (critical) criticalHits += 1
     totalDamageApplied += damage.damageApplied
     remainingHp = damage.remainingHp
   }
@@ -307,5 +328,7 @@ export function simulateAttackSequence(input: AttackSequenceInput): AttackSequen
     totalDamageApplied,
     totalHpLost: startingHp - remainingHp,
     remainingHp,
+    criticalHits,
+    armorIgnored,
   }
 }
