@@ -102,12 +102,70 @@ export interface DamageSimulationResult {
   overkill: number
 }
 
+export interface AttackSequenceInput {
+  damageType: DamageTypeId
+  damageMin: number
+  damageMax: number
+  hp: number
+  armor: number
+  magicArmor: number
+  seed?: number
+  maxAttacks?: number
+}
+
+export interface AttackSequenceEntry extends DamageSimulationResult {
+  index: number
+  rolledDamage: number
+}
+
+export interface AttackSequenceResult {
+  attacks: AttackSequenceEntry[]
+  defeated: boolean
+  truncated: boolean
+  totalDamageApplied: number
+  totalHpLost: number
+  remainingHp: number
+}
+
 function clamp(value: number, minimum: number, maximum: number) {
   return Math.min(maximum, Math.max(minimum, value))
 }
 
 function finiteOrZero(value: number) {
   return Number.isFinite(Number(value)) ? Number(value) : 0
+}
+
+export function damageTypeFromGame(
+  damageTypeValue: number | null,
+  damageTypeLabel = '',
+): DamageTypeId {
+  const value = Math.max(0, Math.trunc(finiteOrZero(damageTypeValue ?? 0)))
+  const bitTypes: Array<[number, DamageTypeId]> = [
+    [1, 'true'],
+    [2, 'physical'],
+    [4, 'magical'],
+    [32, 'magical-explosion'],
+    [8, 'explosion'],
+    [16, 'electrical'],
+    [64, 'shot'],
+    [128, 'rude'],
+    [256, 'stab'],
+    [512, 'mixed'],
+  ]
+  const matched = bitTypes.find(([bit]) => (value & bit) !== 0)
+  if (matched) return matched[1]
+
+  const label = damageTypeLabel.trim().toLowerCase()
+  if (label.includes('真实')) return 'true'
+  if (label.includes('混合')) return 'mixed'
+  if (label.includes('穿刺')) return 'stab'
+  if (label.includes('粗暴')) return 'rude'
+  if (label.includes('枪')) return 'shot'
+  if (label.includes('电')) return 'electrical'
+  if (label.includes('魔法范围')) return 'magical-explosion'
+  if (label.includes('物理范围') || label.includes('范围')) return 'explosion'
+  if (label.includes('魔法')) return 'magical'
+  return 'physical'
 }
 
 export function calculateDamageProtection(
@@ -175,5 +233,79 @@ export function simulateDamage(input: DamageSimulationInput): DamageSimulationRe
     remainingHp,
     remainingHpPercent: hp > 0 ? clamp((remainingHp / hp) * 100, 0, 100) : 0,
     overkill: Math.max(0, damageApplied - hp),
+  }
+}
+
+function createRandom(seed: number) {
+  let state = Math.trunc(finiteOrZero(seed)) >>> 0
+  return () => {
+    state = (Math.imul(state, 1664525) + 1013904223) >>> 0
+    return state / 0x1_0000_0000
+  }
+}
+
+function rollDamage(minimum: number, maximum: number, random: () => number) {
+  if (minimum === maximum) return minimum
+  if (Number.isInteger(minimum) && Number.isInteger(maximum)) {
+    return Math.floor(random() * (maximum - minimum + 1)) + minimum
+  }
+  return Math.round((minimum + random() * (maximum - minimum)) * 1000) / 1000
+}
+
+export function simulateAttackSequence(input: AttackSequenceInput): AttackSequenceResult {
+  const lower = Math.max(0, Math.min(finiteOrZero(input.damageMin), finiteOrZero(input.damageMax)))
+  const upper = Math.max(lower, finiteOrZero(input.damageMin), finiteOrZero(input.damageMax))
+  const startingHp = Math.max(0, finiteOrZero(input.hp))
+  const maxAttacks = clamp(Math.trunc(finiteOrZero(input.maxAttacks ?? 10_000)), 1, 10_000)
+  const random = createRandom(input.seed ?? 1)
+  const attacks: AttackSequenceEntry[] = []
+  let remainingHp = startingHp
+  let totalDamageApplied = 0
+
+  const maximumHit = simulateDamage({
+    damageType: input.damageType,
+    damage: upper,
+    hp: startingHp,
+    armor: input.armor,
+    magicArmor: input.magicArmor,
+  })
+  if (startingHp > 0 && maximumHit.damageApplied <= 0) {
+    return {
+      attacks,
+      defeated: false,
+      truncated: false,
+      totalDamageApplied: 0,
+      totalHpLost: 0,
+      remainingHp,
+    }
+  }
+
+  while (remainingHp > 0 && attacks.length < maxAttacks) {
+    const rolledDamage = rollDamage(lower, upper, random)
+    const damage = simulateDamage({
+      damageType: input.damageType,
+      damage: rolledDamage,
+      hp: remainingHp,
+      armor: input.armor,
+      magicArmor: input.magicArmor,
+    })
+
+    attacks.push({
+      ...damage,
+      index: attacks.length + 1,
+      rolledDamage,
+    })
+    totalDamageApplied += damage.damageApplied
+    remainingHp = damage.remainingHp
+  }
+
+  const defeated = startingHp === 0 || remainingHp === 0
+  return {
+    attacks,
+    defeated,
+    truncated: !defeated && attacks.length === maxAttacks,
+    totalDamageApplied,
+    totalHpLost: startingHp - remainingHp,
+    remainingHp,
   }
 }

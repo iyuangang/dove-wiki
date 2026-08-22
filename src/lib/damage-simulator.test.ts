@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { calculateDamageProtection, simulateDamage } from './damage-simulator'
+import {
+  calculateDamageProtection,
+  damageTypeFromGame,
+  simulateAttackSequence,
+  simulateDamage,
+} from './damage-simulator'
 
 describe('Dove damage simulator', () => {
   it('applies true damage directly to the configurable dummy', () => {
@@ -75,5 +80,87 @@ describe('Dove damage simulator', () => {
     expect(result.hpLost).toBe(40)
     expect(result.remainingHp).toBe(0)
     expect(result.overkill).toBe(60)
+  })
+
+  it('maps Dove damage flags even when modifier bits are combined', () => {
+    expect(damageTypeFromGame(1, '真实')).toBe('true')
+    expect(damageTypeFromGame(33554434, '物理')).toBe('physical')
+    expect(damageTypeFromGame(268435472, '电击')).toBe('electrical')
+    expect(damageTypeFromGame(33554496, '枪伤')).toBe('shot')
+    expect(damageTypeFromGame(null, '物理范围')).toBe('explosion')
+  })
+
+  it('rolls every attack inside the live range until the dummy is defeated', () => {
+    const result = simulateAttackSequence({
+      damageType: 'physical',
+      damageMin: 13,
+      damageMax: 20,
+      hp: 100,
+      armor: 10,
+      magicArmor: 10,
+      seed: 2058,
+    })
+
+    expect(result.defeated).toBe(true)
+    expect(result.attacks.length).toBeGreaterThan(0)
+    expect(result.attacks.every((attack) => attack.rolledDamage >= 13)).toBe(true)
+    expect(result.attacks.every((attack) => attack.rolledDamage <= 20)).toBe(true)
+    expect(result.attacks.at(-1)?.remainingHp).toBe(0)
+    expect(result.attacks.at(-1)?.hpLost).toBeLessThanOrEqual(
+      result.attacks.at(-1)?.damageApplied || 0,
+    )
+  })
+
+  it('produces a stable sequence for the same seed and changes after rerolling', () => {
+    const input = {
+      damageType: 'true' as const,
+      damageMin: 10,
+      damageMax: 20,
+      hp: 100,
+      armor: 0,
+      magicArmor: 0,
+    }
+    const first = simulateAttackSequence({ ...input, seed: 1 })
+    const repeated = simulateAttackSequence({ ...input, seed: 1 })
+    const rerolled = simulateAttackSequence({ ...input, seed: 2 })
+
+    expect(repeated.attacks.map((attack) => attack.rolledDamage)).toEqual(
+      first.attacks.map((attack) => attack.rolledDamage),
+    )
+    expect(rerolled.attacks.map((attack) => attack.rolledDamage)).not.toEqual(
+      first.attacks.map((attack) => attack.rolledDamage),
+    )
+  })
+
+  it('stops safely when armor reduces every hit to zero', () => {
+    const result = simulateAttackSequence({
+      damageType: 'physical',
+      damageMin: 10,
+      damageMax: 20,
+      hp: 100,
+      armor: 100,
+      magicArmor: 0,
+    })
+
+    expect(result.defeated).toBe(false)
+    expect(result.attacks).toHaveLength(0)
+    expect(result.remainingHp).toBe(100)
+  })
+
+  it('keeps simulating after a zero roll when the range can still deal damage', () => {
+    const result = simulateAttackSequence({
+      damageType: 'true',
+      damageMin: 0,
+      damageMax: 1,
+      hp: 1,
+      armor: 0,
+      magicArmor: 0,
+      seed: 1,
+      maxAttacks: 10,
+    })
+
+    expect(result.attacks[0]?.rolledDamage).toBe(0)
+    expect(result.defeated).toBe(true)
+    expect(result.attacks.length).toBeGreaterThan(1)
   })
 })
