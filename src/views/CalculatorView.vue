@@ -8,6 +8,12 @@ import {
   type SupportSelection,
   type TechnologySelection,
 } from '../lib/calculator'
+import {
+  damageTypeFromGame,
+  damageTypeDefinitions,
+  simulateAttackSequence,
+  type DamageTypeId,
+} from '../lib/damage-simulator'
 import type {
   Hero,
   SupportEffect,
@@ -41,6 +47,20 @@ const technologyLevels = reactive<Record<TowerFamily, number>>({
   engineer: 0,
 })
 const mageTowerCount = ref(1)
+const attackSource = ref<'tower' | 'custom'>('tower')
+const demoDamageType = ref<DamageTypeId>('true')
+const customDamage = reactive({
+  min: 100,
+  max: 100,
+})
+const dummy = reactive({
+  hp: 1000,
+  armor: 10,
+  magicArmor: 10,
+})
+const simulationSeed = ref(2058)
+const attackPage = ref(1)
+const attackPageSize = 25
 const state = reactive<Record<string, EffectState>>(
   Object.fromEntries(
     props.effects.map((effect) => [
@@ -95,6 +115,62 @@ const needsMageTowerCount = computed(() =>
     (technology) => technology.technologyId === 'mage_brilliance',
   ),
 )
+const towerDamageType = computed(() =>
+  damageTypeFromGame(
+    selectedTower.value.attack.damageTypeValue,
+    selectedTower.value.attack.damageType,
+  ),
+)
+const activeDamageType = computed(() =>
+  attackSource.value === 'tower' ? towerDamageType.value : demoDamageType.value,
+)
+const activeDamageMin = computed(() =>
+  attackSource.value === 'tower' ? result.value.damageMin || 0 : customDamage.min,
+)
+const activeDamageMax = computed(() =>
+  attackSource.value === 'tower' ? result.value.damageMax || 0 : customDamage.max,
+)
+const selectedDamageType = computed(
+  () =>
+    damageTypeDefinitions.find((damageType) => damageType.id === activeDamageType.value) ||
+    damageTypeDefinitions[0],
+)
+const damageSequence = computed(() =>
+  simulateAttackSequence({
+    damageType: activeDamageType.value,
+    damageMin: activeDamageMin.value,
+    damageMax: activeDamageMax.value,
+    hp: dummy.hp,
+    armor: dummy.armor,
+    magicArmor: dummy.magicArmor,
+    seed: simulationSeed.value,
+  }),
+)
+const firstAttack = computed(() => damageSequence.value.attacks[0])
+const dummyRemainingPercent = computed(() => {
+  const hp = Math.max(0, Number(dummy.hp) || 0)
+  return hp > 0 ? (damageSequence.value.remainingHp / hp) * 100 : 0
+})
+const attackPageCount = computed(() =>
+  Math.max(1, Math.ceil(damageSequence.value.attacks.length / attackPageSize)),
+)
+const currentAttackPage = computed(() => Math.min(attackPage.value, attackPageCount.value))
+const visibleAttacks = computed(() => {
+  const start = (currentAttackPage.value - 1) * attackPageSize
+  return damageSequence.value.attacks.slice(start, start + attackPageSize)
+})
+const visibleAttackRange = computed(() => {
+  if (!damageSequence.value.attacks.length) return '0'
+  const start = (currentAttackPage.value - 1) * attackPageSize + 1
+  const end = start + visibleAttacks.value.length - 1
+  return `${start}–${end}`
+})
+const damageEquation = computed(() => {
+  const damage = firstAttack.value
+  if (!damage) return '当前配置无法造成有效伤害'
+  const typeMultiplier = activeDamageType.value === 'stab' ? ' × 2' : ''
+  return `${formatNumber(damage.rolledDamage)}${typeMultiplier} × (1 − ${formatPercent(damage.protection)}) = ${formatNumber(damage.damageApplied)}`
+})
 
 function selectedLevel(effect: SupportEffect): SupportLevel {
   return (
@@ -153,6 +229,41 @@ function resetTechnologies() {
     technologyLevels[family] = 0
   })
   mageTowerCount.value = 1
+}
+
+function resetDamageDemo() {
+  attackSource.value = 'tower'
+  demoDamageType.value = 'true'
+  customDamage.min = 100
+  customDamage.max = 100
+  dummy.hp = 1000
+  dummy.armor = 10
+  dummy.magicArmor = 10
+  simulationSeed.value = 2058
+  attackPage.value = 1
+}
+
+function selectDamageType(damageType: DamageTypeId) {
+  attackSource.value = 'custom'
+  demoDamageType.value = damageType
+  attackPage.value = 1
+}
+
+function selectAttackSource(source: 'tower' | 'custom') {
+  attackSource.value = source
+  attackPage.value = 1
+}
+
+function rerollDamageSequence() {
+  simulationSeed.value += 9973
+  attackPage.value = 1
+}
+
+function changeAttackPage(offset: number) {
+  attackPage.value = Math.min(
+    attackPageCount.value,
+    Math.max(1, currentAttackPage.value + offset),
+  )
 }
 </script>
 
@@ -293,6 +404,230 @@ function resetTechnologies() {
             </article>
           </div>
           <button class="text-button" type="button" @click="resetSupports">清空全部辅助</button>
+        </section>
+
+        <section class="lab-card damage-lab-card">
+          <div class="lab-step"><span>04</span><div><b>伤害类型与傀儡演示</b><small>DAMAGE TYPE LAB</small></div></div>
+          <div class="damage-type-heading">
+            <div>
+              <strong>游戏伤害类型</strong>
+              <p>点击类型可查看规则并立即对下方傀儡结算。百分比按游戏脚本的小数护甲换算。</p>
+            </div>
+            <span>{{ damageTypeDefinitions.length }} TYPES</span>
+          </div>
+
+          <div class="damage-type-grid">
+            <button
+              v-for="damageType in damageTypeDefinitions"
+              :key="damageType.id"
+              type="button"
+              class="damage-type-card"
+              :class="[{ active: activeDamageType === damageType.id }, `type-${damageType.id}`]"
+              @click="selectDamageType(damageType.id)"
+            >
+              <span><i></i>{{ damageType.code }}</span>
+              <strong>{{ damageType.name }}</strong>
+              <p>{{ damageType.description }}</p>
+              <code>{{ damageType.formula }}</code>
+            </button>
+          </div>
+
+          <div class="damage-demo-panel">
+            <div class="damage-demo-config">
+              <div class="damage-demo-title">
+                <div><strong>配置攻击来源</strong><small>ATTACK SOURCE</small></div>
+                <button type="button" class="text-button" @click="resetDamageDemo">恢复默认</button>
+              </div>
+
+              <div class="attack-source-switch" role="group" aria-label="攻击来源">
+                <button
+                  type="button"
+                  :class="{ active: attackSource === 'tower' }"
+                  @click="selectAttackSource('tower')"
+                >
+                  当前防御塔
+                </button>
+                <button
+                  type="button"
+                  :class="{ active: attackSource === 'custom' }"
+                  @click="selectAttackSource('custom')"
+                >
+                  自定义攻击
+                </button>
+              </div>
+
+              <div v-if="attackSource === 'tower'" class="tower-attack-source">
+                <img :src="selectedTower.image" :alt="selectedTower.name" />
+                <div>
+                  <span>当前防御塔</span>
+                  <strong>{{ selectedTower.name }}</strong>
+                  <small>实时同步科技与辅助效果</small>
+                </div>
+                <dl>
+                  <div>
+                    <dt>伤害类型</dt>
+                    <dd>{{ selectedDamageType.name }}</dd>
+                  </div>
+                  <div>
+                    <dt>实时伤害</dt>
+                    <dd>{{ formatNumber(activeDamageMin) }}–{{ formatNumber(activeDamageMax) }}</dd>
+                  </div>
+                </dl>
+              </div>
+
+              <div v-else class="damage-demo-fields custom-attack-fields">
+                <label>
+                  <span>伤害类型</span>
+                  <select v-model="demoDamageType">
+                    <option
+                      v-for="damageType in damageTypeDefinitions"
+                      :key="damageType.id"
+                      :value="damageType.id"
+                    >
+                      {{ damageType.name }}
+                    </option>
+                  </select>
+                </label>
+                <label>
+                  <span>最低伤害</span>
+                  <input v-model.number="customDamage.min" type="number" min="0" max="999999" step="1" />
+                </label>
+                <label>
+                  <span>最高伤害</span>
+                  <input v-model.number="customDamage.max" type="number" min="0" max="999999" step="1" />
+                </label>
+              </div>
+
+              <div class="damage-demo-title dummy-title">
+                <div><strong>配置傀儡</strong><small>TRAINING DUMMY</small></div>
+              </div>
+              <div class="damage-demo-fields dummy-fields">
+                <label>
+                  <span>生命值</span>
+                  <input v-model.number="dummy.hp" type="number" min="0" max="9999999" step="1" />
+                </label>
+                <label>
+                  <span>护甲 (%)</span>
+                  <input v-model.number="dummy.armor" type="number" min="0" max="100" step="1" />
+                </label>
+                <label>
+                  <span>魔抗 (%)</span>
+                  <input v-model.number="dummy.magicArmor" type="number" min="0" max="100" step="1" />
+                </label>
+              </div>
+            </div>
+
+            <div class="dummy-stage" aria-live="polite">
+              <div class="dummy-stage-heading">
+                <div>
+                  <span>结算结果</span>
+                  <strong>{{ selectedDamageType.name }}</strong>
+                </div>
+                <b :class="{ defeated: damageSequence.defeated }">
+                  {{ damageSequence.defeated ? `${damageSequence.attacks.length} 次攻击击倒` : '尚未击倒' }}
+                </b>
+              </div>
+
+              <div class="dummy-hp-readout">
+                <div>
+                  <span>HP</span>
+                  <strong>{{ formatNumber(damageSequence.remainingHp) }} / {{ formatNumber(Math.max(0, Number(dummy.hp) || 0)) }}</strong>
+                </div>
+                <div class="dummy-hp-track">
+                  <i :style="{ width: `${dummyRemainingPercent}%` }"></i>
+                </div>
+              </div>
+
+              <div class="damage-result-primary">
+                <article>
+                  <span>攻击次数</span>
+                  <strong>{{ damageSequence.attacks.length }}</strong>
+                  <small>随机区间逐击结算</small>
+                </article>
+                <article>
+                  <span>累计伤害</span>
+                  <strong>{{ formatNumber(damageSequence.totalDamageApplied) }}</strong>
+                  <small>包含最后一击溢出</small>
+                </article>
+                <article>
+                  <span>实际扣血</span>
+                  <strong>{{ formatNumber(damageSequence.totalHpLost) }}</strong>
+                  <small>不超过傀儡生命</small>
+                </article>
+              </div>
+
+              <div class="damage-equation">
+                <span>首击算式</span>
+                <code>{{ damageEquation }}</code>
+                <p>{{ selectedDamageType.formula }}</p>
+              </div>
+
+              <p class="damage-demo-note">
+                每次攻击从 {{ formatNumber(activeDamageMin) }}–{{ formatNumber(activeDamageMax) }} 独立随机取值。演示按无免疫、无额外易伤、无护甲穿透、目标伤害系数为 1 结算。
+              </p>
+            </div>
+          </div>
+
+          <div class="attack-history">
+            <div class="attack-history-heading">
+              <div>
+                <strong>逐次攻击记录</strong>
+                <small>HIT-BY-HIT LOG</small>
+              </div>
+              <button type="button" @click="rerollDamageSequence">↻ 重新模拟</button>
+            </div>
+
+            <div v-if="damageSequence.attacks.length" class="attack-history-table">
+              <div class="attack-history-row header-row">
+                <span>攻击</span>
+                <span>随机伤害</span>
+                <span>减伤后</span>
+                <span>实际扣血</span>
+                <span>剩余生命</span>
+              </div>
+              <div
+                v-for="attack in visibleAttacks"
+                :key="attack.index"
+                class="attack-history-row"
+                :class="{ lethal: attack.remainingHp === 0 }"
+              >
+                <b>#{{ attack.index }}</b>
+                <span>{{ formatNumber(attack.rolledDamage) }}</span>
+                <span>{{ formatNumber(attack.damageApplied) }}</span>
+                <span>{{ formatNumber(attack.hpLost) }}</span>
+                <strong>{{ formatNumber(attack.remainingHp) }}</strong>
+              </div>
+            </div>
+
+            <div v-else class="attack-history-empty">
+              {{ Number(dummy.hp) <= 0 ? '傀儡初始生命为 0，无需攻击。' : '当前攻击无法造成有效伤害，傀儡不会死亡。' }}
+            </div>
+
+            <div v-if="damageSequence.attacks.length" class="attack-history-pagination">
+              <span>显示第 {{ visibleAttackRange }} 次 · 共 {{ damageSequence.attacks.length }} 次</span>
+              <div v-if="attackPageCount > 1">
+                <button
+                  type="button"
+                  :disabled="currentAttackPage === 1"
+                  @click="changeAttackPage(-1)"
+                >
+                  上一页
+                </button>
+                <b>{{ currentAttackPage }} / {{ attackPageCount }}</b>
+                <button
+                  type="button"
+                  :disabled="currentAttackPage === attackPageCount"
+                  @click="changeAttackPage(1)"
+                >
+                  下一页
+                </button>
+              </div>
+            </div>
+
+            <p v-if="damageSequence.truncated" class="attack-history-warning">
+              10,000 次攻击后傀儡仍未死亡，记录已停止；请降低傀儡防御或生命后重试。
+            </p>
+          </div>
         </section>
       </div>
 
