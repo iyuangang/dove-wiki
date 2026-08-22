@@ -222,6 +222,51 @@ export interface TechnologyTree {
   technologies: Technology[]
 }
 
+export type GameChangeCategory = 'hero' | 'tower' | 'enemy' | 'technology'
+export type GameChangeKind = 'added' | 'removed' | 'balance' | 'content'
+
+export interface GameChangeDetail {
+  field: string
+  before: string
+  after: string
+  delta: string | null
+  direction: 'increase' | 'decrease' | 'changed'
+}
+
+export interface GameChange {
+  id: string
+  category: GameChangeCategory
+  kind: GameChangeKind
+  entityId: string
+  entityName: string
+  title: string
+  description: string
+  image: string | null
+  details: GameChangeDetail[]
+}
+
+export interface GameRelease {
+  id: string
+  version: string
+  previousVersion: string
+  contentVersion: string
+  commitHash: string
+  previousCommitHash: string
+  detectedAt: string
+  summary: {
+    changeCount: number
+    categoryCounts: Record<GameChangeCategory, number>
+    kindCounts: Record<GameChangeKind, number>
+  }
+  changes: GameChange[]
+}
+
+export interface GameChangelog {
+  schemaVersion: number
+  generatedAt: string | null
+  releases: GameRelease[]
+}
+
 export interface DoveData {
   metadata: {
     title: string

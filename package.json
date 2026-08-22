@@ -8,7 +8,8 @@
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "sync:dove": "node tools/sync-dove.mjs"
+    "sync:dove": "node tools/sync-dove.mjs",
+    "changelog:dove": "node tools/game-changelog.mjs --previous-ref HEAD"
   },
   "dependencies": {
     "@lucide/vue": "^1.31.0",

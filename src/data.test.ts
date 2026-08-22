@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { doveData, enemies, heroes, towerById, towers } from './data'
+import { doveData, enemies, gameChangelog, heroes, towerById, towers } from './data'
 
 describe('游戏百科顺序与图像', () => {
   it('uses the build id as the public game version', () => {
-    expect(doveData.metadata.gameVersion).toBe('2.0.5.8')
+    expect(doveData.metadata.gameVersion).toBe('2.0.6.2')
     expect(doveData.metadata.contentVersion).toBe('5.6.12')
     expect(doveData.metadata.gameId).toBe('kingdom_rush_dove')
   })
@@ -74,7 +74,7 @@ describe('游戏百科顺序与图像', () => {
   })
 
   it('extracts the full hero hall with portraits and calculable support heroes', () => {
-    expect(heroes).toHaveLength(75)
+    expect(heroes).toHaveLength(77)
     expect(heroes.every((hero) => hero.name && hero.description && hero.sources.template)).toBe(true)
     expect(heroes.every((hero) => hero.image.startsWith('/heroes/'))).toBe(true)
     expect(heroes.every((hero) => hero.thumbnail.startsWith('/heroes/thumbs/'))).toBe(true)
@@ -92,9 +92,29 @@ describe('游戏百科顺序与图像', () => {
     expect(doveData.supportEffects.filter((effect) => effect.sourceType === 'hero')).toHaveLength(8)
   })
 
+  it('记录相邻游戏版本的数据差异', () => {
+    expect(gameChangelog.releases).toHaveLength(2)
+    expect(gameChangelog.releases[0]).toMatchObject({
+      version: '2.0.6.2',
+      previousVersion: '2.0.5.9',
+      summary: { changeCount: 11 },
+    })
+    expect(gameChangelog.releases.flatMap((release) => release.changes)).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ category: 'hero', kind: 'added', entityName: '极狗' }),
+        expect.objectContaining({ category: 'hero', kind: 'added', entityName: '特拉敏大师' }),
+        expect.objectContaining({
+          category: 'tower',
+          kind: 'balance',
+          entityName: '女巫姐妹花',
+        }),
+      ]),
+    )
+  })
+
   it('mirrors the in-game enemy encyclopedia order, duplicates and images', () => {
-    expect(enemies).toHaveLength(299)
-    expect(new Set(enemies.map((enemy) => enemy.id)).size).toBe(295)
+    expect(enemies).toHaveLength(300)
+    expect(new Set(enemies.map((enemy) => enemy.id)).size).toBe(296)
     expect(enemies.slice(0, 4).map((enemy) => enemy.id)).toEqual([
       'enemy_goblin',
       'enemy_fat_orc',
@@ -102,7 +122,7 @@ describe('游戏百科顺序与图像', () => {
       'enemy_ogre',
     ])
     expect(enemies.map((enemy) => enemy.order)).toEqual(
-      Array.from({ length: 299 }, (_, index) => index + 1),
+      Array.from({ length: 300 }, (_, index) => index + 1),
     )
     expect(enemies.filter((enemy) => enemy.id === 'enemy_halloween_zombie')).toHaveLength(2)
     expect(enemies.every((enemy) => enemy.name && enemy.description)).toBe(true)

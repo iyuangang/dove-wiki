@@ -1,11 +1,11 @@
 {
   "metadata": {
     "title": "王国保卫战鸽子版 WIKI",
-    "gameVersion": "2.0.5.8",
+    "gameVersion": "2.0.6.2",
     "contentVersion": "5.6.12",
     "gameId": "kingdom_rush_dove",
-    "commitHash": "ab027397630eacb500dade515b111605b252d79e",
-    "generatedAt": "2026-08-11T08:46:42.209Z",
+    "commitHash": "15066fd95ca127b2e0eab76fa5a0b688644b594e",
+    "generatedAt": "2026-08-22T02:14:26.345Z",
     "sourceRoot": "D:\\KingdomRushDove-Windows-Cycle2-v0.1.5\\KingdomRushDove",
     "assumptions": [
       "科技树可在辅助计算中选择；条件触发、概率与特殊目标效果不强行折算进基础面板。",
@@ -22,10 +22,10 @@
     "skillIconCount": 196,
     "technologyTreeCount": 4,
     "technologyCount": 144,
-    "heroCount": 75,
-    "enemyCount": 299,
-    "uniqueEnemyCount": 295,
-    "enemyImageCount": 295,
+    "heroCount": 77,
+    "enemyCount": 300,
+    "uniqueEnemyCount": 296,
+    "enemyImageCount": 296,
     "supportTowerCount": 6,
     "supportHeroCount": 7,
     "supportEffectCount": 15,
@@ -9754,7 +9754,7 @@
         },
         {
           "name": "铁球横扫",
-          "description": "每隔40秒，奥布杜尔朝路径上扔出一个巨大钢球，造成300点破甲伤害，并使敌人眩晕2秒。"
+          "description": "每隔5秒，奥布杜尔朝路径上扔出一个巨大钢球，造成300点破甲伤害，并使敌人眩晕2秒。"
         }
       ],
       "image": "/heroes/hero_builder.png",
@@ -13520,6 +13520,332 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
       }
+    },
+    {
+      "id": "hero_jigou",
+      "name": "极狗",
+      "description": "这头凶蛮可怕的野兽原本被囚禁在北国冰山，从沉睡中醒来只为向维兹南俯首听命。它会按照主人的号令，毫不容情地粉碎一切敌人。",
+      "specialties": [
+        "雪球",
+        "霜冻吐息",
+        "猛击大地",
+        "冰川形态",
+        "冰区",
+        "雪人血"
+      ],
+      "abilities": [
+        {
+          "name": "雪球",
+          "description": "每隔10秒，极狗向敌人投掷一块冻结的石头，对60范围内敌人造成160-195点爆炸伤害。"
+        },
+        {
+          "name": "霜冻吐息",
+          "description": "每隔20秒，极狗呼出肺中的空气，冻结面前的敌人，使其冻结3秒。"
+        },
+        {
+          "name": "猛击大地",
+          "description": "每隔30秒，暴怒，猛烈击打大地13次，对周围敌人造成20点物理伤害，并使其眩晕0.5秒。"
+        },
+        {
+          "name": "冰川形态",
+          "description": "每隔40秒，极狗蜷缩进冰屋，9秒内受到的伤害减少60%，嘲讽周围60范围内敌人，并使其移动速度降低30%，期间每秒恢复67点生命值。"
+        },
+        {
+          "name": "冰区",
+          "description": "每隔44秒，极狗制造出一块布满冰雪的区域，沿敌阵路径延伸，对沿途敌人造成275点物理伤害，并使其移动速度降低60%，持续6秒。"
+        },
+        {
+          "name": "雪人血",
+          "description": "极狗的自愈能力极强，每隔0.2秒恢复6点生命值。"
+        }
+      ],
+      "image": "/heroes/hero_jigou.png",
+      "thumbnail": "/heroes/thumbs/hero_jigou.png",
+      "sourceGame": 4,
+      "availableLevel": 1,
+      "startingLevel": 1,
+      "profileStats": [
+        8,
+        7,
+        0,
+        3
+      ],
+      "maxStats": {
+        "hp": 900,
+        "armor": 0.24,
+        "magicArmor": null,
+        "meleeDamageMin": 67,
+        "meleeDamageMax": 102,
+        "rangedDamageMin": null,
+        "rangedDamageMax": null
+      },
+      "skills": [
+        {
+          "id": "ultimate",
+          "maxLevel": 4,
+          "unlockLevels": [
+            {
+              "heroLevel": 1,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 4,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 7,
+              "skillLevel": 3
+            },
+            {
+              "heroLevel": 10,
+              "skillLevel": 4
+            }
+          ]
+        },
+        {
+          "id": "earthshake",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 2,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 5,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 8,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "frozen_breath",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 2,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 5,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 8,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "ice_shard",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 2,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 5,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 8,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "glacial_form",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 3,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 6,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 9,
+              "skillLevel": 3
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/heroes.lua + kr1/data/balance.lua",
+        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      }
+    },
+    {
+      "id": "hero_tramin",
+      "name": "特拉敏大师",
+      "description": "头脑机敏绝伦的特拉敏，曾是好战分子们那些绝妙发明背后的主创，现在俨然已经成为维兹南的部队中最不可或缺的核心人物之一。充裕的研究经费让他得以肆意发挥自己的天赋，而他的成果也完全对得起这笔投入。",
+      "specialties": [
+        "自爆机器人",
+        "饮硝狂奔",
+        "闪光弹",
+        "火箭弹幕",
+        "疯狂炸弹人",
+        "火箭跳"
+      ],
+      "abilities": [
+        {
+          "name": "自爆机器人",
+          "description": "每隔20秒，向敌人投掷一个自爆机器人，落地后沿路径冲向敌人并自爆，对30范围内敌人造成56-104点爆炸伤害。"
+        },
+        {
+          "name": "饮硝狂奔",
+          "description": "每隔40秒，特拉敏喝下一杯硝酸甘油，使自身攻速加快25%，普攻冷却额外缩短一半，持续22秒。"
+        },
+        {
+          "name": "闪光弹",
+          "description": "每隔24秒，向敌人掷出一枚闪光弹，令其眩晕3秒，并造成普攻伤害。"
+        },
+        {
+          "name": "火箭弹幕",
+          "description": "每隔18秒，向敌人发射8枚追踪导弹，每枚造成40-80点爆炸伤害。"
+        },
+        {
+          "name": "疯狂炸弹人",
+          "description": "每隔56秒，投下一个能造出炸弹的盒子，放出10颗炸弹沿路径前进，每颗爆炸对敌人造成200点爆炸伤害。"
+        },
+        {
+          "name": "火箭跳",
+          "description": "远距离调遣时，特拉敏驱散特殊效果，并用火箭跳跃快速转移。"
+        }
+      ],
+      "image": "/heroes/hero_tramin.png",
+      "thumbnail": "/heroes/thumbs/hero_tramin.png",
+      "sourceGame": 4,
+      "availableLevel": 1,
+      "startingLevel": 1,
+      "profileStats": [
+        5,
+        8,
+        6,
+        7
+      ],
+      "maxStats": {
+        "hp": 396,
+        "armor": 0.24,
+        "magicArmor": null,
+        "meleeDamageMin": 9,
+        "meleeDamageMax": 24,
+        "rangedDamageMin": 16,
+        "rangedDamageMax": 39
+      },
+      "skills": [
+        {
+          "id": "rocket_barrage",
+          "maxLevel": 4,
+          "unlockLevels": [
+            {
+              "heroLevel": 1,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 4,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 7,
+              "skillLevel": 3
+            },
+            {
+              "heroLevel": 10,
+              "skillLevel": 4
+            }
+          ]
+        },
+        {
+          "id": "ultimate",
+          "maxLevel": 4,
+          "unlockLevels": [
+            {
+              "heroLevel": 1,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 4,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 7,
+              "skillLevel": 3
+            },
+            {
+              "heroLevel": 10,
+              "skillLevel": 4
+            }
+          ]
+        },
+        {
+          "id": "nitro_rush",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 2,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 5,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 8,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "bombots",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 3,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 6,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 9,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "flashbang",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 3,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 6,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 9,
+              "skillLevel": 3
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/heroes.lua + kr1/data/balance.lua",
+        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      }
     }
   ],
   "enemies": [
@@ -13539,7 +13865,7 @@
       "imageSprite": "encyclopedia_creeps_0001",
       "thumbnailSprite": "encyclopedia_creep_thumbs_0001",
       "sourceGame": 1,
-      "alwaysShown": true,
+      "alwaysShown": false,
       "flying": false,
       "boss": false,
       "stats": {
@@ -15998,7 +16324,7 @@
       "imageSprite": "kr2_encyclopedia_creeps_0001",
       "thumbnailSprite": "kr2_encyclopedia_creep_thumbs_0001",
       "sourceGame": 2,
-      "alwaysShown": true,
+      "alwaysShown": false,
       "flying": false,
       "boss": false,
       "stats": {
@@ -16876,8 +17202,8 @@
       "boss": false,
       "stats": {
         "hp": 140,
-        "damageMin": 10,
-        "damageMax": 20,
+        "damageMin": null,
+        "damageMax": null,
         "armor": 0,
         "magicArmor": 0.6,
         "speed": 73.62,
@@ -18155,7 +18481,7 @@
       "imageSprite": "kr3_encyclopedia_creeps_0001",
       "thumbnailSprite": "kr3_encyclopedia_creep_thumbs_0001",
       "sourceGame": 3,
-      "alwaysShown": true,
+      "alwaysShown": false,
       "flying": false,
       "boss": false,
       "stats": {
@@ -19779,7 +20105,7 @@
       "imageSprite": "kr5_encyclopedia_creeps_0001",
       "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0001",
       "sourceGame": 5,
-      "alwaysShown": true,
+      "alwaysShown": false,
       "flying": false,
       "boss": false,
       "stats": {
@@ -21308,8 +21634,8 @@
       ],
       "image": "/enemies/enemy_revenant_soulcaller.png",
       "thumbnail": "/enemies/thumbs/enemy_revenant_soulcaller.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0044",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0044",
+      "imageSprite": "kr5_encyclopedia_creeps_0045",
+      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0045",
       "sourceGame": 5,
       "alwaysShown": false,
       "flying": false,
@@ -21343,8 +21669,8 @@
       ],
       "image": "/enemies/enemy_animated_armor.png",
       "thumbnail": "/enemies/thumbs/enemy_animated_armor.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0041",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0041",
+      "imageSprite": "kr5_encyclopedia_creeps_0044",
+      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0044",
       "sourceGame": 5,
       "alwaysShown": false,
       "flying": false,
@@ -23746,9 +24072,44 @@
       }
     },
     {
-      "entryId": "enemy_alfa_lava--285",
-      "id": "enemy_alfa_lava",
+      "entryId": "enemy_tanky_draconian--285",
+      "id": "enemy_tanky_draconian",
       "order": 285,
+      "name": "怒锋龙",
+      "description": "毫无技巧，仅靠蛮力与满腔怒火的魔龙人。他们只知冲锋，不问缘由。",
+      "special": "",
+      "traits": [
+        "中护甲"
+      ],
+      "image": "/enemies/enemy_tanky_draconian.png",
+      "thumbnail": "/enemies/thumbs/enemy_tanky_draconian.png",
+      "imageSprite": "kr5_encyclopedia_creeps_0108",
+      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0108",
+      "sourceGame": 5,
+      "alwaysShown": false,
+      "flying": false,
+      "boss": false,
+      "stats": {
+        "hp": 768,
+        "damageMin": 38,
+        "damageMax": 68.75,
+        "armor": 0.35,
+        "magicArmor": 0,
+        "speed": 38,
+        "lives": 1,
+        "gold": 30
+      },
+      "sources": {
+        "roster": "kr1/game_settings.lua → encyclopedia_enemies",
+        "template": "游戏实体模板 + info.fn",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "encyclopedia": "_assets/kr1-desktop/images/fullhd/encyclopedia.lua + encyclopedia_creeps.lua"
+      }
+    },
+    {
+      "entryId": "enemy_alfa_lava--286",
+      "id": "enemy_alfa_lava",
+      "order": 286,
       "name": "熔岩魔龙",
       "description": "身形庞大且残暴无情的魔龙人头领，在战场中前进时喷发的熔岩会使亲族进化。",
       "special": "",
@@ -23783,9 +24144,9 @@
       }
     },
     {
-      "entryId": "enemy_basic_acid--286",
+      "entryId": "enemy_basic_acid--287",
       "id": "enemy_basic_acid",
-      "order": 286,
+      "order": 287,
       "name": "酸蚀幼龙",
       "description": "这些魔龙人能从远处喷吐无视抗性的酸液，将敌人溶解。",
       "special": "",
@@ -23819,9 +24180,9 @@
       }
     },
     {
-      "entryId": "enemy_evolved_acid--287",
+      "entryId": "enemy_evolved_acid--288",
       "id": "enemy_evolved_acid",
-      "order": 287,
+      "order": 288,
       "name": "腐蚀飞龙",
       "description": "进化为空中掠食者后，这些魔龙人更加强大与致命，能以范围攻击从远处猎杀敌人。",
       "special": "",
@@ -23856,9 +24217,9 @@
       }
     },
     {
-      "entryId": "enemy_alfa_acid--288",
+      "entryId": "enemy_alfa_acid--289",
       "id": "enemy_alfa_acid",
-      "order": 288,
+      "order": 289,
       "name": "腐源魔龙",
       "description": "远距离攻击的危险敌人。擅长射击，进化亲族，以毒瘤般的致命效率循环不息。",
       "special": "",
@@ -23893,9 +24254,9 @@
       }
     },
     {
-      "entryId": "enemy_basic_shadow--289",
+      "entryId": "enemy_basic_shadow--290",
       "id": "enemy_basic_shadow",
-      "order": 289,
+      "order": 290,
       "name": "暗影幼龙",
       "description": "身形小巧，难以捉摸的幼年魔龙人。善于潜入暗影，规避任何形式的正面冲突。",
       "special": "",
@@ -23930,9 +24291,9 @@
       }
     },
     {
-      "entryId": "enemy_evolved_shadow--290",
+      "entryId": "enemy_evolved_shadow--291",
       "id": "enemy_evolved_shadow",
-      "order": 290,
+      "order": 291,
       "name": "幽影飞龙",
       "description": "暗影加身的她藏身于黑暗之中伺机而动，在不期而至的致命突袭中显现身形。",
       "special": "",
@@ -23966,9 +24327,9 @@
       }
     },
     {
-      "entryId": "enemy_alfa_shadow--291",
+      "entryId": "enemy_alfa_shadow--292",
       "id": "enemy_alfa_shadow",
-      "order": 291,
+      "order": 292,
       "name": "永夜魔龙",
       "description": "令人不安的魔龙人女巫穿梭于战场，使用诞生自暗影的魔法进化亲族。",
       "special": "",
@@ -24003,9 +24364,9 @@
       }
     },
     {
-      "entryId": "enemy_basic_storm--292",
+      "entryId": "enemy_basic_storm--293",
       "id": "enemy_basic_storm",
-      "order": 292,
+      "order": 293,
       "name": "电光幼龙",
       "description": "迅捷飞行的魔龙人，以沉稳的优雅之姿穿梭于云层与敌阵之间。",
       "special": "",
@@ -24040,9 +24401,9 @@
       }
     },
     {
-      "entryId": "enemy_evolved_storm--293",
+      "entryId": "enemy_evolved_storm--294",
       "id": "enemy_evolved_storm",
-      "order": 293,
+      "order": 294,
       "name": "风暴飞龙",
       "description": "这些魔龙人虽行动迟缓，却更加危险，总是带领亲族突入敌阵。",
       "special": "",
@@ -24076,9 +24437,9 @@
       }
     },
     {
-      "entryId": "enemy_alfa_storm--294",
+      "entryId": "enemy_alfa_storm--295",
       "id": "enemy_alfa_storm",
-      "order": 294,
+      "order": 295,
       "name": "雷暴魔龙",
       "description": "他召唤风暴，风暴应声而至。雷电不仅是他的武器，也是电光幼龙进化的关键。",
       "special": "",
@@ -24113,9 +24474,9 @@
       }
     },
     {
-      "entryId": "enemy_executioner_storm--295",
+      "entryId": "enemy_executioner_storm--296",
       "id": "enemy_executioner_storm",
-      "order": 295,
+      "order": 296,
       "name": "雷罚龙",
       "description": "历经无尽战火的残暴战士，当雷电加身之时，便会化为行走的死刑判决。",
       "special": "",
@@ -24149,9 +24510,9 @@
       }
     },
     {
-      "entryId": "boss_murglum--296",
+      "entryId": "boss_murglum--297",
       "id": "boss_murglum",
-      "order": 296,
+      "order": 297,
       "name": "墨尔古仑",
       "description": "最强大的熔岩龙，在摆脱维兹南的控制后选择复仇。",
       "special": "",
@@ -24182,9 +24543,9 @@
       }
     },
     {
-      "entryId": "enemy_miniboss_stage_39--297",
+      "entryId": "enemy_miniboss_stage_39--298",
       "id": "enemy_miniboss_stage_39",
-      "order": 297,
+      "order": 298,
       "name": "原初共生体",
       "description": "与魔龙人之母身心相连的可怕怪物，是她意志的延伸，既是漂泊在外的游子，亦是母体最重要的防御机制。",
       "special": "",
@@ -24217,9 +24578,9 @@
       }
     },
     {
-      "entryId": "controller_stage_39_boss--298",
+      "entryId": "controller_stage_39_boss--299",
       "id": "controller_stage_39_boss",
-      "order": 298,
+      "order": 299,
       "name": "魔龙人之母",
       "description": "魔龙人之母，会不断分裂创造巨龙",
       "special": "",
@@ -24253,9 +24614,9 @@
       }
     },
     {
-      "entryId": "controller_stage_40_boss--299",
+      "entryId": "controller_stage_40_boss--300",
       "id": "controller_stage_40_boss",
-      "order": 299,
+      "order": 300,
       "name": "提兰索尔",
       "description": "提兰索尔，邪恶的龙族篡位者，企图统治云境之国。",
       "special": "",
@@ -25847,20 +26208,20 @@
           "icon": "/skills/tower_dwaarp--lava.png",
           "iconSprite": "special_icons_0037",
           "maxLevel": 3,
-          "priceBase": 375,
-          "priceIncrement": 275,
+          "priceBase": 400,
+          "priceIncrement": 250,
           "descriptions": [
             {
               "key": "TOWER_DWAARP_LAVA_DESCRIPTION_1",
-              "text": "每隔15秒，灼烧范围内所有敌人3秒，每秒造成25点伤害。燃烧效果持续2秒。"
+              "text": "每隔15秒，造成1.7倍普攻伤害并灼烧范围内所有敌人3秒，每秒造成25点伤害。燃烧效果持续2秒。"
             },
             {
               "key": "TOWER_DWAARP_LAVA_DESCRIPTION_2",
-              "text": "每隔15秒，灼烧范围内所有敌人3秒，每秒造成40点伤害。燃烧效果持续2秒。"
+              "text": "每隔15秒，造成2.4倍普攻伤害并灼烧范围内所有敌人3秒，每秒造成40点伤害。燃烧效果持续2秒。"
             },
             {
               "key": "TOWER_DWAARP_LAVA_DESCRIPTION_3",
-              "text": "每隔15秒，灼烧范围内所有敌人3秒，每秒造成55点伤害。燃烧效果持续2秒。"
+              "text": "每隔15秒，造成3.1倍普攻伤害并灼烧范围内所有敌人3秒，每秒造成55点伤害。燃烧效果持续2秒。"
             }
           ]
         }
@@ -26779,7 +27140,7 @@
     {
       "id": "tower_archer_dwarf",
       "name": "矮人堡垒",
-      "description": "矮人射手使用威力高的吓人的秘银子弹，就是听说他们大多来自金色酿酒坊。",
+      "description": "矮人射手使用威力高得吓人的秘银子弹，就是听说他们大多来自金色酿酒坊。",
       "families": [
         "archer"
       ],
@@ -28438,8 +28799,8 @@
           "icon": "/skills/tower_drow--blade_mail.png",
           "iconSprite": "kr3_special_icons_0019",
           "maxLevel": 3,
-          "priceBase": 125,
-          "priceIncrement": 125,
+          "priceBase": 120,
+          "priceIncrement": 120,
           "descriptions": [
             {
               "key": "TOWER_DROW_BLADE_MAIL_DESCRIPTION_1",
@@ -28461,8 +28822,8 @@
           "icon": "/skills/tower_drow--double_dagger.png",
           "iconSprite": "kr3_special_icons_0021",
           "maxLevel": 1,
-          "priceBase": 170,
-          "priceIncrement": 170,
+          "priceBase": 165,
+          "priceIncrement": 165,
           "descriptions": [
             {
               "key": "TOWER_DROW_DOUBLE_DAGGER_DESCRIPTION_1",
@@ -28484,20 +28845,20 @@
           "icon": "/skills/tower_drow--life_drain.png",
           "iconSprite": "kr3_special_icons_0020",
           "maxLevel": 3,
-          "priceBase": 225,
-          "priceIncrement": 200,
+          "priceBase": 235,
+          "priceIncrement": 210,
           "descriptions": [
             {
               "key": "TOWER_DROW_LIFE_DRAIN_DESCRIPTION_1",
-              "text": "每隔5.7秒进行吸血打击，造成50点残暴伤害，并使变节者恢复0.8*伤害+30点生命值。"
+              "text": "每隔5.7秒进行吸血打击，驱散剧毒，造成70点残暴伤害，并使变节者恢复0.8*伤害+30点可溢出生命值。"
             },
             {
               "key": "TOWER_DROW_LIFE_DRAIN_DESCRIPTION_2",
-              "text": "每隔5.7秒进行吸血打击，造成100点残暴伤害，并使变节者恢复0.8*伤害+30点生命值。"
+              "text": "每隔5.7秒进行吸血打击，驱散剧毒，造成140点残暴伤害，并使变节者恢复0.8*伤害+30点可溢出生命值。"
             },
             {
               "key": "TOWER_DROW_LIFE_DRAIN_DESCRIPTION_3",
-              "text": "每隔5.7秒进行吸血打击，造成150点残暴伤害，并使变节者恢复0.8*伤害+30点生命值。"
+              "text": "每隔5.7秒进行吸血打击，驱散剧毒，造成210点残暴伤害，并使变节者恢复0.8*伤害+30点可溢出生命值。"
             }
           ]
         }
@@ -28861,9 +29222,9 @@
       },
       "attack": {
         "damageMin": 24,
-        "damageMax": 36,
+        "damageMax": 37,
         "cooldown": 3,
-        "dps": 10,
+        "dps": 10.166666666666666,
         "range": 180,
         "rallyRange": null,
         "damageType": "物理范围",
@@ -30089,9 +30450,9 @@
       "canBeBuffed": true,
       "unlock": {
         "status": "level",
-        "level": 116,
-        "label": "第 116 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level116_data.lua"
+        "level": 117,
+        "label": "第 117 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level117_data.lua"
       },
       "attack": {
         "damageMin": 134,
@@ -30162,7 +30523,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level116_data.lua"
+        "unlock": "kr1/data/levels/level117_data.lua"
       }
     },
     {
@@ -30191,9 +30552,9 @@
       "canBeBuffed": true,
       "unlock": {
         "status": "level",
-        "level": 116,
-        "label": "第 116 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level116_data.lua"
+        "level": 120,
+        "label": "第 120 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level120_data.lua"
       },
       "attack": {
         "damageMin": 70,
@@ -30256,7 +30617,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level116_data.lua"
+        "unlock": "kr1/data/levels/level120_data.lua"
       }
     },
     {
@@ -30285,9 +30646,9 @@
       "canBeBuffed": true,
       "unlock": {
         "status": "level",
-        "level": 116,
-        "label": "第 116 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level116_data.lua"
+        "level": 128,
+        "label": "第 128 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level128_data.lua"
       },
       "attack": {
         "damageMin": 10,
@@ -30350,7 +30711,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level116_data.lua"
+        "unlock": "kr1/data/levels/level128_data.lua"
       }
     },
     {
@@ -30379,9 +30740,9 @@
       "canBeBuffed": true,
       "unlock": {
         "status": "level",
-        "level": 116,
-        "label": "第 116 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level116_data.lua"
+        "level": 123,
+        "label": "第 123 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level123_data.lua"
       },
       "attack": {
         "damageMin": 17,
@@ -30458,7 +30819,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level116_data.lua"
+        "unlock": "kr1/data/levels/level123_data.lua"
       }
     },
     {
@@ -30487,9 +30848,9 @@
       "canBeBuffed": true,
       "unlock": {
         "status": "level",
-        "level": 116,
-        "label": "第 116 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level116_data.lua"
+        "level": 131,
+        "label": "第 131 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level131_data.lua"
       },
       "attack": {
         "damageMin": 32,
@@ -30577,7 +30938,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level116_data.lua"
+        "unlock": "kr1/data/levels/level131_data.lua"
       }
     },
     {
@@ -30605,9 +30966,9 @@
       "canBeBuffed": true,
       "unlock": {
         "status": "level",
-        "level": 116,
-        "label": "第 116 关开始可用，通关后永久解锁",
-        "source": "kr1/data/levels/level116_data.lua"
+        "level": 136,
+        "label": "第 136 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level136_data.lua"
       },
       "attack": {
         "damageMin": 31,
@@ -30674,7 +31035,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/levels/level116_data.lua"
+        "unlock": "kr1/data/levels/level136_data.lua"
       }
     },
     {
@@ -32131,20 +32492,20 @@
           "icon": "/skills/tower_twilight_elves_barrack--backstab.png",
           "iconSprite": "kr4_special_icons_0051",
           "maxLevel": 3,
-          "priceBase": 180,
+          "priceBase": 210,
           "priceIncrement": 180,
           "descriptions": [
             {
               "key": "TOWER_TWILIGHT_ELVES_BARRACK_BACKSTAB_DESCRIPTION_1",
-              "text": "骚扰者有40%概率闪躲敌人的攻击并反击，造成35-40点物理伤害。"
+              "text": "骚扰者有40%概率闪躲敌人的攻击并反击，造成35-40点物理伤害。每次成功闪避，减少箭矢风暴1秒冷却。"
             },
             {
               "key": "TOWER_TWILIGHT_ELVES_BARRACK_BACKSTAB_DESCRIPTION_2",
-              "text": "骚扰者有50%概率闪躲敌人的攻击并反击，造成50-55点物理伤害。"
+              "text": "骚扰者有50%概率闪躲敌人的攻击并反击，造成50-55点物理伤害。每次成功闪避，减少箭矢风暴1秒冷却。"
             },
             {
               "key": "TOWER_TWILIGHT_ELVES_BARRACK_BACKSTAB_DESCRIPTION_3",
-              "text": "骚扰者有60%概率闪躲敌人的攻击并反击，造成65-70点物理伤害。"
+              "text": "骚扰者有60%概率闪躲敌人的攻击并反击，造成65-70点物理伤害。每次成功闪避，减少箭矢风暴1秒冷却。"
             }
           ]
         },
@@ -32159,7 +32520,7 @@
           "descriptions": [
             {
               "key": "TOWER_TWILIGHT_ELVES_BARRACK_LAST_BREATH_DESCRIPTION_1",
-              "text": "骚扰者死时会进入狂怒状态，拥有250点生命，4秒无敌，每次攻击造成35-50点物理伤害，最多战斗12秒。"
+              "text": "骚扰者生命燃尽时成为幽灵骚扰者并无敌3秒，拥有250点生命，每次攻击造成35-50点物理伤害，最多战斗12秒。幽灵骚扰者继承骚扰者的闪避能力。"
             }
           ]
         }
@@ -32668,7 +33029,7 @@
           "icon": "/skills/tower_blazing_watcher--charging.png",
           "iconSprite": "kr4_special_icons_0039",
           "maxLevel": 1,
-          "priceBase": 200,
+          "priceBase": 190,
           "priceIncrement": 0,
           "descriptions": [
             {
@@ -32986,10 +33347,10 @@
         "source": "kr1/data/slot_template.lua"
       },
       "attack": {
-        "damageMin": 210,
-        "damageMax": 210,
+        "damageMin": 183,
+        "damageMax": 183,
         "cooldown": 2.5,
-        "dps": 84,
+        "dps": 73.2,
         "range": 125,
         "rallyRange": 125,
         "damageType": "真实",

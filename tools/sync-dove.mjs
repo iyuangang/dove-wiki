@@ -10,6 +10,7 @@ import {
 } from 'node:fs/promises'
 import { basename, dirname, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { updateGameChangelog } from './game-changelog.mjs'
 
 const toolsDir = dirname(fileURLToPath(import.meta.url))
 const projectRoot = resolve(toolsDir, '..')
@@ -30,6 +31,7 @@ const rawDir = join(toolsDir, '.tmp')
 const rawPath = join(rawDir, 'dove-raw.json')
 const dataDir = join(projectRoot, 'src', 'data')
 const dataPath = join(dataDir, 'dove-data.json')
+const changelogPath = join(dataDir, 'game-changelog.json')
 const portraitDir = join(projectRoot, 'public', 'portraits')
 const encyclopediaDir = join(projectRoot, 'public', 'encyclopedia')
 const encyclopediaThumbDir = join(encyclopediaDir, 'thumbs')
@@ -1168,6 +1170,13 @@ async function cleanupTechnologyImages(rawTechnology) {
 async function main() {
   assertFile(join(gameDir, 'kr1', 'game_settings.lua'), 'Dove 游戏目录')
   assertFile(loveExe, 'Dove 自带 lovec.exe')
+  const previousData = existsSync(dataPath)
+    ? JSON.parse(await readFile(dataPath, 'utf8'))
+    : null
+  const previousChangelog = existsSync(changelogPath)
+    ? JSON.parse(await readFile(changelogPath, 'utf8'))
+    : null
+
   await mkdir(rawDir, { recursive: true })
   await mkdir(dataDir, { recursive: true })
   await mkdir(portraitDir, { recursive: true })
@@ -1326,7 +1335,9 @@ async function main() {
     towers,
   }
 
+  const nextChangelog = updateGameChangelog(previousData, data, previousChangelog)
   await writeFile(dataPath, `${JSON.stringify(data, null, 2)}\n`, 'utf8')
+  await writeFile(changelogPath, `${JSON.stringify(nextChangelog, null, 2)}\n`, 'utf8')
   const dataSize = await stat(dataPath)
   console.log(
     `[dove-wiki] 完成：${towers.length} 座塔、${heroes.length} 名英雄、${enemies.length} 个敌人百科槽位（${uniqueEnemyCount} 个唯一敌人）、${technologyCount} 张科技图标、${encyclopediaCount} 套塔百科图、${skillIconCount} 张技能图标、${towers.length - encyclopediaCount} 张头像回退、${Math.round(dataSize.size / 1024)} KiB 数据`,
