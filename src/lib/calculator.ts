@@ -17,6 +17,7 @@ export interface TechnologySelection {
   treeId: number
   levels: Record<TowerFamily, number>
   mageTowerCount?: number
+  nearbyEnemyCount?: number
 }
 
 export interface BuffResult {
@@ -166,6 +167,18 @@ export function calculateBuffs(
     )
 
     for (const technology of technologies) {
+      let calculatedByContext = false
+      if (technology.id === 'mage_purge_field') {
+        const nearbyEnemyCount = Math.min(
+          30,
+          Math.max(0, Math.floor(technologySelection.nearbyEnemyCount ?? 1)),
+        )
+        const factor = 1.14 + nearbyEnemyCount * 0.01
+        technologyDamageMin = multiply(technologyDamageMin, factor)
+        technologyDamageMax = multiply(technologyDamageMax, factor)
+        calculatedByContext = true
+      }
+
       const modifiers = technology.modifiers.filter((modifier) =>
         modifierAppliesToTower(modifier, tower.id),
       )
@@ -236,7 +249,7 @@ export function calculateBuffs(
         family: technology.family,
         level: technology.level,
         description: technology.description,
-        calculated: modifiers.length > 0,
+        calculated: modifiers.length > 0 || calculatedByContext,
       })
     }
   }

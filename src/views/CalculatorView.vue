@@ -38,13 +38,34 @@ interface EffectState {
 }
 
 interface SimulationTechnologyEffect {
-  id: 'archer_piercing' | 'archer_precision'
+  id: string
   name: string
   description: string
+  active: boolean
 }
 
 const technologyFamilies: TowerFamily[] = ['archer', 'barrack', 'mage', 'engineer']
-const supportedSimulationTechnologyIds = new Set(['archer_piercing', 'archer_precision'])
+const supportedSimulationTechnologyIds = new Set([
+  'archer_piercing',
+  'archer_precision',
+  'archer_el_bloodletting_shoot',
+  'archer_tear',
+  'archer_obsidian',
+  'archer_magic',
+  'archer_fly_killer',
+  'mage_arcane_shatter',
+  'mage_strike',
+  'mage_unsteady',
+  'mage_purge_field',
+  'engineer_magic_dust',
+])
+const magicDustCompensationTowerIds = new Set([
+  'tower_tesla',
+  'tower_frankenstein',
+  'tower_rotten_forest',
+  'tower_ignis_altar',
+  'tower_sandworm',
+])
 const targetId = ref('tower_ranger')
 const technologyTreeId = ref(props.technologyTrees[0]?.id || 1)
 const technologyLevels = reactive<Record<TowerFamily, number>>({
@@ -54,6 +75,7 @@ const technologyLevels = reactive<Record<TowerFamily, number>>({
   engineer: 0,
 })
 const mageTowerCount = ref(1)
+const nearbyEnemyCount = ref(1)
 const attackSource = ref<'tower' | 'custom'>('tower')
 const demoDamageType = ref<DamageTypeId>('true')
 const customDamage = reactive({
@@ -64,6 +86,7 @@ const dummy = reactive({
   hp: 1000,
   armor: 10,
   magicArmor: 10,
+  flying: false,
 })
 const simulationSeed = ref(2058)
 const attackPage = ref(1)
@@ -105,6 +128,7 @@ const technologySelection = computed<TechnologySelection>(() => ({
   treeId: technologyTreeId.value,
   levels: { ...technologyLevels },
   mageTowerCount: mageTowerCount.value,
+  nearbyEnemyCount: nearbyEnemyCount.value,
 }))
 const result = computed(() =>
   calculateBuffs(
@@ -120,6 +144,11 @@ const heroById = computed(() => new Map(props.heroes.map((hero) => [hero.id, her
 const needsMageTowerCount = computed(() =>
   result.value.appliedTechnologies.some(
     (technology) => technology.technologyId === 'mage_brilliance',
+  ),
+)
+const needsNearbyEnemyCount = computed(() =>
+  result.value.appliedTechnologies.some(
+    (technology) => technology.technologyId === 'mage_purge_field',
   ),
 )
 const towerDamageType = computed(() =>
@@ -140,21 +169,130 @@ const activeDamageMax = computed(() =>
 const appliedTechnologyIds = computed(
   () => new Set(result.value.appliedTechnologies.map((technology) => technology.technologyId)),
 )
+const hasSimulationTechnology = (technologyId: string) =>
+  attackSource.value === 'tower' && appliedTechnologyIds.value.has(technologyId)
+const technologyOnlyDamageMin = computed(() =>
+  (result.value.damageMin || 0) / (1 + result.value.damageBonus),
+)
+const technologyOnlyDamageMax = computed(() =>
+  (result.value.damageMax || 0) / (1 + result.value.damageBonus),
+)
+const simulationArmorReductionPerHit = computed(() => {
+  if (hasSimulationTechnology('archer_tear')) {
+    const averageDamage = (technologyOnlyDamageMin.value + technologyOnlyDamageMax.value) / 2
+    if (averageDamage > 40) return 1
+    if (averageDamage > 20) return 0.72
+    if (averageDamage > 10) return 0.44
+    return 0.16
+  }
+  if (hasSimulationTechnology('mage_arcane_shatter')) {
+    return technologyOnlyDamageMax.value >= 50 ? 3.5 : 2
+  }
+  return 0
+})
+const magicDustUsesCompensation = computed(() =>
+  hasSimulationTechnology('engineer_magic_dust') &&
+  magicDustCompensationTowerIds.has(selectedTower.value.id),
+)
 const simulationTechnologyEffects = computed<SimulationTechnologyEffect[]>(() => {
   if (attackSource.value !== 'tower') return []
   const effects: SimulationTechnologyEffect[] = []
-  if (appliedTechnologyIds.value.has('archer_piercing')) {
+  if (hasSimulationTechnology('archer_piercing')) {
     effects.push({
       id: 'archer_piercing',
       name: '穿刺射击',
       description: '每次攻击忽略目标 10 点护甲',
+      active: true,
     })
   }
-  if (appliedTechnologyIds.value.has('archer_precision')) {
+  if (hasSimulationTechnology('archer_precision')) {
     effects.push({
       id: 'archer_precision',
       name: '精准射击',
       description: '每次攻击独立有 10% 概率造成 2 倍伤害',
+      active: true,
+    })
+  }
+  if (hasSimulationTechnology('archer_el_bloodletting_shoot')) {
+    effects.push({
+      id: 'archer_el_bloodletting_shoot',
+      name: '放血射击',
+      description: '15% 概率施加 3 秒放血：立即结算首跳，共 23 跳真实伤害，最多 5 层',
+      active: true,
+    })
+  }
+  if (hasSimulationTechnology('archer_tear')) {
+    effects.push({
+      id: 'archer_tear',
+      name: '护甲撕裂',
+      description: `每次命中后永久降低 ${formatNumber(simulationArmorReductionPerHit.value)} 点护甲`,
+      active: true,
+    })
+  }
+  if (hasSimulationTechnology('archer_obsidian')) {
+    effects.push({
+      id: 'archer_obsidian',
+      name: '黑曜箭镞',
+      description: '目标当前减伤不高于 10% 时，主伤害提高 27%',
+      active: true,
+    })
+  }
+  if (hasSimulationTechnology('archer_magic')) {
+    effects.push({
+      id: 'archer_magic',
+      name: '附魔箭矢',
+      description: '每次命中追加主伤害 12% 的魔法伤害（向上取整）',
+      active: true,
+    })
+  }
+  if (hasSimulationTechnology('archer_fly_killer')) {
+    effects.push({
+      id: 'archer_fly_killer',
+      name: '空军克星',
+      description: dummy.flying ? '傀儡为空军，额外 25% 对空伤害已触发' : '仅对空军额外提高 25%；当前傀儡不是空军',
+      active: dummy.flying,
+    })
+  }
+  if (hasSimulationTechnology('mage_arcane_shatter')) {
+    effects.push({
+      id: 'mage_arcane_shatter',
+      name: '奥术粉碎',
+      description: `每次命中后永久降低 ${formatNumber(simulationArmorReductionPerHit.value)} 点护甲`,
+      active: true,
+    })
+  }
+  if (hasSimulationTechnology('mage_strike')) {
+    effects.push({
+      id: 'mage_strike',
+      name: '弱点打击',
+      description: '目标对本次伤害没有减伤时，主伤害提高 20%',
+      active: true,
+    })
+  }
+  if (hasSimulationTechnology('mage_unsteady')) {
+    effects.push({
+      id: 'mage_unsteady',
+      name: '不稳定魔力',
+      description: '每次攻击有 10% 概率造成 2 倍无减伤伤害',
+      active: true,
+    })
+  }
+  if (hasSimulationTechnology('mage_purge_field')) {
+    effects.push({
+      id: 'mage_purge_field',
+      name: '肃清立场',
+      description: `射程内 ${nearbyEnemyCount.value} 名敌人：实时伤害提高 ${14 + Math.min(30, Math.max(0, Math.floor(nearbyEnemyCount.value || 0)))}%`,
+      active: true,
+    })
+  }
+  if (hasSimulationTechnology('engineer_magic_dust')) {
+    effects.push({
+      id: 'engineer_magic_dust',
+      name: '魔法粉尘',
+      description: magicDustUsesCompensation.value
+        ? '该塔使用兼容补偿规则：固定提高 20%，已计入实时伤害'
+        : '每次攻击有 10% 概率追加基于本次攻击力和傀儡最大生命的伤害',
+      active: true,
     })
   }
   return effects
@@ -188,6 +326,26 @@ const damageSequence = computed(() =>
     armorIgnore: simulationArmorIgnore.value,
     criticalChance: simulationCriticalChance.value,
     criticalMultiplier: 2,
+    attackInterval: result.value.cooldown || 0,
+    armorReductionPerHit: simulationArmorReductionPerHit.value,
+    lowProtectionThreshold: hasSimulationTechnology('archer_obsidian') ? 0.1 : -1,
+    lowProtectionMultiplier: hasSimulationTechnology('archer_obsidian') ? 1.27 : 1,
+    unprotectedMultiplier: hasSimulationTechnology('mage_strike') ? 1.2 : 1,
+    unsteadyChance: hasSimulationTechnology('mage_unsteady') ? 0.1 : 0,
+    unsteadyMultiplier: 2,
+    secondaryMagicDamageFactor: hasSimulationTechnology('archer_magic') ? 0.12 : 0,
+    flyingDamageMultiplier:
+      hasSimulationTechnology('archer_fly_killer') && dummy.flying ? 1.25 : 1,
+    magicDustChance:
+      hasSimulationTechnology('engineer_magic_dust') && !magicDustUsesCompensation.value
+        ? 0.1
+        : 0,
+    bleedChance: hasSimulationTechnology('archer_el_bloodletting_shoot') ? 0.15 : 0,
+    bleedDamageFactor: 0.1,
+    bleedTicks: 23,
+    bleedTickInterval: 4 / 30,
+    bleedDuration: 3,
+    bleedMaxStacks: 5,
     seed: simulationSeed.value,
   }),
 )
@@ -217,8 +375,29 @@ const damageEquation = computed(() => {
     ? ` × ${formatNumber(damage.technologyDamageMultiplier)}`
     : ''
   const typeMultiplier = activeDamageType.value === 'stab' ? ' × 2' : ''
-  return `${formatNumber(damage.rolledDamage)}${technologyMultiplier}${typeMultiplier} × (1 − ${formatPercent(damage.protection)}) = ${formatNumber(damage.damageApplied)}`
+  const extras = damage.totalAttackDamageApplied > damage.damageApplied
+    ? `；附加结算后本击共 ${formatNumber(damage.totalAttackDamageApplied)}`
+    : ''
+  return `${formatNumber(damage.rolledDamage)}${technologyMultiplier}${typeMultiplier} × (1 − ${formatPercent(damage.protection)}) = 主伤 ${formatNumber(damage.damageApplied)}${extras}`
 })
+const technologyTriggerSummary = computed(() => {
+  const parts: string[] = []
+  if (simulationCriticalChance.value) parts.push(`精准 ${damageSequence.value.criticalHits} 次`)
+  if (hasSimulationTechnology('mage_unsteady')) parts.push(`不稳定 ${damageSequence.value.unsteadyHits} 次`)
+  if (hasSimulationTechnology('engineer_magic_dust') && !magicDustUsesCompensation.value) {
+    parts.push(`粉尘 ${damageSequence.value.magicDustHits} 次`)
+  }
+  if (hasSimulationTechnology('archer_el_bloodletting_shoot')) {
+    parts.push(`放血 ${damageSequence.value.bleedTriggers} 次`)
+  }
+  return parts.join(' · ')
+})
+
+function formatDuration(seconds: number) {
+  if (!Number.isFinite(seconds)) return '—'
+  if (seconds < 1) return `${formatNumber(seconds, 3)} 秒`
+  return `${formatNumber(seconds, 2)} 秒`
+}
 
 function technologyIsSimulated(technologyId: string) {
   return attackSource.value === 'tower' && supportedSimulationTechnologyIds.has(technologyId)
@@ -281,6 +460,7 @@ function resetTechnologies() {
     technologyLevels[family] = 0
   })
   mageTowerCount.value = 1
+  nearbyEnemyCount.value = 1
 }
 
 function resetDamageDemo() {
@@ -291,6 +471,7 @@ function resetDamageDemo() {
   dummy.hp = 1000
   dummy.armor = 10
   dummy.magicArmor = 10
+  dummy.flying = false
   simulationSeed.value = 2058
   attackPage.value = 1
 }
@@ -386,6 +567,10 @@ function changeAttackPage(offset: number) {
             <label v-if="needsMageTowerCount">
               <span>场上法师塔</span>
               <input v-model.number="mageTowerCount" type="number" min="1" max="9" />
+            </label>
+            <label v-if="needsNearbyEnemyCount">
+              <span>射程内敌人</span>
+              <input v-model.number="nearbyEnemyCount" type="number" min="0" max="30" />
             </label>
           </div>
 
@@ -538,6 +723,7 @@ function changeAttackPage(offset: number) {
                   <article
                     v-for="technology in simulationTechnologyEffects"
                     :key="technology.id"
+                    :class="{ inactive: !technology.active }"
                   >
                     <i></i>
                     <div>
@@ -588,8 +774,19 @@ function changeAttackPage(offset: number) {
                   <input v-model.number="dummy.magicArmor" type="number" min="0" max="100" step="1" />
                 </label>
               </div>
+              <label class="dummy-trait-toggle">
+                <input v-model="dummy.flying" type="checkbox" />
+                <span></span>
+                <div>
+                  <strong>空军目标</strong>
+                  <small>用于触发只对飞行敌人生效的科技</small>
+                </div>
+              </label>
               <p v-if="simulationArmorIgnore" class="dummy-effective-armor">
                 穿刺射击：护甲 {{ formatNumber(Math.max(0, Number(dummy.armor) || 0)) }}% → 有效护甲 {{ formatNumber(effectiveDummyArmor) }}%
+              </p>
+              <p v-if="simulationArmorReductionPerHit" class="dummy-effective-armor">
+                连续破甲：每次命中后降低 {{ formatNumber(simulationArmorReductionPerHit) }} 点，模拟结束时剩余 {{ formatNumber(damageSequence.finalArmor) }}% 护甲。
               </p>
             </div>
 
@@ -600,7 +797,7 @@ function changeAttackPage(offset: number) {
                   <strong>{{ selectedDamageType.name }}</strong>
                 </div>
                 <b :class="{ defeated: damageSequence.defeated }">
-                  {{ damageSequence.defeated ? `${damageSequence.attacks.length} 次攻击击倒` : '尚未击倒' }}
+                  {{ damageSequence.defeated ? `${damageSequence.attacks.length} 次攻击 · ${formatDuration(damageSequence.elapsedTime)}击倒` : '尚未击倒' }}
                 </b>
               </div>
 
@@ -618,7 +815,7 @@ function changeAttackPage(offset: number) {
                 <article>
                   <span>攻击次数</span>
                   <strong>{{ damageSequence.attacks.length }}</strong>
-                  <small v-if="simulationCriticalChance">精准射击触发 {{ damageSequence.criticalHits }} 次</small>
+                  <small v-if="technologyTriggerSummary">{{ technologyTriggerSummary }}</small>
                   <small v-else>随机区间逐击结算</small>
                 </article>
                 <article>
@@ -631,6 +828,13 @@ function changeAttackPage(offset: number) {
                   <strong>{{ formatNumber(damageSequence.totalHpLost) }}</strong>
                   <small>不超过傀儡生命</small>
                 </article>
+                <article>
+                  <span>击杀总时长</span>
+                  <strong>{{ damageSequence.defeated ? formatDuration(damageSequence.elapsedTime) : '—' }}</strong>
+                  <small>
+                    {{ damageSequence.finalBlow === 'bleed' ? '最后一跳放血击杀' : `首击 0 秒 · 间隔 ${formatNumber(result.cooldown)} 秒` }}
+                  </small>
+                </article>
               </div>
 
               <div class="damage-equation">
@@ -640,7 +844,7 @@ function changeAttackPage(offset: number) {
               </div>
 
               <p class="damage-demo-note">
-                每次攻击从 {{ formatNumber(activeDamageMin) }}–{{ formatNumber(activeDamageMax) }} 独立随机取值。演示按无免疫、无额外易伤、目标伤害系数为 1 结算；上方已启用科技会参与每次攻击。
+                每次攻击从 {{ formatNumber(activeDamageMin) }}–{{ formatNumber(activeDamageMax) }} 独立随机取值。首击记为 0 秒，后续按实时攻击间隔推进；不计弹道飞行与攻击前摇。演示按无免疫、无额外易伤、目标伤害系数为 1 结算；上方已启用科技会参与每次攻击。
               </p>
             </div>
           </div>
@@ -650,7 +854,7 @@ function changeAttackPage(offset: number) {
               <div>
                 <strong>逐次攻击记录</strong>
                 <small>
-                  HIT-BY-HIT LOG<span v-if="simulationCriticalChance"> · 精准触发 {{ damageSequence.criticalHits }} 次</span>
+                  HIT-BY-HIT LOG<span v-if="technologyTriggerSummary"> · {{ technologyTriggerSummary }}</span>
                 </small>
               </div>
               <button type="button" @click="rerollDamageSequence">↻ 重新模拟</button>
@@ -660,7 +864,7 @@ function changeAttackPage(offset: number) {
               <div class="attack-history-row header-row">
                 <span>攻击</span>
                 <span>随机伤害</span>
-                <span>减伤后</span>
+                <span>本击总伤</span>
                 <span>实际扣血</span>
                 <span>剩余生命</span>
               </div>
@@ -668,15 +872,19 @@ function changeAttackPage(offset: number) {
                 v-for="attack in visibleAttacks"
                 :key="attack.index"
                 class="attack-history-row"
-                :class="{ lethal: attack.remainingHp === 0, critical: attack.critical }"
+                :class="{
+                  lethal: attack.remainingHp === 0 || (attack.index === damageSequence.attacks.length && damageSequence.defeated),
+                  critical: attack.critical,
+                  triggered: attack.technologyTriggers.length,
+                }"
               >
-                <b>#{{ attack.index }}</b>
+                <b class="attack-index">#{{ attack.index }}<small>{{ formatDuration(attack.timestamp) }}</small></b>
                 <span class="attack-roll">
                   {{ formatNumber(attack.rolledDamage) }}
-                  <small v-if="attack.critical">精准 ×{{ formatNumber(attack.technologyDamageMultiplier) }}</small>
+                  <small v-if="attack.technologyTriggers.length">{{ attack.technologyTriggers.join(' · ') }}</small>
                 </span>
-                <span>{{ formatNumber(attack.damageApplied) }}</span>
-                <span>{{ formatNumber(attack.hpLost) }}</span>
+                <span>{{ formatNumber(attack.totalAttackDamageApplied) }}</span>
+                <span>{{ formatNumber(attack.totalAttackHpLost) }}</span>
                 <strong>{{ formatNumber(attack.remainingHp) }}</strong>
               </div>
             </div>
@@ -708,6 +916,9 @@ function changeAttackPage(offset: number) {
 
             <p v-if="damageSequence.truncated" class="attack-history-warning">
               10,000 次攻击后傀儡仍未死亡，记录已停止；请降低傀儡防御或生命后重试。
+            </p>
+            <p v-else-if="damageSequence.finalBlow === 'bleed'" class="attack-history-warning bleed-finish">
+              最后一次攻击后，放血于 {{ formatDuration(damageSequence.elapsedTime) }} 完成击杀；逐击表最后一行显示该次攻击结算后的生命值。
             </p>
           </div>
         </section>
