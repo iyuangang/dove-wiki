@@ -1792,6 +1792,250 @@ input:focus {
   --damage-accent: #56d4d0;
 }
 
+.damage-curve-lab {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.damage-curve-toolbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  align-items: end;
+}
+
+.damage-curve-toolbar strong,
+.damage-curve-toolbar p {
+  display: block;
+  margin: 0;
+}
+
+.damage-curve-toolbar strong {
+  font-size: 15px;
+}
+
+.damage-curve-toolbar p {
+  max-width: 670px;
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.damage-curve-slider {
+  display: grid;
+  flex: 0 0 230px;
+  gap: 8px;
+}
+
+.damage-curve-slider > span {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.damage-curve-slider b {
+  color: var(--gold-soft);
+  font-weight: 600;
+}
+
+.damage-curve-slider input {
+  width: 100%;
+  accent-color: var(--gold);
+}
+
+.damage-curve-legend {
+  display: grid;
+  margin-top: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  gap: 7px;
+}
+
+.damage-curve-legend button {
+  display: grid;
+  min-width: 0;
+  grid-template-columns: 22px minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+  padding: 8px 9px;
+  color: var(--ink);
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.09);
+}
+
+.damage-curve-legend button:hover,
+.damage-curve-legend button.active {
+  border-color: color-mix(in srgb, var(--curve-color) 48%, transparent);
+  background: color-mix(in srgb, var(--curve-color) 7%, transparent);
+}
+
+.damage-curve-legend button > i {
+  width: 22px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--curve-color);
+}
+
+.damage-curve-legend button > span,
+.damage-curve-legend strong,
+.damage-curve-legend small {
+  display: block;
+  min-width: 0;
+}
+
+.damage-curve-legend strong {
+  overflow: hidden;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.damage-curve-legend small {
+  margin-top: 2px;
+  overflow: hidden;
+  color: var(--faint);
+  font-size: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.damage-curve-legend button > b {
+  color: var(--curve-color);
+  font-family: Georgia, serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.series-true {
+  --curve-color: #eef0ec;
+}
+
+.series-direct {
+  --curve-color: #e5b968;
+}
+
+.series-area {
+  --curve-color: #df7e68;
+}
+
+.series-electrical {
+  --curve-color: #68d6ff;
+}
+
+.series-shot {
+  --curve-color: #91d9ee;
+}
+
+.series-stab {
+  --curve-color: #c49ae8;
+}
+
+.series-mixed {
+  --curve-color: #70b095;
+}
+
+.damage-curve-chart-host {
+  width: 100%;
+  margin-top: 13px;
+}
+
+.damage-curve-chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  background:
+    radial-gradient(circle at 85% 15%, rgba(229, 185, 104, 0.045), transparent 34%),
+    rgba(0, 0, 0, 0.11);
+}
+
+.damage-curve-frame {
+  fill: rgba(255, 255, 255, 0.008);
+  stroke: rgba(227, 220, 194, 0.12);
+  stroke-width: 1;
+}
+
+.damage-curve-grid-line {
+  stroke: rgba(227, 220, 194, 0.09);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.damage-curve-tick,
+.damage-curve-axis-title {
+  fill: var(--muted);
+  font-family: Inter, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 11px;
+}
+
+.damage-curve-axis-title {
+  fill: var(--faint);
+  font-size: 10px;
+  letter-spacing: 0.03em;
+}
+
+.damage-curve-series {
+  fill: none;
+  stroke: var(--curve-color);
+  stroke-width: 2;
+  opacity: 0.76;
+  vector-effect: non-scaling-stroke;
+  transition: opacity 150ms ease, stroke-width 150ms ease;
+}
+
+.damage-curve-series.series-area,
+.damage-curve-series.series-shot {
+  stroke-dasharray: 7 4;
+}
+
+.damage-curve-series.series-electrical,
+.damage-curve-series.series-mixed {
+  stroke-dasharray: 2 3;
+}
+
+.damage-curve-series.active {
+  stroke-width: 3.5;
+  opacity: 1;
+}
+
+.damage-curve-series.dimmed,
+.damage-curve-point.dimmed {
+  opacity: 0.16;
+}
+
+.damage-curve-cursor {
+  stroke: rgba(242, 238, 226, 0.48);
+  stroke-width: 1;
+  stroke-dasharray: 3 4;
+  vector-effect: non-scaling-stroke;
+}
+
+.damage-curve-point {
+  fill: var(--curve-color);
+  stroke: #111510;
+  stroke-width: 1.5;
+  vector-effect: non-scaling-stroke;
+  transition: opacity 150ms ease;
+}
+
+.damage-curve-point.active {
+  stroke-width: 2;
+}
+
+.damage-curve-note {
+  margin: 9px 0 0;
+  color: var(--faint);
+  font-size: 9px;
+  line-height: 1.55;
+}
+
 .damage-demo-panel {
   display: grid;
   grid-template-columns: minmax(250px, 0.76fr) minmax(340px, 1.24fr);
@@ -5263,6 +5507,15 @@ input:focus {
 @media (max-width: 680px) {
   .damage-type-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .damage-curve-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .damage-curve-slider {
+    flex-basis: auto;
   }
 
   .damage-demo-panel {
