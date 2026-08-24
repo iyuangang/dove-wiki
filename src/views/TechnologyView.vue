@@ -42,6 +42,21 @@ const metricLabels: Record<string, string> = {
   respawn: '重生时间',
   soldierCount: '士兵数量',
 }
+const dynamicDummyTechnologyIds = new Set([
+  'archer_piercing',
+  'archer_precision',
+  'archer_el_bloodletting_shoot',
+  'archer_tear',
+  'archer_obsidian',
+  'archer_magic',
+  'archer_fly_killer',
+  'mage_arcane_shatter',
+  'mage_strike',
+  'mage_unsteady',
+  'mage_purge_field',
+  'engineer_magic_dust',
+])
+const dummyMetrics = new Set(['damage', 'expectedDps', 'cooldown'])
 
 const activeTreeId = ref(String(props.trees[0]?.id || 1))
 const activeTree = computed(
@@ -69,6 +84,12 @@ function isTowerTechnology(technology: Technology) {
 
 function statusLabel(technology: Technology) {
   if (!isTowerTechnology(technology)) return '独立能力'
+  if (
+    dynamicDummyTechnologyIds.has(technology.id) ||
+    technology.modifiers.some((modifier) => dummyMetrics.has(modifier.metric))
+  ) {
+    return '可计入傀儡'
+  }
   return technology.modifiers.length ? '已计入塔面板' : '条件效果'
 }
 </script>

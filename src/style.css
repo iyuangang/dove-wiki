@@ -1933,6 +1933,77 @@ input:focus {
   font-size: 11px;
 }
 
+.simulation-technology-effects {
+  display: grid;
+  gap: 7px;
+  margin-top: 10px;
+  padding: 11px 12px;
+  border: 1px solid rgba(125, 178, 117, 0.2);
+  border-radius: 5px;
+  background: rgba(125, 178, 117, 0.045);
+}
+
+.simulation-technology-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  align-items: center;
+}
+
+.simulation-technology-heading span {
+  color: var(--green);
+  font-size: 10px;
+}
+
+.simulation-technology-heading small {
+  color: var(--faint);
+  font-size: 8px;
+  letter-spacing: 0.06em;
+}
+
+.simulation-technology-effects article {
+  display: grid;
+  grid-template-columns: 7px minmax(0, 1fr);
+  gap: 8px;
+  align-items: start;
+  padding-top: 7px;
+  border-top: 1px solid rgba(125, 178, 117, 0.12);
+}
+
+.simulation-technology-effects article > i {
+  width: 6px;
+  height: 6px;
+  margin-top: 4px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 7px rgba(125, 178, 117, 0.42);
+}
+
+.simulation-technology-effects article.inactive {
+  opacity: 0.56;
+}
+
+.simulation-technology-effects article.inactive > i {
+  background: var(--faint);
+  box-shadow: none;
+}
+
+.simulation-technology-effects strong,
+.simulation-technology-effects article small {
+  display: block;
+}
+
+.simulation-technology-effects strong {
+  font-size: 10px;
+}
+
+.simulation-technology-effects article small {
+  margin-top: 3px;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.45;
+}
+
 .damage-demo-fields.custom-attack-fields {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
@@ -1943,6 +2014,82 @@ input:focus {
 
 .damage-demo-fields.dummy-fields {
   grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.dummy-effective-armor {
+  margin: 9px 0 0;
+  padding: 8px 10px;
+  color: var(--gold-soft);
+  font-size: 9px;
+  line-height: 1.45;
+  border-left: 2px solid var(--gold);
+  background: rgba(229, 185, 104, 0.045);
+}
+
+.dummy-effective-armor + .dummy-effective-armor {
+  margin-top: 6px;
+}
+
+.dummy-trait-toggle {
+  display: grid;
+  width: 100%;
+  margin-top: 10px;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 9px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dummy-trait-toggle input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dummy-trait-toggle > span {
+  position: relative;
+  width: 30px;
+  height: 17px;
+  border: 1px solid var(--line-bright);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.dummy-trait-toggle > span::after {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 9px;
+  height: 9px;
+  content: "";
+  border-radius: 50%;
+  background: var(--faint);
+  transition: 150ms ease;
+}
+
+.dummy-trait-toggle input:checked + span {
+  border-color: rgba(229, 185, 104, 0.55);
+  background: rgba(229, 185, 104, 0.11);
+}
+
+.dummy-trait-toggle input:checked + span::after {
+  transform: translateX(13px);
+  background: var(--gold);
+}
+
+.dummy-trait-toggle strong,
+.dummy-trait-toggle small {
+  display: block;
+}
+
+.dummy-trait-toggle strong {
+  font-size: 10px;
+}
+
+.dummy-trait-toggle small {
+  margin-top: 2px;
+  color: var(--faint);
+  font-size: 8px;
 }
 
 .damage-demo-fields label {
@@ -2040,7 +2187,7 @@ input:focus {
 
 .damage-result-primary {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 7px;
   margin-top: 16px;
 }
@@ -2206,6 +2353,38 @@ input:focus {
   color: var(--paper);
 }
 
+.attack-history-row .attack-roll {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.attack-history-row .attack-roll small {
+  color: var(--gold-soft);
+  font-size: 8px;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.attack-history-row .attack-index small {
+  display: block;
+  margin-top: 2px;
+  color: var(--faint);
+  font-family: var(--font-sans);
+  font-size: 8px;
+  font-weight: 400;
+}
+
+.attack-history-row.triggered:not(.critical):not(.lethal) {
+  box-shadow: inset 2px 0 rgba(125, 178, 117, 0.42);
+}
+
+.attack-history-row.critical {
+  background: rgba(229, 185, 104, 0.055);
+  box-shadow: inset 2px 0 rgba(229, 185, 104, 0.5);
+}
+
 .attack-history-row.lethal {
   background: rgba(210, 94, 73, 0.065);
 }
@@ -2246,6 +2425,12 @@ input:focus {
   color: #d9a18e;
   border-color: rgba(210, 94, 73, 0.23);
   background: rgba(210, 94, 73, 0.045);
+}
+
+.attack-history-warning.bleed-finish {
+  color: var(--gold-soft);
+  border-color: rgba(229, 185, 104, 0.23);
+  background: rgba(229, 185, 104, 0.045);
 }
 
 .soldier-result {
@@ -3274,7 +3459,11 @@ input:focus {
 }
 
 .technology-family-card {
+  display: grid;
   min-width: 0;
+  grid-row: span 7;
+  grid-template-rows: subgrid;
+  row-gap: 0;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 7px;
@@ -3317,7 +3506,7 @@ input:focus {
 }
 
 .technology-family-card ol {
-  display: grid;
+  display: contents;
   margin: 0;
   padding: 0;
   list-style: none;

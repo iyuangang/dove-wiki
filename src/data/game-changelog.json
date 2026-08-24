@@ -1,7 +1,32 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-22T02:14:26.345Z",
+  "generatedAt": "2026-08-24T01:12:10.945Z",
   "releases": [
+    {
+      "id": "2.0.6.4-0b62562a349f",
+      "version": "2.0.6.4",
+      "previousVersion": "2.0.6.2",
+      "contentVersion": "5.6.12",
+      "commitHash": "0b62562a349fc32347f62a127546ea75d82f0fe7",
+      "previousCommitHash": "15066fd95ca127b2e0eab76fa5a0b688644b594e",
+      "detectedAt": "2026-08-24T01:12:10.945Z",
+      "summary": {
+        "changeCount": 0,
+        "categoryCounts": {
+          "hero": 0,
+          "tower": 0,
+          "enemy": 0,
+          "technology": 0
+        },
+        "kindCounts": {
+          "added": 0,
+          "removed": 0,
+          "balance": 0,
+          "content": 0
+        }
+      },
+      "changes": []
+    },
     {
       "id": "2.0.6.2-15066fd95ca1",
       "version": "2.0.6.2",

@@ -3,8 +3,8 @@ import { doveData, enemies, gameChangelog, heroes, towerById, towers } from './d
 
 describe('游戏百科顺序与图像', () => {
   it('uses the build id as the public game version', () => {
-    expect(doveData.metadata.gameVersion).toBe('2.0.6.2')
-    expect(doveData.metadata.contentVersion).toBe('5.6.12')
+    expect(doveData.metadata.gameVersion).toMatch(/^\d+\.\d+\.\d+\.\d+$/)
+    expect(doveData.metadata.contentVersion).toMatch(/^\d+\.\d+\.\d+$/)
     expect(doveData.metadata.gameId).toBe('kingdom_rush_dove')
   })
 
@@ -93,8 +93,9 @@ describe('游戏百科顺序与图像', () => {
   })
 
   it('记录相邻游戏版本的数据差异', () => {
-    expect(gameChangelog.releases).toHaveLength(2)
-    expect(gameChangelog.releases[0]).toMatchObject({
+    expect(gameChangelog.releases.length).toBeGreaterThanOrEqual(2)
+    expect(gameChangelog.releases[0]?.version).toBe(doveData.metadata.gameVersion)
+    expect(gameChangelog.releases.find((release) => release.version === '2.0.6.2')).toMatchObject({
       version: '2.0.6.2',
       previousVersion: '2.0.5.9',
       summary: { changeCount: 11 },

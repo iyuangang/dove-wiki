@@ -145,4 +145,37 @@ describe('Dove auxiliary buff calculator', () => {
     expect(result.flatDps).toBe(45)
     expect(result.dps).toBeCloseTo((13 + 20) / 2 / 0.39 + 45, 4)
   })
+
+  it('applies Purge Field from the configured enemies inside mage range', () => {
+    const arcane = doveData.towers.find((item) => item.id === 'tower_arcane_wizard')!
+    const emptyRange = calculateBuffs(
+      arcane,
+      doveData.supportEffects,
+      [],
+      doveData.technologyTrees,
+      {
+        treeId: 4,
+        levels: { archer: 0, barrack: 0, mage: 6, engineer: 0 },
+        nearbyEnemyCount: 0,
+      },
+    )
+    const fullRange = calculateBuffs(
+      arcane,
+      doveData.supportEffects,
+      [],
+      doveData.technologyTrees,
+      {
+        treeId: 4,
+        levels: { archer: 0, barrack: 0, mage: 6, engineer: 0 },
+        nearbyEnemyCount: 30,
+      },
+    )
+
+    expect((fullRange.damageMin || 0) / (emptyRange.damageMin || 1)).toBeCloseTo(1.44 / 1.14, 3)
+    expect(
+      fullRange.appliedTechnologies.find(
+        (technology) => technology.technologyId === 'mage_purge_field',
+      )?.calculated,
+    ).toBe(true)
+  })
 })

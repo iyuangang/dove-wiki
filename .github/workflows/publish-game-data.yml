@@ -1,0 +1,135 @@
+name: Publish synced game data
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Stable site version, for example v1.2.6
+        required: true
+        type: string
+
+permissions:
+  actions: write
+  contents: write
+
+concurrency:
+  group: publish-synced-game-data
+  cancel-in-progress: false
+
+jobs:
+  prepare:
+    name: Build data-only release tag
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout full history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Validate release request
+        id: release
+        shell: bash
+        env:
+          TAG_NAME: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+
+          if [[ ! "$TAG_NAME" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+            echo "Invalid release version: $TAG_NAME"
+            echo "Expected a stable SemVer version such as v1.2.6."
+            exit 1
+          fi
+
+          git fetch --no-tags origin main:refs/remotes/origin/main dev:refs/remotes/origin/dev
+          if git show-ref --verify --quiet "refs/tags/$TAG_NAME" || git ls-remote --exit-code --tags origin "refs/tags/$TAG_NAME" >/dev/null 2>&1; then
+            echo "Release tag already exists: $TAG_NAME"
+            exit 1
+          fi
+
+          if ! git merge-base --is-ancestor origin/main origin/dev; then
+            echo "dev must contain the latest main commit before publishing game data."
+            exit 1
+          fi
+
+          data_paths=(
+            src/data/dove-data.json
+            src/data/game-changelog.json
+            public/encyclopedia
+            public/skills
+            public/portraits
+            public/heroes
+            public/enemies
+            public/technologies
+          )
+
+          if git diff --quiet origin/main origin/dev -- "${data_paths[@]}"; then
+            echo "No synced game-data changes were found on dev."
+            exit 1
+          fi
+
+          git switch --detach origin/main
+          git diff --binary origin/main origin/dev -- "${data_paths[@]}" | git apply --index
+
+          if git diff --cached --quiet; then
+            echo "The generated data snapshot is empty."
+            exit 1
+          fi
+
+          game_version="$(node -p "JSON.parse(require('fs').readFileSync('src/data/dove-data.json', 'utf8')).metadata.gameVersion")"
+          echo "tag=$TAG_NAME" >> "$GITHUB_OUTPUT"
+          echo "game_version=$game_version" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Verify main code with synced data
+        env:
+          VITE_APP_VERSION: ${{ steps.release.outputs.tag }}
+          VITE_BASE_PATH: /dove-wiki/
+        run: |
+          npm test
+          npm run build
+
+      - name: Create isolated data release tag
+        shell: bash
+        env:
+          TAG_NAME: ${{ steps.release.outputs.tag }}
+          GAME_VERSION: ${{ steps.release.outputs.game_version }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "chore: publish Dove game data ${GAME_VERSION}"
+          git tag -a "$TAG_NAME" -m "Release $TAG_NAME · Game $GAME_VERSION"
+          git push origin "$TAG_NAME"
+
+      - name: Start release and Pages deployment
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG_NAME: ${{ steps.release.outputs.tag }}
+        run: gh workflow run release.yml --ref "$TAG_NAME"
+
+      - name: Write summary
+        shell: bash
+        env:
+          TAG_NAME: ${{ steps.release.outputs.tag }}
+          GAME_VERSION: ${{ steps.release.outputs.game_version }}
+        run: |
+          {
+            echo "## Game data release prepared"
+            echo
+            echo "- Site tag: \`$TAG_NAME\`"
+            echo "- Game version: \`$GAME_VERSION\`"
+            echo "- Source data: latest \`dev\`"
+            echo "- Site code: latest \`main\`"
+            echo
+            echo "The release workflow was dispatched on the new tag and will create the GitHub Release and deploy Pages."
+          } >> "$GITHUB_STEP_SUMMARY"
