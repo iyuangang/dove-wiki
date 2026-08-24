@@ -1,11 +1,11 @@
 {
   "metadata": {
     "title": "王国保卫战鸽子版 WIKI",
-    "gameVersion": "2.0.6.2",
+    "gameVersion": "2.0.6.4",
     "contentVersion": "5.6.12",
     "gameId": "kingdom_rush_dove",
-    "commitHash": "15066fd95ca127b2e0eab76fa5a0b688644b594e",
-    "generatedAt": "2026-08-22T02:14:26.345Z",
+    "commitHash": "0b62562a349fc32347f62a127546ea75d82f0fe7",
+    "generatedAt": "2026-08-24T01:12:10.945Z",
     "sourceRoot": "D:\\KingdomRushDove-Windows-Cycle2-v0.1.5\\KingdomRushDove",
     "assumptions": [
       "科技树可在辅助计算中选择；条件触发、概率与特殊目标效果不强行折算进基础面板。",

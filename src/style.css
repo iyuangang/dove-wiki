@@ -1979,6 +1979,15 @@ input:focus {
   box-shadow: 0 0 7px rgba(125, 178, 117, 0.42);
 }
 
+.simulation-technology-effects article.inactive {
+  opacity: 0.56;
+}
+
+.simulation-technology-effects article.inactive > i {
+  background: var(--faint);
+  box-shadow: none;
+}
+
 .simulation-technology-effects strong,
 .simulation-technology-effects article small {
   display: block;
@@ -2015,6 +2024,72 @@ input:focus {
   line-height: 1.45;
   border-left: 2px solid var(--gold);
   background: rgba(229, 185, 104, 0.045);
+}
+
+.dummy-effective-armor + .dummy-effective-armor {
+  margin-top: 6px;
+}
+
+.dummy-trait-toggle {
+  display: grid;
+  width: 100%;
+  margin-top: 10px;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 9px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.dummy-trait-toggle input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dummy-trait-toggle > span {
+  position: relative;
+  width: 30px;
+  height: 17px;
+  border: 1px solid var(--line-bright);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.dummy-trait-toggle > span::after {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 9px;
+  height: 9px;
+  content: "";
+  border-radius: 50%;
+  background: var(--faint);
+  transition: 150ms ease;
+}
+
+.dummy-trait-toggle input:checked + span {
+  border-color: rgba(229, 185, 104, 0.55);
+  background: rgba(229, 185, 104, 0.11);
+}
+
+.dummy-trait-toggle input:checked + span::after {
+  transform: translateX(13px);
+  background: var(--gold);
+}
+
+.dummy-trait-toggle strong,
+.dummy-trait-toggle small {
+  display: block;
+}
+
+.dummy-trait-toggle strong {
+  font-size: 10px;
+}
+
+.dummy-trait-toggle small {
+  margin-top: 2px;
+  color: var(--faint);
+  font-size: 8px;
 }
 
 .damage-demo-fields label {
@@ -2112,7 +2187,7 @@ input:focus {
 
 .damage-result-primary {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 7px;
   margin-top: 16px;
 }
@@ -2289,7 +2364,20 @@ input:focus {
   color: var(--gold-soft);
   font-size: 8px;
   line-height: 1.2;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
+}
+
+.attack-history-row .attack-index small {
+  display: block;
+  margin-top: 2px;
+  color: var(--faint);
+  font-family: var(--font-sans);
+  font-size: 8px;
+  font-weight: 400;
+}
+
+.attack-history-row.triggered:not(.critical):not(.lethal) {
+  box-shadow: inset 2px 0 rgba(125, 178, 117, 0.42);
 }
 
 .attack-history-row.critical {
@@ -2337,6 +2425,12 @@ input:focus {
   color: #d9a18e;
   border-color: rgba(210, 94, 73, 0.23);
   background: rgba(210, 94, 73, 0.045);
+}
+
+.attack-history-warning.bleed-finish {
+  color: var(--gold-soft);
+  border-color: rgba(229, 185, 104, 0.23);
+  background: rgba(229, 185, 104, 0.045);
 }
 
 .soldier-result {
@@ -3365,7 +3459,11 @@ input:focus {
 }
 
 .technology-family-card {
+  display: grid;
   min-width: 0;
+  grid-row: span 7;
+  grid-template-rows: subgrid;
+  row-gap: 0;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: 7px;
@@ -3408,7 +3506,7 @@ input:focus {
 }
 
 .technology-family-card ol {
-  display: grid;
+  display: contents;
   margin: 0;
   padding: 0;
   list-style: none;
