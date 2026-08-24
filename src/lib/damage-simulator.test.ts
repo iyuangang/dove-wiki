@@ -53,6 +53,57 @@ describe('Dove damage simulator', () => {
     expect(calculateDamageProtection('mixed', 20, 50)).toBe(0.2)
   })
 
+  it('provides the normalized endpoints shown by the damage curve chart', () => {
+    const damageTypes = [
+      'true',
+      'physical',
+      'magical',
+      'explosion',
+      'magical-explosion',
+      'electrical',
+      'shot',
+      'rude',
+      'stab',
+      'mixed',
+    ] as const
+    const atMaximumDefense = Object.fromEntries(
+      damageTypes.map((damageType) => [
+        damageType,
+        Math.round(
+          simulateDamage({
+            damageType,
+            damage: 100,
+            hp: 10_000,
+            armor: 100,
+            magicArmor: 100,
+          }).damageApplied * 1000,
+        ) / 1000,
+      ]),
+    )
+
+    expect(atMaximumDefense).toEqual({
+      true: 100,
+      physical: 0,
+      magical: 0,
+      explosion: 40,
+      'magical-explosion': 40,
+      electrical: 50,
+      shot: 30,
+      rude: 40,
+      stab: 0,
+      mixed: 0,
+    })
+    expect(
+      simulateDamage({
+        damageType: 'stab',
+        damage: 100,
+        hp: 10_000,
+        armor: 0,
+        magicArmor: 0,
+      }).damageApplied,
+    ).toBe(200)
+  })
+
   it('doubles stab base damage before applying protection', () => {
     const result = simulateDamage({
       damageType: 'stab',

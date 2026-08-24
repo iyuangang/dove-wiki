@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, reactive, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
 import { familyLabels } from '../data'
 import {
   calculateBuffs,
@@ -12,6 +12,7 @@ import {
   damageTypeFromGame,
   damageTypeDefinitions,
   simulateAttackSequence,
+  simulateDamage,
   type DamageTypeId,
 } from '../lib/damage-simulator'
 import type {
@@ -44,6 +45,13 @@ interface SimulationTechnologyEffect {
   active: boolean
 }
 
+interface DamageCurveGroup {
+  id: string
+  name: string
+  damageTypes: DamageTypeId[]
+  className: string
+}
+
 const technologyFamilies: TowerFamily[] = ['archer', 'barrack', 'mage', 'engineer']
 const supportedSimulationTechnologyIds = new Set([
   'archer_piercing',
@@ -66,6 +74,30 @@ const magicDustCompensationTowerIds = new Set([
   'tower_ignis_altar',
   'tower_sandworm',
 ])
+const damageCurveGroups: DamageCurveGroup[] = [
+  { id: 'true', name: '真实', damageTypes: ['true'], className: 'series-true' },
+  {
+    id: 'direct',
+    name: '物理 / 魔法',
+    damageTypes: ['physical', 'magical'],
+    className: 'series-direct',
+  },
+  {
+    id: 'area',
+    name: '范围 / 粗暴',
+    damageTypes: ['explosion', 'magical-explosion', 'rude'],
+    className: 'series-area',
+  },
+  {
+    id: 'electrical',
+    name: '电击',
+    damageTypes: ['electrical'],
+    className: 'series-electrical',
+  },
+  { id: 'shot', name: '枪伤', damageTypes: ['shot'], className: 'series-shot' },
+  { id: 'stab', name: '穿刺', damageTypes: ['stab'], className: 'series-stab' },
+  { id: 'mixed', name: '混合', damageTypes: ['mixed'], className: 'series-mixed' },
+]
 const targetId = ref('tower_ranger')
 const technologyTreeId = ref(props.technologyTrees[0]?.id || 1)
 const technologyLevels = reactive<Record<TowerFamily, number>>({
@@ -90,7 +122,12 @@ const dummy = reactive({
 })
 const simulationSeed = ref(2058)
 const attackPage = ref(1)
+const curveDefense = ref(10)
+const curveFocusGroupId = ref<string | null>(null)
+const curveChartHost = ref<HTMLElement | null>(null)
+const curveChartWidth = ref(760)
 const attackPageSize = 25
+let curveResizeObserver: ResizeObserver | undefined
 const state = reactive<Record<string, EffectState>>(
   Object.fromEntries(
     props.effects.map((effect) => [
@@ -315,6 +352,74 @@ const selectedDamageType = computed(
     damageTypeDefinitions.find((damageType) => damageType.id === activeDamageType.value) ||
     damageTypeDefinitions[0],
 )
+const activeCurveGroupId = computed(
+  () =>
+    damageCurveGroups.find((group) => group.damageTypes.includes(activeDamageType.value))?.id ||
+    damageCurveGroups[0]!.id,
+)
+const highlightedCurveGroupId = computed(
+  () => curveFocusGroupId.value || activeCurveGroupId.value,
+)
+const curvePlot = computed(() => {
+  const compact = curveChartWidth.value < 520
+  const height = compact ? 330 : 360
+  return {
+    width: curveChartWidth.value,
+    height,
+    left: compact ? 50 : 62,
+    right: compact ? 12 : 18,
+    top: 24,
+    bottom: 48,
+  }
+})
+const curveXTicks = computed(() =>
+  curveChartWidth.value < 520 ? [0, 25, 50, 75, 100] : [0, 20, 40, 60, 80, 100],
+)
+const curveYTicks = [0, 50, 100, 150, 200]
+
+function curveDamage(group: DamageCurveGroup, defense: number) {
+  const damageType = group.damageTypes[0]!
+  const normalizedDefense = Math.min(100, Math.max(0, Number(defense) || 0))
+  return simulateDamage({
+    damageType,
+    damage: 100,
+    hp: 10_000,
+    armor: normalizedDefense,
+    magicArmor:
+      damageType === 'mixed'
+        ? Math.min(100, Math.max(0, Number(dummy.magicArmor) || 0))
+        : normalizedDefense,
+  }).damageApplied
+}
+
+function curveGroupTypeNames(group: DamageCurveGroup) {
+  return damageTypeDefinitions
+    .filter((damageType) => group.damageTypes.includes(damageType.id))
+    .map((damageType) => damageType.shortName)
+    .join(' · ')
+}
+
+function curveX(defense: number) {
+  const plot = curvePlot.value
+  return plot.left + (defense / 100) * (plot.width - plot.left - plot.right)
+}
+
+function curveY(damage: number) {
+  const plot = curvePlot.value
+  return plot.top + ((200 - damage) / 200) * (plot.height - plot.top - plot.bottom)
+}
+
+function curvePath(group: DamageCurveGroup) {
+  return Array.from({ length: 101 }, (_, defense) => {
+    const prefix = defense === 0 ? 'M' : 'L'
+    return `${prefix}${curveX(defense).toFixed(2)},${curveY(curveDamage(group, defense)).toFixed(2)}`
+  }).join(' ')
+}
+
+function toggleCurveFocus(groupId: string) {
+  curveFocusGroupId.value = curveFocusGroupId.value === groupId ? null : groupId
+}
+
 const damageSequence = computed(() =>
   simulateAttackSequence({
     damageType: activeDamageType.value,
@@ -473,12 +578,15 @@ function resetDamageDemo() {
   dummy.magicArmor = 10
   dummy.flying = false
   simulationSeed.value = 2058
+  curveDefense.value = 10
+  curveFocusGroupId.value = null
   attackPage.value = 1
 }
 
 function selectDamageType(damageType: DamageTypeId) {
   attackSource.value = 'custom'
   demoDamageType.value = damageType
+  curveFocusGroupId.value = null
   attackPage.value = 1
 }
 
@@ -498,6 +606,18 @@ function changeAttackPage(offset: number) {
     Math.max(1, currentAttackPage.value + offset),
   )
 }
+
+onMounted(() => {
+  curveResizeObserver = new ResizeObserver((entries) => {
+    const width = Math.round(entries[0]?.contentRect.width || 0)
+    if (width > 0) curveChartWidth.value = Math.max(280, width)
+  })
+  if (curveChartHost.value) curveResizeObserver.observe(curveChartHost.value)
+})
+
+onBeforeUnmount(() => {
+  curveResizeObserver?.disconnect()
+})
 </script>
 
 <template>
@@ -670,6 +790,149 @@ function changeAttackPage(offset: number) {
               <code>{{ damageType.formula }}</code>
             </button>
           </div>
+
+          <section class="damage-curve-lab" aria-labelledby="damage-curve-title">
+            <div class="damage-curve-toolbar">
+              <div>
+                <strong id="damage-curve-title">伤害曲线</strong>
+                <p>比较 100 点基础伤害在 0–100 点护甲或魔抗下的实际结算值；公式相同的类型合并为同一条线。</p>
+              </div>
+              <label class="damage-curve-slider">
+                <span>查看防御值 <b>{{ curveDefense }}%</b></span>
+                <input v-model.number="curveDefense" type="range" min="0" max="100" step="1" />
+              </label>
+            </div>
+
+            <div class="damage-curve-legend" aria-label="伤害曲线图例">
+              <button
+                v-for="group in damageCurveGroups"
+                :key="group.id"
+                type="button"
+                :class="[
+                  group.className,
+                  { active: highlightedCurveGroupId === group.id },
+                ]"
+                :aria-pressed="curveFocusGroupId === group.id"
+                :aria-label="`${group.name}：${formatNumber(curveDamage(group, curveDefense))} 点实际伤害`"
+                @click="toggleCurveFocus(group.id)"
+              >
+                <i></i>
+                <span>
+                  <strong>{{ group.name }}</strong>
+                  <small>{{ curveGroupTypeNames(group) }}</small>
+                </span>
+                <b>{{ formatNumber(curveDamage(group, curveDefense)) }}</b>
+              </button>
+            </div>
+
+            <div ref="curveChartHost" class="damage-curve-chart-host">
+              <svg
+                class="damage-curve-chart"
+                :viewBox="`0 0 ${curvePlot.width} ${curvePlot.height}`"
+                :width="curvePlot.width"
+                :height="curvePlot.height"
+                role="img"
+                aria-labelledby="damage-curve-svg-title damage-curve-svg-desc"
+              >
+                <title id="damage-curve-svg-title">十种游戏伤害类型的防御减伤曲线</title>
+                <desc id="damage-curve-svg-desc">
+                  横轴为护甲或魔抗百分比，纵轴为每 100 点基础伤害实际造成的伤害。穿刺伤害基础翻倍，因此最高为 200。
+                </desc>
+                <rect
+                  class="damage-curve-frame"
+                  :x="curvePlot.left"
+                  :y="curvePlot.top"
+                  :width="curvePlot.width - curvePlot.left - curvePlot.right"
+                  :height="curvePlot.height - curvePlot.top - curvePlot.bottom"
+                />
+
+                <g v-for="tick in curveYTicks" :key="`curve-y-${tick}`">
+                  <line
+                    class="damage-curve-grid-line"
+                    :x1="curvePlot.left"
+                    :x2="curvePlot.width - curvePlot.right"
+                    :y1="curveY(tick)"
+                    :y2="curveY(tick)"
+                  />
+                  <text
+                    class="damage-curve-tick"
+                    :x="curvePlot.left - 9"
+                    :y="curveY(tick) + 4"
+                    text-anchor="end"
+                  >{{ tick }}</text>
+                </g>
+
+                <g v-for="tick in curveXTicks" :key="`curve-x-${tick}`">
+                  <line
+                    class="damage-curve-grid-line"
+                    :x1="curveX(tick)"
+                    :x2="curveX(tick)"
+                    :y1="curvePlot.top"
+                    :y2="curvePlot.height - curvePlot.bottom"
+                  />
+                  <text
+                    class="damage-curve-tick"
+                    :x="curveX(tick)"
+                    :y="curvePlot.height - curvePlot.bottom + 19"
+                    text-anchor="middle"
+                  >{{ tick }}</text>
+                </g>
+
+                <text
+                  class="damage-curve-axis-title"
+                  :x="curvePlot.left"
+                  y="14"
+                >实际伤害 / 100 基础伤害</text>
+                <text
+                  class="damage-curve-axis-title"
+                  :x="curvePlot.left + (curvePlot.width - curvePlot.left - curvePlot.right) / 2"
+                  :y="curvePlot.height - 7"
+                  text-anchor="middle"
+                >对应护甲 / 魔抗（%）</text>
+
+                <path
+                  v-for="group in damageCurveGroups"
+                  :key="`curve-path-${group.id}`"
+                  class="damage-curve-series"
+                  :class="[
+                    group.className,
+                    {
+                      active: highlightedCurveGroupId === group.id,
+                      dimmed: curveFocusGroupId && curveFocusGroupId !== group.id,
+                    },
+                  ]"
+                  :d="curvePath(group)"
+                />
+
+                <line
+                  class="damage-curve-cursor"
+                  :x1="curveX(curveDefense)"
+                  :x2="curveX(curveDefense)"
+                  :y1="curvePlot.top"
+                  :y2="curvePlot.height - curvePlot.bottom"
+                />
+                <circle
+                  v-for="group in damageCurveGroups"
+                  :key="`curve-point-${group.id}`"
+                  class="damage-curve-point"
+                  :class="[
+                    group.className,
+                    {
+                      active: highlightedCurveGroupId === group.id,
+                      dimmed: curveFocusGroupId && curveFocusGroupId !== group.id,
+                    },
+                  ]"
+                  :cx="curveX(curveDefense)"
+                  :cy="curveY(curveDamage(group, curveDefense))"
+                  :r="highlightedCurveGroupId === group.id ? 4.5 : 2.5"
+                />
+              </svg>
+            </div>
+
+            <p class="damage-curve-note">
+              混合伤害以横轴作为护甲，并固定魔抗为当前傀儡的 {{ formatNumber(dummy.magicArmor) }}%；真实伤害不受两项防御影响。点击图例可突出单条曲线。
+            </p>
+          </section>
 
           <div class="damage-demo-panel">
             <div class="damage-demo-config">
