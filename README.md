@@ -2,6 +2,12 @@
 
 基于 `KingdomRushDove` 游戏 Lua 模板生成的 Vue 3 + TypeScript 游戏百科。当前数据快照包含 93 座唯一玩家塔、77 名英雄、300 个敌人百科槽位、4 套完整科技方案、更新记录和科技/辅助增益计算器。
 
+## 参与项目
+
+不会写代码也可以参与：欢迎通过 [Issue](https://github.com/iyuangang/dove-wiki/issues/new) 反馈页面问题、游戏数据错误或提出建议。会写代码的贡献者可以开发新功能、修复 Bug 或改进数据同步；除很小的修改外，建议开发前先创建 Issue 讨论范围。
+
+分支流程、数据更新方法、三个 GitHub Actions 工作流的触发方式和开发共识，请阅读 [参与指南](./CONTRIBUTING.md)。
+
 ## 启动
 
 ```powershell
@@ -74,6 +80,8 @@ npm run build
 
 ## CI/CD 与发布
 
+面向贡献者的简明操作步骤见 [参与指南：三个 GitHub Actions 工作流](./CONTRIBUTING.md#三个-github-actions-工作流)。以下内容保留发布实现细节。
+
 - PR 到 `dev`、`main`，以及向这两个分支推送时，GitHub Actions 会执行 `npm ci`、测试和带 `/dove-wiki/` 基路径的生产构建。
 - Pages 流水线不会在云端重新同步游戏数据；版本库中的 `src/data` 与 `public` 是发布输入。
 - 常规代码版本仍由指向 `main` 最新提交的稳定 SemVer Tag（例如 `v1.0.0`）创建 GitHub Release 并部署到 `https://iyuangang.github.io/dove-wiki/`。
@@ -91,9 +99,9 @@ git push origin v1.0.0
 
 仅发布游戏数据时：
 
-1. 在本地 `dev` 执行 `npm run sync:dove`，检查变化后以 `chore: sync dove game data` 提交并推送。
-2. 打开仓库 Actions → **Publish synced game data** → **Run workflow**。
-3. 输入新的稳定版本号，例如 `v1.2.6`。无需手动合并 `main` 或创建 Tag。
+1. 从最新 `dev` 建立独立分支，执行 `npm run sync:dove` 和必要检查，再通过 PR 将生成数据合入 `dev`。
+2. 确认数据 PR 已合并且 `dev` 包含最新 `main`，打开仓库 Actions → **Publish synced game data** → **Run workflow**。
+3. 输入新的稳定版本号，例如 `v1.2.6`。无需手动把 `dev` 合入 `main` 或创建 Tag。
 
 数据专用流水线只会从 `dev` 取 `src/data` 中的生成快照和 `public` 下的游戏资源；站点代码始终取最新 `main`，避免把尚未发布的功能一起带入线上。
 
