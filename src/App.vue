@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed, nextTick, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import DetailPanel from './components/DetailPanel.vue'
 import { Badge } from './components/ui/badge'
 import { Tabs, TabsList, TabsTrigger } from './components/ui/tabs'
 import { doveData, enemies, gameChangelog, heroes, siteVersion, towerById, towers } from './data'
+import { hashForTab, navigationTabs as tabs, tabFromHash, type TabId } from './lib/navigation'
 import CalculatorView from './views/CalculatorView.vue'
 import CatalogView from './views/CatalogView.vue'
 import CompareView from './views/CompareView.vue'
@@ -14,28 +15,63 @@ import TechnologyView from './views/TechnologyView.vue'
 import UpdateHistoryView from './views/UpdateHistoryView.vue'
 import type { Tower } from './types'
 
-type TabId = 'catalog' | 'enemies' | 'heroes' | 'technology' | 'updates' | 'calculator' | 'compare' | 'data'
-
-const tabs: Array<{ id: TabId; label: string; eyebrow: string }> = [
-  { id: 'catalog', label: '塔典', eyebrow: 'CATALOG' },
-  { id: 'enemies', label: '敌人', eyebrow: 'ENEMIES' },
-  { id: 'heroes', label: '英雄', eyebrow: 'HEROES' },
-  { id: 'technology', label: '科技', eyebrow: 'TECH' },
-  { id: 'updates', label: '更新', eyebrow: 'UPDATES' },
-  { id: 'calculator', label: '辅助计算', eyebrow: 'BUFF LAB' },
-  { id: 'compare', label: '双塔对比', eyebrow: 'COMPARE' },
-  { id: 'data', label: '数据说明', eyebrow: 'SOURCES' },
-]
-
-const activeTab = ref<TabId>('catalog')
+const activeTab = ref<TabId>(tabFromHash(window.location.hash))
+const mobileNavOpen = ref(false)
 const selectedTowerId = ref<string | null>(null)
 const selectedTower = computed<Tower | null>(() =>
   selectedTowerId.value ? towerById.get(selectedTowerId.value) || null : null,
 )
+const activeTabMeta = computed(() => tabs.find((tab) => tab.id === activeTab.value) ?? tabs[0])
 
-watch(activeTab, async () => {
+let routeInitialized = false
+
+watch(activeTab, async (tab) => {
+  const targetHash = hashForTab(tab)
+
+  if (window.location.hash !== targetHash) {
+    const routeUrl = `${window.location.pathname}${window.location.search}${targetHash}`
+    window.history[routeInitialized ? 'pushState' : 'replaceState'](null, '', routeUrl)
+  }
+
+  routeInitialized = true
+  mobileNavOpen.value = false
+  document.title = `${activeTabMeta.value.label} | 王国保卫战鸽子版 WIKI`
   await nextTick()
   window.scrollTo({ top: 0 })
+}, { immediate: true })
+
+function syncTabFromAddress() {
+  const tab = tabFromHash(window.location.hash)
+  const canonicalHash = hashForTab(tab)
+
+  if (window.location.hash !== canonicalHash) {
+    const routeUrl = `${window.location.pathname}${window.location.search}${canonicalHash}`
+    window.history.replaceState(null, '', routeUrl)
+  }
+
+  activeTab.value = tab
+  mobileNavOpen.value = false
+}
+
+function handleKeydown(event: KeyboardEvent) {
+  if (event.key === 'Escape') mobileNavOpen.value = false
+}
+
+function selectTab(tab: TabId) {
+  activeTab.value = tab
+  mobileNavOpen.value = false
+}
+
+onMounted(() => {
+  window.addEventListener('popstate', syncTabFromAddress)
+  window.addEventListener('hashchange', syncTabFromAddress)
+  window.addEventListener('keydown', handleKeydown)
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('popstate', syncTabFromAddress)
+  window.removeEventListener('hashchange', syncTabFromAddress)
+  window.removeEventListener('keydown', handleKeydown)
 })
 
 function openTower(tower: Tower) {
@@ -46,7 +82,7 @@ function openTower(tower: Tower) {
 <template>
   <Tabs v-model="activeTab" class="app-shell">
     <header class="site-header">
-      <button class="brand" type="button" aria-label="返回塔典" @click="activeTab = 'catalog'">
+      <button class="brand" type="button" aria-label="返回塔典" @click="selectTab('catalog')">
         <span class="brand-mark" aria-hidden="true"><span>Ⅱ</span></span>
         <span>
           <strong>王国保卫战鸽子版 WIKI</strong>
@@ -54,12 +90,44 @@ function openTower(tower: Tower) {
         </span>
       </button>
 
-      <TabsList class="main-nav" variant="line" aria-label="主导航">
+      <button
+        class="mobile-nav-toggle"
+        type="button"
+        :aria-label="mobileNavOpen ? '收起导航' : '展开导航'"
+        :aria-expanded="mobileNavOpen"
+        aria-controls="main-navigation"
+        @click="mobileNavOpen = !mobileNavOpen"
+      >
+        <span class="mobile-nav-toggle-icon" aria-hidden="true">
+          <i></i><i></i><i></i>
+        </span>
+        <span>
+          <small>当前页面</small>
+          <strong>{{ activeTabMeta.label }}</strong>
+        </span>
+      </button>
+
+      <button
+        v-if="mobileNavOpen"
+        class="mobile-nav-backdrop"
+        type="button"
+        aria-label="关闭导航"
+        @click="mobileNavOpen = false"
+      ></button>
+
+      <TabsList
+        id="main-navigation"
+        class="main-nav"
+        :class="{ 'mobile-open': mobileNavOpen }"
+        variant="line"
+        aria-label="主导航"
+      >
         <TabsTrigger
           v-for="tab in tabs"
           :key="tab.id"
           :value="tab.id"
           :class="{ active: activeTab === tab.id }"
+          @click="mobileNavOpen = false"
         >
           <small>{{ tab.eyebrow }}</small>
           <span>{{ tab.label }}</span>
