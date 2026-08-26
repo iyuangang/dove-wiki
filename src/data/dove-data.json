@@ -4,8 +4,8 @@
     "gameVersion": "2.0.6.4",
     "contentVersion": "5.6.12",
     "gameId": "kingdom_rush_dove",
-    "commitHash": "0b62562a349fc32347f62a127546ea75d82f0fe7",
-    "generatedAt": "2026-08-24T01:12:10.945Z",
+    "commitHash": "2d48da8e94abff0d0cda3d5521ce54df45760aa2",
+    "generatedAt": "2026-08-26T03:27:18.130Z",
     "sourceRoot": "D:\\KingdomRushDove-Windows-Cycle2-v0.1.5\\KingdomRushDove",
     "assumptions": [
       "科技树可在辅助计算中选择；条件触发、概率与特殊目标效果不强行折算进基础面板。",
