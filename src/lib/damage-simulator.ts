@@ -4,6 +4,7 @@ export const damageTypeDefinitions = [
     name: '真实伤害',
     shortName: '真实',
     code: 'TRUE',
+    icon: '/damage-types/true.png',
     description: '无视护甲与魔抗，伤害值直接参与生命结算。',
     formula: '减伤率 = 0',
   },
@@ -12,6 +13,7 @@ export const damageTypeDefinitions = [
     name: '物理伤害',
     shortName: '物理',
     code: 'PHYSICAL',
+    icon: '/damage-types/physical.png',
     description: '由护甲等比例减伤；10% 护甲提供 10% 减伤。',
     formula: '减伤率 = 护甲',
   },
@@ -20,30 +22,34 @@ export const damageTypeDefinitions = [
     name: '魔法伤害',
     shortName: '魔法',
     code: 'MAGICAL',
+    icon: '/damage-types/magical.png',
     description: '由魔抗等比例减伤；10% 魔抗提供 10% 减伤。',
     formula: '减伤率 = 魔抗',
   },
   {
     id: 'explosion',
-    name: '物理范围伤害',
-    shortName: '范围',
+    name: '爆炸伤害',
+    shortName: '爆炸',
     code: 'EXPLOSION',
+    icon: '/damage-types/explosion.png',
     description: '读取护甲，但使用范围伤害曲线，高护甲的减伤低于普通物理。',
     formula: '减伤率 = 护甲 × (0.2 × 护甲 + 0.4)',
   },
   {
     id: 'magical-explosion',
-    name: '魔法范围伤害',
-    shortName: '魔法范围',
+    name: '法术爆炸伤害',
+    shortName: '法术爆炸',
     code: 'MAGICAL EXPLOSION',
-    description: '读取魔抗，并使用与物理范围伤害相同的曲线。',
+    icon: '/damage-types/magical-explosion.png',
+    description: '读取魔抗，并使用与爆炸伤害相同的减伤曲线。',
     formula: '减伤率 = 魔抗 × (0.2 × 魔抗 + 0.4)',
   },
   {
     id: 'electrical',
-    name: '电击伤害',
-    shortName: '电击',
+    name: '雷电伤害',
+    shortName: '雷电',
     code: 'ELECTRICAL',
+    icon: '/damage-types/electrical.png',
     description: '只计算一半护甲，因此比普通物理伤害更容易穿透护甲。',
     formula: '减伤率 = 护甲 × 0.5',
   },
@@ -52,22 +58,25 @@ export const damageTypeDefinitions = [
     name: '枪伤',
     shortName: '枪伤',
     code: 'SHOT',
+    icon: '/damage-types/shot.png',
     description: '只计算七成护甲，减伤强度介于普通物理与电击之间。',
     formula: '减伤率 = 护甲 × 0.7',
   },
   {
     id: 'rude',
-    name: '粗暴伤害',
-    shortName: '粗暴',
+    name: '残暴伤害',
+    shortName: '残暴',
     code: 'RUDE',
-    description: '读取护甲，实际采用与物理范围伤害相同的减伤曲线。',
+    icon: '/damage-types/rude.png',
+    description: '读取护甲，实际采用与爆炸伤害相同的减伤曲线。',
     formula: '减伤率 = 护甲 × (0.2 × 护甲 + 0.4)',
   },
   {
     id: 'stab',
-    name: '穿刺伤害',
-    shortName: '穿刺',
+    name: '刺伤',
+    shortName: '刺伤',
     code: 'STAB',
+    icon: '/damage-types/stab.png',
     description: '基础伤害先翻倍，再使用专属护甲曲线进行减伤。',
     formula: '伤害 × 2；减伤率 = 护甲 × (2 - 护甲)',
   },
@@ -76,8 +85,27 @@ export const damageTypeDefinitions = [
     name: '混合伤害',
     shortName: '混合',
     code: 'MIXED',
+    icon: '/damage-types/mixed.png',
     description: '魔抗高于护甲时只取护甲，否则取护甲与魔抗的平均值。',
     formula: '魔抗 > 护甲 ? 护甲 : (护甲 + 魔抗) ÷ 2',
+  },
+  {
+    id: 'against-armor',
+    name: '破甲伤害',
+    shortName: '破甲',
+    code: 'AGAINST ARMOR',
+    icon: '/damage-types/against-armor.png',
+    description: '先按物理伤害结算，再额外造成 2 × 原伤 × 护甲² 的真实伤害。',
+    formula: '实际伤害 = 原伤 × (1 − 护甲) + 2 × 原伤 × 护甲²',
+  },
+  {
+    id: 'against-magic-armor',
+    name: '破魔伤害',
+    shortName: '破魔',
+    code: 'AGAINST MAGIC ARMOR',
+    icon: '/damage-types/against-magic-armor.png',
+    description: '先按法术伤害结算，再额外造成 2 × 原伤 × 魔抗² 的真实伤害。',
+    formula: '实际伤害 = 原伤 × (1 − 魔抗) + 2 × 原伤 × 魔抗²',
   },
 ] as const
 
@@ -95,6 +123,7 @@ export interface DamageSimulationResult {
   baseDamage: number
   typeAdjustedDamage: number
   protection: number
+  resistanceBonusDamage: number
   damageApplied: number
   hpLost: number
   remainingHp: number
@@ -184,6 +213,8 @@ export function damageTypeFromGame(
 ): DamageTypeId {
   const value = Math.max(0, Math.trunc(finiteOrZero(damageTypeValue ?? 0)))
   const bitTypes: Array<[number, DamageTypeId]> = [
+    [131072, 'against-armor'],
+    [262144, 'against-magic-armor'],
     [1, 'true'],
     [2, 'physical'],
     [4, 'magical'],
@@ -200,13 +231,15 @@ export function damageTypeFromGame(
 
   const label = damageTypeLabel.trim().toLowerCase()
   if (label.includes('真实')) return 'true'
+  if (label.includes('破魔')) return 'against-magic-armor'
+  if (label.includes('破甲')) return 'against-armor'
   if (label.includes('混合')) return 'mixed'
-  if (label.includes('穿刺')) return 'stab'
-  if (label.includes('粗暴')) return 'rude'
+  if (label.includes('刺伤') || label.includes('穿刺')) return 'stab'
+  if (label.includes('残暴') || label.includes('粗暴')) return 'rude'
   if (label.includes('枪')) return 'shot'
-  if (label.includes('电')) return 'electrical'
-  if (label.includes('魔法范围')) return 'magical-explosion'
-  if (label.includes('物理范围') || label.includes('范围')) return 'explosion'
+  if (label.includes('雷电') || label.includes('电击')) return 'electrical'
+  if (label.includes('法术爆炸') || label.includes('魔法范围')) return 'magical-explosion'
+  if (label.includes('爆炸') || label.includes('物理范围') || label.includes('范围')) return 'explosion'
   if (label.includes('魔法')) return 'magical'
   return 'physical'
 }
@@ -225,6 +258,12 @@ export function calculateDamageProtection(
       protection = armor
       break
     case 'magical':
+      protection = magicArmor
+      break
+    case 'against-armor':
+      protection = armor
+      break
+    case 'against-magic-armor':
       protection = magicArmor
       break
     case 'explosion':
@@ -263,7 +302,11 @@ export function simulateDamage(input: DamageSimulationInput): DamageSimulationRe
     input.armor,
     input.magicArmor,
   )
-  const damageApplied = typeAdjustedDamage * (1 - protection)
+  const resistanceBonusDamage =
+    input.damageType === 'against-armor' || input.damageType === 'against-magic-armor'
+      ? typeAdjustedDamage * protection * protection * 2
+      : 0
+  const damageApplied = typeAdjustedDamage * (1 - protection) + resistanceBonusDamage
   const hpLost = Math.min(hp, damageApplied)
   const remainingHp = Math.max(0, hp - damageApplied)
 
@@ -271,6 +314,7 @@ export function simulateDamage(input: DamageSimulationInput): DamageSimulationRe
     baseDamage,
     typeAdjustedDamage,
     protection,
+    resistanceBonusDamage,
     damageApplied,
     hpLost,
     remainingHp,

@@ -41,6 +41,7 @@ const heroThumbDir = join(heroDir, 'thumbs')
 const enemyDir = join(projectRoot, 'public', 'enemies')
 const enemyThumbDir = join(enemyDir, 'thumbs')
 const technologyDir = join(projectRoot, 'public', 'technologies')
+const damageIconDir = join(projectRoot, 'public', 'damage-types')
 
 function assertFile(path, label) {
   if (!existsSync(path)) {
@@ -1184,6 +1185,7 @@ async function main() {
   await mkdir(skillIconDir, { recursive: true })
   await mkdir(heroThumbDir, { recursive: true })
   await mkdir(enemyThumbDir, { recursive: true })
+  await mkdir(damageIconDir, { recursive: true })
   for (let treeId = 1; treeId <= 4; treeId += 1) {
     await mkdir(join(technologyDir, String(treeId)), { recursive: true })
   }
@@ -1201,6 +1203,7 @@ async function main() {
       DOVE_HERO_DIR: heroDir,
       DOVE_ENEMY_DIR: enemyDir,
       DOVE_TECHNOLOGY_DIR: technologyDir,
+      DOVE_DAMAGE_ICON_DIR: damageIconDir,
     },
   })
 
