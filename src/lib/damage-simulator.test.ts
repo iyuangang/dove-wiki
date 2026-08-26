@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest'
+import { existsSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import {
   calculateDamageProtection,
   damageTypeFromGame,
+  damageTypeDefinitions,
   simulateAttackSequence,
   simulateDamage,
 } from './damage-simulator'
@@ -65,6 +68,8 @@ describe('Dove damage simulator', () => {
       'rude',
       'stab',
       'mixed',
+      'against-armor',
+      'against-magic-armor',
     ] as const
     const atMaximumDefense = Object.fromEntries(
       damageTypes.map((damageType) => [
@@ -92,6 +97,8 @@ describe('Dove damage simulator', () => {
       rude: 40,
       stab: 0,
       mixed: 0,
+      'against-armor': 200,
+      'against-magic-armor': 200,
     })
     expect(
       simulateDamage({
@@ -118,6 +125,38 @@ describe('Dove damage simulator', () => {
     expect(result.damageApplied).toBeCloseTo(162)
   })
 
+  it('adds the official squared-resistance true damage for armor-breaking types', () => {
+    const armorBreaking = simulateDamage({
+      damageType: 'against-armor',
+      damage: 100,
+      hp: 1000,
+      armor: 10,
+      magicArmor: 80,
+    })
+    const magicBreaking = simulateDamage({
+      damageType: 'against-magic-armor',
+      damage: 100,
+      hp: 1000,
+      armor: 80,
+      magicArmor: 10,
+    })
+
+    expect(armorBreaking.protection).toBe(0.1)
+    expect(armorBreaking.resistanceBonusDamage).toBeCloseTo(2)
+    expect(armorBreaking.damageApplied).toBeCloseTo(92)
+    expect(magicBreaking.protection).toBe(0.1)
+    expect(magicBreaking.resistanceBonusDamage).toBeCloseTo(2)
+    expect(magicBreaking.damageApplied).toBeCloseTo(92)
+  })
+
+  it('uses the official in-game icon extracted for every damage type', () => {
+    expect(damageTypeDefinitions).toHaveLength(12)
+    for (const damageType of damageTypeDefinitions) {
+      const iconPath = fileURLToPath(new URL(`../../public${damageType.icon}`, import.meta.url))
+      expect(existsSync(iconPath), `${damageType.name}: ${iconPath}`).toBe(true)
+    }
+  })
+
   it('separates calculated damage from capped HP loss on lethal hits', () => {
     const result = simulateDamage({
       damageType: 'true',
@@ -138,6 +177,9 @@ describe('Dove damage simulator', () => {
     expect(damageTypeFromGame(33554434, '物理')).toBe('physical')
     expect(damageTypeFromGame(268435472, '电击')).toBe('electrical')
     expect(damageTypeFromGame(33554496, '枪伤')).toBe('shot')
+    expect(damageTypeFromGame(131072, '破甲伤害')).toBe('against-armor')
+    expect(damageTypeFromGame(262144, '破魔伤害')).toBe('against-magic-armor')
+    expect(damageTypeFromGame(131072 | 33554432, '破甲伤害')).toBe('against-armor')
     expect(damageTypeFromGame(null, '物理范围')).toBe('explosion')
   })
 

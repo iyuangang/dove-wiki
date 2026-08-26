@@ -61,6 +61,7 @@ jobs:
             public/heroes
             public/enemies
             public/technologies
+            public/damage-types
           )
 
           if git diff --quiet origin/main origin/dev -- "${data_paths[@]}"; then

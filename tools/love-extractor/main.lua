@@ -6,6 +6,7 @@ local skill_icon_output = os.getenv("DOVE_SKILL_ICON_DIR")
 local hero_output = os.getenv("DOVE_HERO_DIR")
 local enemy_output = os.getenv("DOVE_ENEMY_DIR")
 local technology_output = os.getenv("DOVE_TECHNOLOGY_DIR")
+local damage_icon_output = os.getenv("DOVE_DAMAGE_ICON_DIR")
 
 local function fail(message)
 	io.stderr:write("[dove-wiki] " .. message .. "\n")
@@ -752,6 +753,41 @@ local function export_technology_icons(technology)
 	print(string.format("DOVE_WIKI_TECHNOLOGIES=%d", exported))
 end
 
+local function export_damage_type_icons()
+	local gui_common_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/gui_common.lua")
+	local image_cache = {}
+	local sprites = {
+		["true"] = "base_info_icons_true",
+		["physical"] = "base_info_icons_sword",
+		["magical"] = "base_info_icons_magic",
+		["explosion"] = "base_info_icons_explosion",
+		["magical-explosion"] = "base_info_icons_magic_explosion",
+		["electrical"] = "base_info_icons_electrical",
+		["shot"] = "base_info_icons_shot",
+		["rude"] = "base_info_icons_rude",
+		["stab"] = "base_info_icons_stab",
+		["mixed"] = "base_info_icons_mixed",
+		["against-armor"] = "base_info_icons_against_armor",
+		["against-magic-armor"] = "base_info_icons_against_magic_armor"
+	}
+	local exported = 0
+
+	for damage_type, sprite in pairs(sprites) do
+		export_atlas_crop(
+			gui_common_atlas[sprite],
+			join_path(damage_icon_output, damage_type .. ".png"),
+			image_cache
+		)
+		exported = exported + 1
+	end
+
+	for _, image in pairs(image_cache) do
+		image:release()
+	end
+
+	print(string.format("DOVE_WIKI_DAMAGE_ICONS=%d", exported))
+end
+
 local function export_hero_images(heroes)
 	local image_cache = {}
 
@@ -856,7 +892,8 @@ function love.load()
 		if (raw_output and raw_output ~= "") or (portrait_output and portrait_output ~= "") or
 			(encyclopedia_output and encyclopedia_output ~= "") or
 			(skill_icon_output and skill_icon_output ~= "") or (hero_output and hero_output ~= "") or
-			(enemy_output and enemy_output ~= "") or (technology_output and technology_output ~= "") then
+			(enemy_output and enemy_output ~= "") or (technology_output and technology_output ~= "") or
+			(damage_icon_output and damage_icon_output ~= "") then
 			raw_export = build_raw_export(entity_db)
 		end
 
@@ -881,6 +918,10 @@ function love.load()
 
 		if technology_output and technology_output ~= "" then
 			export_technology_icons(raw_export.technology)
+		end
+
+		if damage_icon_output and damage_icon_output ~= "" then
+			export_damage_type_icons()
 		end
 
 		if hero_output and hero_output ~= "" then

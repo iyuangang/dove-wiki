@@ -15,6 +15,7 @@ import {
   simulateDamage,
   type DamageTypeId,
 } from '../lib/damage-simulator'
+import { publicAssetUrl } from '../lib/public-assets'
 import type {
   Hero,
   SupportEffect,
@@ -84,19 +85,25 @@ const damageCurveGroups: DamageCurveGroup[] = [
   },
   {
     id: 'area',
-    name: '范围 / 粗暴',
+    name: '爆炸 / 残暴',
     damageTypes: ['explosion', 'magical-explosion', 'rude'],
     className: 'series-area',
   },
   {
     id: 'electrical',
-    name: '电击',
+    name: '雷电',
     damageTypes: ['electrical'],
     className: 'series-electrical',
   },
   { id: 'shot', name: '枪伤', damageTypes: ['shot'], className: 'series-shot' },
-  { id: 'stab', name: '穿刺', damageTypes: ['stab'], className: 'series-stab' },
+  { id: 'stab', name: '刺伤', damageTypes: ['stab'], className: 'series-stab' },
   { id: 'mixed', name: '混合', damageTypes: ['mixed'], className: 'series-mixed' },
+  {
+    id: 'against',
+    name: '破甲 / 破魔',
+    damageTypes: ['against-armor', 'against-magic-armor'],
+    className: 'series-against',
+  },
 ]
 const targetId = ref('tower_ranger')
 const technologyTreeId = ref(props.technologyTrees[0]?.id || 1)
@@ -483,6 +490,12 @@ const damageEquation = computed(() => {
   const extras = damage.totalAttackDamageApplied > damage.damageApplied
     ? `；附加结算后本击共 ${formatNumber(damage.totalAttackDamageApplied)}`
     : ''
+  if (
+    activeDamageType.value === 'against-armor' ||
+    activeDamageType.value === 'against-magic-armor'
+  ) {
+    return `${formatNumber(damage.rolledDamage)}${technologyMultiplier} × (1 − ${formatPercent(damage.protection)}) + 2 × ${formatNumber(damage.typeAdjustedDamage)} × ${formatPercent(damage.protection)}² = ${formatNumber(damage.damageApplied)}${extras}`
+  }
   return `${formatNumber(damage.rolledDamage)}${technologyMultiplier}${typeMultiplier} × (1 − ${formatPercent(damage.protection)}) = 主伤 ${formatNumber(damage.damageApplied)}${extras}`
 })
 const technologyTriggerSummary = computed(() => {
@@ -770,7 +783,7 @@ onBeforeUnmount(() => {
           <div class="damage-type-heading">
             <div>
               <strong>游戏伤害类型</strong>
-              <p>点击类型可查看规则并立即对下方傀儡结算。百分比按游戏脚本的小数护甲换算。</p>
+              <p>点击类型可查看官方规则并立即对下方傀儡结算。图标与公式均读取游戏资源和结算脚本。</p>
             </div>
             <span>{{ damageTypeDefinitions.length }} TYPES</span>
           </div>
@@ -784,7 +797,10 @@ onBeforeUnmount(() => {
               :class="[{ active: activeDamageType === damageType.id }, `type-${damageType.id}`]"
               @click="selectDamageType(damageType.id)"
             >
-              <span><i></i>{{ damageType.code }}</span>
+              <div class="damage-type-card-head">
+                <img :src="publicAssetUrl(damageType.icon)" alt="" />
+                <span><i></i>{{ damageType.code }}</span>
+              </div>
               <strong>{{ damageType.name }}</strong>
               <p>{{ damageType.description }}</p>
               <code>{{ damageType.formula }}</code>
@@ -834,9 +850,9 @@ onBeforeUnmount(() => {
                 role="img"
                 aria-labelledby="damage-curve-svg-title damage-curve-svg-desc"
               >
-                <title id="damage-curve-svg-title">十种游戏伤害类型的防御减伤曲线</title>
+                <title id="damage-curve-svg-title">十二种游戏伤害类型的防御减伤曲线</title>
                 <desc id="damage-curve-svg-desc">
-                  横轴为护甲或魔抗百分比，纵轴为每 100 点基础伤害实际造成的伤害。穿刺伤害基础翻倍，因此最高为 200。
+                  横轴为护甲或魔抗百分比，纵轴为每 100 点基础伤害实际造成的伤害。刺伤基础翻倍；破甲与破魔伤害会随对应抗性增加额外真实伤害。
                 </desc>
                 <rect
                   class="damage-curve-frame"
@@ -930,7 +946,7 @@ onBeforeUnmount(() => {
             </div>
 
             <p class="damage-curve-note">
-              混合伤害以横轴作为护甲，并固定魔抗为当前傀儡的 {{ formatNumber(dummy.magicArmor) }}%；真实伤害不受两项防御影响。点击图例可突出单条曲线。
+              混合伤害以横轴作为护甲，并固定魔抗为当前傀儡的 {{ formatNumber(dummy.magicArmor) }}%；破甲／破魔曲线分别使用横轴作为护甲／魔抗。真实伤害不受两项防御影响。点击图例可突出单条曲线。
             </p>
           </section>
 
