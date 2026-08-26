@@ -48,6 +48,7 @@ npm run sync:dove -- --game-dir "D:\KingdomRushDove-Windows-Cycle2-v0.1.5\Kingdo
 - `public/portraits/*.png`：从 `gui_portraits-1.dds` 恢复的透明头像；
 - `public/heroes/*.png`、`public/enemies/*.png`：英雄和敌人百科图；
 - `public/technologies/*.png`：四套方案的游戏原生科技图标；
+- `public/damage-types/*.png`：从 `gui_common-1.dds` 提取的官方伤害类型图标；
 - `tools/.tmp/dove-raw.json`：被 Git 忽略的中间数据。
 
 同步前会保留当前数据快照；当游戏提交哈希发生变化时，同步器自动比较前后版本，记录新增、移除、关键数值、技能说明与科技变化。同一游戏提交重复同步不会产生重复记录。
@@ -103,7 +104,7 @@ git push origin v1.0.0
 2. 确认数据 PR 已合并且 `dev` 包含最新 `main`，打开仓库 Actions → **Publish synced game data** → **Run workflow**。
 3. 输入新的稳定版本号，例如 `v1.2.6`。无需手动把 `dev` 合入 `main` 或创建 Tag。
 
-数据专用流水线只会从 `dev` 取 `src/data` 中的生成快照和 `public` 下的游戏资源；站点代码始终取最新 `main`，避免把尚未发布的功能一起带入线上。
+数据专用流水线只会从 `dev` 取 `src/data` 中的生成快照，以及 `public` 下的百科、技能、头像、敌人、科技和伤害类型资源；站点代码始终取最新 `main`，避免把尚未发布的功能一起带入线上。
 
 本地模拟 Pages 构建：
 
