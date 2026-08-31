@@ -1,11 +1,11 @@
 {
   "metadata": {
     "title": "王国保卫战鸽子版 WIKI",
-    "gameVersion": "2.0.6.4",
+    "gameVersion": "2.0.6.8",
     "contentVersion": "5.6.12",
     "gameId": "kingdom_rush_dove",
-    "commitHash": "2d48da8e94abff0d0cda3d5521ce54df45760aa2",
-    "generatedAt": "2026-08-26T03:27:18.130Z",
+    "commitHash": "77e10bd7f8259e907df3efafd1ffcddabb48640c",
+    "generatedAt": "2026-08-31T11:24:26.196Z",
     "sourceRoot": "D:\\KingdomRushDove-Windows-Cycle2-v0.1.5\\KingdomRushDove",
     "assumptions": [
       "科技树可在辅助计算中选择；条件触发、概率与特殊目标效果不强行折算进基础面板。",
@@ -22,7 +22,7 @@
     "skillIconCount": 196,
     "technologyTreeCount": 4,
     "technologyCount": 144,
-    "heroCount": 77,
+    "heroCount": 78,
     "enemyCount": 300,
     "uniqueEnemyCount": 296,
     "enemyImageCount": 296,
@@ -2632,7 +2632,7 @@
           "icon": "/technologies/4/thunder_typhoon.png",
           "iconSprite": "kr3_Upgrades_Icons_0021",
           "name": "洗礼",
-          "description": "闪电箭与额外闪电箭的数量提升至10发，狂风减速效果提升至75%。",
+          "description": "闪电箭与额外闪电箭的数量提升至10发，狂风减速效果提升至75%，且狂风会额外持续4秒，期间减速效果逐渐减弱。",
           "modifiers": []
         },
         {
@@ -10062,7 +10062,7 @@
         },
         {
           "name": "重塑血肉",
-          "description": "格里姆森可以吞噬一片生命值低于30%的敌人，并对其余敌人造成30点残暴伤害。每吞噬一名敌人，格里姆森就恢复自身总生命值的20%。吞噬敌人的总生命值百分比越多，技能冷却越长，最多需要45秒。"
+          "description": "格里姆森可以吞噬一片生命值低于30%的敌人，并对其余敌人造成60点残暴伤害。每吞噬一名敌人，格里姆森就恢复自身总生命值的20%。吞噬敌人的总生命值百分比越多，技能冷却越长，最多需要45秒。"
         },
         {
           "name": "死亡蔓延",
@@ -11151,7 +11151,7 @@
       "abilities": [
         {
           "name": "南瓜魔术",
-          "description": "每隔20秒，斯特蕾吉将一名生命值低于2400的敌人变成南瓜，持续8秒。南瓜继承敌人40%的生命值，双抗清零，移速为20。"
+          "description": "每隔20秒，斯特蕾吉将一名生命值低于3000的敌人变成南瓜，持续8秒。南瓜继承敌人40%的生命值，双抗清零，移速为20。"
         },
         {
           "name": "闪光诱饵",
@@ -12747,7 +12747,7 @@
         },
         {
           "name": "地狱火雨",
-          "description": "每隔56秒，召唤地狱火雨，每0.2秒对所有敌人造成9点真实伤害，持续4秒。"
+          "description": "每隔56秒，召唤地狱火雨，每0.25秒对所有敌人造成9点真实伤害，持续4秒。"
         }
       ],
       "image": "/heroes/hero_beresad.png",
@@ -13823,6 +13823,167 @@
         },
         {
           "id": "flashbang",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 3,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 6,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 9,
+              "skillLevel": 3
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/heroes.lua + kr1/data/balance.lua",
+        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      }
+    },
+    {
+      "id": "hero_tank",
+      "name": "毁灭坦克 SG-11",
+      "description": "经历了无数年的研发，一代又一代的原型都以毁灭告终。最终就只剩下这一辆毁灭坦克。没有任何军队胆敢直面这样一位灾星。",
+      "specialties": [
+        "多刺蛞蝓",
+        "炽热导弹",
+        "猛击地",
+        "敢死队",
+        "灼热大炮",
+        "女武神的呼唤"
+      ],
+      "abilities": [
+        {
+          "name": "多刺蛞蝓",
+          "description": "毁灭坦克移动时，每0.2秒对附近敌人造成10点物理伤害。"
+        },
+        {
+          "name": "炽热导弹",
+          "description": "每隔18秒，发射8枚导弹，每枚造成32-48点爆炸伤害。"
+        },
+        {
+          "name": "猛击地",
+          "description": "每隔28秒，猛击地面，对路径上的敌人造成63-117点物理伤害，并令其眩晕2秒。"
+        },
+        {
+          "name": "敢死队",
+          "description": "3名严阵以待的士兵与坦克协同作战，每名士兵拥有240点生命值，每次攻击造成9-14点物理伤害。"
+        },
+        {
+          "name": "灼热大炮",
+          "description": "每隔30秒，点燃喷火器并原地旋转，对周围敌人每0.2秒造成10点真实伤害，持续4秒。"
+        },
+        {
+          "name": "女武神的呼唤",
+          "description": "每隔48秒，呼叫飞机投下一颗凝固汽油弹，点燃路径上的敌人，每0.03秒造成12点物理伤害，持续4秒。"
+        }
+      ],
+      "image": "/heroes/hero_tank.png",
+      "thumbnail": "/heroes/thumbs/hero_tank.png",
+      "sourceGame": 4,
+      "availableLevel": 1,
+      "startingLevel": 1,
+      "profileStats": [
+        8,
+        9,
+        4,
+        2
+      ],
+      "maxStats": {
+        "hp": 480,
+        "armor": 0.6,
+        "magicArmor": null,
+        "meleeDamageMin": null,
+        "meleeDamageMax": null,
+        "rangedDamageMin": 88,
+        "rangedDamageMax": 164
+      },
+      "skills": [
+        {
+          "id": "expendables",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 1,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 4,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 7,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "ultimate",
+          "maxLevel": 4,
+          "unlockLevels": [
+            {
+              "heroLevel": 1,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 4,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 7,
+              "skillLevel": 3
+            },
+            {
+              "heroLevel": 10,
+              "skillLevel": 4
+            }
+          ]
+        },
+        {
+          "id": "heat_missiles",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 2,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 5,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 8,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "ground_slam",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 3,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 6,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 9,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "scorching_cannon",
           "maxLevel": 3,
           "unlockLevels": [
             {
@@ -16132,12 +16293,11 @@
       "order": 64,
       "name": "憎恶",
       "description": "巨大的肉身傀儡，由残破的肢体和许多生物的尸体组成。腐臭的气氛能让僵尸血肉复苏。",
-      "special": "尸爆，增益僵尸，惧怕魔法",
+      "special": "尸爆，惧怕魔法",
       "traits": [
         "速度慢",
         "死亡时爆炸",
-        "惧怕法术伤害",
-        "使身边僵尸生长"
+        "惧怕法术伤害"
       ],
       "image": "/enemies/enemy_abomination.png",
       "thumbnail": "/enemies/thumbs/enemy_abomination.png",
@@ -18184,12 +18344,11 @@
       "order": 121,
       "name": "憎恶",
       "description": "巨大的肉身傀儡，由残破的肢体和许多生物的尸体组成。腐臭的气氛能让僵尸血肉复苏。",
-      "special": "尸爆，增益僵尸，惧怕魔法",
+      "special": "尸爆，惧怕魔法",
       "traits": [
         "速度慢",
         "死亡时爆炸",
-        "惧怕法术伤害",
-        "使身边僵尸生长"
+        "惧怕法术伤害"
       ],
       "image": "/enemies/enemy_abomination.png",
       "thumbnail": "/enemies/thumbs/enemy_abomination.png",
@@ -26535,10 +26694,6 @@
           "priceIncrement": 180,
           "descriptions": [
             {
-              "key": "TOWER_NECROMANCER_PESTILENCE_DESCRIPTION",
-              "text": "召唤三团瘟疫云，持续4秒，对敌人造成每秒20点的毒素伤害。"
-            },
-            {
               "key": "TOWER_NECROMANCER_PESTILENCE_DESCRIPTION_1",
               "text": "每隔12秒，召唤3团瘟疫云，持续4秒，对46.6范围内敌人造成每秒20点的毒素伤害。骷髅召唤上限提升1。"
             },
@@ -26572,10 +26727,6 @@
             {
               "key": "TOWER_NECROMANCER_LVL4_SKILL_RIDER_3_DESCRIPTION",
               "text": "每隔动态数值秒，召唤一名死亡骑士向前冲锋，对经过的敌人造成动态数值点真实伤害。"
-            },
-            {
-              "key": "TOWER_NECROMANCER_RIDER_DESCRIPTION",
-              "text": "召唤一名令人畏惧的死亡骑手，拥有能支持附近骷髅的光环。"
             },
             {
               "key": "TOWER_NECROMANCER_RIDER_DESCRIPTION_1",
@@ -27902,10 +28053,10 @@
         "source": "kr1/data/levels/level52_data.lua"
       },
       "attack": {
-        "damageMin": 28,
-        "damageMax": 38,
+        "damageMin": 14,
+        "damageMax": 19,
         "cooldown": 0.8,
-        "dps": 41.25,
+        "dps": 20.625,
         "range": 200,
         "rallyRange": null,
         "damageType": "混合",
