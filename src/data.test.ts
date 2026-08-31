@@ -74,7 +74,9 @@ describe('游戏百科顺序与图像', () => {
   })
 
   it('extracts the full hero hall with portraits and calculable support heroes', () => {
-    expect(heroes).toHaveLength(77)
+    expect(heroes).toHaveLength(doveData.summary.heroCount)
+    expect(new Set(heroes.map((hero) => hero.id)).size).toBe(heroes.length)
+    expect(doveData.validation.missingTemplateSources).toEqual([])
     expect(heroes.every((hero) => hero.name && hero.description && hero.sources.template)).toBe(true)
     expect(heroes.every((hero) => hero.image.startsWith('/heroes/'))).toBe(true)
     expect(heroes.every((hero) => hero.thumbnail.startsWith('/heroes/thumbs/'))).toBe(true)
