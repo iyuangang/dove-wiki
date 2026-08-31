@@ -1,7 +1,223 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-24T01:12:10.945Z",
+  "generatedAt": "2026-08-31T11:24:26.196Z",
   "releases": [
+    {
+      "id": "2.0.6.8-77e10bd7f825",
+      "version": "2.0.6.8",
+      "previousVersion": "2.0.6.4",
+      "contentVersion": "5.6.12",
+      "commitHash": "77e10bd7f8259e907df3efafd1ffcddabb48640c",
+      "previousCommitHash": "2d48da8e94abff0d0cda3d5521ce54df45760aa2",
+      "detectedAt": "2026-08-31T11:24:26.196Z",
+      "summary": {
+        "changeCount": 8,
+        "categoryCounts": {
+          "hero": 4,
+          "tower": 2,
+          "enemy": 1,
+          "technology": 1
+        },
+        "kindCounts": {
+          "added": 1,
+          "removed": 0,
+          "balance": 1,
+          "content": 6
+        }
+      },
+      "changes": [
+        {
+          "id": "hero:hero_venom:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_venom",
+          "entityName": "格里姆森",
+          "title": "内容调整英雄：格里姆森",
+          "description": "",
+          "image": "/heroes/thumbs/hero_venom.png",
+          "details": [
+            {
+              "field": "能力说明：重塑血肉",
+              "before": "格里姆森可以吞噬一片生命值低于30%的敌人，并对其余敌人造成30点残暴伤害。每吞噬一名敌人，格里姆森就恢复自身总生命值的20%。吞噬敌人的总生命值百分比越多，技能冷却越长，最多需要45秒。",
+              "after": "格里姆森可以吞噬一片生命值低于30%的敌人，并对其余敌人造成60点残暴伤害。每吞噬一名敌人，格里姆森就恢复自身总生命值的20%。吞噬敌人的总生命值百分比越多，技能冷却越长，最多需要45秒。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_witch:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_witch",
+          "entityName": "斯特蕾吉",
+          "title": "内容调整英雄：斯特蕾吉",
+          "description": "",
+          "image": "/heroes/thumbs/hero_witch.png",
+          "details": [
+            {
+              "field": "能力说明：南瓜魔术",
+              "before": "每隔20秒，斯特蕾吉将一名生命值低于2400的敌人变成南瓜，持续8秒。南瓜继承敌人40%的生命值，双抗清零，移速为20。",
+              "after": "每隔20秒，斯特蕾吉将一名生命值低于3000的敌人变成南瓜，持续8秒。南瓜继承敌人40%的生命值，双抗清零，移速为20。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_beresad:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_beresad",
+          "entityName": "贝雷萨德",
+          "title": "内容调整英雄：贝雷萨德",
+          "description": "",
+          "image": "/heroes/thumbs/hero_beresad.png",
+          "details": [
+            {
+              "field": "能力说明：地狱火雨",
+              "before": "每隔56秒，召唤地狱火雨，每0.2秒对所有敌人造成9点真实伤害，持续4秒。",
+              "after": "每隔56秒，召唤地狱火雨，每0.25秒对所有敌人造成9点真实伤害，持续4秒。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_tank:added:main",
+          "category": "hero",
+          "kind": "added",
+          "entityId": "hero_tank",
+          "entityName": "毁灭坦克 SG-11",
+          "title": "新增英雄：毁灭坦克 SG-11",
+          "description": "新增可用英雄，包含 6 项能力。",
+          "image": "/heroes/thumbs/hero_tank.png",
+          "details": []
+        },
+        {
+          "id": "tower:tower_necromancer:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_necromancer",
+          "entityName": "亡灵塔",
+          "title": "内容调整防御塔：亡灵塔",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_necromancer.png",
+          "details": [
+            {
+              "field": "瘟疫 · 技能说明",
+              "before": "召唤三团瘟疫云，持续4秒，对敌人造成每秒20点的毒素伤害。；每隔12秒，召唤3团瘟疫云，持续4秒，对46.6范围内敌人造成每秒20点的毒素伤害。骷髅召唤上限提升1。；每隔12秒，召唤4团瘟疫云，持续5秒，对46.6范围内敌人造成每秒20点的毒素伤害。骷髅召唤上限提升2。；每隔12秒，召唤5团瘟疫云，持续6秒，对46.6范围内敌人造成每秒20点的毒素伤害。骷髅召唤上限提升3。",
+              "after": "每隔12秒，召唤3团瘟疫云，持续4秒，对46.6范围内敌人造成每秒20点的毒素伤害。骷髅召唤上限提升1。；每隔12秒，召唤4团瘟疫云，持续5秒，对46.6范围内敌人造成每秒20点的毒素伤害。骷髅召唤上限提升2。；每隔12秒，召唤5团瘟疫云，持续6秒，对46.6范围内敌人造成每秒20点的毒素伤害。骷髅召唤上限提升3。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "亡灵骑士 · 技能说明",
+              "before": "每隔动态数值秒，召唤一名死亡骑士向前冲锋，对经过的敌人造成动态数值点真实伤害。；每隔动态数值秒，召唤一名死亡骑士向前冲锋，对经过的敌人造成动态数值点真实伤害。；每隔动态数值秒，召唤一名死亡骑士向前冲锋，对经过的敌人造成动态数值点真实伤害。；召唤一名令人畏惧的死亡骑手，拥有能支持附近骷髅的光环。；召唤拥有250点生命、40点护甲、5-15点攻击力的死亡骑士。死亡骑士能够加持128范围内的亡灵生物，提升他们35点护甲与30%攻击力（提升护甲效果对有护甲单位衰减）。；召唤拥有300点生命、50点护甲、10-20点攻击力的死亡骑士。死亡骑士能够加持128范围内的亡灵生物，提升他们40点护甲与50%攻击力（提升护甲效果对有护甲单位衰减）。；召唤拥有350点生命、60点护甲、15-30点攻击力的死亡骑士。死亡骑士能够加持128范围内的亡灵生物，提升他们45点护甲与70%攻击力（提升护甲效果对有护甲单位衰减）。",
+              "after": "每隔动态数值秒，召唤一名死亡骑士向前冲锋，对经过的敌人造成动态数值点真实伤害。；每隔动态数值秒，召唤一名死亡骑士向前冲锋，对经过的敌人造成动态数值点真实伤害。；每隔动态数值秒，召唤一名死亡骑士向前冲锋，对经过的敌人造成动态数值点真实伤害。；召唤拥有250点生命、40点护甲、5-15点攻击力的死亡骑士。死亡骑士能够加持128范围内的亡灵生物，提升他们35点护甲与30%攻击力（提升护甲效果对有护甲单位衰减）。；召唤拥有300点生命、50点护甲、10-20点攻击力的死亡骑士。死亡骑士能够加持128范围内的亡灵生物，提升他们40点护甲与50%攻击力（提升护甲效果对有护甲单位衰减）。；召唤拥有350点生命、60点护甲、15-30点攻击力的死亡骑士。死亡骑士能够加持128范围内的亡灵生物，提升他们45点护甲与70%攻击力（提升护甲效果对有护甲单位衰减）。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_arcane:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_arcane",
+          "entityName": "奥术弓手塔",
+          "title": "数值调整防御塔：奥术弓手塔",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_arcane.png",
+          "details": [
+            {
+              "field": "最低伤害",
+              "before": "28",
+              "after": "14",
+              "delta": "-14（-50.0%）",
+              "direction": "decrease"
+            },
+            {
+              "field": "最高伤害",
+              "before": "38",
+              "after": "19",
+              "delta": "-19（-50.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "enemy:enemy_abomination:content:main",
+          "category": "enemy",
+          "kind": "content",
+          "entityId": "enemy_abomination",
+          "entityName": "憎恶",
+          "title": "内容调整敌人：憎恶",
+          "description": "",
+          "image": "/enemies/thumbs/enemy_abomination.png",
+          "details": [
+            {
+              "field": "特殊能力",
+              "before": "尸爆，增益僵尸，惧怕魔法",
+              "after": "尸爆，惧怕魔法",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "特性",
+              "before": "速度慢；死亡时爆炸；惧怕法术伤害；使身边僵尸生长",
+              "after": "速度慢；死亡时爆炸；惧怕法术伤害",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "technology:4:thunder_typhoon:content:main",
+          "category": "technology",
+          "kind": "content",
+          "entityId": "4:thunder_typhoon",
+          "entityName": "洗礼",
+          "title": "内容调整科技：洗礼",
+          "description": "",
+          "image": "/technologies/4/thunder_typhoon.png",
+          "details": [
+            {
+              "field": "科技说明",
+              "before": "闪电箭与额外闪电箭的数量提升至10发，狂风减速效果提升至75%。",
+              "after": "闪电箭与额外闪电箭的数量提升至10发，狂风减速效果提升至75%，且狂风会额外持续4秒，期间减速效果逐渐减弱。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2.0.6.4-2d48da8e94ab",
+      "version": "2.0.6.4",
+      "previousVersion": "2.0.6.4",
+      "contentVersion": "5.6.12",
+      "commitHash": "2d48da8e94abff0d0cda3d5521ce54df45760aa2",
+      "previousCommitHash": "0b62562a349fc32347f62a127546ea75d82f0fe7",
+      "detectedAt": "2026-08-26T03:27:18.130Z",
+      "summary": {
+        "changeCount": 0,
+        "categoryCounts": {
+          "hero": 0,
+          "tower": 0,
+          "enemy": 0,
+          "technology": 0
+        },
+        "kindCounts": {
+          "added": 0,
+          "removed": 0,
+          "balance": 0,
+          "content": 0
+        }
+      },
+      "changes": []
+    },
     {
       "id": "2.0.6.4-0b62562a349f",
       "version": "2.0.6.4",
