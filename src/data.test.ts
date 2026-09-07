@@ -9,6 +9,8 @@ describe('游戏百科顺序与图像', () => {
   })
 
   it('按 map_data.tower_data 的开头顺序排列', () => {
+    expect(towers).toHaveLength(doveData.summary.towerCount)
+    expect(new Set(towers.map((tower) => tower.id)).size).toBe(towers.length)
     expect(towers.slice(0, 10).map((tower) => tower.id)).toEqual([
       'tower_ranger',
       'tower_paladin',
@@ -22,7 +24,7 @@ describe('游戏百科顺序与图像', () => {
       'tower_sunray',
     ])
     expect(towers.map((tower) => tower.encyclopediaOrder)).toEqual(
-      Array.from({ length: 93 }, (_, index) => index + 1),
+      Array.from({ length: towers.length }, (_, index) => index + 1),
     )
   })
 
@@ -30,7 +32,8 @@ describe('游戏百科顺序与图像', () => {
     const listed = towers.filter((tower) => tower.encyclopediaListed)
     const fallback = towers.filter((tower) => !tower.encyclopediaListed)
 
-    expect(listed).toHaveLength(81)
+    expect(listed).toHaveLength(doveData.summary.encyclopediaImageCount)
+    expect(fallback).toHaveLength(doveData.summary.portraitFallbackCount)
     expect(listed.every((tower) => tower.image.startsWith('/encyclopedia/thumbs/'))).toBe(true)
     expect(listed.every((tower) => tower.encyclopediaImage.startsWith('/encyclopedia/'))).toBe(true)
     expect(fallback.map((tower) => tower.id)).toEqual([

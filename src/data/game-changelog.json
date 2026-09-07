@@ -1,7 +1,518 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-31T11:24:26.196Z",
+  "generatedAt": "2026-09-07T07:25:51.468Z",
   "releases": [
+    {
+      "id": "2.0.7.1-8620949ab6c8",
+      "version": "2.0.7.1",
+      "previousVersion": "2.0.6.8",
+      "contentVersion": "5.6.12",
+      "commitHash": "8620949ab6c8a69a40e84f19be4d5555bc19fa9c",
+      "previousCommitHash": "77e10bd7f8259e907df3efafd1ffcddabb48640c",
+      "detectedAt": "2026-09-07T07:25:51.468Z",
+      "summary": {
+        "changeCount": 23,
+        "categoryCounts": {
+          "hero": 0,
+          "tower": 19,
+          "enemy": 0,
+          "technology": 4
+        },
+        "kindCounts": {
+          "added": 1,
+          "removed": 0,
+          "balance": 2,
+          "content": 20
+        }
+      },
+      "changes": [
+        {
+          "id": "tower:tower_crossbow:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_crossbow",
+          "entityName": "弩兵堡垒",
+          "title": "内容调整防御塔：弩兵堡垒",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_crossbow.png",
+          "details": [
+            {
+              "field": "弹幕 · 技能说明",
+              "before": "快速射出6支箭矢，每支造成30至40点枪伤。若目标死亡，在70范围内尝试转火。；快速射出8支箭矢，每支造成30至40点枪伤。若目标死亡，在105范围内尝试转火。；快速射出10支箭矢，每支造成30至40点枪伤。若目标死亡，在140范围内尝试转火。",
+              "after": "每隔6秒，快速射出6支箭矢，每支造成30至40点枪伤。若目标死亡，在70范围内尝试转火。；每隔6秒，快速射出8支箭矢，每支造成30至40点枪伤。若目标死亡，在105范围内尝试转火。；每隔6秒，快速射出10支箭矢，每支造成30至40点枪伤。若目标死亡，在140范围内尝试转火。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_archmage:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_archmage",
+          "entityName": "大法师塔",
+          "title": "内容调整防御塔：大法师塔",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_archmage.png",
+          "details": [
+            {
+              "field": "旋风 · 技能说明",
+              "before": "大法师法力提升，召唤法球的概率提升3%，并能够召唤可以席卷5人、造成30点伤害的龙卷风。龙卷风消散后，在原地留下一枚法球。；大法师法力提升，召唤法球的概率提升6%，并能够召唤可以席卷6人、造成50点伤害的龙卷风。龙卷风消散后，在原地留下一枚法球。；大法师法力提升，召唤法球的概率提升9%，并能够召唤可以席卷7人、造成70点伤害的龙卷风。龙卷风消散后，在原地留下一枚法球。",
+              "after": "大法师法力提升，召唤法球的概率提升3%，并每隔20秒召唤可以席卷5人、造成30点伤害的龙卷风。龙卷风消散后，在原地留下一枚法球。；大法师法力提升，召唤法球的概率提升6%，并每隔20秒召唤可以席卷6人、造成50点伤害的龙卷风。龙卷风消散后，在原地留下一枚法球。；大法师法力提升，召唤法球的概率提升9%，并每隔20秒召唤可以席卷7人、造成70点伤害的龙卷风。龙卷风消散后，在原地留下一枚法球。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_entwood:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_entwood",
+          "entityName": "怪异树木",
+          "title": "内容调整防御塔：怪异树木",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_entwood.png",
+          "details": [
+            {
+              "field": "痛击 · 技能说明",
+              "before": "震动地面，造成75点伤害与40%减速，并对较近的敌人造成额外40%伤害与眩晕效果，持续1秒。；震动地面，造成100点伤害与40%减速，并对较近的敌人造成额外40%伤害与眩晕效果，持续2秒。；震动地面，造成125点伤害与40%减速，并对较近的敌人造成额外40%伤害与眩晕效果，持续3秒。",
+              "after": "每隔14秒，震动地面，造成75点真实伤害与40%减速，并对较近的敌人造成额外40%伤害与眩晕效果，持续1秒。；每隔14秒，震动地面，造成100点真实伤害与40%减速，并对较近的敌人造成额外40%伤害与眩晕效果，持续2秒。；每隔14秒，震动地面，造成125点真实伤害与40%减速，并对较近的敌人造成额外40%伤害与眩晕效果，持续3秒。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "燃烧坚果 · 技能说明",
+              "before": "每隔18秒，投掷一颗燃烧的坚果，爆炸造成129点范围伤害，并使地面着火。；每隔18秒，投掷一颗燃烧的坚果，爆炸造成181点范围伤害，并使地面着火。；每隔18秒，投掷一颗燃烧的坚果，爆炸造成233点范围伤害，并使地面着火。",
+              "after": "每隔18秒，投掷一颗燃烧的坚果，造成129点爆炸伤害，并使地面着火。；每隔18秒，投掷一颗燃烧的坚果，造成181点爆炸伤害，并使地面着火。；每隔18秒，投掷一颗燃烧的坚果，造成233点爆炸伤害，并使地面着火。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_high_elven:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_high_elven",
+          "entityName": "高等精灵法师",
+          "title": "内容调整防御塔：高等精灵法师",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_high_elven.png",
+          "details": [
+            {
+              "field": "时光流转 · 技能说明",
+              "before": "将最多2个敌人相位传送出战场5秒，对其造成100点伤害。若敌人在此期间死亡，将召唤一个奥术守卫。该技能优先锁定可被沉默的敌人。；将最多3个敌人相位传送出战场5秒，对其造成135点伤害。若敌人在此期间死亡，将召唤一个奥术守卫。该技能优先锁定可被沉默的敌人。；将最多4个敌人相位传送出战场5秒，对其造成150点伤害。若敌人在此期间死亡，将召唤一个奥术守卫。该技能优先锁定可被沉默的敌人。",
+              "after": "每隔16秒，将最多2个敌人相位传送出战场5秒，造成100点伤害。若敌人在此期间死亡，将召唤一个奥术守卫。该技能优先锁定可被沉默的敌人。；每隔16秒，将最多3个敌人相位传送出战场5秒，造成135点伤害。若敌人在此期间死亡，将召唤一个奥术守卫。该技能优先锁定可被沉默的敌人。；每隔16秒，将最多4个敌人相位传送出战场5秒，造成150点伤害。若敌人在此期间死亡，将召唤一个奥术守卫。该技能优先锁定可被沉默的敌人。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_forest:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_forest",
+          "entityName": "森林守护者",
+          "title": "内容调整防御塔：森林守护者",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_forest.png",
+          "details": [
+            {
+              "field": "生命之环 · 技能说明",
+              "before": "在4秒内治疗自身和150范围内友军80点生命值。；在4秒内治疗自身和150范围内友军160点生命值。；在4秒内治疗自身和150范围内友军240点生命值。",
+              "after": "每隔10秒，在4秒内治疗自身和150范围内友军80点生命值。；每隔10秒，在4秒内治疗自身和150范围内友军160点生命值。；每隔10秒，在4秒内治疗自身和150范围内友军240点生命值。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "诡异园丁 · 技能说明",
+              "before": "以12根尖刺蔓藤覆盖一片区域，减速敌人50%，每0.5秒对其造成3点物理伤害，持续4秒。；以15根尖刺蔓藤覆盖一片区域，减速敌人50%，每0.5秒对其造成4点物理伤害，持续6秒。",
+              "after": "每隔16秒，以12根尖刺蔓藤覆盖一片区域，减速敌人50%，每0.5秒对其造成3点物理伤害，持续4秒。；每隔16秒，以15根尖刺蔓藤覆盖一片区域，减速敌人50%，每0.5秒对其造成4点物理伤害，持续6秒。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_blade:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_blade",
+          "entityName": "咏剑士殿堂",
+          "title": "内容调整防御塔：咏剑士殿堂",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_blade.png",
+          "details": [
+            {
+              "field": "剑刃乱舞 · 技能说明",
+              "before": "发动秘技，斩击最多2次，造成25-35点真实伤害。；发动秘技，斩击最多3次，造成35-47点真实伤害。；发动秘技，斩击最多4次，造成40-56点真实伤害。",
+              "after": "每隔9秒，发动秘技，斩击最多2次，每次造成25-35点真实伤害。；每隔9秒，发动秘技，斩击最多3次，每次造成35-47点真实伤害。；每隔9秒，发动秘技，斩击最多4次，每次造成40-56点真实伤害。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_ewok:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_ewok",
+          "entityName": "伊渥克小屋",
+          "title": "内容调整防御塔：伊渥克小屋",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_ewok.png",
+          "details": [
+            {
+              "field": "盾势 · 技能说明",
+              "before": "提升盾牌格挡的持续时间1秒，减短盾牌格挡的冷却1秒，并附带25点恢复效果。；提升盾牌格挡的持续时间2秒，减短盾牌格挡的冷却2秒，并附带50点恢复效果。",
+              "after": "提升盾牌格挡的持续时间至5秒，减短盾牌格挡的冷却至19秒，并附带25点恢复效果。；提升盾牌格挡的持续时间至6秒，减短盾牌格挡的冷却至18秒，并附带50点恢复效果。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_royal_archers_lvl4:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_royal_archers_lvl4",
+          "entityName": "皇家弓箭手",
+          "title": "内容调整防御塔：皇家弓箭手",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_royal_archers_lvl4.png",
+          "details": [
+            {
+              "field": "穿甲射击 · 技能说明",
+              "before": "射出三支无视敌人动态数值护甲的强化箭矢，每支造成动态数值-动态数值点刺击伤害，并降低敌人9点护甲。；射出三支无视敌人动态数值护甲的强化箭矢，每支造成动态数值-动态数值点刺击伤害，并降低敌人9点护甲。；射出三支无视敌人动态数值护甲的强化箭矢，每支造成动态数值-动态数值点刺击伤害，并降低敌人9点护甲。",
+              "after": "每隔动态数值秒，射出三支无视敌人动态数值护甲的强化箭矢，每支造成动态数值-动态数值点刺击伤害，并降低敌人9点护甲。；每隔动态数值秒，射出三支无视敌人动态数值护甲的强化箭矢，每支造成动态数值-动态数值点刺击伤害，并降低敌人9点护甲。；每隔动态数值秒，射出三支无视敌人动态数值护甲的强化箭矢，每支造成动态数值-动态数值点刺击伤害，并降低敌人9点护甲。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_tricannon_lvl4:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_tricannon_lvl4",
+          "entityName": "三管加农炮",
+          "title": "内容调整防御塔：三管加农炮",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_tricannon_lvl4.png",
+          "details": [
+            {
+              "field": "猛烈轰炸 · 技能说明",
+              "before": "在大范围内发射多枚炸弹，每枚造成动态数值-动态数值点爆炸伤害。；扩大范围，发射更多炸弹，每枚造成动态数值-动态数值点爆炸伤害。；扩大范围，发射超多炸弹，每枚造成动态数值-动态数值点爆炸伤害。",
+              "after": "每隔动态数值秒，在大范围内发射7枚炸弹，每枚造成动态数值-动态数值点爆炸伤害。；每隔动态数值秒，在大范围内发射13枚炸弹，每枚造成动态数值-动态数值点爆炸伤害。；每隔动态数值秒，在大范围内发射17枚炸弹，每枚造成动态数值-动态数值点爆炸伤害。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_arborean_emissary_lvl4:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_arborean_emissary_lvl4",
+          "entityName": "树灵使者",
+          "title": "内容调整防御塔：树灵使者",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_arborean_emissary_lvl4.png",
+          "details": [
+            {
+              "field": "自然馈赠 · 技能说明",
+              "before": "召唤仙灵追踪友军，使他们每秒恢复动态数值点生命值，持续动态数值秒。该治疗可溢出至最大生命值的动态数值倍。；召唤仙灵追踪友军，使他们每秒恢复动态数值点生命值，持续动态数值秒。该治疗可溢出至最大生命值的动态数值倍。；召唤仙灵追踪友军，使他们每秒恢复动态数值点生命值，持续动态数值秒。该治疗可溢出至最大生命值的动态数值倍。",
+              "after": "每隔动态数值秒，召唤仙灵追踪友军，使他们每秒恢复动态数值点生命值，持续动态数值秒。该治疗可溢出至最大生命值的动态数值倍。；每隔动态数值秒，召唤仙灵追踪友军，使他们每秒恢复动态数值点生命值，持续动态数值秒。该治疗可溢出至最大生命值的动态数值倍。；每隔动态数值秒，召唤仙灵追踪友军，使他们每秒恢复动态数值点生命值，持续动态数值秒。该治疗可溢出至最大生命值的动态数值倍。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "荆棘缠绕 · 技能说明",
+              "before": "生长出动态数值道树根缠绕敌人，使其眩晕动态数值秒，并造成动态数值点真实伤害。；生长出动态数值道根须缠绕敌人，使其眩晕动态数值秒，并造成动态数值点真实伤害。；生长出动态数值道根须缠绕敌人，使其眩晕动态数值秒，并造成动态数值点真实伤害。",
+              "after": "每隔动态数值秒，生长出动态数值道树根缠绕敌人，使其眩晕动态数值秒，并造成动态数值点真实伤害。；每隔动态数值秒，生长出动态数值道根须缠绕敌人，使其眩晕动态数值秒，并造成动态数值点真实伤害。；每隔动态数值秒，生长出动态数值道根须缠绕敌人，使其眩晕动态数值秒，并造成动态数值点真实伤害。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_demon_pit_lvl4:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_demon_pit_lvl4",
+          "entityName": "恶魔熔坑",
+          "title": "内容调整防御塔：恶魔熔坑",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_demon_pit_lvl4.png",
+          "details": [
+            {
+              "field": "天降魔头 · 技能说明",
+              "before": "召唤一个拥有动态数值点生命值的大恶魔，其攻击可造成动态数值-动态数值点物理伤害。爆炸造成动态数值点伤害。；大恶魔拥有动态数值点生命值，攻击造成动态数值-动态数值点物理伤害。爆炸造成动态数值点伤害。；大恶魔拥有动态数值点生命值，攻击造成动态数值-动态数值点物理伤害。爆炸造成动态数值点伤害。",
+              "after": "每隔动态数值秒，召唤一个拥有动态数值点生命值的大恶魔，其攻击可造成动态数值-动态数值点物理伤害。爆炸造成动态数值点伤害。；每隔动态数值秒，召唤一个拥有动态数值点生命值的大恶魔，其攻击可造成动态数值-动态数值点物理伤害。爆炸造成动态数值点伤害。；每隔动态数值秒，召唤一个拥有动态数值点生命值的大恶魔，其攻击可造成动态数值-动态数值点物理伤害。爆炸造成动态数值点伤害。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_elven_stargazers_lvl4:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_elven_stargazers_lvl4",
+          "entityName": "精灵观星者",
+          "title": "内容调整防御塔：精灵观星者",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_elven_stargazers_lvl4.png",
+          "details": [
+            {
+              "field": "事件视界 · 技能说明",
+              "before": "传送最多动态数值名敌人，使他们倒退一段距离。；传送最多动态数值名敌人，使他们倒退更远距离。；传送最多动态数值名敌人，使他们倒退更更远距离。",
+              "after": "每隔动态数值秒，传送最多动态数值名敌人，使他们倒退一段距离。；每隔动态数值秒，传送最多动态数值名敌人，使他们倒退一段距离。；每隔动态数值秒，传送最多动态数值名敌人，使他们倒退一段距离。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_flamespitter_lvl4:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_flamespitter_lvl4",
+          "entityName": "矮人喷火器",
+          "title": "数值调整防御塔：矮人喷火器",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_flamespitter_lvl4.png",
+          "details": [
+            {
+              "field": "最低伤害",
+              "before": "90",
+              "after": "80",
+              "delta": "-10（-11.1%）",
+              "direction": "decrease"
+            },
+            {
+              "field": "最高伤害",
+              "before": "100",
+              "after": "110",
+              "delta": "+10（+10.0%）",
+              "direction": "increase"
+            },
+            {
+              "field": "攻击间隔",
+              "before": "2",
+              "after": "3.9",
+              "delta": "+1.9（+95.0%）",
+              "direction": "increase"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_flamespitter_lvl4:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_flamespitter_lvl4",
+          "entityName": "矮人喷火器",
+          "title": "内容调整防御塔：矮人喷火器",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_flamespitter_lvl4.png",
+          "details": [
+            {
+              "field": "炽热轨迹 · 技能说明",
+              "before": "发射一枚燃烧弹，造成动态数值点爆炸伤害，并灼烧敌人，每秒造成动态数值点真实伤害，持续动态数值秒。；发射一枚燃烧弹，造成动态数值点爆炸伤害，并灼烧敌人，每秒造成动态数值点真实伤害，持续动态数值秒。；发射一枚燃烧弹，造成动态数值点爆炸伤害，并灼烧敌人，每秒造成动态数值点真实伤害，持续动态数值秒。",
+              "after": "每隔动态数值秒，发射一枚燃烧弹，造成动态数值点爆炸伤害，并灼烧敌人，每秒造成动态数值点真实伤害，持续动态数值秒。；每隔动态数值秒，发射一枚燃烧弹，造成动态数值点爆炸伤害，并灼烧敌人，每秒造成动态数值点真实伤害，持续动态数值秒。；每隔动态数值秒，发射一枚燃烧弹，造成动态数值点爆炸伤害，并灼烧敌人，每秒造成动态数值点真实伤害，持续动态数值秒。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "烈焰火柱 · 技能说明",
+              "before": "地面喷发出火柱，眩晕敌人动态数值秒，并造成动态数值点物理伤害。处于火柱内圈的敌人会额外受到动态数值点伤害，并在死亡后化为灰烬。；地面喷发出火柱，眩晕敌人动态数值秒，并造成动态数值点物理伤害。处于火柱内圈的敌人会额外受到动态数值点真实伤害，并在死亡后化为灰烬。；地面喷发出火柱，眩晕敌人动态数值秒，并造成动态数值点物理伤害。处于火柱内圈的敌人会额外受到动态数值点真实伤害，并在死亡后化为灰烬。",
+              "after": "每隔动态数值秒，地面喷发出火柱，眩晕敌人动态数值秒，并造成动态数值点物理伤害。处于火柱内圈的敌人会额外受到动态数值点伤害，并在死亡后化为灰烬。；每隔动态数值秒，地面喷发出火柱，眩晕敌人动态数值秒，并造成动态数值点物理伤害。处于火柱内圈的敌人会额外受到动态数值点真实伤害，并在死亡后化为灰烬。；每隔动态数值秒，地面喷发出火柱，眩晕敌人动态数值秒，并造成动态数值点物理伤害。处于火柱内圈的敌人会额外受到动态数值点真实伤害，并在死亡后化为灰烬。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_ray_lvl4:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_ray_lvl4",
+          "entityName": "诡术魔导师",
+          "title": "内容调整防御塔：诡术魔导师",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_ray_lvl4.png",
+          "details": [
+            {
+              "field": "变形魔咒 · 技能说明",
+              "before": "将附近的一名敌人变成无力的绵羊。绵羊拥有其本体动态数值%的生命值。；将附近的一名敌人变成无力的绵羊。绵羊拥有其本体动态数值%的生命值。；将附近的一名敌人变成无力的绵羊。绵羊拥有其本体动态数值%的生命值。",
+              "after": "每隔动态数值秒，将附近的一名敌人变成无力的绵羊。绵羊拥有其本体动态数值%的生命值。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_stage_28_priests_barrack:added:main",
+          "category": "tower",
+          "kind": "added",
+          "entityId": "tower_stage_28_priests_barrack",
+          "entityName": "无明教团",
+          "title": "新增防御塔：无明教团",
+          "description": "新增防御塔，定位为直接输出、范围伤害、召唤/拦截。",
+          "image": "/encyclopedia/thumbs/tower_stage_28_priests_barrack.png",
+          "details": []
+        },
+        {
+          "id": "tower:tower_dwarf_lvl4:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_dwarf_lvl4",
+          "entityName": "炮兵小队",
+          "title": "内容调整防御塔：炮兵小队",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_dwarf_lvl4.png",
+          "details": [
+            {
+              "field": "燃烧弹药 · 技能说明",
+              "before": "发射一枚爆弹，造成动态数值-动态数值点伤害，并使范围内的敌人在动态数值秒内受到动态数值点燃烧伤害。；发射一枚爆弹，造成动态数值-动态数值点伤害，并使范围内的敌人在动态数值秒内受到动态数值点燃烧伤害。；发射一枚爆弹，造成动态数值-动态数值点伤害，并使范围内的敌人在动态数值秒内受到动态数值点燃烧伤害。",
+              "after": "每隔动态数值秒，发射一枚爆弹，造成动态数值-动态数值点伤害，并使范围内的敌人在动态数值秒内受到动态数值点燃烧伤害，最多叠加动态数值层。；每隔动态数值秒，发射一枚爆弹，造成动态数值-动态数值点伤害，并使范围内的敌人在动态数值秒内受到动态数值点燃烧伤害，最多叠加动态数值层。；每隔动态数值秒，发射一枚爆弹，造成动态数值-动态数值点伤害，并使范围内的敌人在动态数值秒内受到动态数值点燃烧伤害，最多叠加动态数值层。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_dragons_lvl4:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_dragons_lvl4",
+          "entityName": "龙之孵育所",
+          "title": "数值调整防御塔：龙之孵育所",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_dragons_lvl4.png",
+          "details": [
+            {
+              "field": "最低伤害",
+              "before": "31",
+              "after": "32",
+              "delta": "+1（+3.2%）",
+              "direction": "increase"
+            },
+            {
+              "field": "最高伤害",
+              "before": "42",
+              "after": "43",
+              "delta": "+1（+2.4%）",
+              "direction": "increase"
+            },
+            {
+              "field": "颤栗龙吼 · 升级价格",
+              "before": "225",
+              "after": "200",
+              "delta": "-25（-11.1%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_dragons_lvl4:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_dragons_lvl4",
+          "entityName": "龙之孵育所",
+          "title": "内容调整防御塔：龙之孵育所",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_dragons_lvl4.png",
+          "details": [
+            {
+              "field": "魔法唾液 · 技能说明",
+              "before": "每隔动态数值秒，发射一枚魔法飞弹，对单个目标造成动态数值-动态数值点魔法伤害，并对半径动态数值范围内敌人造成动态数值-动态数值点魔法伤害。；每隔动态数值秒，发射一枚魔法飞弹，对单个目标造成动态数值-动态数值点魔法伤害，并对半径动态数值范围内敌人造成动态数值-动态数值点魔法伤害。；每隔动态数值秒，发射一枚魔法飞弹，对单个目标造成动态数值-动态数值点魔法伤害，并对半径动态数值范围内敌人造成动态数值-动态数值点魔法伤害。",
+              "after": "每隔动态数值秒，发射三枚魔法飞弹，共造成动态数值-动态数值点魔法伤害，并对半径动态数值范围内敌人造成动态数值-动态数值点魔法伤害。；每隔动态数值秒，发射三枚魔法飞弹，共造成动态数值-动态数值点魔法伤害，并对半径动态数值范围内敌人造成动态数值-动态数值点魔法伤害。；每隔动态数值秒，发射三枚魔法飞弹，共造成动态数值-动态数值点魔法伤害，并对半径动态数值范围内敌人造成动态数值-动态数值点魔法伤害。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "technology:1:reinforcement_level_6:content:main",
+          "category": "technology",
+          "kind": "content",
+          "entityId": "1:reinforcement_level_6",
+          "entityName": "胜利呼唤",
+          "title": "内容调整科技：胜利呼唤",
+          "description": "",
+          "image": "/technologies/1/reinforcement_level_6.png",
+          "details": [
+            {
+              "field": "科技说明",
+              "before": "提升援军在场的时间2秒，并加快援军技能的冷却1秒。",
+              "after": "提升援军在场的时间2秒，并加快援军技能的冷却2秒。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "technology:2:reinforcement_level_6:content:main",
+          "category": "technology",
+          "kind": "content",
+          "entityId": "2:reinforcement_level_6",
+          "entityName": "胜利呼唤",
+          "title": "内容调整科技：胜利呼唤",
+          "description": "",
+          "image": "/technologies/2/reinforcement_level_6.png",
+          "details": [
+            {
+              "field": "科技说明",
+              "before": "提升援军在场的时间1秒，并加快援军技能的冷却2秒。",
+              "after": "提升援军在场的时间1秒，并加快援军技能的冷却3秒。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "technology:3:reinforcement_level_6:content:main",
+          "category": "technology",
+          "kind": "content",
+          "entityId": "3:reinforcement_level_6",
+          "entityName": "胜利呼唤",
+          "title": "内容调整科技：胜利呼唤",
+          "description": "",
+          "image": "/technologies/3/reinforcement_level_6.png",
+          "details": [
+            {
+              "field": "科技说明",
+              "before": "提升援军在场的时间2秒，并加快援军技能的冷却1秒。",
+              "after": "提升援军在场的时间2秒，并加快援军技能的冷却2秒。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "technology:4:reinforcement_level_6:content:main",
+          "category": "technology",
+          "kind": "content",
+          "entityId": "4:reinforcement_level_6",
+          "entityName": "胜利呼唤",
+          "title": "内容调整科技：胜利呼唤",
+          "description": "",
+          "image": "/technologies/4/reinforcement_level_6.png",
+          "details": [
+            {
+              "field": "科技说明",
+              "before": "提升援军在场的时间1秒，并加快援军技能的冷却2秒。",
+              "after": "提升援军在场的时间1秒，并加快援军技能的冷却3秒。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        }
+      ]
+    },
     {
       "id": "2.0.6.8-77e10bd7f825",
       "version": "2.0.6.8",
