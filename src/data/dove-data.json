@@ -1,11 +1,11 @@
 {
   "metadata": {
     "title": "王国保卫战鸽子版 WIKI",
-    "gameVersion": "2.0.6.8",
+    "gameVersion": "2.0.7.1",
     "contentVersion": "5.6.12",
     "gameId": "kingdom_rush_dove",
-    "commitHash": "77e10bd7f8259e907df3efafd1ffcddabb48640c",
-    "generatedAt": "2026-08-31T11:24:26.196Z",
+    "commitHash": "8620949ab6c8a69a40e84f19be4d5555bc19fa9c",
+    "generatedAt": "2026-09-07T07:25:51.468Z",
     "sourceRoot": "D:\\KingdomRushDove-Windows-Cycle2-v0.1.5\\KingdomRushDove",
     "assumptions": [
       "科技树可在辅助计算中选择；条件触发、概率与特殊目标效果不强行折算进基础面板。",
@@ -15,11 +15,11 @@
     ]
   },
   "summary": {
-    "towerCount": 93,
-    "portraitCount": 93,
-    "encyclopediaImageCount": 81,
+    "towerCount": 94,
+    "portraitCount": 94,
+    "encyclopediaImageCount": 82,
     "portraitFallbackCount": 12,
-    "skillIconCount": 196,
+    "skillIconCount": 197,
     "technologyTreeCount": 4,
     "technologyCount": 144,
     "heroCount": 78,
@@ -29,10 +29,10 @@
     "supportTowerCount": 6,
     "supportHeroCount": 7,
     "supportEffectCount": 15,
-    "levelUnlockCount": 59,
+    "levelUnlockCount": 60,
     "defaultUnlockCount": 34,
     "unlockAnomalyCount": 0,
-    "exactDamageCount": 92
+    "exactDamageCount": 93
   },
   "validation": {
     "warnings": [
@@ -1031,7 +1031,7 @@
           "icon": "/technologies/1/reinforcement_level_6.png",
           "iconSprite": "kr3_Upgrades_Icons_0029",
           "name": "胜利呼唤",
-          "description": "提升援军在场的时间2秒，并加快援军技能的冷却1秒。",
+          "description": "提升援军在场的时间2秒，并加快援军技能的冷却2秒。",
           "modifiers": []
         }
       ]
@@ -1599,7 +1599,7 @@
           "icon": "/technologies/2/reinforcement_level_6.png",
           "iconSprite": "kr3_Upgrades_Icons_0029",
           "name": "胜利呼唤",
-          "description": "提升援军在场的时间1秒，并加快援军技能的冷却2秒。",
+          "description": "提升援军在场的时间1秒，并加快援军技能的冷却3秒。",
           "modifiers": []
         }
       ]
@@ -2148,7 +2148,7 @@
           "icon": "/technologies/3/reinforcement_level_6.png",
           "iconSprite": "kr3_Upgrades_Icons_0029",
           "name": "胜利呼唤",
-          "description": "提升援军在场的时间2秒，并加快援军技能的冷却1秒。",
+          "description": "提升援军在场的时间2秒，并加快援军技能的冷却2秒。",
           "modifiers": []
         }
       ]
@@ -2698,7 +2698,7 @@
           "icon": "/technologies/4/reinforcement_level_6.png",
           "iconSprite": "kr3_Upgrades_Icons_0029",
           "name": "胜利呼唤",
-          "description": "提升援军在场的时间1秒，并加快援军技能的冷却2秒。",
+          "description": "提升援军在场的时间1秒，并加快援军技能的冷却3秒。",
           "modifiers": []
         }
       ]
@@ -26038,15 +26038,15 @@
           "descriptions": [
             {
               "key": "TOWER_CROSSBOW_MULTISHOT_DESCRIPTION_1",
-              "text": "快速射出6支箭矢，每支造成30至40点枪伤。若目标死亡，在70范围内尝试转火。"
+              "text": "每隔6秒，快速射出6支箭矢，每支造成30至40点枪伤。若目标死亡，在70范围内尝试转火。"
             },
             {
               "key": "TOWER_CROSSBOW_MULTISHOT_DESCRIPTION_2",
-              "text": "快速射出8支箭矢，每支造成30至40点枪伤。若目标死亡，在105范围内尝试转火。"
+              "text": "每隔6秒，快速射出8支箭矢，每支造成30至40点枪伤。若目标死亡，在105范围内尝试转火。"
             },
             {
               "key": "TOWER_CROSSBOW_MULTISHOT_DESCRIPTION_3",
-              "text": "快速射出10支箭矢，每支造成30至40点枪伤。若目标死亡，在140范围内尝试转火。"
+              "text": "每隔6秒，快速射出10支箭矢，每支造成30至40点枪伤。若目标死亡，在140范围内尝试转火。"
             }
           ]
         }
@@ -26271,15 +26271,15 @@
           "descriptions": [
             {
               "key": "TOWER_ARCHMAGE_TWISTER_DESCRIPTION_1",
-              "text": "大法师法力提升，召唤法球的概率提升3%，并能够召唤可以席卷5人、造成30点伤害的龙卷风。龙卷风消散后，在原地留下一枚法球。"
+              "text": "大法师法力提升，召唤法球的概率提升3%，并每隔20秒召唤可以席卷5人、造成30点伤害的龙卷风。龙卷风消散后，在原地留下一枚法球。"
             },
             {
               "key": "TOWER_ARCHMAGE_TWISTER_DESCRIPTION_2",
-              "text": "大法师法力提升，召唤法球的概率提升6%，并能够召唤可以席卷6人、造成50点伤害的龙卷风。龙卷风消散后，在原地留下一枚法球。"
+              "text": "大法师法力提升，召唤法球的概率提升6%，并每隔20秒召唤可以席卷6人、造成50点伤害的龙卷风。龙卷风消散后，在原地留下一枚法球。"
             },
             {
               "key": "TOWER_ARCHMAGE_TWISTER_DESCRIPTION_3",
-              "text": "大法师法力提升，召唤法球的概率提升9%，并能够召唤可以席卷7人、造成70点伤害的龙卷风。龙卷风消散后，在原地留下一枚法球。"
+              "text": "大法师法力提升，召唤法球的概率提升9%，并每隔20秒召唤可以席卷7人、造成70点伤害的龙卷风。龙卷风消散后，在原地留下一枚法球。"
             }
           ]
         }
@@ -27771,15 +27771,15 @@
           "descriptions": [
             {
               "key": "TOWER_ENTWOOD_CLOBBER_DESCRIPTION_1",
-              "text": "震动地面，造成75点伤害与40%减速，并对较近的敌人造成额外40%伤害与眩晕效果，持续1秒。"
+              "text": "每隔14秒，震动地面，造成75点真实伤害与40%减速，并对较近的敌人造成额外40%伤害与眩晕效果，持续1秒。"
             },
             {
               "key": "TOWER_ENTWOOD_CLOBBER_DESCRIPTION_2",
-              "text": "震动地面，造成100点伤害与40%减速，并对较近的敌人造成额外40%伤害与眩晕效果，持续2秒。"
+              "text": "每隔14秒，震动地面，造成100点真实伤害与40%减速，并对较近的敌人造成额外40%伤害与眩晕效果，持续2秒。"
             },
             {
               "key": "TOWER_ENTWOOD_CLOBBER_DESCRIPTION_3",
-              "text": "震动地面，造成125点伤害与40%减速，并对较近的敌人造成额外40%伤害与眩晕效果，持续3秒。"
+              "text": "每隔14秒，震动地面，造成125点真实伤害与40%减速，并对较近的敌人造成额外40%伤害与眩晕效果，持续3秒。"
             }
           ]
         },
@@ -27794,15 +27794,15 @@
           "descriptions": [
             {
               "key": "TOWER_ENTWOOD_FIERY_NUTS_DESCRIPTION_1",
-              "text": "每隔18秒，投掷一颗燃烧的坚果，爆炸造成129点范围伤害，并使地面着火。"
+              "text": "每隔18秒，投掷一颗燃烧的坚果，造成129点爆炸伤害，并使地面着火。"
             },
             {
               "key": "TOWER_ENTWOOD_FIERY_NUTS_DESCRIPTION_2",
-              "text": "每隔18秒，投掷一颗燃烧的坚果，爆炸造成181点范围伤害，并使地面着火。"
+              "text": "每隔18秒，投掷一颗燃烧的坚果，造成181点爆炸伤害，并使地面着火。"
             },
             {
               "key": "TOWER_ENTWOOD_FIERY_NUTS_DESCRIPTION_3",
-              "text": "每隔18秒，投掷一颗燃烧的坚果，爆炸造成233点范围伤害，并使地面着火。"
+              "text": "每隔18秒，投掷一颗燃烧的坚果，造成233点爆炸伤害，并使地面着火。"
             }
           ]
         }
@@ -27898,15 +27898,15 @@
           "descriptions": [
             {
               "key": "TOWER_HIGH_ELVEN_TIMELAPSE_DESCRIPTION_1",
-              "text": "将最多2个敌人相位传送出战场5秒，对其造成100点伤害。若敌人在此期间死亡，将召唤一个奥术守卫。该技能优先锁定可被沉默的敌人。"
+              "text": "每隔16秒，将最多2个敌人相位传送出战场5秒，造成100点伤害。若敌人在此期间死亡，将召唤一个奥术守卫。该技能优先锁定可被沉默的敌人。"
             },
             {
               "key": "TOWER_HIGH_ELVEN_TIMELAPSE_DESCRIPTION_2",
-              "text": "将最多3个敌人相位传送出战场5秒，对其造成135点伤害。若敌人在此期间死亡，将召唤一个奥术守卫。该技能优先锁定可被沉默的敌人。"
+              "text": "每隔16秒，将最多3个敌人相位传送出战场5秒，造成135点伤害。若敌人在此期间死亡，将召唤一个奥术守卫。该技能优先锁定可被沉默的敌人。"
             },
             {
               "key": "TOWER_HIGH_ELVEN_TIMELAPSE_DESCRIPTION_3",
-              "text": "将最多4个敌人相位传送出战场5秒，对其造成150点伤害。若敌人在此期间死亡，将召唤一个奥术守卫。该技能优先锁定可被沉默的敌人。"
+              "text": "每隔16秒，将最多4个敌人相位传送出战场5秒，造成150点伤害。若敌人在此期间死亡，将召唤一个奥术守卫。该技能优先锁定可被沉默的敌人。"
             }
           ]
         }
@@ -28286,15 +28286,15 @@
           "descriptions": [
             {
               "key": "TOWER_FOREST_CIRCLE_DESCRIPTION_1",
-              "text": "在4秒内治疗自身和150范围内友军80点生命值。"
+              "text": "每隔10秒，在4秒内治疗自身和150范围内友军80点生命值。"
             },
             {
               "key": "TOWER_FOREST_CIRCLE_DESCRIPTION_2",
-              "text": "在4秒内治疗自身和150范围内友军160点生命值。"
+              "text": "每隔10秒，在4秒内治疗自身和150范围内友军160点生命值。"
             },
             {
               "key": "TOWER_FOREST_CIRCLE_DESCRIPTION_3",
-              "text": "在4秒内治疗自身和150范围内友军240点生命值。"
+              "text": "每隔10秒，在4秒内治疗自身和150范围内友军240点生命值。"
             }
           ]
         },
@@ -28309,11 +28309,11 @@
           "descriptions": [
             {
               "key": "TOWER_FOREST_EERIE_DESCRIPTION_1",
-              "text": "以12根尖刺蔓藤覆盖一片区域，减速敌人50%，每0.5秒对其造成3点物理伤害，持续4秒。"
+              "text": "每隔16秒，以12根尖刺蔓藤覆盖一片区域，减速敌人50%，每0.5秒对其造成3点物理伤害，持续4秒。"
             },
             {
               "key": "TOWER_FOREST_EERIE_DESCRIPTION_2",
-              "text": "以15根尖刺蔓藤覆盖一片区域，减速敌人50%，每0.5秒对其造成4点物理伤害，持续6秒。"
+              "text": "每隔16秒，以15根尖刺蔓藤覆盖一片区域，减速敌人50%，每0.5秒对其造成4点物理伤害，持续6秒。"
             }
           ]
         },
@@ -28412,15 +28412,15 @@
           "descriptions": [
             {
               "key": "TOWER_BLADE_BLADE_DANCE_DESCRIPTION_1",
-              "text": "发动秘技，斩击最多2次，造成25-35点真实伤害。"
+              "text": "每隔9秒，发动秘技，斩击最多2次，每次造成25-35点真实伤害。"
             },
             {
               "key": "TOWER_BLADE_BLADE_DANCE_DESCRIPTION_2",
-              "text": "发动秘技，斩击最多3次，造成35-47点真实伤害。"
+              "text": "每隔9秒，发动秘技，斩击最多3次，每次造成35-47点真实伤害。"
             },
             {
               "key": "TOWER_BLADE_BLADE_DANCE_DESCRIPTION_3",
-              "text": "发动秘技，斩击最多4次，造成40-56点真实伤害。"
+              "text": "每隔9秒，发动秘技，斩击最多4次，每次造成40-56点真实伤害。"
             }
           ]
         },
@@ -28557,11 +28557,11 @@
           "descriptions": [
             {
               "key": "TOWER_EWOK_SHIELD_DESCRIPTION_1",
-              "text": "提升盾牌格挡的持续时间1秒，减短盾牌格挡的冷却1秒，并附带25点恢复效果。"
+              "text": "提升盾牌格挡的持续时间至5秒，减短盾牌格挡的冷却至19秒，并附带25点恢复效果。"
             },
             {
               "key": "TOWER_EWOK_SHIELD_DESCRIPTION_2",
-              "text": "提升盾牌格挡的持续时间2秒，减短盾牌格挡的冷却2秒，并附带50点恢复效果。"
+              "text": "提升盾牌格挡的持续时间至6秒，减短盾牌格挡的冷却至18秒，并附带50点恢复效果。"
             }
           ]
         },
@@ -29295,15 +29295,15 @@
           "descriptions": [
             {
               "key": "TOWER_ROYAL_ARCHERS_LVL4_ARMOR_PIERCER_1_DESCRIPTION",
-              "text": "射出三支无视敌人动态数值护甲的强化箭矢，每支造成动态数值-动态数值点刺击伤害，并降低敌人9点护甲。"
+              "text": "每隔动态数值秒，射出三支无视敌人动态数值护甲的强化箭矢，每支造成动态数值-动态数值点刺击伤害，并降低敌人9点护甲。"
             },
             {
               "key": "TOWER_ROYAL_ARCHERS_LVL4_ARMOR_PIERCER_2_DESCRIPTION",
-              "text": "射出三支无视敌人动态数值护甲的强化箭矢，每支造成动态数值-动态数值点刺击伤害，并降低敌人9点护甲。"
+              "text": "每隔动态数值秒，射出三支无视敌人动态数值护甲的强化箭矢，每支造成动态数值-动态数值点刺击伤害，并降低敌人9点护甲。"
             },
             {
               "key": "TOWER_ROYAL_ARCHERS_LVL4_ARMOR_PIERCER_3_DESCRIPTION",
-              "text": "射出三支无视敌人动态数值护甲的强化箭矢，每支造成动态数值-动态数值点刺击伤害，并降低敌人9点护甲。"
+              "text": "每隔动态数值秒，射出三支无视敌人动态数值护甲的强化箭矢，每支造成动态数值-动态数值点刺击伤害，并降低敌人9点护甲。"
             }
           ]
         },
@@ -29397,15 +29397,15 @@
           "descriptions": [
             {
               "key": "TOWER_TRICANNON_LVL4_BOMBARDMENT_1_DESCRIPTION",
-              "text": "在大范围内发射多枚炸弹，每枚造成动态数值-动态数值点爆炸伤害。"
+              "text": "每隔动态数值秒，在大范围内发射7枚炸弹，每枚造成动态数值-动态数值点爆炸伤害。"
             },
             {
               "key": "TOWER_TRICANNON_LVL4_BOMBARDMENT_2_DESCRIPTION",
-              "text": "扩大范围，发射更多炸弹，每枚造成动态数值-动态数值点爆炸伤害。"
+              "text": "每隔动态数值秒，在大范围内发射13枚炸弹，每枚造成动态数值-动态数值点爆炸伤害。"
             },
             {
               "key": "TOWER_TRICANNON_LVL4_BOMBARDMENT_3_DESCRIPTION",
-              "text": "扩大范围，发射超多炸弹，每枚造成动态数值-动态数值点爆炸伤害。"
+              "text": "每隔动态数值秒，在大范围内发射17枚炸弹，每枚造成动态数值-动态数值点爆炸伤害。"
             }
           ]
         },
@@ -29600,15 +29600,15 @@
           "descriptions": [
             {
               "key": "TOWER_ARBOREAN_EMISSARY_LVL4_GIFT_OF_NATURE_1_DESCRIPTION",
-              "text": "召唤仙灵追踪友军，使他们每秒恢复动态数值点生命值，持续动态数值秒。该治疗可溢出至最大生命值的动态数值倍。"
+              "text": "每隔动态数值秒，召唤仙灵追踪友军，使他们每秒恢复动态数值点生命值，持续动态数值秒。该治疗可溢出至最大生命值的动态数值倍。"
             },
             {
               "key": "TOWER_ARBOREAN_EMISSARY_LVL4_GIFT_OF_NATURE_2_DESCRIPTION",
-              "text": "召唤仙灵追踪友军，使他们每秒恢复动态数值点生命值，持续动态数值秒。该治疗可溢出至最大生命值的动态数值倍。"
+              "text": "每隔动态数值秒，召唤仙灵追踪友军，使他们每秒恢复动态数值点生命值，持续动态数值秒。该治疗可溢出至最大生命值的动态数值倍。"
             },
             {
               "key": "TOWER_ARBOREAN_EMISSARY_LVL4_GIFT_OF_NATURE_3_DESCRIPTION",
-              "text": "召唤仙灵追踪友军，使他们每秒恢复动态数值点生命值，持续动态数值秒。该治疗可溢出至最大生命值的动态数值倍。"
+              "text": "每隔动态数值秒，召唤仙灵追踪友军，使他们每秒恢复动态数值点生命值，持续动态数值秒。该治疗可溢出至最大生命值的动态数值倍。"
             }
           ]
         },
@@ -29623,15 +29623,15 @@
           "descriptions": [
             {
               "key": "TOWER_ARBOREAN_EMISSARY_LVL4_WAVE_OF_ROOTS_1_DESCRIPTION",
-              "text": "生长出动态数值道树根缠绕敌人，使其眩晕动态数值秒，并造成动态数值点真实伤害。"
+              "text": "每隔动态数值秒，生长出动态数值道树根缠绕敌人，使其眩晕动态数值秒，并造成动态数值点真实伤害。"
             },
             {
               "key": "TOWER_ARBOREAN_EMISSARY_LVL4_WAVE_OF_ROOTS_2_DESCRIPTION",
-              "text": "生长出动态数值道根须缠绕敌人，使其眩晕动态数值秒，并造成动态数值点真实伤害。"
+              "text": "每隔动态数值秒，生长出动态数值道根须缠绕敌人，使其眩晕动态数值秒，并造成动态数值点真实伤害。"
             },
             {
               "key": "TOWER_ARBOREAN_EMISSARY_LVL4_WAVE_OF_ROOTS_3_DESCRIPTION",
-              "text": "生长出动态数值道根须缠绕敌人，使其眩晕动态数值秒，并造成动态数值点真实伤害。"
+              "text": "每隔动态数值秒，生长出动态数值道根须缠绕敌人，使其眩晕动态数值秒，并造成动态数值点真实伤害。"
             }
           ]
         }
@@ -29703,15 +29703,15 @@
           "descriptions": [
             {
               "key": "TOWER_DEMON_PIT_LVL4_BIG_GUY_1_DESCRIPTION",
-              "text": "召唤一个拥有动态数值点生命值的大恶魔，其攻击可造成动态数值-动态数值点物理伤害。爆炸造成动态数值点伤害。"
+              "text": "每隔动态数值秒，召唤一个拥有动态数值点生命值的大恶魔，其攻击可造成动态数值-动态数值点物理伤害。爆炸造成动态数值点伤害。"
             },
             {
               "key": "TOWER_DEMON_PIT_LVL4_BIG_GUY_2_DESCRIPTION",
-              "text": "大恶魔拥有动态数值点生命值，攻击造成动态数值-动态数值点物理伤害。爆炸造成动态数值点伤害。"
+              "text": "每隔动态数值秒，召唤一个拥有动态数值点生命值的大恶魔，其攻击可造成动态数值-动态数值点物理伤害。爆炸造成动态数值点伤害。"
             },
             {
               "key": "TOWER_DEMON_PIT_LVL4_BIG_GUY_3_DESCRIPTION",
-              "text": "大恶魔拥有动态数值点生命值，攻击造成动态数值-动态数值点物理伤害。爆炸造成动态数值点伤害。"
+              "text": "每隔动态数值秒，召唤一个拥有动态数值点生命值的大恶魔，其攻击可造成动态数值-动态数值点物理伤害。爆炸造成动态数值点伤害。"
             }
           ]
         },
@@ -30032,15 +30032,15 @@
           "descriptions": [
             {
               "key": "TOWER_ELVEN_STARGAZERS_LVL4_TELEPORT_1_DESCRIPTION",
-              "text": "传送最多动态数值名敌人，使他们倒退一段距离。"
+              "text": "每隔动态数值秒，传送最多动态数值名敌人，使他们倒退一段距离。"
             },
             {
               "key": "TOWER_ELVEN_STARGAZERS_LVL4_TELEPORT_2_DESCRIPTION",
-              "text": "传送最多动态数值名敌人，使他们倒退更远距离。"
+              "text": "每隔动态数值秒，传送最多动态数值名敌人，使他们倒退一段距离。"
             },
             {
               "key": "TOWER_ELVEN_STARGAZERS_LVL4_TELEPORT_3_DESCRIPTION",
-              "text": "传送最多动态数值名敌人，使他们倒退更更远距离。"
+              "text": "每隔动态数值秒，传送最多动态数值名敌人，使他们倒退一段距离。"
             }
           ]
         }
@@ -30087,10 +30087,10 @@
         "source": "kr1/data/levels/level110_data.lua"
       },
       "attack": {
-        "damageMin": 90,
-        "damageMax": 100,
-        "cooldown": 2,
-        "dps": 47.5,
+        "damageMin": 80,
+        "damageMax": 110,
+        "cooldown": 3.9,
+        "dps": 24.35897435897436,
         "range": 200,
         "rallyRange": null,
         "damageType": "真实",
@@ -30112,15 +30112,15 @@
           "descriptions": [
             {
               "key": "TOWER_FLAMESPITTER_LVL4_SKILL_BOMB_1_DESCRIPTION",
-              "text": "发射一枚燃烧弹，造成动态数值点爆炸伤害，并灼烧敌人，每秒造成动态数值点真实伤害，持续动态数值秒。"
+              "text": "每隔动态数值秒，发射一枚燃烧弹，造成动态数值点爆炸伤害，并灼烧敌人，每秒造成动态数值点真实伤害，持续动态数值秒。"
             },
             {
               "key": "TOWER_FLAMESPITTER_LVL4_SKILL_BOMB_2_DESCRIPTION",
-              "text": "发射一枚燃烧弹，造成动态数值点爆炸伤害，并灼烧敌人，每秒造成动态数值点真实伤害，持续动态数值秒。"
+              "text": "每隔动态数值秒，发射一枚燃烧弹，造成动态数值点爆炸伤害，并灼烧敌人，每秒造成动态数值点真实伤害，持续动态数值秒。"
             },
             {
               "key": "TOWER_FLAMESPITTER_LVL4_SKILL_BOMB_3_DESCRIPTION",
-              "text": "发射一枚燃烧弹，造成动态数值点爆炸伤害，并灼烧敌人，每秒造成动态数值点真实伤害，持续动态数值秒。"
+              "text": "每隔动态数值秒，发射一枚燃烧弹，造成动态数值点爆炸伤害，并灼烧敌人，每秒造成动态数值点真实伤害，持续动态数值秒。"
             }
           ]
         },
@@ -30135,15 +30135,15 @@
           "descriptions": [
             {
               "key": "TOWER_FLAMESPITTER_LVL4_SKILL_COLUMNS_1_DESCRIPTION",
-              "text": "地面喷发出火柱，眩晕敌人动态数值秒，并造成动态数值点物理伤害。处于火柱内圈的敌人会额外受到动态数值点伤害，并在死亡后化为灰烬。"
+              "text": "每隔动态数值秒，地面喷发出火柱，眩晕敌人动态数值秒，并造成动态数值点物理伤害。处于火柱内圈的敌人会额外受到动态数值点伤害，并在死亡后化为灰烬。"
             },
             {
               "key": "TOWER_FLAMESPITTER_LVL4_SKILL_COLUMNS_2_DESCRIPTION",
-              "text": "地面喷发出火柱，眩晕敌人动态数值秒，并造成动态数值点物理伤害。处于火柱内圈的敌人会额外受到动态数值点真实伤害，并在死亡后化为灰烬。"
+              "text": "每隔动态数值秒，地面喷发出火柱，眩晕敌人动态数值秒，并造成动态数值点物理伤害。处于火柱内圈的敌人会额外受到动态数值点真实伤害，并在死亡后化为灰烬。"
             },
             {
               "key": "TOWER_FLAMESPITTER_LVL4_SKILL_COLUMNS_3_DESCRIPTION",
-              "text": "地面喷发出火柱，眩晕敌人动态数值秒，并造成动态数值点物理伤害。处于火柱内圈的敌人会额外受到动态数值点真实伤害，并在死亡后化为灰烬。"
+              "text": "每隔动态数值秒，地面喷发出火柱，眩晕敌人动态数值秒，并造成动态数值点物理伤害。处于火柱内圈的敌人会额外受到动态数值点真实伤害，并在死亡后化为灰烬。"
             }
           ]
         }
@@ -30446,15 +30446,7 @@
           "descriptions": [
             {
               "key": "TOWER_RAY_LVL4_SHEEP_1_DESCRIPTION",
-              "text": "将附近的一名敌人变成无力的绵羊。绵羊拥有其本体动态数值%的生命值。"
-            },
-            {
-              "key": "TOWER_RAY_LVL4_SHEEP_2_DESCRIPTION",
-              "text": "将附近的一名敌人变成无力的绵羊。绵羊拥有其本体动态数值%的生命值。"
-            },
-            {
-              "key": "TOWER_RAY_LVL4_SHEEP_3_DESCRIPTION",
-              "text": "将附近的一名敌人变成无力的绵羊。绵羊拥有其本体动态数值%的生命值。"
+              "text": "每隔动态数值秒，将附近的一名敌人变成无力的绵羊。绵羊拥有其本体动态数值%的生命值。"
             }
           ]
         }
@@ -30866,6 +30858,110 @@
       }
     },
     {
+      "id": "tower_stage_28_priests_barrack",
+      "name": "无明教团",
+      "description": "痛改前非的教徒。他们会施展巫术与敌人作战，在死亡时化作怪物。",
+      "families": [
+        "barrack"
+      ],
+      "roles": [
+        "直接输出",
+        "范围伤害",
+        "召唤/拦截"
+      ],
+      "image": "/encyclopedia/thumbs/tower_stage_28_priests_barrack.png",
+      "encyclopediaImage": "/encyclopedia/tower_stage_28_priests_barrack.png",
+      "encyclopediaOrder": 57,
+      "encyclopediaListed": true,
+      "encyclopediaSprite": "kr5_encyclopedia_towers_0023",
+      "encyclopediaThumbSprite": "kr5_encyclopedia_tower_thumbs_0023",
+      "sourceGame": 5,
+      "portraitSprite": "kr5_portraits_towers_0029",
+      "price": 200,
+      "level": 1,
+      "towerType": "tower_priests_barrack",
+      "canBeBuffed": true,
+      "unlock": {
+        "status": "level",
+        "level": 128,
+        "label": "第 128 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level128_data.lua"
+      },
+      "attack": {
+        "damageMin": 10,
+        "damageMax": 15,
+        "cooldown": 1,
+        "dps": 12.5,
+        "range": null,
+        "rallyRange": 174.4,
+        "damageType": "魔法",
+        "damageTypeValue": 4,
+        "kind": "soldier",
+        "confidence": "精确",
+        "scope": "单个驻防单位"
+      },
+      "soldier": {
+        "count": 4,
+        "hp": 110,
+        "armor": 0,
+        "magicArmor": 0,
+        "respawn": 12
+      },
+      "powers": [
+        {
+          "id": "abomination",
+          "name": "血肉进化",
+          "icon": null,
+          "iconSprite": null,
+          "maxLevel": 2,
+          "priceBase": 120,
+          "priceIncrement": 200,
+          "descriptions": [
+            {
+              "key": "TOWER_STAGE_28_PRIESTS_BARRACK_ABOMINATION_1_DESCRIPTION",
+              "text": "无明教徒死亡后化为触手，攻击敌人，每次造成12-20点物理伤害。"
+            },
+            {
+              "key": "TOWER_STAGE_28_PRIESTS_BARRACK_ABOMINATION_2_DESCRIPTION",
+              "text": "无明教徒死亡后化为憎恶，拦截敌人，每次攻击造成45-60点物理伤害，并可斩杀生命值低于30%的敌人。"
+            }
+          ]
+        },
+        {
+          "id": "explosion",
+          "name": "腐朽爆破",
+          "icon": "/skills/tower_stage_28_priests_barrack--explosion.png",
+          "iconSprite": "kr5_special_icons_0030",
+          "maxLevel": 3,
+          "priceBase": 200,
+          "priceIncrement": 120,
+          "descriptions": [
+            {
+              "key": "TOWER_STAGE_28_PRIESTS_BARRACK_EXPLOSION_1_DESCRIPTION",
+              "text": "无明教徒的法球命中时爆炸，造成8-12点范围法术伤害。"
+            },
+            {
+              "key": "TOWER_STAGE_28_PRIESTS_BARRACK_EXPLOSION_2_DESCRIPTION",
+              "text": "无明教徒的法球命中时爆炸，造成14-18点范围法术伤害。"
+            },
+            {
+              "key": "TOWER_STAGE_28_PRIESTS_BARRACK_EXPLOSION_3_DESCRIPTION",
+              "text": "无明教徒的法球命中时爆炸，造成20-24点范围法术伤害。"
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/barrack_towers.lua",
+        "nameKey": "TOWER_STAGE_28_PRIESTS_BARRACK_NAME",
+        "descriptionKey": "TOWER_STAGE_28_PRIESTS_BARRACK_DESCRIPTION",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
+        "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
+        "unlock": "kr1/data/levels/level128_data.lua"
+      }
+    },
+    {
       "id": "tower_dwarf_lvl4",
       "name": "炮兵小队",
       "description": "身材娇小，一点就着，没有任何敌人能活着穿过她们的防线。",
@@ -30879,7 +30975,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_dwarf_lvl4.png",
       "encyclopediaImage": "/encyclopedia/tower_dwarf_lvl4.png",
-      "encyclopediaOrder": 57,
+      "encyclopediaOrder": 58,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr5_encyclopedia_towers_0020",
       "encyclopediaThumbSprite": "kr5_encyclopedia_tower_thumbs_0020",
@@ -30950,15 +31046,15 @@
           "descriptions": [
             {
               "key": "TOWER_DWARF_LVL4_INCENDIARY_AMMO_1_DESCRIPTION",
-              "text": "发射一枚爆弹，造成动态数值-动态数值点伤害，并使范围内的敌人在动态数值秒内受到动态数值点燃烧伤害。"
+              "text": "每隔动态数值秒，发射一枚爆弹，造成动态数值-动态数值点伤害，并使范围内的敌人在动态数值秒内受到动态数值点燃烧伤害，最多叠加动态数值层。"
             },
             {
               "key": "TOWER_DWARF_LVL4_INCENDIARY_AMMO_2_DESCRIPTION",
-              "text": "发射一枚爆弹，造成动态数值-动态数值点伤害，并使范围内的敌人在动态数值秒内受到动态数值点燃烧伤害。"
+              "text": "每隔动态数值秒，发射一枚爆弹，造成动态数值-动态数值点伤害，并使范围内的敌人在动态数值秒内受到动态数值点燃烧伤害，最多叠加动态数值层。"
             },
             {
               "key": "TOWER_DWARF_LVL4_INCENDIARY_AMMO_3_DESCRIPTION",
-              "text": "发射一枚爆弹，造成动态数值-动态数值点伤害，并使范围内的敌人在动态数值秒内受到动态数值点燃烧伤害。"
+              "text": "每隔动态数值秒，发射一枚爆弹，造成动态数值-动态数值点伤害，并使范围内的敌人在动态数值秒内受到动态数值点燃烧伤害，最多叠加动态数值层。"
             }
           ]
         }
@@ -30987,7 +31083,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_pandas_lvl4.png",
       "encyclopediaImage": "/encyclopedia/tower_pandas_lvl4.png",
-      "encyclopediaOrder": 58,
+      "encyclopediaOrder": 59,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr5_encyclopedia_towers_0021",
       "encyclopediaThumbSprite": "kr5_encyclopedia_tower_thumbs_0021",
@@ -31105,7 +31201,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_dragons_lvl4.png",
       "encyclopediaImage": "/encyclopedia/tower_dragons_lvl4.png",
-      "encyclopediaOrder": 59,
+      "encyclopediaOrder": 60,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr5_encyclopedia_towers_0022",
       "encyclopediaThumbSprite": "kr5_encyclopedia_tower_thumbs_0022",
@@ -31122,10 +31218,10 @@
         "source": "kr1/data/levels/level136_data.lua"
       },
       "attack": {
-        "damageMin": 31,
-        "damageMax": 42,
+        "damageMin": 32,
+        "damageMax": 43,
         "cooldown": 0.66666666666667,
-        "dps": 54.74999999999973,
+        "dps": 56.24999999999972,
         "range": 275,
         "rallyRange": 0,
         "damageType": "魔法",
@@ -31147,15 +31243,15 @@
           "descriptions": [
             {
               "key": "TOWER_DRAGONS_LVL4_DRAGON_SPLIT_1_DESCRIPTION",
-              "text": "每隔动态数值秒，发射一枚魔法飞弹，对单个目标造成动态数值-动态数值点魔法伤害，并对半径动态数值范围内敌人造成动态数值-动态数值点魔法伤害。"
+              "text": "每隔动态数值秒，发射三枚魔法飞弹，共造成动态数值-动态数值点魔法伤害，并对半径动态数值范围内敌人造成动态数值-动态数值点魔法伤害。"
             },
             {
               "key": "TOWER_DRAGONS_LVL4_DRAGON_SPLIT_2_DESCRIPTION",
-              "text": "每隔动态数值秒，发射一枚魔法飞弹，对单个目标造成动态数值-动态数值点魔法伤害，并对半径动态数值范围内敌人造成动态数值-动态数值点魔法伤害。"
+              "text": "每隔动态数值秒，发射三枚魔法飞弹，共造成动态数值-动态数值点魔法伤害，并对半径动态数值范围内敌人造成动态数值-动态数值点魔法伤害。"
             },
             {
               "key": "TOWER_DRAGONS_LVL4_DRAGON_SPLIT_3_DESCRIPTION",
-              "text": "每隔动态数值秒，发射一枚魔法飞弹，对单个目标造成动态数值-动态数值点魔法伤害，并对半径动态数值范围内敌人造成动态数值-动态数值点魔法伤害。"
+              "text": "每隔动态数值秒，发射三枚魔法飞弹，共造成动态数值-动态数值点魔法伤害，并对半径动态数值范围内敌人造成动态数值-动态数值点魔法伤害。"
             }
           ]
         },
@@ -31166,7 +31262,7 @@
           "iconSprite": "kr5_special_icons_0045",
           "maxLevel": 2,
           "priceBase": 200,
-          "priceIncrement": 225,
+          "priceIncrement": 200,
           "descriptions": [
             {
               "key": "TOWER_DRAGONS_LVL4_MASSIVE_FEAR_1_DESCRIPTION",
@@ -31202,7 +31298,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_shadow_archer.png",
       "encyclopediaImage": "/encyclopedia/tower_shadow_archer.png",
-      "encyclopediaOrder": 60,
+      "encyclopediaOrder": 61,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0007",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0007",
@@ -31321,7 +31417,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_rotten_forest.png",
       "encyclopediaImage": "/encyclopedia/tower_rotten_forest.png",
-      "encyclopediaOrder": 61,
+      "encyclopediaOrder": 62,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0009",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0009",
@@ -31428,7 +31524,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_bone_flingers.png",
       "encyclopediaImage": "/encyclopedia/tower_bone_flingers.png",
-      "encyclopediaOrder": 62,
+      "encyclopediaOrder": 63,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0011",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0011",
@@ -31544,7 +31640,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_ogre_shipwreck.png",
       "encyclopediaImage": "/encyclopedia/tower_ogre_shipwreck.png",
-      "encyclopediaOrder": 63,
+      "encyclopediaOrder": 64,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0022",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0022",
@@ -31651,7 +31747,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_orc_warriors.png",
       "encyclopediaImage": "/encyclopedia/tower_orc_warriors.png",
-      "encyclopediaOrder": 64,
+      "encyclopediaOrder": 65,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0003",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0003",
@@ -31768,7 +31864,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_dark_knights.png",
       "encyclopediaImage": "/encyclopedia/tower_dark_knights.png",
-      "encyclopediaOrder": 65,
+      "encyclopediaOrder": 66,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0006",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0006",
@@ -31890,7 +31986,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_infernal_mage.png",
       "encyclopediaImage": "/encyclopedia/tower_infernal_mage.png",
-      "encyclopediaOrder": 66,
+      "encyclopediaOrder": 67,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0010",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0010",
@@ -32007,7 +32103,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_orc_shaman.png",
       "encyclopediaImage": "/encyclopedia/tower_orc_shaman.png",
-      "encyclopediaOrder": 67,
+      "encyclopediaOrder": 68,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0004",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0004",
@@ -32131,7 +32227,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_rocket_riders.png",
       "encyclopediaImage": "/encyclopedia/tower_rocket_riders.png",
-      "encyclopediaOrder": 68,
+      "encyclopediaOrder": 69,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0005",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0005",
@@ -32246,7 +32342,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_grim_cemetery.png",
       "encyclopediaImage": "/encyclopedia/tower_grim_cemetery.png",
-      "encyclopediaOrder": 69,
+      "encyclopediaOrder": 70,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0013",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0013",
@@ -32360,7 +32456,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_balloon.png",
       "encyclopediaImage": "/encyclopedia/tower_balloon.png",
-      "encyclopediaOrder": 70,
+      "encyclopediaOrder": 71,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0002",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0002",
@@ -32467,7 +32563,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_spirit_mausoleum.png",
       "encyclopediaImage": "/encyclopedia/tower_spirit_mausoleum.png",
-      "encyclopediaOrder": 71,
+      "encyclopediaOrder": 72,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0012",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0012",
@@ -32578,7 +32674,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_twilight_elves_barrack.png",
       "encyclopediaImage": "/encyclopedia/tower_twilight_elves_barrack.png",
-      "encyclopediaOrder": 72,
+      "encyclopediaOrder": 73,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0008",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0008",
@@ -32700,7 +32796,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_goblirang.png",
       "encyclopediaImage": "/encyclopedia/tower_goblirang.png",
-      "encyclopediaOrder": 73,
+      "encyclopediaOrder": 74,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0001",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0001",
@@ -32816,7 +32912,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_shaolin.png",
       "encyclopediaImage": "/encyclopedia/tower_shaolin.png",
-      "encyclopediaOrder": 74,
+      "encyclopediaOrder": 75,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0019",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0019",
@@ -32923,7 +33019,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_deep_devils.png",
       "encyclopediaImage": "/encyclopedia/tower_deep_devils.png",
-      "encyclopediaOrder": 75,
+      "encyclopediaOrder": 76,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0016",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0016",
@@ -33036,7 +33132,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_ignis_altar.png",
       "encyclopediaImage": "/encyclopedia/tower_ignis_altar.png",
-      "encyclopediaOrder": 76,
+      "encyclopediaOrder": 77,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0020",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0020",
@@ -33144,7 +33240,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_blazing_watcher.png",
       "encyclopediaImage": "/encyclopedia/tower_blazing_watcher.png",
-      "encyclopediaOrder": 77,
+      "encyclopediaOrder": 78,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0014",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0014",
@@ -33256,7 +33352,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_swamp_monster.png",
       "encyclopediaImage": "/encyclopedia/tower_swamp_monster.png",
-      "encyclopediaOrder": 78,
+      "encyclopediaOrder": 79,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0018",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0018",
@@ -33374,7 +33470,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_melting_furnace.png",
       "encyclopediaImage": "/encyclopedia/tower_melting_furnace.png",
-      "encyclopediaOrder": 79,
+      "encyclopediaOrder": 80,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0015",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0015",
@@ -33482,7 +33578,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_wicked_sisters.png",
       "encyclopediaImage": "/encyclopedia/tower_wicked_sisters.png",
-      "encyclopediaOrder": 80,
+      "encyclopediaOrder": 81,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0017",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0017",
@@ -33591,7 +33687,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_sandworm.png",
       "encyclopediaImage": "/encyclopedia/tower_sandworm.png",
-      "encyclopediaOrder": 81,
+      "encyclopediaOrder": 82,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr4_encyclopedia_towers_0021",
       "encyclopediaThumbSprite": "kr4_encyclopedia_tower_thumbs_0021",
@@ -33730,7 +33826,7 @@
       ],
       "image": "/portraits/tower_archer_1.png",
       "encyclopediaImage": "/portraits/tower_archer_1.png",
-      "encyclopediaOrder": 82,
+      "encyclopediaOrder": 83,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -33783,7 +33879,7 @@
       ],
       "image": "/portraits/tower_archer_2.png",
       "encyclopediaImage": "/portraits/tower_archer_2.png",
-      "encyclopediaOrder": 83,
+      "encyclopediaOrder": 84,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -33836,7 +33932,7 @@
       ],
       "image": "/portraits/tower_archer_3.png",
       "encyclopediaImage": "/portraits/tower_archer_3.png",
-      "encyclopediaOrder": 84,
+      "encyclopediaOrder": 85,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -33889,7 +33985,7 @@
       ],
       "image": "/portraits/tower_mage_1.png",
       "encyclopediaImage": "/portraits/tower_mage_1.png",
-      "encyclopediaOrder": 85,
+      "encyclopediaOrder": 86,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -33942,7 +34038,7 @@
       ],
       "image": "/portraits/tower_mage_2.png",
       "encyclopediaImage": "/portraits/tower_mage_2.png",
-      "encyclopediaOrder": 86,
+      "encyclopediaOrder": 87,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -33995,7 +34091,7 @@
       ],
       "image": "/portraits/tower_mage_3.png",
       "encyclopediaImage": "/portraits/tower_mage_3.png",
-      "encyclopediaOrder": 87,
+      "encyclopediaOrder": 88,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -34049,7 +34145,7 @@
       ],
       "image": "/portraits/tower_engineer_1.png",
       "encyclopediaImage": "/portraits/tower_engineer_1.png",
-      "encyclopediaOrder": 88,
+      "encyclopediaOrder": 89,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -34103,7 +34199,7 @@
       ],
       "image": "/portraits/tower_engineer_2.png",
       "encyclopediaImage": "/portraits/tower_engineer_2.png",
-      "encyclopediaOrder": 89,
+      "encyclopediaOrder": 90,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -34157,7 +34253,7 @@
       ],
       "image": "/portraits/tower_engineer_3.png",
       "encyclopediaImage": "/portraits/tower_engineer_3.png",
-      "encyclopediaOrder": 90,
+      "encyclopediaOrder": 91,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -34210,7 +34306,7 @@
       ],
       "image": "/portraits/tower_barrack_1.png",
       "encyclopediaImage": "/portraits/tower_barrack_1.png",
-      "encyclopediaOrder": 91,
+      "encyclopediaOrder": 92,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -34269,7 +34365,7 @@
       ],
       "image": "/portraits/tower_barrack_2.png",
       "encyclopediaImage": "/portraits/tower_barrack_2.png",
-      "encyclopediaOrder": 92,
+      "encyclopediaOrder": 93,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -34328,7 +34424,7 @@
       ],
       "image": "/portraits/tower_barrack_3.png",
       "encyclopediaImage": "/portraits/tower_barrack_3.png",
-      "encyclopediaOrder": 93,
+      "encyclopediaOrder": 94,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
