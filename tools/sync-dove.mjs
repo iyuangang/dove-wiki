@@ -11,6 +11,8 @@ import {
 import { basename, dirname, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { updateGameChangelog } from './game-changelog.mjs'
+import { buildPowerLevels, buildTowerUnits } from './tower-details.mjs'
+import { buildTowerMechanics, loadMechanicReview } from './tower-mechanics.mjs'
 
 const toolsDir = dirname(fileURLToPath(import.meta.url))
 const projectRoot = resolve(toolsDir, '..')
@@ -199,7 +201,7 @@ async function buildTemplateSourceIndex() {
 
   for (const file of files) {
     const source = await readFile(file, 'utf8')
-    for (const match of source.matchAll(/(?:\bRT|\bE:register_t)\s*\(\s*["'](tower_[a-zA-Z0-9_]+)["']/g)) {
+    for (const match of source.matchAll(/(?:\bRT|\bE:register_t)\s*\(\s*["']([a-zA-Z0-9_]+)["']/g)) {
       if (!result.has(match[1])) {
         result.set(match[1], relative(gameDir, file).replaceAll('\\', '/'))
       }
@@ -243,7 +245,7 @@ function localizePowers(localization, towerId, powers = {}, powerIcons = {}) {
     const powerToken = powerId.toUpperCase()
     const matchingKeys = Object.keys(localization).filter(
       (key) =>
-        bases.some((base) => key.startsWith(`${base}_`)) && key.includes(powerToken),
+        bases.some((base) => key.startsWith(`${base}_${powerToken}_`)),
     )
     const nameKey =
       matchingKeys.find((key) => /(?:_1_NAME|_NAME_1)$/.test(key)) ||
@@ -980,6 +982,7 @@ function normalizeTower(
   source,
   supportIds,
   encyclopediaOrder,
+  sourceIndex,
 ) {
   const localized = localizeTower(localization, rawTower.id)
   rawTower.localized = localized
@@ -1074,6 +1077,18 @@ function normalizeTower(
   }
 
   tower.roles = inferRoles(rawTower, supportIds)
+  for (const power of tower.powers) {
+    power.levels = buildPowerLevels(power, rawTower.template.powers[power.id], rawTower.resolved_descriptions)
+    power.descriptions = power.descriptions.map((description) => ({
+      ...description,
+      text: rawTower.resolved_descriptions?.[description.key]?.text || description.text,
+    }))
+  }
+  tower.units = buildTowerUnits(rawTower, tower.powers, localization, sourceIndex, formatDamageType)
+  if (tower.units.length && !tower.roles.includes('召唤/拦截')) {
+    tower.roles = tower.roles.filter((role) => role !== '纯输出')
+    tower.roles.push('召唤/拦截')
+  }
   return tower
 }
 
@@ -1211,6 +1226,7 @@ async function main() {
   const towerIds = raw.towers.map((tower) => tower.id)
   const unlocks = await buildUnlockIndex(towerIds)
   const sourceIndex = await buildTemplateSourceIndex()
+  const mechanicReview = await loadMechanicReview(gameDir)
   const supportIds = new Map()
 
   for (const effect of supportEffects) {
@@ -1230,9 +1246,15 @@ async function main() {
         sourceIndex.get(tower.id),
         supportIds,
         tower.encyclopedia?.order || ++fallbackOrder,
+        sourceIndex,
       ),
     )
     .sort((a, b) => a.encyclopediaOrder - b.encyclopediaOrder)
+
+  for (const tower of towers) {
+    tower.mechanics = buildTowerMechanics(raw.towers.find((item) => item.id === tower.id), tower, mechanicReview)
+    if (tower.id === 'tower_shaolin') tower.attack.scope = '单名僧众的一次攻击'
+  }
 
   await cleanupPortraits(raw.towers)
   await cleanupEncyclopediaImages(raw.towers)

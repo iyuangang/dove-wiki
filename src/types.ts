@@ -32,6 +32,59 @@ export interface TowerPower {
   priceBase: number | null
   priceIncrement: number | null
   descriptions: Array<{ key: string; text: string }>
+  levels: TowerPowerLevel[]
+}
+
+export interface TowerPowerLevel {
+  level: number
+  price: number | null
+  cumulativePrice: number | null
+  description: string
+  descriptionKey: string | null
+  descriptionSource: 'level' | 'shared' | 'missing'
+  unresolved: boolean
+  parameters: Array<{ label: string; value: number; unit: string }>
+}
+
+export interface UnitAttack {
+  id: string
+  name: string
+  damageMin: number | null
+  damageMax: number | null
+  damageType: string
+  cooldown: number | null
+  range: number | null
+  radius: number | null
+  targets: number | null
+  chance: number | null
+  disabled: boolean
+  source: string
+}
+
+export interface TowerUnitStats {
+  hp: number | null
+  armor: number | null
+  magicArmor: number | null
+  speed: number | null
+  respawn: number | null
+  regen: number | null
+  regenCooldown: number | null
+  lifetime: number | null
+  attacks: UnitAttack[]
+}
+
+export interface TowerUnit {
+  id: string
+  name: string
+  relatedPowerIds: string[]
+  count: number | null
+  rallyRange: number | null
+  controllable: boolean
+  note: string
+  stats: TowerUnitStats
+  variants: Array<TowerUnitStats & { level: number; label: string }>
+  source: string | null
+  scriptSource: string | null
 }
 
 export interface Tower {
@@ -62,6 +115,13 @@ export interface Tower {
     respawn: number | null
   } | null
   powers: TowerPower[]
+  units: TowerUnit[]
+  mechanics: {
+    reviewedVersion: string
+    hasSpecificReview: boolean
+    pending: string[]
+    items: TowerMechanic[]
+  }
   sources: {
     template: string | null
     nameKey: string | null
@@ -71,6 +131,16 @@ export interface Tower {
     encyclopedia: string | null
     unlock: string
   }
+}
+
+export interface TowerMechanic {
+  id: string
+  title: string
+  kind: 'intrinsic' | 'skill-interaction' | 'damage-rule'
+  summary: string
+  details: string[]
+  formula?: string
+  sources: Array<{ file: string; symbol: string; line: number | null }>
 }
 
 export interface SupportLevel {

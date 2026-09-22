@@ -2,6 +2,71 @@ import { describe, expect, it } from 'vitest'
 import { doveData, enemies, gameChangelog, heroes, towerById, towers } from './data'
 
 describe('游戏百科顺序与图像', () => {
+  it('实战机制包含可靠来源、版本和少林寺条件，未核实的塔不伪装成已完成', () => {
+    for (const tower of towers) {
+      expect(tower.mechanics.reviewedVersion).toBe(doveData.metadata.gameVersion)
+      expect(tower.mechanics.pending).toEqual([])
+      for (const item of tower.mechanics.items) {
+        expect(item.sources.length).toBeGreaterThan(0)
+        expect(item.sources.every((source) => source.line !== null && source.line > 0)).toBe(true)
+        expect(JSON.stringify(item)).not.toMatch(/NaN|undefined/)
+      }
+    }
+    const shaolin = towerById.get('tower_shaolin')!
+    const control = shaolin.mechanics.items.find((item) => item.id === 'shaolin-control')!
+    expect(control.summary).toContain('没有士兵阻挡')
+    expect(control.details.join(' ')).toContain('0.7 秒')
+    expect(shaolin.mechanics.items.find((item) => item.id === 'shaolin-distribution')?.formula).toContain('ceil')
+    expect(towerById.get('tower_archer_1')!.mechanics.hasSpecificReview).toBe(false)
+  })
+  it('所有塔技能保留连续等级、费用和已展开的对应等级说明', () => {
+    for (const tower of towers) {
+      for (const power of tower.powers) {
+        expect(power.levels.map((level) => level.level)).toEqual(Array.from({ length: power.maxLevel }, (_, i) => i + 1))
+        for (const level of power.levels) {
+          expect(level.descriptionSource).toBe('level')
+          expect(level.unresolved).toBe(false)
+          expect(level.description).not.toMatch(/动态数值|%\$|数值未解析/)
+          expect(level.price).toBe(level.level === 1 ? power.priceBase : power.priceIncrement)
+        }
+      }
+    }
+  })
+
+  it('少林寺包含可调集神龙大侠完整属性与人多势众的三级人数', () => {
+    const tower = towerById.get('tower_shaolin')!
+    expect(tower.units).toHaveLength(1)
+    expect(tower.units[0]).toMatchObject({
+      id: 'soldier_dragon', name: '神龙大侠', count: 1, controllable: true, rallyRange: 180,
+      relatedPowerIds: ['dragon'],
+      stats: { hp: 400, armor: 0, magicArmor: 0, respawn: 13, speed: 30 },
+    })
+    expect(tower.units[0]?.stats.attacks[0]).toMatchObject({ damageMin: 40, damageMax: 60, cooldown: 1, radius: 37.5, damageType: '物理' })
+    expect(tower.powers.find((p) => p.id === 'total')?.levels.map((l) => l.description)).toEqual([
+      '将僧众人数升至4名。', '将僧众人数升至5名。', '将僧众人数升至6名。',
+    ])
+    expect(tower.roles).toContain('召唤/拦截')
+    expect(tower.roles).not.toContain('纯输出')
+  })
+
+  it('召唤物属性随技能成长，血肉傀儡的范围招式仅在三级启用', () => {
+    const elemental = towerById.get('tower_sorcerer')!.units[0]!
+    expect(elemental.variants.map((v) => v.hp)).toEqual([600, 700, 800])
+    expect(elemental.variants.map((v) => v.attacks[0]?.damageMin)).toEqual([30, 40, 50])
+    const frankie = towerById.get('tower_frankenstein')!.units[0]!
+    expect(frankie.variants.map((v) => v.attacks[1]?.disabled)).toEqual([true, true, false])
+    expect(frankie.variants.map((v) => v.armor)).toEqual([0.2, 0.4, 0.6])
+  })
+
+  it('召唤物不包含光环受益单位，也不会把相似塔名的技能混入', () => {
+    expect(towerById.get('tower_necromancer')!.units.map((u) => u.id)).toEqual([
+      'soldier_death_rider', 'soldier_skeleton', 'soldier_skeleton_knight',
+    ])
+    expect(towerById.get('tower_paladin')!.units.map((u) => u.id)).toEqual(['soldier_paladin'])
+    expect(towerById.get('tower_paladin')!.powers.find((p) => p.id === 'healing')?.levels[0]?.descriptionKey).toBe('TOWER_PALADIN_HEALING_DESCRIPTION_1')
+    expect(towerById.get('tower_grim_cemetery')!.units.map((u) => u.id)).toEqual(['soldier_zombie', 'soldier_zombie_big', 'soldier_zombie_medium'])
+  })
+
   it('uses the build id as the public game version', () => {
     expect(doveData.metadata.gameVersion).toMatch(/^\d+\.\d+\.\d+\.\d+$/)
     expect(doveData.metadata.contentVersion).toMatch(/^\d+\.\d+\.\d+$/)

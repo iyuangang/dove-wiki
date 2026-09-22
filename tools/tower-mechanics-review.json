@@ -1,0 +1,21 @@
+{
+  "version": "2.0.7.6",
+  "note": "人工核对模板、攻击脚本与结算规则。同步器不得自动更新此文件；源码指纹不匹配时条目待复核。",
+  "files": {
+    "kr1/engineer_towers.lua": "28d9ba49cf3bc53450f4da3f716520ddc60f38b5f1ea10b2bd6bdab770b89964",
+    "kr1/game_scripts.lua": "a03d15084dbfa9a7d7a9508f09ee11a82306586dd64da2586cf57fcf179064be",
+    "kr1/tower_scripts.lua": "7bc1324cefb1924727d744a51d0cca9fbc3c6337f78ae96fc6983bd675ad2b68",
+    "kr1/barrack_towers.lua": "3186d7a2cb9851998731a5e8a88e3f7643cab6b0c3e62b68a79d01360475f5c7",
+    "all/systems/health.lua": "e630aa5c0558fc5f2d041b16281eef482fe788a5be36dc6e8466fc176f178773",
+    "all/script_utils.lua": "ee0a090546d5cc47e530e12cedc83aecd0b20f6d19306f3c23c0faf3aa30a7b3",
+    "all/scripts.lua": "6534dad83fb3ce0307b0edf89496dbe7b1dfa49ac21123a4c746351e8f3e65d8",
+    "kr1/archer_towers.lua": "7366eabf0467b5d534e8d32d6be58ce2c94193ddcaa1e149221da3e4e48c4fd0",
+    "kr1/data/game_animations.lua": "f7838e9c45016b75127a2ab74b328437681b4b2b02fdce1b041b9d50ff3f2d91",
+    "all/animation_db.lua": "6a8d1c3726c8279fcb2dbf0111504ed67c0079fde1edc3aabeb517ed6730842b",
+    "all/utils.lua": "6f2d9f18ad508753de6d5bd434550542111a97b0121b6b5514bd6f8acb08e742",
+    "all/constants.lua": "1c47d3cc434a8269ac66aebc76f0094a3a0da56c39a4c219c45a178e62bedcb2",
+    "kr1/mage_towers.lua": "088618cb4dc8acb78f59ac8f50fdfc313e8edd072442d979524c68f78583f662",
+    "all/templates.lua": "c97a6def36b6e331454a46b2c434c110ee3e8beca4fa4cee82b00cacaf689881",
+    "kr1/foundamental_towers.lua": "57f2c9236243ced0ecfcac0435b65da05bf9b2a230c6e9b749f345fd10e428f5"
+  }
+}

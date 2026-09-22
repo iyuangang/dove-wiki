@@ -34,6 +34,9 @@ const filteredTowers = computed(() => {
       tower.unlock.label,
       ...tower.roles,
       ...tower.families.map((item) => familyLabels[item]),
+      ...tower.powers.map((power) => power.name),
+      ...tower.units.flatMap((unit) => [unit.name, unit.id]),
+      ...tower.mechanics.items.filter((item) => item.kind !== 'damage-rule').flatMap((item) => [item.title, item.summary, ...item.details]),
     ]
       .join(' ')
       .toLocaleLowerCase('zh-CN')

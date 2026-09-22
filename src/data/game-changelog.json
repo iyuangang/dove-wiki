@@ -1,7 +1,161 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-07T07:25:51.468Z",
+  "generatedAt": "2026-09-21T08:48:17.982Z",
   "releases": [
+    {
+      "id": "2.0.7.6-01818eb55f3e",
+      "version": "2.0.7.6",
+      "previousVersion": "2.0.7.1",
+      "contentVersion": "5.6.12",
+      "commitHash": "01818eb55f3ed2898339975c153cce76a01d136d",
+      "previousCommitHash": "8620949ab6c8a69a40e84f19be4d5555bc19fa9c",
+      "detectedAt": "2026-09-21T08:48:17.982Z",
+      "summary": {
+        "changeCount": 6,
+        "categoryCounts": {
+          "hero": 1,
+          "tower": 1,
+          "enemy": 4,
+          "technology": 0
+        },
+        "kindCounts": {
+          "added": 0,
+          "removed": 0,
+          "balance": 5,
+          "content": 1
+        }
+      },
+      "changes": [
+        {
+          "id": "hero:hero_builder:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_builder",
+          "entityName": "托雷斯",
+          "title": "内容调整英雄：托雷斯",
+          "description": "",
+          "image": "/heroes/thumbs/hero_builder.png",
+          "details": [
+            {
+              "field": "能力说明：铁球横扫",
+              "before": "每隔5秒，奥布杜尔朝路径上扔出一个巨大钢球，造成300点破甲伤害，并使敌人眩晕2秒。",
+              "after": "每隔35秒，奥布杜尔朝路径上扔出一个巨大钢球，造成300点破甲伤害，并使敌人眩晕2秒。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_shaolin:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_shaolin",
+          "entityName": "少林寺",
+          "title": "数值调整防御塔：少林寺",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_shaolin.png",
+          "details": [
+            {
+              "field": "最低伤害",
+              "before": "15",
+              "after": "20",
+              "delta": "+5（+33.3%）",
+              "direction": "increase"
+            },
+            {
+              "field": "最高伤害",
+              "before": "27",
+              "after": "25",
+              "delta": "-2（-7.4%）",
+              "direction": "decrease"
+            },
+            {
+              "field": "攻击间隔",
+              "before": "1.5",
+              "after": "1.6",
+              "delta": "+0.1（+6.7%）",
+              "direction": "increase"
+            }
+          ]
+        },
+        {
+          "id": "enemy:enemy_alfa_lava:balance:main",
+          "category": "enemy",
+          "kind": "balance",
+          "entityId": "enemy_alfa_lava",
+          "entityName": "熔岩魔龙",
+          "title": "数值调整敌人：熔岩魔龙",
+          "description": "",
+          "image": "/enemies/thumbs/enemy_alfa_lava.png",
+          "details": [
+            {
+              "field": "赏金",
+              "before": "80",
+              "after": "90",
+              "delta": "+10（+12.5%）",
+              "direction": "increase"
+            }
+          ]
+        },
+        {
+          "id": "enemy:enemy_alfa_acid:balance:main",
+          "category": "enemy",
+          "kind": "balance",
+          "entityId": "enemy_alfa_acid",
+          "entityName": "腐源魔龙",
+          "title": "数值调整敌人：腐源魔龙",
+          "description": "",
+          "image": "/enemies/thumbs/enemy_alfa_acid.png",
+          "details": [
+            {
+              "field": "赏金",
+              "before": "95",
+              "after": "105",
+              "delta": "+10（+10.5%）",
+              "direction": "increase"
+            }
+          ]
+        },
+        {
+          "id": "enemy:enemy_alfa_shadow:balance:main",
+          "category": "enemy",
+          "kind": "balance",
+          "entityId": "enemy_alfa_shadow",
+          "entityName": "永夜魔龙",
+          "title": "数值调整敌人：永夜魔龙",
+          "description": "",
+          "image": "/enemies/thumbs/enemy_alfa_shadow.png",
+          "details": [
+            {
+              "field": "赏金",
+              "before": "60",
+              "after": "70",
+              "delta": "+10（+16.7%）",
+              "direction": "increase"
+            }
+          ]
+        },
+        {
+          "id": "enemy:enemy_alfa_storm:balance:main",
+          "category": "enemy",
+          "kind": "balance",
+          "entityId": "enemy_alfa_storm",
+          "entityName": "雷暴魔龙",
+          "title": "数值调整敌人：雷暴魔龙",
+          "description": "",
+          "image": "/enemies/thumbs/enemy_alfa_storm.png",
+          "details": [
+            {
+              "field": "赏金",
+              "before": "70",
+              "after": "80",
+              "delta": "+10（+14.3%）",
+              "direction": "increase"
+            }
+          ]
+        }
+      ]
+    },
     {
       "id": "2.0.7.1-8620949ab6c8",
       "version": "2.0.7.1",
