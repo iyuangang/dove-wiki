@@ -30,6 +30,7 @@ local function install_game_loader(root_dir)
 		"_assets/kr1-desktop",
 		"mods",
 		"mods/all",
+		"plugin/all",
 		"plugins"
 	}
 	local searchers = package.searchers or package.loaders
@@ -188,6 +189,11 @@ local function copy_jsonable(value, depth, seen)
 end
 
 local reference_components = {
+	"info",
+	"regen",
+	"dodge",
+	"nav_rally",
+	"auras",
 	"area_attack",
 	"attacks",
 	"aura",
@@ -230,8 +236,11 @@ local function find_template_references(value, entities, output, depth, seen)
 	end
 	seen[value] = true
 
-	for _, item in pairs(value) do
-		find_template_references(item, entities, output, depth - 1, seen)
+	for key, item in pairs(value) do
+		-- Target filters identify beneficiaries/enemies, not owned entities.
+		if key ~= "allowed_templates" and key ~= "excluded_templates" and key ~= "excluded_templates_golem" then
+			find_template_references(item, entities, output, depth - 1, seen)
+		end
 	end
 
 	seen[value] = nil
@@ -239,6 +248,12 @@ end
 
 local function summarize_reference(template)
 	local summary = {template_name = template.template_name}
+	-- Some combat values/references live outside components (e.g. skeletons).
+	for key, value in pairs(template) do
+		if type(value) == "number" or type(value) == "string" or type(value) == "boolean" then
+			summary[key] = value
+		end
+	end
 
 	for _, component_name in ipairs(reference_components) do
 		if template[component_name] ~= nil then
@@ -429,9 +444,51 @@ local function build_raw_export(entity_db)
 			end
 
 			local reference_names = {}
+			find_template_references(template, entity_db.entities, reference_names, 8)
+			-- Literal spawns in scripts do not appear as template fields.
+			if tower_id == "tower_grim_cemetery" then reference_names.grim_cemetery_aura = true end
+			if tower_id == "tower_necromancer" then
+				reference_names.soldier_skeleton = true
+				reference_names.soldier_skeleton_knight = true
+			end
+			-- Resolve the game's own dynamic descriptions with the tower context.
+			-- Keep failures visible instead of silently deleting numeric expressions.
+			record.resolved_descriptions = {}
+			local U = require("utils")
+			local base = tower_id:upper():gsub("_LVL4$", "")
+			local function belongs_to_tower(key)
+				for _, prefix in ipairs({tower_id:upper(), base}) do
+					if key == prefix .. "_DESCRIPTION" then return true end
+					for power_id in pairs(template.powers or {}) do
+						local power_prefix = prefix .. "_" .. power_id:upper() .. "_"
+						if key:find(power_prefix, 1, true) == 1 then return true end
+					end
+				end
+				return false
+			end
+			for key, text in pairs(localization) do
+				if type(text) == "string" and belongs_to_tower(key) and key:find("DESCRIPTION", 1, true) then
+					local level = tonumber(key:match("_(%d+)_DESCRIPTION$") or key:match("_DESCRIPTION_(%d+)$")) or 1
+					local unresolved = false
+					for name in text:gmatch("T%(['\"]([^'\"]+)['\"]%)") do
+						if entity_db.entities[name] then reference_names[name] = true end
+					end
+					local resolved = text:gsub("%%$(.-)%%$(%%?)", function(expr, percent)
+						local value = U.eval_text_expr(expr, {tpl = template, level = level})
+						if value == nil then
+							unresolved = true
+							return "[数值未解析]" .. percent
+						end
+						if percent == "%" and type(value) == "number" then value = value * 100 end
+						return tostring(U.format_text_number(value)) .. percent
+					end)
+					record.resolved_descriptions[key] = {text = resolved, unresolved = unresolved}
+				end
+			end
 			find_template_references(record.template.attacks, entity_db.entities, reference_names, 8)
 			find_template_references(record.template.barrack, entity_db.entities, reference_names, 8)
 			find_template_references(record.template.powers, entity_db.entities, reference_names, 8)
+			record.unit_candidates = {}
 
 			record.references = {}
 			local frontier = {}
@@ -452,6 +509,9 @@ local function build_raw_export(entity_db)
 					if reference_template then
 						local summary = summarize_reference(reference_template)
 						record.references[item.name] = summary
+						if summary.soldier and summary.health then
+							record.unit_candidates[#record.unit_candidates + 1] = item.name
+						end
 
 						local nested_names = {}
 						find_template_references(summary, entity_db.entities, nested_names, 8)
@@ -877,6 +937,8 @@ function love.load()
 	local ok, result = xpcall(function()
 		require("all.constants")
 		require("lib.klua.table")
+		local i18n = require("i18n")
+		i18n.msgs[i18n.current_locale] = load_lua_table("_assets/kr1-desktop/strings/zh-Hans.lua")
 
 		local entity_db = require("entity_db")
 		entity_db:load()

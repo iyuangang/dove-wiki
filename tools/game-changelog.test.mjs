@@ -88,4 +88,16 @@ describe('游戏更新差异生成', () => {
     expect(first.releases).toHaveLength(1)
     expect(second).toEqual(first)
   })
+
+  it('升级详情格式时不把动态说明展开记为游戏调整，仍保留价格变化', () => {
+    const before = tower(100, 100, '造成动态数值点伤害')
+    const after = tower(100, 120, '造成30点伤害')
+    after.powers[0].levels = [{ level: 1, description: '造成30点伤害' }]
+    const release = createGameRelease(data('1', 'a', { towers: [before] }), data('2', 'b', { towers: [after] }))
+    expect(release.changes.map((change) => change.kind)).toEqual(['balance'])
+    const later = structuredClone(after)
+    later.powers[0].descriptions[0].text = '造成40点伤害'
+    const next = createGameRelease(data('2', 'b', { towers: [after] }), data('3', 'c', { towers: [later] }))
+    expect(next.changes.map((change) => change.kind)).toEqual(['content'])
+  })
 })

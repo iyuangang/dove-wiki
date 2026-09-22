@@ -197,7 +197,10 @@ function compareTowerPowers(before, after) {
     }
     const previousDescriptions = (previousPower.descriptions || []).map((item) => item.text)
     const descriptions = (power.descriptions || []).map((item) => item.text)
-    if (!valuesEqual(previousDescriptions, descriptions)) {
+    // The first detailed export evaluates Lua expressions and corrects skill-key
+    // matching. Old and new text formats cannot establish a gameplay change.
+    const sameDescriptionSchema = Boolean(previousPower.levels) === Boolean(power.levels)
+    if (sameDescriptionSchema && !valuesEqual(previousDescriptions, descriptions)) {
       content.push(textDetail(`${power.name} · 技能说明`, previousDescriptions, descriptions))
     }
   }

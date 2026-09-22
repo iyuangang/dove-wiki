@@ -1214,6 +1214,46 @@ input:focus {
   font-size: 11px;
 }
 
+/* Detailed tower skills and units */
+.power-levels { grid-column: 1 / -1; min-width: 0; margin-top: 8px; }
+.power-level-row { padding: 14px 0; border-top: 1px solid var(--line); }
+.power-level-row:last-child { padding-bottom: 0; }
+.power-level-heading { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 7px; }
+.power-level-heading strong { color: var(--gold-soft); }
+.power-level-heading span { color: var(--faint); font-size: 11px; }
+.power-level-heading b { color: var(--ink); font-weight: 500; }
+.power-levels p { font-size: 12px; line-height: 1.85; }
+.power-parameters { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 8px; color: var(--muted); font-size: 11px; }
+.power-parameters b { color: var(--gold-soft); font-weight: 500; }
+.power-data-note { display: block; margin-top: 8px; color: var(--gold-soft); }
+.unit-list { display: grid; gap: 14px; }
+.unit-card { padding: 18px; border: 1px solid var(--line-bright); border-radius: 6px; background: rgba(112, 176, 149, 0.035); min-width: 0; }
+.unit-card-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.unit-card-heading h3 { margin: 0 0 4px; font-family: Georgia, "Songti SC", serif; color: var(--ink); font-size: 17px; }
+.unit-card-heading span, .unit-level-select, .unit-skill-note { color: var(--muted); font-size: 11px; }
+.unit-card-heading .unit-level-label { color: var(--gold-soft); }
+.unit-level-select { display: grid; gap: 5px; max-width: 100%; }
+.unit-level-select select { padding: 7px; color: var(--ink); background: var(--panel, #1c241c); border: 1px solid var(--line-bright); border-radius: 4px; max-width: 100%; }
+.unit-stat-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 15px 12px; margin: 20px 0; }
+.unit-stat-grid dt { color: var(--muted); font-size: 11px; margin-bottom: 4px; }
+.unit-stat-grid dd { color: var(--gold-soft); font-size: 17px; margin: 0; }
+.unit-attacks { display: grid; gap: 10px; }
+.unit-attack { border-top: 1px solid var(--line); padding-top: 12px; }
+.unit-attack-title { display: flex; justify-content: space-between; gap: 10px; font-size: 12px; color: var(--ink); }
+.unit-attack-title span { color: var(--muted); font-size: 11px; }
+.unit-attack-values { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 10px; font-size: 11px; color: var(--muted); }
+.unit-attack-values b { color: var(--ink); font-weight: 500; }
+.attack-disabled { opacity: 0.6; }
+.unit-footnote { margin: 14px 0 0; font-size: 11px; line-height: 1.8; color: var(--faint); }
+.unit-source { margin-top: 12px; color: var(--faint); font-size: 10px; overflow-wrap: anywhere; }
+.unit-source summary { cursor: pointer; width: fit-content; }
+.unit-source code, .unit-source span { display: block; margin-top: 6px; }
+@media (max-width: 600px) {
+  .unit-card { padding: 14px; }
+  .unit-stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .power-level-heading { gap: 6px 12px; }
+}
+
 .source-unlock {
   padding: 11px 13px;
   color: var(--green);
@@ -6302,3 +6342,27 @@ input:focus {
     padding-left: 8px;
   }
 }
+.mechanic-intro, .mechanic-review-note { font-size: 12px; line-height: 1.8; color: var(--text-muted, #a4a899); margin: 0 0 16px; }
+.mechanic-review-note { border-left: 2px solid #a5894f; padding: 9px 12px; background: #a5894f0a; }
+.mechanic-list { display: grid; gap: 12px; }
+.mechanic-card, .shaolin-calculator { padding: 18px; border: 1px solid #d4c28a29; border-radius: 5px; background: #ffffff02; min-width: 0; }
+.mechanic-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.mechanic-heading h3, .shaolin-calculator h3 { font-size: 15px; line-height: 1.6; margin: 0; }
+.mechanic-heading > span { font-size: 10px; color: #bd9b55; flex-shrink: 0; }
+.mechanic-card p, .mechanic-card li { font-size: 13px; line-height: 1.9; color: #b9bdaf; }
+.mechanic-card ul { margin: 10px 0 14px; padding-left: 18px; }
+.mechanic-card li + li { margin-top: 8px; }
+.mechanic-card .mechanic-formula { padding: 12px; color: #e0c480; background: #d4b96e09; border-left: 2px solid #a5894f; overflow-wrap: anywhere; }
+.mechanic-card .unit-source code { white-space: normal; overflow-wrap: anywhere; }
+.mechanic-card .unit-source > div { margin-top: 8px; }
+.shaolin-calculator { margin-top: 20px; border-color: #aa8d4a66; }
+.mechanic-controls { display: flex; gap: 14px; flex-wrap: wrap; margin: 16px 0; }
+.mechanic-controls label { flex: 1 1 180px; font-size: 12px; color: #b9bdaf; display: grid; gap: 7px; }
+.mechanic-controls select { width: 100%; border: 1px solid #a5894f66; border-radius: 4px; padding: 9px; background: #1a2018; color: #e1ddcc; }
+.mechanic-table-wrap { overflow-x: auto; }
+.mechanic-table { width: 100%; border-collapse: collapse; font-size: 12px; font-variant-numeric: tabular-nums; }
+.mechanic-table th, .mechanic-table td { text-align: left; padding: 10px 6px; border-bottom: 1px solid #a5894f29; }
+.mechanic-table th { color: #a5aa9d; font-weight: 400; }
+.mechanic-table td { color: #dedcca; }
+.mechanic-total { font-size: 13px; color: #b9bdaf; display: flex; justify-content: space-between; }
+.mechanic-total strong { font-size: 19px; color: #e0c480; }
