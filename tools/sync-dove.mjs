@@ -12,6 +12,7 @@ import { basename, dirname, join, relative, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { updateGameChangelog } from './game-changelog.mjs'
 import { buildPowerLevels, buildTowerUnits } from './tower-details.mjs'
+import { inferTowerRoles } from './tower-roles.mjs'
 import { buildTowerMechanics, loadMechanicReview } from './tower-mechanics.mjs'
 
 const toolsDir = dirname(fileURLToPath(import.meta.url))
@@ -291,16 +292,6 @@ function formatDamageType(value) {
     .filter(([bit]) => (value & bit) !== 0)
     .map(([, label]) => label)
   return matches.length ? [...new Set(matches)].join(' / ') : `类型 ${value}`
-}
-
-function hasPositiveKey(value, keyPattern, seen = new Set()) {
-  if (!value || typeof value !== 'object' || seen.has(value)) return false
-  seen.add(value)
-
-  return Object.entries(value).some(([key, child]) => {
-    if (keyPattern.test(key) && typeof child === 'number' && child > 0) return true
-    return hasPositiveKey(child, keyPattern, seen)
-  })
 }
 
 const supportEffects = [
@@ -914,67 +905,6 @@ function normalizeEnemy(rawEnemy, localization) {
   }
 }
 
-function inferRoles(tower, supportIds) {
-  const roles = []
-  const info = tower.computed_info || {}
-  const searchText = JSON.stringify({
-    id: tower.id,
-    description: tower.localized.description,
-    powers: tower.template?.powers,
-    references: Object.keys(tower.references || {}),
-  }).toLowerCase()
-
-  if (Number.isFinite(info.damage_min)) roles.push('直接输出')
-  if (
-    hasPositiveKey(tower.references, /damage_radius/i) ||
-    /explosion|bomb|blast|overcharge|area_attack|灼热|爆炸/.test(searchText)
-  ) {
-    roles.push('范围伤害')
-  }
-  if (/poison|burn|bleed|ignite|acid|岩浆|中毒|燃烧/.test(searchText)) {
-    roles.push('持续伤害')
-  }
-  if (/slow|stun|teleport|thorn|root|freeze|silence|twister|polymorph|晕|减速|传送|缠绕/.test(searchText)) {
-    roles.push('控制')
-  }
-  if (tower.families.includes('barrack') || /summon|spawn|召唤/.test(searchText)) {
-    roles.push('召唤/拦截')
-  }
-  if (/gold|money|income|pickpocket|steal|loot|金币|赏金/.test(searchText)) {
-    roles.push('经济辅助')
-  }
-  if (/reduce_armor|armor_reduction|curse|weakness|削减.*护甲|破甲/.test(searchText)) {
-    roles.push('减益/破甲')
-  }
-
-  const effects = supportIds.get(tower.id) || []
-  if (effects.some((effect) => effect.levels.some((level) => level.damageBonus || level.damagePerTrigger))) {
-    roles.push('增伤辅助')
-  }
-  if (effects.some((effect) => effect.levels.some((level) => level.rangeBonus))) {
-    roles.push('增距辅助')
-  }
-  if (effects.some((effect) => effect.levels.some((level) => level.speedBonus))) {
-    roles.push('攻速辅助')
-  }
-
-  const unique = [...new Set(roles)]
-  const utilityRoles = new Set([
-    '控制',
-    '召唤/拦截',
-    '经济辅助',
-    '减益/破甲',
-    '增伤辅助',
-    '增距辅助',
-    '攻速辅助',
-  ])
-  if (unique.includes('直接输出') && !unique.some((role) => utilityRoles.has(role))) {
-    unique.unshift('纯输出')
-  }
-
-  return unique
-}
-
 function normalizeTower(
   rawTower,
   localization,
@@ -1076,7 +1006,7 @@ function normalizeTower(
     },
   }
 
-  tower.roles = inferRoles(rawTower, supportIds)
+
   for (const power of tower.powers) {
     power.levels = buildPowerLevels(power, rawTower.template.powers[power.id], rawTower.resolved_descriptions)
     power.descriptions = power.descriptions.map((description) => ({
@@ -1085,10 +1015,7 @@ function normalizeTower(
     }))
   }
   tower.units = buildTowerUnits(rawTower, tower.powers, localization, sourceIndex, formatDamageType)
-  if (tower.units.length && !tower.roles.includes('召唤/拦截')) {
-    tower.roles = tower.roles.filter((role) => role !== '纯输出')
-    tower.roles.push('召唤/拦截')
-  }
+
   return tower
 }
 
@@ -1252,7 +1179,9 @@ async function main() {
     .sort((a, b) => a.encyclopediaOrder - b.encyclopediaOrder)
 
   for (const tower of towers) {
-    tower.mechanics = buildTowerMechanics(raw.towers.find((item) => item.id === tower.id), tower, mechanicReview)
+    const rawTower = raw.towers.find((item) => item.id === tower.id)
+    tower.mechanics = buildTowerMechanics(rawTower, tower, mechanicReview)
+    Object.assign(tower, inferTowerRoles(rawTower, tower, supportIds))
     if (tower.id === 'tower_shaolin') tower.attack.scope = '单名僧众的一次攻击'
   }
 

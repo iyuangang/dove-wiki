@@ -5,7 +5,7 @@
     "contentVersion": "5.6.12",
     "gameId": "kingdom_rush_dove",
     "commitHash": "01818eb55f3ed2898339975c153cce76a01d136d",
-    "generatedAt": "2026-09-22T06:12:52.614Z",
+    "generatedAt": "2026-09-23T01:52:39.534Z",
     "sourceRoot": "D:\\KingdomRushDove-Windows-Cycle2-v0.1.5\\KingdomRushDove",
     "assumptions": [
       "科技树可在辅助计算中选择；条件触发、概率与特殊目标效果不强行折算进基础面板。",
@@ -24820,8 +24820,9 @@
       ],
       "roles": [
         "直接输出",
-        "持续伤害",
-        "控制"
+        "范围伤害",
+        "控制",
+        "持续伤害"
       ],
       "image": "/encyclopedia/thumbs/tower_ranger.png",
       "encyclopediaImage": "/encyclopedia/tower_ranger.png",
@@ -25012,7 +25013,34 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "aura_ranger_thorn"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_ranger_poison"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_ranger_poison"
+        },
+        {
+          "role": "控制",
+          "description": "定身 / 冻结效果。",
+          "source": "mod_thorn"
+        }
+      ]
     },
     {
       "id": "tower_paladin",
@@ -25023,8 +25051,8 @@
       ],
       "roles": [
         "直接输出",
-        "范围伤害",
         "控制",
+        "范围伤害",
         "召唤/拦截"
       ],
       "image": "/encyclopedia/thumbs/tower_paladin.png",
@@ -25312,7 +25340,29 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "沉默效果。",
+          "source": "mod_paladin_silence"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "soldier_paladin.damage_radius / area"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_arcane_wizard",
@@ -25528,7 +25578,19 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "传送效果。",
+          "source": "mod_teleport_arcane"
+        }
+      ]
     },
     {
       "id": "tower_bfg",
@@ -25723,7 +25785,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bomb_bfg.damage_radius / area"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_bfg_stun"
+        }
+      ]
     },
     {
       "id": "tower_musketeer",
@@ -25918,7 +25997,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "纯输出",
+          "description": "当前已识别能力以伤害为主，未识别到控制、召唤或辅助效果。",
+          "source": "已识别能力汇总"
+        },
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bomb_musketeer.damage_radius / area"
+        }
+      ]
     },
     {
       "id": "tower_barbarian",
@@ -25930,7 +26026,6 @@
       "roles": [
         "直接输出",
         "范围伤害",
-        "控制",
         "召唤/拦截"
       ],
       "image": "/encyclopedia/thumbs/tower_barbarian.png",
@@ -26246,7 +26341,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "soldier_barbarian.damage_radius / area"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_sorcerer",
@@ -26257,10 +26369,11 @@
       ],
       "roles": [
         "直接输出",
-        "范围伤害",
         "控制",
-        "减益/破甲",
-        "召唤/拦截"
+        "持续伤害",
+        "范围伤害",
+        "召唤/拦截",
+        "减益/破甲"
       ],
       "image": "/encyclopedia/thumbs/tower_sorcerer.png",
       "encyclopediaImage": "/encyclopedia/tower_sorcerer.png",
@@ -26628,7 +26741,39 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "变形效果。",
+          "source": "mod_polymorph_sorcerer"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_sorcerer_curse_dps"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "soldier_elemental.damage_radius / area"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        },
+        {
+          "role": "减益/破甲",
+          "description": "效果降低目标的物理护甲或魔法护甲。",
+          "source": "mod_sorcerer_curse_armor"
+        }
+      ]
     },
     {
       "id": "tower_tesla",
@@ -26638,9 +26783,9 @@
         "engineer"
       ],
       "roles": [
-        "纯输出",
         "直接输出",
-        "范围伤害"
+        "范围伤害",
+        "控制"
       ],
       "image": "/encyclopedia/thumbs/tower_tesla.png",
       "encyclopediaImage": "/encyclopedia/tower_tesla.png",
@@ -26850,7 +26995,29 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "aura_tesla_overcharge"
+        },
+        {
+          "role": "控制",
+          "description": "过载概率眩晕效果。",
+          "source": "mod_tesla_overcharge"
+        },
+        {
+          "role": "范围伤害",
+          "description": "已核实攻击可分配至多个敌人或逐个结算范围内敌人。",
+          "source": "tesla-chain"
+        }
+      ]
     },
     {
       "id": "tower_elf",
@@ -26862,6 +27029,7 @@
       "roles": [
         "直接输出",
         "持续伤害",
+        "控制",
         "召唤/拦截"
       ],
       "image": "/encyclopedia/thumbs/tower_elf.png",
@@ -27120,7 +27288,29 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_elf_bleed"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_elf_cripple"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_sunray",
@@ -27131,6 +27321,7 @@
       ],
       "roles": [
         "直接输出",
+        "范围伤害",
         "经济辅助"
       ],
       "image": "/encyclopedia/thumbs/tower_sunray.png",
@@ -27374,7 +27565,24 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "已核实攻击可分配至多个敌人或逐个结算范围内敌人。",
+          "source": "sunray-sharing"
+        },
+        {
+          "role": "经济辅助",
+          "description": "技能可增加金币收益。",
+          "source": "tower_sunray.powers.gold"
+        }
+      ]
     },
     {
       "id": "tower_crossbow",
@@ -27591,7 +27799,24 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "增距辅助",
+          "description": "为受益防御塔提供射程增益。",
+          "source": "crossbow-eagle"
+        },
+        {
+          "role": "攻速辅助",
+          "description": "为受益防御塔提供攻速增益。",
+          "source": "crossbow-eagle"
+        }
+      ]
     },
     {
       "id": "tower_assassin",
@@ -27967,7 +28192,24 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        },
+        {
+          "role": "经济辅助",
+          "description": "攻击或效果可增加金币收益。",
+          "source": "soldier_assassin"
+        }
+      ]
     },
     {
       "id": "tower_archmage",
@@ -27979,7 +28221,8 @@
       "roles": [
         "直接输出",
         "范围伤害",
-        "控制"
+        "控制",
+        "减益/破甲"
       ],
       "image": "/encyclopedia/thumbs/tower_archmage.png",
       "encyclopediaImage": "/encyclopedia/tower_archmage.png",
@@ -28215,7 +28458,29 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bolt_blast.damage_radius / area"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_twister"
+        },
+        {
+          "role": "减益/破甲",
+          "description": "效果降低目标的物理护甲或魔法护甲。",
+          "source": "mod_archmage_shatter"
+        }
+      ]
     },
     {
       "id": "tower_dwaarp",
@@ -28226,6 +28491,8 @@
       ],
       "roles": [
         "直接输出",
+        "范围伤害",
+        "持续伤害",
         "控制"
       ],
       "image": "/encyclopedia/thumbs/tower_dwaarp.png",
@@ -28431,7 +28698,39 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "tower_dwaarp.damage_radius / area"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "lava_dwaarp"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_lava_dwaarp"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_slow_dwaarp"
+        },
+        {
+          "role": "范围伤害",
+          "description": "已核实攻击可分配至多个敌人或逐个结算范围内敌人。",
+          "source": "dwaarp-control"
+        }
+      ]
     },
     {
       "id": "tower_totem",
@@ -28443,6 +28742,8 @@
       "roles": [
         "直接输出",
         "控制",
+        "持续伤害",
+        "范围伤害",
         "减益/破甲"
       ],
       "image": "/encyclopedia/thumbs/tower_totem.png",
@@ -28630,7 +28931,34 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "沉默效果。",
+          "source": "mod_silence_totem"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_totem_fire"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "totem_weakness"
+        },
+        {
+          "role": "减益/破甲",
+          "description": "效果降低敌人输出或提高敌人受到的伤害。",
+          "source": "mod_weakness_totem"
+        }
+      ]
     },
     {
       "id": "tower_templar",
@@ -28951,7 +29279,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_blood_templar"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_necromancer",
@@ -28962,7 +29307,10 @@
       ],
       "roles": [
         "直接输出",
-        "召唤/拦截"
+        "持续伤害",
+        "范围伤害",
+        "召唤/拦截",
+        "减益/破甲"
       ],
       "image": "/encyclopedia/thumbs/tower_necromancer.png",
       "encyclopediaImage": "/encyclopedia/tower_necromancer.png",
@@ -29347,7 +29695,34 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_pestilence"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "pestilence"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        },
+        {
+          "role": "减益/破甲",
+          "description": "效果降低敌人输出或提高敌人受到的伤害。",
+          "source": "mod_pestilence_weak"
+        }
+      ]
     },
     {
       "id": "tower_mech",
@@ -29542,7 +29917,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bomb_mecha.damage_radius / area"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_slow_oil"
+        }
+      ]
     },
     {
       "id": "tower_barrack_mercenaries",
@@ -29553,6 +29945,7 @@
       ],
       "roles": [
         "直接输出",
+        "控制",
         "召唤/拦截"
       ],
       "image": "/encyclopedia/thumbs/tower_barrack_mercenaries.png",
@@ -29784,7 +30177,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_djinn_shock"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_barrack_pirates",
@@ -29796,6 +30206,7 @@
       "roles": [
         "直接输出",
         "范围伤害",
+        "持续伤害",
         "召唤/拦截"
       ],
       "image": "/encyclopedia/thumbs/tower_barrack_pirates.png",
@@ -30041,7 +30452,29 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bomb_molotov.damage_radius / area"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_molotov_big"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_barrack_amazonas",
@@ -30264,7 +30697,24 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "soldier_amazona.damage_radius / area"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_barrack_dwarf",
@@ -30552,7 +31002,19 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_archer_dwarf",
@@ -30747,7 +31209,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "纯输出",
+          "description": "当前已识别能力以伤害为主，未识别到控制、召唤或辅助效果。",
+          "source": "已识别能力汇总"
+        },
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "dwarf_barrel.damage_radius / area"
+        }
+      ]
     },
     {
       "id": "tower_pirate_watchtower",
@@ -30758,6 +31237,7 @@
       ],
       "roles": [
         "直接输出",
+        "控制",
         "范围伤害",
         "增距辅助"
       ],
@@ -31030,7 +31510,29 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_pirate_watchtower_bomb"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "pirate_watchtower_bomb.damage_radius / area"
+        },
+        {
+          "role": "增距辅助",
+          "description": "为受益防御塔提供射程增益。",
+          "source": "pirate-watcher"
+        }
+      ]
     },
     {
       "id": "tower_frankenstein",
@@ -31430,7 +31932,29 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "soldier_frankenstein.damage_radius / area"
+        },
+        {
+          "role": "范围伤害",
+          "description": "已核实攻击可分配至多个敌人或逐个结算范围内敌人。",
+          "source": "frankenstein-chain"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_druid",
@@ -31441,8 +31965,8 @@
       ],
       "roles": [
         "直接输出",
-        "范围伤害",
         "控制",
+        "范围伤害",
         "召唤/拦截"
       ],
       "image": "/encyclopedia/thumbs/tower_druid.png",
@@ -31685,7 +32209,29 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_rock_slow"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "rock_druid.damage_radius / area"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_entwood",
@@ -31697,7 +32243,8 @@
       "roles": [
         "直接输出",
         "范围伤害",
-        "控制"
+        "控制",
+        "持续伤害"
       ],
       "image": "/encyclopedia/thumbs/tower_entwood.png",
       "encyclopediaImage": "/encyclopedia/tower_entwood.png",
@@ -31912,7 +32459,39 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "tower_entwood.damage_radius / area"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "aura_fiery_nut"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_clobber"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_clobber_slow"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_fiery_nut"
+        }
+      ]
     },
     {
       "id": "tower_high_elven",
@@ -31923,9 +32502,8 @@
       ],
       "roles": [
         "直接输出",
-        "范围伤害",
-        "持续伤害",
         "控制",
+        "范围伤害",
         "增伤辅助",
         "攻速辅助"
       ],
@@ -32166,7 +32744,34 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "时空禁锢效果。",
+          "source": "mod_timelapse"
+        },
+        {
+          "role": "范围伤害",
+          "description": "已核实攻击可分配至多个敌人或逐个结算范围内敌人。",
+          "source": "high-elven-volley"
+        },
+        {
+          "role": "增伤辅助",
+          "description": "为受益防御塔提供伤害增益。",
+          "source": "high-elven-sentinel"
+        },
+        {
+          "role": "攻速辅助",
+          "description": "为受益防御塔提供攻速增益。",
+          "source": "high-elven-sentinel"
+        }
+      ]
     },
     {
       "id": "tower_wild_magus",
@@ -32385,7 +32990,24 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "mod_eldritch.damage_radius / area"
+        },
+        {
+          "role": "控制",
+          "description": "沉默效果。",
+          "source": "mod_ward"
+        }
+      ]
     },
     {
       "id": "tower_arcane",
@@ -32395,9 +33017,11 @@
         "archer"
       ],
       "roles": [
-        "纯输出",
         "直接输出",
-        "范围伤害"
+        "范围伤害",
+        "持续伤害",
+        "控制",
+        "减益/破甲"
       ],
       "image": "/encyclopedia/thumbs/tower_arcane.png",
       "encyclopediaImage": "/encyclopedia/tower_arcane.png",
@@ -32613,7 +33237,34 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "aura_arcane_burst"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_arcane_burst"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_arrow_arcane_slumber"
+        },
+        {
+          "role": "减益/破甲",
+          "description": "效果降低目标的物理护甲或魔法护甲。",
+          "source": "mod_arrow_arcane"
+        }
+      ]
     },
     {
       "id": "tower_silver",
@@ -32624,7 +33275,7 @@
       ],
       "roles": [
         "直接输出",
-        "经济辅助"
+        "减益/破甲"
       ],
       "image": "/encyclopedia/thumbs/tower_silver.png",
       "encyclopediaImage": "/encyclopedia/tower_silver.png",
@@ -32830,7 +33481,19 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "减益/破甲",
+          "description": "效果降低敌人输出或提高敌人受到的伤害。",
+          "source": "mod_arrow_silver_mark"
+        }
+      ]
     },
     {
       "id": "tower_forest",
@@ -32841,6 +33504,8 @@
       ],
       "roles": [
         "直接输出",
+        "范围伤害",
+        "持续伤害",
         "控制",
         "召唤/拦截"
       ],
@@ -33142,7 +33807,34 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "aura_forest_eerie"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_forest_eerie_dps"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_forest_eerie_slow"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_blade",
@@ -33441,7 +34133,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "soldier_blade.damage_radius / area"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_ewok",
@@ -33452,7 +34161,8 @@
       ],
       "roles": [
         "直接输出",
-        "召唤/拦截"
+        "召唤/拦截",
+        "减益/破甲"
       ],
       "image": "/encyclopedia/thumbs/tower_ewok.png",
       "encyclopediaImage": "/encyclopedia/tower_ewok.png",
@@ -33738,7 +34448,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        },
+        {
+          "role": "减益/破甲",
+          "description": "效果降低目标的物理护甲或魔法护甲。",
+          "source": "mod_ewok_tear"
+        }
+      ]
     },
     {
       "id": "tower_faerie_dragon",
@@ -33918,7 +34645,19 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "定身 / 冻结效果。",
+          "source": "mod_faerie_dragon_l0"
+        }
+      ]
     },
     {
       "id": "tower_pixie",
@@ -34100,7 +34839,34 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_pixie_poison"
+        },
+        {
+          "role": "控制",
+          "description": "变形效果。",
+          "source": "mod_pixie_polymorph"
+        },
+        {
+          "role": "控制",
+          "description": "传送效果。",
+          "source": "mod_pixie_teleport"
+        },
+        {
+          "role": "经济辅助",
+          "description": "攻击或效果可增加金币收益。",
+          "source": "mod_pixie_pickpocket"
+        }
+      ]
     },
     {
       "id": "tower_baby_ashbite",
@@ -34339,7 +35105,29 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "aura_breath_baby_ashbite"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "fireball_baby_ashbite.damage_radius / area"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_slow_baby_ashbite"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_drow",
@@ -34644,7 +35432,19 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_arcane_wizard_lvl4",
@@ -34891,7 +35691,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "传送效果。",
+          "source": "mod_teleport_arcane"
+        },
+        {
+          "role": "增伤辅助",
+          "description": "为受益防御塔提供伤害增益。",
+          "source": "arcane-empowerment"
+        }
+      ]
     },
     {
       "id": "tower_paladin_covenant_lvl4",
@@ -35118,7 +35935,19 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_royal_archers_lvl4",
@@ -35128,8 +35957,8 @@
         "archer"
       ],
       "roles": [
-        "纯输出",
-        "直接输出"
+        "直接输出",
+        "减益/破甲"
       ],
       "image": "/encyclopedia/thumbs/tower_royal_archers_lvl4.png",
       "encyclopediaImage": "/encyclopedia/tower_royal_archers_lvl4.png",
@@ -35393,7 +36222,19 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "减益/破甲",
+          "description": "效果降低目标的物理护甲或魔法护甲。",
+          "source": "mod_tower_royal_archers_armor_piercer"
+        }
+      ]
     },
     {
       "id": "tower_tricannon_lvl4",
@@ -35405,7 +36246,8 @@
       "roles": [
         "纯输出",
         "直接输出",
-        "范围伤害"
+        "范围伤害",
+        "持续伤害"
       ],
       "image": "/encyclopedia/thumbs/tower_tricannon_lvl4.png",
       "encyclopediaImage": "/encyclopedia/tower_tricannon_lvl4.png",
@@ -35691,7 +36533,29 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "纯输出",
+          "description": "当前已识别能力以伤害为主，未识别到控制、召唤或辅助效果。",
+          "source": "已识别能力汇总"
+        },
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "tower_tricannon_bomb.damage_radius / area"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "tower_tricannon_overheat_scorch_aura_mod"
+        }
+      ]
     },
     {
       "id": "tower_ballista_lvl4",
@@ -35952,7 +36816,29 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bullet_tower_ballista_skill_bomb.damage_radius / area"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_bullet_tower_ballista_skill_bomb_slow"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_bullet_tower_ballista_skill_final_shot_stun"
+        }
+      ]
     },
     {
       "id": "tower_arborean_emissary_lvl4",
@@ -35963,7 +36849,8 @@
       ],
       "roles": [
         "直接输出",
-        "控制"
+        "控制",
+        "减益/破甲"
       ],
       "image": "/encyclopedia/thumbs/tower_arborean_emissary_lvl4.png",
       "encyclopediaImage": "/encyclopedia/tower_arborean_emissary_lvl4.png",
@@ -36227,7 +37114,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "tower_arborean_emissary_root_stun_mod"
+        },
+        {
+          "role": "减益/破甲",
+          "description": "树灵标记提高目标受到的伤害。",
+          "source": "mod_tower_arborean_emissary_basic_attack"
+        }
+      ]
     },
     {
       "id": "tower_demon_pit_lvl4",
@@ -36239,8 +37143,8 @@
       "roles": [
         "直接输出",
         "范围伤害",
-        "持续伤害",
         "控制",
+        "持续伤害",
         "召唤/拦截"
       ],
       "image": "/encyclopedia/thumbs/tower_demon_pit_lvl4.png",
@@ -36521,7 +37425,34 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bullet_tower_demon_pit_basic_attack_lvl4.damage_radius / area"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_soldier_tower_demon_pit_explosion"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_tower_demon_pit_master_explosion_burning"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_barrel_lvl4",
@@ -36535,7 +37466,8 @@
         "范围伤害",
         "持续伤害",
         "控制",
-        "召唤/拦截"
+        "召唤/拦截",
+        "减益/破甲"
       ],
       "image": "/encyclopedia/thumbs/tower_barrel_lvl4.png",
       "encyclopediaImage": "/encyclopedia/tower_barrel_lvl4.png",
@@ -36809,7 +37741,44 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "aura_bullet_tower_barrel_skill_barrel"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bullet_tower_barrel_lvl4.damage_radius / area"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_tower_barrel_skill_barrel_poison"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_tower_barrel_skill_barrel_slow"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        },
+        {
+          "role": "减益/破甲",
+          "description": "效果降低敌人输出或提高敌人受到的伤害。",
+          "source": "mod_bullet_tower_barrel_lvl4"
+        }
+      ]
     },
     {
       "id": "tower_necromancer_lvl4",
@@ -36820,8 +37789,8 @@
       ],
       "roles": [
         "直接输出",
-        "召唤/拦截",
-        "减益/破甲"
+        "控制",
+        "召唤/拦截"
       ],
       "image": "/encyclopedia/thumbs/tower_necromancer_lvl4.png",
       "encyclopediaImage": "/encyclopedia/tower_necromancer_lvl4.png",
@@ -37162,7 +38131,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "沉默效果。",
+          "source": "mod_tower_necromancer_skill_debuff"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_elven_stargazers_lvl4",
@@ -37374,7 +38360,19 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_tower_stargazers_death_star_stun"
+        }
+      ]
     },
     {
       "id": "tower_flamespitter_lvl4",
@@ -37606,7 +38604,29 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bullet_tower_flamespitter_skill_bomb.damage_radius / area"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_burning_tower_flamespitter"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_tower_flamesplitter_skill_columns"
+        }
+      ]
     },
     {
       "id": "tower_sand_lvl4",
@@ -37882,7 +38902,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_tower_sand_skill_big_blade_slow"
+        },
+        {
+          "role": "经济辅助",
+          "description": "攻击或效果可增加金币收益。",
+          "source": "bullet_tower_sand_skill_gold"
+        }
+      ]
     },
     {
       "id": "tower_rocket_gunners_lvl4",
@@ -38199,7 +39236,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "soldier_tower_rocket_gunners_lvl4.damage_radius / area"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_ray_lvl4",
@@ -38371,7 +39425,19 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_tower_ray_slow"
+        }
+      ]
     },
     {
       "id": "tower_ghost_lvl4",
@@ -38384,7 +39450,8 @@
         "直接输出",
         "范围伤害",
         "控制",
-        "召唤/拦截"
+        "召唤/拦截",
+        "减益/破甲"
       ],
       "image": "/encyclopedia/thumbs/tower_ghost_lvl4.png",
       "encyclopediaImage": "/encyclopedia/tower_ghost_lvl4.png",
@@ -38652,7 +39719,39 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "aura_tower_ghost_extra_damage"
+        },
+        {
+          "role": "控制",
+          "description": "传送效果。",
+          "source": "mod_eleemntal_water_holder_teleport"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_tower_ghost_soul_slow"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        },
+        {
+          "role": "减益/破甲",
+          "description": "效果降低敌人输出或提高敌人受到的伤害。",
+          "source": "mod_tower_ghost_soul_damage_factor"
+        }
+      ]
     },
     {
       "id": "tower_dark_elf_lvl4",
@@ -38663,8 +39762,8 @@
       ],
       "roles": [
         "直接输出",
-        "增伤辅助",
-        "召唤/拦截"
+        "召唤/拦截",
+        "增伤辅助"
       ],
       "image": "/encyclopedia/thumbs/tower_dark_elf_lvl4.png",
       "encyclopediaImage": "/encyclopedia/tower_dark_elf_lvl4.png",
@@ -38996,7 +40095,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        },
+        {
+          "role": "增伤辅助",
+          "description": "为受益防御塔提供伤害增益。",
+          "source": "dark-elf-hunt"
+        }
+      ]
     },
     {
       "id": "tower_hermit_toad_lvl4",
@@ -39217,7 +40333,29 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bullet_tower_hermit_toad_engineer_basic_lvl4.damage_radius / area"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_tower_hermit_toad_engineer_basic_slow"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_tower_hermit_toad_jump"
+        }
+      ]
     },
     {
       "id": "tower_sparking_geode_lvl4",
@@ -39228,8 +40366,9 @@
       ],
       "roles": [
         "直接输出",
-        "控制",
-        "召唤/拦截"
+        "范围伤害",
+        "持续伤害",
+        "控制"
       ],
       "image": "/encyclopedia/thumbs/tower_sparking_geode_lvl4.png",
       "encyclopediaImage": "/encyclopedia/tower_sparking_geode_lvl4.png",
@@ -39431,7 +40570,34 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "aura_tower_sparking_geode_spike_burst"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_tower_sparking_geode_burst_damage"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_tower_sparking_geode_burst_slow"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_tower_sparking_geode_stun"
+        }
+      ]
     },
     {
       "id": "tower_stage_28_priests_barrack",
@@ -39725,7 +40891,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bolt_soldier_priests_barrack_explosion.damage_radius / area"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_dwarf_lvl4",
@@ -39737,6 +40920,7 @@
       "roles": [
         "直接输出",
         "范围伤害",
+        "持续伤害",
         "召唤/拦截"
       ],
       "image": "/encyclopedia/thumbs/tower_dwarf_lvl4.png",
@@ -39995,7 +41179,29 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bullet_incendiary_soldier_tower_dwarf.damage_radius / area"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_aura_bullet_soldier_tower_dwarf"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_pandas_lvl4",
@@ -40350,7 +41556,29 @@
         "items": [],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_soldier_tower_pandas_blue_stun"
+        },
+        {
+          "role": "控制",
+          "description": "传送效果。",
+          "source": "mod_soldier_tower_pandas_red_teleport"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_dragons_lvl4",
@@ -40361,6 +41589,7 @@
       ],
       "roles": [
         "直接输出",
+        "范围伤害",
         "控制"
       ],
       "image": "/encyclopedia/thumbs/tower_dragons_lvl4.png",
@@ -40560,7 +41789,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "tower_dragons_lvl4.damage_radius / area"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_stun_tower_dragons_massive_fear"
+        }
+      ]
     },
     {
       "id": "tower_shadow_archer",
@@ -40794,7 +42040,19 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "纯输出",
+          "description": "当前已识别能力以伤害为主，未识别到控制、召唤或辅助效果。",
+          "source": "已识别能力汇总"
+        },
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        }
+      ]
     },
     {
       "id": "tower_rotten_forest",
@@ -40805,8 +42063,10 @@
       ],
       "roles": [
         "直接输出",
+        "范围伤害",
         "控制",
-        "召唤/拦截"
+        "召唤/拦截",
+        "减益/破甲"
       ],
       "image": "/encyclopedia/thumbs/tower_rotten_forest.png",
       "encyclopediaImage": "/encyclopedia/tower_rotten_forest.png",
@@ -41050,7 +42310,39 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "aura_tower_rotten_forest_spike_burst"
+        },
+        {
+          "role": "控制",
+          "description": "定身 / 冻结效果。",
+          "source": "mod_rf_thorn"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_tower_rotten_forest_burst_slow"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        },
+        {
+          "role": "减益/破甲",
+          "description": "效果降低敌人输出或提高敌人受到的伤害。",
+          "source": "mod_tower_rotten_forest_fog_miss"
+        }
+      ]
     },
     {
       "id": "tower_bone_flingers",
@@ -41401,7 +42693,19 @@
         "items": [],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_ogre_shipwreck",
@@ -41763,7 +43067,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bomb_ogre_shipwreck_goblin.damage_radius / area"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_orc_warriors",
@@ -41774,7 +43095,8 @@
       ],
       "roles": [
         "直接输出",
-        "召唤/拦截"
+        "召唤/拦截",
+        "减益/破甲"
       ],
       "image": "/encyclopedia/thumbs/tower_orc_warriors.png",
       "encyclopediaImage": "/encyclopedia/tower_orc_warriors.png",
@@ -42074,7 +43396,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        },
+        {
+          "role": "减益/破甲",
+          "description": "效果降低敌人输出或提高敌人受到的伤害。",
+          "source": "mod_soldier_orc_warrior_captain_weak"
+        }
+      ]
     },
     {
       "id": "tower_dark_knights",
@@ -42357,7 +43696,19 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_infernal_mage",
@@ -42368,8 +43719,9 @@
       ],
       "roles": [
         "直接输出",
-        "控制",
-        "减益/破甲"
+        "范围伤害",
+        "持续伤害",
+        "控制"
       ],
       "image": "/encyclopedia/thumbs/tower_infernal_mage.png",
       "encyclopediaImage": "/encyclopedia/tower_infernal_mage.png",
@@ -42626,7 +43978,29 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "aura_curse_infernal"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_lava_infernal_mage"
+        },
+        {
+          "role": "控制",
+          "description": "传送效果。",
+          "source": "mod_teleport_infernal"
+        }
+      ]
     },
     {
       "id": "tower_orc_shaman",
@@ -42638,8 +44012,7 @@
       "roles": [
         "直接输出",
         "范围伤害",
-        "控制",
-        "召唤/拦截"
+        "控制"
       ],
       "image": "/encyclopedia/thumbs/tower_orc_shaman.png",
       "encyclopediaImage": "/encyclopedia/tower_orc_shaman.png",
@@ -42909,7 +44282,29 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bolt_orc_shaman_shock.damage_radius / area"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_orc_shaman_heal_enemy"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_orc_shaman_meteorite_stun"
+        }
+      ]
     },
     {
       "id": "tower_rocket_riders",
@@ -43147,7 +44542,24 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bomb_rr_fragment.damage_radius / area"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_rr_mine_stun"
+        }
+      ]
     },
     {
       "id": "tower_grim_cemetery",
@@ -43483,7 +44895,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_grim_cemetery_poison"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_balloon",
@@ -43732,7 +45161,29 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bomb_balloon.damage_radius / area"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_slow_oil_balloon"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_spirit_mausoleum",
@@ -43743,6 +45194,7 @@
       ],
       "roles": [
         "直接输出",
+        "控制",
         "召唤/拦截"
       ],
       "image": "/encyclopedia/thumbs/tower_spirit_mausoleum.png",
@@ -44019,7 +45471,24 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "附身控制效果。",
+          "source": "mod_possession"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_twilight_elves_barrack",
@@ -44369,7 +45838,19 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_goblirang",
@@ -44381,7 +45862,8 @@
       "roles": [
         "直接输出",
         "范围伤害",
-        "控制"
+        "控制",
+        "持续伤害"
       ],
       "image": "/encyclopedia/thumbs/tower_goblirang.png",
       "encyclopediaImage": "/encyclopedia/tower_goblirang.png",
@@ -44650,7 +46132,39 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "goblirang.damage_radius / area"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "honey_bees_aura"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_goblirang_slow"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_goblirang_stun"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_honey_bees"
+        }
+      ]
     },
     {
       "id": "tower_shaolin",
@@ -44662,8 +46176,9 @@
       "roles": [
         "直接输出",
         "范围伤害",
-        "经济辅助",
-        "召唤/拦截"
+        "控制",
+        "召唤/拦截",
+        "经济辅助"
       ],
       "image": "/encyclopedia/thumbs/tower_shaolin.png",
       "encyclopediaImage": "/encyclopedia/tower_shaolin.png",
@@ -45008,7 +46523,39 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "soldier_dragon.damage_radius / area"
+        },
+        {
+          "role": "控制",
+          "description": "少林僧众普攻在满足条件时打断敌人；详见实战机制。",
+          "source": "shaolin-control"
+        },
+        {
+          "role": "范围伤害",
+          "description": "已核实攻击可分配至多个敌人或逐个结算范围内敌人。",
+          "source": "shaolin-distribution"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        },
+        {
+          "role": "经济辅助",
+          "description": "攻击或效果可增加金币收益。",
+          "source": "aura_tower_shaolin_gold"
+        }
+      ]
     },
     {
       "id": "tower_deep_devils",
@@ -45019,6 +46566,7 @@
       ],
       "roles": [
         "直接输出",
+        "控制",
         "召唤/拦截"
       ],
       "image": "/encyclopedia/thumbs/tower_deep_devils.png",
@@ -45363,7 +46911,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_deep_devils_net1"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_ignis_altar",
@@ -45377,7 +46942,8 @@
         "范围伤害",
         "持续伤害",
         "控制",
-        "召唤/拦截"
+        "召唤/拦截",
+        "减益/破甲"
       ],
       "image": "/encyclopedia/thumbs/tower_ignis_altar.png",
       "encyclopediaImage": "/encyclopedia/tower_ignis_altar.png",
@@ -45599,7 +47165,44 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "aura_bullet_ignis_altar"
+        },
+        {
+          "role": "持续伤害",
+          "description": "火光祭坛落地光环在持续时间内反复造成伤害。",
+          "source": "aura_bullet_ignis_altar"
+        },
+        {
+          "role": "范围伤害",
+          "description": "技能爆炸具有范围伤害判定。",
+          "source": "mod_ignis_altar_single_extinction_1"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_ignis_altar_slow"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        },
+        {
+          "role": "减益/破甲",
+          "description": "效果降低敌人输出或提高敌人受到的伤害。",
+          "source": "mod_ignis_altar_single_extinction_1"
+        }
+      ]
     },
     {
       "id": "tower_blazing_watcher",
@@ -45609,9 +47212,9 @@
         "mage"
       ],
       "roles": [
-        "纯输出",
         "直接输出",
-        "范围伤害"
+        "范围伤害",
+        "控制"
       ],
       "image": "/encyclopedia/thumbs/tower_blazing_watcher.png",
       "encyclopediaImage": "/encyclopedia/tower_blazing_watcher.png",
@@ -45834,7 +47437,24 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "blazing_watcher_bolt_blast.damage_radius / area"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_blazing_watcher_bolt_blast"
+        }
+      ]
     },
     {
       "id": "tower_swamp_monster",
@@ -46147,7 +47767,29 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bullet_swamp_monster_bomb.damage_radius / area"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_swamp_stun"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_melting_furnace",
@@ -46369,7 +48011,44 @@
         ],
         "pending": [],
         "hasSpecificReview": true
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "tower_melting_furnace.damage_radius / area"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "lava_furnace"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_furnace_stun"
+        },
+        {
+          "role": "范围伤害",
+          "description": "已核实攻击可分配至多个敌人或逐个结算范围内敌人。",
+          "source": "furnace-penetration"
+        },
+        {
+          "role": "增伤辅助",
+          "description": "为受益防御塔提供伤害增益。",
+          "source": "furnace-heat"
+        },
+        {
+          "role": "攻速辅助",
+          "description": "为受益防御塔提供攻速增益。",
+          "source": "furnace-fuel"
+        }
+      ]
     },
     {
       "id": "tower_wicked_sisters",
@@ -46380,8 +48059,8 @@
       ],
       "roles": [
         "直接输出",
-        "持续伤害",
-        "控制"
+        "控制",
+        "持续伤害"
       ],
       "image": "/encyclopedia/thumbs/tower_wicked_sisters.png",
       "encyclopediaImage": "/encyclopedia/tower_wicked_sisters.png",
@@ -46580,7 +48259,29 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "变形效果。",
+          "source": "mod_polymorph_wicked_sisters"
+        },
+        {
+          "role": "控制",
+          "description": "沉默效果。",
+          "source": "mod_silence_totem_wicked_sisters"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_wicked_sister_poison"
+        }
+      ]
     },
     {
       "id": "tower_sandworm",
@@ -46926,7 +48627,39 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "aura_bomb_tower_sandworm_spit"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bomb_tower_sandworm_spit.damage_radius / area"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_tower_sandworm_poison"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_tower_sandworm_slow"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_archer_1",
@@ -47008,7 +48741,19 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "纯输出",
+          "description": "当前已识别能力以伤害为主，未识别到控制、召唤或辅助效果。",
+          "source": "已识别能力汇总"
+        },
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        }
+      ]
     },
     {
       "id": "tower_archer_2",
@@ -47090,7 +48835,19 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "纯输出",
+          "description": "当前已识别能力以伤害为主，未识别到控制、召唤或辅助效果。",
+          "source": "已识别能力汇总"
+        },
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        }
+      ]
     },
     {
       "id": "tower_archer_3",
@@ -47172,7 +48929,19 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "纯输出",
+          "description": "当前已识别能力以伤害为主，未识别到控制、召唤或辅助效果。",
+          "source": "已识别能力汇总"
+        },
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        }
+      ]
     },
     {
       "id": "tower_mage_1",
@@ -47254,7 +49023,19 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "纯输出",
+          "description": "当前已识别能力以伤害为主，未识别到控制、召唤或辅助效果。",
+          "source": "已识别能力汇总"
+        },
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        }
+      ]
     },
     {
       "id": "tower_mage_2",
@@ -47336,7 +49117,19 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "纯输出",
+          "description": "当前已识别能力以伤害为主，未识别到控制、召唤或辅助效果。",
+          "source": "已识别能力汇总"
+        },
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        }
+      ]
     },
     {
       "id": "tower_mage_3",
@@ -47418,7 +49211,19 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "纯输出",
+          "description": "当前已识别能力以伤害为主，未识别到控制、召唤或辅助效果。",
+          "source": "已识别能力汇总"
+        },
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        }
+      ]
     },
     {
       "id": "tower_engineer_1",
@@ -47501,7 +49306,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "纯输出",
+          "description": "当前已识别能力以伤害为主，未识别到控制、召唤或辅助效果。",
+          "source": "已识别能力汇总"
+        },
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bomb.damage_radius / area"
+        }
+      ]
     },
     {
       "id": "tower_engineer_2",
@@ -47584,7 +49406,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "纯输出",
+          "description": "当前已识别能力以伤害为主，未识别到控制、召唤或辅助效果。",
+          "source": "已识别能力汇总"
+        },
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bomb_dynamite.damage_radius / area"
+        }
+      ]
     },
     {
       "id": "tower_engineer_3",
@@ -47667,7 +49506,24 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "纯输出",
+          "description": "当前已识别能力以伤害为主，未识别到控制、召唤或辅助效果。",
+          "source": "已识别能力汇总"
+        },
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bomb_black.damage_radius / area"
+        }
+      ]
     },
     {
       "id": "tower_barrack_1",
@@ -47794,7 +49650,19 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_barrack_2",
@@ -47921,7 +49789,19 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     },
     {
       "id": "tower_barrack_3",
@@ -48048,7 +49928,19 @@
         ],
         "pending": [],
         "hasSpecificReview": false
-      }
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
     }
   ]
 }

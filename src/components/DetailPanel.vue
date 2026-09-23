@@ -119,6 +119,14 @@ onBeforeUnmount(() => {
             <div class="tag-row spacious">
               <span v-for="role in tower.roles" :key="role" class="role-tag">{{ role }}</span>
             </div>
+            <p class="unit-footnote">标签包含可购买技能及所属单位的能力，不全是普攻效果；普通士兵阻挡归入召唤/拦截，不直接算控制。</p>
+            <details class="unit-source role-evidence">
+              <summary>查看标签依据</summary>
+              <div v-for="item in tower.roleEvidence" :key="`${item.role}-${item.description}`">
+                <span><strong>{{ item.role }}</strong>：{{ item.description }}</span>
+                <code>{{ item.source }}</code>
+              </div>
+            </details>
           </section>
 
           <section class="detail-section">
