@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
+import { Search, ArrowUpRight, Footprints, SlidersHorizontal } from '@lucide/vue'
+import DossierNav from '../components/DossierNav.vue'
 import { Badge } from '../components/ui/badge'
 import { Button } from '../components/ui/button'
 import type { Hero, SupportEffect } from '../types'
@@ -86,21 +88,21 @@ onBeforeUnmount(() => {
     <div class="page-heading split-heading hero-page-heading">
       <div>
         <div class="eyebrow"><span></span> HERO HALL</div>
-        <h1>英雄殿堂<em>档案</em></h1>
-        <p>按游戏英雄殿堂顺序整理 {{ heroes.length }} 位英雄。查看移动方式、调动条件、实战特性、技能说明与成长节点；可影响防御塔的英雄已接入辅助计算台。</p>
-        <p class="hero-behavior-note">英雄档案来源：游戏 v{{ dataVersion }}。飞行筛选仅包含常驻飞行英雄；技能解锁后的移动能力也会列入对应分类。</p>
+        <h1>英雄殿堂<span class="heading-accent"> / </span><em>知己，善战。</em></h1>
+        <p>从移动方式到实战特性，找到适合你的战场搭档。</p>
+        <div class="archive-caption"><span class="status-dot"></span> 游戏 v{{ dataVersion }} · 参数与机制均附源码依据</div>
       </div>
-      <div class="hero-support-callout">
-        <strong>{{ supportByHero.size }}</strong>
-        <span>位英雄可影响矩阵</span>
-        <small>{{ effects.filter((effect) => effect.sourceType === 'hero').length }} 项可计算效果</small>
+      <div class="hero-overview" aria-label="英雄资料概览">
+        <div><strong>{{ heroes.length }}</strong><span>英雄档案</span></div>
+        <div><strong>{{ movementOptions.length }}</strong><span>移动分类</span></div>
+        <div><strong>{{ supportByHero.size }}</strong><span>辅助英雄</span></div>
       </div>
     </div>
 
     <section class="hero-toolbar">
       <label class="hero-search">
-        <span>搜索英雄、技能、移动方式或特性</span>
-        <input v-model="query" type="search" placeholder="例如：迪纳斯 / 远程 / hero_denas" />
+        <span>搜索英雄</span>
+        <div class="archive-search-input"><Search :size="18" aria-hidden="true" /><input v-model="query" type="search" aria-label="搜索英雄、技能、移动方式或特性" placeholder="名称、技能、移动方式或特性…" /></div>
       </label>
       <label>
         <span>来源作品</span>
@@ -122,14 +124,17 @@ onBeforeUnmount(() => {
         type="button"
         :variant="supportOnly ? 'default' : 'outline'"
         class="hero-support-filter"
+        :aria-pressed="supportOnly"
         @click="supportOnly = !supportOnly"
       >
-        {{ supportOnly ? '正在查看辅助英雄' : '只看辅助英雄' }}
+        <SlidersHorizontal :size="15" aria-hidden="true" />{{ supportOnly ? '辅助英雄已筛选' : '只看辅助英雄' }}
       </Button>
     </section>
 
     <div class="hero-results-line">
-      <span>显示 {{ filteredHeroes.length }} / {{ heroes.length }} 位英雄</span>
+      <span role="status"><strong>{{ filteredHeroes.length }}</strong> 位英雄 <small>/ 共 {{ heroes.length }} 位</small></span>
+      <span class="results-hint">按游戏殿堂顺序 · 点击查看完整档案</span>
+      <details class="filter-help"><summary>筛选说明</summary><p>“飞行”仅包含常驻飞行英雄；技能解锁后的移动能力计入对应分类。辅助英雄可影响防御塔，并已接入辅助计算。</p></details>
       <button v-if="query || sourceGame || supportOnly || movementFilter" type="button" @click="query = ''; sourceGame = 0; supportOnly = false; movementFilter = ''">清除筛选</button>
     </div>
 
@@ -141,31 +146,21 @@ onBeforeUnmount(() => {
           :aria-label="`查看${hero.name}英雄详情`"
           @click="selectedHero = hero"
         >
-          <div class="hero-card-visual">
-            <img :src="hero.image" :alt="`${hero.name}英雄立绘`" loading="lazy" />
-            <Badge class="hero-game-badge" variant="outline">{{ sourceNames[hero.sourceGame] || `KR ${hero.sourceGame}` }}</Badge>
-            <Badge v-if="supportByHero.has(hero.id)" class="hero-buff-badge">辅助矩阵</Badge>
-            <span class="hero-open-label">查看完整档案</span>
+          <div class="hero-card-header">
+            <div class="hero-card-art"><img :src="hero.image" :alt="`${hero.name}英雄立绘`" loading="lazy" /></div>
+            <div class="hero-card-identity">
+              <span class="hero-origin">{{ sourceNames[hero.sourceGame] || `KR ${hero.sourceGame}` }}<i></i>Lv.{{ hero.startingLevel }} 起始</span>
+              <h2>{{ hero.name }}</h2>
+              <span class="hero-travel-chip"><Footprints :size="13" aria-hidden="true" />{{ hero.details.movement.label }}</span>
+              <span v-if="supportByHero.has(hero.id)" class="hero-support-chip">可辅助防御塔</span>
+            </div>
           </div>
 
           <div class="hero-card-body">
-            <div class="hero-name-row">
-              <div><h2>{{ hero.name }}</h2><code>{{ hero.id }}</code></div>
-              <span>初始 Lv.{{ hero.startingLevel }}</span>
-            </div>
             <p class="hero-description">{{ hero.description }}</p>
-            <p class="hero-movement-label">{{ hero.details.movement.label }} <span>基础移速 {{ hero.details.movement.baseSpeed ?? '—' }}</span></p>
 
             <div class="hero-specialties">
               <span v-for="specialty in hero.specialties" :key="specialty">{{ specialty }}</span>
-            </div>
-
-            <div class="hero-profile-bars">
-              <div v-for="(value, index) in hero.profileStats" :key="profileLabels[index]">
-                <span>{{ profileLabels[index] }}</span>
-                <i><b :style="{ width: `${Math.min(value, 10) * 10}%` }"></b></i>
-                <strong>{{ value }}</strong>
-              </div>
             </div>
 
             <dl class="hero-max-stats">
@@ -180,6 +175,7 @@ onBeforeUnmount(() => {
               <span v-for="effect in supportByHero.get(hero.id)" :key="effect.id">{{ effect.name }}</span>
             </div>
           </div>
+          <div class="hero-card-footer"><span>基础移速 <b>{{ hero.details.movement.baseSpeed ?? '—' }}</b></span><span>查看档案<ArrowUpRight :size="16" aria-hidden="true" /></span></div>
         </button>
       </article>
     </div>
@@ -193,10 +189,10 @@ onBeforeUnmount(() => {
   <Teleport to="body">
     <Transition name="panel">
       <div v-if="selectedHero" class="hero-detail-overlay" role="presentation" @mousedown.self="selectedHero = null">
-        <aside class="hero-detail-panel" role="dialog" aria-modal="true" :aria-label="`${selectedHero.name}英雄详情`">
-          <Button type="button" variant="ghost" class="hero-detail-close" aria-label="关闭英雄详情" @click="selectedHero = null">×</Button>
+        <aside class="hero-detail-panel" role="dialog" aria-modal="true" tabindex="-1" :aria-label="`${selectedHero.name}英雄详情`">
+          <DossierNav :key="selectedHero.id" :title="selectedHero.name" close-label="关闭英雄详情" :sections="[{ id: 'overview', label: '概览' }, { id: 'movement', label: '移动' }, { id: 'traits', label: '特性' }, { id: 'abilities', label: '技能' }, ...(selectedHero.skills.length ? [{ id: 'growth', label: '成长' }] : []), { id: 'sources', label: '来源' }]" @close="selectedHero = null" />
 
-          <div class="hero-detail-hero">
+          <div class="hero-detail-hero" data-section="overview">
             <div class="hero-detail-image">
               <img :src="selectedHero.image" :alt="`${selectedHero.name}英雄立绘`" />
             </div>
@@ -221,7 +217,13 @@ onBeforeUnmount(() => {
             <div><dt>技能数量</dt><dd>{{ selectedHero.abilities.length }}</dd></div>
           </dl>
 
-          <section class="hero-detail-section">
+          <div class="hero-profile-bars hero-detail-profile" aria-label="英雄殿堂能力评级">
+            <div v-for="(value, index) in selectedHero.profileStats" :key="profileLabels[index]">
+              <span>{{ profileLabels[index] }}</span><i><b :style="{ width: `${Math.min(value, 10) * 10}%` }"></b></i><strong>{{ value }}</strong>
+            </div>
+          </div>
+
+          <section class="hero-detail-section" data-section="movement">
             <div class="hero-detail-title">
               <strong>移动与基础行为</strong>
               <small>{{ selectedHero.details.movement.label }}</small>
@@ -251,7 +253,7 @@ onBeforeUnmount(() => {
             </details>
           </section>
 
-          <section class="hero-detail-section">
+          <section class="hero-detail-section" data-section="traits">
             <div class="hero-detail-title">
               <strong>移动机制与实战特性</strong>
               <small>{{ selectedHero.details.items.length }} 条已核实 · v{{ selectedHero.details.reviewedVersion }}</small>
@@ -272,7 +274,7 @@ onBeforeUnmount(() => {
             <p v-if="!selectedHero.details.items.length && !selectedHero.details.pending.length" class="hero-behavior-note">已提供模板移动参数；本英雄专属被动尚未逐项核实。</p>
           </section>
 
-          <section class="hero-detail-section">
+          <section class="hero-detail-section" data-section="abilities">
             <div class="hero-detail-title">
               <strong>技能介绍</strong>
               <small>取自游戏英雄殿堂的满级技能说明</small>
@@ -289,7 +291,7 @@ onBeforeUnmount(() => {
             <p v-else class="empty-copy">游戏英雄殿堂未提供独立技能说明。</p>
           </section>
 
-          <section v-if="selectedHero.skills.length" class="hero-detail-section">
+          <section v-if="selectedHero.skills.length" class="hero-detail-section" data-section="growth">
             <div class="hero-detail-title">
               <strong>技能成长节点</strong>
               <small>英雄等级 → 技能等级</small>
@@ -318,7 +320,7 @@ onBeforeUnmount(() => {
             </div>
           </section>
 
-          <section class="hero-detail-section hero-detail-source">
+          <section class="hero-detail-section hero-detail-source" data-section="sources">
             <div class="hero-detail-title"><strong>数据来源</strong><small>字段可追溯</small></div>
             <code>{{ selectedHero.sources.roster }}</code>
             <code>{{ selectedHero.sources.template }}</code>

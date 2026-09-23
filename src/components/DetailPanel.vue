@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onBeforeUnmount, watch } from 'vue'
+import DossierNav from './DossierNav.vue'
 import { familyLabels } from '../data'
 import { formatNumber } from '../lib/calculator'
 import type { Tower } from '../types'
@@ -33,10 +34,10 @@ onBeforeUnmount(() => {
   <Teleport to="body">
     <Transition name="panel">
       <div v-if="tower" class="detail-overlay" role="presentation" @mousedown.self="$emit('close')">
-        <section class="detail-panel" role="dialog" aria-modal="true" :aria-label="`${tower.name}详情`">
-          <button class="close-button" type="button" aria-label="关闭详情" @click="$emit('close')">×</button>
+        <section class="detail-panel" role="dialog" aria-modal="true" tabindex="-1" :aria-label="`${tower.name}详情`">
+          <DossierNav :key="tower.id" :title="tower.name" close-label="关闭详情" :sections="[{ id: 'overview', label: '概览' }, { id: 'mechanics', label: '机制' }, ...(tower.units.length ? [{ id: 'units', label: '单位' }] : []), { id: 'roles', label: '定位' }, { id: 'skills', label: '技能' }, { id: 'sources', label: '来源' }]" @close="$emit('close')" />
 
-          <div class="detail-hero">
+          <div class="detail-hero" data-section="overview">
             <div class="detail-portrait">
               <img :src="tower.encyclopediaImage" :alt="`${tower.name}${tower.encyclopediaListed ? '百科插图' : '头像'}`" />
             </div>
@@ -81,7 +82,7 @@ onBeforeUnmount(() => {
             </div>
           </div>
 
-          <TowerMechanics :key="tower.id" :tower="tower" />
+          <TowerMechanics :key="tower.id" :tower="tower" data-section="mechanics" />
 
           <section v-if="tower.soldier && !tower.units.length" class="detail-section">
             <div class="section-title">
@@ -96,7 +97,7 @@ onBeforeUnmount(() => {
             </div>
           </section>
 
-          <section v-if="tower.units.length" class="detail-section">
+          <section v-if="tower.units.length" class="detail-section" data-section="units">
             <div class="section-title">
               <span>驻防与召唤单位</span>
               <small>{{ tower.units.length }} 种单位 · 独立战斗面板</small>
@@ -111,7 +112,7 @@ onBeforeUnmount(() => {
             </div>
           </section>
 
-          <section class="detail-section">
+          <section class="detail-section" data-section="roles">
             <div class="section-title">
               <span>定位与能力</span>
               <small>多标签，不强制互斥</small>
@@ -129,7 +130,7 @@ onBeforeUnmount(() => {
             </details>
           </section>
 
-          <section class="detail-section">
+          <section class="detail-section" data-section="skills">
             <div class="section-title">
               <span>技能档案 · 逐级数据</span>
               <small>{{ tower.powers.length }} 项升级能力</small>
@@ -167,7 +168,7 @@ onBeforeUnmount(() => {
             <p v-if="tower.powers.length" class="unit-footnote">费用为该级单独花费；累计仅含本技能。数值未计科技、英雄和辅助增益。</p>
           </section>
 
-          <section class="detail-section source-section">
+          <section class="detail-section source-section" data-section="sources">
             <div class="section-title">
               <span>解锁与来源</span>
               <small>字段可追溯</small>
