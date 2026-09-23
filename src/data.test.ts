@@ -2,6 +2,21 @@ import { describe, expect, it } from 'vitest'
 import { doveData, enemies, gameChangelog, heroes, towerById, towers } from './data'
 
 describe('游戏百科顺序与图像', () => {
+  it('修复名称碰撞、禁止效果和动画误标，并保留实际技能能力', () => {
+    expect(towerById.get('tower_barbarian')!.roles).toEqual(['直接输出', '范围伤害', '召唤/拦截'])
+    expect(towerById.get('tower_high_elven')!.roles).not.toContain('持续伤害')
+    expect(towerById.get('tower_silver')!.roles).not.toContain('经济辅助')
+    expect(towerById.get('tower_silver')!.roles).toContain('减益/破甲')
+    for (const id of ['tower_shaolin', 'tower_arcane', 'tower_elf', 'tower_deep_devils', 'tower_wild_magus', 'tower_tesla']) {
+      expect(towerById.get(id)!.roles).toContain('控制')
+    }
+    expect(towerById.get('tower_pixie')!.roles).toContain('经济辅助')
+    expect(towerById.get('tower_tesla')!.roles).not.toContain('持续伤害')
+    for (const t of towers) {
+      expect(new Set(t.roleEvidence.map((e) => e.role))).toEqual(new Set(t.roles))
+      expect(t.roleEvidence.every((e) => e.description && e.source)).toBe(true)
+    }
+  })
   it('实战机制包含可靠来源、版本和少林寺条件，未核实的塔不伪装成已完成', () => {
     for (const tower of towers) {
       expect(tower.mechanics.reviewedVersion).toBe(doveData.metadata.gameVersion)
