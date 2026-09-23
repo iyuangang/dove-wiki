@@ -3957,7 +3957,7 @@ input:focus {
 
 .hero-toolbar {
   display: grid;
-  grid-template-columns: minmax(260px, 1fr) 220px auto;
+  grid-template-columns: minmax(220px, 1fr) minmax(135px, 180px) minmax(135px, 180px) auto;
   gap: 12px;
   align-items: end;
   padding: 18px;
@@ -4357,6 +4357,24 @@ input:focus {
   padding-top: 20px;
   border-top: 1px solid var(--line);
 }
+
+.hero-movement-label { margin: 12px 0; color: var(--gold-soft); font-size: 12px; }
+.hero-movement-label span { display: inline-block; margin-left: 8px; color: var(--muted); font-size: 11px; }
+.hero-behavior-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin: 16px 0; }
+.hero-behavior-stats dt { color: var(--muted); font-size: 12px; }
+.hero-behavior-stats dd { margin: 5px 0 0; color: var(--gold-soft); font-size: 19px; }
+.hero-behavior-stats small { color: var(--muted); font-size: 11px; }
+.hero-behavior-note { margin: 12px 0; color: var(--muted); font-size: 12px; line-height: 1.8; }
+.hero-behavior-attacks { display: grid; gap: 8px; }
+.hero-behavior-attacks > div { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--muted); }
+.hero-behavior-attacks strong { color: var(--text); }
+.hero-trait-list { display: grid; gap: 12px; }
+.hero-trait-list article { padding: 16px; border: 1px solid var(--line); border-radius: 5px; background: rgba(255,255,255,.018); }
+.hero-trait-list h3 { margin: 0; font-size: 15px; color: var(--gold-soft); }
+.hero-trait-list p, .hero-trait-list li { color: var(--muted); font-size: 12px; line-height: 1.8; }
+.hero-trait-list p { margin: 8px 0; }
+.hero-trait-list ul { padding-left: 18px; margin: 8px 0; }
+.hero-trait-list .unit-source code, .hero-detail-section > .unit-source code { display: block; overflow-wrap: anywhere; }
 
 .hero-detail-title {
   display: flex;

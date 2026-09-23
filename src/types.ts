@@ -184,6 +184,18 @@ export interface HeroAbility {
   description: string
 }
 
+export interface HeroDetails {
+  reviewedVersion: string
+  movement: { label: string; tags: string[]; baseSpeed: number | null; terrain: string[]; destinations: string[] }
+  respawnSeconds: number | null
+  regenInterval: number | null
+  regenHitDelay: number | null
+  attacks: { kind: string; cooldown: number | null; range: number | null; minRange: number | null; disabled: boolean }[]
+  items: { id: string; title: string; summary: string; facts: string[]; sources: { file: string; symbol: string; line: number | null }[] }[]
+  pending: string[]
+  sources: { file: string; symbol: string; line: number | null }[]
+}
+
 export interface Hero {
   id: string
   name: string
@@ -206,6 +218,7 @@ export interface Hero {
   }
   skills: HeroSkill[]
   abilities: HeroAbility[]
+  details: HeroDetails
   sources: {
     template: string | null
     roster: string
@@ -347,6 +360,7 @@ export interface DoveData {
     commitHash: string
     generatedAt: string
     sourceRoot: string
+    heroSnapshot?: { gameVersion: string; commitHash: string; generatedAt: string; sourceRoot: string }
     assumptions: string[]
   }
   summary: {

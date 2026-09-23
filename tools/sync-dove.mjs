@@ -14,6 +14,7 @@ import { updateGameChangelog } from './game-changelog.mjs'
 import { buildPowerLevels, buildTowerUnits } from './tower-details.mjs'
 import { inferTowerRoles } from './tower-roles.mjs'
 import { buildTowerMechanics, loadMechanicReview } from './tower-mechanics.mjs'
+import { buildHeroDetails, loadHeroReview, mergeHeroSnapshot } from './hero-details.mjs'
 
 const toolsDir = dirname(fileURLToPath(import.meta.url))
 const projectRoot = resolve(toolsDir, '..')
@@ -1111,6 +1112,7 @@ async function cleanupTechnologyImages(rawTechnology) {
 }
 
 async function main() {
+  const heroesOnly = process.argv.includes('--heroes-only')
   assertFile(join(gameDir, 'kr1', 'game_settings.lua'), 'Dove 游戏目录')
   assertFile(loveExe, 'Dove 自带 lovec.exe')
   const previousData = existsSync(dataPath)
@@ -1119,6 +1121,7 @@ async function main() {
   const previousChangelog = existsSync(changelogPath)
     ? JSON.parse(await readFile(changelogPath, 'utf8'))
     : null
+  if (heroesOnly && !previousData) throw new Error('仅更新英雄需要已有的完整站点快照。')
 
   await mkdir(rawDir, { recursive: true })
   await mkdir(dataDir, { recursive: true })
@@ -1139,17 +1142,32 @@ async function main() {
       ...process.env,
       DOVE_GAME_DIR: gameDir,
       DOVE_RAW_OUTPUT: rawPath,
-      DOVE_PORTRAIT_DIR: portraitDir,
-      DOVE_ENCYCLOPEDIA_DIR: encyclopediaDir,
-      DOVE_SKILL_ICON_DIR: skillIconDir,
+      DOVE_PORTRAIT_DIR: heroesOnly ? '' : portraitDir,
+      DOVE_ENCYCLOPEDIA_DIR: heroesOnly ? '' : encyclopediaDir,
+      DOVE_SKILL_ICON_DIR: heroesOnly ? '' : skillIconDir,
       DOVE_HERO_DIR: heroDir,
-      DOVE_ENEMY_DIR: enemyDir,
-      DOVE_TECHNOLOGY_DIR: technologyDir,
-      DOVE_DAMAGE_ICON_DIR: damageIconDir,
+      DOVE_ENEMY_DIR: heroesOnly ? '' : enemyDir,
+      DOVE_TECHNOLOGY_DIR: heroesOnly ? '' : technologyDir,
+      DOVE_DAMAGE_ICON_DIR: heroesOnly ? '' : damageIconDir,
     },
   })
 
   const raw = JSON.parse(await readFile(rawPath, 'utf8'))
+  if (heroesOnly) {
+    const review = await loadHeroReview(gameDir)
+    const heroes = raw.heroes.map((hero) => ({ ...normalizeHero(hero, raw.localization), details: buildHeroDetails(hero, review) }))
+    const versionSource = await readFile(join(gameDir, 'version.lua'), 'utf8')
+    const snapshot = {
+      gameVersion: /^\s*id\s*=\s*["']([^"']+)/m.exec(versionSource)?.[1] || 'unknown',
+      commitHash: (await readFile(join(gameDir, 'current_version_commit_hash.txt'), 'utf8')).trim(),
+      generatedAt: new Date().toISOString(), sourceRoot: gameDir,
+    }
+    const data = mergeHeroSnapshot(previousData, heroes, snapshot)
+    await cleanupHeroImages(raw.heroes)
+    await writeFile(dataPath, `${JSON.stringify(data, null, 2)}\n`, 'utf8')
+    console.log(`[dove-wiki] 已更新 ${heroes.length} 位英雄（${snapshot.gameVersion}）；其余数据与更新历史保持原快照。`)
+    return
+  }
   const towerIds = raw.towers.map((tower) => tower.id)
   const unlocks = await buildUnlockIndex(towerIds)
   const sourceIndex = await buildTemplateSourceIndex()
@@ -1215,7 +1233,11 @@ async function main() {
     (total, tree) => total + tree.technologies.length,
     0,
   )
-  const heroes = raw.heroes.map((hero) => normalizeHero(hero, raw.localization))
+  const heroReview = await loadHeroReview(gameDir)
+  const heroes = raw.heroes.map((hero) => ({
+    ...normalizeHero(hero, raw.localization),
+    details: buildHeroDetails(hero, heroReview),
+  }))
   const enemies = raw.enemies.map((enemy) => normalizeEnemy(enemy, raw.localization))
   const uniqueEnemyCount = new Set(enemies.map((enemy) => enemy.id)).size
   const normalizedSupportEffects = supportEffects.map((effect) => ({
@@ -1237,6 +1259,7 @@ async function main() {
       commitHash,
       generatedAt: new Date().toISOString(),
       sourceRoot: gameDir,
+      heroSnapshot: { gameVersion, commitHash, generatedAt: new Date().toISOString(), sourceRoot: gameDir },
       assumptions: [
         '科技树可在辅助计算中选择；条件触发、概率与特殊目标效果不强行折算进基础面板。',
         '英雄增益按游戏脚本的峰值生效状态计算；持续时间、冷却和触发条件单独标注。',
