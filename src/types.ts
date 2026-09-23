@@ -93,6 +93,7 @@ export interface Tower {
   description: string
   families: TowerFamily[]
   roles: string[]
+  roleEvidence: { role: string; description: string; source: string }[]
   image: string
   encyclopediaImage: string
   encyclopediaOrder: number

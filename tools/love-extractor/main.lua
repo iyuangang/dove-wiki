@@ -191,6 +191,7 @@ end
 local reference_components = {
 	"info",
 	"regen",
+	"pickpocket",
 	"dodge",
 	"nav_rally",
 	"auras",
@@ -202,6 +203,8 @@ local reference_components = {
 	"count_group",
 	"damage",
 	"dps",
+	"slow",
+	"armor_buff",
 	"health",
 	"melee",
 	"modifier",
@@ -213,6 +216,16 @@ local reference_components = {
 	"timed",
 	"tower",
 	"unit"
+}
+
+-- Names of animations/powers and effect exclusion lists are not spawn/apply edges.
+-- In particular barbarian's animation/power_name = "twister" is NOT the
+-- archmage's entity template of the same name.
+local non_reference_keys = {
+	allowed_templates = true, excluded_templates = true, excluded_templates_golem = true,
+	bans = true, ban_types = true, animation = true, animations = true,
+	power_name = true, type = true, template_name = true,
+	render = true, sound_events = true, sound = true, info = true,
 }
 
 local function find_template_references(value, entities, output, depth, seen)
@@ -238,7 +251,7 @@ local function find_template_references(value, entities, output, depth, seen)
 
 	for key, item in pairs(value) do
 		-- Target filters identify beneficiaries/enemies, not owned entities.
-		if key ~= "allowed_templates" and key ~= "excluded_templates" and key ~= "excluded_templates_golem" then
+		if not non_reference_keys[key] then
 			find_template_references(item, entities, output, depth - 1, seen)
 		end
 	end
@@ -246,13 +259,22 @@ local function find_template_references(value, entities, output, depth, seen)
 	seen[value] = nil
 end
 
+local script_names = {}
+
 local function summarize_reference(template)
 	local summary = {template_name = template.template_name}
+	summary.script_hooks = {}
+	for hook, fn in pairs(template.main_script or {}) do
+		if script_names[fn] then summary.script_hooks[hook] = script_names[fn] end
+	end
 	-- Some combat values/references live outside components (e.g. skeletons).
 	for key, value in pairs(template) do
 		if type(value) == "number" or type(value) == "string" or type(value) == "boolean" then
 			summary[key] = value
 		end
+	end
+	for _, key in ipairs({"received_damage_factor_config", "inflicted_damage_factor_config"}) do
+		if template[key] then summary[key] = copy_jsonable(template[key], 3) end
 	end
 
 	for _, component_name in ipairs(reference_components) do
@@ -363,6 +385,17 @@ local function load_hero_index()
 end
 
 local function build_raw_export(entity_db)
+	for name, script in pairs(require("game_scripts")) do
+		if type(script) == "table" then
+			for hook, fn in pairs(script) do
+				if type(fn) == "function" then
+					script_names[fn] = script_names[fn] or {}
+					table.insert(script_names[fn], name .. "." .. hook)
+				end
+			end
+		end
+	end
+	for _, names in pairs(script_names) do table.sort(names) end
 	local settings = require("game_settings")
 	local localization = load_lua_table("_assets/kr1-desktop/strings/zh-Hans.lua")
 	local i18n = require("i18n")
