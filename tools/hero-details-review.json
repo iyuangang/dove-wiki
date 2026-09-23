@@ -1,0 +1,8 @@
+{
+  "version": "2.0.7.7",
+  "files": {
+    "kr1/heroes.lua": "d7f8be28e04e54e501435a0bf7af936b81cdf76c8c4acb219b1b82c87290f1b6",
+    "kr1/hero_scripts.lua": "02cfadadd176a2a8e346bb3a1b41a7f77b8e3f7b5c572a440c2b38a75ba9412f",
+    "all/script_utils.lua": "ee0a090546d5cc47e530e12cedc83aecd0b20f6d19306f3c23c0faf3aa30a7b3"
+  }
+}
