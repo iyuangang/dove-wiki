@@ -4,17 +4,20 @@ import { Badge } from '../components/ui/badge'
 import { Button } from '../components/ui/button'
 import type { Hero, SupportEffect } from '../types'
 
-const props = defineProps<{ heroes: Hero[]; effects: SupportEffect[] }>()
+const props = defineProps<{ heroes: Hero[]; effects: SupportEffect[]; dataVersion: string }>()
 
 const query = ref('')
 const sourceGame = ref(0)
 const supportOnly = ref(false)
+const movementFilter = ref('')
+const movementOptions = computed(() => [...new Set(props.heroes.flatMap((hero) => hero.details.movement.tags))])
 const selectedHero = ref<Hero | null>(null)
 const profileLabels = ['耐久', '近战', '远程', '技能']
 const sourceNames: Record<number, string> = {
   1: '王国保卫战',
   2: '前线',
   3: '起源',
+  4: '复仇',
   5: '联盟',
 }
 const supportByHero = computed(() => {
@@ -33,11 +36,14 @@ const filteredHeroes = computed(() => {
   return props.heroes.filter((hero) => {
     if (sourceGame.value && hero.sourceGame !== sourceGame.value) return false
     if (supportOnly.value && !supportByHero.value.has(hero.id)) return false
+    if (movementFilter.value && !hero.details.movement.tags.includes(movementFilter.value)) return false
     return !needle || [
       hero.name,
       hero.id,
       ...hero.specialties,
       ...hero.abilities.map((ability) => ability.description),
+      hero.details.movement.label,
+      ...hero.details.items.flatMap((item) => [item.title, item.summary, ...item.facts]),
     ].some((text) => text.toLowerCase().includes(needle))
   })
 })
@@ -81,7 +87,8 @@ onBeforeUnmount(() => {
       <div>
         <div class="eyebrow"><span></span> HERO HALL</div>
         <h1>英雄殿堂<em>档案</em></h1>
-        <p>按游戏英雄殿堂顺序整理 {{ heroes.length }} 位英雄。点击英雄可查看完整属性、技能说明与成长节点；可影响防御塔的英雄已接入辅助计算台。</p>
+        <p>按游戏英雄殿堂顺序整理 {{ heroes.length }} 位英雄。查看移动方式、调动条件、实战特性、技能说明与成长节点；可影响防御塔的英雄已接入辅助计算台。</p>
+        <p class="hero-behavior-note">英雄档案来源：游戏 v{{ dataVersion }}。飞行筛选仅包含常驻飞行英雄；技能解锁后的移动能力也会列入对应分类。</p>
       </div>
       <div class="hero-support-callout">
         <strong>{{ supportByHero.size }}</strong>
@@ -92,7 +99,7 @@ onBeforeUnmount(() => {
 
     <section class="hero-toolbar">
       <label class="hero-search">
-        <span>搜索英雄、内部 ID、定位或技能说明</span>
+        <span>搜索英雄、技能、移动方式或特性</span>
         <input v-model="query" type="search" placeholder="例如：迪纳斯 / 远程 / hero_denas" />
       </label>
       <label>
@@ -102,6 +109,13 @@ onBeforeUnmount(() => {
           <option v-for="game in sourceGames" :key="game" :value="game">
             {{ sourceNames[game] || `作品 ${game}` }}
           </option>
+        </select>
+      </label>
+      <label>
+        <span>移动方式</span>
+        <select v-model="movementFilter">
+          <option value="">全部移动方式</option>
+          <option v-for="movement in movementOptions" :key="movement" :value="movement">{{ movement }}</option>
         </select>
       </label>
       <Button
@@ -116,7 +130,7 @@ onBeforeUnmount(() => {
 
     <div class="hero-results-line">
       <span>显示 {{ filteredHeroes.length }} / {{ heroes.length }} 位英雄</span>
-      <button v-if="query || sourceGame || supportOnly" type="button" @click="query = ''; sourceGame = 0; supportOnly = false">清除筛选</button>
+      <button v-if="query || sourceGame || supportOnly || movementFilter" type="button" @click="query = ''; sourceGame = 0; supportOnly = false; movementFilter = ''">清除筛选</button>
     </div>
 
     <div class="hero-grid">
@@ -140,6 +154,7 @@ onBeforeUnmount(() => {
               <span>初始 Lv.{{ hero.startingLevel }}</span>
             </div>
             <p class="hero-description">{{ hero.description }}</p>
+            <p class="hero-movement-label">{{ hero.details.movement.label }} <span>基础移速 {{ hero.details.movement.baseSpeed ?? '—' }}</span></p>
 
             <div class="hero-specialties">
               <span v-for="specialty in hero.specialties" :key="specialty">{{ specialty }}</span>
@@ -205,6 +220,57 @@ onBeforeUnmount(() => {
             <div><dt>满级伤害</dt><dd>{{ damageLabel(selectedHero) }}</dd></div>
             <div><dt>技能数量</dt><dd>{{ selectedHero.abilities.length }}</dd></div>
           </dl>
+
+          <section class="hero-detail-section">
+            <div class="hero-detail-title">
+              <strong>移动与基础行为</strong>
+              <small>{{ selectedHero.details.movement.label }}</small>
+            </div>
+            <dl class="hero-behavior-stats">
+              <div><dt>基础移速</dt><dd>{{ selectedHero.details.movement.baseSpeed ?? '—' }} <small>游戏距离 / 秒</small></dd></div>
+              <div><dt>基础复活等待</dt><dd>{{ selectedHero.details.respawnSeconds ?? '—' }} 秒</dd></div>
+              <div><dt>回血周期参数</dt><dd>{{ selectedHero.details.regenInterval ?? '—' }} 秒</dd></div>
+              <div><dt>受击后回血等待参数</dt><dd>{{ selectedHero.details.regenHitDelay ?? '—' }} 秒</dd></div>
+            </dl>
+            <p class="hero-behavior-note">模板基准值，未计升级、变身与外部增益。复活还有动作耗时，特殊复活机制可覆盖基础等待；回血周期仅在恢复逻辑运行时累计，不能据此视为战斗中每秒回血。</p>
+            <div class="hero-behavior-attacks">
+              <div v-for="attack in selectedHero.details.attacks" :key="attack.kind">
+                <strong>{{ attack.kind }}主攻击</strong>
+                <span>冷却 {{ attack.cooldown ?? '—' }} 秒 · {{ attack.kind === '近战' ? '接敌距离' : '射程' }} {{ attack.range ?? '—' }}</span>
+                <span v-if="attack.minRange != null">最短射程 {{ attack.minRange }}</span>
+                <small v-if="attack.disabled">模板默认未启用</small>
+              </div>
+            </div>
+            <p class="hero-behavior-note">主攻击指对应攻击列表的首项，冷却不含走位与动作耗时；特殊脚本可能使用独立攻击逻辑。</p>
+            <details class="unit-source">
+              <summary>基础参数与寻路依据</summary>
+              <p>默认可经过：{{ selectedHero.details.movement.terrain.join('、') || '未提供' }}</p>
+              <p>默认可选目的地：{{ selectedHero.details.movement.destinations.join('、') || '未提供' }}</p>
+              <p>以上为模板地形许可，实际落点还受地图与关卡限制；技能解锁后的变化见下方条目。</p>
+              <code v-for="source in selectedHero.details.sources" :key="source.symbol">{{ source.file }}:{{ source.line ?? '?' }} · {{ source.symbol }}</code>
+            </details>
+          </section>
+
+          <section class="hero-detail-section">
+            <div class="hero-detail-title">
+              <strong>移动机制与实战特性</strong>
+              <small>{{ selectedHero.details.items.length }} 条已核实 · v{{ selectedHero.details.reviewedVersion }}</small>
+            </div>
+            <p class="hero-behavior-note">根据实际行为脚本整理；这里列出已核实的机制，未收录不代表没有其他特性。特殊移动不等同于常驻飞行。</p>
+            <p v-if="selectedHero.details.pending.length" class="hero-behavior-note">源码已变动，以下说明等待重新核实：{{ selectedHero.details.pending.join('、') }}</p>
+            <div class="hero-trait-list">
+              <article v-for="item in selectedHero.details.items" :key="item.id">
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.summary }}</p>
+                <ul v-if="item.facts.length"><li v-for="fact in item.facts" :key="fact">{{ fact }}</li></ul>
+                <details class="unit-source">
+                  <summary>查看源码依据</summary>
+                  <code v-for="source in item.sources" :key="source.file + source.symbol">{{ source.file }}:{{ source.line ?? '?' }} · {{ source.symbol }}</code>
+                </details>
+              </article>
+            </div>
+            <p v-if="!selectedHero.details.items.length && !selectedHero.details.pending.length" class="hero-behavior-note">已提供模板移动参数；本英雄专属被动尚未逐项核实。</p>
+          </section>
 
           <section class="hero-detail-section">
             <div class="hero-detail-title">

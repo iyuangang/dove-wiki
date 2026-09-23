@@ -603,6 +603,11 @@ local function build_raw_export(entity_db)
 				ranged = copy_jsonable(template.ranged, 7),
 				timed_attacks = copy_jsonable(template.timed_attacks, 7)
 			}
+			record.behavior = summarize_reference(template)
+			for _, key in ipairs({"nav_grid", "teleport", "transfer", "fly_to", "treewalk", "cloudwalk", "flywalk", "slimewalk", "burrow", "passive_charge", "selfdestruct", "vis", "revive", "timed_attacks"}) do
+				record.behavior[key] = copy_jsonable(template[key], 7)
+			end
+			record.behavior.is_flying = template.vis and bit_lib.band(template.vis.flags or 0, F_FLYING) ~= 0 or false
 		end
 
 		heroes[#heroes + 1] = record

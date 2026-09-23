@@ -12,7 +12,13 @@
       "英雄增益按游戏脚本的峰值生效状态计算；持续时间、冷却和触发条件单独标注。",
       "基础 DPS 是单目标理论值；范围伤害、召唤物与技能效果单独理解。",
       "兵营塔的增距结果表示集结范围。"
-    ]
+    ],
+    "heroSnapshot": {
+      "gameVersion": "2.0.7.7",
+      "commitHash": "d6dbb4e2da9b48d3e3702f45989b57e98cc28b89",
+      "generatedAt": "2026-09-23T06:16:00.780Z",
+      "sourceRoot": "D:\\KingdomRushDove-Windows-Cycle2-v0.1.5\\KingdomRushDove"
+    }
   },
   "summary": {
     "towerCount": 94,
@@ -2832,6 +2838,92 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 90,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 65,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_gerald\"",
+                "line": 30
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_gerald =",
+                "line": 197
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          },
+          {
+            "id": "boss-dodge",
+            "title": "对首领的格挡限制",
+            "summary": "首领来源的攻击，在通常的格挡判定外还有一次额外检查。",
+            "facts": [
+              "额外检查通过概率为 50%；这不是最终格挡率，仍要结合技能提供的格挡概率。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_gerald\"",
+                "line": 30
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_gerald =",
+                "line": 197
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_gerald\"",
+            "line": 30
+          }
+        ]
       }
     },
     {
@@ -2954,6 +3046,99 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 144,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 40,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 0.4,
+            "range": 185,
+            "minRange": 40,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_alleria\"",
+                "line": 213
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_alleria =",
+                "line": 530
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          },
+          {
+            "id": "pet-rally",
+            "title": "调动时带领宠物",
+            "summary": "更改集结点时，会为已召唤的野猫一同设置新的目标位置。",
+            "facts": [
+              "只作用于已经存在的宠物；调动指令本身不会额外召唤宠物。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_alleria\"",
+                "line": 213
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_alleria =",
+                "line": 530
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_alleria\"",
+            "line": 213
+          }
+        ]
       }
     },
     {
@@ -3046,6 +3231,72 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 78,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1.2,
+            "range": 65,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_malik\"",
+                "line": 884
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_malik =",
+                "line": 3902
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_malik\"",
+            "line": 884
+          }
+        ]
       }
     },
     {
@@ -3139,6 +3390,72 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 81,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 25,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_bolin\"",
+                "line": 400
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_bolin =",
+                "line": 1907
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_bolin\"",
+            "line": 400
+          }
+        ]
       }
     },
     {
@@ -3239,6 +3556,85 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "步行 / 传送",
+          "tags": [
+            "地面",
+            "传送"
+          ],
+          "baseSpeed": 36,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 45,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 1.1,
+            "range": 175,
+            "minRange": 50,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "teleport",
+            "title": "远距离传送",
+            "summary": "改变集结点时，依据当前位置与目标点的直线距离判断是否传送。",
+            "facts": [
+              "距离严格大于 45 时触发；距离不足时使用近距离移动。",
+              "传送过程包含出发与到达动画，不能用基础移速计算总耗时。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_magnus\"",
+                "line": 592
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_magnus =",
+                "line": 4620
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.hero_will_teleport(",
+                "line": 793
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_magnus\"",
+            "line": 592
+          }
+        ]
       }
     },
     {
@@ -3327,6 +3723,72 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 120,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 0.8,
+            "range": 70,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_ignus\"",
+                "line": 753
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_ignus =",
+                "line": 6406
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_ignus\"",
+            "line": 753
+          }
+        ]
       }
     },
     {
@@ -3419,6 +3881,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 81,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": null,
+            "range": 45,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 0.633,
+            "range": 175,
+            "minRange": 45,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_denas\"",
+                "line": 1003
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_denas =",
+                "line": 2394
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_denas\"",
+            "line": 1003
+          }
+        ]
       }
     },
     {
@@ -3507,6 +4042,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 105,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1.5,
+            "range": 45,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 1.333,
+            "range": 166.4,
+            "minRange": 23.04,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_elora\"",
+                "line": 1352
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_elora =",
+                "line": 5864
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_elora\"",
+            "line": 1352
+          }
+        ]
       }
     },
     {
@@ -3599,6 +4207,72 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 96,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 83.2,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_ingvar\"",
+                "line": 1207
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_ingvar =",
+                "line": 6197
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_ingvar\"",
+            "line": 1207
+          }
+        ]
       }
     },
     {
@@ -3695,6 +4369,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 84,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1.2,
+            "range": 65,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 7.567,
+            "range": 150,
+            "minRange": 0,
+            "disabled": true
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_hacksaw\"",
+                "line": 1651
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_hacksaw =",
+                "line": 6104
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_hacksaw\"",
+            "line": 1651
+          }
+        ]
       }
     },
     {
@@ -3805,6 +4552,93 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 96,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 65,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_oni\"",
+                "line": 1528
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_oni =",
+                "line": 6726
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          },
+          {
+            "id": "oni-missing-health",
+            "title": "失血增伤与减伤",
+            "summary": "按当前已损失生命比例，动态增加伤害加值并降低受伤倍率。",
+            "facts": [
+              "伤害加值 = 已损失生命比例 × 当前技能的狂怒上限；受伤倍率减量 = 已损失生命比例 × 当前技能的不屈上限。",
+              "以当前血量持续重算；回血后这两项收益会随之降低。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_oni\"",
+                "line": 1528
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_oni =",
+                "line": 6726
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_oni\"",
+            "line": 1528
+          }
+        ]
       }
     },
     {
@@ -3893,6 +4727,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 90,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 65,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 10.433,
+            "range": 250,
+            "minRange": 0,
+            "disabled": true
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_thor\"",
+                "line": 1753
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_thor =",
+                "line": 6916
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_thor\"",
+            "line": 1753
+          }
+        ]
       }
     },
     {
@@ -3981,6 +4888,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "步行 / 传送",
+          "tags": [
+            "地面",
+            "传送"
+          ],
+          "baseSpeed": 48,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1.35,
+            "range": 55,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "teleport",
+            "title": "远距离传送",
+            "summary": "改变集结点时，依据当前位置与目标点的直线距离判断是否传送。",
+            "facts": [
+              "距离严格大于 55 时触发；距离不足时使用近距离移动。",
+              "传送过程包含出发与到达动画，不能用基础移速计算总耗时。",
+              "巨人形态期间关闭传送；调动距离大于 200 时会先结束巨人形态，恢复传送，并按剩余变身时间补偿冷却。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_10yr\"",
+                "line": 1898
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_10yr =",
+                "line": 7008
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.hero_will_teleport(",
+                "line": 793
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_10yr\"",
+            "line": 1898
+          }
+        ]
       }
     },
     {
@@ -4128,6 +5108,73 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "沙化移动",
+          "tags": [
+            "地面",
+            "变形加速"
+          ],
+          "baseSpeed": 90,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": null,
+            "range": 80,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "transfer",
+            "title": "沙化移动",
+            "summary": "调动距离大于 90 时使用移动形态。",
+            "facts": [
+              "基础移速增加 60，无外部增益时为 150。",
+              "移动形态期间忽略伤害，到达后恢复原移速。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_alric\"",
+                "line": 2543
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_alric =",
+                "line": 1717
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_alric\"",
+            "line": 2543
+          }
+        ]
       }
     },
     {
@@ -4270,6 +5317,100 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 75,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 0.9,
+            "range": 45,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 0.5,
+            "range": 140,
+            "minRange": 25,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_mirage\"",
+                "line": 2121
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_mirage =",
+                "line": 825
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          },
+          {
+            "id": "swiftness",
+            "title": "迅捷同时改变移动与动作",
+            "summary": "迅捷升级会提高自身移速和近战接敌距离，并调整角色动作帧率。",
+            "facts": [
+              "各次技能升级的移速倍率为 1.4 / 1.3 / 1.2，按升级触发顺序乘入当前数值。",
+              "因此模板基础移速不代表满级实际移速，攻击动作耗时也不能只看冷却字段。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_mirage\"",
+                "line": 2121
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_mirage =",
+                "line": 825
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_mirage\"",
+            "line": 2121
+          }
+        ]
       }
     },
     {
@@ -4412,6 +5553,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 80,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 83.2,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 5.4,
+            "range": 140,
+            "minRange": 25,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_pirate\"",
+                "line": 3495
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_pirate =",
+                "line": 5594
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_pirate\"",
+            "line": 3495
+          }
+        ]
       }
     },
     {
@@ -4581,6 +5795,85 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "步行 / 传送",
+          "tags": [
+            "地面",
+            "传送"
+          ],
+          "baseSpeed": 45,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 45,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 1.5,
+            "range": 130,
+            "minRange": 25,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "teleport",
+            "title": "远距离传送",
+            "summary": "改变集结点时，依据当前位置与目标点的直线距离判断是否传送。",
+            "facts": [
+              "距离严格大于 45 时触发；距离不足时使用近距离移动。",
+              "传送过程包含出发与到达动画，不能用基础移速计算总耗时。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_wizard\"",
+                "line": 2333
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_wizard =",
+                "line": 1389
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.hero_will_teleport(",
+                "line": 793
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_wizard\"",
+            "line": 2333
+          }
+        ]
       }
     },
     {
@@ -4727,6 +6020,92 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 100,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 75,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_beastmaster\"",
+                "line": 2698
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_beastmaster =",
+                "line": 2924
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          },
+          {
+            "id": "pet-rally",
+            "title": "调动时带领宠物",
+            "summary": "更改集结点时，会围绕目标位置重新分配已召唤野猪的站位。",
+            "facts": [
+              "只作用于已经存在的宠物；调动指令本身不会额外召唤宠物。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_beastmaster\"",
+                "line": 2698
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_beastmaster =",
+                "line": 2924
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_beastmaster\"",
+            "line": 2698
+          }
+        ]
       }
     },
     {
@@ -4891,6 +6270,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 90,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1.45,
+            "range": 51.2,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 1.45,
+            "range": 140,
+            "minRange": 25,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_voodoo_witch\"",
+                "line": 5010
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_voodoo_witch =",
+                "line": 9003
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_voodoo_witch\"",
+            "line": 5010
+          }
+        ]
       }
     },
     {
@@ -5043,6 +6495,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 100,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 6,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 75,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 5.733,
+            "range": 125,
+            "minRange": 0,
+            "disabled": true
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_alien\"",
+                "line": 4570
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_alien =",
+                "line": 8449
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_alien\"",
+            "line": 4570
+          }
+        ]
       }
     },
     {
@@ -5220,6 +6745,72 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 120,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": null,
+            "range": 83.2,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_monk\"",
+                "line": 4837
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_monk =",
+                "line": 8642
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_monk\"",
+            "line": 4837
+          }
+        ]
       }
     },
     {
@@ -5354,6 +6945,72 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面 / 腾云移动",
+          "tags": [
+            "地面",
+            "变形加速"
+          ],
+          "baseSpeed": 108,
+          "terrain": [
+            "陆地",
+            "水面",
+            "不可步行区域",
+            "浅水",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": null,
+            "range": 64,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "travel-form",
+            "title": "腾云移动",
+            "summary": "普通战斗状态与赶路形态分开处理；赶路飞行不代表常驻飞行单位。",
+            "facts": [
+              "直线距离大于 300，或已生成的路径点含水面、浅水、不可步行地形时触发。",
+              "移速增加 108，无外部增益时为 216。",
+              "特殊移动结束后恢复原移速；可经过的地形与可选集结点分别受寻路规则限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_monkey_god\"",
+                "line": 5884
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_monkey_god =",
+                "line": 10137
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_monkey_god\"",
+            "line": 5884
+          }
+        ]
       }
     },
     {
@@ -5505,6 +7162,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 55,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1.3,
+            "range": 70,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 10.4,
+            "range": 300,
+            "minRange": 50,
+            "disabled": true
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_giant\"",
+                "line": 5459
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_giant =",
+                "line": 4934
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_giant\"",
+            "line": 5459
+          }
+        ]
       }
     },
     {
@@ -5657,6 +7387,77 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "常驻飞行",
+          "tags": [
+            "飞行"
+          ],
+          "baseSpeed": 90,
+          "terrain": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "远程",
+            "cooldown": 1.5,
+            "range": 140,
+            "minRange": 0,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "flying",
+            "title": "常驻飞行单位",
+            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
+            "facts": [
+              "基础导航忽略地面路径拐点，直接向目的地移动。",
+              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_dragon\"",
+                "line": 3759
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_dragon =",
+                "line": 7595
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_dragon\"",
+            "line": 3759
+          }
+        ]
       }
     },
     {
@@ -5799,6 +7600,87 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "步行 / 技能传送",
+          "tags": [
+            "地面",
+            "传送"
+          ],
+          "baseSpeed": 90,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 51.2,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 1.233,
+            "range": 160,
+            "minRange": 25,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "teleport",
+            "title": "光翼传送",
+            "summary": "改变集结点时，依据当前位置与目标点的直线距离判断是否传送。",
+            "facts": [
+              "光翼技能解锁后启用（英雄 Lv.1）；初始模板不具备传送能力。",
+              "距离严格大于 51.2 时触发；距离不足时使用近距离移动。",
+              "传送过程包含出发与到达动画，不能用基础移速计算总耗时。",
+              "出发点与到达点均调用光翼增益逻辑。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_priest\"",
+                "line": 2983
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_priest =",
+                "line": 4096
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.hero_will_teleport(",
+                "line": 793
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_priest\"",
+            "line": 2983
+          }
+        ]
       }
     },
     {
@@ -5909,6 +7791,72 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 81,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 80,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_dwarf\"",
+                "line": 6114
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_dwarf =",
+                "line": 17282
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_dwarf\"",
+            "line": 6114
+          }
+        ]
       }
     },
     {
@@ -6061,6 +8009,72 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 90,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": null,
+            "range": 64,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_minotaur\"",
+                "line": 5659
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_minotaur =",
+                "line": 9723
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_minotaur\"",
+            "line": 5659
+          }
+        ]
       }
     },
     {
@@ -6194,6 +8208,76 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "步行 / 技能潜地",
+          "tags": [
+            "地面",
+            "潜地"
+          ],
+          "baseSpeed": 60,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": null,
+            "range": 83.2,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 9,
+            "range": 256,
+            "minRange": 0,
+            "disabled": true
+          }
+        ],
+        "items": [
+          {
+            "id": "burrow",
+            "title": "技能潜地",
+            "summary": "潜地技能解锁后，调动距离大于 100 时入地赶路。",
+            "facts": [
+              "英雄 Lv.1 首次解锁；未解锁时步行。",
+              "入地时增加 40 基础移速，随后还会按技能等级加速。",
+              "解锁后可经过水面和浅水；目标集结点仍使用独立的地面限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_crab\"",
+                "line": 5257
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_crab =",
+                "line": 9227
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_crab\"",
+            "line": 5257
+          }
+        ]
       }
     },
     {
@@ -6346,6 +8430,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 105,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 0.983,
+            "range": 51.2,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 1.45,
+            "range": 140,
+            "minRange": 50,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_van_helsing\"",
+                "line": 4105
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_van_helsing =",
+                "line": 3369
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_van_helsing\"",
+            "line": 4105
+          }
+        ]
       }
     },
     {
@@ -6498,6 +8655,77 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "常驻飞行",
+          "tags": [
+            "飞行"
+          ],
+          "baseSpeed": 100,
+          "terrain": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "远程",
+            "cooldown": 1.3,
+            "range": 120,
+            "minRange": 0,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "flying",
+            "title": "常驻飞行单位",
+            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
+            "facts": [
+              "基础导航忽略地面路径拐点，直接向目的地移动。",
+              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_dracolich\"",
+                "line": 3163
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_dracolich =",
+                "line": 5164
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_dracolich\"",
+            "line": 3163
+          }
+        ]
       }
     },
     {
@@ -6595,6 +8823,73 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面 / 蝙蝠飞行",
+          "tags": [
+            "地面",
+            "变形加速"
+          ],
+          "baseSpeed": 60,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 0.9,
+            "range": 80,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "bat-flight",
+            "title": "蝙蝠赶路",
+            "summary": "调动距离大于 80 时变成蝙蝠。",
+            "facts": [
+              "移速从 60 切换为 135；到达后恢复。",
+              "变形赶路时忽略伤害；正常作战仍按地面英雄处理。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_vampiress\"",
+                "line": 4444
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_vampiress =",
+                "line": 8249
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_vampiress\"",
+            "line": 4444
+          }
+        ]
       }
     },
     {
@@ -6778,6 +9073,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 110,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": null,
+            "range": 67.5,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 0.8,
+            "range": 215,
+            "minRange": 67.5,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_elves_archer\"",
+                "line": 6242
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_elves_archer =",
+                "line": 10461
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_elves_archer\"",
+            "line": 6242
+          }
+        ]
       }
     },
     {
@@ -6934,6 +9302,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 90,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 50,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 1.5,
+            "range": 160,
+            "minRange": 20,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_arivan\"",
+                "line": 7733
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_arivan =",
+                "line": 13644
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_arivan\"",
+            "line": 7733
+          }
+        ]
       }
     },
     {
@@ -7090,6 +9531,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "步行 / 传送",
+          "tags": [
+            "地面",
+            "传送"
+          ],
+          "baseSpeed": 60,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1.7,
+            "range": 65,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "teleport",
+            "title": "远距离传送",
+            "summary": "改变集结点时，依据当前位置与目标点的直线距离判断是否传送。",
+            "facts": [
+              "距离严格大于 65 时触发；距离不足时使用近距离移动。",
+              "传送过程包含出发与到达动画，不能用基础移速计算总耗时。",
+              "额外隐藏等待 0.333 秒，不含动画时间。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_bravebark\"",
+                "line": 8372
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_bravebark =",
+                "line": 14562
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.hero_will_teleport(",
+                "line": 793
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_bravebark\"",
+            "line": 8372
+          }
+        ]
       }
     },
     {
@@ -7246,6 +9760,88 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "集结点传送",
+          "tags": [
+            "地面",
+            "传送"
+          ],
+          "baseSpeed": 81,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1.5,
+            "range": 65,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "xin-rally",
+            "title": "调动即传送",
+            "summary": "每次处理新的集结点，都在出发动画结束后直接移动到目标点。",
+            "facts": [
+              "这段调动逻辑没有最短距离阈值。",
+              "如果出发时正在阻挡敌人，会眩晕被阻挡目标，并生成短暂替身接替阻挡；本体到达后替身死亡。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_xin\"",
+                "line": 9083
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_xin =",
+                "line": 15642
+              }
+            ]
+          },
+          {
+            "id": "xin-cleanse",
+            "title": "驭体于灵状态清除异常",
+            "summary": "驭体于灵状态激活时，每隔约 10 帧检查并移除带毒、眩晕或流血标记的效果。",
+            "facts": [
+              "该检查位于未眩晕的行为分支；不能据此视为永久眩晕免疫。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_xin\"",
+                "line": 9083
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_xin =",
+                "line": 15642
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_xin\"",
+            "line": 9083
+          }
+        ]
       }
     },
     {
@@ -7411,6 +10007,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 82.5,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1.2,
+            "range": 72.5,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 12,
+            "range": 150,
+            "minRange": 0,
+            "disabled": true
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_elves_denas\"",
+                "line": 7528
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_elves_denas =",
+                "line": 13248
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_elves_denas\"",
+            "line": 7528
+          }
+        ]
       }
     },
     {
@@ -7567,6 +10236,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 66,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 2,
+            "range": 50,
+            "minRange": 0,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 1,
+            "range": 110,
+            "minRange": 45,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_rag\"",
+                "line": 9618
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_rag =",
+                "line": 16424
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_rag\"",
+            "line": 9618
+          }
+        ]
       }
     },
     {
@@ -7723,6 +10465,80 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "棱晶移动",
+          "tags": [
+            "地面",
+            "变形加速"
+          ],
+          "baseSpeed": 60,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": null,
+            "range": 75,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 17.5,
+            "range": 250,
+            "minRange": 75,
+            "disabled": true
+          }
+        ],
+        "items": [
+          {
+            "id": "transfer",
+            "title": "棱晶移动",
+            "summary": "调动距离大于 0 时使用移动形态。",
+            "facts": [
+              "基础移速增加 165，无外部增益时为 225。",
+              "移动形态期间忽略伤害，到达后恢复原移速。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_durax\"",
+                "line": 7366
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_durax =",
+                "line": 12900
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_durax\"",
+            "line": 7366
+          }
+        ]
       }
     },
     {
@@ -7879,6 +10695,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 105,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 40,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 0.95,
+            "range": 175,
+            "minRange": 20,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_catha\"",
+                "line": 8601
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_catha =",
+                "line": 14930
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_catha\"",
+            "line": 8601
+          }
+        ]
       }
     },
     {
@@ -8035,6 +10924,72 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 114,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": null,
+            "range": 65,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_regson\"",
+                "line": 6458
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_regson =",
+                "line": 10968
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_regson\"",
+            "line": 6458
+          }
+        ]
       }
     },
     {
@@ -8196,6 +11151,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 99,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 57.5,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 2,
+            "range": 170,
+            "minRange": 20,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_lilith\"",
+                "line": 8809
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_lilith =",
+                "line": 15274
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_lilith\"",
+            "line": 8809
+          }
+        ]
       }
     },
     {
@@ -8352,6 +11380,77 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "常驻飞行",
+          "tags": [
+            "飞行"
+          ],
+          "baseSpeed": 105,
+          "terrain": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 5,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "远程",
+            "cooldown": 1.567,
+            "range": 150,
+            "minRange": 0,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "flying",
+            "title": "常驻飞行单位",
+            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
+            "facts": [
+              "基础导航忽略地面路径拐点，直接向目的地移动。",
+              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_phoenix\"",
+                "line": 8060
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_phoenix =",
+                "line": 14249
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_phoenix\"",
+            "line": 8060
+          }
+        ]
       }
     },
     {
@@ -8531,6 +11630,77 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "常驻飞行",
+          "tags": [
+            "飞行"
+          ],
+          "baseSpeed": 198,
+          "terrain": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "远程",
+            "cooldown": 1,
+            "range": 150,
+            "minRange": 0,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "flying",
+            "title": "常驻飞行单位",
+            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
+            "facts": [
+              "基础导航忽略地面路径拐点，直接向目的地移动。",
+              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_faustus\"",
+                "line": 9343
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_faustus =",
+                "line": 16124
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_faustus\"",
+            "line": 9343
+          }
+        ]
       }
     },
     {
@@ -8682,6 +11852,85 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "步行 / 传送",
+          "tags": [
+            "地面",
+            "传送"
+          ],
+          "baseSpeed": 60,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 55,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 1.5,
+            "range": 165,
+            "minRange": 20,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "teleport",
+            "title": "远距离传送",
+            "summary": "改变集结点时，依据当前位置与目标点的直线距离判断是否传送。",
+            "facts": [
+              "距离严格大于 55 时触发；距离不足时使用近距离移动。",
+              "传送过程包含出发与到达动画，不能用基础移速计算总耗时。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_veznan\"",
+                "line": 7131
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_veznan =",
+                "line": 12547
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.hero_will_teleport(",
+                "line": 793
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_veznan\"",
+            "line": 7131
+          }
+        ]
       }
     },
     {
@@ -8833,6 +12082,72 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 99,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": null,
+            "range": 55,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_bruce\"",
+                "line": 9878
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_bruce =",
+                "line": 16843
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_bruce\"",
+            "line": 9878
+          }
+        ]
       }
     },
     {
@@ -8993,6 +12308,72 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 90,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": null,
+            "range": 60,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_lynn\"",
+                "line": 6634
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_lynn =",
+                "line": 11562
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_lynn\"",
+            "line": 6634
+          }
+        ]
       }
     },
     {
@@ -9144,6 +12525,98 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "常驻飞行",
+          "tags": [
+            "飞行"
+          ],
+          "baseSpeed": 54,
+          "terrain": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "远程",
+            "cooldown": 0.8,
+            "range": 150,
+            "minRange": 0,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "flying",
+            "title": "常驻飞行单位",
+            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
+            "facts": [
+              "基础导航忽略地面路径拐点，直接向目的地移动。",
+              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_wilbur\"",
+                "line": 6862
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_wilbur =",
+                "line": 12040
+              }
+            ]
+          },
+          {
+            "id": "engine-speed",
+            "title": "引擎影响飞行速度",
+            "summary": "升级时以基础引擎速度乘以当前引擎技能倍率，重新设置飞行速度。",
+            "facts": [
+              "引擎基准速度 54；技能倍率依次为 1.2 / 1.4 / 1.6。",
+              "倍率覆盖当前引擎系数，不是每升一级继续相乘。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_wilbur\"",
+                "line": 6862
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_wilbur =",
+                "line": 12040
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_wilbur\"",
+            "line": 6862
+          }
+        ]
       }
     },
     {
@@ -9254,6 +12727,94 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 99,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 55,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_bolverk\"",
+                "line": 10070
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_bolverk =",
+                "line": 17157
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          },
+          {
+            "id": "berserker",
+            "title": "残血缩短攻击冷却",
+            "summary": "生命比例越低，普通近战、第二近战招式与第一项定时技能的冷却越短。",
+            "facts": [
+              "冷却倍率 = 生命比例 × 0.5 + 0.5。",
+              "满血为 1 倍冷却，半血为 0.75 倍，濒死趋近 0.5 倍。",
+              "只改变上述攻击冷却，不代表伤害翻倍或所有技能都获得相同加速。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_bolverk\"",
+                "line": 10070
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_bolverk =",
+                "line": 17157
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_bolverk\"",
+            "line": 10070
+          }
+        ]
       }
     },
     {
@@ -9410,6 +12971,85 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "步行 / 传送",
+          "tags": [
+            "地面",
+            "传送"
+          ],
+          "baseSpeed": 105,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": null,
+            "range": 72,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 2,
+            "range": 205,
+            "minRange": 150,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "teleport",
+            "title": "远距离传送",
+            "summary": "改变集结点时，依据当前位置与目标点的直线距离判断是否传送。",
+            "facts": [
+              "距离严格大于 144 时触发；距离不足时使用近距离移动。",
+              "传送过程包含出发与到达动画，不能用基础移速计算总耗时。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "E:register_t(\"hero_vesper\"",
+                "line": 13989
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_vesper =",
+                "line": 28098
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.hero_will_teleport(",
+                "line": 793
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "E:register_t(\"hero_vesper\"",
+            "line": 13989
+          }
+        ]
       }
     },
     {
@@ -9566,6 +13206,68 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "步行 / 条件跳跃",
+          "tags": [
+            "地面",
+            "跳跃"
+          ],
+          "baseSpeed": 60,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 2,
+            "range": 72,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "raelyn-jump",
+            "title": "按横向距离跳跃",
+            "summary": "目标点与当前位置的横向距离大于 125 且小于 300 时，调动改为跳跃。",
+            "facts": [
+              "检查的是横向距离绝对值，不是直线距离；恰好 125 或 300 时不触发。",
+              "其余距离走通用移动逻辑；跳跃耗时受动作帧率影响。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_raelyn\"",
+                "line": 10940
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_raelyn =",
+                "line": 20213
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_raelyn\"",
+            "line": 10940
+          }
+        ]
       }
     },
     {
@@ -9722,6 +13424,76 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面 / 树行移动",
+          "tags": [
+            "地面",
+            "变形加速"
+          ],
+          "baseSpeed": 75,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 72,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 1.5,
+            "range": 180,
+            "minRange": 68,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "travel-form",
+            "title": "树行移动",
+            "summary": "普通战斗状态与赶路形态分开处理；赶路飞行不代表常驻飞行单位。",
+            "facts": [
+              "直线距离大于 75，或已生成的路径点含水面、浅水、不可步行地形时触发。",
+              "移速增加 95，无外部增益时为 170。",
+              "特殊移动结束后恢复原移速；可经过的地形与可选集结点分别受寻路规则限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "E:register_t(\"hero_muyrn\"",
+                "line": 14304
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_muyrn =",
+                "line": 28663
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "E:register_t(\"hero_muyrn\"",
+            "line": 14304
+          }
+        ]
       }
     },
     {
@@ -9878,6 +13650,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 75,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 2,
+            "range": 72,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": null,
+            "range": 0,
+            "minRange": 0,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_builder\"",
+                "line": 15443
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_builder =",
+                "line": 32156
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_builder\"",
+            "line": 15443
+          }
+        ]
       }
     },
     {
@@ -10034,6 +13879,76 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面 / 迷雾移动",
+          "tags": [
+            "地面",
+            "变形加速"
+          ],
+          "baseSpeed": 75,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 0.8,
+            "range": 72,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 1,
+            "range": 250,
+            "minRange": 72,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "travel-form",
+            "title": "迷雾移动",
+            "summary": "普通战斗状态与赶路形态分开处理；赶路飞行不代表常驻飞行单位。",
+            "facts": [
+              "直线距离大于 90，或已生成的路径点含水面、浅水、不可步行地形时触发。",
+              "移速增加 95，无外部增益时为 170。",
+              "特殊移动结束后恢复原移速；可经过的地形与可选集结点分别受寻路规则限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_hunter\"",
+                "line": 10272
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_hunter =",
+                "line": 17522
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_hunter\"",
+            "line": 10272
+          }
+        ]
       }
     },
     {
@@ -10190,6 +14105,70 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面 / 黏液移动",
+          "tags": [
+            "地面",
+            "变形加速"
+          ],
+          "baseSpeed": 75,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 72,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "travel-form",
+            "title": "黏液移动",
+            "summary": "普通战斗状态与赶路形态分开处理；赶路飞行不代表常驻飞行单位。",
+            "facts": [
+              "直线距离大于 72，或已生成的路径点含水面、浅水、不可步行地形时触发。",
+              "移速增加 95，无外部增益时为 170。",
+              "特殊移动结束后恢复原移速；可经过的地形与可选集结点分别受寻路规则限制。",
+              "已处于战斗变身状态时，不进入黏液赶路形态。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_venom\"",
+                "line": 11282
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_venom =",
+                "line": 20726
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_venom\"",
+            "line": 11282
+          }
+        ]
       }
     },
     {
@@ -10346,6 +14325,77 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "常驻飞行",
+          "tags": [
+            "飞行"
+          ],
+          "baseSpeed": 120,
+          "terrain": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "远程",
+            "cooldown": 1.5,
+            "range": 200,
+            "minRange": 0,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "flying",
+            "title": "常驻飞行单位",
+            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
+            "facts": [
+              "基础导航忽略地面路径拐点，直接向目的地移动。",
+              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_bird\"",
+                "line": 16205
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_bird =",
+                "line": 34050
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_bird\"",
+            "line": 16205
+          }
+        ]
       }
     },
     {
@@ -10502,6 +14552,112 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "步行 / 传送",
+          "tags": [
+            "地面",
+            "传送"
+          ],
+          "baseSpeed": 90,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 72.5,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 1.5,
+            "range": 160,
+            "minRange": 68,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "teleport",
+            "title": "远距离传送",
+            "summary": "改变集结点时，依据当前位置与目标点的直线距离判断是否传送。",
+            "facts": [
+              "距离严格大于 72.5 时触发；距离不足时使用近距离移动。",
+              "传送过程包含出发与到达动画，不能用基础移速计算总耗时。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_space_elf\"",
+                "line": 10563
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_space_elf =",
+                "line": 19085
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.hero_will_teleport(",
+                "line": 793
+              }
+            ]
+          },
+          {
+            "id": "transfer",
+            "title": "近距离形态移动",
+            "summary": "调动距离大于 0 时使用移动形态。",
+            "facts": [
+              "基础移速增加 1，无外部增益时为 91。",
+              "移动形态期间忽略伤害，到达后恢复原移速。",
+              "达到传送阈值时优先使用传送。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_space_elf\"",
+                "line": 10563
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_space_elf =",
+                "line": 19085
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_space_elf\"",
+            "line": 10563
+          }
+        ]
       }
     },
     {
@@ -10658,6 +14814,72 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 50,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "远程",
+            "cooldown": 2,
+            "range": 250,
+            "minRange": 0,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_mecha\"",
+                "line": 17291
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_mecha =",
+                "line": 36077
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_mecha\"",
+            "line": 17291
+          }
+        ]
       }
     },
     {
@@ -10818,6 +15040,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面 / 喷气飞行",
+          "tags": [
+            "地面",
+            "变形加速"
+          ],
+          "baseSpeed": 45,
+          "terrain": [
+            "陆地",
+            "水面",
+            "不可步行区域",
+            "浅水",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 72,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": null,
+            "range": 0,
+            "minRange": 0,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "travel-form",
+            "title": "喷气飞行",
+            "summary": "普通战斗状态与赶路形态分开处理；赶路飞行不代表常驻飞行单位。",
+            "facts": [
+              "直线距离大于 80，或已生成的路径点含水面、浅水、不可步行地形时触发。",
+              "移速增加 110，无外部增益时为 155。",
+              "特殊移动结束后恢复原移速；可经过的地形与可选集结点分别受寻路规则限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_robot\"",
+                "line": 15816
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_robot =",
+                "line": 32711
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_robot\"",
+            "line": 15816
+          }
+        ]
       }
     },
     {
@@ -10974,6 +15269,77 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "常驻飞行",
+          "tags": [
+            "飞行"
+          ],
+          "baseSpeed": 120,
+          "terrain": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "远程",
+            "cooldown": 1.8,
+            "range": 240,
+            "minRange": 0,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "flying",
+            "title": "常驻飞行单位",
+            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
+            "facts": [
+              "基础导航忽略地面路径拐点，直接向目的地移动。",
+              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_lumenir\"",
+                "line": 13044
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_lumenir =",
+                "line": 25694
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_lumenir\"",
+            "line": 13044
+          }
+        ]
       }
     },
     {
@@ -11135,6 +15501,97 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "常驻飞行",
+          "tags": [
+            "飞行"
+          ],
+          "baseSpeed": 100,
+          "terrain": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 0,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "远程",
+            "cooldown": 1,
+            "range": 220,
+            "minRange": 50,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "flying",
+            "title": "常驻飞行单位",
+            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
+            "facts": [
+              "基础导航忽略地面路径拐点，直接向目的地移动。",
+              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_dragon_gem\"",
+                "line": 11640
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_dragon_gem =",
+                "line": 21675
+              }
+            ]
+          },
+          {
+            "id": "travel-charge",
+            "title": "移动触发蓄能",
+            "summary": "一次调动完成后，实际起终点距离大于 250 时施加蓄能效果。",
+            "facts": [
+              "检查的是本次起终点距离，不是沿途累计路程；短距离反复移动不会直接累加到阈值。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_dragon_gem\"",
+                "line": 11640
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_dragon_gem =",
+                "line": 21675
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_dragon_gem\"",
+            "line": 11640
+          }
+        ]
       }
     },
     {
@@ -11291,6 +15748,82 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 180,
+          "terrain": [
+            "陆地",
+            "水面",
+            "不可步行区域",
+            "浅水",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 72,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 1.5,
+            "range": 200,
+            "minRange": 50,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_witch\"",
+                "line": 12050
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_witch =",
+                "line": 23258
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_witch\"",
+            "line": 12050
+          }
+        ]
       }
     },
     {
@@ -11452,6 +15985,77 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "常驻飞行",
+          "tags": [
+            "飞行"
+          ],
+          "baseSpeed": 130,
+          "terrain": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "远程",
+            "cooldown": 2,
+            "range": 220,
+            "minRange": 0,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "flying",
+            "title": "常驻飞行单位",
+            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
+            "facts": [
+              "基础导航忽略地面路径拐点，直接向目的地移动。",
+              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_dragon_bone\"",
+                "line": 12522
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_dragon_bone =",
+                "line": 24538
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_dragon_bone\"",
+            "line": 12522
+          }
+        ]
       }
     },
     {
@@ -11608,6 +16212,72 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面 / 腾云移动",
+          "tags": [
+            "地面",
+            "变形加速"
+          ],
+          "baseSpeed": 80,
+          "terrain": [
+            "陆地",
+            "水面",
+            "不可步行区域",
+            "浅水",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": null,
+            "range": 100,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "travel-form",
+            "title": "腾云移动",
+            "summary": "普通战斗状态与赶路形态分开处理；赶路飞行不代表常驻飞行单位。",
+            "facts": [
+              "直线距离大于 150，或已生成的路径点含水面、浅水、不可步行地形时触发。",
+              "移速乘以 2.2，无外部增益时为 176。",
+              "特殊移动结束后恢复原移速；可经过的地形与可选集结点分别受寻路规则限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_wukong\"",
+                "line": 13664
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_wukong =",
+                "line": 26850
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_wukong\"",
+            "line": 13664
+          }
+        ]
       }
     },
     {
@@ -11764,6 +16434,98 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "常驻飞行",
+          "tags": [
+            "飞行"
+          ],
+          "baseSpeed": 130,
+          "terrain": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "远程",
+            "cooldown": 1.75,
+            "range": 300,
+            "minRange": 10,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "flying",
+            "title": "常驻飞行单位",
+            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
+            "facts": [
+              "基础导航忽略地面路径拐点，直接向目的地移动。",
+              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "E:register_t(\"hero_dragon_arb\"",
+                "line": 14760
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_dragon_arb =",
+                "line": 29767
+              }
+            ]
+          },
+          {
+            "id": "flight-easing",
+            "title": "飞行加速与减速",
+            "summary": "调动飞行有起步加速和接近目的地时的减速，实际行程并非恒速。",
+            "facts": [
+              "起步加速参数为 0.7 秒；距离目的地 50 以内切换为接近减速。",
+              "同方向连续改点会衔接上一段速度变化，不能简单按距离除以基础移速推算。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "E:register_t(\"hero_dragon_arb\"",
+                "line": 14760
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_dragon_arb =",
+                "line": 29767
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "E:register_t(\"hero_dragon_arb\"",
+            "line": 14760
+          }
+        ]
       }
     },
     {
@@ -11920,6 +16682,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 55,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1.25,
+            "range": 72,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 20,
+            "range": 150,
+            "minRange": 100,
+            "disabled": true
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_lava\"",
+                "line": 16616
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_lava =",
+                "line": 34764
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_lava\"",
+            "line": 16616
+          }
+        ]
       }
     },
     {
@@ -12076,6 +16911,87 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "步行 / 掘地转移",
+          "tags": [
+            "地面",
+            "传送"
+          ],
+          "baseSpeed": 90,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 75,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 1.5,
+            "range": 160,
+            "minRange": 68,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "teleport",
+            "title": "掘地转移",
+            "summary": "改变集结点时，依据当前位置与目标点的直线距离判断是否传送。",
+            "facts": [
+              "距离严格大于 180 时触发；距离不足时使用近距离移动。",
+              "传送过程包含出发与到达动画，不能用基础移速计算总耗时。",
+              "额外隐藏等待 0.4 秒，不含动画时间。",
+              "随后还有 0.35 秒接近阶段；到达后的掘地攻击须技能已启用。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_spider\"",
+                "line": 16957
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_spider =",
+                "line": 35402
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.hero_will_teleport(",
+                "line": 793
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_spider\"",
+            "line": 16957
+          }
+        ]
       }
     },
     {
@@ -12232,6 +17148,77 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "常驻飞行",
+          "tags": [
+            "飞行"
+          ],
+          "baseSpeed": 190,
+          "terrain": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "远程",
+            "cooldown": 1,
+            "range": 220,
+            "minRange": 0,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "flying",
+            "title": "常驻飞行单位",
+            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
+            "facts": [
+              "基础导航忽略地面路径拐点，直接向目的地移动。",
+              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_dragon_sun\"",
+                "line": 17973
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_dragon_sun =",
+                "line": 37247
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_dragon_sun\"",
+            "line": 17973
+          }
+        ]
       }
     },
     {
@@ -12393,6 +17380,77 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "常驻飞行",
+          "tags": [
+            "飞行"
+          ],
+          "baseSpeed": 90,
+          "terrain": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "远程",
+            "cooldown": 2,
+            "range": 220,
+            "minRange": 0,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "flying",
+            "title": "常驻飞行单位",
+            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
+            "facts": [
+              "基础导航忽略地面路径拐点，直接向目的地移动。",
+              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_eiskalt\"",
+                "line": 18177
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_eiskalt =",
+                "line": 38761
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_eiskalt\"",
+            "line": 18177
+          }
+        ]
       }
     },
     {
@@ -12554,6 +17612,77 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "常驻飞行",
+          "tags": [
+            "飞行"
+          ],
+          "baseSpeed": 55,
+          "terrain": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "远程",
+            "cooldown": 2,
+            "range": 200,
+            "minRange": 0,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "flying",
+            "title": "常驻飞行单位",
+            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
+            "facts": [
+              "基础导航忽略地面路径拐点，直接向目的地移动。",
+              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_dianyun\"",
+                "line": 19230
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_dianyun =",
+                "line": 40066
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_dianyun\"",
+            "line": 19230
+          }
+        ]
       }
     },
     {
@@ -12715,6 +17844,85 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "步行 / 传送",
+          "tags": [
+            "地面",
+            "传送"
+          ],
+          "baseSpeed": 75,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 0.8,
+            "range": 60,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 0.5,
+            "range": 200,
+            "minRange": 25,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "teleport",
+            "title": "远距离传送",
+            "summary": "改变集结点时，依据当前位置与目标点的直线距离判断是否传送。",
+            "facts": [
+              "距离严格大于 120 时触发；距离不足时使用近距离移动。",
+              "传送过程包含出发与到达动画，不能用基础移速计算总耗时。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_asra\"",
+                "line": 18548
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_asra =",
+                "line": 39345
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.hero_will_teleport(",
+                "line": 793
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_asra\"",
+            "line": 18548
+          }
+        ]
       }
     },
     {
@@ -12871,6 +18079,77 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "常驻飞行",
+          "tags": [
+            "飞行"
+          ],
+          "baseSpeed": 90,
+          "terrain": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "远程",
+            "cooldown": 1.5,
+            "range": 175,
+            "minRange": 0,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "flying",
+            "title": "常驻飞行单位",
+            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
+            "facts": [
+              "基础导航忽略地面路径拐点，直接向目的地移动。",
+              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_beresad\"",
+                "line": 18819
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_beresad =",
+                "line": 39578
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_beresad\"",
+            "line": 18819
+          }
+        ]
       }
     },
     {
@@ -13032,6 +18311,72 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 90,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 60,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_orc\"",
+                "line": 20107
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_orc =",
+                "line": 41447
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_orc\"",
+            "line": 20107
+          }
+        ]
       }
     },
     {
@@ -13193,6 +18538,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 65,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 30,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 1.8,
+            "range": 170,
+            "minRange": 30,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_oloch\"",
+                "line": 20353
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_oloch =",
+                "line": 41658
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_oloch\"",
+            "line": 20353
+          }
+        ]
       }
     },
     {
@@ -13358,6 +18776,73 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面 / 蝙蝠移动",
+          "tags": [
+            "地面",
+            "变形加速"
+          ],
+          "baseSpeed": 66,
+          "terrain": [
+            "陆地",
+            "水面",
+            "不可步行区域",
+            "浅水",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1.2,
+            "range": 80,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "travel-form",
+            "title": "蝙蝠移动",
+            "summary": "普通战斗状态与赶路形态分开处理；赶路飞行不代表常驻飞行单位。",
+            "facts": [
+              "直线距离大于 120，或已生成的路径点含水面、浅水、不可步行地形时触发。",
+              "移速乘以 2.5，无外部增益时为 165。",
+              "特殊移动结束后恢复原移速；可经过的地形与可选集结点分别受寻路规则限制。",
+              "强化状态期间不进入蝙蝠赶路形态。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_margosa\"",
+                "line": 20735
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_margosa =",
+                "line": 42038
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_margosa\"",
+            "line": 20735
+          }
+        ]
       }
     },
     {
@@ -13519,6 +19004,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 60,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 45,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 1.8,
+            "range": 150,
+            "minRange": 25,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_mortemis\"",
+                "line": 20978
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_mortemis =",
+                "line": 42553
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_mortemis\"",
+            "line": 20978
+          }
+        ]
       }
     },
     {
@@ -13680,6 +19238,79 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 55,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 2,
+            "range": 60,
+            "minRange": 0,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 10,
+            "range": 200,
+            "minRange": 25,
+            "disabled": true
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_jigou\"",
+                "line": 21334
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_jigou =",
+                "line": 43045
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_jigou\"",
+            "line": 21334
+          }
+        ]
       }
     },
     {
@@ -13845,6 +19476,76 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "奔跑 / 火箭跳",
+          "tags": [
+            "地面",
+            "跳跃"
+          ],
+          "baseSpeed": 81,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 25,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 1.5,
+            "range": 180,
+            "minRange": 25,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "tramin-jetpack",
+            "title": "长距离火箭跳",
+            "summary": "调动距离小于 160 时奔跑，否则使用喷气背包跳跃。",
+            "facts": [
+              "距离按集结中心与角色站位偏移校正后计算。",
+              "抛物线飞行阶段为 0.9 秒，不含起跳与落地动画。",
+              "起跳时清除饮酒效果。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_tramin\"",
+                "line": 21655
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_tramin =",
+                "line": 43440
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_tramin\"",
+            "line": 21655
+          }
+        ]
       }
     },
     {
@@ -14006,6 +19707,72 @@
         "roster": "kr1-desktop/data/map_data.lua → hero_data",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+      },
+      "details": {
+        "reviewedVersion": "2.0.7.7",
+        "movement": {
+          "label": "地面移动",
+          "tags": [
+            "地面"
+          ],
+          "baseSpeed": 75,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "远程",
+            "cooldown": 3,
+            "range": 140,
+            "minRange": 0,
+            "disabled": false
+          }
+        ],
+        "items": [
+          {
+            "id": "ground-navigation",
+            "title": "地面寻路",
+            "summary": "默认以地面单位的导航配置处理调动。",
+            "facts": [
+              "基础导航沿生成的路径点前进，实际路程可能长于两点直线距离。",
+              "途中可经过的地形与可选集结点分别限制。"
+            ],
+            "sources": [
+              {
+                "file": "kr1/heroes.lua",
+                "symbol": "RT(\"hero_tank\"",
+                "line": 21959
+              },
+              {
+                "file": "kr1/hero_scripts.lua",
+                "symbol": "scripts.hero_tank =",
+                "line": 43871
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_hero_new_rally(",
+                "line": 853
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "sources": [
+          {
+            "file": "kr1/heroes.lua",
+            "symbol": "RT(\"hero_tank\"",
+            "line": 21959
+          }
+        ]
       }
     }
   ],

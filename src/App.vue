@@ -16,6 +16,7 @@ import UpdateHistoryView from './views/UpdateHistoryView.vue'
 import type { Tower } from './types'
 
 const activeTab = ref<TabId>(tabFromHash(window.location.hash))
+const activeSnapshot = computed(() => activeTab.value === 'heroes' ? doveData.metadata.heroSnapshot || doveData.metadata : doveData.metadata)
 const mobileNavOpen = ref(false)
 const selectedTowerId = ref<string | null>(null)
 const selectedTower = computed<Tower | null>(() =>
@@ -136,7 +137,7 @@ function openTower(tower: Tower) {
 
       <Badge variant="outline" class="version-badge">
         <span class="status-dot"></span>
-        <span>Game v{{ doveData.metadata.gameVersion }}</span>
+        <span>Game v{{ activeSnapshot.gameVersion }}</span>
         <strong>Site {{ siteVersion }}</strong>
       </Badge>
     </header>
@@ -164,6 +165,7 @@ function openTower(tower: Tower) {
         v-else-if="activeTab === 'heroes'"
         :heroes="heroes"
         :effects="doveData.supportEffects"
+        :data-version="activeSnapshot.gameVersion"
       />
       <TechnologyView
         v-else-if="activeTab === 'technology'"
@@ -188,7 +190,7 @@ function openTower(tower: Tower) {
 
     <footer class="site-footer">
       <span>王国保卫战鸽子版 WIKI</span>
-      <span>站点 {{ siteVersion }} · 数据提交 {{ doveData.metadata.commitHash.slice(0, 8) }}</span>
+      <span>站点 {{ siteVersion }} · 数据提交 {{ activeSnapshot.commitHash.slice(0, 8) }}</span>
       <span>{{ doveData.summary.encyclopediaImageCount }} 套塔百科图 · {{ doveData.summary.enemyCount }} 个敌人槽位 · {{ doveData.summary.heroCount }} 位英雄 · {{ doveData.summary.technologyTreeCount }} 套科技方案</span>
     </footer>
 
