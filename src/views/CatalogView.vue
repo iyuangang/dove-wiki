@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { Search } from '@lucide/vue'
 import TowerCard from '../components/TowerCard.vue'
 import { familyLabels, unlockLabels } from '../data'
 import type { DoveData, Tower, TowerFamily, UnlockStatus } from '../types'
@@ -80,7 +81,7 @@ function resetFilters() {
   <section class="catalog-view page-width">
     <div class="catalog-hero">
       <div class="hero-copy">
-        <div class="eyebrow"><span></span> DOVE FIELD ARCHIVE / CYCLE 2</div>
+        <div class="eyebrow"><span></span> TOWER ARCHIVE / 防御塔图鉴</div>
         <h1>每一座塔，<em>都有据可查。</em></h1>
         <p>
           查询游戏原始伤害、射程、技能与解锁关卡；用多角色标签看清输出、控制与辅助定位。
@@ -110,9 +111,8 @@ function resetFilters() {
 
     <div class="catalog-toolbar">
       <label class="search-box">
-        <span aria-hidden="true">⌕</span>
-        <input v-model="search" type="search" placeholder="搜索名称、模板 ID、描述、标签或关卡…" />
-        <kbd>/</kbd>
+        <Search :size="18" aria-hidden="true" />
+        <input v-model="search" type="search" aria-label="搜索防御塔" placeholder="名称、技能、单位或实战特性…" />
       </label>
       <div class="filter-grid">
         <label>
@@ -149,7 +149,7 @@ function resetFilters() {
     </div>
 
     <div class="result-line">
-      <p>
+      <p role="status">
         找到 <strong>{{ filteredTowers.length }}</strong> 座塔
         <span v-if="sort === 'encyclopedia'"> · 按游戏百科顺序</span>
       </p>
@@ -160,7 +160,7 @@ function resetFilters() {
       <TowerCard v-for="tower in filteredTowers" :key="tower.id" :tower="tower" @open="$emit('open', $event)" />
     </div>
     <div v-else class="empty-state">
-      <span>⌕</span>
+      <Search :size="28" aria-hidden="true" />
       <h2>没有匹配的防御塔</h2>
       <p>尝试缩短关键词，或清除一个分类条件。</p>
       <button type="button" @click="resetFilters">重置全部筛选</button>

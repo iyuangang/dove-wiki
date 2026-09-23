@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { Castle, Skull, Swords, Sparkles, History, FlaskConical, Columns2, BookOpen } from '@lucide/vue'
 import DetailPanel from './components/DetailPanel.vue'
 import { Badge } from './components/ui/badge'
 import { Tabs, TabsList, TabsTrigger } from './components/ui/tabs'
@@ -16,6 +17,7 @@ import UpdateHistoryView from './views/UpdateHistoryView.vue'
 import type { Tower } from './types'
 
 const activeTab = ref<TabId>(tabFromHash(window.location.hash))
+const navIcons = { catalog: Castle, enemies: Skull, heroes: Swords, technology: Sparkles, updates: History, calculator: FlaskConical, compare: Columns2, data: BookOpen }
 const activeSnapshot = computed(() => activeTab.value === 'heroes' ? doveData.metadata.heroSnapshot || doveData.metadata : doveData.metadata)
 const mobileNavOpen = ref(false)
 const selectedTowerId = ref<string | null>(null)
@@ -84,10 +86,10 @@ function openTower(tower: Tower) {
   <Tabs v-model="activeTab" class="app-shell">
     <header class="site-header">
       <button class="brand" type="button" aria-label="返回塔典" @click="selectTab('catalog')">
-        <span class="brand-mark" aria-hidden="true"><span>Ⅱ</span></span>
+        <span class="brand-mark" aria-hidden="true"><Castle :size="24" :stroke-width="1.5" /></span>
         <span>
-          <strong>王国保卫战鸽子版 WIKI</strong>
-          <small>游戏百科 · 数据档案</small>
+          <strong>王国保卫战<span class="brand-edition">鸽子版</span></strong>
+          <small>DOVE WIKI · 游戏数据图鉴</small>
         </span>
       </button>
 
@@ -130,7 +132,7 @@ function openTower(tower: Tower) {
           :class="{ active: activeTab === tab.id }"
           @click="mobileNavOpen = false"
         >
-          <small>{{ tab.eyebrow }}</small>
+          <component :is="navIcons[tab.id]" :size="16" :stroke-width="1.7" aria-hidden="true" />
           <span>{{ tab.label }}</span>
         </TabsTrigger>
       </TabsList>
