@@ -59,6 +59,10 @@ export function inferTowerRoles(raw, tower, supportIds = new Map()) {
   // Script-only behavior comes from the fingerprint-checked mechanics review.
   const reviewed = new Map((tower.mechanics?.items || []).map((m) => [m.id, m]))
   if (reviewed.has('shaolin-control')) add('控制', '少林僧众普攻在满足条件时打断敌人；详见实战机制。', 'shaolin-control')
+  if (reviewed.has('archers-range')) add('增距辅助', '射程光环随塔间距离衰减；详见实战机制。', 'archers-range')
+  if (reviewed.has('archers-mark')) add('减益/破甲', '鹰之印记提高敌人受伤倍率，Boss 增幅减半。', 'archers-mark')
+  if (reviewed.has('wizard-empower')) add('增伤辅助', '知识卷轴给周围塔增加伤害倍率。', 'wizard-empower')
+  if (reviewed.has('knights-heroes')) add('增伤辅助', '骑士身边的英雄获得输出倍率增幅。', 'knights-heroes')
   for (const id of ['shaolin-distribution', 'high-elven-volley', 'sunray-sharing', 'dwaarp-control', 'furnace-penetration', 'tesla-chain', 'frankenstein-chain']) {
     if (reviewed.has(id)) add('范围伤害', '已核实攻击可分配至多个敌人或逐个结算范围内敌人。', id)
   }

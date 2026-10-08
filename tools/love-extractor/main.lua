@@ -1,5 +1,6 @@
 local game_root = os.getenv("DOVE_GAME_DIR")
 local raw_output = os.getenv("DOVE_RAW_OUTPUT")
+local error_output = os.getenv("DOVE_ERROR_OUTPUT")
 local portrait_output = os.getenv("DOVE_PORTRAIT_DIR")
 local encyclopedia_output = os.getenv("DOVE_ENCYCLOPEDIA_DIR")
 local skill_icon_output = os.getenv("DOVE_SKILL_ICON_DIR")
@@ -8,8 +9,19 @@ local enemy_output = os.getenv("DOVE_ENEMY_DIR")
 local technology_output = os.getenv("DOVE_TECHNOLOGY_DIR")
 local damage_icon_output = os.getenv("DOVE_DAMAGE_ICON_DIR")
 
-local function fail(message)
+local function report_error(message)
 	io.stderr:write("[dove-wiki] " .. message .. "\n")
+	if error_output and error_output ~= "" then
+		local output = io.open(error_output, "wb")
+		if output then
+			output:write(message .. "\n")
+			output:close()
+		end
+	end
+end
+
+local function fail(message)
+	report_error(message)
 	love.event.quit(1)
 end
 
@@ -192,6 +204,7 @@ local reference_components = {
 	"info",
 	"regen",
 	"pickpocket",
+	"powers",
 	"dodge",
 	"nav_rally",
 	"auras",
@@ -214,6 +227,7 @@ local reference_components = {
 	"spawn",
 	"spawner",
 	"timed",
+	"timed_attacks",
 	"tower",
 	"unit"
 }
@@ -273,7 +287,7 @@ local function summarize_reference(template)
 			summary[key] = value
 		end
 	end
-	for _, key in ipairs({"received_damage_factor_config", "inflicted_damage_factor_config"}) do
+	for _, key in ipairs({"received_damage_factor_config", "inflicted_damage_factor_config", "modifier_duration", "damage_min_conf", "damage_max_conf", "slow_factor_config", "stun_duration_config", "min_damage", "max_damage", "bullet_count"}) do
 		if template[key] then summary[key] = copy_jsonable(template[key], 3) end
 	end
 
@@ -293,6 +307,42 @@ local function load_lua_table(path)
 	end
 
 	return chunk()
+end
+
+local function load_atlas_table(path)
+	local base_path = join_path(game_root, path):gsub("%.lua$", "")
+	for _, extension in ipairs({".lua", ".bin", ".luac"}) do
+		local filename = base_path .. extension
+		local input = io.open(filename, "rb")
+		if input then
+			local contents = input:read("*a")
+			input:close()
+			local info
+			if contents:sub(1, 4) == "KRAB" then
+				-- Use the installed game's decoder for its packed atlas format.
+				info = assert(require("lib.klove.atlas_binary").unpack(contents))
+			else
+				info = assert(loadstring(contents, "@" .. filename))()
+			end
+			if not (info.keys and info.values and info.count) then return info end
+
+			local frames = {}
+			for index = 1, info.count do
+				local value = info.values[index]
+				local quad = value[2]
+				local frame = {
+					a_name = value[1],
+					f_quad = {quad[1], quad[2], quad[3], quad[4]},
+					a_size = {quad[5], quad[6]},
+					trim = value[3], ref_scale = value[4], size = value[5], alias = value[6]
+				}
+				frames[info.keys[index]] = frame
+				for _, alias in ipairs(value[6] or {}) do frames[alias] = frame end
+			end
+			return frames
+		end
+	end
+	error("missing atlas metadata (.lua, .bin or .luac): " .. path)
 end
 
 local function collect_menu_images(value, result, seen)
@@ -400,13 +450,13 @@ local function build_raw_export(entity_db)
 	local localization = load_lua_table("_assets/kr1-desktop/strings/zh-Hans.lua")
 	local i18n = require("i18n")
 	i18n.msgs[i18n.current_locale] = localization
-	local portrait_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/gui_portraits.lua")
-	local gui_icon_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/gui_ico.lua")
-	local encyclopedia_thumb_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/encyclopedia.lua")
-	local encyclopedia_detail_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/encyclopedia_creeps.lua")
+	local portrait_atlas = load_atlas_table("_assets/kr1-desktop/images/fullhd/gui_portraits.lua")
+	local gui_icon_atlas = load_atlas_table("_assets/kr1-desktop/images/fullhd/gui_ico.lua")
+	local encyclopedia_thumb_atlas = load_atlas_table("_assets/kr1-desktop/images/fullhd/encyclopedia.lua")
+	local encyclopedia_detail_atlas = load_atlas_table("_assets/kr1-desktop/images/fullhd/encyclopedia_creeps.lua")
 	local encyclopedia_index = load_encyclopedia_index()
-	local hero_room_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/hero_room.lua")
-	local upgrades_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/upgrades.lua")
+	local hero_room_atlas = load_atlas_table("_assets/kr1-desktop/images/fullhd/hero_room.lua")
+	local upgrades_atlas = load_atlas_table("_assets/kr1-desktop/images/fullhd/upgrades.lua")
 	local hero_index = load_hero_index()
 	local hero_skill_descriptions = load_lua_table(
 		"_assets/kr1-desktop/strings/hero_room_special.lua"
@@ -449,6 +499,8 @@ local function build_raw_export(entity_db)
 				barrack = copy_jsonable(template.barrack, 8),
 				info = copy_jsonable(template.info, 4),
 				powers = copy_jsonable(template.powers, 8),
+				rotation_time = template.rotation_time,
+				shooters_sids = copy_jsonable(template.shooters_sids, 2),
 				tower = copy_jsonable(template.tower, 5)
 			}
 
@@ -484,6 +536,11 @@ local function build_raw_export(entity_db)
 				reference_names.soldier_skeleton = true
 				reference_names.soldier_skeleton_knight = true
 			end
+			if tower_id == "tower_knights" then
+				reference_names.mod_knights_skill_a_soldier = true
+				reference_names.mod_knights_skill_a_hero = true
+			end
+			if tower_id == "tower_tricannon_lvl4" then reference_names.tower_tricannon_overheat_scorch_aura = true end
 			-- Resolve the game's own dynamic descriptions with the tower context.
 			-- Keep failures visible instead of silently deleting numeric expressions.
 			record.resolved_descriptions = {}
@@ -608,6 +665,16 @@ local function build_raw_export(entity_db)
 				record.behavior[key] = copy_jsonable(template[key], 7)
 			end
 			record.behavior.is_flying = template.vis and bit_lib.band(template.vis.flags or 0, F_FLYING) ~= 0 or false
+			-- Preserve skill controllers and referenced attacks without running combat code.
+			record.skill_references = {}
+			local skill_references = {}
+			find_template_references(template.hero.skills, entity_db.entities, skill_references, 8)
+			for _, component in ipairs({"melee", "ranged", "timed_attacks", "dodge"}) do
+				find_template_references(template[component], entity_db.entities, skill_references, 8)
+			end
+			for name in pairs(skill_references) do
+				record.skill_references[name] = copy_jsonable(entity_db.entities[name], 7)
+			end
 		end
 
 		heroes[#heroes + 1] = record
@@ -852,7 +919,7 @@ local function export_technology_icons(technology)
 end
 
 local function export_damage_type_icons()
-	local gui_common_atlas = load_lua_table("_assets/kr1-desktop/images/fullhd/gui_common.lua")
+	local gui_common_atlas = load_atlas_table("_assets/kr1-desktop/images/fullhd/gui_common.lua")
 	local image_cache = {}
 	local sprites = {
 		["true"] = "base_info_icons_true",
@@ -1040,7 +1107,7 @@ function love.load()
 	end, debug.traceback)
 
 	if not ok then
-		io.stderr:write(result .. "\n")
+		report_error(result)
 		return love.event.quit(1)
 	end
 

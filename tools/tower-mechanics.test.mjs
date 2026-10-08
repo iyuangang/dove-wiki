@@ -40,4 +40,42 @@ describe('机制的来源验证', () => {
       expect(definitions.every((item) => item.sources.length > 0)).toBe(true)
     }
   })
+
+  it('少林寺已审阅样例保留控制条件与分配公式，源码失效时撤下对应条目', () => {
+    const definitions = [...mechanicCatalog.tower_shaolin, damageRule(2)]
+    const files = new Map()
+    for (const definition of definitions) {
+      for (const [file, anchor] of definition.sources) {
+        if (file.endsWith('.bin')) {
+          const animations = files.get(file)?.animations || new Map()
+          animations.set(anchor, { frameCount: 8 })
+          files.set(file, { valid: true, animations })
+        } else files.set(file, { valid: true, text: `${files.get(file)?.text || ''}\n${anchor}\n` })
+      }
+    }
+    const raw = { id: 'tower_shaolin', template: { powers: { total: { base_count: 3 } } } }
+    const tower = { attack: { damageTypeValue: 2 } }
+    const review = { version: 'test', files }
+    const result = buildTowerMechanics(raw, tower, review)
+    expect(result.pending).toEqual([])
+    const control = result.items.find((item) => item.id === 'shaolin-control')
+    expect(control.summary).toContain('没有士兵阻挡')
+    expect(control.details.join(' ')).toContain('0.7 秒')
+    expect(control.sources.filter((s) => s.file.endsWith('.bin')).every((s) => s.line === null)).toBe(true)
+    expect(result.items.find((item) => item.id === 'shaolin-distribution').formula).toContain('ceil')
+    files.get('kr1/tower_scripts.lua').valid = false
+    const stale = buildTowerMechanics(raw, tower, review)
+    expect(stale.items.map((item) => item.id)).not.toContain('shaolin-control')
+    expect(stale.pending).toContain(control.title)
+    expect(stale.items.some((item) => item.kind === 'damage-rule')).toBe(true)
+  })
+
+  it('编译动画必须有解析后的准确动画键，文本出现同名字符串不足以通过', () => {
+    const definition = mechanicCatalog.tower_shaolin.find((d) => d.id === 'shaolin-control')
+    const files = new Map()
+    for (const [file, anchor] of definition.sources) files.set(file, { valid: true, text: `${files.get(file)?.text || ''}\n${anchor}` })
+    const result = buildTowerMechanics({ id: 'tower_shaolin' }, { attack: {} }, { version: 'test', files })
+    expect(result.pending).toContain(definition.title)
+    expect(result.items.some((i) => i.id === definition.id)).toBe(false)
+  })
 })

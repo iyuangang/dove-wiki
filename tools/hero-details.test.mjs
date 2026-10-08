@@ -11,6 +11,19 @@ function fixture(id, behavior = {}, skills = {}) {
   return { raw, review }
 }
 
+function reviewedDetails(id, behavior = {}, skills = {}) {
+  const { raw, review } = fixture(id, behavior, skills)
+  const result = buildHeroDetails(raw, review)
+  expect(result.pending, id).toEqual([])
+  return result
+}
+
+function facts(details, id) {
+  const item = details.items.find((item) => item.id === id)
+  expect(item, id).toBeDefined()
+  return item.facts.join(' ')
+}
+
 describe('英雄行为来源与移动分类', () => {
   it('英雄单独更新保留塔、敌人、科技、辅助与原始版本，不产生跨版本覆盖', () => {
     const previous = { metadata: { gameVersion: 'old' }, summary: { heroCount: 1, towerCount: 94 }, towers: [{ id: 'tower' }], enemies: [{ id: 'enemy' }], technologyTrees: [1], supportEffects: [2], validation: { warnings: [] } }
@@ -54,5 +67,71 @@ describe('英雄行为来源与移动分类', () => {
     const result = buildHeroDetails(raw, review)
     expect(result.items).toEqual([])
     expect(result.pending).toContain('常驻飞行单位')
+  })
+  it('浚湃的增伤阈值来自专属控制器，缺失控制器来源时撤下被动', () => {
+    const { raw, review } = fixture('hero_naga')
+    review.files.get('kr1/heroes.lua').text += '\nRT("controller_hero_naga_fight_to_win_or_die"'
+    review.files.get('kr1/hero_scripts.lua').text += '\nscripts.controller_hero_naga_fight_to_win_or_die ='
+    const result = buildHeroDetails(raw, review)
+    const passive = result.items.find((item) => item.id === 'naga-fight')
+    expect(passive.summary).toContain('严格低于最大生命的 80%')
+    expect(passive.summary).toContain('1.5')
+    review.files.get('kr1/hero_scripts.lua').text = 'scripts.hero_naga ='
+    const invalid = buildHeroDetails(raw, review)
+    expect(invalid.items.some((item) => item.id === 'naga-fight')).toBe(false)
+    expect(invalid.pending).toContain(passive.title)
+  })
+
+  it('已审阅样例区分常驻飞行与赶路形态，并计算变形移速', () => {
+    for (const id of ['hero_dragon', 'hero_phoenix']) {
+      expect(reviewedDetails(id, { is_flying: true }).movement.tags).toContain('飞行')
+    }
+    const monkey = reviewedDetails('hero_monkey_god', {
+      motion: { max_speed: 108 }, cloudwalk: { min_distance: 300, extra_speed: 108 },
+    })
+    expect(monkey.movement.tags).toEqual(['地面', '变形加速'])
+    expect(facts(monkey, 'travel-form')).toContain('300')
+    expect(facts(monkey, 'travel-form')).toContain('216')
+    const durax = reviewedDetails('hero_durax', {
+      motion: { max_speed: 60 }, transfer: { min_distance: 0, extra_speed: 165 },
+    })
+    expect(facts(durax, 'transfer')).toContain('225')
+    const groundForms = [
+      ['hero_vampiress', { motion: { max_speed: 60, max_speed_bat: 150 }, fly_to: { min_distance: 80 } }],
+      ['hero_margosa', { treewalk: { min_distance: 120, speed_factor: 2.5 } }],
+      ['hero_robot', { flywalk: { min_distance: 80, extra_speed: 110 } }],
+      ['hero_wukong', { flywalk: { min_distance: 150, extra_speed_mult: 2.2 } }],
+      ['hero_catha', { teleport: { min_distance: 200 } }],
+      ['hero_witch', { teleport: { min_distance: 200 } }],
+    ]
+    for (const [id, behavior] of groundForms) {
+      expect(reviewedDetails(id, behavior).movement.tags).not.toContain('飞行')
+    }
+  })
+
+  it('已审阅样例保留距离边界、横向判定、技能启用与形态限制', () => {
+    expect(facts(reviewedDetails('hero_raelyn'), 'raelyn-jump')).toContain('恰好 125 或 300 时不触发')
+    expect(facts(reviewedDetails('hero_10yr', { teleport: { min_distance: 200 } }), 'teleport')).toContain('距离大于 200')
+    expect(facts(reviewedDetails('hero_priest', { teleport: { disabled: true, min_distance: 51.2 } }, {
+      wingsoflight: { xp_level_steps: { 1: 1, 4: 2 } },
+    }), 'teleport')).toContain('Lv.1')
+    expect(facts(reviewedDetails('hero_crab', { burrow: { min_distance: 100, init_accel: 40 } }, {
+      burrow: { xp_level_steps: { 1: 1, 4: 2 } },
+    }), 'burrow')).toContain('Lv.1')
+    expect(facts(reviewedDetails('hero_venom', { slimewalk: { min_distance: 72, extra_speed: 95 } }), 'travel-form')).toContain('战斗变身')
+    expect(facts(reviewedDetails('hero_tramin', { max_dist_walk: 160, flight_time: 0.9 }), 'tramin-jetpack')).toContain('0.9 秒')
+    expect(facts(reviewedDetails('hero_xin'), 'xin-rally')).toContain('没有最短距离阈值')
+  })
+
+  it('已审阅样例使用残血冷却公式、引擎倍率与蓄能距离', () => {
+    expect(facts(reviewedDetails('hero_bolverk', { berserker_factor: 0.5 }), 'berserker')).toContain('半血为 0.75 倍')
+    const wilbur = reviewedDetails('hero_wilbur', {
+      is_flying: true, motion: { max_speed: 54, max_speed_base: 54 },
+    }, { engine: { speed_factor: [1.2, 1.4, 1.6] } })
+    expect(wilbur.movement.tags).toContain('飞行')
+    expect(facts(wilbur, 'engine-speed')).toContain('1.2 / 1.4 / 1.6')
+    expect(reviewedDetails('hero_oni').items.some((item) => item.id === 'oni-missing-health')).toBe(true)
+    const gem = reviewedDetails('hero_dragon_gem', { passive_charge: { distance_to_charge: 250 } })
+    expect(gem.items.find((item) => item.id === 'travel-charge').summary).toContain('250')
   })
 })
