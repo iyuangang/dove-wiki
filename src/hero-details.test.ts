@@ -5,6 +5,12 @@ import heroReview from '../tools/hero-details-review.json'
 const hero = (id: string) => heroes.find((h) => h.id === id)!
 
 describe('英雄详情数据回归', () => {
+  it('当前审阅提交的英雄机制全部完成复核，并保留浚湃低血量被动', () => {
+    const snapshotCommit = doveData.metadata.heroSnapshot?.commitHash || doveData.metadata.commitHash
+    if (snapshotCommit !== heroReview.gameCommit) return
+    expect(heroes.flatMap((h) => h.details.pending)).toEqual([])
+    expect(hero('hero_naga').details.items.find((item) => item.id === 'naga-fight')?.summary).toContain('80%')
+  })
   it('完整英雄名单保留来源可查的基础数据和实际审阅版本', () => {
     expect(heroes).toHaveLength(doveData.summary.heroCount)
     expect(new Set(heroes.map((h) => h.id)).size).toBe(heroes.length)

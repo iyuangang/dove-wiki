@@ -30,7 +30,9 @@ describe('游戏百科顺序与图像', () => {
       for (const item of tower.mechanics.items) {
         expect(tower.mechanics.pending, `${tower.id}:${item.id}`).not.toContain(item.title)
         expect(item.sources.length).toBeGreaterThan(0)
-        expect(item.sources.every((source) => source.line !== null && source.line > 0)).toBe(true)
+        expect(item.sources.every((source) => source.file.endsWith('.bin')
+          ? source.line === null && source.symbol.startsWith('shaolin_monk_lvl4_')
+          : source.line !== null && source.line > 0)).toBe(true)
         expect(item.sources.every((source) => source.file in mechanicReview.files)).toBe(true)
         expect(JSON.stringify(item)).not.toMatch(/NaN|undefined/)
       }
@@ -41,6 +43,27 @@ describe('游戏百科顺序与图像', () => {
       expect.arrayContaining(['普攻自带控制：条件与实际时长', '僧众分摊目标与集中攻击衰减']),
     )
     expect(towerById.get('tower_archer_1')!.mechanics.hasSpecificReview).toBe(false)
+  })
+  it('当前审阅提交的已有条目完成复核，四座新增塔保留专属机制', () => {
+    if (doveData.metadata.commitHash !== mechanicReview.gameCommit) return
+    expect(towers.flatMap((tower) => tower.mechanics.pending)).toEqual([])
+    for (const [id, required] of [
+      ['tower_catapult', ['catapult-direction', 'catapult-tar', 'catapult-extra-explosion', 'catapult-traps', 'catapult-ultimate']],
+      ['tower_archers', ['archers-rotation', 'archers-lines', 'archers-range', 'archers-mark', 'archers-haste']],
+      ['tower_wizard', ['wizard-double-bolt', 'wizard-firebook', 'wizard-empower', 'wizard-copies', 'wizard-ultimate']],
+      ['tower_knights', ['knights-heroes', 'knights-overheal', 'knights-fallen', 'knights-last-stand']],
+    ] as const) {
+      const tower = towerById.get(id)!
+      expect(tower.mechanics.hasSpecificReview, id).toBe(true)
+      expect(tower.mechanics.items.map((item) => item.id), id).toEqual(expect.arrayContaining([...required]))
+    }
+    expect(towerById.get('tower_archers')!.roles).toEqual(expect.arrayContaining(['增距辅助', '减益/破甲']))
+    expect(towerById.get('tower_wizard')!.roles).toContain('增伤辅助')
+    expect(towerById.get('tower_knights')!.roles).toContain('增伤辅助')
+    expect(towerById.get('tower_wizard')!.attack.scope).toContain('单枚')
+    const furnace = towerById.get('tower_melting_furnace')!.mechanics.items.find((item) => item.id === 'furnace-penetration')!
+    expect(furnace.details.join(' ')).toContain('不会再次乘冷却系数')
+    expect(towerById.get('tower_tricannon_lvl4')!.mechanics.items.some((item) => item.id === 'tricannon-overheat')).toBe(true)
   })
   it('所有塔技能保留连续等级、费用和已展开的对应等级说明', () => {
     for (const tower of towers) {

@@ -1,5 +1,6 @@
 // Human-reviewed behavior, read from the local Dove scripts. Text must describe
 // the actual branch conditions, not infer behavior from a template/skill name.
+import { newTowerMechanics } from './new-tower-mechanics.mjs'
 const TS = 'kr1/tower_scripts.lua'
 const AS = 'all/scripts.lua'
 const source = (file, anchor) => [file, anchor]
@@ -12,6 +13,7 @@ const text = (summary, ...details) => () => ({ summary, details })
 const sharedArmorSources = [source('all/systems/health.lua', 'elseif band(d.damage_type, DAMAGE_MAGICAL_ARMOR)'), source('all/script_utils.lua', 'function SU.magic_armor_inc')]
 
 export const mechanicCatalog = {
+  ...newTowerMechanics,
   tower_tesla: [entry('tesla-chain', '连锁数量、伤害倍率与重复目标', [tpl('engineer'), source('kr1/game_scripts.lua', 'function scripts.ray_tesla.update')], text('基础电弧可额外跳跃 2 次，即无特殊中继时最多触及 3 个不同目标；连锁技能每级再增加一次跳跃，满级最多 6 个目标。', '未计科技时，伤害计算使用 0.5 倍系数，后续跳跃保持这一倍率，不会每次再减半。工程效率科技会将该系数改为 1。', '连锁基础搜索距离 95，技能每级增加 5；同一条链共享已命中名单，不会反复电击同一个目标。附近目标不足时不会强行产生完整跳跃次数。', '雷神可以作为特殊中继并被治疗，且会修改连锁范围与次数；上述目标上限针对没有这种特殊中继的情况。'))],
   tower_frankenstein: [entry('frankenstein-chain', '连锁逐段衰减，也能治疗傀儡', [tpl('engineer'), source('kr1/game_scripts.lua', 'function scripts.ray_frankenstein.update')], text('无工程效率科技时，初次电击、第一次跳跃、第二次及之后跳跃的倍率为 100% / 75% / 50%；下限 50%。', '基础额外跳跃 2 次，闪电技能每级增加一次；同一条链不重复命中已经访问的单位。工程效率科技会让后续跳跃使用 100% 倍率。', '跳跃时先找可用雷神，再找最近的未命中敌人，最后才找弗兰奇。命中弗兰奇时恢复 10 点生命，不对它造成普通电击伤害。', '雷神中继有额外范围与次数规则，不能套用没有英雄中继时的普通目标上限。'))],
   tower_sparking_geode_lvl4: [entry('geode-low-count', '敌人较少时增伤，连续出手逐渐加速', [tpl('engineer'), source(TS, 'function scripts.tower_sparking_geode.update')], (t) => ({ summary: '发射时按当前候选敌人数调整倍率：1 / 2 / 3 / 至少 4 个敌人时，分别为 200% / 166.67% / 133.33% / 100%。', details: [`基础持续攻击分支的发射等待从接近 ${attack(t).ray_timing_max} 秒逐渐缩短至 ${attack(t).ray_timing_min} 秒，按本轮出手序号计算；没有攻速增益时第 ${t.template.attacks.attack_count_for_min_cooldown} 发达到最短等待。`, '前述等待不是整轮攻击的统一冷却；进入/退出动作、技能打断、目标离场和冷却增益都会影响实战节奏。'], formula: '少目标增伤倍率 = max(1, 1 + (4 − N) / 3)' }))],
@@ -27,7 +29,7 @@ export const mechanicCatalog = {
       details: ['同一轮落在同一目标上的前三击均为全额；第四、五、六击分别约为 70.71%、57.74%、50%。衰减在每轮分配目标时重新计算，不会跨轮累计。', '敌人越少，单个敌人分到的攻击越多；两名目标、六名僧众时各承受三击，均不衰减。候选目标数可能包含尚未被分配到攻击的敌人。', '这属于多名僧众分头攻击，不是单次命中后对周围造成溅射。上方基础伤害与 DPS 只代表一名僧众，整轮伤害见下方计算。'],
       formula: '第 i 名僧众：r = ceil(i / 目标数)，倍率 = 1 / √max(r − 2, 1)',
     })),
-    entry('shaolin-control', '普攻自带控制：条件与实际时长', [source(TS, 'scripts.decal_shaolin ='), source(TS, 'scripts.tower_shaolin ='), source('kr1/data/game_animations.lua', 'shaolin_monk_lvl4_punchIn ='), source('all/animation_db.lua', 'function animation_db:fn('), source('all/utils.lua', 'function U.y_animation_wait_default'), source('all/constants.lua', 'FPS = 30')], text(
+    entry('shaolin-control', '普攻自带控制：条件与实际时长', [source(TS, 'scripts.decal_shaolin ='), source(TS, 'scripts.tower_shaolin ='), ...['punchIn', 'punchOut', 'kickIn', 'kickOut', 'dragonPunchOut'].map((name) => source('kr1/data/game_animations.bin', `shaolin_monk_lvl4_${name}`)), source('all/animation_db.lua', 'function animation_db:fn('), source('all/utils.lua', 'function U.y_animation_wait_default'), source('all/constants.lua', 'FPS = 30')], text(
       '僧众出手前增加目标的眩晕计数，动作结束后解除；必须是可眩晕、非 Boss、且当前没有士兵阻挡的敌人。',
       '地面拳/踢动作均为 9 帧入场 + 8 帧退场，按默认 30 帧/秒估算，单名僧众约控制 0.567 秒。控制从出手开始，伤害在等待 6 帧后结算。',
       '同一目标的后续僧众每次错开 2 帧。无攻速增益、三名僧众围攻一个地面敌人时，重叠控制窗口约 (17 + 2×2) / 30 = 0.7 秒；六名时约 0.9 秒。这是动画推算值，并非固定 0.7 秒的状态效果。',
@@ -62,10 +64,16 @@ export const mechanicCatalog = {
   tower_entwood: [entry('entwood-bounce', '巨石弹跳衰减与基础减速', [tpl('engineer'), source(AS, 'scripts.bomb_bouncing ='), source('kr1/foundamental_towers.lua', 'tt = RT("mod_rock_slow"'), source('all/templates.lua', 'local mod_slow =')], (t) => ({ summary: `基础巨石落地后最多额外弹跳 ${ref(t,'rock_entwood').bounce_count} 次，弹跳伤害乘以 ${num(ref(t,'rock_entwood').bounce_factor*100)}%。`, details: ['只有附近找到可用目标时才弹跳；两次落点都能造成范围伤害，但不能把弹跳伤害无条件计入每次普攻。', '命中附加 0.75 秒减速，移动速度降至 50%。'] }))],
   tower_tricannon_lvl4: [entry('tricannon-volley', '三连炮与重复目标散布', [source(TS, 'function scripts.tower_tricannon.update'), tpl('engineer')], (t) => ({ summary: `一轮普攻发射 ${attack(t).bomb_amount} 枚炮弹，按候选敌人循环分配预判落点。`, details: [`同一轮再次分到同一个敌人，或目标已经丢失时，会额外加入横向最多 ${attack(t).random_x_to_dest}、纵向最多 ${attack(t).random_y_to_dest} 的随机落点偏移，再吸附到道路节点。`, '因此三枚炮弹不保证全部命中一个敌人；范围内敌人分布也会影响实际总伤害。'] }))],
   tower_spirit_mausoleum: [entry('mausoleum-storage', '空闲储存幽魂，再集中释放', [source(TS, 'function scripts.tower_spirit_mausoleum.update'), tpl('mage')], (t) => ({ summary: `未升级时最多储存 ${attack(t).max_charges} 枚幽魂弹；没有目标也会继续准备，达到上限才停止。`, details: ['有敌人时释放存弹，并根据预测剩余生命决定何时转向下一目标；单次面板伤害不代表整轮存弹爆发。', '储弹数量还可能被技能修改，以上是未购买技能的基准上限。'] }))],
-  tower_melting_furnace: [entry('furnace-penetration', '全范围普攻自带穿甲与眩晕', [source(TS, 'function scripts.tower_melting_furnace.update'), tpl('engineer'), source('all/utils.lua', 'function U.calc_protection')], (t) => ({ summary: `普攻逐个伤害范围内地面敌人；本次伤害忽略 ${num(attack(t).reduce_armor*100)} 个百分点的物理护甲，并附加 0.6 秒眩晕效果。`, details: ['穿甲写入本次伤害对象，不会永久降低敌人护甲供其他塔使用。眩晕仍受敌人对应免疫和状态处理约束。', `基础出伤前摇为 ${attack(t).hit_times[0]} 秒；燃料强化分支使用约 ${num(attack(t).hit_times[1])} 秒，均再乘塔的冷却系数。`] }))],
+  tower_melting_furnace: [entry('furnace-penetration', '全范围普攻自带穿甲与眩晕', [source(TS, 'function scripts.tower_melting_furnace.update'), tpl('engineer'), source('all/utils.lua', 'function U.calc_protection'), source('all/script_utils.lua', 'function SU.change_fps')], (t) => ({ summary: `普攻逐个伤害范围内地面敌人；本次伤害忽略 ${num(attack(t).reduce_armor*100)} 个百分点的物理护甲，并附加 0.6 秒眩晕效果。`, details: ['穿甲写入本次伤害对象，不会永久降低敌人护甲供其他塔使用。眩晕仍受敌人对应免疫和状态处理约束。', `基础出伤前摇为 ${num(attack(t).hit_times[0])} 秒；燃料强化分支使用约 ${num(attack(t).hit_times[1])} 秒。新版直接读取当前 hit_times；攻速增益由通用帧率缩放修改前摇，出伤分支不会再次乘冷却系数。`] }))],
   tower_blazing_watcher: [entry('blazing-ramp', '持续锁定升档，断开后重置', [source(TS, 'scripts.tower_blazing_watcher ='), source(TS, 'scripts.mod_tower_blazing_watcher_damage ='), tpl('mage')], text('持续攻击同一个目标会蓄能升档；无攻速增益时，超过 1.08 秒进入二档，超过 2.16 秒进入三档。', '实际伤害档位倍率为 1.375 / 2.25 / 3.125；购买对应蓄能技能后，超过 3.24 秒可进入四档，倍率为 4。', '蓄能按经过时间除以塔冷却系数累计，攻速影响升档速度。目标死亡、塔被封锁或光束被强制终止后，档位重置为一档。', '锁定后允许目标留在基础射程的 1.25 倍内，少量走出初始射程不会立即断开光束。'))],
   tower_rocket_riders: [entry('rocket-targeting', '引擎技能还会改变普攻选敌', [source(TS, 'function scripts.tower_rocket_riders.seek')], text('未购买引擎技能时按敌人距终点的路径节点数选敌；购买后改为评估目标后方的敌人分布。', '脚本统计与候选目标夹角差不超过 30°、且离发射点更远的敌人数量，选择得分最高的候选目标，以增加后续集束命中机会。', '因此升级后，即使攻击范围和面板伤害没变化，普攻的优先目标也可能改变。'), 'skill-interaction')],
 }
+
+mechanicCatalog.tower_tricannon_lvl4.push(entry('tricannon-overheat', '过热升级后持续附着，不再按旧冷却开启', [tpl('engineer'), source(TS, 'function scripts.tower_tricannon.update'), source('kr1/engineer_towers.lua', 'RT("tower_tricannon_overheat_scorch_aura"'), source(AS, 'function scripts.mod_dps.update')], (t) => {
+  const aura = ref(t, 'tower_tricannon_overheat_scorch_aura').aura
+  const m = ref(t, 'tower_tricannon_overheat_scorch_aura_mod')
+  return { summary: '过热等级大于 0 后，普攻与轰炸技能炮弹都会附带焦土光环；不再先开启一段临时过热状态。', details: [`焦土半径 ${aura.radius}，持续 ${aura.duration} 秒，反复施加燃烧；燃烧每 ${m.dps.damage_every} 秒结算 ${m.dps.damage_inc} × 技能等级点真实伤害，状态自身持续 ${m.modifier.duration} 秒，可刷新。`, '模板仍保留过热 cooldown 与 duration 配置，但新版更新脚本不读取它们来限制附着；不能再按这些旧字段折算覆盖率。'] }
+}, 'skill-interaction'))
 
 // Mirror U.calc_protection's precedence; modifiers on the numeric damage type
 // must not accidentally make a mixed flag look like plain magic/physical damage.
