@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process'
-import { existsSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import {
   mkdir,
   readFile,
@@ -9,7 +9,9 @@ import {
   writeFile,
 } from 'node:fs/promises'
 import { basename, dirname, join, relative, resolve } from 'node:path'
+import { homedir } from 'node:os'
 import { fileURLToPath } from 'node:url'
+import { resolveDovePaths } from './dove-paths.mjs'
 import { updateGameChangelog } from './game-changelog.mjs'
 import { buildPowerLevels, buildTowerUnits } from './tower-details.mjs'
 import { inferTowerRoles } from './tower-roles.mjs'
@@ -18,21 +20,21 @@ import { buildHeroDetails, loadHeroReview, mergeHeroSnapshot } from './hero-deta
 
 const toolsDir = dirname(fileURLToPath(import.meta.url))
 const projectRoot = resolve(toolsDir, '..')
-const defaultGameDir = 'D:\\KingdomRushDove-Windows-Cycle2-v0.1.5\\KingdomRushDove'
+const defaultGameDirs = [
+  join(process.env.LOCALAPPDATA || join(homedir(), 'AppData', 'Local'), '王国保卫战Dove版'),
+  'D:\\KingdomRushDove-Windows-Cycle2-v0.1.5\\KingdomRushDove',
+]
 
 function readOption(name) {
   const index = process.argv.indexOf(name)
   return index >= 0 ? process.argv[index + 1] : undefined
 }
 
-const gameDir = resolve(
-  readOption('--game-dir') || process.env.DOVE_GAME_DIR || defaultGameDir,
-)
-const loveExe = resolve(
-  readOption('--love-exe') || process.env.LOVE_EXE || join(gameDir, '..', 'lovec.exe'),
-)
+let gameDir
+let loveExe
 const rawDir = join(toolsDir, '.tmp')
 const rawPath = join(rawDir, 'dove-raw.json')
+const errorPath = join(rawDir, 'dove-error.log')
 const dataDir = join(projectRoot, 'src', 'data')
 const dataPath = join(dataDir, 'dove-data.json')
 const changelogPath = join(dataDir, 'game-changelog.json')
@@ -47,12 +49,6 @@ const enemyThumbDir = join(enemyDir, 'thumbs')
 const technologyDir = join(projectRoot, 'public', 'technologies')
 const damageIconDir = join(projectRoot, 'public', 'damage-types')
 
-function assertFile(path, label) {
-  if (!existsSync(path)) {
-    throw new Error(`${label}不存在：${path}`)
-  }
-}
-
 function run(command, args, options = {}) {
   const result = spawnSync(command, args, {
     cwd: options.cwd || projectRoot,
@@ -63,7 +59,10 @@ function run(command, args, options = {}) {
   })
 
   if (result.status !== 0) {
-    const details = options.quiet ? `\n${result.stderr || result.stdout || ''}` : ''
+    const diagnostic = result.error?.message ||
+      (options.errorPath && existsSync(options.errorPath) ? readFileSync(options.errorPath, 'utf8') : '') ||
+      (options.quiet ? result.stderr || result.stdout : '')
+    const details = diagnostic ? `\n${diagnostic}` : ''
     throw new Error(`${basename(command)} 执行失败（退出码 ${result.status}）${details}`)
   }
 
@@ -1113,8 +1112,13 @@ async function cleanupTechnologyImages(rawTechnology) {
 
 async function main() {
   const heroesOnly = process.argv.includes('--heroes-only')
-  assertFile(join(gameDir, 'kr1', 'game_settings.lua'), 'Dove 游戏目录')
-  assertFile(loveExe, 'Dove 自带 lovec.exe')
+  const paths = resolveDovePaths({
+    gameDir: readOption('--game-dir') || process.env.DOVE_GAME_DIR,
+    loveExe: readOption('--love-exe') || process.env.LOVE_EXE,
+    defaultGameDirs,
+  })
+  gameDir = paths.gameDir
+  loveExe = paths.loveExe
   const previousData = existsSync(dataPath)
     ? JSON.parse(await readFile(dataPath, 'utf8'))
     : null
@@ -1136,12 +1140,16 @@ async function main() {
   }
 
   console.log(`[dove-wiki] 读取游戏：${gameDir}`)
+  console.log(`[dove-wiki] LÖVE 运行时：${loveExe}`)
+  if (existsSync(errorPath)) await unlink(errorPath)
   run(loveExe, [join(toolsDir, 'love-extractor')], {
     cwd: dirname(loveExe),
+    errorPath,
     env: {
       ...process.env,
       DOVE_GAME_DIR: gameDir,
       DOVE_RAW_OUTPUT: rawPath,
+      DOVE_ERROR_OUTPUT: errorPath,
       DOVE_PORTRAIT_DIR: heroesOnly ? '' : portraitDir,
       DOVE_ENCYCLOPEDIA_DIR: heroesOnly ? '' : encyclopediaDir,
       DOVE_SKILL_ICON_DIR: heroesOnly ? '' : skillIconDir,

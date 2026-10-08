@@ -26,19 +26,21 @@ npm run preview
 
 ## 从 Dove 重新同步
 
-默认游戏目录是：
+默认优先查找当前用户的安装目录；未找到时仍兼容旧版的 `D:\KingdomRushDove-Windows-Cycle2-v0.1.5\KingdomRushDove`：
 
 ```text
-D:\KingdomRushDove-Windows-Cycle2-v0.1.5\KingdomRushDove
+%LOCALAPPDATA%\王国保卫战Dove版
 ```
 
 同步当前目录中的 Lua 模板、简体中文文本、解锁表、科技树、百科顺序和 DDS 图集：
 
 ```powershell
-npm run sync:dove -- --game-dir "D:\KingdomRushDove-Windows-Cycle2-v0.1.5\KingdomRushDove"
+npm run sync:dove -- --game-dir "$env:LOCALAPPDATA\王国保卫战Dove版"
 ```
 
-同步器使用游戏自带的 `lovec.exe` 展开模板继承并调用每座塔的 `info.fn`，然后生成：
+`--game-dir` 支持安装目录和内层 `KingdomRushDove` 源码目录，也支持路径末尾的斜杠。同步器优先使用游戏自带的 `lovec.exe`，新版安装包仅提供 `love.exe` 时会自动使用它，展开模板继承并调用每座塔的 `info.fn`，然后生成：
+
+图集描述支持旧版 `.lua`、新版 `.bin` 和 `.luac`；紧凑二进制由安装游戏自带的解码器读取。提取失败时，Lua 错误会显示在终端，并保存在 `tools/.tmp/dove-error.log`。
 
 - `src/data/dove-data.json`：浏览器使用的规范化数据和校验报告；
 - `src/data/game-changelog.json`：按游戏版本累计的结构化更新差异；
@@ -55,7 +57,7 @@ npm run sync:dove -- --game-dir "D:\KingdomRushDove-Windows-Cycle2-v0.1.5\Kingdo
 
 从旧版技能说明迁移到逐级数据时，不把模板表达式展开与说明匹配修正记为游戏技能文案调整；价格、等级和基础数值仍正常比较。后续两份快照均包含逐级数据时，恢复技能文案比较。
 
-如果 `lovec.exe` 不在游戏目录上一级，可额外传入 `--love-exe`。
+运行时会从源码目录和上一级目录查找；放在其他位置时，可额外传入 `--love-exe`。也可通过 `DOVE_GAME_DIR` 和 `LOVE_EXE` 环境变量指定路径。
 
 ## 数据口径
 
