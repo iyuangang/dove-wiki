@@ -204,6 +204,7 @@ local reference_components = {
 	"info",
 	"regen",
 	"pickpocket",
+	"powers",
 	"dodge",
 	"nav_rally",
 	"auras",
@@ -226,6 +227,7 @@ local reference_components = {
 	"spawn",
 	"spawner",
 	"timed",
+	"timed_attacks",
 	"tower",
 	"unit"
 }
@@ -285,7 +287,7 @@ local function summarize_reference(template)
 			summary[key] = value
 		end
 	end
-	for _, key in ipairs({"received_damage_factor_config", "inflicted_damage_factor_config"}) do
+	for _, key in ipairs({"received_damage_factor_config", "inflicted_damage_factor_config", "modifier_duration", "damage_min_conf", "damage_max_conf", "slow_factor_config", "stun_duration_config", "min_damage", "max_damage", "bullet_count"}) do
 		if template[key] then summary[key] = copy_jsonable(template[key], 3) end
 	end
 
@@ -497,6 +499,8 @@ local function build_raw_export(entity_db)
 				barrack = copy_jsonable(template.barrack, 8),
 				info = copy_jsonable(template.info, 4),
 				powers = copy_jsonable(template.powers, 8),
+				rotation_time = template.rotation_time,
+				shooters_sids = copy_jsonable(template.shooters_sids, 2),
 				tower = copy_jsonable(template.tower, 5)
 			}
 
@@ -532,6 +536,11 @@ local function build_raw_export(entity_db)
 				reference_names.soldier_skeleton = true
 				reference_names.soldier_skeleton_knight = true
 			end
+			if tower_id == "tower_knights" then
+				reference_names.mod_knights_skill_a_soldier = true
+				reference_names.mod_knights_skill_a_hero = true
+			end
+			if tower_id == "tower_tricannon_lvl4" then reference_names.tower_tricannon_overheat_scorch_aura = true end
 			-- Resolve the game's own dynamic descriptions with the tower context.
 			-- Keep failures visible instead of silently deleting numeric expressions.
 			record.resolved_descriptions = {}

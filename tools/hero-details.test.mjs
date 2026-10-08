@@ -68,6 +68,19 @@ describe('英雄行为来源与移动分类', () => {
     expect(result.items).toEqual([])
     expect(result.pending).toContain('常驻飞行单位')
   })
+  it('浚湃的增伤阈值来自专属控制器，缺失控制器来源时撤下被动', () => {
+    const { raw, review } = fixture('hero_naga')
+    review.files.get('kr1/heroes.lua').text += '\nRT("controller_hero_naga_fight_to_win_or_die"'
+    review.files.get('kr1/hero_scripts.lua').text += '\nscripts.controller_hero_naga_fight_to_win_or_die ='
+    const result = buildHeroDetails(raw, review)
+    const passive = result.items.find((item) => item.id === 'naga-fight')
+    expect(passive.summary).toContain('严格低于最大生命的 80%')
+    expect(passive.summary).toContain('1.5')
+    review.files.get('kr1/hero_scripts.lua').text = 'scripts.hero_naga ='
+    const invalid = buildHeroDetails(raw, review)
+    expect(invalid.items.some((item) => item.id === 'naga-fight')).toBe(false)
+    expect(invalid.pending).toContain(passive.title)
+  })
 
   it('已审阅样例区分常驻飞行与赶路形态，并计算变形移速', () => {
     for (const id of ['hero_dragon', 'hero_phoenix']) {

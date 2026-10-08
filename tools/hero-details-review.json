@@ -1,8 +1,11 @@
 {
-  "version": "2.0.7.7",
+  "version": "2.0.8.9",
   "files": {
-    "kr1/heroes.lua": "d7f8be28e04e54e501435a0bf7af936b81cdf76c8c4acb219b1b82c87290f1b6",
-    "kr1/hero_scripts.lua": "02cfadadd176a2a8e346bb3a1b41a7f77b8e3f7b5c572a440c2b38a75ba9412f",
-    "all/script_utils.lua": "ee0a090546d5cc47e530e12cedc83aecd0b20f6d19306f3c23c0faf3aa30a7b3"
-  }
+    "kr1/heroes.lua": "d70d8b4f879c1d898ff12ec13c5bb180f7e82088e6686145696416e49a286208",
+    "kr1/hero_scripts.lua": "22b4cfe4f8ec6b932d0c52d48f3c3a3af5e6573dad5c0dc65b1b70352acaeb99",
+    "all/script_utils.lua": "e29b1142b128df1ba436cb832a66df70aebce13510bc9c95f82ab13cfc051c9a"
+  },
+  "gameCommit": "45073448b340682d893dec553d495153108f186e",
+  "reviewedAt": "2026-10-08",
+  "audit": "docs/mechanics-review-2.0.8.9.md"
 }

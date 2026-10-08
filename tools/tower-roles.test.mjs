@@ -33,6 +33,11 @@ describe('防御塔定位依据', () => {
     expect(inferTowerRoles(raw(), tower()).roles).not.toContain('控制')
     expect(inferTowerRoles(raw(), tower({ mechanics: { items: [{ id: 'shaolin-control' }] } })).roles).toContain('控制')
   })
+  it('新增塔的辅助与易伤定位随有效审阅条目启用，不凭技能名字添加', () => {
+    const reviewed = tower({ mechanics: { items: [{ id: 'archers-range' }, { id: 'archers-mark' }, { id: 'wizard-empower' }, { id: 'knights-heroes' }] } })
+    expect(inferTowerRoles(raw(), reviewed).roles).toEqual(expect.arrayContaining(['增距辅助', '减益/破甲', '增伤辅助']))
+    expect(inferTowerRoles(raw(), tower()).roles).not.toEqual(expect.arrayContaining(['增距辅助', '减益/破甲', '增伤辅助']))
+  })
   it('金币特效不构成经济能力，实际零起始等级的偷窃参数可以', () => {
     expect(inferTowerRoles(raw({ pop_golden: {} }), tower()).roles).not.toContain('经济辅助')
     expect(inferTowerRoles(raw({ pick: { pickpocket: { steal_max: { 0: 3, 1: 4 } } } }), tower()).roles).toContain('经济辅助')

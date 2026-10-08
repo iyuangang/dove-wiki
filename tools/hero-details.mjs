@@ -175,6 +175,10 @@ export function buildHeroDetails(raw, review) {
   if (raw.id === 'hero_xin') add('xin-cleanse', '驭体于灵状态清除异常', '驭体于灵状态激活时，每隔约 10 帧检查并移除带毒、眩晕或流血标记的效果。', [
     '该检查位于未眩晕的行为分支；不能据此视为永久眩晕免疫。',
   ], own)
+  if (raw.id === 'hero_naga') add('naga-fight', '低于八成生命时增伤', '当前生命严格低于最大生命的 80% 时，自带控制器将输出倍率乘以 1.5。', [
+    '回到 80% 或以上时撤销这项倍率；连续处于低血量状态不会每帧重复相乘。',
+    '这是基础被动，无需购买技能；地面调动仍走通用英雄寻路。',
+  ], [...own, [TEMPLATE, 'RT("controller_hero_naga_fight_to_win_or_die"'], [SCRIPTS, 'scripts.controller_hero_naga_fight_to_win_or_die =']])
 
   // Attack entries are template parameters, not a simulated full-level DPS.
   const attacks = []
