@@ -1,7 +1,981 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-21T08:48:17.982Z",
+  "generatedAt": "2026-10-08T06:48:51.583Z",
   "releases": [
+    {
+      "id": "2.0.8.9-45073448b340",
+      "version": "2.0.8.9",
+      "previousVersion": "2.0.7.6",
+      "contentVersion": "5.6.12",
+      "commitHash": "45073448b340682d893dec553d495153108f186e",
+      "previousCommitHash": "01818eb55f3ed2898339975c153cce76a01d136d",
+      "detectedAt": "2026-10-08T06:48:51.583Z",
+      "summary": {
+        "changeCount": 73,
+        "categoryCounts": {
+          "hero": 1,
+          "tower": 14,
+          "enemy": 56,
+          "technology": 2
+        },
+        "kindCounts": {
+          "added": 60,
+          "removed": 1,
+          "balance": 4,
+          "content": 8
+        }
+      },
+      "changes": [
+        {
+          "id": "hero:hero_naga:added:main",
+          "category": "hero",
+          "kind": "added",
+          "entityId": "hero_naga",
+          "entityName": "浚湃",
+          "title": "新增英雄：浚湃",
+          "description": "新增可用英雄，包含 6 项能力。",
+          "image": "/heroes/thumbs/hero_naga.png",
+          "details": []
+        },
+        {
+          "id": "tower:tower_druid:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_druid",
+          "entityName": "大德鲁伊巨石阵",
+          "title": "数值调整防御塔：大德鲁伊巨石阵",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_druid.png",
+          "details": [
+            {
+              "field": "最低伤害",
+              "before": "32",
+              "after": "33",
+              "delta": "+1（+3.1%）",
+              "direction": "increase"
+            },
+            {
+              "field": "最高伤害",
+              "before": "54",
+              "after": "56",
+              "delta": "+2（+3.7%）",
+              "direction": "increase"
+            },
+            {
+              "field": "攻击间隔",
+              "before": "1.6667",
+              "after": "1.7",
+              "delta": "+0.0333（+2.0%）",
+              "direction": "increase"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_druid:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_druid",
+          "entityName": "大德鲁伊巨石阵",
+          "title": "内容调整防御塔：大德鲁伊巨石阵",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_druid.png",
+          "details": [
+            {
+              "field": "符文巨熊 · 技能说明",
+              "before": "呼唤1头拥有300点生命值、20点护甲、40点法抗与20-40点攻击力的符文巨熊。；呼唤2头拥有300点生命值、20点护甲、40点法抗与20-40点攻击力的符文巨熊。",
+              "after": "呼唤1头拥有300点生命值、21点护甲、40点法抗与20-40点攻击力的符文巨熊。；呼唤2头拥有300点生命值、21点护甲、40点法抗与20-40点攻击力的符文巨熊。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "森林诅咒 · 技能说明",
+              "before": "每隔12秒，诅咒一个敌人，使其每0.5秒受到5点伤害，并将所受全部伤害的23%传递给身边未被诅咒的敌人，持续6秒。若敌人死亡且诅咒仍在持续，诅咒效果会延长一秒，并转移到附近敌人身上。；每隔12秒，诅咒一个敌人，使其每0.5秒受到5点伤害，并将所受全部伤害的46%传递给身边未被诅咒的敌人，持续6秒。若敌人死亡且诅咒仍在持续，诅咒效果会延长一秒，并转移到附近敌人身上。；每隔12秒，诅咒一个敌人，使其每0.5秒受到5点伤害，并将所受全部伤害的69%传递给身边未被诅咒的敌人，持续6秒。若敌人死亡且诅咒仍在持续，诅咒效果会延长一秒，并转移到附近敌人身上。",
+              "after": "每隔12秒，诅咒一个敌人，使其每0.5秒受到5点伤害，并将所受全部伤害的23%传递给身边未被诅咒的敌人，持续6秒。若敌人死亡且诅咒仍在持续，诅咒效果会延长一秒，并转移到附近敌人身上。；每隔12秒，诅咒一个敌人，使其每0.5秒受到10点伤害，并将所受全部伤害的46%传递给身边未被诅咒的敌人，持续6秒。若敌人死亡且诅咒仍在持续，诅咒效果会延长一秒，并转移到附近敌人身上。；每隔12秒，诅咒一个敌人，使其每0.5秒受到15点伤害，并将所受全部伤害的69%传递给身边未被诅咒的敌人，持续6秒。若敌人死亡且诅咒仍在持续，诅咒效果会延长一秒，并转移到附近敌人身上。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_arcane_wizard_lvl4:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_arcane_wizard_lvl4",
+          "entityName": "奥术法师",
+          "title": "内容调整防御塔：奥术法师",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_arcane_wizard_lvl4.png",
+          "details": [
+            {
+              "field": "强化光环 · 技能说明",
+              "before": "使附近240范围内的防御塔伤害提高15%。；使附近240范围内的防御塔伤害提高25%。；使附近240范围内的防御塔伤害提高40%",
+              "after": "使附近240范围内的防御塔伤害提高15%。；使附近240范围内的防御塔伤害提高25%。；使附近240范围内的防御塔伤害提高40%。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_tricannon_lvl4:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_tricannon_lvl4",
+          "entityName": "三管加农炮",
+          "title": "内容调整防御塔：三管加农炮",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_tricannon_lvl4.png",
+          "details": [
+            {
+              "field": "猛烈轰炸 · 技能说明",
+              "before": "每隔15秒，在大范围内发射7枚炸弹，每枚造成21-45点爆炸伤害。；每隔15秒，在大范围内发射13枚炸弹，每枚造成27-59点爆炸伤害。；每隔15秒，在大范围内发射17枚炸弹，每枚造成33-73点爆炸伤害。",
+              "after": "每隔15秒，在大范围内发射14枚炸弹，每枚造成21-45点爆炸伤害。；每隔15秒，在大范围内发射26枚炸弹，每枚造成27-59点爆炸伤害。；每隔15秒，在大范围内发射34枚炸弹，每枚造成33-73点爆炸伤害。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "过热模式 · 技能说明",
+              "before": "每隔30秒，加农炮进入过载状态6秒，使炸弹灼烧地面，对敌人每秒造成10点真实伤害，可叠加5层，持续3秒。；每隔25秒，加农炮进入过载状态10秒，使炸弹灼烧地面，对敌人每秒造成10点真实伤害，可叠加5层，持续3秒。；每隔20秒，加农炮进入过载状态12秒，使炸弹灼烧地面，对敌人每秒造成10点真实伤害，可叠加5层，持续3秒。",
+              "after": "三管加农炮的炸弹能够灼烧地面，对敌人每秒造成10点真实伤害，持续3秒。；三管加农炮的炸弹能够灼烧地面，对敌人每秒造成20点真实伤害，持续3秒。；三管加农炮的炸弹能够灼烧地面，对敌人每秒造成30点真实伤害，持续3秒。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_demon_pit_lvl4:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_demon_pit_lvl4",
+          "entityName": "恶魔熔坑",
+          "title": "数值调整防御塔：恶魔熔坑",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_demon_pit_lvl4.png",
+          "details": [
+            {
+              "field": "攻击间隔",
+              "before": "4",
+              "after": "3.8",
+              "delta": "-0.2（-5.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_demon_pit_lvl4:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_demon_pit_lvl4",
+          "entityName": "恶魔熔坑",
+          "title": "内容调整防御塔：恶魔熔坑",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_demon_pit_lvl4.png",
+          "details": [
+            {
+              "field": "天降魔头 · 技能说明",
+              "before": "每隔33秒，召唤一个拥有100点生命值的大恶魔，其攻击可造成19-29点物理伤害。爆炸造成100点伤害。；每隔33秒，召唤一个拥有150点生命值的大恶魔，其攻击可造成28-42点物理伤害。爆炸造成175点伤害。；每隔33秒，召唤一个拥有200点生命值的大恶魔，其攻击可造成37-55点物理伤害。爆炸造成250点伤害。",
+              "after": "每隔30秒，召唤一个拥有100点生命值的大恶魔，其攻击可造成19-29点物理伤害。爆炸造成100点伤害。；每隔30秒，召唤一个拥有150点生命值的大恶魔，其攻击可造成28-42点物理伤害。爆炸造成175点伤害。；每隔30秒，召唤一个拥有200点生命值的大恶魔，其攻击可造成37-55点物理伤害。爆炸造成250点伤害。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_barrel_lvl4:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_barrel_lvl4",
+          "entityName": "酿酒战匠",
+          "title": "数值调整防御塔：酿酒战匠",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_barrel_lvl4.png",
+          "details": [
+            {
+              "field": "攻击间隔",
+              "before": "2.64",
+              "after": "2.6",
+              "delta": "-0.04（-1.5%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_barrel_lvl4:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_barrel_lvl4",
+          "entityName": "酿酒战匠",
+          "title": "内容调整防御塔：酿酒战匠",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_barrel_lvl4.png",
+          "details": [
+            {
+              "field": "劲爆秘饮 · 技能说明",
+              "before": "每隔27秒，酿酒战匠投掷一桶神秘饮品，在4秒内持续吸引75范围内的敌人，使他们受到50%减速效果，并每秒受到4点毒素伤害。吸引时间结束时，产生爆炸，造成80-120点物理伤害。；每隔24秒，酿酒战匠投掷一桶神秘饮品，在4秒内持续吸引75范围内的敌人，使他们受到50%减速效果，并每秒受到4点毒素伤害。吸引时间结束时，产生爆炸，造成130-200点物理伤害。；每隔21秒，酿酒战匠投掷一桶神秘饮品，在4秒内持续吸引75范围内的敌人，使他们受到50%减速效果，并每秒受到4点毒素伤害。吸引时间结束时，产生爆炸，造成180-280点物理伤害。",
+              "after": "每隔27秒，酿酒战匠投掷一桶神秘饮品，在4秒内持续吸引75范围内的敌人，使他们受到50%减速效果，并每秒受到4点毒素伤害。吸引时间结束时，产生爆炸，造成100-120点物理伤害。；每隔24秒，酿酒战匠投掷一桶神秘饮品，在4秒内持续吸引75范围内的敌人，使他们受到50%减速效果，并每秒受到4点毒素伤害。吸引时间结束时，产生爆炸，造成150-210点物理伤害。；每隔21秒，酿酒战匠投掷一桶神秘饮品，在4秒内持续吸引75范围内的敌人，使他们受到50%减速效果，并每秒受到4点毒素伤害。吸引时间结束时，产生爆炸，造成200-300点物理伤害。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "神奇药酒 · 技能说明",
+              "before": "每隔12秒，召唤一名喝下药酒，百毒不侵的战士，拥有300点生命值，每次攻击造成30-45点物理伤害。；每隔11秒，召唤一名喝下药酒，百毒不侵的战士，拥有375点生命值，每次攻击造成48-72点物理伤害。；每隔10秒，召唤一名喝下药酒，百毒不侵的战士，拥有450点生命值，每次攻击造成64-99点物理伤害。",
+              "after": "每隔12秒，召唤一名喝下药酒，百毒不侵的战士，拥有300点生命值，每次攻击造成30-45点物理伤害。；每隔11秒，召唤一名喝下药酒，百毒不侵的战士，拥有400点生命值，每次攻击造成48-72点物理伤害。；每隔10秒，召唤一名喝下药酒，百毒不侵的战士，拥有500点生命值，每次攻击造成64-99点物理伤害。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_dark_elf_lvl4:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_dark_elf_lvl4",
+          "entityName": "暮光长弓",
+          "title": "数值调整防御塔：暮光长弓",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_dark_elf_lvl4.png",
+          "details": [
+            {
+              "field": "最低伤害",
+              "before": "134",
+              "after": "136",
+              "delta": "+2（+1.5%）",
+              "direction": "increase"
+            },
+            {
+              "field": "最高伤害",
+              "before": "146",
+              "after": "152",
+              "delta": "+6（+4.1%）",
+              "direction": "increase"
+            },
+            {
+              "field": "攻击间隔",
+              "before": "2.75",
+              "after": "2.9",
+              "delta": "+0.15（+5.5%）",
+              "direction": "increase"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_dark_elf_lvl4:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_dark_elf_lvl4",
+          "entityName": "暮光长弓",
+          "title": "内容调整防御塔：暮光长弓",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_dark_elf_lvl4.png",
+          "details": [
+            {
+              "field": "猎杀戾气 · 技能说明",
+              "before": "提升暮光长弓手10%攻速，并使暮光长弓手每杀死一名敌人，伤害提升1-1，攻速额外加快1%（最多加快攻速25%），并使附近随机一座防御塔提升伤害0.8%。以上效果最多触发20次。；提升暮光长弓手10%攻速，并使暮光长弓手每杀死一名敌人，伤害提升1-1，攻速额外加快1%（最多加快攻速25%），并使附近随机一座防御塔提升伤害0.8%。以上效果最多触发50次。；提升暮光长弓手10%攻速，并使暮光长弓手每杀死一名敌人，伤害提升1-1，攻速额外加快1%（最多加快攻速25%），并使附近随机一座防御塔提升伤害0.8%。以上效果无次数限制。",
+              "after": "提升暮光长弓手10%攻速，并使暮光长弓手每杀死一名敌人，伤害提升1-1，攻速额外加快0.78%(最多加快攻速25%)，并使附近随机一座防御塔提升伤害0.8%。以上效果最多触发20次。；提升暮光长弓手10%攻速，并使暮光长弓手每杀死一名敌人，伤害提升1-1，攻速额外加快0.78%(最多加快攻速25%)，并使附近随机一座防御塔提升伤害0.8%。以上效果最多触发50次。；提升暮光长弓手10%攻速，并使暮光长弓手每杀死一名敌人，伤害提升1-1，攻速额外加快0.78%(最多加快攻速25%)，并使附近随机一座防御塔提升伤害0.8%。以上效果无次数限制。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_catapult:added:main",
+          "category": "tower",
+          "kind": "added",
+          "entityId": "tower_catapult",
+          "entityName": "皇家投石机",
+          "title": "新增防御塔：皇家投石机",
+          "description": "新增防御塔，定位为直接输出、范围伤害、控制、持续伤害。",
+          "image": "/encyclopedia/thumbs/tower_catapult.png",
+          "details": []
+        },
+        {
+          "id": "tower:tower_archers:added:main",
+          "category": "tower",
+          "kind": "added",
+          "entityId": "tower_archers",
+          "entityName": "弓兵要塞",
+          "title": "新增防御塔：弓兵要塞",
+          "description": "新增防御塔，定位为直接输出、范围伤害、控制。",
+          "image": "/encyclopedia/thumbs/tower_archers.png",
+          "details": []
+        },
+        {
+          "id": "tower:tower_wizard:added:main",
+          "category": "tower",
+          "kind": "added",
+          "entityId": "tower_wizard",
+          "entityName": "魔典学者",
+          "title": "新增防御塔：魔典学者",
+          "description": "新增防御塔，定位为直接输出、范围伤害、持续伤害、控制。",
+          "image": "/encyclopedia/thumbs/tower_wizard.png",
+          "details": []
+        },
+        {
+          "id": "tower:tower_knights:added:main",
+          "category": "tower",
+          "kind": "added",
+          "entityId": "tower_knights",
+          "entityName": "守卫骑士团",
+          "title": "新增防御塔：守卫骑士团",
+          "description": "新增防御塔，定位为直接输出、召唤/拦截。",
+          "image": "/encyclopedia/thumbs/tower_knights.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_bandit_kr6:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_bandit_kr6",
+          "entityName": "强盗",
+          "title": "新增敌人：强盗",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_bandit_kr6.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_blackguard:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_blackguard",
+          "entityName": "暴匪",
+          "title": "新增敌人：暴匪",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_blackguard.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_shadow_archer_kr6:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_shadow_archer_kr6",
+          "entityName": "暗影弓手",
+          "title": "新增敌人：暗影弓手",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_shadow_archer_kr6.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_shadow_blades:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_shadow_blades",
+          "entityName": "幽影潜伏者",
+          "title": "新增敌人：幽影潜伏者",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_shadow_blades.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_crow:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_crow",
+          "entityName": "乌鸦",
+          "title": "新增敌人：乌鸦",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_crow.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_crowcaller:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_crowcaller",
+          "entityName": "唤鸦者",
+          "title": "新增敌人：唤鸦者",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_crowcaller.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_goblin_kr6:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_goblin_kr6",
+          "entityName": "哥布林",
+          "title": "新增敌人：哥布林",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_goblin_kr6.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_orc_warrior:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_orc_warrior",
+          "entityName": "兽人战士",
+          "title": "新增敌人：兽人战士",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_orc_warrior.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_orc_shaman:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_orc_shaman",
+          "entityName": "兽人萨满",
+          "title": "新增敌人：兽人萨满",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_orc_shaman.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_wulf:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_wulf",
+          "entityName": "狼",
+          "title": "新增敌人：狼",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_wulf.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_worg:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_worg",
+          "entityName": "座狼",
+          "title": "新增敌人：座狼",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_worg.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_orc_wildling:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_orc_wildling",
+          "entityName": "野蛮兽人",
+          "title": "新增敌人：野蛮兽人",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_orc_wildling.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_headhunter:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_headhunter",
+          "entityName": "猎头者",
+          "title": "新增敌人：猎头者",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_headhunter.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_rider_goblin:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_rider_goblin",
+          "entityName": "哥布林骑兵",
+          "title": "新增敌人：哥布林骑兵",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_rider_goblin.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_ogre_kr6:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_ogre_kr6",
+          "entityName": "食人魔",
+          "title": "新增敌人：食人魔",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_ogre_kr6.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_boss_stage_208:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_boss_stage_208",
+          "entityName": "古罗扎克",
+          "title": "新增敌人：古罗扎克",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_boss_stage_208.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_troll_warrior:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_troll_warrior",
+          "entityName": "巨魔战士",
+          "title": "新增敌人：巨魔战士",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_troll_warrior.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_troll_champion:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_troll_champion",
+          "entityName": "巨魔勇士",
+          "title": "新增敌人：巨魔勇士",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_troll_champion.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_troll_glider:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_troll_glider",
+          "entityName": "巨魔滑翔者",
+          "title": "新增敌人：巨魔滑翔者",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_troll_glider.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_frost_icecaller:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_frost_icecaller",
+          "entityName": "冰霜使者",
+          "title": "新增敌人：冰霜使者",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_frost_icecaller.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_troll_crusher:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_troll_crusher",
+          "entityName": "巨魔撼地者",
+          "title": "新增敌人：巨魔撼地者",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_troll_crusher.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_troll_pathfinder:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_troll_pathfinder",
+          "entityName": "巨魔先锋",
+          "title": "新增敌人：巨魔先锋",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_troll_pathfinder.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_frost_baiter:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_frost_baiter",
+          "entityName": "冰霜捣蛋鬼",
+          "title": "新增敌人：冰霜捣蛋鬼",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_frost_baiter.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_frost_brute:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_frost_brute",
+          "entityName": "冰霜巨兽",
+          "title": "新增敌人：冰霜巨兽",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_frost_brute.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_boss_stage_10:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_boss_stage_10",
+          "entityName": "大雪怪",
+          "title": "新增敌人：大雪怪",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_boss_stage_10.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_spiderling_kr6:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_spiderling_kr6",
+          "entityName": "幼蛛",
+          "title": "新增敌人：幼蛛",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_spiderling_kr6.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_giant_spider:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_giant_spider",
+          "entityName": "巨型蜘蛛",
+          "title": "新增敌人：巨型蜘蛛",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_giant_spider.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_spider_matriarch:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_spider_matriarch",
+          "entityName": "蜘蛛主母",
+          "title": "新增敌人：蜘蛛主母",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_spider_matriarch.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_leaper_spider:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_leaper_spider",
+          "entityName": "剧毒跳蛛",
+          "title": "新增敌人：剧毒跳蛛",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_leaper_spider.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_son_of_sarelgaz:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_son_of_sarelgaz",
+          "entityName": "萨雷格兹之子",
+          "title": "新增敌人：萨雷格兹之子",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_son_of_sarelgaz.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_boss_stage_11:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_boss_stage_11",
+          "entityName": "萨雷格兹",
+          "title": "新增敌人：萨雷格兹",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_boss_stage_11.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_troll_chieftain_kr6:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_troll_chieftain_kr6",
+          "entityName": "巨魔首领",
+          "title": "新增敌人：巨魔首领",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_troll_chieftain_kr6.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_boss_stage_213:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_boss_stage_213",
+          "entityName": "莫格可汗",
+          "title": "新增敌人：莫格可汗",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_boss_stage_213.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_brigand_kr6:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_brigand_kr6",
+          "entityName": "土匪",
+          "title": "新增敌人：土匪",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_brigand_kr6.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_gargoyle_kr6:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_gargoyle_kr6",
+          "entityName": "石像鬼",
+          "title": "新增敌人：石像鬼",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_gargoyle_kr6.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_dark_sapper:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_dark_sapper",
+          "entityName": "黑暗爆破兵",
+          "title": "新增敌人：黑暗爆破兵",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_dark_sapper.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_tainted_wolf:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_tainted_wolf",
+          "entityName": "污秽魔狼",
+          "title": "新增敌人：污秽魔狼",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_tainted_wolf.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_skeleton_kr6:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_skeleton_kr6",
+          "entityName": "骷髅",
+          "title": "新增敌人：骷髅",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_skeleton_kr6.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_skeleton_big_kr6:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_skeleton_big_kr6",
+          "entityName": "碎骨魔像",
+          "title": "新增敌人：碎骨魔像",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_skeleton_big_kr6.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_dark_disciple:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_dark_disciple",
+          "entityName": "黑暗门徒",
+          "title": "新增敌人：黑暗门徒",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_dark_disciple.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_swamp_thing_kr6:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_swamp_thing_kr6",
+          "entityName": "沼泽巨人",
+          "title": "新增敌人：沼泽巨人",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_swamp_thing_kr6.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_swamp_husk:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_swamp_husk",
+          "entityName": "沼泽空骸",
+          "title": "新增敌人：沼泽空骸",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_swamp_husk.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_necromancer_kr6:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_necromancer_kr6",
+          "entityName": "死灵法师",
+          "title": "新增敌人：死灵法师",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_necromancer_kr6.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_boss_stage_215:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_boss_stage_215",
+          "entityName": "布莱克本领主",
+          "title": "新增敌人：布莱克本领主",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_boss_stage_215.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_death_rider:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_death_rider",
+          "entityName": "死灵骑手",
+          "title": "新增敌人：死灵骑手",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_death_rider.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_rotten_tree_kr6:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_rotten_tree_kr6",
+          "entityName": "腐朽树精",
+          "title": "新增敌人：腐朽树精",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_rotten_tree_kr6.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_dark_knight_kr6:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_dark_knight_kr6",
+          "entityName": "黑暗骑士",
+          "title": "新增敌人：黑暗骑士",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_dark_knight_kr6.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_dark_slayer:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_dark_slayer",
+          "entityName": "黑暗屠夫",
+          "title": "新增敌人：黑暗屠夫",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_dark_slayer.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_demon_spawn:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_demon_spawn",
+          "entityName": "恶魔之子",
+          "title": "新增敌人：恶魔之子",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_demon_spawn.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_demon_hound:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_demon_hound",
+          "entityName": "恶魔猎犬",
+          "title": "新增敌人：恶魔猎犬",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_demon_hound.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_demon_lord:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_demon_lord",
+          "entityName": "恶魔头领",
+          "title": "新增敌人：恶魔头领",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_demon_lord.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_demon_flareon_kr6:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_demon_flareon_kr6",
+          "entityName": "投火魔",
+          "title": "新增敌人：投火魔",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_demon_flareon_kr6.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_demon_imp_kr6:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_demon_imp_kr6",
+          "entityName": "魔精",
+          "title": "新增敌人：魔精",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_demon_imp_kr6.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_magma_elemental:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_magma_elemental",
+          "entityName": "熔岩元素",
+          "title": "新增敌人：熔岩元素",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_magma_elemental.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_stage_218_veznan:added:main",
+          "category": "enemy",
+          "kind": "added",
+          "entityId": "enemy_stage_218_veznan",
+          "entityName": "维兹南",
+          "title": "新增敌人：维兹南",
+          "description": "新增敌人百科条目。",
+          "image": "/enemies/thumbs/enemy_stage_218_veznan.png",
+          "details": []
+        },
+        {
+          "id": "enemy:enemy_unblinded_abomination_stage_8:removed:main",
+          "category": "enemy",
+          "kind": "removed",
+          "entityId": "enemy_unblinded_abomination_stage_8",
+          "entityName": "恶煞工头",
+          "title": "移除敌人：恶煞工头",
+          "description": "",
+          "image": null,
+          "details": []
+        },
+        {
+          "id": "technology:2:reinforcement_level_6:content:main",
+          "category": "technology",
+          "kind": "content",
+          "entityId": "2:reinforcement_level_6",
+          "entityName": "胜利呼唤",
+          "title": "内容调整科技：胜利呼唤",
+          "description": "",
+          "image": "/technologies/2/reinforcement_level_6.png",
+          "details": [
+            {
+              "field": "科技说明",
+              "before": "提升援军在场的时间1秒，并加快援军技能的冷却3秒。",
+              "after": "提升援军在场的时间1秒，并加快援军技能的冷却2.5秒。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "technology:4:reinforcement_level_6:content:main",
+          "category": "technology",
+          "kind": "content",
+          "entityId": "4:reinforcement_level_6",
+          "entityName": "胜利呼唤",
+          "title": "内容调整科技：胜利呼唤",
+          "description": "",
+          "image": "/technologies/4/reinforcement_level_6.png",
+          "details": [
+            {
+              "field": "科技说明",
+              "before": "提升援军在场的时间1秒，并加快援军技能的冷却3秒。",
+              "after": "提升援军在场的时间1秒，并加快援军技能的冷却2.5秒。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        }
+      ]
+    },
     {
       "id": "2.0.7.6-01818eb55f3e",
       "version": "2.0.7.6",

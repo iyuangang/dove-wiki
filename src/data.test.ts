@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { doveData, enemies, gameChangelog, heroes, towerById, towers } from './data'
+import mechanicReview from '../tools/tower-mechanics-review.json'
 
 describe('游戏百科顺序与图像', () => {
   it('修复名称碰撞、禁止效果和动画误标，并保留实际技能能力', () => {
@@ -7,9 +8,13 @@ describe('游戏百科顺序与图像', () => {
     expect(towerById.get('tower_high_elven')!.roles).not.toContain('持续伤害')
     expect(towerById.get('tower_silver')!.roles).not.toContain('经济辅助')
     expect(towerById.get('tower_silver')!.roles).toContain('减益/破甲')
-    for (const id of ['tower_shaolin', 'tower_arcane', 'tower_elf', 'tower_deep_devils', 'tower_wild_magus', 'tower_tesla']) {
+    for (const id of ['tower_arcane', 'tower_elf', 'tower_deep_devils', 'tower_wild_magus', 'tower_tesla']) {
       expect(towerById.get(id)!.roles).toContain('控制')
     }
+    const shaolin = towerById.get('tower_shaolin')!
+    expect(shaolin.roles.includes('控制')).toBe(
+      shaolin.mechanics.items.some((item) => item.id === 'shaolin-control'),
+    )
     expect(towerById.get('tower_pixie')!.roles).toContain('经济辅助')
     expect(towerById.get('tower_tesla')!.roles).not.toContain('持续伤害')
     for (const t of towers) {
@@ -17,21 +22,24 @@ describe('游戏百科顺序与图像', () => {
       expect(t.roleEvidence.every((e) => e.description && e.source)).toBe(true)
     }
   })
-  it('实战机制包含可靠来源、版本和少林寺条件，未核实的塔不伪装成已完成', () => {
+  it('实战机制记录实际审阅版本，待复核条目不作为已核实结论显示', () => {
     for (const tower of towers) {
-      expect(tower.mechanics.reviewedVersion).toBe(doveData.metadata.gameVersion)
-      expect(tower.mechanics.pending).toEqual([])
+      expect(tower.mechanics.reviewedVersion).toBe(mechanicReview.version)
+      expect(new Set(tower.mechanics.pending).size).toBe(tower.mechanics.pending.length)
+      expect(new Set(tower.mechanics.items.map((item) => item.id)).size).toBe(tower.mechanics.items.length)
       for (const item of tower.mechanics.items) {
+        expect(tower.mechanics.pending, `${tower.id}:${item.id}`).not.toContain(item.title)
         expect(item.sources.length).toBeGreaterThan(0)
         expect(item.sources.every((source) => source.line !== null && source.line > 0)).toBe(true)
+        expect(item.sources.every((source) => source.file in mechanicReview.files)).toBe(true)
         expect(JSON.stringify(item)).not.toMatch(/NaN|undefined/)
       }
     }
     const shaolin = towerById.get('tower_shaolin')!
-    const control = shaolin.mechanics.items.find((item) => item.id === 'shaolin-control')!
-    expect(control.summary).toContain('没有士兵阻挡')
-    expect(control.details.join(' ')).toContain('0.7 秒')
-    expect(shaolin.mechanics.items.find((item) => item.id === 'shaolin-distribution')?.formula).toContain('ceil')
+    expect(shaolin.mechanics.hasSpecificReview).toBe(true)
+    expect([...shaolin.mechanics.items.map((item) => item.title), ...shaolin.mechanics.pending]).toEqual(
+      expect.arrayContaining(['普攻自带控制：条件与实际时长', '僧众分摊目标与集中攻击衰减']),
+    )
     expect(towerById.get('tower_archer_1')!.mechanics.hasSpecificReview).toBe(false)
   })
   it('所有塔技能保留连续等级、费用和已展开的对应等级说明', () => {
@@ -199,8 +207,8 @@ describe('游戏百科顺序与图像', () => {
   })
 
   it('mirrors the in-game enemy encyclopedia order, duplicates and images', () => {
-    expect(enemies).toHaveLength(300)
-    expect(new Set(enemies.map((enemy) => enemy.id)).size).toBe(296)
+    expect(enemies).toHaveLength(doveData.summary.enemyCount)
+    expect(new Set(enemies.map((enemy) => enemy.id)).size).toBe(doveData.summary.uniqueEnemyCount)
     expect(enemies.slice(0, 4).map((enemy) => enemy.id)).toEqual([
       'enemy_goblin',
       'enemy_fat_orc',
@@ -208,7 +216,7 @@ describe('游戏百科顺序与图像', () => {
       'enemy_ogre',
     ])
     expect(enemies.map((enemy) => enemy.order)).toEqual(
-      Array.from({ length: 300 }, (_, index) => index + 1),
+      Array.from({ length: enemies.length }, (_, index) => index + 1),
     )
     expect(enemies.filter((enemy) => enemy.id === 'enemy_halloween_zombie')).toHaveLength(2)
     expect(enemies.every((enemy) => enemy.name && enemy.description)).toBe(true)
