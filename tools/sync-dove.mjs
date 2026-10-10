@@ -10,6 +10,7 @@ import {
 } from 'node:fs/promises'
 import { basename, dirname, join, relative, resolve } from 'node:path'
 import { homedir } from 'node:os'
+import { randomUUID } from 'node:crypto'
 import { fileURLToPath } from 'node:url'
 import { resolveDovePaths } from './dove-paths.mjs'
 import { updateGameChangelog } from './game-changelog.mjs'
@@ -17,6 +18,11 @@ import { buildPowerLevels, buildTowerUnits } from './tower-details.mjs'
 import { inferTowerRoles } from './tower-roles.mjs'
 import { buildTowerMechanics, loadMechanicReview } from './tower-mechanics.mjs'
 import { buildHeroDetails, loadHeroReview, mergeHeroSnapshot } from './hero-details.mjs'
+import { normalizeEnemy } from './enemy-data.mjs'
+import { beginSync, generatedPaths } from './sync-transaction.mjs'
+import { enemyValidation, snapshotHash, validateAssets, validateRaw, validateSnapshot } from './snapshot-validation.mjs'
+import { loadCalculationRules } from './calculation-rules.mjs'
+import { buildSupportEffects, loadSupportReview } from './support-effects.mjs'
 
 const toolsDir = dirname(fileURLToPath(import.meta.url))
 const projectRoot = resolve(toolsDir, '..')
@@ -33,21 +39,13 @@ function readOption(name) {
 let gameDir
 let loveExe
 const rawDir = join(toolsDir, '.tmp')
-const rawPath = join(rawDir, 'dove-raw.json')
+let rawPath
 const errorPath = join(rawDir, 'dove-error.log')
 const dataDir = join(projectRoot, 'src', 'data')
 const dataPath = join(dataDir, 'dove-data.json')
 const changelogPath = join(dataDir, 'game-changelog.json')
-const portraitDir = join(projectRoot, 'public', 'portraits')
-const encyclopediaDir = join(projectRoot, 'public', 'encyclopedia')
-const encyclopediaThumbDir = join(encyclopediaDir, 'thumbs')
-const skillIconDir = join(projectRoot, 'public', 'skills')
-const heroDir = join(projectRoot, 'public', 'heroes')
-const heroThumbDir = join(heroDir, 'thumbs')
-const enemyDir = join(projectRoot, 'public', 'enemies')
-const enemyThumbDir = join(enemyDir, 'thumbs')
-const technologyDir = join(projectRoot, 'public', 'technologies')
-const damageIconDir = join(projectRoot, 'public', 'damage-types')
+let portraitDir, encyclopediaDir, encyclopediaThumbDir, skillIconDir, heroDir,
+  heroThumbDir, enemyDir, enemyThumbDir, technologyDir, damageIconDir
 
 function run(command, args, options = {}) {
   const result = spawnSync(command, args, {
@@ -56,6 +54,7 @@ function run(command, args, options = {}) {
     env: options.env || process.env,
     stdio: options.quiet ? 'pipe' : 'inherit',
     windowsHide: true,
+    timeout: options.timeout || 180_000,
   })
 
   if (result.status !== 0) {
@@ -293,213 +292,6 @@ function formatDamageType(value) {
     .map(([, label]) => label)
   return matches.length ? [...new Set(matches)].join(' / ') : `类型 ${value}`
 }
-
-const supportEffects = [
-  {
-    id: 'crossbow-eagle',
-    sourceType: 'tower',
-    sourceTowerId: 'tower_crossbow',
-    skillId: 'eagle',
-    name: '驯鹰者',
-    mode: 'aura',
-    levels: [
-      { level: 1, radius: 170, rangeBonus: 0.05, speedBonus: 0.15 },
-      { level: 2, radius: 210, rangeBonus: 0.075, speedBonus: 0.2 },
-      { level: 3, radius: 250, rangeBonus: 0.1, speedBonus: 0.25 },
-    ],
-    note: '范围倍率与其他增距来源相乘；攻速加成加入攻速除数。',
-  },
-  {
-    id: 'pirate-watcher',
-    sourceType: 'tower',
-    sourceTowerId: 'tower_pirate_watchtower',
-    skillId: 'watcher',
-    name: '眺望',
-    mode: 'aura',
-    levels: [
-      { level: 1, radius: 250, rangeBonus: 0.1 },
-      { level: 2, radius: 250, rangeBonus: 0.2 },
-      { level: 3, radius: 250, rangeBonus: 0.3 },
-    ],
-    note: '只改变攻击范围；对兵营塔显示为集结范围。',
-  },
-  {
-    id: 'high-elven-sentinel',
-    sourceType: 'tower',
-    sourceTowerId: 'tower_high_elven',
-    skillId: 'sentinel',
-    name: '元素赐福',
-    mode: 'aura',
-    levels: [
-      { level: 1, radius: 180, damageBonus: 0.135, speedBonus: 0.09 },
-      { level: 2, radius: 240, damageBonus: 0.18, speedBonus: 0.12 },
-      { level: 3, radius: 300, damageBonus: 0.225, speedBonus: 0.15 },
-    ],
-    note: '伤害百分比与其他增伤来源相加。',
-  },
-  {
-    id: 'arcane-empowerment',
-    sourceType: 'tower',
-    sourceTowerId: 'tower_arcane_wizard_lvl4',
-    skillId: 'empowerment',
-    name: '强化光环',
-    mode: 'aura',
-    levels: [
-      { level: 1, radius: 240, damageBonus: 0.15 },
-      { level: 2, radius: 240, damageBonus: 0.25 },
-      { level: 3, radius: 240, damageBonus: 0.4 },
-    ],
-    note: '同种强化光环取有效最高等级。',
-  },
-  {
-    id: 'furnace-heat',
-    sourceType: 'tower',
-    sourceTowerId: 'tower_melting_furnace',
-    skillId: 'heat',
-    name: '摩擦生热',
-    mode: 'aura',
-    levels: [
-      { level: 1, radius: 291.5, damageBonus: 0.15 },
-      { level: 2, radius: 291.5, damageBonus: 0.3 },
-    ],
-    note: '常驻增伤光环。',
-  },
-  {
-    id: 'furnace-fuel',
-    sourceType: 'tower',
-    sourceTowerId: 'tower_melting_furnace',
-    skillId: 'fuel',
-    name: '燃料爆燃',
-    mode: 'temporary',
-    levels: [
-      { level: 1, radius: 291.5, speedBonus: 0.5, duration: 10, cycle: 30 },
-    ],
-    note: '每 30 秒触发、持续 10 秒；结果显示生效期间的峰值。',
-  },
-  {
-    id: 'dark-elf-hunt',
-    sourceType: 'tower',
-    sourceTowerId: 'tower_dark_elf_lvl4',
-    skillId: 'skill_buff',
-    name: '猎杀戾气',
-    mode: 'triggered',
-    levels: [
-      { level: 1, radius: 225, damagePerTrigger: 0.008, triggerCap: 20 },
-      { level: 2, radius: 225, damagePerTrigger: 0.008, triggerCap: 50 },
-      { level: 3, radius: 225, damagePerTrigger: 0.008, triggerCap: 999999 },
-    ],
-    note: '每次击杀随机选择范围内一座塔；计算值是目标获得指定次数后的潜在增伤。',
-  },
-  {
-    id: 'denas-resource-management',
-    sourceType: 'hero',
-    sourceHeroId: 'hero_denas',
-    skillId: 'resource_management',
-    name: '资源调配',
-    mode: 'passive',
-    requiresBuffable: false,
-    levels: [{ level: 1, radius: 0, priceMultiplier: 0.95 }],
-    note: '迪纳斯登场时将所有塔模板价格乘以 0.95 并向下取整；不受 tower.can_be_mod 限制。',
-  },
-  {
-    id: 'denas-tower-buff',
-    sourceType: 'hero',
-    sourceHeroId: 'hero_denas',
-    skillId: 'tower_buff',
-    name: '皇家号令',
-    mode: 'temporary',
-    levels: [
-      { level: 1, radius: 200, rangeBonus: 0.25, cooldownMultiplier: 0.75, duration: 5, cycle: 11.7 },
-      { level: 2, radius: 200, rangeBonus: 0.25, cooldownMultiplier: 0.75, duration: 8, cycle: 11.7 },
-      { level: 3, radius: 200, rangeBonus: 0.25, cooldownMultiplier: 0.75, duration: 11, cycle: 11.7 },
-    ],
-    note: '范围乘以 1.25，冷却缩放系数为 0.75；显示技能生效期间的峰值。',
-  },
-  {
-    id: 'priest-consecrate',
-    sourceType: 'hero',
-    sourceHeroId: 'hero_priest',
-    skillId: 'consecrate',
-    name: '神圣祝颂',
-    mode: 'temporary',
-    levels: [
-      { level: 1, radius: 160, damageBonus: 0.18, duration: 8, cycle: 8 },
-      { level: 2, radius: 160, damageBonus: 0.24, duration: 15, cycle: 8 },
-      { level: 3, radius: 160, damageBonus: 0.3, duration: 22, cycle: 8 },
-    ],
-    note: '每次选择范围内最近的一座未祝颂塔；伤害加成同时传递给兵营士兵。',
-  },
-  {
-    id: 'minotaur-roar-of-fury',
-    sourceType: 'hero',
-    sourceHeroId: 'hero_minotaur',
-    skillId: 'roaroffury',
-    name: '野牛怒吼',
-    mode: 'temporary',
-    levels: [
-      { level: 1, radius: 0, damageBonus: 0.25, duration: 4, cycle: 15 },
-      { level: 2, radius: 0, damageBonus: 0.5, duration: 4, cycle: 15 },
-      { level: 3, radius: 0, damageBonus: 0.75, duration: 4, cycle: 15 },
-    ],
-    note: '对全场所有可被强化且未封锁的塔生效，显示 4 秒持续期内的峰值。',
-  },
-  {
-    id: 'phoenix-flaming-path',
-    sourceType: 'hero',
-    sourceHeroId: 'hero_phoenix',
-    skillId: 'flaming_path',
-    name: '余烬之地',
-    mode: 'temporary',
-    levels: [
-      { level: 1, radius: 125, flatDps: 15, duration: 6.5, cycle: 30 },
-      { level: 2, radius: 125, flatDps: 30, duration: 6.5, cycle: 30 },
-      { level: 3, radius: 125, flatDps: 45, duration: 6.5, cycle: 30 },
-    ],
-    note: '附着到附近一座塔，每 2 秒造成 30/60/90 点范围真实伤害；额外 DPS 按持续期峰值计入。',
-  },
-  {
-    id: 'space-elf-spatial-distortion',
-    sourceType: 'hero',
-    sourceHeroId: 'hero_space_elf',
-    skillId: 'spatial_distortion',
-    name: '空间扭曲',
-    mode: 'temporary',
-    levels: [
-      { level: 1, radius: 0, damageBonus: 0.04, rangeBonus: 0.04, cooldownMultiplier: 0.96, duration: 6, cycle: 25 },
-      { level: 2, radius: 0, damageBonus: 0.06, rangeBonus: 0.06, cooldownMultiplier: 0.94, duration: 7, cycle: 23 },
-      { level: 3, radius: 0, damageBonus: 0.08, rangeBonus: 0.08, cooldownMultiplier: 0.92, duration: 8, cycle: 20 },
-    ],
-    note: '对全场所有可强化塔同时生效；冷却缩放系数分别为 0.96/0.94/0.92。',
-  },
-  {
-    id: 'lava-hotheaded',
-    sourceType: 'hero',
-    sourceHeroId: 'hero_lava',
-    skillId: 'hotheaded',
-    name: '烈焰之心',
-    mode: 'triggered',
-    levels: [
-      { level: 1, radius: 180, damageBonus: 0.2, duration: 6 },
-      { level: 2, radius: 180, damageBonus: 0.3, duration: 6 },
-      { level: 3, radius: 180, damageBonus: 0.4, duration: 6 },
-    ],
-    note: '喀拉托复活时强化周围塔 6 秒；结果显示触发后的峰值。',
-  },
-  {
-    id: 'oloch-hellish-infusion',
-    sourceType: 'hero',
-    sourceHeroId: 'hero_oloch',
-    skillId: 'hellish_infusion',
-    name: '地狱注入',
-    mode: 'temporary',
-    levels: [
-      { level: 1, radius: 170, damageBonus: 0.1, duration: 6, cycle: 18 },
-      { level: 2, radius: 170, damageBonus: 0.2, duration: 6, cycle: 18 },
-      { level: 3, radius: 170, damageBonus: 0.3, duration: 6, cycle: 18 },
-    ],
-    note: '强化椭圆范围内全部可强化塔；显示 6 秒持续期内的峰值。',
-  },
-]
 
 const technologyClassFamilies = {
   archers: 'archer',
@@ -849,62 +641,6 @@ function normalizeHero(rawHero, localization) {
   }
 }
 
-function normalizeEnemy(rawEnemy, localization) {
-  const i18nKey = rawEnemy.template?.info?.i18n_key || rawEnemy.id.toUpperCase()
-  const specialKey = `${rawEnemy.id.toUpperCase()}_SPECIAL`
-  const extraText = localization[`${i18nKey}_EXTRA`] || ''
-  const info = rawEnemy.computed_info || {}
-  const boss = /(^|_)(eb|boss|miniboss)(_|$)/i.test(rawEnemy.id) ||
-    rawEnemy.id.startsWith('controller_')
-
-  return {
-    entryId: `${rawEnemy.id}--${rawEnemy.order}`,
-    id: rawEnemy.id,
-    order: Number(rawEnemy.order),
-    name: localization[`${i18nKey}_NAME`] || rawEnemy.id.replaceAll('_', ' '),
-    description:
-      localization[`${i18nKey}_DESCRIPTION`] || '游戏百科未提供中文描述。',
-    special: localization[specialKey] || '',
-    traits: extraText
-      .split(/\r?\n/)
-      .map((item) => item.replace(/^\s*[-•]\s*/, '').trim())
-      .filter(Boolean),
-    image: `/enemies/${rawEnemy.id}.png`,
-    thumbnail: `/enemies/thumbs/${rawEnemy.id}.png`,
-    imageSprite: rawEnemy.encyclopedia?.detail_sprite || null,
-    thumbnailSprite: rawEnemy.encyclopedia?.thumb_sprite || null,
-    sourceGame: Number(rawEnemy.source_game),
-    alwaysShown: rawEnemy.always_shown === true,
-    flying: rawEnemy.is_flying === true,
-    boss,
-    stats: {
-      hp: Number.isFinite(info.hp_max) ? info.hp_max : null,
-      damageMin: Number.isFinite(info.damage_min) ? info.damage_min : null,
-      damageMax: Number.isFinite(info.damage_max) ? info.damage_max : null,
-      armor: Number.isFinite(info.armor) ? info.armor : null,
-      magicArmor: Number.isFinite(info.magic_armor) ? info.magic_armor : null,
-      speed: Number.isFinite(rawEnemy.template?.motion?.max_speed)
-        ? rawEnemy.template.motion.max_speed
-        : null,
-      lives: Number.isFinite(info.lives)
-        ? info.lives
-        : Number.isFinite(rawEnemy.template?.enemy?.lives_cost)
-          ? rawEnemy.template.enemy.lives_cost
-          : null,
-      gold: Number.isFinite(rawEnemy.template?.enemy?.gold)
-        ? rawEnemy.template.enemy.gold
-        : null,
-    },
-    sources: {
-      roster: 'kr1/game_settings.lua → encyclopedia_enemies',
-      template: rawEnemy.template_exists ? '游戏实体模板 + info.fn' : null,
-      localization: '_assets/kr1-desktop/strings/zh-Hans.lua',
-      encyclopedia:
-        '_assets/kr1-desktop/images/fullhd/encyclopedia.lua + encyclopedia_creeps.lua',
-    },
-  }
-}
-
 function normalizeTower(
   rawTower,
   localization,
@@ -1019,98 +755,70 @@ function normalizeTower(
   return tower
 }
 
-async function cleanupPortraits(rawTowers) {
-  const expected = new Set(rawTowers.map((tower) => `${tower.id}.png`))
-  const resolvedPortraitDir = resolve(portraitDir)
-
-  for (const filename of await readdir(portraitDir)) {
-    const fullPath = resolve(portraitDir, filename)
-    if (dirname(fullPath) !== resolvedPortraitDir) {
-      throw new Error(`拒绝清理非头像目录文件：${fullPath}`)
-    }
-    if (filename.endsWith('.png') && !expected.has(filename)) await unlink(fullPath)
-  }
-}
-
-async function cleanupEncyclopediaImages(rawTowers) {
-  const expected = new Set(
-    rawTowers
-      .filter((tower) => tower.encyclopedia)
-      .map((tower) => `${tower.id}.png`),
-  )
-
-  for (const directory of [encyclopediaDir, encyclopediaThumbDir]) {
-    const resolvedDirectory = resolve(directory)
-    for (const filename of await readdir(directory)) {
-      const fullPath = resolve(directory, filename)
-      if (dirname(fullPath) !== resolvedDirectory) continue
-      if (filename.endsWith('.png') && !expected.has(filename)) await unlink(fullPath)
-    }
-  }
-}
-
-async function cleanupSkillIcons(rawTowers) {
-  const expected = new Set(
-    rawTowers.flatMap((tower) =>
-      Object.keys(tower.power_icons || {}).map(
-        (powerId) => `${tower.id}--${powerId}.png`,
-      ),
-    ),
-  )
-  const resolvedDirectory = resolve(skillIconDir)
-
-  for (const filename of await readdir(skillIconDir)) {
-    const fullPath = resolve(skillIconDir, filename)
-    if (dirname(fullPath) !== resolvedDirectory) continue
-    if (filename.endsWith('.png') && !expected.has(filename)) await unlink(fullPath)
-  }
-}
-
-async function cleanupHeroImages(rawHeroes) {
-  const expected = new Set(rawHeroes.map((hero) => `${hero.id}.png`))
-
-  for (const directory of [heroDir, heroThumbDir]) {
-    const resolvedDirectory = resolve(directory)
-    for (const filename of await readdir(directory)) {
-      const fullPath = resolve(directory, filename)
-      if (dirname(fullPath) !== resolvedDirectory) continue
-      if (filename.endsWith('.png') && !expected.has(filename)) await unlink(fullPath)
-    }
-  }
-}
-
-async function cleanupEnemyImages(rawEnemies) {
-  const expected = new Set(
-    rawEnemies
-      .filter((enemy) => enemy.encyclopedia)
-      .map((enemy) => `${enemy.id}.png`),
-  )
-
-  for (const directory of [enemyDir, enemyThumbDir]) {
-    const resolvedDirectory = resolve(directory)
-    for (const filename of await readdir(directory)) {
-      const fullPath = resolve(directory, filename)
-      if (dirname(fullPath) !== resolvedDirectory) continue
-      if (filename.endsWith('.png') && !expected.has(filename)) await unlink(fullPath)
-    }
-  }
-}
-
-async function cleanupTechnologyImages(rawTechnology) {
-  for (const [index, technologyList] of (rawTechnology?.lists || []).entries()) {
-    const directory = join(technologyDir, String(index + 1))
-    const expected = new Set(Object.keys(technologyList).map((id) => `${id}.png`))
-    const resolvedDirectory = resolve(directory)
-
-    for (const filename of await readdir(directory)) {
-      const fullPath = resolve(directory, filename)
-      if (dirname(fullPath) !== resolvedDirectory) continue
-      if (filename.endsWith('.png') && !expected.has(filename)) await unlink(fullPath)
-    }
-  }
-}
-
 async function main() {
+  const transaction = await beginSync(projectRoot)
+  try { await sync(transaction) } finally { await transaction.close() }
+}
+
+function reviewManifest(review) {
+  return { ...review.manifest, invalidFiles: [...review.files].filter(([, source]) => !source.valid).map(([file]) => file) }
+}
+
+async function finishSnapshot(transaction, data, changelog, manifest, previous, checkOnly, heroesOnly) {
+  const contract = JSON.parse(await readFile(join(projectRoot, 'src/data-contract.json'), 'utf8'))
+  const problems = (data.validation.enemyMissingStats || []).filter((item) => !item.expected)
+  const errors = data.validation.enemyInfoErrors || []
+  if (!heroesOnly) {
+    if (problems.length) data.validation.warnings.push(`${problems.length} 项敌人难度字段缺失，原因见校验清单。`)
+    if (errors.length) data.validation.warnings.push(`${errors.length} 次敌人百科计算失败，已保留错误与可用模板字段。`)
+  }
+  validateSnapshot(data, manifest, contract)
+  const assetCount = await validateAssets(data, transaction.stageRoot, heroesOnly ? projectRoot : undefined)
+  const changes = {}
+  for (const key of ['towers', 'heroes', 'enemies']) {
+    const id = (item) => key === 'enemies' ? item.entryId : item.id
+    const before = new Map((previous?.[key] || []).map((item) => [id(item), item]))
+    const after = new Map(data[key].map((item) => [id(item), item]))
+    if (previous && after.size < before.size * 0.8 && !process.argv.includes('--allow-count-drop')) throw new Error(`${key} 数量下降超过 20%；请检查提取结果，确认后可使用 --allow-count-drop。`)
+    changes[key] = {
+      added: [...after.keys()].filter((key) => !before.has(key)),
+      removed: [...before.keys()].filter((key) => !after.has(key)),
+      changed: [...after.keys()].filter((key) => before.has(key) && JSON.stringify(before.get(key)) !== JSON.stringify(after.get(key))),
+    }
+  }
+  const report = {
+    checkOnly, gameVersion: data.metadata.gameVersion, gameCommit: data.metadata.commitHash,
+    assetCount, changes, validation: data.validation,
+    pending: { towers: data.towers.flatMap((tower) => tower.mechanics.pending), heroes: data.heroes.flatMap((hero) => hero.details.pending) },
+  }
+  await writeFile(join(rawDir, 'sync-report.json'), `${JSON.stringify(report, null, 2)}\n`)
+  const dataText = `${JSON.stringify(data, null, 2)}\n`
+  manifest.dataHash = snapshotHash(dataText)
+  await writeFile(join(transaction.stageRoot, 'src/data/dove-data.json'), dataText)
+  await writeFile(join(transaction.stageRoot, 'src/data/snapshot-manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`)
+  if (changelog) await writeFile(join(transaction.stageRoot, 'src/data/game-changelog.json'), `${JSON.stringify(changelog, null, 2)}\n`)
+  if (!checkOnly) await transaction.promote(heroesOnly
+    ? ['public/heroes', 'src/data/dove-data.json', 'src/data/snapshot-manifest.json']
+    : generatedPaths)
+  console.log(`[dove-wiki] ${checkOnly ? '检查通过，正式快照未修改' : '完整快照已发布'}；${assetCount} 个资源引用有效。差异报告：tools/.tmp/sync-report.json`)
+}
+
+async function sync(transaction) {
+  const checkOnly = process.argv.includes('--check') || process.argv.includes('--dry-run')
+  const runId = randomUUID()
+  const stageRoot = transaction.stageRoot
+  rawPath = join(transaction.tempRoot, 'dove-raw.json')
+  portraitDir = join(stageRoot, 'public/portraits')
+  encyclopediaDir = join(stageRoot, 'public/encyclopedia')
+  encyclopediaThumbDir = join(encyclopediaDir, 'thumbs')
+  skillIconDir = join(stageRoot, 'public/skills')
+  heroDir = join(stageRoot, 'public/heroes')
+  heroThumbDir = join(heroDir, 'thumbs')
+  enemyDir = join(stageRoot, 'public/enemies')
+  enemyThumbDir = join(enemyDir, 'thumbs')
+  technologyDir = join(stageRoot, 'public/technologies')
+  damageIconDir = join(stageRoot, 'public/damage-types')
+  await mkdir(join(stageRoot, 'src/data'), { recursive: true })
   const heroesOnly = process.argv.includes('--heroes-only')
   const paths = resolveDovePaths({
     gameDir: readOption('--game-dir') || process.env.DOVE_GAME_DIR,
@@ -1141,6 +849,7 @@ async function main() {
 
   console.log(`[dove-wiki] 读取游戏：${gameDir}`)
   console.log(`[dove-wiki] LÖVE 运行时：${loveExe}`)
+  const extractionCommit = (await readFile(join(gameDir, 'current_version_commit_hash.txt'), 'utf8')).trim()
   if (existsSync(errorPath)) await unlink(errorPath)
   run(loveExe, [join(toolsDir, 'love-extractor')], {
     cwd: dirname(loveExe),
@@ -1148,6 +857,7 @@ async function main() {
     env: {
       ...process.env,
       DOVE_GAME_DIR: gameDir,
+      DOVE_RUN_ID: runId,
       DOVE_RAW_OUTPUT: rawPath,
       DOVE_ERROR_OUTPUT: errorPath,
       DOVE_PORTRAIT_DIR: heroesOnly ? '' : portraitDir,
@@ -1161,6 +871,9 @@ async function main() {
   })
 
   const raw = JSON.parse(await readFile(rawPath, 'utf8'))
+  if ((await readFile(join(gameDir, 'current_version_commit_hash.txt'), 'utf8')).trim() !== extractionCommit) throw new Error('提取期间游戏版本发生变化，请重新同步。')
+  validateRaw(raw, runId)
+  await writeFile(join(rawDir, 'dove-raw.json'), JSON.stringify(raw))
   if (heroesOnly) {
     const review = await loadHeroReview(gameDir)
     const heroes = raw.heroes.map((hero) => ({ ...normalizeHero(hero, raw.localization), details: buildHeroDetails(hero, review) }))
@@ -1171,8 +884,9 @@ async function main() {
       generatedAt: new Date().toISOString(), sourceRoot: gameDir,
     }
     const data = mergeHeroSnapshot(previousData, heroes, snapshot)
-    await cleanupHeroImages(raw.heroes)
-    await writeFile(dataPath, `${JSON.stringify(data, null, 2)}\n`, 'utf8')
+    const manifest = JSON.parse(await readFile(join(dataDir, 'snapshot-manifest.json'), 'utf8'))
+    manifest.reviews.heroes = reviewManifest(review)
+    await finishSnapshot(transaction, data, null, manifest, previousData, checkOnly, true)
     console.log(`[dove-wiki] 已更新 ${heroes.length} 位英雄（${snapshot.gameVersion}）；其余数据与更新历史保持原快照。`)
     return
   }
@@ -1180,6 +894,8 @@ async function main() {
   const unlocks = await buildUnlockIndex(towerIds)
   const sourceIndex = await buildTemplateSourceIndex()
   const mechanicReview = await loadMechanicReview(gameDir)
+  const supportReview = await loadSupportReview(gameDir)
+  const supportEffects = buildSupportEffects(raw, supportReview)
   const supportIds = new Map()
 
   for (const effect of supportEffects) {
@@ -1212,13 +928,6 @@ async function main() {
     if (tower.mechanics.items.some((item) => item.id === 'wizard-double-bolt')) tower.attack.scope = '单枚普攻弹丸参数（每轮两枚）'
     if (tower.mechanics.items.some((item) => item.id === 'culverine-splash')) tower.attack.scope = '普攻落点范围内的单个目标'
   }
-
-  await cleanupPortraits(raw.towers)
-  await cleanupEncyclopediaImages(raw.towers)
-  await cleanupSkillIcons(raw.towers)
-  await cleanupHeroImages(raw.heroes)
-  await cleanupEnemyImages(raw.enemies)
-  await cleanupTechnologyImages(raw.technology)
 
   const versionSource = await readFile(join(gameDir, 'version.lua'), 'utf8')
   const commitHash = (
@@ -1261,6 +970,8 @@ async function main() {
   const gameVersion = /^\s*id\s*=\s*["']([^"']+)/m.exec(versionSource)?.[1] || 'unknown'
   const gameId = /^\s*identity\s*=\s*["']([^"']+)/m.exec(versionSource)?.[1] || 'unknown'
   const data = {
+    schemaVersion: 2,
+    calculationRules: await loadCalculationRules(gameDir),
     metadata: {
       title: '王国保卫战鸽子版 WIKI',
       gameVersion,
@@ -1314,6 +1025,7 @@ async function main() {
       unlockAnomalies: missingUnlocks.map((tower) => tower.id),
       noUnifiedDamage: missingDamage.map((tower) => tower.id),
       missingTemplateSources: missingSources.map((tower) => tower.id),
+      ...enemyValidation(enemies),
     },
     supportEffects: normalizedSupportEffects,
     technologyTrees,
@@ -1323,9 +1035,12 @@ async function main() {
   }
 
   const nextChangelog = updateGameChangelog(previousData, data, previousChangelog)
-  await writeFile(dataPath, `${JSON.stringify(data, null, 2)}\n`, 'utf8')
-  await writeFile(changelogPath, `${JSON.stringify(nextChangelog, null, 2)}\n`, 'utf8')
-  const dataSize = await stat(dataPath)
+  const manifest = {
+    schemaVersion: data.schemaVersion, gameCommit: commitHash,
+    reviews: { towers: reviewManifest(mechanicReview), heroes: reviewManifest(heroReview), supports: supportReview.manifest },
+  }
+  await finishSnapshot(transaction, data, nextChangelog, manifest, previousData, checkOnly, false)
+  const dataSize = await stat(join(stageRoot, 'src/data/dove-data.json')).catch(() => stat(dataPath))
   console.log(
     `[dove-wiki] 完成：${towers.length} 座塔、${heroes.length} 名英雄、${enemies.length} 个敌人百科槽位（${uniqueEnemyCount} 个唯一敌人）、${technologyCount} 张科技图标、${encyclopediaCount} 套塔百科图、${skillIconCount} 张技能图标、${towers.length - encyclopediaCount} 张头像回退、${Math.round(dataSize.size / 1024)} KiB 数据`,
   )

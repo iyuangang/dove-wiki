@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { doveData } from '../data'
-import { calculateBuffs } from './calculator'
+import { calculateBuffs, resolveSupportLevel } from './calculator'
 
 const tower = doveData.towers.find((item) => item.id === 'tower_ranger')!
 
@@ -132,9 +132,9 @@ describe('Dove auxiliary buff calculator', () => {
     expect(result.price).toBe(218)
     expect(result.priceMultiplier).toBe(0.95)
     expect(result.range).toBe(250)
-    expect(result.speedBonus).toBe(0)
-    expect(result.supportCooldownMultiplier).toBe(0.75)
-    expect(result.cooldown).toBeCloseTo(0.2925, 4)
+    expect(result.speedBonus).toBe(0.25)
+    expect(result.supportCooldownMultiplier).toBe(1)
+    expect(result.cooldown).toBeCloseTo(0.312, 4)
   })
 
   it('adds Phoenix attached-area damage as flat peak DPS', () => {
@@ -177,5 +177,64 @@ describe('Dove auxiliary buff calculator', () => {
         (technology) => technology.technologyId === 'mage_purge_field',
       )?.calculated,
     ).toBe(true)
+  })
+
+  it('calculates Eye range falloff at the centre, halfway and edge, excluding out-of-range targets', () => {
+    const effect = doveData.supportEffects.find((effect) => effect.id === 'archers-eye')!
+    expect(effect).toBeDefined()
+    for (const [distanceRatio, range] of [[0, 270], [0.5, 252.5], [1, 235]]) {
+      const result = calculateBuffs(tower, doveData.supportEffects, [{ effectId: effect.id, level: 3, distanceRatio }])
+      expect(result.range).toBe(range)
+    }
+    expect(calculateBuffs(tower, doveData.supportEffects, [{ effectId: effect.id, level: 3, distanceRatio: 1.01 }]).applied).toHaveLength(0)
+    expect(resolveSupportLevel(effect, { effectId: effect.id, level: 3, sourceRange: 300, distanceRatio: 0.5 })?.radius).toBe(300)
+    expect(resolveSupportLevel(effect, { effectId: effect.id, level: 3, sourceRange: 0 })).toBeNull()
+  })
+
+  it('keeps the strongest actual Eye bonus instead of the highest skill level or multiplying identical auras', () => {
+    const selections = [
+      { effectId: 'archers-eye', level: 3, distanceRatio: 1 }, // 17.5%
+      { effectId: 'archers-eye', level: 2, distanceRatio: 0 }, // 25%
+      { effectId: 'pirate-watcher', level: 3 },
+    ]
+    for (const ordered of [selections, [...selections].reverse()]) {
+      const result = calculateBuffs(tower, doveData.supportEffects, ordered)
+      expect(result.range).toBe(325)
+      expect(result.applied).toHaveLength(2)
+    }
+  })
+
+  it('adds Knowledge damage to other support sources, refreshing identical casts and replacing lower levels', () => {
+    const result = calculateBuffs(tower, doveData.supportEffects, [
+      { effectId: 'wizard-knowledge', level: 2 },
+      { effectId: 'wizard-knowledge', level: 3 },
+      { effectId: 'wizard-knowledge', level: 3 },
+      { effectId: 'arcane-empowerment', level: 3 },
+    ])
+    expect(result.damageBonus).toBe(1.4)
+    expect(result.damageMin).toBe(31.2)
+    expect(result.damageMax).toBe(48)
+    expect(result.applied).toHaveLength(2)
+    const source = doveData.towers.find((tower) => tower.id === 'tower_wizard')!
+    expect(calculateBuffs(source, doveData.supportEffects, [{ effectId: 'wizard-knowledge', level: 3 }]).damageMin).toBe(74)
+  })
+
+  it('uses the shared cooldown divider for tower and hero supports together', () => {
+    const result = calculateBuffs(tower, doveData.supportEffects, [
+      { effectId: 'crossbow-eagle', level: 3 },
+      { effectId: 'furnace-fuel', level: 1 },
+      { effectId: 'denas-tower-buff', level: 3 },
+      { effectId: 'space-elf-spatial-distortion', level: 3 },
+    ])
+    expect(result.speedBonus).toBe(1.08)
+    expect(result.cooldown).toBeCloseTo(tower.attack.cooldown! / 2.08, 4)
+  })
+
+  it('excludes new supports from unbuffable towers and pauses effects whose source review expired', () => {
+    const selections = [{ effectId: 'archers-eye', level: 3 }, { effectId: 'wizard-knowledge', level: 3 }]
+    expect(calculateBuffs({ ...tower, canBeBuffed: false }, doveData.supportEffects, selections).applied).toHaveLength(0)
+    const effects = doveData.supportEffects.map((effect) => ({ ...effect, review: { reviewedVersion: '2.0.9.3', sources: ['kr1/tower_scripts.lua'], valid: false, invalidFiles: ['kr1/tower_scripts.lua'] } }))
+    expect(calculateBuffs(tower, effects, selections).applied).toHaveLength(0)
+    expect(doveData.supportEffects.some((effect) => effect.sourceTowerId === 'tower_knights')).toBe(false)
   })
 })

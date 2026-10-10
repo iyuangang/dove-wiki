@@ -1,0 +1,18 @@
+{
+  "version": "2.0.9.3",
+  "gameCommit": "731afe683e16e3adbfe162cf2b7452cc7bd2f867",
+  "reviewedAt": "2026-10-10",
+  "files": {
+    "kr1/archer_towers.lua": "d97b0c14e8aba349bb4c25f01842029c67089e61b19e3397e102ffc4b5e44f0d",
+    "kr1/mage_towers.lua": "89dad06dec914d540496df09715a3ca9d43df69b1a04afef917eb4babee1c0ef",
+    "kr1/engineer_towers.lua": "6dd5dec81d28a57977de5781a994bebb85b05f4e9de7bc50eccbf2c06bb8de71",
+    "kr1/tower_scripts.lua": "d2444783435e4c03e606b0bbbf952172da26cd945b6725e7dfc9e015ec34eb18",
+    "kr1/game_scripts.lua": "d78c9cc9d4c6df87a1383089eb8661a6dc1add31270e9c218c6969731a875fe0",
+    "all/templates.lua": "f83d5091f593ac92ee8edef0e9384269f0b2c89c81b7e2f559a8472178db21b8",
+    "all/scripts.lua": "2d73332e1dccd0bbddd6f51b2990fa36370d7a85020539f1f2651325620c7394",
+    "all/script_utils.lua": "e29b1142b128df1ba436cb832a66df70aebce13510bc9c95f82ab13cfc051c9a",
+    "all/systems/mod_lifecycle.lua": "fa535b2e80cd9aa25c8a36974dcb093b569eea35d238aaa028559219611b9d3a",
+    "kr1/heroes.lua": "d70d8b4f879c1d898ff12ec13c5bb180f7e82088e6686145696416e49a286208",
+    "kr1/hero_scripts.lua": "22b4cfe4f8ec6b932d0c52d48f3c3a3af5e6573dad5c0dc65b1b70352acaeb99"
+  }
+}

@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { heroes, doveData } from './data'
-import heroReview from '../tools/hero-details-review.json'
+import { snapshotManifest } from './data'
+const heroReview = snapshotManifest.reviews.heroes
 
 const hero = (id: string) => heroes.find((h) => h.id === id)!
 

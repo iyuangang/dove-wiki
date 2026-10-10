@@ -55,6 +55,7 @@ jobs:
           data_paths=(
             src/data/dove-data.json
             src/data/game-changelog.json
+            src/data/snapshot-manifest.json
             public/encyclopedia
             public/skills
             public/portraits
@@ -95,6 +96,7 @@ jobs:
           VITE_APP_VERSION: ${{ steps.release.outputs.tag }}
           VITE_BASE_PATH: /dove-wiki/
         run: |
+          npm run check:data
           npm test
           npm run build
 

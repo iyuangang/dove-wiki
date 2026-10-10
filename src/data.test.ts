@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { doveData, enemies, gameChangelog, heroes, towerById, towers } from './data'
-import mechanicReview from '../tools/tower-mechanics-review.json'
+import { snapshotManifest } from './data'
+const mechanicReview = snapshotManifest.reviews.towers
 
 describe('游戏百科顺序与图像', () => {
   it('修复名称碰撞、禁止效果和动画误标，并保留实际技能能力', () => {

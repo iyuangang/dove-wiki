@@ -11,6 +11,12 @@ const sourceGame = ref(0)
 const movement = ref('all')
 const rank = ref('all')
 const defense = ref('all')
+const difficulty = ref(2)
+const difficultyLabels = ['休闲', '普通', '老兵', '不可能']
+const enemiesWithStats = computed(() => props.enemies.map((enemy) => {
+  const variant = enemy.statsByDifficulty.find((item) => item.difficulty === difficulty.value)!
+  return { ...enemy, stats: variant.stats, diagnostics: variant }
+}))
 const selectedEnemy = ref<Enemy | null>(null)
 const sourceNames: Record<number, string> = {
   1: '王国保卫战',
@@ -28,7 +34,7 @@ const bossCount = computed(() => props.enemies.filter((enemy) => enemy.boss).len
 const flyingCount = computed(() => props.enemies.filter((enemy) => enemy.flying).length)
 const filteredEnemies = computed(() => {
   const needle = query.value.trim().toLowerCase()
-  return props.enemies.filter((enemy) => {
+  return enemiesWithStats.value.filter((enemy) => {
     if (sourceGame.value && enemy.sourceGame !== sourceGame.value) return false
     if (movement.value === 'ground' && enemy.flying) return false
     if (movement.value === 'flying' && !enemy.flying) return false
@@ -79,6 +85,10 @@ onBeforeUnmount(() => {
   document.body.classList.remove('modal-open')
   window.removeEventListener('keydown', onKeydown)
 })
+
+watch(difficulty, () => {
+  if (selectedEnemy.value) selectedEnemy.value = enemiesWithStats.value.find((enemy) => enemy.entryId === selectedEnemy.value?.entryId) || null
+})
 </script>
 
 <template>
@@ -101,6 +111,12 @@ onBeforeUnmount(() => {
       <label class="enemy-search">
         <span>搜索敌人、内部 ID 或能力</span>
         <input v-model="query" type="search" placeholder="例如：哥布林 / 飞行 / enemy_goblin" />
+      </label>
+      <label>
+        <span>面板难度</span>
+        <select v-model="difficulty" aria-label="面板难度">
+          <option v-for="(label, index) in difficultyLabels" :key="label" :value="index + 1">{{ label }}</option>
+        </select>
       </label>
       <label>
         <span>来源作品</span>
@@ -139,6 +155,7 @@ onBeforeUnmount(() => {
 
     <div class="enemy-results-line">
       <span>显示 {{ filteredEnemies.length }} / {{ enemies.length }} 个百科槽位</span>
+      <span>{{ difficultyLabels[difficulty - 1] }}难度 · 不含关卡与波次加成</span>
       <button
         v-if="query || sourceGame || movement !== 'all' || rank !== 'all' || defense !== 'all'"
         type="button"
@@ -167,7 +184,7 @@ onBeforeUnmount(() => {
             <p>{{ enemy.description }}</p>
             <dl class="enemy-card-stats">
               <div><dt>生命</dt><dd>{{ numberLabel(enemy.stats.hp) }}</dd></div>
-              <div><dt>伤害</dt><dd>{{ damageLabel(enemy) }}</dd></div>
+              <div><dt>{{ enemy.diagnostics.damageScope === '未提供攻击面板' ? '伤害' : `${enemy.diagnostics.damageScope}伤害` }}</dt><dd>{{ damageLabel(enemy) }}</dd></div>
               <div><dt>速度</dt><dd>{{ numberLabel(enemy.stats.speed) }}</dd></div>
               <div><dt>扣除生命</dt><dd>{{ numberLabel(enemy.stats.lives) }}</dd></div>
             </dl>
@@ -210,7 +227,7 @@ onBeforeUnmount(() => {
 
             <dl class="enemy-detail-stats">
               <div><dt>生命值</dt><dd>{{ numberLabel(selectedEnemy.stats.hp) }}</dd></div>
-              <div><dt>攻击伤害</dt><dd>{{ damageLabel(selectedEnemy) }}</dd></div>
+              <div><dt>{{ selectedEnemy.diagnostics.damageScope === '未提供攻击面板' ? '攻击伤害' : `${selectedEnemy.diagnostics.damageScope}伤害` }}</dt><dd>{{ damageLabel(selectedEnemy) }}</dd></div>
               <div><dt>物理护甲</dt><dd>{{ percentLabel(selectedEnemy.stats.armor) }}</dd></div>
               <div><dt>魔法抗性</dt><dd>{{ percentLabel(selectedEnemy.stats.magicArmor) }}</dd></div>
               <div><dt>移动速度</dt><dd>{{ numberLabel(selectedEnemy.stats.speed) }}</dd></div>
@@ -225,7 +242,12 @@ onBeforeUnmount(() => {
 
             <section class="enemy-detail-source">
               <strong>数据来源</strong>
+              <p>{{ difficultyLabels[difficulty - 1] }}难度；不含关卡、波次和特殊脚本动态加成。</p>
+              <p v-for="(reason, field) in selectedEnemy.diagnostics.missingFields" :key="field">{{ field }}：{{ reason }}</p>
+              <p v-if="selectedEnemy.diagnostics.infoError">百科计算存在异常，已使用可读取的模板字段。</p>
+              <code v-if="selectedEnemy.bossEvidence">首领依据：{{ selectedEnemy.bossEvidence }}</code>
               <code>{{ selectedEnemy.sources.roster }}</code>
+              <code>{{ selectedEnemy.sources.difficulty }}</code>
               <code>{{ selectedEnemy.sources.encyclopedia }}</code>
             </section>
           </aside>

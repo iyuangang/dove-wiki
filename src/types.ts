@@ -171,6 +171,15 @@ export interface SupportEffect {
   note: string
   icon: string | null
   requiresBuffable?: boolean
+  radiusUsesSourceRange?: boolean
+  excludeTowerIds?: string[]
+  rangeFalloff?: { edgeFactor: number }
+  review?: {
+    reviewedVersion: string
+    sources: string[]
+    valid: boolean
+    invalidFiles: string[]
+  }
 }
 
 export interface HeroSkill {
@@ -243,22 +252,42 @@ export interface Enemy {
   alwaysShown: boolean
   flying: boolean
   boss: boolean
-  stats: {
-    hp: number | null
-    damageMin: number | null
-    damageMax: number | null
-    armor: number | null
-    magicArmor: number | null
-    speed: number | null
-    lives: number | null
-    gold: number | null
-  }
+  bossEvidence: string | null
+  stats: EnemyStats
+  statsByDifficulty: EnemyDifficultyStats[]
+  diagnostics: EnemyDiagnostics
   sources: {
     roster: string
     template: string | null
     localization: string
     encyclopedia: string
+    difficulty: string
   }
+}
+
+export interface EnemyStats {
+  hp: number | null
+  damageMin: number | null
+  damageMax: number | null
+  armor: number | null
+  magicArmor: number | null
+  speed: number | null
+  lives: number | null
+  gold: number | null
+}
+
+export interface EnemyDiagnostics {
+  fieldSources: Record<string, string | null>
+  missingFields: Partial<Record<keyof EnemyStats, string>>
+  notApplicableFields: string[]
+  damageScope: string
+  infoError: string | null
+}
+
+export interface EnemyDifficultyStats extends EnemyDiagnostics {
+  difficulty: number
+  label: string
+  stats: EnemyStats
 }
 
 export type TechnologyMetric =
@@ -352,6 +381,8 @@ export interface GameChangelog {
 }
 
 export interface DoveData {
+  schemaVersion: number
+  calculationRules: CalculationRules
   metadata: {
     title: string
     gameVersion: string
@@ -388,10 +419,53 @@ export interface DoveData {
     unlockAnomalies: string[]
     noUnifiedDamage: string[]
     missingTemplateSources: string[]
+    enemyMissingStats: { entryId: string; difficulty: number; field: string; reason: string; expected: boolean }[]
+    enemyInfoErrors: { entryId: string; difficulty: number; message: string }[]
   }
   supportEffects: SupportEffect[]
   technologyTrees: TechnologyTree[]
   heroes: Hero[]
   enemies: Enemy[]
   towers: Tower[]
+}
+
+export interface CalculationRules {
+  version: number
+  reviewedVersion: string
+  gameCommit: string
+  reviewedAt: string
+  valid: boolean
+  files: Record<string, string>
+  invalidFiles: string[]
+  simulationTechnologyIds: string[]
+  magicDustCompensationTowerIds: string[]
+  parameters: {
+    piercingArmor: number
+    criticalChance: number
+    criticalMultiplier: number
+    tearThresholds: number[]
+    tearReductions: number[]
+    shatterThreshold: number
+    shatterSmall: number
+    shatterNormal: number
+    lowProtectionThreshold: number
+    lowProtectionMultiplier: number
+    secondaryMagicDamageFactor: number
+    flyingDamageMultiplier: number
+    unprotectedMultiplier: number
+    unsteadyChance: number
+    unsteadyMultiplier: number
+    magicDustChance: number
+    magicDustHpFactor: number
+    magicDustCompensation: number
+    bleedChance: number
+    bleedDamageFactor: number
+    bleedTicks: number
+    bleedTickInterval: number
+    bleedDuration: number
+    bleedMaxStacks: number
+    purgeBase: number
+    purgePerEnemy: number
+    purgeEnemyCap: number
+  }
 }
