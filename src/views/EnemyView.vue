@@ -17,6 +17,7 @@ const sourceNames: Record<number, string> = {
   2: '前线',
   3: '起源',
   5: '联盟',
+  6: 'KR Genesis',
 }
 
 const sourceGames = computed(() =>
