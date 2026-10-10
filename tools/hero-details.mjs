@@ -22,7 +22,7 @@ export async function loadHeroReview(gameDir) {
       return [file, { text, valid: sourceHash(text) === hash }]
     } catch { return [file, { text: '', valid: false }] }
   })))
-  return { version: review.version, files }
+  return { version: review.version, files, manifest: review }
 }
 
 export function buildHeroDetails(raw, review) {

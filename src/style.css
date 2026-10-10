@@ -2322,11 +2322,15 @@ input:focus {
 }
 
 .damage-demo-fields.custom-attack-fields label:first-child {
-  grid-column: 1 / -1;
+  grid-column: auto;
 }
 
 .damage-demo-fields.dummy-fields {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.damage-demo-fields.dummy-fields label:first-child {
+  grid-column: 1 / -1;
 }
 
 .dummy-effective-armor {
@@ -5105,7 +5109,7 @@ input:focus {
 
 .enemy-toolbar {
   display: grid;
-  grid-template-columns: minmax(300px, 2fr) repeat(4, minmax(135px, 1fr));
+  grid-template-columns: minmax(220px, 2fr) repeat(5, minmax(110px, 1fr));
   gap: 12px;
   align-items: end;
   padding: 18px;
@@ -5141,6 +5145,8 @@ input:focus {
 .enemy-results-line {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
   padding: 14px 2px;
   color: var(--faint);
   font-size: 12px;

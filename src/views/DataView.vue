@@ -102,8 +102,9 @@ function openSupportSource(effect: SupportEffect) {
                 <span><strong>{{ effect.name }}</strong><small>{{ supportSourceName(effect) }}</small></span>
               </component>
               <div class="level-pills">
-                <span v-for="level in effect.levels" :key="level.level">Lv.{{ level.level }} · {{ describeLevel(level) }}</span>
+                <span v-for="level in effect.levels" :key="level.level">Lv.{{ level.level }} · {{ describeLevel(level) }}<template v-if="effect.rangeFalloff">（中心）；边缘 +{{ formatPercent((level.rangeBonus || 0) * effect.rangeFalloff.edgeFactor) }}</template></span>
               </div>
+              <p v-if="effect.review?.valid === false">源码已变化，待复核；该效果已暂停计算。</p>
               <p>{{ effect.note }}</p>
             </article>
           </div>
@@ -134,6 +135,13 @@ function openSupportSource(effect: SupportEffect) {
           <ul>
             <li v-for="warning in data.validation.warnings" :key="warning">{{ warning }}</li>
           </ul>
+          <details v-if="data.validation.enemyMissingStats.length || data.validation.enemyInfoErrors.length">
+            <summary>敌人字段与计算异常</summary>
+            <ul>
+              <li v-for="item in data.validation.enemyMissingStats" :key="`${item.entryId}:${item.difficulty}:${item.field}`">{{ item.entryId }} · 难度 {{ item.difficulty }} · {{ item.field }}：{{ item.reason }}</li>
+              <li v-for="item in data.validation.enemyInfoErrors" :key="`${item.entryId}:${item.difficulty}:error`">{{ item.entryId }} · 难度 {{ item.difficulty }}：{{ item.message }}</li>
+            </ul>
+          </details>
         </section>
 
         <section class="data-card anomaly-card">
@@ -156,6 +164,7 @@ function openSupportSource(effect: SupportEffect) {
           <div class="section-title"><span>数据快照</span><small>VERSION</small></div>
           <dl>
             <div><dt>站点版本</dt><dd>{{ siteVersion }}</dd></div>
+            <div><dt>数据格式</dt><dd>{{ data.schemaVersion }}</dd></div>
             <div><dt>游戏版本</dt><dd>{{ data.metadata.gameVersion }}</dd></div>
             <div><dt>内容版本</dt><dd>{{ data.metadata.contentVersion }}</dd></div>
             <div><dt>内部 ID</dt><dd>{{ data.metadata.gameId }}</dd></div>

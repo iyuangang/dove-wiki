@@ -1,16 +1,39 @@
 import type {
   SupportEffect,
+  SupportLevel,
   Technology,
   TechnologyModifier,
   TechnologyTree,
   Tower,
   TowerFamily,
 } from '../types'
+import { calculationRules, purgeDamageBonus } from './calculation-rules'
 
 export interface SupportSelection {
   effectId: string
   level: number
   triggers?: number
+  sourceRange?: number
+  distanceRatio?: number
+}
+
+// Source-range auras use the source tower's current range, independent of the target's technologies.
+export function resolveSupportLevel(effect: SupportEffect, selection: SupportSelection): SupportLevel | null {
+  const level = effect.levels.find((candidate) => candidate.level === selection.level)
+  if (!level) return null
+  const radius = effect.radiusUsesSourceRange ? selection.sourceRange ?? level.radius : level.radius
+  if (!Number.isFinite(radius) || radius < 0 || (effect.radiusUsesSourceRange && radius === 0)) return null
+  let rangeBonus = level.rangeBonus
+  if (effect.rangeFalloff) {
+    const ratio = selection.distanceRatio ?? 1
+    if (!Number.isFinite(ratio) || ratio < 0 || ratio > 1) return null
+    rangeBonus = (rangeBonus || 0) * (1 - ratio * (1 - effect.rangeFalloff.edgeFactor))
+  }
+  return { ...level, radius, rangeBonus }
+}
+
+export function supportAppliesToTower(effect: SupportEffect, tower: Tower) {
+  return effect.review?.valid !== false && !effect.excludeTowerIds?.includes(tower.id) && (tower.canBeBuffed || effect.requiresBuffable === false)
 }
 
 export interface TechnologySelection {
@@ -36,6 +59,9 @@ export interface BuffResult {
     respawn: number | null
   } | null
   damageBonus: number
+  technologyDamageBonus: number
+  technologyDamageMin: number | null
+  technologyDamageMax: number | null
   technologyDamageMultiplier: number
   rangeMultiplier: number
   technologyRangeMultiplier: number
@@ -102,6 +128,7 @@ export function calculateBuffs(
 ): BuffResult {
   const effectById = new Map(effects.map((effect) => [effect.id, effect]))
   let damageBonus = 0
+  let technologyDamageBonus = 0
   let rangeMultiplier = 1
   let speedBonus = 0
   let supportCooldownMultiplier = 1
@@ -109,11 +136,22 @@ export function calculateBuffs(
   let flatDps = 0
   const applied: BuffResult['applied'] = []
 
+  const effectiveSelections = new Map<string, { selection: SupportSelection; effect: SupportEffect; level: SupportLevel }>()
   for (const selection of selections) {
     const effect = effectById.get(selection.effectId)
-    const level = effect?.levels.find((candidate) => candidate.level === selection.level)
+    const level = effect && resolveSupportLevel(effect, selection)
     if (!effect || !level) continue
-    if (!tower.canBeBuffed && effect.requiresBuffable !== false) continue
+    if (!supportAppliesToTower(effect, tower)) continue
+    const previous = effectiveSelections.get(effect.id)
+    // Identical modifiers refresh/replace; several towers cannot multiply the same aura.
+    const strength = effect.rangeFalloff ? level.rangeBonus || 0 : level.level
+    const previousStrength = effect.rangeFalloff ? previous?.level.rangeBonus || 0 : previous?.level.level || 0
+    if (!previous || strength > previousStrength || (strength === previousStrength && (selection.triggers || 0) > (previous.selection.triggers || 0))) {
+      effectiveSelections.set(effect.id, { selection, effect, level })
+    }
+  }
+
+  for (const { selection, effect, level } of effectiveSelections.values()) {
 
     let selectedDamageBonus = level.damageBonus || 0
     let triggers: number | null = null
@@ -168,14 +206,8 @@ export function calculateBuffs(
 
     for (const technology of technologies) {
       let calculatedByContext = false
-      if (technology.id === 'mage_purge_field') {
-        const nearbyEnemyCount = Math.min(
-          30,
-          Math.max(0, Math.floor(technologySelection.nearbyEnemyCount ?? 1)),
-        )
-        const factor = 1.14 + nearbyEnemyCount * 0.01
-        technologyDamageMin = multiply(technologyDamageMin, factor)
-        technologyDamageMax = multiply(technologyDamageMax, factor)
+      if (technology.id === 'mage_purge_field' && calculationRules.valid) {
+        technologyDamageBonus += purgeDamageBonus(technologySelection.nearbyEnemyCount ?? 1)
         calculatedByContext = true
       }
 
@@ -262,11 +294,11 @@ export function calculateBuffs(
   const damageMin =
     technologyDamageMin === null
       ? null
-      : round(technologyDamageMin * (1 + damageBonus))
+      : round(technologyDamageMin * (1 + damageBonus + technologyDamageBonus))
   const damageMax =
     technologyDamageMax === null
       ? null
-      : round(technologyDamageMax * (1 + damageBonus))
+      : round(technologyDamageMax * (1 + damageBonus + technologyDamageBonus))
   const cooldown =
     tower.attack.cooldown === null
       ? null
@@ -313,6 +345,9 @@ export function calculateBuffs(
     price,
     soldier,
     damageBonus: round(damageBonus),
+    technologyDamageBonus: round(technologyDamageBonus),
+    technologyDamageMin,
+    technologyDamageMax,
     technologyDamageMultiplier:
       baseDamageAverage && technologyDamageAverage
         ? round(technologyDamageAverage / baseDamageAverage)

@@ -11,8 +11,11 @@ const leftId = ref('tower_ranger')
 const rightId = ref('tower_high_elven')
 const left = computed(() => props.towers.find((tower) => tower.id === leftId.value) || props.towers[0])
 const right = computed(() => props.towers.find((tower) => tower.id === rightId.value) || props.towers[1])
+const attackComparable = computed(() => left.value.attack.scope === right.value.attack.scope && left.value.attack.damageTypeValue === right.value.attack.damageTypeValue)
+const rangeComparable = computed(() => (left.value.attack.range === null) === (right.value.attack.range === null))
 
-function statClass(leftValue: number | null, rightValue: number | null, side: 'left' | 'right', lower = false) {
+function statClass(leftValue: number | null, rightValue: number | null, side: 'left' | 'right', lower = false, comparable = true) {
+  if (!comparable) return ''
   if (leftValue === null || rightValue === null || leftValue === rightValue) return ''
   const leftWins = lower ? leftValue < rightValue : leftValue > rightValue
   return (side === 'left' && leftWins) || (side === 'right' && !leftWins) ? 'winner' : ''
@@ -52,6 +55,7 @@ function statClass(leftValue: number | null, rightValue: number | null, side: 'l
           <small>{{ left.families.map((family) => familyLabels[family]).join(' / ') }}</small>
           <h2>{{ left.name }}</h2>
           <code>{{ left.id }}</code>
+          <small>{{ left.attack.scope }}</small>
         </div>
       </button>
       <div class="compare-center-title">基础面板</div>
@@ -60,33 +64,34 @@ function statClass(leftValue: number | null, rightValue: number | null, side: 'l
           <small>{{ right.families.map((family) => familyLabels[family]).join(' / ') }}</small>
           <h2>{{ right.name }}</h2>
           <code>{{ right.id }}</code>
+          <small>{{ right.attack.scope }}</small>
         </div>
         <div class="compare-portrait" :class="{ 'encyclopedia-icon': right.encyclopediaListed }">
           <img :src="right.image" :alt="right.name" />
         </div>
       </button>
 
-      <div class="compare-value" :class="statClass(left.attack.damageMin, right.attack.damageMin, 'left')">
+      <div class="compare-value" :class="statClass(left.attack.damageMin, right.attack.damageMin, 'left', false, attackComparable)">
         {{ formatNumber(left.attack.damageMin) }}–{{ formatNumber(left.attack.damageMax) }}
       </div>
-      <div class="compare-label"><span>单次伤害</span><small>{{ left.attack.scope === right.attack.scope ? left.attack.scope : '基础口径' }}</small></div>
-      <div class="compare-value" :class="statClass(left.attack.damageMin, right.attack.damageMin, 'right')">
+      <div class="compare-label"><span>单次伤害</span><small>{{ attackComparable ? left.attack.scope : '口径或伤害类型不同，分别阅读' }}</small></div>
+      <div class="compare-value" :class="statClass(left.attack.damageMin, right.attack.damageMin, 'right', false, attackComparable)">
         {{ formatNumber(right.attack.damageMin) }}–{{ formatNumber(right.attack.damageMax) }}
       </div>
 
-      <div class="compare-value" :class="statClass(left.attack.dps, right.attack.dps, 'left')">{{ formatNumber(left.attack.dps) }}</div>
+      <div class="compare-value" :class="statClass(left.attack.dps, right.attack.dps, 'left', false, attackComparable)">{{ formatNumber(left.attack.dps) }}</div>
       <div class="compare-label"><span>理论 DPS</span><small>单目标</small></div>
-      <div class="compare-value" :class="statClass(left.attack.dps, right.attack.dps, 'right')">{{ formatNumber(right.attack.dps) }}</div>
+      <div class="compare-value" :class="statClass(left.attack.dps, right.attack.dps, 'right', false, attackComparable)">{{ formatNumber(right.attack.dps) }}</div>
 
-      <div class="compare-value" :class="statClass(left.attack.cooldown, right.attack.cooldown, 'left', true)">{{ formatNumber(left.attack.cooldown) }}s</div>
+      <div class="compare-value" :class="statClass(left.attack.cooldown, right.attack.cooldown, 'left', true, attackComparable)">{{ formatNumber(left.attack.cooldown) }}s</div>
       <div class="compare-label"><span>攻击间隔</span><small>越低越快</small></div>
-      <div class="compare-value" :class="statClass(left.attack.cooldown, right.attack.cooldown, 'right', true)">{{ formatNumber(right.attack.cooldown) }}s</div>
+      <div class="compare-value" :class="statClass(left.attack.cooldown, right.attack.cooldown, 'right', true, attackComparable)">{{ formatNumber(right.attack.cooldown) }}s</div>
 
-      <div class="compare-value" :class="statClass(left.attack.range ?? left.attack.rallyRange, right.attack.range ?? right.attack.rallyRange, 'left')">
+      <div class="compare-value" :class="statClass(left.attack.range ?? left.attack.rallyRange, right.attack.range ?? right.attack.rallyRange, 'left', false, rangeComparable)">
         {{ formatNumber(left.attack.range ?? left.attack.rallyRange) }}
       </div>
       <div class="compare-label"><span>范围</span><small>兵营为集结范围</small></div>
-      <div class="compare-value" :class="statClass(left.attack.range ?? left.attack.rallyRange, right.attack.range ?? right.attack.rallyRange, 'right')">
+      <div class="compare-value" :class="statClass(left.attack.range ?? left.attack.rallyRange, right.attack.range ?? right.attack.rallyRange, 'right', false, rangeComparable)">
         {{ formatNumber(right.attack.range ?? right.attack.rallyRange) }}
       </div>
 

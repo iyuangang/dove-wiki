@@ -8,6 +8,7 @@ local hero_output = os.getenv("DOVE_HERO_DIR")
 local enemy_output = os.getenv("DOVE_ENEMY_DIR")
 local technology_output = os.getenv("DOVE_TECHNOLOGY_DIR")
 local damage_icon_output = os.getenv("DOVE_DAMAGE_ICON_DIR")
+local template_bases = {}
 
 local function report_error(message)
 	io.stderr:write("[dove-wiki] " .. message .. "\n")
@@ -452,6 +453,7 @@ local function build_raw_export(entity_db)
 	i18n.msgs[i18n.current_locale] = localization
 	local portrait_atlas = load_atlas_table("_assets/kr1-desktop/images/fullhd/gui_portraits.lua")
 	local gui_icon_atlas = load_atlas_table("_assets/kr1-desktop/images/fullhd/gui_ico.lua")
+	local gui_common_atlas = load_atlas_table("_assets/kr1-desktop/images/fullhd/gui_common.lua")
 	local encyclopedia_thumb_atlas = load_atlas_table("_assets/kr1-desktop/images/fullhd/encyclopedia.lua")
 	local encyclopedia_detail_atlas = load_atlas_table("_assets/kr1-desktop/images/fullhd/encyclopedia_creeps.lua")
 	local encyclopedia_index = load_encyclopedia_index()
@@ -501,6 +503,7 @@ local function build_raw_export(entity_db)
 				powers = copy_jsonable(template.powers, 8),
 				rotation_time = template.rotation_time,
 				shooters_sids = copy_jsonable(template.shooters_sids, 2),
+				vis = copy_jsonable(template.vis, 3),
 				tower = copy_jsonable(template.tower, 5)
 			}
 
@@ -520,10 +523,11 @@ local function build_raw_export(entity_db)
 
 			for power_id in pairs(template.powers or {}) do
 				local sprite = menu_images[power_id]
-				if sprite and gui_icon_atlas[sprite] then
+				local atlas = sprite and (gui_icon_atlas[sprite] or gui_common_atlas[sprite])
+				if atlas then
 					record.power_icons[power_id] = {
 						sprite = sprite,
-						atlas = copy_jsonable(gui_icon_atlas[sprite], 4)
+						atlas = copy_jsonable(atlas, 4)
 					}
 				end
 			end
@@ -689,6 +693,42 @@ local function build_raw_export(entity_db)
 
 	local enemies = {}
 	local U = require("utils")
+	-- Run the installed difficulty implementation on independent template copies.
+	-- In particular, level 3 selects index 4 when a four-item array is present.
+	local originals = entity_db.entities
+	local difficulty = require("difficulty")
+	local enemy_variants = {}
+	for level = 1, 4 do
+		entity_db.entities = {}
+		for name, template in pairs(originals) do
+			entity_db.entities[name] = table.deepclone(template)
+		end
+		difficulty:set_level(level)
+		difficulty:patch_templates()
+		for index, entry in ipairs(settings.encyclopedia_enemies or {}) do
+			local id = type(entry) == "table" and entry.name or entry
+			local template = entity_db.entities[id]
+			local variant = {difficulty = level}
+			if template then
+				variant.template = {
+					health = copy_jsonable(template.health, 5),
+					motion = copy_jsonable(template.motion, 4),
+					enemy = copy_jsonable(template.enemy, 5),
+					melee = copy_jsonable(template.melee, 7),
+					ranged = copy_jsonable(template.ranged, 7)
+				}
+				if template.info and type(template.info.fn) == "function" then
+					local ok, info = pcall(template.info.fn, template)
+					if ok and type(info) == "table" then
+						variant.computed_info = copy_jsonable(info, 6)
+					else variant.computed_info_error = tostring(info) end
+				end
+			end
+			enemy_variants[index] = enemy_variants[index] or {}
+			table.insert(enemy_variants[index], variant)
+		end
+	end
+	entity_db.entities = originals
 	for index, enemy_entry in ipairs(settings.encyclopedia_enemies or {}) do
 		local enemy_id = type(enemy_entry) == "table" and enemy_entry.name or enemy_entry
 		local template = entity_db.entities[enemy_id]
@@ -703,8 +743,22 @@ local function build_raw_export(entity_db)
 			always_shown = type(enemy_entry) == "table" and enemy_entry.always_shown == true or false,
 			template_exists = template ~= nil
 		}
+		record.difficulty_stats = enemy_variants[index]
 
 		if template then
+			local base = enemy_id
+			local seen = {}
+			while base and not seen[base] do
+				seen[base] = true
+				if base == "boss" then
+					record.boss_evidence = "模板继承链 → boss"
+					break
+				end
+				base = template_bases[base]
+			end
+			if not record.boss_evidence and template.info and template.info.portrait_boss then
+				record.boss_evidence = "info.portrait_boss（首领血条头像）"
+			end
 			record.template = {
 				enemy = copy_jsonable(template.enemy, 5),
 				health = copy_jsonable(template.health, 5),
@@ -759,6 +813,7 @@ local function build_raw_export(entity_db)
 	end
 
 	return {
+		metadata = {runId = os.getenv("DOVE_RUN_ID"), enemyDifficultySource = "all/difficulty.lua"},
 		localization = localization,
 		technology = {
 			display_order = copy_jsonable(upgrades.display_order, 3),
@@ -1045,6 +1100,11 @@ function love.load()
 		i18n.msgs[i18n.current_locale] = load_lua_table("_assets/kr1-desktop/strings/zh-Hans.lua")
 
 		local entity_db = require("entity_db")
+		local register = entity_db.register_t
+		entity_db.register_t = function(self, name, base)
+			template_bases[name] = base
+			return register(self, name, base)
+		end
 		entity_db:load()
 
 		local count = 0

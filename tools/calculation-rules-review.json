@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "reviewedVersion": "2.0.9.3",
+  "gameCommit": "731afe683e16e3adbfe162cf2b7452cc7bd2f867",
+  "reviewedAt": "2026-10-10",
+  "note": "人工核对科技钩子、修饰器模板及伤害/持续伤害结算。同步不得更新指纹；变化后条件与概率规则停止计算，等待复核。",
+  "files": {
+    "kr1/upgrades.lua": "44c9e73126171f2bda1140877ff696e53b5cb1666e9e781ff72542836168f3f5",
+    "kr1/game_templates.lua": "93756fe782e43de9c32616d97573ca572a0c4f63467e16ac1036763b40865336",
+    "kr1/game_scripts.lua": "d78c9cc9d4c6df87a1383089eb8661a6dc1add31270e9c218c6969731a875fe0",
+    "all/templates.lua": "f83d5091f593ac92ee8edef0e9384269f0b2c89c81b7e2f559a8472178db21b8",
+    "all/scripts.lua": "2d73332e1dccd0bbddd6f51b2990fa36370d7a85020539f1f2651325620c7394",
+    "all/systems/health.lua": "fe28639c2c537ff39842010905ea414e4299502c1a6e50b5188bba487951ec16"
+  },
+  "simulationTechnologyIds": [
+    "archer_piercing",
+    "archer_precision",
+    "archer_el_bloodletting_shoot",
+    "archer_tear",
+    "archer_obsidian",
+    "archer_magic",
+    "archer_fly_killer",
+    "mage_arcane_shatter",
+    "mage_strike",
+    "mage_unsteady",
+    "mage_purge_field",
+    "engineer_magic_dust"
+  ],
+  "magicDustCompensationTowerIds": [
+    "tower_tesla",
+    "tower_frankenstein",
+    "tower_rotten_forest",
+    "tower_ignis_altar",
+    "tower_sandworm"
+  ],
+  "parameters": {
+    "piercingArmor": 10,
+    "criticalChance": 0.1,
+    "criticalMultiplier": 2,
+    "tearThresholds": [
+      10,
+      20,
+      40
+    ],
+    "tearReductions": [
+      0.16,
+      0.44,
+      0.72,
+      1
+    ],
+    "shatterThreshold": 50,
+    "shatterSmall": 2,
+    "shatterNormal": 3.5,
+    "lowProtectionThreshold": 0.1,
+    "lowProtectionMultiplier": 1.27,
+    "secondaryMagicDamageFactor": 0.12,
+    "flyingDamageMultiplier": 1.25,
+    "unprotectedMultiplier": 1.2,
+    "unsteadyChance": 0.1,
+    "unsteadyMultiplier": 2,
+    "magicDustChance": 0.1,
+    "magicDustHpFactor": 0.004,
+    "magicDustCompensation": 1.2,
+    "bleedChance": 0.15,
+    "bleedDamageFactor": 0.1,
+    "bleedTicks": 23,
+    "bleedTickInterval": 0.13333333333333333,
+    "bleedDuration": 3,
+    "bleedMaxStacks": 5,
+    "purgeBase": 0.14,
+    "purgePerEnemy": 0.01,
+    "purgeEnemyCap": 30
+  }
+}
