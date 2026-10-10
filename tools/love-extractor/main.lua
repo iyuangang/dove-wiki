@@ -287,7 +287,7 @@ local function summarize_reference(template)
 			summary[key] = value
 		end
 	end
-	for _, key in ipairs({"received_damage_factor_config", "inflicted_damage_factor_config", "modifier_duration", "damage_min_conf", "damage_max_conf", "slow_factor_config", "stun_duration_config", "min_damage", "max_damage", "bullet_count"}) do
+	for _, key in ipairs({"received_damage_factor_config", "inflicted_damage_factor_config", "modifier_duration", "damage_min_conf", "damage_max_conf", "armor_red_factor_conf", "slow_factor_config", "stun_duration_config", "min_damage", "max_damage", "bullet_count"}) do
 		if template[key] then summary[key] = copy_jsonable(template[key], 3) end
 	end
 
@@ -541,6 +541,13 @@ local function build_raw_export(entity_db)
 				reference_names.mod_knights_skill_a_hero = true
 			end
 			if tower_id == "tower_tricannon_lvl4" then reference_names.tower_tricannon_overheat_scorch_aura = true end
+			-- Power upgrades replace attack.bullet at runtime; these edges are absent
+			-- from the unupgraded template (tower_culverine/elf_ranger.update).
+			if tower_id == "tower_culverine" then reference_names.bullet_culverine_skill_b = true end
+			if tower_id == "tower_elf_ranger" then
+				reference_names.bullet_elf_ranger_skill_c = true
+				reference_names.bullet_elf_ranger_skill_a_bounce = true
+			end
 			-- Resolve the game's own dynamic descriptions with the tower context.
 			-- Keep failures visible instead of silently deleting numeric expressions.
 			record.resolved_descriptions = {}
@@ -681,20 +688,13 @@ local function build_raw_export(entity_db)
 	end
 
 	local enemies = {}
+	local U = require("utils")
 	for index, enemy_entry in ipairs(settings.encyclopedia_enemies or {}) do
 		local enemy_id = type(enemy_entry) == "table" and enemy_entry.name or enemy_entry
 		local template = entity_db.entities[enemy_id]
-		local source_game
-
-		if index <= 68 then
-			source_game = 1
-		elseif index <= 128 then
-			source_game = (index == 117 or index == 120 or index == 121 or index == 122) and 1 or 2
-		elseif index <= 173 then
-			source_game = 3
-		else
-			source_game = 5
-		end
+		-- Use the same source/prefix contract as screen_map's enemy encyclopedia.
+		-- A copied index range silently selects another game's same-numbered art.
+		local source_game = U.get_enemy_encyclopedia_creep_from_kr(index)
 
 		local record = {
 			id = enemy_id,
@@ -728,11 +728,10 @@ local function build_raw_export(entity_db)
 
 			local enc_icon = template.info and template.info.enc_icon
 			if enc_icon then
-				local prefix = source_game == 1 and "" or "kr" .. source_game .. "_"
 				record.encyclopedia = {
 					icon = enc_icon,
-					thumb_sprite = prefix .. string.format("encyclopedia_creep_thumbs_%04i", enc_icon),
-					detail_sprite = prefix .. string.format("encyclopedia_creeps_%04i", enc_icon)
+					thumb_sprite = U.splicing_from_kr(source_game, string.format("encyclopedia_creep_thumbs_%04i", enc_icon)),
+					detail_sprite = U.splicing_from_kr(source_game, string.format("encyclopedia_creeps_%04i", enc_icon))
 				}
 				record.encyclopedia.thumb_atlas = copy_jsonable(
 					encyclopedia_thumb_atlas[record.encyclopedia.thumb_sprite],

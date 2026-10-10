@@ -79,6 +79,22 @@ describe('游戏百科顺序与图像', () => {
     }
   })
 
+  it('2.0.9.3 复核补齐三座新塔并保留骑士实际眩晕流程', () => {
+    if (doveData.metadata.commitHash !== mechanicReview.gameCommit) return
+    for (const [id, count] of [['tower_culverine', 5], ['tower_elf_ranger', 4], ['tower_wildcat', 5]] as const) {
+      const tower = towerById.get(id)!
+      expect(tower.mechanics.items.filter((item) => item.kind !== 'damage-rule'), id).toHaveLength(count)
+    }
+    const item = (tower: string, id: string) => towerById.get(tower)!.mechanics.items.find((item) => item.id === id)!
+    expect(item('tower_knights', 'knights-stun').details.join(' ')).toContain('单体近战函数没有读取')
+    expect(item('tower_culverine', 'culverine-shred').summary).toContain('3 / 5 / 7 个百分点')
+    expect(towerById.get('tower_culverine')!.roles).toContain('减益/破甲')
+    expect(towerById.get('tower_culverine')!.attack.scope).toContain('落点范围')
+    expect(item('tower_elf_ranger', 'elf-ranger-ricochet').formula).toContain('r^k')
+    expect(item('tower_wildcat', 'wildcat-rain').summary).toContain('16 / 20 / 24 枚')
+    expect(towerById.get('tower_wildcat')!.roles).toContain('范围伤害')
+  })
+
   it('少林寺包含可调集神龙大侠完整属性与人多势众的三级人数', () => {
     const tower = towerById.get('tower_shaolin')!
     expect(tower.units).toHaveLength(1)
@@ -281,6 +297,27 @@ describe('游戏百科顺序与图像', () => {
         ),
       ),
     ).toBe(true)
+  })
+
+  it('KR Genesis 敌人使用独立图集，不与联盟的相同编号串图', () => {
+    expect(enemies[298]?.sourceGame).toBe(5)
+    expect(enemies[299]).toMatchObject({
+      id: 'enemy_bandit_kr6', sourceGame: 6,
+      imageSprite: 'kr6_encyclopedia_creeps_0001',
+      thumbnailSprite: 'kr6_encyclopedia_creep_thumbs_0001',
+    })
+    const veznan = enemies.find((enemy) => enemy.id === 'enemy_stage_218_veznan')!
+    expect(veznan).toMatchObject({
+      sourceGame: 6,
+      imageSprite: 'kr6_encyclopedia_creeps_0061',
+      thumbnailSprite: 'kr6_encyclopedia_creep_thumbs_0061',
+    })
+    expect(enemies.filter((enemy) => enemy.sourceGame === 6)).toHaveLength(55)
+    for (const enemy of enemies) {
+      const prefix = enemy.sourceGame === 1 ? '' : `kr${enemy.sourceGame}_`
+      expect(enemy.imageSprite, enemy.id).toMatch(new RegExp(`^${prefix}encyclopedia_creeps_`))
+      expect(enemy.thumbnailSprite, enemy.id).toMatch(new RegExp(`^${prefix}encyclopedia_creep_thumbs_`))
+    }
   })
 
   it('同时识别关卡主脚本和数据脚本中的塔解锁记录', () => {

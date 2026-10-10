@@ -1,16 +1,16 @@
 {
   "metadata": {
     "title": "王国保卫战鸽子版 WIKI",
-    "gameVersion": "2.0.8.9",
+    "gameVersion": "2.0.9.3",
     "contentVersion": "5.6.12",
     "gameId": "kingdom_rush_dove",
-    "commitHash": "45073448b340682d893dec553d495153108f186e",
-    "generatedAt": "2026-10-08T07:34:37.730Z",
+    "commitHash": "731afe683e16e3adbfe162cf2b7452cc7bd2f867",
+    "generatedAt": "2026-10-10T08:35:59.509Z",
     "sourceRoot": "C:\\Users\\hhyg2\\AppData\\Local\\王国保卫战Dove版\\KingdomRushDove",
     "heroSnapshot": {
-      "gameVersion": "2.0.8.9",
-      "commitHash": "45073448b340682d893dec553d495153108f186e",
-      "generatedAt": "2026-10-08T07:34:37.733Z",
+      "gameVersion": "2.0.9.3",
+      "commitHash": "731afe683e16e3adbfe162cf2b7452cc7bd2f867",
+      "generatedAt": "2026-10-10T08:35:59.513Z",
       "sourceRoot": "C:\\Users\\hhyg2\\AppData\\Local\\王国保卫战Dove版\\KingdomRushDove"
     },
     "assumptions": [
@@ -21,9 +21,9 @@
     ]
   },
   "summary": {
-    "towerCount": 98,
-    "portraitCount": 98,
-    "encyclopediaImageCount": 86,
+    "towerCount": 101,
+    "portraitCount": 101,
+    "encyclopediaImageCount": 89,
     "portraitFallbackCount": 12,
     "skillIconCount": 197,
     "technologyTreeCount": 4,
@@ -35,10 +35,10 @@
     "supportTowerCount": 6,
     "supportHeroCount": 7,
     "supportEffectCount": 15,
-    "levelUnlockCount": 64,
+    "levelUnlockCount": 67,
     "defaultUnlockCount": 34,
     "unlockAnomalyCount": 0,
-    "exactDamageCount": 97
+    "exactDamageCount": 100
   },
   "validation": {
     "warnings": [
@@ -30816,9 +30816,9 @@
       "traits": [],
       "image": "/enemies/enemy_bandit_kr6.png",
       "thumbnail": "/enemies/thumbs/enemy_bandit_kr6.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0001",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0001",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0001",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0001",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -30851,9 +30851,9 @@
       ],
       "image": "/enemies/enemy_blackguard.png",
       "thumbnail": "/enemies/thumbs/enemy_blackguard.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0002",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0002",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0002",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0002",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -30888,9 +30888,9 @@
       ],
       "image": "/enemies/enemy_shadow_archer_kr6.png",
       "thumbnail": "/enemies/thumbs/enemy_shadow_archer_kr6.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0004",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0004",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0004",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0004",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -30924,9 +30924,9 @@
       ],
       "image": "/enemies/enemy_shadow_blades.png",
       "thumbnail": "/enemies/thumbs/enemy_shadow_blades.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0003",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0003",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0003",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0003",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -30959,9 +30959,9 @@
       ],
       "image": "/enemies/enemy_crow.png",
       "thumbnail": "/enemies/thumbs/enemy_crow.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0005",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0005",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0005",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0005",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": true,
       "boss": false,
@@ -30995,9 +30995,9 @@
       ],
       "image": "/enemies/enemy_crowcaller.png",
       "thumbnail": "/enemies/thumbs/enemy_crowcaller.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0006",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0006",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0006",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0006",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31031,9 +31031,9 @@
       ],
       "image": "/enemies/enemy_goblin_kr6.png",
       "thumbnail": "/enemies/thumbs/enemy_goblin_kr6.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0007",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0007",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0007",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0007",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31067,9 +31067,9 @@
       ],
       "image": "/enemies/enemy_orc_warrior.png",
       "thumbnail": "/enemies/thumbs/enemy_orc_warrior.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0008",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0008",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0008",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0008",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31103,9 +31103,9 @@
       ],
       "image": "/enemies/enemy_orc_shaman.png",
       "thumbnail": "/enemies/thumbs/enemy_orc_shaman.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0009",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0009",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0009",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0009",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31139,9 +31139,9 @@
       ],
       "image": "/enemies/enemy_wulf.png",
       "thumbnail": "/enemies/thumbs/enemy_wulf.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0010",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0010",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0010",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0010",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31176,9 +31176,9 @@
       ],
       "image": "/enemies/enemy_worg.png",
       "thumbnail": "/enemies/thumbs/enemy_worg.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0011",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0011",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0011",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0011",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31212,9 +31212,9 @@
       ],
       "image": "/enemies/enemy_orc_wildling.png",
       "thumbnail": "/enemies/thumbs/enemy_orc_wildling.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0012",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0012",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0012",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0012",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31248,9 +31248,9 @@
       ],
       "image": "/enemies/enemy_headhunter.png",
       "thumbnail": "/enemies/thumbs/enemy_headhunter.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0013",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0013",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0013",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0013",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31284,9 +31284,9 @@
       ],
       "image": "/enemies/enemy_rider_goblin.png",
       "thumbnail": "/enemies/thumbs/enemy_rider_goblin.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0014",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0014",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0014",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0014",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31321,9 +31321,9 @@
       ],
       "image": "/enemies/enemy_ogre_kr6.png",
       "thumbnail": "/enemies/thumbs/enemy_ogre_kr6.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0015",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0015",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0015",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0015",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31354,9 +31354,9 @@
       "traits": [],
       "image": "/enemies/enemy_boss_stage_208.png",
       "thumbnail": "/enemies/thumbs/enemy_boss_stage_208.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0016",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0016",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0016",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0016",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": true,
@@ -31389,9 +31389,9 @@
       ],
       "image": "/enemies/enemy_troll_warrior.png",
       "thumbnail": "/enemies/thumbs/enemy_troll_warrior.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0018",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0018",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0018",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0018",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31425,9 +31425,9 @@
       ],
       "image": "/enemies/enemy_troll_champion.png",
       "thumbnail": "/enemies/thumbs/enemy_troll_champion.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0019",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0019",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0019",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0019",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31461,9 +31461,9 @@
       ],
       "image": "/enemies/enemy_troll_glider.png",
       "thumbnail": "/enemies/thumbs/enemy_troll_glider.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0021",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0021",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0021",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0021",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": true,
       "boss": false,
@@ -31497,9 +31497,9 @@
       ],
       "image": "/enemies/enemy_frost_icecaller.png",
       "thumbnail": "/enemies/thumbs/enemy_frost_icecaller.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0022",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0022",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0022",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0022",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31534,9 +31534,9 @@
       ],
       "image": "/enemies/enemy_troll_crusher.png",
       "thumbnail": "/enemies/thumbs/enemy_troll_crusher.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0020",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0020",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0020",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0020",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31570,9 +31570,9 @@
       ],
       "image": "/enemies/enemy_troll_pathfinder.png",
       "thumbnail": "/enemies/thumbs/enemy_troll_pathfinder.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0023",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0023",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0023",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0023",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31605,9 +31605,9 @@
       ],
       "image": "/enemies/enemy_frost_baiter.png",
       "thumbnail": "/enemies/thumbs/enemy_frost_baiter.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0024",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0024",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0024",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0024",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31642,9 +31642,9 @@
       ],
       "image": "/enemies/enemy_frost_brute.png",
       "thumbnail": "/enemies/thumbs/enemy_frost_brute.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0025",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0025",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0025",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0025",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31678,9 +31678,9 @@
       ],
       "image": "/enemies/enemy_boss_stage_10.png",
       "thumbnail": "/enemies/thumbs/enemy_boss_stage_10.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0026",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0026",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0026",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0026",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": true,
@@ -31711,9 +31711,9 @@
       "traits": [],
       "image": "/enemies/enemy_spiderling_kr6.png",
       "thumbnail": "/enemies/thumbs/enemy_spiderling_kr6.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0029",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0029",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0029",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0029",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31747,9 +31747,9 @@
       ],
       "image": "/enemies/enemy_giant_spider.png",
       "thumbnail": "/enemies/thumbs/enemy_giant_spider.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0027",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0027",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0027",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0027",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31783,9 +31783,9 @@
       ],
       "image": "/enemies/enemy_spider_matriarch.png",
       "thumbnail": "/enemies/thumbs/enemy_spider_matriarch.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0028",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0028",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0028",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0028",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31820,9 +31820,9 @@
       ],
       "image": "/enemies/enemy_leaper_spider.png",
       "thumbnail": "/enemies/thumbs/enemy_leaper_spider.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0030",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0030",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0030",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0030",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31857,9 +31857,9 @@
       ],
       "image": "/enemies/enemy_son_of_sarelgaz.png",
       "thumbnail": "/enemies/thumbs/enemy_son_of_sarelgaz.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0031",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0031",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0031",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0031",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31893,9 +31893,9 @@
       ],
       "image": "/enemies/enemy_boss_stage_11.png",
       "thumbnail": "/enemies/thumbs/enemy_boss_stage_11.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0032",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0032",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0032",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0032",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": true,
@@ -31931,9 +31931,9 @@
       ],
       "image": "/enemies/enemy_troll_chieftain_kr6.png",
       "thumbnail": "/enemies/thumbs/enemy_troll_chieftain_kr6.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0033",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0033",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0033",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0033",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -31966,9 +31966,9 @@
       ],
       "image": "/enemies/enemy_boss_stage_213.png",
       "thumbnail": "/enemies/thumbs/enemy_boss_stage_213.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0034",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0034",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0034",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0034",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": true,
@@ -32002,9 +32002,9 @@
       ],
       "image": "/enemies/enemy_brigand_kr6.png",
       "thumbnail": "/enemies/thumbs/enemy_brigand_kr6.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0040",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0040",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0040",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0040",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -32038,9 +32038,9 @@
       ],
       "image": "/enemies/enemy_gargoyle_kr6.png",
       "thumbnail": "/enemies/thumbs/enemy_gargoyle_kr6.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0041",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0041",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0041",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0041",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": true,
       "boss": false,
@@ -32074,9 +32074,9 @@
       ],
       "image": "/enemies/enemy_dark_sapper.png",
       "thumbnail": "/enemies/thumbs/enemy_dark_sapper.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0044",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0044",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0044",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0044",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -32110,9 +32110,9 @@
       ],
       "image": "/enemies/enemy_tainted_wolf.png",
       "thumbnail": "/enemies/thumbs/enemy_tainted_wolf.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0045",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0045",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0045",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0045",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -32143,9 +32143,9 @@
       "traits": [],
       "image": "/enemies/enemy_skeleton_kr6.png",
       "thumbnail": "/enemies/thumbs/enemy_skeleton_kr6.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0042",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0042",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0042",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0042",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -32176,9 +32176,9 @@
       "traits": [],
       "image": "/enemies/enemy_skeleton_big_kr6.png",
       "thumbnail": "/enemies/thumbs/enemy_skeleton_big_kr6.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0043",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0043",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0043",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0043",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -32212,9 +32212,9 @@
       ],
       "image": "/enemies/enemy_dark_disciple.png",
       "thumbnail": "/enemies/thumbs/enemy_dark_disciple.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0049",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0049",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0049",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0049",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -32249,9 +32249,9 @@
       ],
       "image": "/enemies/enemy_swamp_thing_kr6.png",
       "thumbnail": "/enemies/thumbs/enemy_swamp_thing_kr6.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0046",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0046",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0046",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0046",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -32285,9 +32285,9 @@
       ],
       "image": "/enemies/enemy_swamp_husk.png",
       "thumbnail": "/enemies/thumbs/enemy_swamp_husk.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0047",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0047",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0047",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0047",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -32323,9 +32323,9 @@
       ],
       "image": "/enemies/enemy_necromancer_kr6.png",
       "thumbnail": "/enemies/thumbs/enemy_necromancer_kr6.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0051",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0051",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0051",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0051",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -32359,9 +32359,9 @@
       ],
       "image": "/enemies/enemy_boss_stage_215.png",
       "thumbnail": "/enemies/thumbs/enemy_boss_stage_215.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0048",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0048",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0048",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0048",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": true,
@@ -32395,9 +32395,9 @@
       ],
       "image": "/enemies/enemy_death_rider.png",
       "thumbnail": "/enemies/thumbs/enemy_death_rider.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0050",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0050",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0050",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0050",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -32430,9 +32430,9 @@
       ],
       "image": "/enemies/enemy_rotten_tree_kr6.png",
       "thumbnail": "/enemies/thumbs/enemy_rotten_tree_kr6.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0052",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0052",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0052",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0052",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -32465,9 +32465,9 @@
       ],
       "image": "/enemies/enemy_dark_knight_kr6.png",
       "thumbnail": "/enemies/thumbs/enemy_dark_knight_kr6.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0053",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0053",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0053",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0053",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -32503,9 +32503,9 @@
       ],
       "image": "/enemies/enemy_dark_slayer.png",
       "thumbnail": "/enemies/thumbs/enemy_dark_slayer.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0054",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0054",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0054",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0054",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -32539,9 +32539,9 @@
       ],
       "image": "/enemies/enemy_demon_spawn.png",
       "thumbnail": "/enemies/thumbs/enemy_demon_spawn.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0055",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0055",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0055",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0055",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -32576,9 +32576,9 @@
       ],
       "image": "/enemies/enemy_demon_hound.png",
       "thumbnail": "/enemies/thumbs/enemy_demon_hound.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0058",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0058",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0058",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0058",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -32613,9 +32613,9 @@
       ],
       "image": "/enemies/enemy_demon_lord.png",
       "thumbnail": "/enemies/thumbs/enemy_demon_lord.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0059",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0059",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0059",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0059",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -32650,9 +32650,9 @@
       ],
       "image": "/enemies/enemy_demon_flareon_kr6.png",
       "thumbnail": "/enemies/thumbs/enemy_demon_flareon_kr6.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0057",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0057",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0057",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0057",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -32686,9 +32686,9 @@
       ],
       "image": "/enemies/enemy_demon_imp_kr6.png",
       "thumbnail": "/enemies/thumbs/enemy_demon_imp_kr6.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0056",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0056",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0056",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0056",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": true,
       "boss": false,
@@ -32724,9 +32724,9 @@
       ],
       "image": "/enemies/enemy_magma_elemental.png",
       "thumbnail": "/enemies/thumbs/enemy_magma_elemental.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0060",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0060",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0060",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0060",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -32757,9 +32757,9 @@
       "traits": [],
       "image": "/enemies/enemy_stage_218_veznan.png",
       "thumbnail": "/enemies/thumbs/enemy_stage_218_veznan.png",
-      "imageSprite": "kr5_encyclopedia_creeps_0061",
-      "thumbnailSprite": "kr5_encyclopedia_creep_thumbs_0061",
-      "sourceGame": 5,
+      "imageSprite": "kr6_encyclopedia_creeps_0061",
+      "thumbnailSprite": "kr6_encyclopedia_creep_thumbs_0061",
+      "sourceGame": 6,
       "alwaysShown": false,
       "flying": false,
       "boss": false,
@@ -32791,7 +32791,6 @@
       ],
       "roles": [
         "直接输出",
-        "范围伤害",
         "控制",
         "持续伤害"
       ],
@@ -32958,7 +32957,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -32990,11 +32989,6 @@
           "role": "直接输出",
           "description": "基础攻击具有可读取伤害。",
           "source": "computed_info.damage_min"
-        },
-        {
-          "role": "范围伤害",
-          "description": "范围光环向敌人施加伤害效果。",
-          "source": "aura_ranger_thorn"
         },
         {
           "role": "控制",
@@ -33285,7 +33279,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -33523,7 +33517,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
@@ -33730,7 +33724,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "令 A 为扣除本次穿甲后的物理护甲，减伤比例 = A × (0.2A + 0.4)。例如 50% 护甲对应 25% 减伤，100% 护甲对应 60% 减伤。",
@@ -33942,7 +33936,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "使用扣除穿甲后的物理护甲的 70% 作为减伤比例，例如 50% 护甲对应 35% 减伤。",
@@ -34286,7 +34280,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -34653,7 +34647,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "普攻除直接魔法伤害外，还施加持续 9 秒的减甲与持续伤害。",
@@ -34917,7 +34911,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "基础电弧可额外跳跃 2 次，即无特殊中继时最多触及 3 个不同目标；连锁技能每级再增加一次跳跃，满级最多 6 个目标。",
@@ -35233,7 +35227,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -35487,7 +35481,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "围绕选中目标在 45 范围内结算；每个目标的伤害乘以 4 / (3 + 实际目标数)。",
@@ -35722,7 +35716,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "未购买鹰眼时，这条暴击分支不生效；购买后，普通攻击和连射弹丸均逐发判定双倍伤害。",
@@ -35742,7 +35736,7 @@
               {
                 "file": "kr1/archer_towers.lua",
                 "symbol": "\"tower_crossbow\"",
-                "line": 133
+                "line": 132
               }
             ]
           },
@@ -36088,7 +36082,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "刺客受到足以致死的伤害时，若保命计时已就绪，会取消本次伤害并将生命设为 1。这个分支没有技能等级条件。",
@@ -36350,7 +36344,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "空闲时可准备并储存最多 5 枚魔法弹；有目标时释放存弹。",
@@ -36621,7 +36615,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "普攻对塔范围内符合条件的地面敌人逐个结算，而不是在某个落点做小范围溅射。",
@@ -36641,7 +36635,7 @@
               {
                 "file": "kr1/engineer_towers.lua",
                 "symbol": "\"tower_dwaarp\"",
-                "line": 292
+                "line": 291
               }
             ]
           },
@@ -36876,7 +36870,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -37224,7 +37218,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -37640,7 +37634,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
@@ -37862,7 +37856,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "令 A 为扣除本次穿甲后的物理护甲，减伤比例 = A × (0.2A + 0.4)。例如 50% 护甲对应 25% 减伤，100% 护甲对应 60% 减伤。",
@@ -38122,7 +38116,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
@@ -38397,7 +38391,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -38620,7 +38614,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "女战士模板自带中毒效果禁用标记；基础击杀跟踪效果为恢复 60 点生命。",
@@ -38947,7 +38941,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -39154,7 +39148,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "使用扣除穿甲后的物理护甲的 70% 作为减伤比例，例如 50% 护甲对应 35% 减伤。",
@@ -39455,7 +39449,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "使用扣除穿甲后的物理护甲的 70% 作为减伤比例，例如 50% 护甲对应 35% 减伤。",
@@ -39854,7 +39848,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "无工程效率科技时，初次电击、第一次跳跃、第二次及之后跳跃的倍率为 100% / 75% / 50%；下限 50%。",
@@ -39870,7 +39864,7 @@
               {
                 "file": "kr1/engineer_towers.lua",
                 "symbol": "\"tower_frankenstein\"",
-                "line": 585
+                "line": 584
               },
               {
                 "file": "kr1/game_scripts.lua",
@@ -40122,7 +40116,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "最多储存 3 块巨石；一次装填至少增加一块，其余空位各有 20% 概率再增加一块。",
@@ -40142,7 +40136,7 @@
               {
                 "file": "kr1/engineer_towers.lua",
                 "symbol": "\"tower_druid\"",
-                "line": 766
+                "line": 765
               },
               {
                 "file": "kr1/foundamental_towers.lua",
@@ -40372,7 +40366,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "基础巨石落地后最多额外弹跳 1 次，弹跳伤害乘以 60%。",
@@ -40387,7 +40381,7 @@
               {
                 "file": "kr1/engineer_towers.lua",
                 "symbol": "\"tower_entwood\"",
-                "line": 913
+                "line": 912
               },
               {
                 "file": "all/scripts.lua",
@@ -40666,7 +40660,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "当前脚本每轮发射 5 枚弹丸，而非仅凭描述理解为三发。",
@@ -40911,7 +40905,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "对同一名 can_do_magic 为真的敌人持续射击，从第二发起每发多扣 0.5 点基础伤害，最多扣 20 点。",
@@ -41149,7 +41143,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "箭矢附带独立的削魔抗效果，每次命中减少 3.5 个百分点的魔法护甲。",
@@ -41165,7 +41159,7 @@
               {
                 "file": "kr1/archer_towers.lua",
                 "symbol": "\"tower_arcane\"",
-                "line": 729
+                "line": 728
               },
               {
                 "file": "all/scripts.lua",
@@ -41403,7 +41397,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "以 162.5 为远近分界，超过才使用远程模式。远近攻击的伤害、间隔和暴击率均不同。",
@@ -41424,7 +41418,7 @@
               {
                 "file": "kr1/archer_towers.lua",
                 "symbol": "\"tower_silver\"",
-                "line": 873
+                "line": 872
               }
             ]
           },
@@ -41752,7 +41746,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -42078,7 +42072,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -42393,7 +42387,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -42590,7 +42584,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
@@ -42784,7 +42778,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
@@ -43054,7 +43048,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "幼龙带飞行标记，并禁止吞噬、网、中毒和燃烧效果。",
@@ -43377,7 +43371,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -43636,7 +43630,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
@@ -43880,7 +43874,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -44167,7 +44161,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -44426,7 +44420,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "一轮普攻发射 3 枚炮弹，按候选敌人循环分配预判落点。",
@@ -44446,7 +44440,7 @@
               {
                 "file": "kr1/engineer_towers.lua",
                 "symbol": "\"tower_tricannon_lvl4\"",
-                "line": 1082
+                "line": 1081
               }
             ]
           },
@@ -44463,7 +44457,7 @@
               {
                 "file": "kr1/engineer_towers.lua",
                 "symbol": "\"tower_tricannon_lvl4\"",
-                "line": 1082
+                "line": 1081
               },
               {
                 "file": "kr1/tower_scripts.lua",
@@ -44473,7 +44467,7 @@
               {
                 "file": "kr1/engineer_towers.lua",
                 "symbol": "RT(\"tower_tricannon_overheat_scorch_aura\"",
-                "line": 1146
+                "line": 1145
               },
               {
                 "file": "all/scripts.lua",
@@ -44768,7 +44762,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -45066,7 +45060,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
@@ -45377,7 +45371,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -45679,7 +45673,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "令 A 为扣除本次穿甲后的物理护甲，减伤比例 = A × (0.2A + 0.4)。例如 50% 护甲对应 25% 减伤，100% 护甲对应 60% 减伤。",
@@ -46069,7 +46063,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
@@ -46298,7 +46292,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
@@ -46542,7 +46536,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "护甲减伤系数为 0；目标的免疫、护盾及其他伤害钩子仍可能影响最终结果。",
@@ -46840,7 +46834,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "令 A 为扣除本次穿甲后的物理护甲，减伤比例 = A × (2 − A)。例如 50% 护甲对应 75% 减伤。",
@@ -47174,7 +47168,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -47363,7 +47357,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
@@ -47657,7 +47651,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "护甲减伤系数为 0；目标的免疫、护盾及其他伤害钩子仍可能影响最终结果。",
@@ -48033,7 +48027,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -48271,7 +48265,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
@@ -48485,7 +48479,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "发射时按当前候选敌人数调整倍率：1 / 2 / 3 / 至少 4 个敌人时，分别为 200% / 166.67% / 133.33% / 100%。",
@@ -48501,7 +48495,7 @@
               {
                 "file": "kr1/engineer_towers.lua",
                 "symbol": "\"tower_sparking_geode_lvl4\"",
-                "line": 1924
+                "line": 1923
               },
               {
                 "file": "kr1/tower_scripts.lua",
@@ -48829,7 +48823,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
@@ -49117,7 +49111,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -49516,7 +49510,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [],
         "pending": [],
         "hasSpecificReview": false
@@ -49727,7 +49721,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
@@ -49978,7 +49972,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -50248,7 +50242,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "令 A 为扣除本次穿甲后的物理护甲，减伤比例 = A × (2 − A)。例如 50% 护甲对应 75% 减伤。",
@@ -50653,7 +50647,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [],
         "pending": [],
         "hasSpecificReview": false
@@ -51005,7 +50999,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "使用扣除穿甲后的物理护甲的 70% 作为减伤比例，例如 50% 护甲对应 35% 减伤。",
@@ -51334,7 +51328,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -51634,7 +51628,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -51916,7 +51910,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
@@ -52220,7 +52214,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
@@ -52463,7 +52457,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "未购买引擎技能时按敌人距终点的路径节点数选敌；购买后改为评估目标后方的敌人分布。",
@@ -52833,7 +52827,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -53099,7 +53093,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "令 A 为扣除本次穿甲后的物理护甲，减伤比例 = A × (0.2A + 0.4)。例如 50% 护甲对应 25% 减伤，100% 护甲对应 60% 减伤。",
@@ -53387,7 +53381,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "未升级时最多储存 3 枚幽魂弹；没有目标也会继续准备，达到上限才停止。",
@@ -53776,7 +53770,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -54043,7 +54037,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "回旋镖沿飞行路径伤敌。每段行程对同一个敌人只造成一次伤害，开始返程时清空命中名单，因此同一枚最多往返各命中一次。",
@@ -54063,7 +54057,7 @@
               {
                 "file": "kr1/archer_towers.lua",
                 "symbol": "\"tower_goblirang\"",
-                "line": 2315
+                "line": 2314
               },
               {
                 "file": "all/templates.lua",
@@ -54367,7 +54361,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "普攻由 3 名僧众共同出击；人多势众每级增加 1 名，满级 6 名。僧众按候选敌人列表循环分配目标。",
@@ -54394,7 +54388,7 @@
               {
                 "file": "kr1/archer_towers.lua",
                 "symbol": "\"tower_shaolin\"",
-                "line": 2508
+                "line": 2507
               }
             ]
           },
@@ -54479,7 +54473,7 @@
               {
                 "file": "kr1/archer_towers.lua",
                 "symbol": "\"tower_shaolin\"",
-                "line": 2508
+                "line": 2507
               }
             ]
           },
@@ -54869,7 +54863,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
@@ -55123,7 +55117,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "令 A 为扣除本次穿甲后的物理护甲，减伤比例 = A × (0.2A + 0.4)。例如 50% 护甲对应 25% 减伤，100% 护甲对应 60% 减伤。",
@@ -55367,7 +55361,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "持续攻击同一个目标会蓄能升档；无攻速增益时，超过 1.08 秒进入二档，超过 2.16 秒进入三档。",
@@ -55725,7 +55719,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -55942,7 +55936,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "普攻逐个伤害范围内地面敌人；本次伤害忽略 75 个百分点的物理护甲，并附加 0.6 秒眩晕效果。",
@@ -55962,7 +55956,7 @@
               {
                 "file": "kr1/engineer_towers.lua",
                 "symbol": "\"tower_melting_furnace\"",
-                "line": 2977
+                "line": 2976
               },
               {
                 "file": "all/utils.lua",
@@ -56222,7 +56216,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "护甲减伤系数为 0；目标的免疫、护盾及其他伤害钩子仍可能影响最终结果。",
@@ -56590,7 +56584,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "令 A 为扣除本次穿甲后的物理护甲，减伤比例 = A × (0.2A + 0.4)。例如 50% 护甲对应 25% 减伤，100% 护甲对应 60% 减伤。",
@@ -56873,7 +56867,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "基础冷却参数为 5.3 秒；攻击原点右侧且上方（目标 x 更大、y 不大于原点）走无需转向的分支。",
@@ -56889,7 +56883,7 @@
               {
                 "file": "kr1/engineer_towers.lua",
                 "symbol": "RT(\"tower_catapult\"",
-                "line": 3336
+                "line": 3335
               },
               {
                 "file": "kr1/tower_scripts.lua",
@@ -56911,7 +56905,7 @@
               {
                 "file": "kr1/engineer_towers.lua",
                 "symbol": "RT(\"tower_catapult\"",
-                "line": 3336
+                "line": 3335
               },
               {
                 "file": "kr1/tower_scripts.lua",
@@ -56944,7 +56938,7 @@
               {
                 "file": "kr1/engineer_towers.lua",
                 "symbol": "RT(\"tower_catapult\"",
-                "line": 3336
+                "line": 3335
               },
               {
                 "file": "kr1/tower_scripts.lua",
@@ -56977,7 +56971,7 @@
               {
                 "file": "kr1/engineer_towers.lua",
                 "symbol": "RT(\"tower_catapult\"",
-                "line": 3336
+                "line": 3335
               },
               {
                 "file": "kr1/tower_scripts.lua",
@@ -57010,7 +57004,7 @@
               {
                 "file": "kr1/engineer_towers.lua",
                 "symbol": "RT(\"tower_catapult\"",
-                "line": 3336
+                "line": 3335
               },
               {
                 "file": "kr1/tower_scripts.lua",
@@ -57083,6 +57077,525 @@
       ]
     },
     {
+      "id": "tower_culverine",
+      "name": "矮人扩散炮",
+      "description": "由矮人所使用的先进火炮，以火药与钢铁的弹丸来主宰战场。",
+      "families": [
+        "engineer"
+      ],
+      "roles": [
+        "直接输出",
+        "范围伤害",
+        "控制",
+        "减益/破甲"
+      ],
+      "image": "/encyclopedia/thumbs/tower_culverine.png",
+      "encyclopediaImage": "/encyclopedia/tower_culverine.png",
+      "encyclopediaOrder": 84,
+      "encyclopediaListed": true,
+      "encyclopediaSprite": "kr6_encyclopedia_towers_0024",
+      "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0024",
+      "sourceGame": 6,
+      "portraitSprite": "kr6_info_portraits_towers_0009",
+      "price": 340,
+      "level": 1,
+      "towerType": "culverine",
+      "canBeBuffed": true,
+      "unlock": {
+        "status": "level",
+        "level": 204,
+        "label": "第 204 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level204_data.lua"
+      },
+      "attack": {
+        "damageMin": 70,
+        "damageMax": 89,
+        "cooldown": 3.1,
+        "dps": 25.64516129032258,
+        "range": 180,
+        "rallyRange": null,
+        "damageType": "物理范围",
+        "damageTypeValue": 8,
+        "kind": "bullet",
+        "confidence": "精确",
+        "scope": "普攻落点范围内的单个目标"
+      },
+      "soldier": null,
+      "powers": [
+        {
+          "id": "skill_a",
+          "name": "硫磺爆裂",
+          "icon": null,
+          "iconSprite": null,
+          "maxLevel": 3,
+          "priceBase": 150,
+          "priceIncrement": 150,
+          "descriptions": [
+            {
+              "key": "TOWER_CULVERINE_SKILL_A_DESCRIPTION_1",
+              "text": "每16秒发射一颗硫磺爆弹，对敌群造成70-90点爆炸伤害，并留下硫磺云降低其中敌人100%的魔法抗性，持续6秒。"
+            },
+            {
+              "key": "TOWER_CULVERINE_SKILL_A_DESCRIPTION_2",
+              "text": "每16秒发射一颗硫磺爆弹，对敌群造成120-160点爆炸伤害，并留下硫磺云降低其中敌人100%的魔法抗性，持续8秒。"
+            },
+            {
+              "key": "TOWER_CULVERINE_SKILL_A_DESCRIPTION_3",
+              "text": "每16秒发射一颗硫磺爆弹，对敌群造成170-230点爆炸伤害，并留下硫磺云降低其中敌人100%的魔法抗性，持续10秒。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 150,
+              "cumulativePrice": 150,
+              "description": "每16秒发射一颗硫磺爆弹，对敌群造成70-90点爆炸伤害，并留下硫磺云降低其中敌人100%的魔法抗性，持续6秒。",
+              "descriptionKey": "TOWER_CULVERINE_SKILL_A_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 150,
+              "cumulativePrice": 300,
+              "description": "每16秒发射一颗硫磺爆弹，对敌群造成120-160点爆炸伤害，并留下硫磺云降低其中敌人100%的魔法抗性，持续8秒。",
+              "descriptionKey": "TOWER_CULVERINE_SKILL_A_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 150,
+              "cumulativePrice": 450,
+              "description": "每16秒发射一颗硫磺爆弹，对敌群造成170-230点爆炸伤害，并留下硫磺云降低其中敌人100%的魔法抗性，持续10秒。",
+              "descriptionKey": "TOWER_CULVERINE_SKILL_A_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "name": "锋利弹片",
+          "icon": null,
+          "iconSprite": null,
+          "maxLevel": 3,
+          "priceBase": 100,
+          "priceIncrement": 100,
+          "descriptions": [
+            {
+              "key": "TOWER_CULVERINE_SKILL_B_DESCRIPTION_1",
+              "text": "此塔的每次普通攻击都会摧毁敌人3%的物理护甲。"
+            },
+            {
+              "key": "TOWER_CULVERINE_SKILL_B_DESCRIPTION_2",
+              "text": "此塔的每次普通攻击都会摧毁敌人5%的物理护甲。"
+            },
+            {
+              "key": "TOWER_CULVERINE_SKILL_B_DESCRIPTION_3",
+              "text": "此塔的每次普通攻击都会摧毁敌人7%的物理护甲。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 100,
+              "cumulativePrice": 100,
+              "description": "此塔的每次普通攻击都会摧毁敌人3%的物理护甲。",
+              "descriptionKey": "TOWER_CULVERINE_SKILL_B_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 100,
+              "cumulativePrice": 200,
+              "description": "此塔的每次普通攻击都会摧毁敌人5%的物理护甲。",
+              "descriptionKey": "TOWER_CULVERINE_SKILL_B_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 100,
+              "cumulativePrice": 300,
+              "description": "此塔的每次普通攻击都会摧毁敌人7%的物理护甲。",
+              "descriptionKey": "TOWER_CULVERINE_SKILL_B_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "name": "火力全开",
+          "icon": null,
+          "iconSprite": null,
+          "maxLevel": 3,
+          "priceBase": 200,
+          "priceIncrement": 200,
+          "descriptions": [
+            {
+              "key": "TOWER_CULVERINE_SKILL_C_DESCRIPTION_1",
+              "text": "每27秒全速运转，快速连射3发弹药。"
+            },
+            {
+              "key": "TOWER_CULVERINE_SKILL_C_DESCRIPTION_2",
+              "text": "每27秒全速运转，快速连射6发弹药。"
+            },
+            {
+              "key": "TOWER_CULVERINE_SKILL_C_DESCRIPTION_3",
+              "text": "每27秒全速运转，快速连射9发弹药。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 200,
+              "cumulativePrice": 200,
+              "description": "每27秒全速运转，快速连射3发弹药。",
+              "descriptionKey": "TOWER_CULVERINE_SKILL_C_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 200,
+              "cumulativePrice": 400,
+              "description": "每27秒全速运转，快速连射6发弹药。",
+              "descriptionKey": "TOWER_CULVERINE_SKILL_C_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 200,
+              "cumulativePrice": 600,
+              "description": "每27秒全速运转，快速连射9发弹药。",
+              "descriptionKey": "TOWER_CULVERINE_SKILL_C_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/engineer_towers.lua",
+        "nameKey": "TOWER_CULVERINE_NAME",
+        "descriptionKey": "TOWER_CULVERINE_DESCRIPTION",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
+        "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
+        "unlock": "kr1/data/levels/level204_data.lua"
+      },
+      "units": [],
+      "mechanics": {
+        "reviewedVersion": "2.0.9.3",
+        "items": [
+          {
+            "summary": "光束自身不造成直伤，命中时在落点生成半径 60 的一次性光环，各目标承受 70–89 点爆炸伤害。",
+            "details": [
+              "伤害在落点范围结算，不沿整条光束逐个伤敌，也不是持续灼烧。落点光环按敌人实时位置重新筛选。",
+              "普攻选敌禁止飞行和悬崖目标，但落点光环仅禁止友军，因此附近飞行敌人也可能被波及；基础冷却 3.1 秒，装填、技能动作会影响节奏。"
+            ],
+            "id": "culverine-splash",
+            "title": "普攻光束在落点结算一次范围伤害",
+            "kind": "intrinsic",
+            "sources": [
+              {
+                "file": "kr1/engineer_towers.lua",
+                "symbol": "RT(\"tower_culverine\"",
+                "line": 3640
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.tower_culverine.update",
+                "line": 33712
+              },
+              {
+                "file": "kr1/game_scripts.lua",
+                "symbol": "function scripts.ray5_simple.update",
+                "line": 17362
+              },
+              {
+                "file": "all/scripts.lua",
+                "symbol": "function scripts.aura_apply_damage.update",
+                "line": 4732
+              },
+              {
+                "file": "all/templates.lua",
+                "symbol": "local bullet =",
+                "line": 222
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          },
+          {
+            "summary": "购买后替换普攻弹药，落点范围内有物理护甲的敌人每次减少 3 / 5 / 7 个百分点护甲。",
+            "details": [
+              "削甲通过通用函数乘以 (1 − 护甲韧性)，受护甲下限约束。插入效果后立即返回 false，没有定时恢复分支，后续命中可以继续削减。",
+              "效果作用于范围目标，不是仅为本次伤害增加穿甲；连发也使用当前普攻弹药。"
+            ],
+            "id": "culverine-shred",
+            "title": "锋利弹片逐次永久削减物理护甲",
+            "kind": "skill-interaction",
+            "sources": [
+              {
+                "file": "kr1/engineer_towers.lua",
+                "symbol": "RT(\"tower_culverine\"",
+                "line": 3640
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.tower_culverine.update",
+                "line": 33712
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.mod_bullet_culverine_skill_b.insert",
+                "line": 33621
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.armor_dec",
+                "line": 319
+              },
+              {
+                "file": "all/scripts.lua",
+                "symbol": "function scripts.aura_apply_damage.update",
+                "line": 4732
+              },
+              {
+                "file": "all/templates.lua",
+                "symbol": "local bullet =",
+                "line": 222
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          },
+          {
+            "summary": "技能就绪且未装入普攻弹时，须有至少 3 名候选敌人，或其中至少一名魔抗达到 30%，才可启动；冷却 16 秒。",
+            "details": [
+              "落点半径 90，各级爆炸伤害 70–90 / 120–160 / 170–230；烟云持续 6 / 8 / 10 秒。",
+              "烟云每 0.25 秒尝试施加短效果，削减施加时全部当前魔抗，再受护甲韧性影响；单份效果持续 0.3 秒，到期恢复。重复效果按通用去重规则处理，不能视为永久清空魔抗。",
+              "实际施加仍检查魔法接受状态和效果免疫，选敌门槛不代表所有敌人都能被削抗。"
+            ],
+            "id": "culverine-sulfur",
+            "title": "硫磺弹有施放门槛，并暂时削魔抗",
+            "kind": "skill-interaction",
+            "sources": [
+              {
+                "file": "kr1/engineer_towers.lua",
+                "symbol": "RT(\"tower_culverine\"",
+                "line": 3640
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.tower_culverine.update",
+                "line": 33712
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.bullet_culverine_skill_a.update",
+                "line": 33602
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.mod_bullet_culverine_skill_a.insert",
+                "line": 33641
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.mod_bullet_culverine_skill_a.remove",
+                "line": 33663
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.mod_bullet_culverine_skill_a.update",
+                "line": 33675
+              },
+              {
+                "file": "all/scripts.lua",
+                "symbol": "function scripts.bomb.update",
+                "line": 2714
+              },
+              {
+                "file": "all/scripts.lua",
+                "symbol": "function scripts.aura_apply_mod.update",
+                "line": 4582
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.magic_armor_dec",
+                "line": 337
+              },
+              {
+                "file": "all/systems/mod_lifecycle.lua",
+                "symbol": "function mod_lifecycle:on_insert",
+                "line": 7
+              },
+              {
+                "file": "all/templates.lua",
+                "symbol": "local bullet =",
+                "line": 222
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          },
+          {
+            "summary": "连发各级射击 3 / 6 / 9 次，每炮使用当前普攻弹药；技能冷却 27 秒。",
+            "details": [
+              "每炮重新选敌，失去目标后继续朝最后预判位置开火，因此不保证集中命中；封锁会中断连发。",
+              "每次成功发射都会累加大招计数，达到阈值时可在连发途中插入大招；硫磺弹没有增加这个计数的分支。"
+            ],
+            "id": "culverine-barrage",
+            "title": "连发每炮独立选敌，并计入大招充能",
+            "kind": "skill-interaction",
+            "sources": [
+              {
+                "file": "kr1/engineer_towers.lua",
+                "symbol": "RT(\"tower_culverine\"",
+                "line": 3640
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.tower_culverine.update",
+                "line": 33712
+              },
+              {
+                "file": "all/templates.lua",
+                "symbol": "local bullet =",
+                "line": 222
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          },
+          {
+            "summary": "普攻或连发累计发射 6 次后尝试触发大招；计数按发射而非实际命中，没有独立定时冷却。",
+            "details": [
+              "以塔攻击原点为中心，在当前攻击范围内一次性造成 98–124 点爆炸伤害，并尝试施加 2 秒眩晕。",
+              "伤害光环禁止飞行目标；普通装填、封锁和动作等待影响触发时刻。周围八个小爆炸是特效，不额外结算八次伤害。"
+            ],
+            "id": "culverine-ultimate",
+            "title": "自带大招按发射次数触发",
+            "kind": "intrinsic",
+            "sources": [
+              {
+                "file": "kr1/engineer_towers.lua",
+                "symbol": "RT(\"tower_culverine\"",
+                "line": 3640
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.tower_culverine.update",
+                "line": 33712
+              },
+              {
+                "file": "all/scripts.lua",
+                "symbol": "function scripts.aura_apply_damage.update",
+                "line": 4732
+              },
+              {
+                "file": "all/scripts.lua",
+                "symbol": "function scripts.mod_stun.insert",
+                "line": 5836
+              },
+              {
+                "file": "all/templates.lua",
+                "symbol": "local bullet =",
+                "line": 222
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          },
+          {
+            "summary": "令 A 为扣除本次穿甲后的物理护甲，减伤比例 = A × (0.2A + 0.4)。例如 50% 护甲对应 25% 减伤，100% 护甲对应 60% 减伤。",
+            "details": [
+              "最终护甲减伤比例限制在 0%–100%。本条解释伤害类型，不代表整座塔的所有技能与召唤单位都使用相同类型。"
+            ],
+            "id": "damage-resolution",
+            "title": "爆炸 / 猛击伤害的护甲结算",
+            "kind": "damage-rule",
+            "sources": [
+              {
+                "file": "all/utils.lua",
+                "symbol": "function U.calc_protection",
+                "line": 1979
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "hasSpecificReview": true
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "aura_bullet_culverine"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bullet_culverine_skill_a.damage_radius / area"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_culverine_ultimate_stun"
+        },
+        {
+          "role": "减益/破甲",
+          "description": "锋利弹片逐次永久削减物理护甲。",
+          "source": "culverine-shred"
+        },
+        {
+          "role": "减益/破甲",
+          "description": "硫磺烟云暂时削减魔法护甲。",
+          "source": "culverine-sulfur"
+        }
+      ]
+    },
+    {
       "id": "tower_archers",
       "name": "弓兵要塞",
       "description": "驻守高塔的弓箭手，能凭借射程优势从远处歼灭来犯之敌。",
@@ -57098,7 +57611,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_archers.png",
       "encyclopediaImage": "/encyclopedia/tower_archers.png",
-      "encyclopediaOrder": 84,
+      "encyclopediaOrder": 85,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr6_encyclopedia_towers_0004",
       "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0004",
@@ -57387,7 +57900,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "4 名弓手共用 0.45 秒的普攻调度冷却，每次指令只安排一名空闲弓手。",
@@ -57402,7 +57915,7 @@
               {
                 "file": "kr1/archer_towers.lua",
                 "symbol": "RT(\"tower_archers\"",
-                "line": 2891
+                "line": 2890
               },
               {
                 "file": "kr1/tower_scripts.lua",
@@ -57429,7 +57942,7 @@
               {
                 "file": "kr1/archer_towers.lua",
                 "symbol": "RT(\"tower_archers\"",
-                "line": 2891
+                "line": 2890
               },
               {
                 "file": "kr1/tower_scripts.lua",
@@ -57463,7 +57976,7 @@
               {
                 "file": "kr1/archer_towers.lua",
                 "symbol": "RT(\"tower_archers\"",
-                "line": 2891
+                "line": 2890
               },
               {
                 "file": "kr1/tower_scripts.lua",
@@ -57501,7 +58014,7 @@
               {
                 "file": "kr1/archer_towers.lua",
                 "symbol": "RT(\"tower_archers\"",
-                "line": 2891
+                "line": 2890
               },
               {
                 "file": "kr1/tower_scripts.lua",
@@ -57538,7 +58051,7 @@
               {
                 "file": "kr1/archer_towers.lua",
                 "symbol": "RT(\"tower_archers\"",
-                "line": 2891
+                "line": 2890
               },
               {
                 "file": "kr1/tower_scripts.lua",
@@ -57616,6 +58129,510 @@
       ]
     },
     {
+      "id": "tower_elf_ranger",
+      "name": "精灵精英游侠",
+      "description": "凭借对毒药的知识与高超的箭技，守护森林安宁，驱逐危害的游侠。",
+      "families": [
+        "archer"
+      ],
+      "roles": [
+        "直接输出",
+        "持续伤害",
+        "控制"
+      ],
+      "image": "/encyclopedia/thumbs/tower_elf_ranger.png",
+      "encyclopediaImage": "/encyclopedia/tower_elf_ranger.png",
+      "encyclopediaOrder": 86,
+      "encyclopediaListed": true,
+      "encyclopediaSprite": "kr6_encyclopedia_towers_0020",
+      "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0020",
+      "sourceGame": 6,
+      "portraitSprite": "kr6_info_portraits_towers_0005",
+      "price": 260,
+      "level": 1,
+      "towerType": "elf_ranger",
+      "canBeBuffed": true,
+      "unlock": {
+        "status": "level",
+        "level": 205,
+        "label": "第 205 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level205_data.lua"
+      },
+      "attack": {
+        "damageMin": 59,
+        "damageMax": 70,
+        "cooldown": 1.5,
+        "dps": 43,
+        "range": 235,
+        "rallyRange": null,
+        "damageType": "物理",
+        "damageTypeValue": 2,
+        "kind": "bullet",
+        "confidence": "精确",
+        "scope": "单目标基础攻击"
+      },
+      "soldier": null,
+      "powers": [
+        {
+          "id": "skill_a",
+          "name": "淬毒箭矢",
+          "icon": null,
+          "iconSprite": null,
+          "maxLevel": 3,
+          "priceBase": 200,
+          "priceIncrement": 200,
+          "descriptions": [
+            {
+              "key": "TOWER_ELF_RANGER_SKILL_A_DESCRIPTION_1",
+              "text": "每15秒连射3发涂有毒药的箭矢，使目标中毒，在3秒内持续受到共计24点剧毒伤害。"
+            },
+            {
+              "key": "TOWER_ELF_RANGER_SKILL_A_DESCRIPTION_2",
+              "text": "每15秒连射3发涂有毒药的箭矢，使目标中毒，在6秒内持续受到共计96点剧毒伤害。"
+            },
+            {
+              "key": "TOWER_ELF_RANGER_SKILL_A_DESCRIPTION_3",
+              "text": "每15秒连射3发涂有毒药的箭矢，使目标中毒，在9秒内持续受到共计216点剧毒伤害。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 200,
+              "cumulativePrice": 200,
+              "description": "每15秒连射3发涂有毒药的箭矢，使目标中毒，在3秒内持续受到共计24点剧毒伤害。",
+              "descriptionKey": "TOWER_ELF_RANGER_SKILL_A_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 200,
+              "cumulativePrice": 400,
+              "description": "每15秒连射3发涂有毒药的箭矢，使目标中毒，在6秒内持续受到共计96点剧毒伤害。",
+              "descriptionKey": "TOWER_ELF_RANGER_SKILL_A_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 200,
+              "cumulativePrice": 600,
+              "description": "每15秒连射3发涂有毒药的箭矢，使目标中毒，在9秒内持续受到共计216点剧毒伤害。",
+              "descriptionKey": "TOWER_ELF_RANGER_SKILL_A_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "name": "刺藤射击",
+          "icon": null,
+          "iconSprite": null,
+          "maxLevel": 3,
+          "priceBase": 150,
+          "priceIncrement": 150,
+          "descriptions": [
+            {
+              "key": "TOWER_ELF_RANGER_SKILL_B_DESCRIPTION_1",
+              "text": "每25秒射出一发蓄力箭矢，对目标造成90-135点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续6秒。"
+            },
+            {
+              "key": "TOWER_ELF_RANGER_SKILL_B_DESCRIPTION_2",
+              "text": "每25秒射出一发蓄力箭矢，对目标造成135-205点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续7秒。"
+            },
+            {
+              "key": "TOWER_ELF_RANGER_SKILL_B_DESCRIPTION_3",
+              "text": "每25秒射出一发蓄力箭矢，对目标造成180-270点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续9秒。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 150,
+              "cumulativePrice": 150,
+              "description": "每25秒射出一发蓄力箭矢，对目标造成90-135点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续6秒。",
+              "descriptionKey": "TOWER_ELF_RANGER_SKILL_B_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "伤害下限",
+                  "value": 90,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 135,
+                  "unit": ""
+                }
+              ]
+            },
+            {
+              "level": 2,
+              "price": 150,
+              "cumulativePrice": 300,
+              "description": "每25秒射出一发蓄力箭矢，对目标造成135-205点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续7秒。",
+              "descriptionKey": "TOWER_ELF_RANGER_SKILL_B_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "伤害下限",
+                  "value": 135,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 205,
+                  "unit": ""
+                }
+              ]
+            },
+            {
+              "level": 3,
+              "price": 150,
+              "cumulativePrice": 450,
+              "description": "每25秒射出一发蓄力箭矢，对目标造成180-270点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续9秒。",
+              "descriptionKey": "TOWER_ELF_RANGER_SKILL_B_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "伤害下限",
+                  "value": 180,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 270,
+                  "unit": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "name": "林地弹射",
+          "icon": null,
+          "iconSprite": null,
+          "maxLevel": 3,
+          "priceBase": 200,
+          "priceIncrement": 200,
+          "descriptions": [
+            {
+              "key": "TOWER_ELF_RANGER_SKILL_C_DESCRIPTION_1",
+              "text": "箭矢现在可在目标周围的敌人间弹射3次，每次弹射造成先前40%的伤害。"
+            },
+            {
+              "key": "TOWER_ELF_RANGER_SKILL_C_DESCRIPTION_2",
+              "text": "箭矢现在可在目标周围的敌人间弹射3次，每次弹射造成先前65%的伤害。"
+            },
+            {
+              "key": "TOWER_ELF_RANGER_SKILL_C_DESCRIPTION_3",
+              "text": "箭矢现在可在目标周围的敌人间弹射3次，每次弹射造成先前80%的伤害。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 200,
+              "cumulativePrice": 200,
+              "description": "箭矢现在可在目标周围的敌人间弹射3次，每次弹射造成先前40%的伤害。",
+              "descriptionKey": "TOWER_ELF_RANGER_SKILL_C_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 200,
+              "cumulativePrice": 400,
+              "description": "箭矢现在可在目标周围的敌人间弹射3次，每次弹射造成先前65%的伤害。",
+              "descriptionKey": "TOWER_ELF_RANGER_SKILL_C_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 200,
+              "cumulativePrice": 600,
+              "description": "箭矢现在可在目标周围的敌人间弹射3次，每次弹射造成先前80%的伤害。",
+              "descriptionKey": "TOWER_ELF_RANGER_SKILL_C_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/archer_towers.lua",
+        "nameKey": "TOWER_ELF_RANGER_NAME",
+        "descriptionKey": "TOWER_ELF_RANGER_DESCRIPTION",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
+        "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
+        "unlock": "kr1/data/levels/level205_data.lua"
+      },
+      "units": [],
+      "mechanics": {
+        "reviewedVersion": "2.0.9.3",
+        "items": [
+          {
+            "summary": "技能冷却 15 秒，连续发射 3 枚毒箭；优先选择本轮尚未射击、没有同种毒且不禁毒的目标。",
+            "details": [
+              "没有合适的新目标时会退回普通选敌结果，三箭不保证命中三个不同敌人。",
+              "中毒持续 3 / 6 / 9 秒，每 0.25 秒结算 2 / 4 / 6 点毒伤害；直接箭伤与毒伤分别结算，毒伤使用毒抗。"
+            ],
+            "id": "elf-ranger-poison",
+            "title": "三枚毒箭优先分给未中毒目标",
+            "kind": "skill-interaction",
+            "sources": [
+              {
+                "file": "kr1/archer_towers.lua",
+                "symbol": "RT(\"tower_elf_ranger\"",
+                "line": 3168
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.tower_elf_ranger.update",
+                "line": 34180
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.mod_elf_ranger_skill_a_poison.insert",
+                "line": 34678
+              },
+              {
+                "file": "all/scripts.lua",
+                "symbol": "function scripts.mod_dps.update",
+                "line": 6027
+              },
+              {
+                "file": "all/scripts.lua",
+                "symbol": "function scripts.arrow.update",
+                "line": 2174
+              },
+              {
+                "file": "all/templates.lua",
+                "symbol": "local bullet =",
+                "line": 222
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          },
+          {
+            "summary": "荆棘箭对选中目标造成 90–135 / 135–205 / 180–270 点物理伤害，并尝试施加 2 秒眩晕。",
+            "details": [
+              "落地控制器须找到有效道路节点，才在该节点留下半径 60、持续 6 / 7 / 9 秒的减速区域，速度降至 40%。",
+              "直伤与眩晕依赖箭矢命中，减速区域通过另一个控制器生成；周围荆棘图像本身没有逐根独立伤害。眩晕的退场动画可能延长实际解除时间，配置时长不是实测值。"
+            ],
+            "id": "elf-ranger-bramble",
+            "title": "荆棘箭的直伤、眩晕与减速区域分开判定",
+            "kind": "skill-interaction",
+            "sources": [
+              {
+                "file": "kr1/archer_towers.lua",
+                "symbol": "RT(\"tower_elf_ranger\"",
+                "line": 3168
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.tower_elf_ranger.update",
+                "line": 34180
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.controller_bramble_spawner.insert",
+                "line": 34524
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.aura_elf_ranger_skill_b.insert",
+                "line": 34688
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.mod_elf_ranger_skill_b_stun.update",
+                "line": 34645
+              },
+              {
+                "file": "all/scripts.lua",
+                "symbol": "function scripts.arrow.update",
+                "line": 2174
+              },
+              {
+                "file": "all/scripts.lua",
+                "symbol": "function scripts.aura_apply_mod.update",
+                "line": 4582
+              },
+              {
+                "file": "all/templates.lua",
+                "symbol": "local bullet =",
+                "line": 222
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          },
+          {
+            "summary": "购买弹射后，普攻和毒箭都可额外弹跳最多 3 次，每段寻找 100 内最近的未命中敌人。",
+            "details": [
+              "各级单段伤害倍率 r 为 40 / 65 / 80%；三个额外落点分别使用 r、r²、r³，不是每跳都保持相同伤害。",
+              "初始目标与已经访问的目标被排除；附近目标不足会提前结束。弹射毒箭仍可施加同等级毒，弹射直伤衰减没有写入毒效果的倍率。"
+            ],
+            "formula": "第 k 次额外弹跳直伤 = 原箭基础伤害 × r^k × 塔伤害倍率",
+            "id": "elf-ranger-ricochet",
+            "title": "普攻与毒箭额外弹跳逐段衰减",
+            "kind": "skill-interaction",
+            "sources": [
+              {
+                "file": "kr1/archer_towers.lua",
+                "symbol": "RT(\"tower_elf_ranger\"",
+                "line": 3168
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.tower_elf_ranger.update",
+                "line": 34180
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.bullet_tower_elf_ranger_skill_c_bounce_clone.insert",
+                "line": 34698
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.bullet_tower_elf_ranger_skill_c_bounce_clone.update",
+                "line": 34724
+              },
+              {
+                "file": "all/scripts.lua",
+                "symbol": "function scripts.arrow.update",
+                "line": 2174
+              },
+              {
+                "file": "all/templates.lua",
+                "symbol": "local bullet =",
+                "line": 222
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          },
+          {
+            "summary": "自带处决冷却 32 秒；选敌要求当前生命不超过最大生命的 50%，同时严格大于 750。",
+            "details": [
+              "750 点恰好不满足，低血小兵也不会自动被处决；选敌禁止 Boss，另检查秒杀与远程标记。",
+              "弹丸使用秒杀及禁止生成标记；健康系统按最大生命与秒杀抗性结算，模板中的 500 不代表固定 500 点普通伤害，也不能概括为必杀所有残血单位。"
+            ],
+            "id": "elf-ranger-ultimate",
+            "title": "自带处决有严格生命门槛",
+            "kind": "intrinsic",
+            "sources": [
+              {
+                "file": "kr1/archer_towers.lua",
+                "symbol": "RT(\"tower_elf_ranger\"",
+                "line": 3168
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.tower_elf_ranger.update",
+                "line": 34180
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.bullet_tower_elf_ranger_ultimate.update",
+                "line": 34819
+              },
+              {
+                "file": "all/utils.lua",
+                "symbol": "function U.predict_damage",
+                "line": 2015
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "BIG_ENEMY_HP =",
+                "line": 33
+              },
+              {
+                "file": "all/templates.lua",
+                "symbol": "local bullet =",
+                "line": 222
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          },
+          {
+            "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
+            "details": [
+              "最终护甲减伤比例限制在 0%–100%。本条解释伤害类型，不代表整座塔的所有技能与召唤单位都使用相同类型。"
+            ],
+            "id": "damage-resolution",
+            "title": "物理伤害的护甲结算",
+            "kind": "damage-rule",
+            "sources": [
+              {
+                "file": "all/utils.lua",
+                "symbol": "function U.calc_protection",
+                "line": 1979
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "hasSpecificReview": true
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_elf_ranger_skill_a_poison"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_elf_ranger_skill_b_slow"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_elf_ranger_skill_b_stun"
+        }
+      ]
+    },
+    {
       "id": "tower_wizard",
       "name": "魔典学者",
       "description": "胆敢打断学者研究的敌人，将面临可怕的后果。",
@@ -57631,7 +58648,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_wizard.png",
       "encyclopediaImage": "/encyclopedia/tower_wizard.png",
-      "encyclopediaOrder": 85,
+      "encyclopediaOrder": 87,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr6_encyclopedia_towers_0012",
       "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0012",
@@ -57887,7 +58904,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "每轮普攻发射两枚 37–67 点魔法伤害弹丸；基础冷却 2 秒。",
@@ -58098,12 +59115,13 @@
       ],
       "roles": [
         "直接输出",
+        "控制",
         "增伤辅助",
         "召唤/拦截"
       ],
       "image": "/encyclopedia/thumbs/tower_knights.png",
       "encyclopediaImage": "/encyclopedia/tower_knights.png",
-      "encyclopediaOrder": 86,
+      "encyclopediaOrder": 88,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr6_encyclopedia_towers_0008",
       "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0008",
@@ -58374,8 +59392,70 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
+          {
+            "summary": "两套普通近战都携带 1 秒眩晕，无需购买技能。命中时直接尝试施加，仍受目标免疫与 Boss 禁用条件限制。",
+            "details": [
+              "模板配置 mod_chance = 0.2，但实际单体近战函数没有读取它，不能按 20% 概率计算。",
+              "须命中仍由该骑士阻挡的目标，且目标未闪避；动作被打断不会保证施加。第二近战继承同一效果，同级重复眩晕通过通用规则刷新时长。"
+            ],
+            "id": "knights-stun",
+            "title": "近战自带眩晕，模板概率未被读取",
+            "kind": "intrinsic",
+            "sources": [
+              {
+                "file": "kr1/barrack_towers.lua",
+                "symbol": "RT(\"tower_knights\"",
+                "line": 3794
+              },
+              {
+                "file": "kr1/barrack_towers.lua",
+                "symbol": "RT(\"soldier_knights\"",
+                "line": 3840
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.soldier_knights.update",
+                "line": 33323
+              },
+              {
+                "file": "kr1/barrack_towers.lua",
+                "symbol": "RT(\"mod_knights_stun\"",
+                "line": 3901
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_soldier_melee_block_and_attacks",
+                "line": 2667
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_soldier_do_single_melee_attack",
+                "line": 2329
+              },
+              {
+                "file": "all/scripts.lua",
+                "symbol": "function scripts.mod_stun.insert",
+                "line": 5836
+              },
+              {
+                "file": "all/templates.lua",
+                "symbol": "local mod_stun =",
+                "line": 526
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "F_BOSS =",
+                "line": 294
+              },
+              {
+                "file": "all/systems/mod_lifecycle.lua",
+                "symbol": "function mod_lifecycle:on_insert",
+                "line": 7
+              }
+            ]
+          },
           {
             "summary": "每名骑士独立扫描自身周围 120 范围内存活英雄；每名英雄提供 5 / 10 / 15 个百分点的物理护甲增量。",
             "details": [
@@ -58390,12 +59470,12 @@
               {
                 "file": "kr1/barrack_towers.lua",
                 "symbol": "RT(\"tower_knights\"",
-                "line": 3795
+                "line": 3794
               },
               {
                 "file": "kr1/barrack_towers.lua",
                 "symbol": "RT(\"soldier_knights\"",
-                "line": 3841
+                "line": 3840
               },
               {
                 "file": "kr1/tower_scripts.lua",
@@ -58442,12 +59522,12 @@
               {
                 "file": "kr1/barrack_towers.lua",
                 "symbol": "RT(\"tower_knights\"",
-                "line": 3795
+                "line": 3794
               },
               {
                 "file": "kr1/barrack_towers.lua",
                 "symbol": "RT(\"soldier_knights\"",
-                "line": 3841
+                "line": 3840
               },
               {
                 "file": "kr1/tower_scripts.lua",
@@ -58474,12 +59554,12 @@
               {
                 "file": "kr1/barrack_towers.lua",
                 "symbol": "RT(\"tower_knights\"",
-                "line": 3795
+                "line": 3794
               },
               {
                 "file": "kr1/barrack_towers.lua",
                 "symbol": "RT(\"soldier_knights\"",
-                "line": 3841
+                "line": 3840
               },
               {
                 "file": "kr1/tower_scripts.lua",
@@ -58508,12 +59588,12 @@
               {
                 "file": "kr1/barrack_towers.lua",
                 "symbol": "RT(\"tower_knights\"",
-                "line": 3795
+                "line": 3794
               },
               {
                 "file": "kr1/barrack_towers.lua",
                 "symbol": "RT(\"soldier_knights\"",
-                "line": 3841
+                "line": 3840
               },
               {
                 "file": "kr1/tower_scripts.lua",
@@ -58564,9 +59644,609 @@
           "source": "computed_info.damage_min"
         },
         {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_knights_stun"
+        },
+        {
           "role": "增伤辅助",
           "description": "骑士身边的英雄获得输出倍率增幅。",
           "source": "knights-heroes"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
+    },
+    {
+      "id": "tower_wildcat",
+      "name": "野猫女猎手",
+      "description": "迅爪与飞矢的组合，森林的入侵者与邪恶之徒正是她们的猎物。",
+      "families": [
+        "barrack"
+      ],
+      "roles": [
+        "直接输出",
+        "持续伤害",
+        "控制",
+        "范围伤害",
+        "召唤/拦截"
+      ],
+      "image": "/encyclopedia/thumbs/tower_wildcat.png",
+      "encyclopediaImage": "/encyclopedia/tower_wildcat.png",
+      "encyclopediaOrder": 89,
+      "encyclopediaListed": true,
+      "encyclopediaSprite": "kr6_encyclopedia_towers_0028",
+      "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0028",
+      "sourceGame": 6,
+      "portraitSprite": "kr6_info_portraits_towers_0014",
+      "price": 260,
+      "level": 1,
+      "towerType": "wildcat",
+      "canBeBuffed": true,
+      "unlock": {
+        "status": "level",
+        "level": 205,
+        "label": "第 205 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level205_data.lua"
+      },
+      "attack": {
+        "damageMin": 25,
+        "damageMax": 30,
+        "cooldown": 1,
+        "dps": 27.5,
+        "range": 170,
+        "rallyRange": 170,
+        "damageType": "物理",
+        "damageTypeValue": 2,
+        "kind": "custom",
+        "confidence": "精确",
+        "scope": "单个驻防单位"
+      },
+      "soldier": {
+        "count": 2,
+        "hp": 235,
+        "armor": 0.4,
+        "magicArmor": 0,
+        "respawn": 12
+      },
+      "powers": [
+        {
+          "id": "skill_a",
+          "name": "银制飞刃",
+          "icon": null,
+          "iconSprite": null,
+          "maxLevel": 3,
+          "priceBase": 120,
+          "priceIncrement": 120,
+          "descriptions": [
+            {
+              "key": "TOWER_WILDCAT_SKILL_A_DESCRIPTION_1",
+              "text": "每隔12秒，投掷一把短刃，造成28-36点破魔伤害，并可在敌人间弹射2次。"
+            },
+            {
+              "key": "TOWER_WILDCAT_SKILL_A_DESCRIPTION_2",
+              "text": "每隔12秒，投掷一把短刃，造成40-56点破魔伤害，并可在敌人间弹射3次。"
+            },
+            {
+              "key": "TOWER_WILDCAT_SKILL_A_DESCRIPTION_3",
+              "text": "每隔12秒，投掷一把短刃，造成51-64点破魔伤害，并可在敌人间弹射4次。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 120,
+              "cumulativePrice": 120,
+              "description": "每隔12秒，投掷一把短刃，造成28-36点破魔伤害，并可在敌人间弹射2次。",
+              "descriptionKey": "TOWER_WILDCAT_SKILL_A_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 120,
+              "cumulativePrice": 240,
+              "description": "每隔12秒，投掷一把短刃，造成40-56点破魔伤害，并可在敌人间弹射3次。",
+              "descriptionKey": "TOWER_WILDCAT_SKILL_A_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 120,
+              "cumulativePrice": 360,
+              "description": "每隔12秒，投掷一把短刃，造成51-64点破魔伤害，并可在敌人间弹射4次。",
+              "descriptionKey": "TOWER_WILDCAT_SKILL_A_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "name": "致命撕咬",
+          "icon": null,
+          "iconSprite": null,
+          "maxLevel": 3,
+          "priceBase": 175,
+          "priceIncrement": 160,
+          "descriptions": [
+            {
+              "key": "TOWER_WILDCAT_SKILL_B_DESCRIPTION_1",
+              "text": "每隔12秒，黑豹痛咬一名敌人，造成200-240点物理伤害，并在后续4秒内持续造成共计48点真实伤害。"
+            },
+            {
+              "key": "TOWER_WILDCAT_SKILL_B_DESCRIPTION_2",
+              "text": "每隔12秒，黑豹痛咬一名敌人，造成400-480点物理伤害，并在后续4秒内持续造成共计48点真实伤害。"
+            },
+            {
+              "key": "TOWER_WILDCAT_SKILL_B_DESCRIPTION_3",
+              "text": "每隔12秒，黑豹痛咬一名敌人，造成600-720点物理伤害，并在后续4秒内持续造成共计48点真实伤害。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 175,
+              "cumulativePrice": 175,
+              "description": "每隔12秒，黑豹痛咬一名敌人，造成200-240点物理伤害，并在后续4秒内持续造成共计48点真实伤害。",
+              "descriptionKey": "TOWER_WILDCAT_SKILL_B_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 160,
+              "cumulativePrice": 335,
+              "description": "每隔12秒，黑豹痛咬一名敌人，造成400-480点物理伤害，并在后续4秒内持续造成共计48点真实伤害。",
+              "descriptionKey": "TOWER_WILDCAT_SKILL_B_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 160,
+              "cumulativePrice": 495,
+              "description": "每隔12秒，黑豹痛咬一名敌人，造成600-720点物理伤害，并在后续4秒内持续造成共计48点真实伤害。",
+              "descriptionKey": "TOWER_WILDCAT_SKILL_B_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "name": "狩猎箭雨",
+          "icon": null,
+          "iconSprite": null,
+          "maxLevel": 3,
+          "priceBase": 180,
+          "priceIncrement": 180,
+          "descriptions": [
+            {
+              "key": "TOWER_WILDCAT_SKILL_C_DESCRIPTION_1",
+              "text": "每隔12秒，发射特制的弓箭，在空中散裂为8支箭矢落下，每支对敌人造成8-12点破魔伤害。"
+            },
+            {
+              "key": "TOWER_WILDCAT_SKILL_C_DESCRIPTION_2",
+              "text": "每隔12秒，发射特制的弓箭，在空中散裂为10支箭矢落下，每支对敌人造成13-16点破魔伤害。"
+            },
+            {
+              "key": "TOWER_WILDCAT_SKILL_C_DESCRIPTION_3",
+              "text": "每隔12秒，发射特制的弓箭，在空中散裂为12支箭矢落下，每支对敌人造成18-22点破魔伤害。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 180,
+              "cumulativePrice": 180,
+              "description": "每隔12秒，发射特制的弓箭，在空中散裂为8支箭矢落下，每支对敌人造成8-12点破魔伤害。",
+              "descriptionKey": "TOWER_WILDCAT_SKILL_C_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 180,
+              "cumulativePrice": 360,
+              "description": "每隔12秒，发射特制的弓箭，在空中散裂为10支箭矢落下，每支对敌人造成13-16点破魔伤害。",
+              "descriptionKey": "TOWER_WILDCAT_SKILL_C_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 180,
+              "cumulativePrice": 540,
+              "description": "每隔12秒，发射特制的弓箭，在空中散裂为12支箭矢落下，每支对敌人造成18-22点破魔伤害。",
+              "descriptionKey": "TOWER_WILDCAT_SKILL_C_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/barrack_towers.lua",
+        "nameKey": "TOWER_WILDCAT_NAME",
+        "descriptionKey": "TOWER_WILDCAT_DESCRIPTION",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
+        "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
+        "unlock": "kr1/data/levels/level205_data.lua"
+      },
+      "units": [
+        {
+          "id": "soldier_wildcat",
+          "name": "soldier_wildcat",
+          "relatedPowerIds": [
+            "skill_a",
+            "skill_b",
+            "skill_c"
+          ],
+          "count": 2,
+          "rallyRange": 170,
+          "controllable": true,
+          "note": "模板基准值，未代入技能升级；技能带来的属性变化见逐级说明。",
+          "stats": {
+            "hp": 235,
+            "armor": 0.4,
+            "magicArmor": 0,
+            "speed": 125,
+            "respawn": 12,
+            "regen": null,
+            "regenCooldown": 1,
+            "lifetime": null,
+            "attacks": [
+              {
+                "id": "melee-1",
+                "name": "近战",
+                "damageMin": 25,
+                "damageMax": 30,
+                "damageType": "物理",
+                "cooldown": 1,
+                "range": 70,
+                "radius": null,
+                "targets": null,
+                "chance": 1,
+                "disabled": false,
+                "source": "soldier_wildcat.melee.attacks[1]"
+              },
+              {
+                "id": "ranged-1",
+                "name": "远程",
+                "damageMin": 30,
+                "damageMax": 40,
+                "damageType": "物理",
+                "cooldown": 1,
+                "range": 175,
+                "radius": null,
+                "targets": null,
+                "chance": 1,
+                "disabled": false,
+                "source": "soldier_wildcat.ranged.attacks[1]"
+              }
+            ]
+          },
+          "variants": [],
+          "source": "kr1/barrack_towers.lua",
+          "scriptSource": null
+        }
+      ],
+      "mechanics": {
+        "reviewedVersion": "2.0.9.3",
+        "items": [
+          {
+            "summary": "驻防 2 名女猎手，面板 25–30 是单名近战参数，不能当成整塔总输出。",
+            "details": [
+              "普通远程箭为 30–40 点物理伤害；每名单位按自身位置在 50–175 距离内选敌，与塔集结范围是两种范围。",
+              "先处理技能与近战阻挡流程，再尝试远程射击；不能把近战和远程两种理论 DPS 无条件相加。"
+            ],
+            "id": "wildcat-combat",
+            "title": "两名驻防单位分别近战与射箭",
+            "kind": "intrinsic",
+            "sources": [
+              {
+                "file": "kr1/barrack_towers.lua",
+                "symbol": "RT(\"tower_wildcat\"",
+                "line": 3964
+              },
+              {
+                "file": "kr1/barrack_towers.lua",
+                "symbol": "RT(\"soldier_wildcat\"",
+                "line": 4017
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.soldier_wildcat.update",
+                "line": 35027
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_soldier_melee_block_and_attacks",
+                "line": 2667
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_soldier_ranged_attacks",
+                "line": 1761
+              },
+              {
+                "file": "all/templates.lua",
+                "symbol": "local bullet =",
+                "line": 222
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          },
+          {
+            "summary": "飞刀各级最多额外弹跳 2 / 3 / 4 次，加初次命中共最多 3 / 4 / 5 次；每次基础伤害 28–36 / 40–56 / 51–64。",
+            "details": [
+              "优先寻找未命中敌人；没有新目标时会清空旧名单，仅排除当前目标，因此可以在两个敌人之间往返。目标不足仍会提前结束。",
+              "更新脚本没有每跳乘伤害衰减的分支，不能套用精灵游侠的弹射公式。各单位技能使用自己的计时。",
+              "飞刀同属对魔抗特攻，魔抗比例 M 对应抗性与特攻倍率 (1 − M) + 2M²；基础伤害之外仍受单位增伤及目标伤害处理影响。"
+            ],
+            "id": "wildcat-knife",
+            "title": "飞刀可返回先前目标，伤害不逐跳衰减",
+            "kind": "skill-interaction",
+            "sources": [
+              {
+                "file": "kr1/barrack_towers.lua",
+                "symbol": "RT(\"tower_wildcat\"",
+                "line": 3964
+              },
+              {
+                "file": "kr1/barrack_towers.lua",
+                "symbol": "RT(\"soldier_wildcat\"",
+                "line": 4017
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.soldier_wildcat.update",
+                "line": 35027
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.bullet_skill_a_wildcat.update",
+                "line": 35222
+              },
+              {
+                "file": "all/utils.lua",
+                "symbol": "function U.predict_damage",
+                "line": 2015
+              },
+              {
+                "file": "all/templates.lua",
+                "symbol": "local bullet =",
+                "line": 222
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          },
+          {
+            "summary": "每名单位的撕咬冷却 12 秒，须有近战目标并到达阻挡位置；各级直伤 200–240 / 400–480 / 600–720 点物理伤害。",
+            "details": [
+              "另附持续 4 秒、每 0.25 秒 3 点的流血，流血没有随技能等级增加的分支。",
+              "命中与附加效果仍受闪避、阻挡状态、打断及效果免疫限制，不能将技能冷却当作无条件触发周期。"
+            ],
+            "id": "wildcat-bite",
+            "title": "撕咬要求近战目标，另附固定流血",
+            "kind": "skill-interaction",
+            "sources": [
+              {
+                "file": "kr1/barrack_towers.lua",
+                "symbol": "RT(\"tower_wildcat\"",
+                "line": 3964
+              },
+              {
+                "file": "kr1/barrack_towers.lua",
+                "symbol": "RT(\"soldier_wildcat\"",
+                "line": 4017
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.soldier_wildcat.update",
+                "line": 35027
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.y_soldier_do_single_melee_attack",
+                "line": 2329
+              },
+              {
+                "file": "all/scripts.lua",
+                "symbol": "function scripts.mod_dps.update",
+                "line": 6027
+              },
+              {
+                "file": "all/templates.lua",
+                "symbol": "local bullet =",
+                "line": 222
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          },
+          {
+            "summary": "箭数配置 8 / 10 / 12 是布置轮数；中心先放两箭，之后每轮在道路两侧各放一箭，路径有效时最多 16 / 20 / 24 枚。",
+            "details": [
+              "每箭在落点半径 35 内伤敌，各级基础伤害 8–12 / 13–16 / 18–22；无效道路节点会减少实际箭数，不保证全部集中命中。",
+              "伤害类型为对魔抗特攻。仅计抗性与特攻时，魔抗比例 M 对应倍率 (1 − M) + 2M²；50% 魔抗时为 1 倍，100% 时为 2 倍，并非普通魔法伤害只做减伤。",
+              "每名单位须在技能选敌范围内找到至少 2 名候选敌人；具体落点按预判位置与路径节点安排。"
+            ],
+            "formula": "有效路径上的理论箭数上限 = 2 × arrow_count",
+            "id": "wildcat-rain",
+            "title": "箭雨两侧布箭，配置数量不是总箭数",
+            "kind": "skill-interaction",
+            "sources": [
+              {
+                "file": "kr1/barrack_towers.lua",
+                "symbol": "RT(\"tower_wildcat\"",
+                "line": 3964
+              },
+              {
+                "file": "kr1/barrack_towers.lua",
+                "symbol": "RT(\"soldier_wildcat\"",
+                "line": 4017
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.soldier_wildcat.update",
+                "line": 35027
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.bullet_skill_c_wildcat.update",
+                "line": 35323
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.bullet_skill_c_wildcat_arrows.update",
+                "line": 35484
+              },
+              {
+                "file": "all/utils.lua",
+                "symbol": "function U.predict_damage",
+                "line": 2015
+              },
+              {
+                "file": "all/templates.lua",
+                "symbol": "local bullet =",
+                "line": 222
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          },
+          {
+            "summary": "自带大招冷却 35 秒，安排 4 次 160–240 点物理突袭；伤害乘塔输出倍率。",
+            "details": [
+              "对可眩晕的非 Boss 目标施加约 2.167 秒的控制参数；伤害由独立突袭实体在等待 0.433 秒后结算。",
+              "目标死亡时可以把剩余次数转给塔范围内的新目标；没有可用目标时停止。黑豹是攻击效果，不是另一个常驻阻挡士兵。"
+            ],
+            "id": "wildcat-ultimate",
+            "title": "自带四次突袭，目标死亡后可转移",
+            "kind": "intrinsic",
+            "sources": [
+              {
+                "file": "kr1/barrack_towers.lua",
+                "symbol": "RT(\"tower_wildcat\"",
+                "line": 3964
+              },
+              {
+                "file": "kr1/barrack_towers.lua",
+                "symbol": "RT(\"soldier_wildcat\"",
+                "line": 4017
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.soldier_wildcat.update",
+                "line": 35027
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.tower_wildcat.update",
+                "line": 34906
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.controller_wildcat_ult.update",
+                "line": 35565
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.decal_wildcat_ult_panther.update",
+                "line": 35531
+              },
+              {
+                "file": "all/scripts.lua",
+                "symbol": "function scripts.mod_stun.insert",
+                "line": 5836
+              },
+              {
+                "file": "all/templates.lua",
+                "symbol": "local bullet =",
+                "line": 222
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          },
+          {
+            "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
+            "details": [
+              "最终护甲减伤比例限制在 0%–100%。本条解释伤害类型，不代表整座塔的所有技能与召唤单位都使用相同类型。"
+            ],
+            "id": "damage-resolution",
+            "title": "物理伤害的护甲结算",
+            "kind": "damage-rule",
+            "sources": [
+              {
+                "file": "all/utils.lua",
+                "symbol": "function U.calc_protection",
+                "line": 1979
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "hasSpecificReview": true
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_wildcat_skill_b_bleed"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_wildcat_ult_stun"
+        },
+        {
+          "role": "范围伤害",
+          "description": "已核实攻击可分配至多个敌人或逐个结算范围内敌人。",
+          "source": "wildcat-rain"
         },
         {
           "role": "召唤/拦截",
@@ -58588,7 +60268,7 @@
       ],
       "image": "/portraits/tower_archer_1.png",
       "encyclopediaImage": "/portraits/tower_archer_1.png",
-      "encyclopediaOrder": 87,
+      "encyclopediaOrder": 90,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -58629,7 +60309,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -58682,7 +60362,7 @@
       ],
       "image": "/portraits/tower_archer_2.png",
       "encyclopediaImage": "/portraits/tower_archer_2.png",
-      "encyclopediaOrder": 88,
+      "encyclopediaOrder": 91,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -58723,7 +60403,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -58776,7 +60456,7 @@
       ],
       "image": "/portraits/tower_archer_3.png",
       "encyclopediaImage": "/portraits/tower_archer_3.png",
-      "encyclopediaOrder": 89,
+      "encyclopediaOrder": 92,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -58817,7 +60497,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -58870,7 +60550,7 @@
       ],
       "image": "/portraits/tower_mage_1.png",
       "encyclopediaImage": "/portraits/tower_mage_1.png",
-      "encyclopediaOrder": 90,
+      "encyclopediaOrder": 93,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -58911,7 +60591,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
@@ -58964,7 +60644,7 @@
       ],
       "image": "/portraits/tower_mage_2.png",
       "encyclopediaImage": "/portraits/tower_mage_2.png",
-      "encyclopediaOrder": 91,
+      "encyclopediaOrder": 94,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -59005,7 +60685,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
@@ -59058,7 +60738,7 @@
       ],
       "image": "/portraits/tower_mage_3.png",
       "encyclopediaImage": "/portraits/tower_mage_3.png",
-      "encyclopediaOrder": 92,
+      "encyclopediaOrder": 95,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -59099,7 +60779,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
@@ -59153,7 +60833,7 @@
       ],
       "image": "/portraits/tower_engineer_1.png",
       "encyclopediaImage": "/portraits/tower_engineer_1.png",
-      "encyclopediaOrder": 93,
+      "encyclopediaOrder": 96,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -59194,7 +60874,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "令 A 为扣除本次穿甲后的物理护甲，减伤比例 = A × (0.2A + 0.4)。例如 50% 护甲对应 25% 减伤，100% 护甲对应 60% 减伤。",
@@ -59253,7 +60933,7 @@
       ],
       "image": "/portraits/tower_engineer_2.png",
       "encyclopediaImage": "/portraits/tower_engineer_2.png",
-      "encyclopediaOrder": 94,
+      "encyclopediaOrder": 97,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -59294,7 +60974,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "令 A 为扣除本次穿甲后的物理护甲，减伤比例 = A × (0.2A + 0.4)。例如 50% 护甲对应 25% 减伤，100% 护甲对应 60% 减伤。",
@@ -59353,7 +61033,7 @@
       ],
       "image": "/portraits/tower_engineer_3.png",
       "encyclopediaImage": "/portraits/tower_engineer_3.png",
-      "encyclopediaOrder": 95,
+      "encyclopediaOrder": 98,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -59394,7 +61074,7 @@
       },
       "units": [],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "令 A 为扣除本次穿甲后的物理护甲，减伤比例 = A × (0.2A + 0.4)。例如 50% 护甲对应 25% 减伤，100% 护甲对应 60% 减伤。",
@@ -59452,7 +61132,7 @@
       ],
       "image": "/portraits/tower_barrack_1.png",
       "encyclopediaImage": "/portraits/tower_barrack_1.png",
-      "encyclopediaOrder": 96,
+      "encyclopediaOrder": 99,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -59538,7 +61218,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -59591,7 +61271,7 @@
       ],
       "image": "/portraits/tower_barrack_2.png",
       "encyclopediaImage": "/portraits/tower_barrack_2.png",
-      "encyclopediaOrder": 97,
+      "encyclopediaOrder": 100,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -59677,7 +61357,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
@@ -59730,7 +61410,7 @@
       ],
       "image": "/portraits/tower_barrack_3.png",
       "encyclopediaImage": "/portraits/tower_barrack_3.png",
-      "encyclopediaOrder": 98,
+      "encyclopediaOrder": 101,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -59816,7 +61496,7 @@
         }
       ],
       "mechanics": {
-        "reviewedVersion": "2.0.8.9",
+        "reviewedVersion": "2.0.9.3",
         "items": [
           {
             "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",

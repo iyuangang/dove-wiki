@@ -63,7 +63,9 @@ export function inferTowerRoles(raw, tower, supportIds = new Map()) {
   if (reviewed.has('archers-mark')) add('减益/破甲', '鹰之印记提高敌人受伤倍率，Boss 增幅减半。', 'archers-mark')
   if (reviewed.has('wizard-empower')) add('增伤辅助', '知识卷轴给周围塔增加伤害倍率。', 'wizard-empower')
   if (reviewed.has('knights-heroes')) add('增伤辅助', '骑士身边的英雄获得输出倍率增幅。', 'knights-heroes')
-  for (const id of ['shaolin-distribution', 'high-elven-volley', 'sunray-sharing', 'dwaarp-control', 'furnace-penetration', 'tesla-chain', 'frankenstein-chain']) {
+  if (reviewed.has('culverine-shred')) add('减益/破甲', '锋利弹片逐次永久削减物理护甲。', 'culverine-shred')
+  if (reviewed.has('culverine-sulfur')) add('减益/破甲', '硫磺烟云暂时削减魔法护甲。', 'culverine-sulfur')
+  for (const id of ['shaolin-distribution', 'high-elven-volley', 'sunray-sharing', 'dwaarp-control', 'furnace-penetration', 'tesla-chain', 'frankenstein-chain', 'wildcat-rain']) {
     if (reviewed.has(id)) add('范围伤害', '已核实攻击可分配至多个敌人或逐个结算范围内敌人。', id)
   }
 

@@ -1210,6 +1210,7 @@ async function main() {
     Object.assign(tower, inferTowerRoles(rawTower, tower, supportIds))
     if (tower.id === 'tower_shaolin') tower.attack.scope = '单名僧众的一次攻击'
     if (tower.mechanics.items.some((item) => item.id === 'wizard-double-bolt')) tower.attack.scope = '单枚普攻弹丸参数（每轮两枚）'
+    if (tower.mechanics.items.some((item) => item.id === 'culverine-splash')) tower.attack.scope = '普攻落点范围内的单个目标'
   }
 
   await cleanupPortraits(raw.towers)

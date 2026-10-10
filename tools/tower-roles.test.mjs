@@ -42,4 +42,10 @@ describe('防御塔定位依据', () => {
     expect(inferTowerRoles(raw({ pop_golden: {} }), tower()).roles).not.toContain('经济辅助')
     expect(inferTowerRoles(raw({ pick: { pickpocket: { steal_max: { 0: 3, 1: 4 } } } }), tower()).roles).toContain('经济辅助')
   })
+  it('扩散炮削抗与野猫箭雨的脚本定位依赖有效复核', () => {
+    const reviewed = tower({ mechanics: { items: [{ id: 'culverine-shred' }, { id: 'culverine-sulfur' }, { id: 'wildcat-rain' }] } })
+    expect(inferTowerRoles(raw(), reviewed).roles).toEqual(expect.arrayContaining(['减益/破甲', '范围伤害']))
+    expect(inferTowerRoles(raw(), tower()).roles).not.toContain('减益/破甲')
+    expect(inferTowerRoles(raw(), tower()).roles).not.toContain('范围伤害')
+  })
 })
