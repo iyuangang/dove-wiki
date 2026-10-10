@@ -8,6 +8,7 @@
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
     "test": "vitest run",
+    "check:data": "node tools/check-snapshot.mjs",
     "sync:dove": "node tools/sync-dove.mjs",
     "changelog:dove": "node tools/game-changelog.mjs --previous-ref HEAD"
   },

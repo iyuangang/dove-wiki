@@ -155,6 +155,7 @@ function openTower(tower: Tower) {
         v-else-if="activeTab === 'calculator'"
         :towers="towers"
         :heroes="heroes"
+        :enemies="enemies"
         :effects="doveData.supportEffects"
         :technology-trees="doveData.technologyTrees"
         @open="openTower"

@@ -1,9 +1,16 @@
 import rawData from './data/dove-data.json'
 import rawGameChangelog from './data/game-changelog.json'
+import manifest from './data/snapshot-manifest.json'
+import contract from './data-contract.json'
 import { publicAssetUrl } from './lib/public-assets'
 import type { DoveData, GameChangelog } from './types'
 
 const sourceData = rawData as DoveData
+if (!contract.supportedSchemaVersions.includes(sourceData.schemaVersion) ||
+  !contract.supportedCalculationRulesVersions.includes(sourceData.calculationRules.version)) {
+  throw new Error('当前站点代码与游戏快照格式不兼容，请发布兼容版本。')
+}
+export const snapshotManifest = manifest
 
 export const doveData: DoveData = {
   ...sourceData,

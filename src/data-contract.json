@@ -1,0 +1,11 @@
+{
+  "supportedSchemaVersions": [2],
+  "supportedCalculationRulesVersions": [1],
+  "requiredCalculationParameters": [
+    "piercingArmor", "criticalChance", "criticalMultiplier", "tearThresholds", "tearReductions",
+    "shatterThreshold", "shatterSmall", "shatterNormal", "lowProtectionThreshold", "lowProtectionMultiplier",
+    "secondaryMagicDamageFactor", "flyingDamageMultiplier", "unprotectedMultiplier", "unsteadyChance", "unsteadyMultiplier",
+    "magicDustChance", "magicDustHpFactor", "magicDustCompensation", "bleedChance", "bleedDamageFactor",
+    "bleedTicks", "bleedTickInterval", "bleedDuration", "bleedMaxStacks", "purgeBase", "purgePerEnemy", "purgeEnemyCap"
+  ]
+}

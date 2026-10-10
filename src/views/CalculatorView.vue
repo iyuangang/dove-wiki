@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
 import { familyLabels } from '../data'
+import { buildSimulationTechnologies, calculationRules } from '../lib/calculation-rules'
 import {
   calculateBuffs,
   formatNumber,
   formatPercent,
+  resolveSupportLevel,
+  supportAppliesToTower,
   type SupportSelection,
   type TechnologySelection,
 } from '../lib/calculator'
@@ -17,6 +20,7 @@ import {
 } from '../lib/damage-simulator'
 import { publicAssetUrl } from '../lib/public-assets'
 import type {
+  Enemy,
   Hero,
   SupportEffect,
   SupportLevel,
@@ -28,6 +32,7 @@ import type {
 const props = defineProps<{
   towers: Tower[]
   heroes: Hero[]
+  enemies: Enemy[]
   effects: SupportEffect[]
   technologyTrees: TechnologyTree[]
 }>()
@@ -37,13 +42,8 @@ interface EffectState {
   enabled: boolean
   level: number
   triggers: number
-}
-
-interface SimulationTechnologyEffect {
-  id: string
-  name: string
-  description: string
-  active: boolean
+  sourceRange: number
+  distancePercent: number
 }
 
 interface DamageCurveGroup {
@@ -54,27 +54,7 @@ interface DamageCurveGroup {
 }
 
 const technologyFamilies: TowerFamily[] = ['archer', 'barrack', 'mage', 'engineer']
-const supportedSimulationTechnologyIds = new Set([
-  'archer_piercing',
-  'archer_precision',
-  'archer_el_bloodletting_shoot',
-  'archer_tear',
-  'archer_obsidian',
-  'archer_magic',
-  'archer_fly_killer',
-  'mage_arcane_shatter',
-  'mage_strike',
-  'mage_unsteady',
-  'mage_purge_field',
-  'engineer_magic_dust',
-])
-const magicDustCompensationTowerIds = new Set([
-  'tower_tesla',
-  'tower_frankenstein',
-  'tower_rotten_forest',
-  'tower_ignis_altar',
-  'tower_sandworm',
-])
+const supportedSimulationTechnologyIds = new Set(calculationRules.valid ? calculationRules.simulationTechnologyIds : [])
 const damageCurveGroups: DamageCurveGroup[] = [
   { id: 'true', name: '真实', damageTypes: ['true'], className: 'series-true' },
   {
@@ -121,12 +101,27 @@ const customDamage = reactive({
   min: 100,
   max: 100,
 })
+const customAttackInterval = ref(1)
 const dummy = reactive({
   hp: 1000,
   armor: 10,
   magicArmor: 10,
   flying: false,
 })
+const enemyPresetId = ref('')
+const enemyPresetDifficulty = ref(2)
+const enemyPresetOptions = computed(() => [...new Map(props.enemies.map((enemy) => [enemy.id, enemy])).values()])
+const enemyPreset = computed(() => props.enemies.find((enemy) => enemy.id === enemyPresetId.value))
+const enemyPresetStats = computed(() => enemyPreset.value?.statsByDifficulty.find((variant) => variant.difficulty === enemyPresetDifficulty.value))
+function loadEnemyPreset() {
+  const stats = enemyPresetStats.value?.stats
+  if (!stats || stats.hp === null) return
+  dummy.hp = stats.hp
+  dummy.armor = (stats.armor || 0) * 100
+  dummy.magicArmor = (stats.magicArmor || 0) * 100
+  dummy.flying = enemyPreset.value!.flying
+  attackPage.value = 1
+}
 const simulationSeed = ref(2058)
 const attackPage = ref(1)
 const curveDefense = ref(10)
@@ -143,6 +138,8 @@ const state = reactive<Record<string, EffectState>>(
         enabled: false,
         level: effect.levels.at(-1)?.level || 1,
         triggers: 0,
+        sourceRange: effect.levels[0]?.radius || 0,
+        distancePercent: 100,
       },
     ]),
   ),
@@ -166,6 +163,8 @@ const selectedEffects = computed<SupportSelection[]>(() =>
       effectId: effect.id,
       level: state[effect.id]?.level || 1,
       triggers: state[effect.id]?.triggers || 0,
+      sourceRange: state[effect.id]?.sourceRange,
+      distanceRatio: (state[effect.id]?.distancePercent ?? 100) / 100,
     })),
 )
 const technologySelection = computed<TechnologySelection>(() => ({
@@ -183,6 +182,7 @@ const result = computed(() =>
     technologySelection.value,
   ),
 )
+const activeAttackInterval = computed(() => attackSource.value === 'tower' ? result.value.cooldown || 0 : customAttackInterval.value)
 const sourceById = computed(() => new Map(props.towers.map((tower) => [tower.id, tower])))
 const heroById = computed(() => new Map(props.heroes.map((hero) => [hero.id, hero])))
 const needsMageTowerCount = computed(() =>
@@ -214,143 +214,15 @@ const appliedTechnologyIds = computed(
   () => new Set(result.value.appliedTechnologies.map((technology) => technology.technologyId)),
 )
 const hasSimulationTechnology = (technologyId: string) =>
-  attackSource.value === 'tower' && appliedTechnologyIds.value.has(technologyId)
-const technologyOnlyDamageMin = computed(() =>
-  (result.value.damageMin || 0) / (1 + result.value.damageBonus),
-)
-const technologyOnlyDamageMax = computed(() =>
-  (result.value.damageMax || 0) / (1 + result.value.damageBonus),
-)
-const simulationArmorReductionPerHit = computed(() => {
-  if (hasSimulationTechnology('archer_tear')) {
-    const averageDamage = (technologyOnlyDamageMin.value + technologyOnlyDamageMax.value) / 2
-    if (averageDamage > 40) return 1
-    if (averageDamage > 20) return 0.72
-    if (averageDamage > 10) return 0.44
-    return 0.16
-  }
-  if (hasSimulationTechnology('mage_arcane_shatter')) {
-    return technologyOnlyDamageMax.value >= 50 ? 3.5 : 2
-  }
-  return 0
-})
-const magicDustUsesCompensation = computed(() =>
-  hasSimulationTechnology('engineer_magic_dust') &&
-  magicDustCompensationTowerIds.has(selectedTower.value.id),
-)
-const simulationTechnologyEffects = computed<SimulationTechnologyEffect[]>(() => {
-  if (attackSource.value !== 'tower') return []
-  const effects: SimulationTechnologyEffect[] = []
-  if (hasSimulationTechnology('archer_piercing')) {
-    effects.push({
-      id: 'archer_piercing',
-      name: '穿刺射击',
-      description: '每次攻击忽略目标 10 点护甲',
-      active: true,
-    })
-  }
-  if (hasSimulationTechnology('archer_precision')) {
-    effects.push({
-      id: 'archer_precision',
-      name: '精准射击',
-      description: '每次攻击独立有 10% 概率造成 2 倍伤害',
-      active: true,
-    })
-  }
-  if (hasSimulationTechnology('archer_el_bloodletting_shoot')) {
-    effects.push({
-      id: 'archer_el_bloodletting_shoot',
-      name: '放血射击',
-      description: '15% 概率施加 3 秒放血：立即结算首跳，共 23 跳真实伤害，最多 5 层',
-      active: true,
-    })
-  }
-  if (hasSimulationTechnology('archer_tear')) {
-    effects.push({
-      id: 'archer_tear',
-      name: '护甲撕裂',
-      description: `每次命中后永久降低 ${formatNumber(simulationArmorReductionPerHit.value)} 点护甲`,
-      active: true,
-    })
-  }
-  if (hasSimulationTechnology('archer_obsidian')) {
-    effects.push({
-      id: 'archer_obsidian',
-      name: '黑曜箭镞',
-      description: '目标当前减伤不高于 10% 时，主伤害提高 27%',
-      active: true,
-    })
-  }
-  if (hasSimulationTechnology('archer_magic')) {
-    effects.push({
-      id: 'archer_magic',
-      name: '附魔箭矢',
-      description: '每次命中追加主伤害 12% 的魔法伤害（向上取整）',
-      active: true,
-    })
-  }
-  if (hasSimulationTechnology('archer_fly_killer')) {
-    effects.push({
-      id: 'archer_fly_killer',
-      name: '空军克星',
-      description: dummy.flying ? '傀儡为空军，额外 25% 对空伤害已触发' : '仅对空军额外提高 25%；当前傀儡不是空军',
-      active: dummy.flying,
-    })
-  }
-  if (hasSimulationTechnology('mage_arcane_shatter')) {
-    effects.push({
-      id: 'mage_arcane_shatter',
-      name: '奥术粉碎',
-      description: `每次命中后永久降低 ${formatNumber(simulationArmorReductionPerHit.value)} 点护甲`,
-      active: true,
-    })
-  }
-  if (hasSimulationTechnology('mage_strike')) {
-    effects.push({
-      id: 'mage_strike',
-      name: '弱点打击',
-      description: '目标对本次伤害没有减伤时，主伤害提高 20%',
-      active: true,
-    })
-  }
-  if (hasSimulationTechnology('mage_unsteady')) {
-    effects.push({
-      id: 'mage_unsteady',
-      name: '不稳定魔力',
-      description: '每次攻击有 10% 概率造成 2 倍无减伤伤害',
-      active: true,
-    })
-  }
-  if (hasSimulationTechnology('mage_purge_field')) {
-    effects.push({
-      id: 'mage_purge_field',
-      name: '肃清立场',
-      description: `射程内 ${nearbyEnemyCount.value} 名敌人：实时伤害提高 ${14 + Math.min(30, Math.max(0, Math.floor(nearbyEnemyCount.value || 0)))}%`,
-      active: true,
-    })
-  }
-  if (hasSimulationTechnology('engineer_magic_dust')) {
-    effects.push({
-      id: 'engineer_magic_dust',
-      name: '魔法粉尘',
-      description: magicDustUsesCompensation.value
-        ? '该塔使用兼容补偿规则：固定提高 20%，已计入实时伤害'
-        : '每次攻击有 10% 概率追加基于本次攻击力和傀儡最大生命的伤害',
-      active: true,
-    })
-  }
-  return effects
-})
-const simulationArmorIgnore = computed(() =>
-  simulationTechnologyEffects.value.some((technology) => technology.id === 'archer_piercing')
-    ? 10
-    : 0,
-)
-const simulationCriticalChance = computed(() =>
-  simulationTechnologyEffects.value.some((technology) => technology.id === 'archer_precision')
-    ? 0.1
-    : 0,
-)
+  calculationRules.valid && attackSource.value === 'tower' && appliedTechnologyIds.value.has(technologyId)
+const simulationTechnologies = computed<ReturnType<typeof buildSimulationTechnologies>>(() => attackSource.value === 'tower'
+  ? buildSimulationTechnologies(selectedTower.value, result.value, dummy.flying, nearbyEnemyCount.value)
+  : { effects: [], input: {}, magicDustUsesCompensation: false })
+const simulationTechnologyEffects = computed(() => simulationTechnologies.value.effects)
+const simulationArmorReductionPerHit = computed(() => simulationTechnologies.value.input.armorReductionPerHit || 0)
+const simulationArmorIgnore = computed(() => simulationTechnologies.value.input.armorIgnore || 0)
+const simulationCriticalChance = computed(() => simulationTechnologies.value.input.criticalChance || 0)
+const magicDustUsesCompensation = computed(() => simulationTechnologies.value.magicDustUsesCompensation)
 const effectiveDummyArmor = computed(() =>
   Math.max(0, (Number(dummy.armor) || 0) - simulationArmorIgnore.value),
 )
@@ -435,29 +307,8 @@ const damageSequence = computed(() =>
     hp: dummy.hp,
     armor: dummy.armor,
     magicArmor: dummy.magicArmor,
-    armorIgnore: simulationArmorIgnore.value,
-    criticalChance: simulationCriticalChance.value,
-    criticalMultiplier: 2,
-    attackInterval: result.value.cooldown || 0,
-    armorReductionPerHit: simulationArmorReductionPerHit.value,
-    lowProtectionThreshold: hasSimulationTechnology('archer_obsidian') ? 0.1 : -1,
-    lowProtectionMultiplier: hasSimulationTechnology('archer_obsidian') ? 1.27 : 1,
-    unprotectedMultiplier: hasSimulationTechnology('mage_strike') ? 1.2 : 1,
-    unsteadyChance: hasSimulationTechnology('mage_unsteady') ? 0.1 : 0,
-    unsteadyMultiplier: 2,
-    secondaryMagicDamageFactor: hasSimulationTechnology('archer_magic') ? 0.12 : 0,
-    flyingDamageMultiplier:
-      hasSimulationTechnology('archer_fly_killer') && dummy.flying ? 1.25 : 1,
-    magicDustChance:
-      hasSimulationTechnology('engineer_magic_dust') && !magicDustUsesCompensation.value
-        ? 0.1
-        : 0,
-    bleedChance: hasSimulationTechnology('archer_el_bloodletting_shoot') ? 0.15 : 0,
-    bleedDamageFactor: 0.1,
-    bleedTicks: 23,
-    bleedTickInterval: 4 / 30,
-    bleedDuration: 3,
-    bleedMaxStacks: 5,
+    attackInterval: activeAttackInterval.value,
+    ...simulationTechnologies.value.input,
     seed: simulationSeed.value,
   }),
 )
@@ -528,11 +379,17 @@ function selectedLevel(effect: SupportEffect): SupportLevel {
 }
 
 function effectSummary(effect: SupportEffect) {
-  const level = selectedLevel(effect)
+  if (effect.review?.valid === false) return '来源已变化，等待复核后恢复计算'
+  if (!supportAppliesToTower(effect, selectedTower.value)) return '该效果不作用于当前目标塔'
+  const level = resolveSupportLevel(effect, {
+    effectId: effect.id, level: state[effect.id]!.level,
+    sourceRange: state[effect.id]!.sourceRange, distanceRatio: state[effect.id]!.distancePercent / 100,
+  })
+  if (!level) return '超出覆盖范围或半径无效，无增益'
   const parts = []
   if (level.damageBonus) parts.push(`伤害 +${formatPercent(level.damageBonus)}`)
   if (level.damagePerTrigger) parts.push(`每次伤害 +${formatPercent(level.damagePerTrigger)}`)
-  if (level.rangeBonus) parts.push(`范围 +${formatPercent(level.rangeBonus)}`)
+  if (level.rangeBonus) parts.push(`范围 +${formatPercent(level.rangeBonus, 2)}`)
   if (level.speedBonus) parts.push(`攻速 +${formatPercent(level.speedBonus)}`)
   if (level.cooldownMultiplier && level.cooldownMultiplier !== 1) {
     parts.push(`攻击间隔 ×${formatPercent(level.cooldownMultiplier)}`)
@@ -570,6 +427,7 @@ function resetSupports() {
   Object.values(state).forEach((item) => {
     item.enabled = false
     item.triggers = 0
+    item.distancePercent = 100
   })
 }
 
@@ -586,6 +444,9 @@ function resetDamageDemo() {
   demoDamageType.value = 'true'
   customDamage.min = 100
   customDamage.max = 100
+  customAttackInterval.value = 1
+  enemyPresetId.value = ''
+  enemyPresetDifficulty.value = 2
   dummy.hp = 1000
   dummy.armor = 10
   dummy.magicArmor = 10
@@ -730,6 +591,7 @@ onBeforeUnmount(() => {
 
         <section class="lab-card support-selector-card">
           <div class="lab-step"><span>03</span><div><b>配置辅助来源</b><small>SUPPORT SOURCES</small></div></div>
+          <p class="technology-empty">勾选表示目标处于覆盖范围且效果正在生效；临时增益按持续期峰值计算。同类光环不重复叠加。守卫骑士团的守护鼓舞强化英雄，不计入防御塔增伤。</p>
           <div class="support-list">
             <article
               v-for="effect in effects"
@@ -738,7 +600,7 @@ onBeforeUnmount(() => {
               :class="{ enabled: state[effect.id]?.enabled }"
             >
               <label class="support-toggle">
-                <input v-model="state[effect.id]!.enabled" type="checkbox" />
+                <input v-model="state[effect.id]!.enabled" type="checkbox" :disabled="!supportAppliesToTower(effect, selectedTower)" :aria-label="`启用${effect.name}`" />
                 <span></span>
               </label>
               <img :src="effectIcon(effect)" :alt="`${effect.name}技能图标`" />
@@ -749,7 +611,7 @@ onBeforeUnmount(() => {
                 </div>
                 <p>{{ effectSummary(effect) || '条件触发型辅助' }}</p>
                 <span class="effect-meta">
-                  {{ selectedLevel(effect).radius ? `半径 ${selectedLevel(effect).radius}` : '全场' }}
+                  {{ selectedLevel(effect).radius ? `半径 ${effect.radiusUsesSourceRange ? state[effect.id]!.sourceRange : selectedLevel(effect).radius}` : '全场' }}
                   · {{ effectModeLabel(effect) }}
                   <template v-if="selectedLevel(effect).duration"> · {{ selectedLevel(effect).duration }}s</template>
                 </span>
@@ -770,6 +632,14 @@ onBeforeUnmount(() => {
                     :max="selectedLevel(effect).triggerCap"
                     :disabled="!state[effect.id]?.enabled"
                   />
+                </label>
+                <label v-if="effect.radiusUsesSourceRange">
+                  <span>源塔当前覆盖半径</span>
+                  <input v-model.number="state[effect.id]!.sourceRange" type="number" min="1" :disabled="!state[effect.id]?.enabled" />
+                </label>
+                <label v-if="effect.rangeFalloff">
+                  <span>两塔椭圆距离 / 半径（%）</span>
+                  <input v-model.number="state[effect.id]!.distancePercent" type="number" min="0" max="100" :disabled="!state[effect.id]?.enabled" />
                 </label>
               </div>
               <p class="support-note">{{ effect.note }}</p>
@@ -980,7 +850,7 @@ onBeforeUnmount(() => {
                   <div>
                     <span>当前防御塔</span>
                     <strong>{{ selectedTower.name }}</strong>
-                    <small>实时同步科技与辅助效果</small>
+                    <small>{{ selectedTower.attack.scope }}</small>
                   </div>
                   <dl>
                     <div>
@@ -993,6 +863,8 @@ onBeforeUnmount(() => {
                     </div>
                   </dl>
                 </div>
+                <p class="dummy-effective-armor">按上述攻击口径模拟单个目标；技能、召唤物与多枚弹丸的整轮分配需分别核实。</p>
+                <p v-if="!calculationRules.valid" class="attack-history-warning">条件与概率规则来源发生变化，已停止应用相关规则，等待复核：{{ calculationRules.invalidFiles.join('、') }}</p>
 
                 <div v-if="simulationTechnologyEffects.length" class="simulation-technology-effects">
                   <div class="simulation-technology-heading">
@@ -1014,6 +886,10 @@ onBeforeUnmount(() => {
               </template>
 
               <div v-else class="damage-demo-fields custom-attack-fields">
+                <label>
+                  <span>攻击间隔（秒）</span>
+                  <input v-model.number="customAttackInterval" type="number" min="0.01" step="0.01" />
+                </label>
                 <label>
                   <span>伤害类型</span>
                   <select v-model="demoDamageType">
@@ -1039,6 +915,23 @@ onBeforeUnmount(() => {
               <div class="damage-demo-title dummy-title">
                 <div><strong>配置傀儡</strong><small>TRAINING DUMMY</small></div>
               </div>
+              <div class="damage-demo-fields enemy-preset-fields">
+                <label>
+                  <span>载入游戏敌人</span>
+                  <select v-model="enemyPresetId" aria-label="载入游戏敌人">
+                    <option value="">选择敌人（可选）</option>
+                    <option v-for="enemy in enemyPresetOptions" :key="enemy.id" :value="enemy.id">{{ enemy.name }} · {{ enemy.id }}</option>
+                  </select>
+                </label>
+                <label>
+                  <span>敌人难度</span>
+                  <select v-model="enemyPresetDifficulty" aria-label="敌人难度">
+                    <option v-for="(label, index) in ['休闲', '普通', '老兵', '不可能']" :key="label" :value="index + 1">{{ label }}</option>
+                  </select>
+                </label>
+                <button type="button" class="text-button" :disabled="!enemyPresetStats || enemyPresetStats.stats.hp === null" @click="loadEnemyPreset">载入面板</button>
+              </div>
+              <p v-if="enemyPreset" class="dummy-effective-armor">载入生命、双抗与飞行属性后仍可编辑；不计该敌人的免疫、护盾和特殊脚本。</p>
               <div class="damage-demo-fields dummy-fields">
                 <label>
                   <span>生命值</span>
@@ -1111,7 +1004,7 @@ onBeforeUnmount(() => {
                   <span>击杀总时长</span>
                   <strong>{{ damageSequence.defeated ? formatDuration(damageSequence.elapsedTime) : '—' }}</strong>
                   <small>
-                    {{ damageSequence.finalBlow === 'bleed' ? '最后一跳放血击杀' : `首击 0 秒 · 间隔 ${formatNumber(result.cooldown)} 秒` }}
+                    {{ damageSequence.finalBlow === 'bleed' ? '最后一跳放血击杀' : `首击 0 秒 · 间隔 ${formatNumber(activeAttackInterval)} 秒` }}
                   </small>
                 </article>
               </div>
@@ -1123,7 +1016,7 @@ onBeforeUnmount(() => {
               </div>
 
               <p class="damage-demo-note">
-                每次攻击从 {{ formatNumber(activeDamageMin) }}–{{ formatNumber(activeDamageMax) }} 独立随机取值。首击记为 0 秒，后续按实时攻击间隔推进；不计弹道飞行与攻击前摇。演示按无免疫、无额外易伤、目标伤害系数为 1 结算；上方已启用科技会参与每次攻击。
+                每次攻击从 {{ formatNumber(activeDamageMin) }}–{{ formatNumber(activeDamageMax) }} 独立随机取值。首击记为 0 秒，后续按实时攻击间隔推进；不计弹道飞行与攻击前摇。演示按无免疫、无额外易伤、目标伤害系数为 1 结算；{{ attackSource === 'tower' ? '上方已启用科技会参与每次攻击。' : '当前使用自定义伤害与独立攻击间隔。' }}
               </p>
             </div>
           </div>
@@ -1225,7 +1118,7 @@ onBeforeUnmount(() => {
               <b>→</b>
               <strong>{{ formatNumber(result.damageMin) }}–{{ formatNumber(result.damageMax) }}</strong>
             </div>
-            <em>科技 ×{{ formatNumber(result.technologyDamageMultiplier, 3) }} · 辅助 +{{ formatPercent(result.damageBonus) }}</em>
+            <em>科技 ×{{ formatNumber(result.technologyDamageMultiplier, 3) }} · 辅助 +{{ formatPercent(result.damageBonus) }}<template v-if="result.technologyDamageBonus"> · 肃清 +{{ formatPercent(result.technologyDamageBonus) }}</template></em>
           </article>
           <article>
             <div><span>{{ result.rangeLabel }}</span><small>RANGE</small></div>

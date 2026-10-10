@@ -537,7 +537,7 @@ export function simulateAttackSequence(input: AttackSequenceInput): AttackSequen
         totalDamageApplied += tickDamage
         bleedDamageApplied += tickDamage
         totalAttackHpLost += immediateHpLost
-        technologyTriggers.push('放血 23 跳')
+        technologyTriggers.push(`放血 ${bleedTicks} 跳`)
         for (let tick = 1; tick < bleedTicks; tick += 1) {
           bleedEvents.push({ time: timestamp + tick * bleedTickInterval, damage: tickDamage })
         }

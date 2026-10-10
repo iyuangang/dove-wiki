@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 2,
+  "gameCommit": "731afe683e16e3adbfe162cf2b7452cc7bd2f867",
+  "reviews": {
+    "towers": {
+      "version": "2.0.9.3",
+      "note": "人工核对模板、攻击脚本与结算规则。同步器不得自动更新此文件；源码指纹不匹配时条目待复核。",
+      "files": {
+        "kr1/engineer_towers.lua": "6dd5dec81d28a57977de5781a994bebb85b05f4e9de7bc50eccbf2c06bb8de71",
+        "kr1/game_scripts.lua": "d78c9cc9d4c6df87a1383089eb8661a6dc1add31270e9c218c6969731a875fe0",
+        "kr1/tower_scripts.lua": "d2444783435e4c03e606b0bbbf952172da26cd945b6725e7dfc9e015ec34eb18",
+        "kr1/barrack_towers.lua": "4440fd9ccdeb78474c0c6f1cf71b597955b6b1bd447b4c52063d1b9d4ed0d269",
+        "all/systems/health.lua": "fe28639c2c537ff39842010905ea414e4299502c1a6e50b5188bba487951ec16",
+        "all/script_utils.lua": "e29b1142b128df1ba436cb832a66df70aebce13510bc9c95f82ab13cfc051c9a",
+        "all/scripts.lua": "2d73332e1dccd0bbddd6f51b2990fa36370d7a85020539f1f2651325620c7394",
+        "kr1/archer_towers.lua": "d97b0c14e8aba349bb4c25f01842029c67089e61b19e3397e102ffc4b5e44f0d",
+        "all/animation_db.lua": "5e14c2b8cf5020b2c6ac28bf98ea71545dd5b530a9a10aedec98f51c8d163d5e",
+        "all/utils.lua": "bb31988ffd453c10dbe6bd5f10d8e399f38a2cda769e8ea750a714ef8265a947",
+        "all/constants.lua": "a53b9167e9e5186c2041132481a2630628a05fc752f066a92f03cc5152716092",
+        "kr1/mage_towers.lua": "89dad06dec914d540496df09715a3ca9d43df69b1a04afef917eb4babee1c0ef",
+        "all/templates.lua": "f83d5091f593ac92ee8edef0e9384269f0b2c89c81b7e2f559a8472178db21b8",
+        "kr1/foundamental_towers.lua": "d07a8b85d38a3379c190b0eac2f2fc773ba34c0462e22c30d0d565e35f2714e6",
+        "kr1/data/game_animations.bin": "52190d13f892d270e1403f18fd4eed827bc3138111ac9144bcb66974b9c09d45",
+        "all/systems/mod_lifecycle.lua": "fa535b2e80cd9aa25c8a36974dcb093b569eea35d238aaa028559219611b9d3a"
+      },
+      "gameCommit": "731afe683e16e3adbfe162cf2b7452cc7bd2f867",
+      "reviewedAt": "2026-10-10",
+      "audit": "docs/mechanics-review-2.0.9.3.md",
+      "invalidFiles": []
+    },
+    "heroes": {
+      "version": "2.0.8.9",
+      "files": {
+        "kr1/heroes.lua": "d70d8b4f879c1d898ff12ec13c5bb180f7e82088e6686145696416e49a286208",
+        "kr1/hero_scripts.lua": "22b4cfe4f8ec6b932d0c52d48f3c3a3af5e6573dad5c0dc65b1b70352acaeb99",
+        "all/script_utils.lua": "e29b1142b128df1ba436cb832a66df70aebce13510bc9c95f82ab13cfc051c9a"
+      },
+      "gameCommit": "45073448b340682d893dec553d495153108f186e",
+      "reviewedAt": "2026-10-08",
+      "audit": "docs/mechanics-review-2.0.8.9.md",
+      "invalidFiles": []
+    },
+    "supports": {
+      "version": "2.0.9.3",
+      "gameCommit": "731afe683e16e3adbfe162cf2b7452cc7bd2f867",
+      "reviewedAt": "2026-10-10",
+      "files": {
+        "kr1/archer_towers.lua": "d97b0c14e8aba349bb4c25f01842029c67089e61b19e3397e102ffc4b5e44f0d",
+        "kr1/mage_towers.lua": "89dad06dec914d540496df09715a3ca9d43df69b1a04afef917eb4babee1c0ef",
+        "kr1/engineer_towers.lua": "6dd5dec81d28a57977de5781a994bebb85b05f4e9de7bc50eccbf2c06bb8de71",
+        "kr1/tower_scripts.lua": "d2444783435e4c03e606b0bbbf952172da26cd945b6725e7dfc9e015ec34eb18",
+        "kr1/game_scripts.lua": "d78c9cc9d4c6df87a1383089eb8661a6dc1add31270e9c218c6969731a875fe0",
+        "all/templates.lua": "f83d5091f593ac92ee8edef0e9384269f0b2c89c81b7e2f559a8472178db21b8",
+        "all/scripts.lua": "2d73332e1dccd0bbddd6f51b2990fa36370d7a85020539f1f2651325620c7394",
+        "all/script_utils.lua": "e29b1142b128df1ba436cb832a66df70aebce13510bc9c95f82ab13cfc051c9a",
+        "all/systems/mod_lifecycle.lua": "fa535b2e80cd9aa25c8a36974dcb093b569eea35d238aaa028559219611b9d3a",
+        "kr1/heroes.lua": "d70d8b4f879c1d898ff12ec13c5bb180f7e82088e6686145696416e49a286208",
+        "kr1/hero_scripts.lua": "22b4cfe4f8ec6b932d0c52d48f3c3a3af5e6573dad5c0dc65b1b70352acaeb99"
+      },
+      "invalidFiles": []
+    }
+  },
+  "dataHash": "86d91b64af2f38dcceb87cd26e150f9bdd58daa3ca128c987310cbf41746b6f8"
+}
