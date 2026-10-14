@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
 import { familyLabels } from '../data'
+import { Button } from '../components/ui/button'
 import { buildSimulationTechnologies, calculationRules } from '../lib/calculation-rules'
 import {
   calculateBuffs,
@@ -86,6 +87,21 @@ const damageCurveGroups: DamageCurveGroup[] = [
   },
 ]
 const targetId = ref('tower_ranger')
+const supportSourceFilter = ref<'all' | 'tower' | 'hero' | 'selected'>('all')
+const supportSearch = ref('')
+
+function resetSupportFilters() {
+  supportSourceFilter.value = 'all'
+  supportSearch.value = ''
+}
+
+function scrollToResults() {
+  const panel = document.getElementById('calculator-results')
+  panel?.scrollIntoView({
+    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start',
+  })
+  panel?.focus({ preventScroll: true })
+}
 const technologyTreeId = ref(props.technologyTrees[0]?.id || 1)
 const technologyLevels = reactive<Record<TowerFamily, number>>({
   archer: 0,
@@ -185,6 +201,21 @@ const result = computed(() =>
 const activeAttackInterval = computed(() => attackSource.value === 'tower' ? result.value.cooldown || 0 : customAttackInterval.value)
 const sourceById = computed(() => new Map(props.towers.map((tower) => [tower.id, tower])))
 const heroById = computed(() => new Map(props.heroes.map((hero) => [hero.id, hero])))
+const supportFilterOptions = computed(() => [
+  { id: 'all' as const, name: '全部', count: props.effects.length },
+  { id: 'tower' as const, name: '防御塔', count: props.effects.filter((effect) => effect.sourceType === 'tower').length },
+  { id: 'hero' as const, name: '英雄', count: props.effects.filter((effect) => effect.sourceType === 'hero').length },
+  { id: 'selected' as const, name: '已启用', count: props.effects.filter((effect) => state[effect.id]?.enabled).length },
+])
+const visibleSupportEffects = computed(() => {
+  const query = supportSearch.value.trim().toLowerCase()
+  return props.effects.filter((effect) => {
+    const matchesSource = supportSourceFilter.value === 'all' ||
+      (supportSourceFilter.value === 'selected' ? state[effect.id]?.enabled : effect.sourceType === supportSourceFilter.value)
+    const matchesQuery = !query || `${effect.name} ${effectSourceName(effect)}`.toLowerCase().includes(query)
+    return matchesSource && matchesQuery
+  })
+})
 const needsMageTowerCount = computed(() =>
   result.value.appliedTechnologies.some(
     (technology) => technology.technologyId === 'mage_brilliance',
@@ -510,6 +541,16 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
+    <div class="mobile-result-strip" role="region" aria-label="实时计算结果速览">
+      <dl>
+        <div><dt>伤害</dt><dd>{{ formatNumber(result.damageMin) }}–{{ formatNumber(result.damageMax) }}</dd></div>
+        <div><dt>{{ result.rangeLabel }}</dt><dd>{{ formatNumber(result.range) }}</dd></div>
+        <div><dt>攻击间隔</dt><dd>{{ formatNumber(result.cooldown) }}s</dd></div>
+        <div><dt>理论 DPS</dt><dd>{{ formatNumber(result.dps) }}</dd></div>
+      </dl>
+      <Button variant="ghost" size="sm" @click="scrollToResults">完整结果 ↓</Button>
+    </div>
+
     <div class="calculator-layout">
       <div class="calculator-controls">
         <section class="lab-card target-selector-card">
@@ -591,17 +632,30 @@ onBeforeUnmount(() => {
 
         <section class="lab-card support-selector-card">
           <div class="lab-step"><span>03</span><div><b>配置辅助来源</b><small>SUPPORT SOURCES</small></div></div>
-          <p class="technology-empty">勾选表示目标处于覆盖范围且效果正在生效；临时增益按持续期峰值计算。同类光环不重复叠加。守卫骑士团的守护鼓舞强化英雄，不计入防御塔增伤。</p>
+          <p class="support-intro">勾选目标正在获得的效果。临时增益按持续期峰值计算，同类光环取最高。</p>
+          <div class="support-toolbar">
+            <div class="support-source-tabs" role="group" aria-label="辅助来源类型">
+              <Button v-for="filter in supportFilterOptions" :key="filter.id" variant="ghost" size="sm"
+                :aria-pressed="supportSourceFilter === filter.id" @click="supportSourceFilter = filter.id">
+                {{ filter.name }} <span>{{ filter.count }}</span>
+              </Button>
+            </div>
+            <input v-model="supportSearch" class="support-search" type="search" aria-label="搜索辅助效果或来源" placeholder="搜索技能或来源" />
+          </div>
+          <div class="support-list-status">
+            <span role="status">显示 {{ visibleSupportEffects.length }} 项 · 实际生效 {{ result.applied.length }} 项</span>
+            <Button variant="ghost" size="sm" :disabled="!selectedEffects.length" @click="resetSupports">清空全部辅助</Button>
+          </div>
           <div class="support-list">
             <article
-              v-for="effect in effects"
+              v-for="effect in visibleSupportEffects"
               :key="effect.id"
               class="support-option"
-              :class="{ enabled: state[effect.id]?.enabled }"
+              :class="{ enabled: state[effect.id]?.enabled, unavailable: !supportAppliesToTower(effect, selectedTower) }"
             >
               <label class="support-toggle">
                 <input v-model="state[effect.id]!.enabled" type="checkbox" :disabled="!supportAppliesToTower(effect, selectedTower)" :aria-label="`启用${effect.name}`" />
-                <span></span>
+                <span aria-hidden="true"></span>
               </label>
               <img :src="effectIcon(effect)" :alt="`${effect.name}技能图标`" />
               <div class="support-copy">
@@ -614,9 +668,10 @@ onBeforeUnmount(() => {
                   {{ selectedLevel(effect).radius ? `半径 ${effect.radiusUsesSourceRange ? state[effect.id]!.sourceRange : selectedLevel(effect).radius}` : '全场' }}
                   · {{ effectModeLabel(effect) }}
                   <template v-if="selectedLevel(effect).duration"> · {{ selectedLevel(effect).duration }}s</template>
+                  <template v-if="selectedLevel(effect).cycle"> · 基础冷却 {{ selectedLevel(effect).cycle }}s</template>
                 </span>
               </div>
-              <div class="support-inputs">
+              <div v-if="state[effect.id]?.enabled && supportAppliesToTower(effect, selectedTower)" class="support-inputs">
                 <label>
                   <span>技能等级</span>
                   <select v-model.number="state[effect.id]!.level" :disabled="!state[effect.id]?.enabled">
@@ -642,10 +697,18 @@ onBeforeUnmount(() => {
                   <input v-model.number="state[effect.id]!.distancePercent" type="number" min="0" max="100" :disabled="!state[effect.id]?.enabled" />
                 </label>
               </div>
-              <p class="support-note">{{ effect.note }}</p>
+              <details class="support-rules">
+                <summary>触发与叠加规则<span v-if="state[effect.id]?.enabled"> · 已启用</span></summary>
+                <p class="support-note">{{ effect.note }}</p>
+              </details>
             </article>
           </div>
-          <button class="text-button" type="button" @click="resetSupports">清空全部辅助</button>
+          <div v-if="!visibleSupportEffects.length" class="support-empty">
+            <strong>{{ supportSourceFilter === 'selected' && !selectedEffects.length ? '尚未启用辅助效果' : '没有匹配的辅助效果' }}</strong>
+            <p>查看全部来源，或缩短搜索关键词。</p>
+            <Button variant="outline" size="sm" @click="resetSupportFilters">查看全部来源</Button>
+          </div>
+          <p class="support-footnote">守卫骑士团的守护鼓舞强化英雄，塔的增伤计算中不包含该效果。</p>
         </section>
 
         <section class="lab-card damage-lab-card">
@@ -1096,7 +1159,7 @@ onBeforeUnmount(() => {
         </section>
       </div>
 
-      <aside class="result-console">
+      <aside id="calculator-results" class="result-console" aria-label="完整计算结果" tabindex="-1">
         <div class="console-heading">
           <div><span>LIVE RESULT</span><strong>实时结果</strong></div>
           <span class="live-chip"><i></i> SCRIPT RULES</span>
