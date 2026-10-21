@@ -8,8 +8,11 @@ export const generatedPaths = [
   'src/data/dove-data.json', 'src/data/game-changelog.json', 'src/data/snapshot-manifest.json',
 ]
 
+export const ratingPaths = ['public/rating', 'src/data/rating-manifest.json', 'src/data/rating-methodology.json', 'data/asset-lock.json']
+const allGeneratedPaths = [...generatedPaths, ...ratingPaths]
+
 const managed = (path) => !isAbsolute(path) && !path.split(/[\\/]/).some((part) => part === '..' || part === '.') &&
-  (generatedPaths.includes(path) || generatedPaths.some((directory) => directory.startsWith('public/') && path.startsWith(`${directory}/`) && path.endsWith('.png')))
+  (allGeneratedPaths.includes(path) || generatedPaths.some((directory) => directory.startsWith('public/') && path.startsWith(`${directory}/`) && path.endsWith('.png')))
 
 async function imageFiles(root, path) {
   const directory = inside(root, path)
@@ -94,9 +97,9 @@ export async function beginSync(root) {
     async promote(paths, afterPromote) {
       const items = []
       for (const path of paths) {
-        if (!generatedPaths.includes(path)) throw new Error(`拒绝发布非生成路径：${path}`)
+        if (!allGeneratedPaths.includes(path)) throw new Error(`拒绝发布非生成路径：${path}`)
         if (!existsSync(inside(stageRoot, path))) throw new Error(`缺少待发布结果：${path}`)
-        if (path.startsWith('public/')) {
+        if (path.startsWith('public/') && path !== 'public/rating') {
           const staged = await imageFiles(stageRoot, path)
           const old = await imageFiles(root, path)
           for (const file of new Set([...staged, ...old])) {

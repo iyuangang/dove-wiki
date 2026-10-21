@@ -161,7 +161,9 @@ npm run build
 提交示例：
 
 ```powershell
-git add src/data public/encyclopedia public/skills public/portraits public/heroes public/enemies public/technologies
+npm run assets:pack -- game
+npm run assets:publish -- game
+git add src/data data/asset-lock.json
 git commit -m "chore: sync dove game data"
 git push -u origin feature/sync-dove-data
 ```
@@ -194,7 +196,7 @@ git push -u origin feature/sync-dove-data
 4. 输入一个未使用的稳定版本号，例如 `v1.3.3`；
 5. 工作流会自动创建隔离的数据 Tag，并启动 **Release and deploy**。
 
-此流程不会把 `dev` 中尚未发布的功能代码带到线上。站点代码取最新 `main`，只有生成数据和游戏资源取自 `dev`。
+此流程不会把 `dev` 中尚未发布的功能代码带到线上。站点代码取最新 `main`，只有生成数据和资源包清单取自 `dev`。
 
 ### 发布代码版本
 
@@ -223,3 +225,12 @@ git push origin v1.4.0
 - 对数据口径或功能方向不确定时先讨论，不要用难以回退的大改动替代沟通。
 
 友善、具体的反馈比“完美的提交”更重要。欢迎从一个小问题、一条数据线索或一次文档改进开始。
+
+
+## 测评数据与生成资源
+
+生成图片和测评附件由GitHub Releases资源包托管，不提交 `public` 下的生成目录。CI和发布工作流按 `data/asset-lock.json` 下载、核验并缓存；失败时停止构建，不拿旧包补新清单。普通PR只读下载，不需要仓库写入密钥。
+
+完成强度测评中心后台标准测量并启用基准后，在wiki运行 `npm run ratings:sync -- --profile standard --publish`。快速档使用 `--profile quick`。提交天梯清单、测评说明和资源清单，按既有PR流程合入；数据发布工作流同时支持百科和天梯更新。资源包上传仅准备构建输入，网站上线仍由Release and deploy控制。
+
+本次迁移保留原有Git历史；本地生成文件仍在原处。建议新环境使用浅克隆，构建时只获取清单固定的资源包。完整维护流程见README和 `docs/strength-tierlist.md`。

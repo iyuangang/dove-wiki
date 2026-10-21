@@ -300,16 +300,18 @@ test('塔与英雄弹窗保持键盘焦点并恢复打开按钮', async ({ page 
 
 test('天梯保留两档实测、分类和版本边界，直接地址可刷新', async ({ page }) => {
   await navigate(page, '强度天梯')
-  await expect(page.locator('.rating-section-heading').first()).toContainText('已评级 79 / 79')
-  await expect(page.locator('.rating-facts')).toContainText('15,145')
+  await expect(page.locator('.rating-section-heading').first()).toContainText(`已评级 ${ratingManifest.profiles.standard.groupCounts.hero_ranged} / ${ratingManifest.profiles.standard.groupCounts.hero_ranged}`)
+  await expect(page.locator('.rating-facts')).toContainText(ratingManifest.profiles.standard.coreTrials.toLocaleString('en-US'))
   if (ratingManifest.commitHash !== snapshot.metadata.commitHash) {
     await expect(page.getByRole('note')).toContainText(`当前百科已同步至 ${snapshot.metadata.gameVersion}`)
   }
   await page.getByRole('combobox', { name: '对象类别', exact: true }).selectOption('tower_final')
-  await expect(page.locator('.rating-section-heading').first()).toContainText('已评级 91 / 91')
+  await expect(page.locator('.rating-section-heading').first()).toContainText(`已评级 ${ratingManifest.profiles.standard.groupCounts.tower_final} / ${ratingManifest.profiles.standard.groupCounts.tower_final}`)
   await page.getByRole('combobox', { name: '测评档位', exact: true }).selectOption('quick')
   await expect(page.locator('.rating-board')).toBeVisible()
-  await expect(page.locator('.rating-facts')).toContainText('9,087')
+  await expect(page.locator('.rating-facts')).toContainText(ratingManifest.profiles.quick.coreTrials.toLocaleString('en-US'))
+  await expect(page.locator('.rating-section-heading').first()).toContainText(`已评级 ${ratingManifest.profiles.quick.groupCounts.tower_final} / ${ratingManifest.profiles.quick.groupCounts.tower_final}`)
+  await expect(page.locator('.version-badge')).toContainText(`Game v${ratingManifest.profiles.quick.gameVersion}`)
   await expect(page.getByRole('img', { name: /八维雷达图/ })).toBeVisible()
   await noOverflow(page)
   await page.reload()

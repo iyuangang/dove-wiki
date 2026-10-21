@@ -5,9 +5,11 @@ import { doveData, heroById, towerById } from '../data'
 import manifest from '../data/rating-manifest.json'
 import methodology from '../data/rating-methodology.json'
 import { publicAssetUrl } from '../lib/public-assets'
-import { axesFor, filterRatings, radarPoint, radarPolygon, ratingAxes, ratingGroups, ratingNumber, ratingRoles, ratingTier, ratingTiers, type RatingDataset, type RatingObject, type RatingProfile, type RatingRole } from '../lib/ratings'
+import { validRatingCoverage, axesFor, filterRatings, radarPoint, radarPolygon, ratingAxes, ratingGroups, ratingNumber, ratingRoles, ratingTier, ratingTiers, type RatingDataset, type RatingObject, type RatingProfile, type RatingRole } from '../lib/ratings'
 
+const emit = defineEmits<{ profileChange: [profile: RatingProfile] }>()
 const profile = ref<RatingProfile>('standard')
+watch(profile, value => emit('profileChange', value), { immediate: true })
 const role = ref<RatingRole>('output')
 const group = ref('hero_ranged')
 const search = ref('')
@@ -35,7 +37,7 @@ watch([profile, retry], async ([current], _, cleanup) => {
       if (hash !== source.sha256) throw new Error('结果文件校验不一致，请刷新后重试')
     }
     const result = JSON.parse(new TextDecoder().decode(bytes)) as RatingDataset
-    if (result.schema !== 1 || result.summary.profile !== current || result.summary.gameVersion !== source.gameVersion || result.summary.coreFailed !== 0 || result.objects.length !== 291) throw new Error('测评格式或完整性检查未通过')
+    if (!validRatingCoverage(result) || result.summary.profile !== current || result.summary.gameVersion !== source.gameVersion) throw new Error('测评格式或完整性检查未通过')
     if (!abort.signal.aborted) dataset.value = result
   } catch (error) {
     if (!abort.signal.aborted) failure.value = error instanceof Error ? error.message : '无法读取测评结果'
@@ -66,13 +68,13 @@ const feedbackUrl = computed(() => {
   <section class="rating-page page-width" aria-label="强度天梯测评结果">
     <header class="rating-heading">
       <div><div class="eyebrow"><span></span> COMBAT LAB · NATIVE BENCHMARK</div><h1>强度<em>天梯</em></h1>
-        <p>79 位英雄分别评测近战与远程，103 座常规防御塔独立比较。选择用途，查看八维能力与实测证据。</p></div>
+        <p>英雄分别评测近战与远程，常规防御塔按阶级独立比较。选择用途，查看八维能力与实测证据。</p></div>
       <div class="rating-stamp"><Trophy :size="26" aria-hidden="true" /><strong>Dove {{ summary.gameVersion }}</strong><span>{{ summary.asOf }} 实测 · {{ profile === 'standard' ? '标准' : '快速' }}档</span></div>
     </header>
     <div class="rating-facts" aria-label="本档测评覆盖">
       <div><strong>{{ summary.coreTrials.toLocaleString() }}</strong><span>正式轮次 · 全部成功</span></div>
       <div><strong>{{ summary.seconds }} 秒 × {{ summary.repeats }}</strong><span>每场景时长与固定种子数</span></div>
-      <div><strong>158 + 103</strong><span>英雄模式条目与常规塔</span></div>
+      <div><strong>{{ dataset ? `${dataset.objects.filter(r => r.core && r.kind === 'hero').length} + ${dataset.objects.filter(r => r.core && r.kind === 'tower').length}` : '—' }}</strong><span>英雄模式条目与常规塔</span></div>
       <div><strong>{{ summary.failedTrials }}</strong><span>附录失败轮次 · 不评级</span></div>
     </div>
     <p class="rating-notice">固定靶场的原生自动能力基准，保留自动技能、反击与召唤物。手动大招和实战操作尚未完整覆盖；快速档与标准档分别校准，不直接混排。本站其他百科页面仍使用各自标注的数据版本。</p>
@@ -125,7 +127,7 @@ const feedbackUrl = computed(() => {
 
     <section id="rating-methods" ref="methodsSection" class="rating-methods" aria-labelledby="rating-method-title">
       <h2 id="rating-method-title">测评标准与专业玩家审阅</h2>
-      <p>各轴正值中位数对应 70 分：<code>min(100, 70 × √(实测指标 / 固定参照))</code>。英雄近远程共用英雄参照；塔只以 91 座常规最终阶级塔建立参照。缺失与失败不填零分。</p>
+      <p>各轴正值中位数对应 70 分：<code>min(100, 70 × √(实测指标 / 固定参照))</code>。英雄近远程共用英雄参照；塔只以本档常规最终阶级塔建立参照。缺失与失败不填零分。</p>
       <div class="rating-table-wrap"><table class="rating-table rating-weights"><tbody><tr><th>输出</th><td>对单 25% · 对群 35% · 对空 15% · 攻坚 25%</td></tr><tr><th>守线</th><td>生存（英雄）／拦截（塔）40% · 辅助 25% · 控场 35%</td></tr><tr><th>辅助</th><td>辅助 70% · 控场 30%</td></tr></tbody></table></div>
       <p class="rating-caption">手动大招、复杂地形、特殊敌人、长冷却、成长和阵容协同仍需补充测试。等级针对当前固定靶场，不代表玩家操作上限或完整 Boss 战胜率。</p>
       <details><summary>展开完整标准、场景参数、已知局限与反馈清单</summary><div class="rating-method-text" v-html="methodology.html"></div></details>

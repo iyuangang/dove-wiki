@@ -11,7 +11,7 @@
 ## 启动
 
 ```powershell
-npm install
+npm ci
 npm run dev
 ```
 
@@ -34,6 +34,52 @@ npm run test:ui
 检查会构建 `/dove-wiki/` 基路径的生产版本并启动独立预览服务；失败时保存截图与 trace，HTML 报告位于 `playwright-report/`。CI 在构建后自动运行同一组浏览器检查。
 
 配置、百科筛选和滚动位置在当前页面会话内保留；刷新页面后恢复默认值。计算台提供“重置计算配置”，各百科保留原有清除筛选入口。
+
+## 生成资源与构建
+
+游戏图片、天梯图、逐轮证据和测评结果不再提交到Git。它们作为独立资源包保存在本仓库GitHub Releases的 `data-assets` 版本中；`data/asset-lock.json` 固定资源包地址和校验值。开发、测试与构建前自动下载、校验并还原到本地 `public`，GitHub Actions缓存资源包，无需安装游戏或访问作者电脑。
+
+源码、可审阅的游戏数据JSON和小型清单继续由Git管理。新增手工制作的站点资源可以正常提交；上面列出的生成目录由工具维护。
+
+### 从强度测评中心更新天梯
+
+先在插件目录完成你原来的命令：
+
+```powershell
+.\Run-Native-Quick.cmd -NewRun -UseAsBaseline -Profile standard
+```
+
+然后在wiki目录执行：
+
+```powershell
+# 读取插件已启用的标准基准，导入并上传资源包
+npm run ratings:sync -- --profile standard --publish
+
+# 检查并构建
+npm test
+npm run build
+```
+
+导入器自动读取游戏存档中的个人基准，并找到对应完整结果目录。快速档将参数改为 `--profile quick`。两档独立更新，新增英雄、防御塔的数量从本批数据读取。没有 `--publish` 时只在本地导入；上传需先使用GitHub CLI登录，并有仓库写入权限。
+
+提交代码和以下小文件即可交给CI/CD构建：
+
+```powershell
+git add data/asset-lock.json src/data/rating-manifest.json src/data/rating-methodology.json
+```
+
+也可指定完整结果文件夹，详见[天梯数据维护](docs/strength-tierlist.md)。不要删掉插件原始结果目录；wiki导入需要其中的原始证据和天梯图片。
+
+### 更新百科图片
+
+完成下文游戏同步后，生成并上传新的图片包：
+
+```powershell
+npm run assets:pack -- game
+npm run assets:publish -- game
+```
+
+把 `data/asset-lock.json` 与本次 `src/data` 数据一起提交。CI/CD按清单精确还原，保持代码与数据版本对应。资源下载或校验失败会停止构建。需要重新还原本地资源时可运行 `npm run assets:restore -- --force`。
 
 ## 从 Dove 重新同步
 

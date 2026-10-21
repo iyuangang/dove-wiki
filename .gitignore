@@ -6,3 +6,13 @@ dist/
 tools/.tmp/
 playwright-report/
 test-results/
+
+# Generated assets are restored from data/asset-lock.json (GitHub Release bundles).
+/public/encyclopedia/
+/public/skills/
+/public/portraits/
+/public/heroes/
+/public/enemies/
+/public/technologies/
+/public/damage-types/
+/public/rating/
