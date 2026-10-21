@@ -300,7 +300,7 @@ test('天梯保留两档实测、分类和版本边界，直接地址可刷新',
   await page.getByRole('combobox', { name: '测评档位', exact: true }).selectOption('quick')
   await expect(page.locator('.rating-board')).toBeVisible()
   await expect(page.locator('.rating-facts')).toContainText('9,087')
-  await expect(page.locator('.rating-detail svg')).toBeVisible()
+  await expect(page.getByRole('img', { name: /八维雷达图/ })).toBeVisible()
   await noOverflow(page)
   await page.reload()
   await expect(page).toHaveURL(/#\/tierlist$/)
