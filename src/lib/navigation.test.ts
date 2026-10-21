@@ -3,6 +3,7 @@ import { hashForTab, tabFromHash } from './navigation'
 
 describe('页面地址路由', () => {
   it('从固定地址恢复对应页面', () => {
+    expect(tabFromHash('#/tierlist')).toBe('tierlist')
     expect(tabFromHash('#/updates')).toBe('updates')
     expect(tabFromHash('#/technology/')).toBe('technology')
     expect(tabFromHash('#/calculator?source=tower')).toBe('calculator')
