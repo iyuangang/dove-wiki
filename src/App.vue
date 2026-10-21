@@ -16,8 +16,10 @@ import TechnologyView from './views/TechnologyView.vue'
 import UpdateHistoryView from './views/UpdateHistoryView.vue'
 import ratingManifest from './data/rating-manifest.json'
 const RatingView = defineAsyncComponent(() => import('./views/RatingView.vue'))
+
 import type { Enemy, Tower } from './types'
 import { createWorkspace, loadEnemyPanel, workspaceKey } from './composables/useWorkspace'
+
 
 const workspace = createWorkspace(doveData.supportEffects, doveData.technologyTrees)
 provide(workspaceKey, workspace)
