@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "bundles": {
+    "game": {
+      "inputs": {
+        "src/data/dove-data.json": "6379d2462f5fe6db4e0d102b03b82ae1c71c41d69e187c73353e4f541f75d40f",
+        "src/data/snapshot-manifest.json": "d1dac845466a40452b7440624818f64360abcc63ac016d47b673222d81a670a1"
+      },
+      "file": "game-9370351b0fbf0e2bc0e3.ndjson.gz",
+      "sha256": "a96150392942594f0e560eb242a65d6aa1cc7ab4eba685f895687fadd0026859",
+      "treeSha256": "9370351b0fbf0e2bc0e37c3161455bdc53b68feee8eac5e60352e4cd948fba1d",
+      "files": 1529,
+      "bytes": 45994914,
+      "url": "https://github.com/iyuangang/dove-wiki/releases/download/data-assets/game-9370351b0fbf0e2bc0e3.ndjson.gz"
+    },
+    "ratings": {
+      "inputs": {
+        "src/data/rating-manifest.json": "07423e5a5b011a2cde43d51c2493bf449ee43fbdbc9e973160989031b49ad216",
+        "src/data/rating-methodology.json": "a9deef22e6ec5e88cfd592b9fe2db12a5cb1f81104c7daf55e09e40c9dca3b18"
+      },
+      "file": "ratings-4914769e04951e5abd13.ndjson.gz",
+      "sha256": "cc9b912e2917fb2d74a1635c240cca3b63e25de293e7548f045ef6bb7f1b04e9",
+      "treeSha256": "4914769e04951e5abd13d8c7d6eae7d087914286f841f534d18b5dfa85f6cffd",
+      "files": 463,
+      "bytes": 27337695,
+      "url": "https://github.com/iyuangang/dove-wiki/releases/download/data-assets/ratings-4914769e04951e5abd13.ndjson.gz"
+    }
+  }
+}

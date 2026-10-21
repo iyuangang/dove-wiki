@@ -11,7 +11,15 @@
     "test:ui": "node tools/run-ui-tests.mjs",
     "check:data": "node tools/check-snapshot.mjs",
     "sync:dove": "node tools/sync-dove.mjs",
-    "changelog:dove": "node tools/game-changelog.mjs --previous-ref HEAD"
+    "changelog:dove": "node tools/game-changelog.mjs --previous-ref HEAD",
+    "assets:restore": "node tools/assets.mjs restore",
+    "assets:pack": "node tools/assets.mjs pack",
+    "assets:publish": "node tools/assets.mjs publish",
+    "ratings:sync": "node tools/import-ratings.mjs",
+    "predev": "npm run assets:restore",
+    "prebuild": "npm run assets:restore",
+    "pretest": "npm run assets:restore",
+    "precheck:data": "npm run assets:restore"
   },
   "dependencies": {
     "@lucide/vue": "^1.31.0",

@@ -1,7 +1,7 @@
 import { mergeConfig } from 'vite'
-import { defineConfig } from 'vitest/config'
+import { configDefaults, defineConfig } from 'vitest/config'
 import viteConfig from './vite.config'
 
 export default mergeConfig(viteConfig, defineConfig({
-  test: { include: ['src/**/*.test.ts', 'tools/**/*.test.mjs'] },
+  test: { include: ['src/**/*.test.ts', 'tools/**/*.test.mjs'], exclude: [...configDefaults.exclude, 'tools/.tmp/**'] },
 }))

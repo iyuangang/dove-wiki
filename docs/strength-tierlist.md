@@ -1,23 +1,46 @@
-# 强度天梯页面
+# 强度天梯数据维护
 
-页面地址：`#/tierlist`。此页展示强度测评中心采集的 Dove 2.0.9.7 原生战斗结果，与百科和计算器原有快照分别标注版本。
+页面地址：`#/tierlist`。百科和天梯分别标注来源版本，快速、标准两档独立维护。英雄近战与远程分组，常规塔按最终／过渡阶级分组；特殊对象列为附录，失败对象不评级。数量从测评批次读取。
 
-标准档为 60 秒 × 5 个种子，正式样本 15,145 轮；快速档为 30 秒 × 3 个种子，正式样本 9,087 轮。79 位可选英雄的近战、远程分别展示；103 座常规塔按 91 座最终阶级和 12 座过渡阶级分类。特殊英雄、关卡特殊塔列为附录，失败对象不评级。
+## 推荐流程
 
-页面支持类别、评价方向与搜索筛选、八维雷达、原始指标与参照、三类综合分、普攻适用性说明、失败证据及完整标准。CSV、JSON、21 张 PNG 和逐模板 JSON.gz 可下载。完整规则与专业玩家反馈清单见 `public/rating/methodology.md`，也可在页面展开阅读。
-
-## 更新结果
-
-先用强度测评中心完整测评并核验正式样本，再导入两个独立档位：
+在强度测评中心插件目录完成：
 
 ```powershell
-node tools/import-ratings.mjs --standard "标准档结果目录" --quick "快速档结果目录" --methods "测评标准与局限.md"
-npm test
-npm run build
+.\Run-Native-Quick.cmd -NewRun -UseAsBaseline -Profile standard
 ```
 
-导入器核对正式名单、轮次数、游戏提交、固定参照分数与综合分，保留原始轮次文件的精确字节，以 gzip 压缩并生成原文件及压缩文件的 SHA-256 清单。原始 JSON 中可能含采集时的临时评分；页面使用全量原生参照的最终评分，不回写原始证据。
+到wiki目录运行：
 
-`src/data/rating-manifest.json` 绑定各档 `results.json` 的 SHA-256。页面按需加载结果并校验，切档时取消旧请求；载入失败不会把上一个档位或空数据当成新结果。辅助单轴字段与辅助综合分分别保存。资源地址统一尊重 Vite BASE_URL，支持 GitHub Pages 的 `/dove-wiki/` 路径。
+```powershell
+npm run ratings:sync -- --profile standard --publish
+npm test
+npm run build
+git add data/asset-lock.json src/data/rating-manifest.json src/data/rating-methodology.json
+```
 
-测评页不重跑游戏、不修改百科快照，也不向 GitHub 自动提交反馈；反馈链接只预填可编辑的 Issue 表单。
+工具读取 `%APPDATA%\LOVE\kingdom_rush_dove\Meta_Rating_Center\baselines\standard.json`，校验个人基准的摘要，定位其完整原生测评目录。快速档使用 `--profile quick`，不会覆盖另一档。`--publish` 将生成资源包上传到同仓库GitHub Releases，需要登录 `gh auth login`；不加该选项可先本地检查，再用 `npm run assets:publish -- ratings` 上传。
+
+仅上传资源包不部署网站。提交上述小文件后，按仓库已有CI和发布流程上线。
+
+## 指定来源
+
+没有使用本机默认存档时，可指定个人基准目录或完整批次文件夹：
+
+```powershell
+npm run ratings:sync -- --profile standard --baseline-dir "D:\存档\Meta_Rating_Center\baselines" --publish
+npm run ratings:sync -- --standard "D:\测评结果\standard_某批次" --methods "D:\测评标准与局限.md" --publish
+```
+
+也可以同时传 `--standard` 和 `--quick`，一次导入两档。请保留完整批次的JSON、raw目录、CSV、天梯PNG和测评标准。新批次与旧版独立参照均支持；缺少正式对象、轮次或分数不能复算时拒绝发布。导入在独立目录完成，核验成功后一次替换，失败回滚。
+
+## 数据如何进入CI/CD
+
+- `src/data/rating-manifest.json`：两档的版本、批次、数量、结果摘要；`rating-methodology.json` 保存页面说明。
+- `data/asset-lock.json`：内容寻址资源包及SHA-256。
+- GitHub Releases的 `data-assets`：不可覆盖同名内容的游戏图片包与天梯附件包；旧包保留，旧清单仍可还原。
+- `public/rating`：构建前自动还原，包含结果、CSV、各组PNG、原始证据JSON.gz，Git忽略这些生成文件。
+
+原始JSON按精确字节压缩，保留压缩前后校验值。页面按需读取本档结果并校验，切换时取消旧请求；数据缺失或不匹配时不生成等级。所有资源尊重站点部署的基路径。
+
+更新百科图片后使用 `npm run assets:pack -- game` 和 `npm run assets:publish -- game`，再提交游戏数据JSON及资源清单。下载缓存位于 `tools/.tmp/asset-cache`；`npm run assets:restore -- --force` 可按当前清单强制还原。
