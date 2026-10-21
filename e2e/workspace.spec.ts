@@ -23,7 +23,8 @@ async function navigate(page: Page, label: string) {
     await expect(toggle).toHaveAttribute('aria-expanded', 'true')
   }
   await tab.click()
-  await expect(tab).toHaveAttribute('aria-selected', 'true')
+  // The selected mobile tab leaves the accessibility tree when the menu closes.
+  await expect(page.locator('#main-navigation [role="tab"][aria-selected="true"]')).toHaveText(label)
   if (mobile) await expect(toggle).toHaveAttribute('aria-expanded', 'false')
 }
 async function openTower(page: Page, id: string) {
