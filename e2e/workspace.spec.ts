@@ -1,10 +1,13 @@
 import { test, expect, type Page } from '@playwright/test'
 import snapshot from '../src/data/dove-data.json' with { type: 'json' }
+import ratingManifest from '../src/data/rating-manifest.json' with { type: 'json' }
 
 const eye = snapshot.supportEffects.find(effect => effect.rangeFalloff)!
 const eyeTower = snapshot.towers.find(tower => tower.id === eye.sourceTowerId)!
-const heroEffect = snapshot.supportEffects.find(effect => effect.sourceType === 'hero')!
+const heroEffect = snapshot.supportEffects.find(effect => effect.sourceType === 'hero' && effect.review?.valid !== false)!
 const hero = snapshot.heroes.find(item => item.id === heroEffect.sourceHeroId)!
+const eyeIsReviewed = eye.review?.valid !== false
+const persistentEffect = eyeIsReviewed ? eye : heroEffect
 const enemy = snapshot.enemies.find(item => item.statsByDifficulty.every(variant => variant.stats.hp !== null))!
 const target = snapshot.towers.find(tower => tower.id === 'tower_high_elven')!
 const pageErrors = new WeakMap<Page, string[]>()
@@ -34,18 +37,19 @@ test.afterEach(async ({ page }) => {
 
 test('页面往返保留计算参数、辅助与滚动位置，并可完整重置', async ({ page }) => {
   await navigate(page, '辅助计算')
-  await page.getByRole('checkbox', { name: '启用' + eye.name, exact: true }).check()
-  await page.getByRole('spinbutton', { name: '两塔椭圆距离 / 半径（%）', exact: true }).fill('50')
+  await page.getByRole('checkbox', { name: '启用' + persistentEffect.name, exact: true }).check()
+  if (eyeIsReviewed) await page.getByRole('spinbutton', { name: '两塔椭圆距离 / 半径（%）', exact: true }).fill('50')
   await page.getByRole('spinbutton', { name: '生命值', exact: true }).fill('2345')
   await page.evaluate(() => window.scrollTo({ top: 500, behavior: 'instant' }))
   await navigate(page, '敌人')
+  await navigate(page, '强度天梯')
   await navigate(page, '辅助计算')
   await expect.poll(() => page.evaluate(() => window.scrollY)).toBe(500)
-  await expect(page.getByRole('checkbox', { name: '启用' + eye.name, exact: true })).toBeChecked()
-  await expect(page.getByRole('spinbutton', { name: '两塔椭圆距离 / 半径（%）', exact: true })).toHaveValue('50')
+  await expect(page.getByRole('checkbox', { name: '启用' + persistentEffect.name, exact: true })).toBeChecked()
+  if (eyeIsReviewed) await expect(page.getByRole('spinbutton', { name: '两塔椭圆距离 / 半径（%）', exact: true })).toHaveValue('50')
   await expect(page.getByRole('spinbutton', { name: '生命值', exact: true })).toHaveValue('2345')
   await page.getByRole('button', { name: '重置计算配置', exact: true }).click()
-  await expect(page.getByRole('checkbox', { name: '启用' + eye.name, exact: true })).not.toBeChecked()
+  await expect(page.getByRole('checkbox', { name: '启用' + persistentEffect.name, exact: true })).not.toBeChecked()
   await expect(page.getByRole('spinbutton', { name: '生命值', exact: true })).toHaveValue('1000')
   await expect(page.locator('#calculator-target')).toHaveValue('tower_ranger')
 })
@@ -81,18 +85,29 @@ test('塔详情带入目标和左右对比，同时保留现有辅助参数', as
   await expect(page.locator('#compare-right')).toHaveValue(target.id)
 })
 
-test('塔和英雄辅助入口累加选择，不适用的已选效果可取消', async ({ page }) => {
+test('辅助入口尊重来源审阅，累加有效选择并保留取消入口', async ({ page }) => {
   await openTower(page, eyeTower.id)
-  await page.getByRole('button', { name: '启用该塔辅助', exact: true }).click()
-  await expect(page.getByRole('checkbox', { name: '启用' + eye.name, exact: true })).toBeChecked()
+  if (eyeIsReviewed) {
+    await page.getByRole('button', { name: '启用该塔辅助', exact: true }).click()
+    await expect(page.getByRole('checkbox', { name: '启用' + eye.name, exact: true })).toBeChecked()
+  } else {
+    await expect(page.getByRole('button', { name: '启用该塔辅助', exact: true })).toHaveCount(0)
+    await page.keyboard.press('Escape')
+  }
   await navigate(page, '英雄')
   await page.getByRole('searchbox', { name: '搜索英雄、技能、移动方式或特性', exact: true }).fill(hero.id)
   await page.locator('.hero-card-hit').first().click()
   await page.getByRole('button', { name: '启用英雄辅助', exact: true }).click()
   await expect(page.getByRole('checkbox', { name: '启用' + heroEffect.name, exact: true })).toBeChecked()
-  await expect(page.getByRole('checkbox', { name: '启用' + eye.name, exact: true })).toBeChecked()
+  if (eyeIsReviewed) await expect(page.getByRole('checkbox', { name: '启用' + eye.name, exact: true })).toBeChecked()
   const excludedEffect = snapshot.supportEffects.find(effect => effect.excludeTowerIds?.length)!
   await page.getByRole('button', { name: /^全部\s/ }).click()
+  if (excludedEffect.review?.valid === false) {
+    await expect(page.getByRole('checkbox', { name: '启用' + excludedEffect.name, exact: true })).toBeDisabled()
+    await page.getByRole('checkbox', { name: '启用' + heroEffect.name, exact: true }).uncheck()
+    await expect(page.getByRole('checkbox', { name: '启用' + heroEffect.name, exact: true })).not.toBeChecked()
+    return
+  }
   await page.getByRole('checkbox', { name: '启用' + excludedEffect.name, exact: true }).check()
   await page.locator('#calculator-target').selectOption(excludedEffect.excludeTowerIds![0])
   const excludedCard = page.locator('.support-option').filter({ has: page.getByRole('checkbox', { name: '启用' + excludedEffect.name, exact: true }) })
@@ -170,6 +185,16 @@ test('无效数字与伤害顺序就地提示，修正后恢复模拟', async ({
 
 test('辅助半径和距离校验阻止误读，合法配置保持计算结果', async ({ page }) => {
   await navigate(page, '辅助计算')
+  if (!eyeIsReviewed) {
+    const checkbox = page.getByRole('checkbox', { name: '启用' + eye.name, exact: true })
+    await expect(checkbox).toBeDisabled()
+    const card = page.locator('.support-option').filter({ has: checkbox })
+    await expect(card).toContainText('来源已变化，等待复核后恢复计算')
+    await expect(card.locator('.support-inputs')).toHaveCount(0)
+    await expect(page.locator('.result-stat-list')).toBeVisible()
+    await noOverflow(page)
+    return
+  }
   await page.getByRole('checkbox', { name: '启用' + eye.name, exact: true }).check()
   const range = page.getByRole('spinbutton', { name: '源塔当前覆盖半径', exact: true })
   const distance = page.getByRole('spinbutton', { name: '两塔椭圆距离 / 半径（%）', exact: true })
@@ -191,7 +216,7 @@ test('辅助半径和距离校验阻止误读，合法配置保持计算结果',
 })
 
 test('全部页面、详情操作和错误提示在各宽度无横向溢出', async ({ page }, testInfo) => {
-  for (const label of ['塔典', '敌人', '英雄', '科技', '更新', '辅助计算', '双塔对比', '数据说明']) {
+  for (const label of ['塔典', '敌人', '英雄', '强度天梯', '科技', '更新', '辅助计算', '双塔对比', '数据说明']) {
     await navigate(page, label)
     await noOverflow(page)
   }
@@ -202,8 +227,7 @@ test('全部页面、详情操作和错误提示在各宽度无横向溢出', as
   await page.keyboard.press('Escape')
   await expect(dialog).toHaveCount(0)
   await navigate(page, '辅助计算')
-  await page.getByRole('checkbox', { name: '启用' + eye.name, exact: true }).check()
-  await page.getByRole('spinbutton', { name: '两塔椭圆距离 / 半径（%）', exact: true }).fill('101')
+  await page.getByRole('spinbutton', { name: '生命值', exact: true }).fill('-1')
   await noOverflow(page)
   await page.screenshot({ path: testInfo.outputPath('calculator-validation.png'), fullPage: false })
 })
@@ -222,6 +246,10 @@ test('条件科技数量与触发次数校验整数，修正后恢复结果', as
   await count.fill('4')
   await expect(page.locator('.result-stat-list')).toBeVisible()
   const triggered = snapshot.supportEffects.find(effect => effect.levels.some(level => level.damagePerTrigger))!
+  if (triggered.review?.valid === false) {
+    await expect(page.getByRole('checkbox', { name: '启用' + triggered.name, exact: true })).toBeDisabled()
+    return
+  }
   await page.getByRole('checkbox', { name: '启用' + triggered.name, exact: true }).check()
   const triggers = page.getByRole('spinbutton', { name: '目标获益次数', exact: true })
   await triggers.fill('1.5')
@@ -258,4 +286,23 @@ test('塔与英雄弹窗保持键盘焦点并恢复打开按钮', async ({ page 
   await page.keyboard.press('Escape')
   await expect(dialog).toHaveCount(0)
   await expect(heroOpener).toBeFocused()
+})
+
+test('天梯保留两档实测、分类和版本边界，直接地址可刷新', async ({ page }) => {
+  await navigate(page, '强度天梯')
+  await expect(page.locator('.rating-section-heading').first()).toContainText('已评级 79 / 79')
+  await expect(page.locator('.rating-facts')).toContainText('15,145')
+  if (ratingManifest.commitHash !== snapshot.metadata.commitHash) {
+    await expect(page.getByRole('note')).toContainText(`当前百科已同步至 ${snapshot.metadata.gameVersion}`)
+  }
+  await page.getByRole('combobox', { name: '对象类别', exact: true }).selectOption('tower_final')
+  await expect(page.locator('.rating-section-heading').first()).toContainText('已评级 91 / 91')
+  await page.getByRole('combobox', { name: '测评档位', exact: true }).selectOption('quick')
+  await expect(page.locator('.rating-board')).toBeVisible()
+  await expect(page.locator('.rating-facts')).toContainText('9,087')
+  await expect(page.locator('.rating-detail svg')).toBeVisible()
+  await noOverflow(page)
+  await page.reload()
+  await expect(page).toHaveURL(/#\/tierlist$/)
+  await expect(page.locator('.rating-board')).toBeVisible()
 })
