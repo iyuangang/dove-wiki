@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, toRefs } from 'vue'
 import { Search } from '@lucide/vue'
+import { useWorkspace } from '../composables/useWorkspace'
 import TowerCard from '../components/TowerCard.vue'
 import { familyLabels, unlockLabels } from '../data'
-import type { DoveData, Tower, TowerFamily, UnlockStatus } from '../types'
+import type { DoveData, Tower } from '../types'
 
 const props = defineProps<{
   towers: Tower[]
@@ -11,13 +12,7 @@ const props = defineProps<{
 }>()
 defineEmits<{ open: [tower: Tower] }>()
 
-type SortId = 'encyclopedia' | 'name' | 'damage' | 'range' | 'unlock'
-
-const search = ref('')
-const family = ref<'all' | TowerFamily>('all')
-const role = ref('all')
-const unlock = ref<'all' | UnlockStatus>('all')
-const sort = ref<SortId>('encyclopedia')
+const { search, family, role, unlock, sort } = toRefs(useWorkspace().catalog)
 
 const roles = computed(() =>
   [...new Set(props.towers.flatMap((tower) => tower.roles))].sort((a, b) =>

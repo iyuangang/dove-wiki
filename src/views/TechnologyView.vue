@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, toRefs } from 'vue'
+import { useWorkspace } from '../composables/useWorkspace'
 import { Badge } from '../components/ui/badge'
 import { Tabs, TabsList, TabsTrigger } from '../components/ui/tabs'
 import type { Technology, TechnologyFamily, TechnologyTree } from '../types'
@@ -58,7 +59,7 @@ const dynamicDummyTechnologyIds = new Set([
 ])
 const dummyMetrics = new Set(['damage', 'expectedDps', 'cooldown'])
 
-const activeTreeId = ref(String(props.trees[0]?.id || 1))
+const { activeTreeId } = toRefs(useWorkspace().technology)
 const activeTree = computed(
   () => props.trees.find((tree) => String(tree.id) === activeTreeId.value) || props.trees[0],
 )

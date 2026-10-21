@@ -24,6 +24,17 @@ npm run build
 npm run preview
 ```
 
+浏览器回归覆盖页面状态恢复、百科带入计算与对比、数字校验、敌人面板状态和弹窗键盘操作，使用 320、390、768、1280px 四种宽度：
+
+```powershell
+npx playwright install chromium
+npm run test:ui
+```
+
+检查会构建 `/dove-wiki/` 基路径的生产版本并启动独立预览服务；失败时保存截图与 trace，HTML 报告位于 `playwright-report/`。CI 在构建后自动运行同一组浏览器检查。
+
+配置、百科筛选和滚动位置在当前页面会话内保留；刷新页面后恢复默认值。计算台提供“重置计算配置”，各百科保留原有清除筛选入口。
+
 ## 从 Dove 重新同步
 
 默认优先查找当前用户的安装目录；未找到时仍兼容旧版的 `D:\KingdomRushDove-Windows-Cycle2-v0.1.5\KingdomRushDove`：

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { useDialogFocus } from '../composables/useDialogFocus'
 import { BookOpen, X } from '@lucide/vue'
 
 const props = defineProps<{ title: string; closeLabel: string; sections: { id: string; label: string }[] }>()
@@ -7,7 +8,8 @@ defineEmits<{ close: [] }>()
 const bar = ref<HTMLElement | null>(null)
 const active = ref(props.sections[0]?.id)
 let panel: HTMLElement | null = null
-let previousFocus: HTMLElement | null = null
+const focusPanel = ref<HTMLElement | null>(null)
+useDialogFocus(focusPanel)
 
 function section(id: string) {
   return panel?.querySelector<HTMLElement>(`[data-section="${id}"]`)
@@ -30,35 +32,16 @@ function trackSection() {
   active.value = [...props.sections].reverse().find((item) => (section(item.id)?.getBoundingClientRect().top ?? Infinity) <= threshold)?.id ?? props.sections[0]?.id
 }
 
-function keepFocus(event: KeyboardEvent) {
-  if (event.key !== 'Tab' || !panel) return
-  const controls = Array.from(panel.querySelectorAll<HTMLElement>('button:not(:disabled), a[href], input:not(:disabled), select:not(:disabled), summary, [tabindex="0"]')).filter((element) => element.getClientRects().length)
-  const first = controls[0]
-  const last = controls[controls.length - 1]
-  if (event.shiftKey && (document.activeElement === first || document.activeElement === panel)) {
-    event.preventDefault()
-    last?.focus()
-  } else if (!event.shiftKey && document.activeElement === last) {
-    event.preventDefault()
-    first?.focus()
-  }
-}
-
-onMounted(async () => {
-  previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null
+onMounted(() => {
   panel = bar.value?.closest<HTMLElement>('[role="dialog"]') ?? null
   panel?.addEventListener('scroll', trackSection, { passive: true })
-  panel?.addEventListener('keydown', keepFocus)
+  focusPanel.value = panel
   window.addEventListener('resize', trackSection)
-  await nextTick()
-  panel?.focus({ preventScroll: true })
 })
 
 onBeforeUnmount(() => {
   panel?.removeEventListener('scroll', trackSection)
-  panel?.removeEventListener('keydown', keepFocus)
   window.removeEventListener('resize', trackSection)
-  if (previousFocus?.isConnected) previousFocus.focus({ preventScroll: true })
 })
 </script>
 

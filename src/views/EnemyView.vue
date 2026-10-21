@@ -1,17 +1,23 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, ref, toRefs, watch } from 'vue'
+import { useWorkspace } from '../composables/useWorkspace'
+import { useDialogFocus } from '../composables/useDialogFocus'
 import { Badge } from '../components/ui/badge'
 import { Button } from '../components/ui/button'
 import type { Enemy } from '../types'
 
 const props = defineProps<{ enemies: Enemy[] }>()
 
-const query = ref('')
-const sourceGame = ref(0)
-const movement = ref('all')
-const rank = ref('all')
-const defense = ref('all')
-const difficulty = ref(2)
+const emit = defineEmits<{ calculate: [enemy: Enemy, difficulty: number] }>()
+const { query, sourceGame, movement, rank, defense, difficulty } = toRefs(useWorkspace().enemies)
+const dialog = ref<HTMLElement | null>(null)
+useDialogFocus(dialog)
+function calculateEnemy() {
+  if (!selectedEnemy.value) return
+  const enemy = selectedEnemy.value
+  selectedEnemy.value = null
+  emit('calculate', enemy, difficulty.value)
+}
 const difficultyLabels = ['休闲', '普通', '老兵', '不可能']
 const enemiesWithStats = computed(() => props.enemies.map((enemy) => {
   const variant = enemy.statsByDifficulty.find((item) => item.difficulty === difficulty.value)!
@@ -204,7 +210,7 @@ watch(difficulty, () => {
     <Teleport to="body">
       <Transition name="panel">
         <div v-if="selectedEnemy" class="enemy-detail-overlay" role="presentation" @mousedown.self="selectedEnemy = null">
-          <aside class="enemy-detail-panel" role="dialog" aria-modal="true" :aria-label="`${selectedEnemy.name}详情`">
+          <aside ref="dialog" class="enemy-detail-panel" tabindex="-1" role="dialog" aria-modal="true" :aria-label="`${selectedEnemy.name}详情`">
             <Button type="button" variant="ghost" class="enemy-detail-close" aria-label="关闭敌人详情" @click="selectedEnemy = null">×</Button>
             <div class="enemy-detail-hero">
               <div class="enemy-detail-image">
@@ -222,6 +228,7 @@ watch(difficulty, () => {
               </div>
             </div>
 
+            <div class="dossier-actions"><Button :disabled="selectedEnemy.stats.hp === null" @click="calculateEnemy">载入敌人面板</Button><span>{{ difficultyLabels[difficulty - 1] }}难度 · 通用傀儡模型</span></div>
             <p class="enemy-detail-description">{{ selectedEnemy.description }}</p>
             <p v-if="selectedEnemy.special" class="enemy-special">特殊能力：{{ selectedEnemy.special }}</p>
 
