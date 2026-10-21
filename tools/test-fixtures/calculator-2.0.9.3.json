@@ -1,0 +1,3577 @@
+{
+  "provenance": {
+    "wikiCommit": "1f8dc1c9c0dafe7d1eea23b198efcc9951fa2e94",
+    "gameCommit": "731afe683e16e3adbfe162cf2b7452cc7bd2f867",
+    "gameVersion": "2.0.9.3",
+    "snapshotSha256": "86d91b64af2f38dcceb87cd26e150f9bdd58daa3ca128c987310cbf41746b6f8",
+    "purpose": "Immutable reviewed inputs for formula regression, never production data"
+  },
+  "schemaVersion": 2,
+  "metadata": {
+    "gameVersion": "2.0.9.3",
+    "commitHash": "731afe683e16e3adbfe162cf2b7452cc7bd2f867"
+  },
+  "calculationRules": {
+    "version": 1,
+    "reviewedVersion": "2.0.9.3",
+    "gameCommit": "731afe683e16e3adbfe162cf2b7452cc7bd2f867",
+    "reviewedAt": "2026-10-10",
+    "note": "人工核对科技钩子、修饰器模板及伤害/持续伤害结算。同步不得更新指纹；变化后条件与概率规则停止计算，等待复核。",
+    "files": {
+      "kr1/upgrades.lua": "44c9e73126171f2bda1140877ff696e53b5cb1666e9e781ff72542836168f3f5",
+      "kr1/game_templates.lua": "93756fe782e43de9c32616d97573ca572a0c4f63467e16ac1036763b40865336",
+      "kr1/game_scripts.lua": "d78c9cc9d4c6df87a1383089eb8661a6dc1add31270e9c218c6969731a875fe0",
+      "all/templates.lua": "f83d5091f593ac92ee8edef0e9384269f0b2c89c81b7e2f559a8472178db21b8",
+      "all/scripts.lua": "2d73332e1dccd0bbddd6f51b2990fa36370d7a85020539f1f2651325620c7394",
+      "all/systems/health.lua": "fe28639c2c537ff39842010905ea414e4299502c1a6e50b5188bba487951ec16"
+    },
+    "simulationTechnologyIds": [
+      "archer_piercing",
+      "archer_precision",
+      "archer_el_bloodletting_shoot",
+      "archer_tear",
+      "archer_obsidian",
+      "archer_magic",
+      "archer_fly_killer",
+      "mage_arcane_shatter",
+      "mage_strike",
+      "mage_unsteady",
+      "mage_purge_field",
+      "engineer_magic_dust"
+    ],
+    "magicDustCompensationTowerIds": [
+      "tower_tesla",
+      "tower_frankenstein",
+      "tower_rotten_forest",
+      "tower_ignis_altar",
+      "tower_sandworm"
+    ],
+    "parameters": {
+      "piercingArmor": 10,
+      "criticalChance": 0.1,
+      "criticalMultiplier": 2,
+      "tearThresholds": [
+        10,
+        20,
+        40
+      ],
+      "tearReductions": [
+        0.16,
+        0.44,
+        0.72,
+        1
+      ],
+      "shatterThreshold": 50,
+      "shatterSmall": 2,
+      "shatterNormal": 3.5,
+      "lowProtectionThreshold": 0.1,
+      "lowProtectionMultiplier": 1.27,
+      "secondaryMagicDamageFactor": 0.12,
+      "flyingDamageMultiplier": 1.25,
+      "unprotectedMultiplier": 1.2,
+      "unsteadyChance": 0.1,
+      "unsteadyMultiplier": 2,
+      "magicDustChance": 0.1,
+      "magicDustHpFactor": 0.004,
+      "magicDustCompensation": 1.2,
+      "bleedChance": 0.15,
+      "bleedDamageFactor": 0.1,
+      "bleedTicks": 23,
+      "bleedTickInterval": 0.13333333333333333,
+      "bleedDuration": 3,
+      "bleedMaxStacks": 5,
+      "purgeBase": 0.14,
+      "purgePerEnemy": 0.01,
+      "purgeEnemyCap": 30
+    },
+    "valid": true,
+    "invalidFiles": []
+  },
+  "towers": [
+    {
+      "id": "tower_ranger",
+      "name": "游侠匿所",
+      "description": "传说中的弓术大师，射出的箭矢比王国中其他战士更快更远。",
+      "families": [
+        "archer"
+      ],
+      "roles": [
+        "直接输出",
+        "控制",
+        "持续伤害"
+      ],
+      "image": "/encyclopedia/thumbs/tower_ranger.png",
+      "encyclopediaImage": "/encyclopedia/tower_ranger.png",
+      "encyclopediaOrder": 1,
+      "encyclopediaListed": true,
+      "encyclopediaSprite": "encyclopedia_towers_0013",
+      "encyclopediaThumbSprite": "encyclopedia_tower_thumbs_0013",
+      "sourceGame": 1,
+      "portraitSprite": "info_portraits_towers_0006",
+      "price": 230,
+      "level": 1,
+      "towerType": "ranger",
+      "canBeBuffed": true,
+      "unlock": {
+        "status": "level",
+        "level": 5,
+        "label": "第 5 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level05_data.lua"
+      },
+      "attack": {
+        "damageMin": 13,
+        "damageMax": 20,
+        "cooldown": 0.39,
+        "dps": 42.30769230769231,
+        "range": 200,
+        "rallyRange": null,
+        "damageType": "物理",
+        "damageTypeValue": 2,
+        "kind": "bullet",
+        "confidence": "精确",
+        "scope": "单目标基础攻击"
+      },
+      "soldier": null,
+      "powers": [
+        {
+          "id": "poison",
+          "name": "剧毒箭矢",
+          "icon": "/skills/tower_ranger--poison.png",
+          "iconSprite": "special_icons_0008",
+          "maxLevel": 3,
+          "priceBase": 225,
+          "priceIncrement": 175,
+          "descriptions": [
+            {
+              "key": "TOWER_RANGER_POISON_DESCRIPTION",
+              "text": "使敌人中毒，持续造成伤害。"
+            },
+            {
+              "key": "TOWER_RANGER_POISON_DESCRIPTION_1",
+              "text": "毒素在3秒内造成15点伤害。中毒敌人减速10%，可叠加3层。中毒的敌人会多被荆棘捆绑0.5秒。"
+            },
+            {
+              "key": "TOWER_RANGER_POISON_DESCRIPTION_2",
+              "text": "毒素在3秒内造成30点伤害。中毒敌人减速10%，可叠加3层。中毒的敌人会多被荆棘捆绑1秒。"
+            },
+            {
+              "key": "TOWER_RANGER_POISON_DESCRIPTION_3",
+              "text": "毒素在3秒内造成45点伤害。中毒敌人减速10%，可叠加3层。中毒的敌人会多被荆棘捆绑1.5秒。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 225,
+              "cumulativePrice": 225,
+              "description": "毒素在3秒内造成15点伤害。中毒敌人减速10%，可叠加3层。中毒的敌人会多被荆棘捆绑0.5秒。",
+              "descriptionKey": "TOWER_RANGER_POISON_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 175,
+              "cumulativePrice": 400,
+              "description": "毒素在3秒内造成30点伤害。中毒敌人减速10%，可叠加3层。中毒的敌人会多被荆棘捆绑1秒。",
+              "descriptionKey": "TOWER_RANGER_POISON_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 175,
+              "cumulativePrice": 575,
+              "description": "毒素在3秒内造成45点伤害。中毒敌人减速10%，可叠加3层。中毒的敌人会多被荆棘捆绑1.5秒。",
+              "descriptionKey": "TOWER_RANGER_POISON_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "id": "thorn",
+          "name": "森林之怒",
+          "icon": "/skills/tower_ranger--thorn.png",
+          "iconSprite": "special_icons_0002",
+          "maxLevel": 3,
+          "priceBase": 225,
+          "priceIncrement": 175,
+          "descriptions": [
+            {
+              "key": "TOWER_RANGER_THORN_DESCRIPTION",
+              "text": "召唤荆刺和蔓藤，困住射程内的地面敌人并使其丧失战斗力。"
+            },
+            {
+              "key": "TOWER_RANGER_THORN_DESCRIPTION_1",
+              "text": "每隔9秒，召唤荆刺和蔓藤，困住最多4名敌人并造成每秒40点物理伤害，持续1秒。"
+            },
+            {
+              "key": "TOWER_RANGER_THORN_DESCRIPTION_2",
+              "text": "每隔9秒，召唤荆刺和蔓藤，困住最多6名敌人并造成每秒40点物理伤害，持续2秒。"
+            },
+            {
+              "key": "TOWER_RANGER_THORN_DESCRIPTION_3",
+              "text": "每隔9秒，召唤荆刺和蔓藤，困住最多8名敌人并造成每秒40点物理伤害，持续3秒。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 225,
+              "cumulativePrice": 225,
+              "description": "每隔9秒，召唤荆刺和蔓藤，困住最多4名敌人并造成每秒40点物理伤害，持续1秒。",
+              "descriptionKey": "TOWER_RANGER_THORN_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 175,
+              "cumulativePrice": 400,
+              "description": "每隔9秒，召唤荆刺和蔓藤，困住最多6名敌人并造成每秒40点物理伤害，持续2秒。",
+              "descriptionKey": "TOWER_RANGER_THORN_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 175,
+              "cumulativePrice": 575,
+              "description": "每隔9秒，召唤荆刺和蔓藤，困住最多8名敌人并造成每秒40点物理伤害，持续3秒。",
+              "descriptionKey": "TOWER_RANGER_THORN_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/archer_towers.lua",
+        "nameKey": "TOWER_RANGER_NAME",
+        "descriptionKey": "TOWER_RANGER_DESCRIPTION",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
+        "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
+        "unlock": "kr1/data/levels/level05_data.lua"
+      },
+      "units": [],
+      "mechanics": {
+        "reviewedVersion": "2.0.9.3",
+        "items": [
+          {
+            "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
+            "details": [
+              "最终护甲减伤比例限制在 0%–100%。本条解释伤害类型，不代表整座塔的所有技能与召唤单位都使用相同类型。"
+            ],
+            "id": "damage-resolution",
+            "title": "物理伤害的护甲结算",
+            "kind": "damage-rule",
+            "sources": [
+              {
+                "file": "all/utils.lua",
+                "symbol": "function U.calc_protection",
+                "line": 1979
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "hasSpecificReview": false
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_ranger_poison"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_ranger_poison"
+        },
+        {
+          "role": "控制",
+          "description": "定身 / 冻结效果。",
+          "source": "mod_thorn"
+        }
+      ]
+    },
+    {
+      "id": "tower_paladin",
+      "name": "神圣秩序",
+      "description": "训练圣骑士，维护秩序的神圣战士。他们是虔诚守护与神圣防御的典范。",
+      "families": [
+        "barrack"
+      ],
+      "roles": [
+        "直接输出",
+        "控制",
+        "范围伤害",
+        "召唤/拦截"
+      ],
+      "image": "/encyclopedia/thumbs/tower_paladin.png",
+      "encyclopediaImage": "/encyclopedia/tower_paladin.png",
+      "encyclopediaOrder": 2,
+      "encyclopediaListed": true,
+      "encyclopediaSprite": "encyclopedia_towers_0014",
+      "encyclopediaThumbSprite": "encyclopedia_tower_thumbs_0014",
+      "sourceGame": 1,
+      "portraitSprite": "info_portraits_towers_0005",
+      "price": 185,
+      "level": 1,
+      "towerType": "paladin",
+      "canBeBuffed": true,
+      "unlock": {
+        "status": "level",
+        "level": 6,
+        "label": "第 6 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level06_data.lua"
+      },
+      "attack": {
+        "damageMin": 12,
+        "damageMax": 18,
+        "cooldown": 1,
+        "dps": 15,
+        "range": null,
+        "rallyRange": 160,
+        "damageType": "物理",
+        "damageTypeValue": 2,
+        "kind": "soldier",
+        "confidence": "精确",
+        "scope": "单个驻防单位"
+      },
+      "soldier": {
+        "count": 3,
+        "hp": 250,
+        "armor": 0.45,
+        "magicArmor": 0.45,
+        "respawn": 14
+      },
+      "powers": [
+        {
+          "id": "healing",
+          "name": "治疗之光",
+          "icon": "/skills/tower_paladin--healing.png",
+          "iconSprite": "special_icons_0007",
+          "maxLevel": 3,
+          "priceBase": 150,
+          "priceIncrement": 100,
+          "descriptions": [
+            {
+              "key": "TOWER_PALADIN_HEALING_DESCRIPTION_1",
+              "text": "圣骑士每隔10秒能呼唤圣光，驱散毒瘴，治疗自己44-66点生命值。该治疗可溢出。"
+            },
+            {
+              "key": "TOWER_PALADIN_HEALING_DESCRIPTION_2",
+              "text": "圣骑士每隔10秒能呼唤圣光，驱散毒瘴，治疗自己88-132点生命值。该治疗可溢出。"
+            },
+            {
+              "key": "TOWER_PALADIN_HEALING_DESCRIPTION_3",
+              "text": "圣骑士每隔10秒能呼唤圣光，驱散毒瘴，治疗自己132-198点生命值。该治疗可溢出。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 150,
+              "cumulativePrice": 150,
+              "description": "圣骑士每隔10秒能呼唤圣光，驱散毒瘴，治疗自己44-66点生命值。该治疗可溢出。",
+              "descriptionKey": "TOWER_PALADIN_HEALING_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 100,
+              "cumulativePrice": 250,
+              "description": "圣骑士每隔10秒能呼唤圣光，驱散毒瘴，治疗自己88-132点生命值。该治疗可溢出。",
+              "descriptionKey": "TOWER_PALADIN_HEALING_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 100,
+              "cumulativePrice": 350,
+              "description": "圣骑士每隔10秒能呼唤圣光，驱散毒瘴，治疗自己132-198点生命值。该治疗可溢出。",
+              "descriptionKey": "TOWER_PALADIN_HEALING_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "id": "holystrike",
+          "name": "神圣打击",
+          "icon": "/skills/tower_paladin--holystrike.png",
+          "iconSprite": "special_icons_0006",
+          "maxLevel": 3,
+          "priceBase": 200,
+          "priceIncrement": 150,
+          "descriptions": [
+            {
+              "key": "TOWER_PALADIN_HOLYSTRIKE_DESCRIPTION_1",
+              "text": "圣骑士有12%概率发动神圣打击，造成30-50点范围法术爆炸伤害与4秒沉默效果。"
+            },
+            {
+              "key": "TOWER_PALADIN_HOLYSTRIKE_DESCRIPTION_2",
+              "text": "圣骑士有18%概率发动神圣打击，造成40-65点范围法术爆炸伤害与4秒沉默效果。"
+            },
+            {
+              "key": "TOWER_PALADIN_HOLYSTRIKE_DESCRIPTION_3",
+              "text": "圣骑士有24%概率发动神圣打击，造成50-80点范围法术爆炸伤害与4秒沉默效果。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 200,
+              "cumulativePrice": 200,
+              "description": "圣骑士有12%概率发动神圣打击，造成30-50点范围法术爆炸伤害与4秒沉默效果。",
+              "descriptionKey": "TOWER_PALADIN_HOLYSTRIKE_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 150,
+              "cumulativePrice": 350,
+              "description": "圣骑士有18%概率发动神圣打击，造成40-65点范围法术爆炸伤害与4秒沉默效果。",
+              "descriptionKey": "TOWER_PALADIN_HOLYSTRIKE_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 150,
+              "cumulativePrice": 500,
+              "description": "圣骑士有24%概率发动神圣打击，造成50-80点范围法术爆炸伤害与4秒沉默效果。",
+              "descriptionKey": "TOWER_PALADIN_HOLYSTRIKE_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "id": "shield",
+          "name": "勇气之盾",
+          "icon": "/skills/tower_paladin--shield.png",
+          "iconSprite": "special_icons_0009",
+          "maxLevel": 1,
+          "priceBase": 175,
+          "priceIncrement": 100,
+          "descriptions": [
+            {
+              "key": "TOWER_PALADIN_SHIELD_DESCRIPTION_1",
+              "text": "提升圣骑士15点护甲与法术护甲。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 175,
+              "cumulativePrice": 175,
+              "description": "提升圣骑士15点护甲与法术护甲。",
+              "descriptionKey": "TOWER_PALADIN_SHIELD_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/barrack_towers.lua",
+        "nameKey": "TOWER_PALADIN_NAME",
+        "descriptionKey": "TOWER_PALADIN_DESCRIPTION",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
+        "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
+        "unlock": "kr1/data/levels/level06_data.lua"
+      },
+      "units": [
+        {
+          "id": "soldier_paladin",
+          "name": "圣骑士",
+          "relatedPowerIds": [
+            "healing",
+            "holystrike",
+            "shield"
+          ],
+          "count": 3,
+          "rallyRange": 160,
+          "controllable": true,
+          "note": "模板基准值，未代入技能升级；技能带来的属性变化见逐级说明。",
+          "stats": {
+            "hp": 250,
+            "armor": 0.45,
+            "magicArmor": 0.45,
+            "speed": 75,
+            "respawn": 14,
+            "regen": null,
+            "regenCooldown": 1,
+            "lifetime": null,
+            "attacks": [
+              {
+                "id": "melee-1",
+                "name": "近战",
+                "damageMin": 12,
+                "damageMax": 18,
+                "damageType": "物理",
+                "cooldown": 1,
+                "range": 60,
+                "radius": null,
+                "targets": null,
+                "chance": 1,
+                "disabled": false,
+                "source": "soldier_paladin.melee.attacks[1]"
+              },
+              {
+                "id": "melee-2",
+                "name": "近战 · 招式 2",
+                "damageMin": 12,
+                "damageMax": 18,
+                "damageType": "物理",
+                "cooldown": 1,
+                "range": 60,
+                "radius": null,
+                "targets": null,
+                "chance": 0.5,
+                "disabled": false,
+                "source": "soldier_paladin.melee.attacks[2]"
+              },
+              {
+                "id": "melee-3",
+                "name": "近战 · 招式 3",
+                "damageMin": 20,
+                "damageMax": 35,
+                "damageType": "魔法范围",
+                "cooldown": null,
+                "range": 60,
+                "radius": 50,
+                "targets": null,
+                "chance": 0.06,
+                "disabled": true,
+                "source": "soldier_paladin.melee.attacks[3]"
+              }
+            ]
+          },
+          "variants": [],
+          "source": "kr1/barrack_towers.lua",
+          "scriptSource": null
+        }
+      ],
+      "mechanics": {
+        "reviewedVersion": "2.0.9.3",
+        "items": [
+          {
+            "summary": "按目标物理护甲减去本次攻击的穿甲值计算减伤。",
+            "details": [
+              "最终护甲减伤比例限制在 0%–100%。本条解释伤害类型，不代表整座塔的所有技能与召唤单位都使用相同类型。"
+            ],
+            "id": "damage-resolution",
+            "title": "物理伤害的护甲结算",
+            "kind": "damage-rule",
+            "sources": [
+              {
+                "file": "all/utils.lua",
+                "symbol": "function U.calc_protection",
+                "line": 1979
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "hasSpecificReview": false
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "沉默效果。",
+          "source": "mod_paladin_silence"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "soldier_paladin.damage_radius / area"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
+    },
+    {
+      "id": "tower_arcane_wizard",
+      "name": "奥术法师",
+      "description": "奥术巫师注重改变现实之力；同时还能发射已知最致命的魔法射线。",
+      "families": [
+        "mage"
+      ],
+      "roles": [
+        "直接输出",
+        "控制"
+      ],
+      "image": "/encyclopedia/thumbs/tower_arcane_wizard.png",
+      "encyclopediaImage": "/encyclopedia/tower_arcane_wizard.png",
+      "encyclopediaOrder": 3,
+      "encyclopediaListed": true,
+      "encyclopediaSprite": "encyclopedia_towers_0015",
+      "encyclopediaThumbSprite": "encyclopedia_tower_thumbs_0015",
+      "sourceGame": 1,
+      "portraitSprite": "info_portraits_towers_0008",
+      "price": 290,
+      "level": 1,
+      "towerType": "arcane_wizard",
+      "canBeBuffed": true,
+      "unlock": {
+        "status": "level",
+        "level": 6,
+        "label": "第 6 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level06_data.lua"
+      },
+      "attack": {
+        "damageMin": 92,
+        "damageMax": 156,
+        "cooldown": 2,
+        "dps": 62,
+        "range": 200,
+        "rallyRange": null,
+        "damageType": "魔法",
+        "damageTypeValue": 268435460,
+        "kind": "bullet",
+        "confidence": "精确",
+        "scope": "单目标基础攻击"
+      },
+      "soldier": null,
+      "powers": [
+        {
+          "id": "disintegrate",
+          "name": "死亡射线",
+          "icon": "/skills/tower_arcane_wizard--disintegrate.png",
+          "iconSprite": "special_icons_0015",
+          "maxLevel": 3,
+          "priceBase": 350,
+          "priceIncrement": 225,
+          "descriptions": [
+            {
+              "key": "TOWER_ARCANE_WIZARD_DISINTEGRATE_DESCRIPTION",
+              "text": "敌人部队被解体为细微的尘埃。保证完全有效！"
+            },
+            {
+              "key": "TOWER_ARCANE_WIZARD_DISINTEGRATE_DESCRIPTION_1",
+              "text": "每隔20秒，将一个敌人解体为细尘。若敌人原始生命低于666点，则按比例恢复冷却。若目标为boss或免疫秒杀，则造成642+4.7%最大生命值的伤害。"
+            },
+            {
+              "key": "TOWER_ARCANE_WIZARD_DISINTEGRATE_DESCRIPTION_2",
+              "text": "每隔18秒，将一个敌人解体为细尘。若敌人原始生命低于733点，则按比例恢复冷却。若目标为boss或免疫秒杀，则造成642+4.7%最大生命值的伤害。"
+            },
+            {
+              "key": "TOWER_ARCANE_WIZARD_DISINTEGRATE_DESCRIPTION_3",
+              "text": "每隔16秒，将一个敌人解体为细尘。若敌人原始生命低于800点，则按比例恢复冷却。若目标为boss或免疫秒杀，则造成642+4.7%最大生命值的伤害。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 350,
+              "cumulativePrice": 350,
+              "description": "每隔20秒，将一个敌人解体为细尘。若敌人原始生命低于666点，则按比例恢复冷却。若目标为boss或免疫秒杀，则造成642+4.7%最大生命值的伤害。",
+              "descriptionKey": "TOWER_ARCANE_WIZARD_DISINTEGRATE_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 20,
+                  "unit": "秒"
+                }
+              ]
+            },
+            {
+              "level": 2,
+              "price": 225,
+              "cumulativePrice": 575,
+              "description": "每隔18秒，将一个敌人解体为细尘。若敌人原始生命低于733点，则按比例恢复冷却。若目标为boss或免疫秒杀，则造成642+4.7%最大生命值的伤害。",
+              "descriptionKey": "TOWER_ARCANE_WIZARD_DISINTEGRATE_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 18,
+                  "unit": "秒"
+                }
+              ]
+            },
+            {
+              "level": 3,
+              "price": 225,
+              "cumulativePrice": 800,
+              "description": "每隔16秒，将一个敌人解体为细尘。若敌人原始生命低于800点，则按比例恢复冷却。若目标为boss或免疫秒杀，则造成642+4.7%最大生命值的伤害。",
+              "descriptionKey": "TOWER_ARCANE_WIZARD_DISINTEGRATE_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 16,
+                  "unit": "秒"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "teleport",
+          "name": "传送",
+          "icon": "/skills/tower_arcane_wizard--teleport.png",
+          "iconSprite": "special_icons_0016",
+          "maxLevel": 3,
+          "priceBase": 250,
+          "priceIncrement": 125,
+          "descriptions": [
+            {
+              "key": "TOWER_ARCANE_WIZARD_TELEPORT_DESCRIPTION_1",
+              "text": "每隔10秒将最多4个敌人沿路往回传送\n一段随机距离，并造成50点法术爆炸伤害。"
+            },
+            {
+              "key": "TOWER_ARCANE_WIZARD_TELEPORT_DESCRIPTION_2",
+              "text": "每隔10秒将最多5个敌人沿路往回传送\n一段随机距离，并造成75点法术爆炸伤害。"
+            },
+            {
+              "key": "TOWER_ARCANE_WIZARD_TELEPORT_DESCRIPTION_3",
+              "text": "每隔10秒将最多6个敌人沿路往回传送\n一段随机距离，并造成100点法术爆炸伤害。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 250,
+              "cumulativePrice": 250,
+              "description": "每隔10秒将最多4个敌人沿路往回传送\n一段随机距离，并造成50点法术爆炸伤害。",
+              "descriptionKey": "TOWER_ARCANE_WIZARD_TELEPORT_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 125,
+              "cumulativePrice": 375,
+              "description": "每隔10秒将最多5个敌人沿路往回传送\n一段随机距离，并造成75点法术爆炸伤害。",
+              "descriptionKey": "TOWER_ARCANE_WIZARD_TELEPORT_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 125,
+              "cumulativePrice": 500,
+              "description": "每隔10秒将最多6个敌人沿路往回传送\n一段随机距离，并造成100点法术爆炸伤害。",
+              "descriptionKey": "TOWER_ARCANE_WIZARD_TELEPORT_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/mage_towers.lua",
+        "nameKey": "TOWER_ARCANE_WIZARD_NAME",
+        "descriptionKey": "TOWER_ARCANE_WIZARD_DESCRIPTION",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
+        "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
+        "unlock": "kr1/data/levels/level06_data.lua"
+      },
+      "units": [],
+      "mechanics": {
+        "reviewedVersion": "2.0.9.3",
+        "items": [
+          {
+            "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
+            "details": [
+              "最终护甲减伤比例限制在 0%–100%。本条解释伤害类型，不代表整座塔的所有技能与召唤单位都使用相同类型。"
+            ],
+            "id": "damage-resolution",
+            "title": "魔法伤害的护甲结算",
+            "kind": "damage-rule",
+            "sources": [
+              {
+                "file": "all/utils.lua",
+                "symbol": "function U.calc_protection",
+                "line": 1979
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "hasSpecificReview": false
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "传送效果。",
+          "source": "mod_teleport_arcane"
+        }
+      ]
+    },
+    {
+      "id": "tower_bfg",
+      "name": "500mm大贝莎",
+      "description": "500mm攻城炮又名“大贝莎”，是史上最巨大、最凶猛的火炮之一。",
+      "families": [
+        "engineer"
+      ],
+      "roles": [
+        "直接输出",
+        "范围伤害",
+        "控制"
+      ],
+      "image": "/encyclopedia/thumbs/tower_bfg.png",
+      "encyclopediaImage": "/encyclopedia/tower_bfg.png",
+      "encyclopediaOrder": 4,
+      "encyclopediaListed": true,
+      "encyclopediaSprite": "encyclopedia_towers_0016",
+      "encyclopediaThumbSprite": "encyclopedia_tower_thumbs_0016",
+      "sourceGame": 1,
+      "portraitSprite": "info_portraits_towers_0002",
+      "price": 400,
+      "level": 1,
+      "towerType": "bfg",
+      "canBeBuffed": true,
+      "unlock": {
+        "status": "level",
+        "level": 8,
+        "label": "第 8 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level08_data.lua"
+      },
+      "attack": {
+        "damageMin": 66,
+        "damageMax": 131,
+        "cooldown": 3.65,
+        "dps": 26.986301369863014,
+        "range": 190,
+        "rallyRange": null,
+        "damageType": "物理范围",
+        "damageTypeValue": 8,
+        "kind": "bullet",
+        "confidence": "精确",
+        "scope": "单目标基础攻击"
+      },
+      "soldier": null,
+      "powers": [
+        {
+          "id": "cluster",
+          "name": "群簇轰炸",
+          "icon": "/skills/tower_bfg--cluster.png",
+          "iconSprite": "special_icons_0018",
+          "maxLevel": 3,
+          "priceBase": 175,
+          "priceIncrement": 210,
+          "descriptions": [
+            {
+              "key": "TOWER_BFG_CLUSTER_DESCRIPTION_1",
+              "text": "每隔15秒，发射一枚母弹，在半空中爆裂成4颗小炸弹，每颗造成63-84点伤害并晕眩敌人0.25秒。"
+            },
+            {
+              "key": "TOWER_BFG_CLUSTER_DESCRIPTION_2",
+              "text": "每隔11.5秒，发射一枚母弹，在半空中爆裂成6颗小炸弹，每颗造成63-84点伤害并晕眩敌人0.25秒。"
+            },
+            {
+              "key": "TOWER_BFG_CLUSTER_DESCRIPTION_3",
+              "text": "每隔8秒，发射一枚母弹，在半空中爆裂成8颗小炸弹，每颗造成63-84点伤害并晕眩敌人0.25秒。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 175,
+              "cumulativePrice": 175,
+              "description": "每隔15秒，发射一枚母弹，在半空中爆裂成4颗小炸弹，每颗造成63-84点伤害并晕眩敌人0.25秒。",
+              "descriptionKey": "TOWER_BFG_CLUSTER_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 210,
+              "cumulativePrice": 385,
+              "description": "每隔11.5秒，发射一枚母弹，在半空中爆裂成6颗小炸弹，每颗造成63-84点伤害并晕眩敌人0.25秒。",
+              "descriptionKey": "TOWER_BFG_CLUSTER_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 210,
+              "cumulativePrice": 595,
+              "description": "每隔8秒，发射一枚母弹，在半空中爆裂成8颗小炸弹，每颗造成63-84点伤害并晕眩敌人0.25秒。",
+              "descriptionKey": "TOWER_BFG_CLUSTER_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "id": "missile",
+          "name": "龙息导弹",
+          "icon": "/skills/tower_bfg--missile.png",
+          "iconSprite": "special_icons_0017",
+          "maxLevel": 3,
+          "priceBase": 175,
+          "priceIncrement": 150,
+          "descriptions": [
+            {
+              "key": "TOWER_BFG_MISSILE_DESCRIPTION_1",
+              "text": "每隔14秒，发射绝对不会失误、射程超长的跟踪导弹，造成70-98点伤害与0.25秒晕眩。导弹命中后，分裂为三枚小导弹，造成1/3伤害与同样晕眩效果。"
+            },
+            {
+              "key": "TOWER_BFG_MISSILE_DESCRIPTION_2",
+              "text": "每隔12秒，发射绝对不会失误、射程超长的跟踪导弹，造成98-126点伤害与0.25秒晕眩。导弹命中后，分裂为三枚小导弹，造成1/3伤害与同样晕眩效果。"
+            },
+            {
+              "key": "TOWER_BFG_MISSILE_DESCRIPTION_3",
+              "text": "每隔10秒，发射绝对不会失误、射程超长的跟踪导弹，造成126-154点伤害与0.25秒晕眩。导弹命中后，分裂为三枚小导弹，造成1/3伤害与同样晕眩效果。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 175,
+              "cumulativePrice": 175,
+              "description": "每隔14秒，发射绝对不会失误、射程超长的跟踪导弹，造成70-98点伤害与0.25秒晕眩。导弹命中后，分裂为三枚小导弹，造成1/3伤害与同样晕眩效果。",
+              "descriptionKey": "TOWER_BFG_MISSILE_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 150,
+              "cumulativePrice": 325,
+              "description": "每隔12秒，发射绝对不会失误、射程超长的跟踪导弹，造成98-126点伤害与0.25秒晕眩。导弹命中后，分裂为三枚小导弹，造成1/3伤害与同样晕眩效果。",
+              "descriptionKey": "TOWER_BFG_MISSILE_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 150,
+              "cumulativePrice": 475,
+              "description": "每隔10秒，发射绝对不会失误、射程超长的跟踪导弹，造成126-154点伤害与0.25秒晕眩。导弹命中后，分裂为三枚小导弹，造成1/3伤害与同样晕眩效果。",
+              "descriptionKey": "TOWER_BFG_MISSILE_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/engineer_towers.lua",
+        "nameKey": "TOWER_BFG_NAME",
+        "descriptionKey": "TOWER_BFG_DESCRIPTION",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
+        "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
+        "unlock": "kr1/data/levels/level08_data.lua"
+      },
+      "units": [],
+      "mechanics": {
+        "reviewedVersion": "2.0.9.3",
+        "items": [
+          {
+            "summary": "令 A 为扣除本次穿甲后的物理护甲，减伤比例 = A × (0.2A + 0.4)。例如 50% 护甲对应 25% 减伤，100% 护甲对应 60% 减伤。",
+            "details": [
+              "最终护甲减伤比例限制在 0%–100%。本条解释伤害类型，不代表整座塔的所有技能与召唤单位都使用相同类型。"
+            ],
+            "id": "damage-resolution",
+            "title": "爆炸 / 猛击伤害的护甲结算",
+            "kind": "damage-rule",
+            "sources": [
+              {
+                "file": "all/utils.lua",
+                "symbol": "function U.calc_protection",
+                "line": 1979
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "hasSpecificReview": false
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bomb_bfg.damage_radius / area"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_bfg_stun"
+        }
+      ]
+    },
+    {
+      "id": "tower_arcane",
+      "name": "奥术弓手塔",
+      "description": "奥术弓箭手能射出物法混伤的魔法箭矢，绕过敌人的物理护甲，削弱目标的魔法抗性。",
+      "families": [
+        "archer"
+      ],
+      "roles": [
+        "直接输出",
+        "范围伤害",
+        "持续伤害",
+        "控制",
+        "减益/破甲"
+      ],
+      "image": "/encyclopedia/thumbs/tower_arcane.png",
+      "encyclopediaImage": "/encyclopedia/tower_arcane.png",
+      "encyclopediaOrder": 30,
+      "encyclopediaListed": true,
+      "encyclopediaSprite": "kr3_encyclopedia_towers_0005",
+      "encyclopediaThumbSprite": "kr3_encyclopedia_tower_thumbs_0005",
+      "sourceGame": 3,
+      "portraitSprite": "kr3_info_portraits_towers_0009",
+      "price": 230,
+      "level": 1,
+      "towerType": "arcane",
+      "canBeBuffed": true,
+      "unlock": {
+        "status": "level",
+        "level": 52,
+        "label": "第 52 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level52_data.lua"
+      },
+      "attack": {
+        "damageMin": 14,
+        "damageMax": 19,
+        "cooldown": 0.8,
+        "dps": 20.625,
+        "range": 200,
+        "rallyRange": null,
+        "damageType": "混合",
+        "damageTypeValue": 512,
+        "kind": "bullet",
+        "confidence": "精确",
+        "scope": "单目标基础攻击"
+      },
+      "soldier": null,
+      "powers": [
+        {
+          "id": "burst",
+          "name": "爆裂箭矢",
+          "icon": "/skills/tower_arcane--burst.png",
+          "iconSprite": "kr3_special_icons_0002",
+          "maxLevel": 3,
+          "priceBase": 200,
+          "priceIncrement": 200,
+          "descriptions": [
+            {
+              "key": "TOWER_ARCANE_BURST_DESCRIPTION_1",
+              "text": "每隔12秒，射出一支爆炸魔法箭，造成80点法术爆炸伤害。若敌人无魔法抗性，则额外受到灼烧，共造成40点法术伤害。奥术弓手每次命中有魔法抗性的敌人，将加快爆炸魔法箭冷却0.3秒。"
+            },
+            {
+              "key": "TOWER_ARCANE_BURST_DESCRIPTION_2",
+              "text": "每隔12秒，射出一支爆炸魔法箭，造成160点法术爆炸伤害。若敌人无魔法抗性，则额外受到灼烧，共造成80点法术伤害。奥术弓手每次命中有魔法抗性的敌人，将加快爆炸魔法箭冷却0.3秒。"
+            },
+            {
+              "key": "TOWER_ARCANE_BURST_DESCRIPTION_3",
+              "text": "每隔12秒，射出一支爆炸魔法箭，造成240点法术爆炸伤害。若敌人无魔法抗性，则额外受到灼烧，共造成120点法术伤害。奥术弓手每次命中有魔法抗性的敌人，将加快爆炸魔法箭冷却0.3秒。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 200,
+              "cumulativePrice": 200,
+              "description": "每隔12秒，射出一支爆炸魔法箭，造成80点法术爆炸伤害。若敌人无魔法抗性，则额外受到灼烧，共造成40点法术伤害。奥术弓手每次命中有魔法抗性的敌人，将加快爆炸魔法箭冷却0.3秒。",
+              "descriptionKey": "TOWER_ARCANE_BURST_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 200,
+              "cumulativePrice": 400,
+              "description": "每隔12秒，射出一支爆炸魔法箭，造成160点法术爆炸伤害。若敌人无魔法抗性，则额外受到灼烧，共造成80点法术伤害。奥术弓手每次命中有魔法抗性的敌人，将加快爆炸魔法箭冷却0.3秒。",
+              "descriptionKey": "TOWER_ARCANE_BURST_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 200,
+              "cumulativePrice": 600,
+              "description": "每隔12秒，射出一支爆炸魔法箭，造成240点法术爆炸伤害。若敌人无魔法抗性，则额外受到灼烧，共造成120点法术伤害。奥术弓手每次命中有魔法抗性的敌人，将加快爆炸魔法箭冷却0.3秒。",
+              "descriptionKey": "TOWER_ARCANE_BURST_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "id": "slumber",
+          "name": "睡眠箭矢",
+          "icon": "/skills/tower_arcane--slumber.png",
+          "iconSprite": "kr3_special_icons_0001",
+          "maxLevel": 3,
+          "priceBase": 225,
+          "priceIncrement": 75,
+          "descriptions": [
+            {
+              "key": "TOWER_ARCANE_SLUMBER_DESCRIPTION_1",
+              "text": "奥术弓手有6%概率射出催眠箭矢，造成4倍伤害并使敌人睡眠2秒。奥术爆发有30%概率使敌人进入睡眠状态。"
+            },
+            {
+              "key": "TOWER_ARCANE_SLUMBER_DESCRIPTION_2",
+              "text": "奥术弓手有8%概率射出催眠箭矢，造成4倍伤害并使敌人睡眠2秒。奥术爆发有40%概率使敌人进入睡眠状态。"
+            },
+            {
+              "key": "TOWER_ARCANE_SLUMBER_DESCRIPTION_3",
+              "text": "奥术弓手有10%概率射出催眠箭矢，造成4倍伤害并使敌人睡眠2秒。奥术爆发有50%概率使敌人进入睡眠状态。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 225,
+              "cumulativePrice": 225,
+              "description": "奥术弓手有6%概率射出催眠箭矢，造成4倍伤害并使敌人睡眠2秒。奥术爆发有30%概率使敌人进入睡眠状态。",
+              "descriptionKey": "TOWER_ARCANE_SLUMBER_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 75,
+              "cumulativePrice": 300,
+              "description": "奥术弓手有8%概率射出催眠箭矢，造成4倍伤害并使敌人睡眠2秒。奥术爆发有40%概率使敌人进入睡眠状态。",
+              "descriptionKey": "TOWER_ARCANE_SLUMBER_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 75,
+              "cumulativePrice": 375,
+              "description": "奥术弓手有10%概率射出催眠箭矢，造成4倍伤害并使敌人睡眠2秒。奥术爆发有50%概率使敌人进入睡眠状态。",
+              "descriptionKey": "TOWER_ARCANE_SLUMBER_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/archer_towers.lua",
+        "nameKey": "TOWER_ARCANE_NAME",
+        "descriptionKey": "TOWER_ARCANE_DESCRIPTION",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
+        "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
+        "unlock": "kr1/data/levels/level52_data.lua"
+      },
+      "units": [],
+      "mechanics": {
+        "reviewedVersion": "2.0.9.3",
+        "items": [
+          {
+            "summary": "箭矢附带独立的削魔抗效果，每次命中减少 3.5 个百分点的魔法护甲。",
+            "details": [
+              "这是对目标属性的削减，不是只让本次攻击穿透魔抗；效果没有配置自动到期恢复。",
+              "实际削减乘以 (1 − 目标护甲韧性)，并受目标免疫、伤害处理与护甲下限规则约束。",
+              "普攻本身是混合伤害，其护甲算法见本栏的伤害结算规则。"
+            ],
+            "id": "arcane-shred",
+            "title": "普攻逐次削减魔抗",
+            "kind": "intrinsic",
+            "sources": [
+              {
+                "file": "kr1/archer_towers.lua",
+                "symbol": "\"tower_arcane\"",
+                "line": 728
+              },
+              {
+                "file": "all/scripts.lua",
+                "symbol": "function scripts.mod_damage.insert",
+                "line": 7162
+              },
+              {
+                "file": "all/systems/health.lua",
+                "symbol": "elseif band(d.damage_type, DAMAGE_MAGICAL_ARMOR)",
+                "line": 663
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.magic_armor_inc",
+                "line": 275
+              }
+            ]
+          },
+          {
+            "summary": "若魔抗高于物理护甲，采用物理护甲；否则采用物理护甲与魔抗的平均值。双方先扣除各自穿透值；不是固定一半物理、一半魔法分别结算。",
+            "details": [
+              "最终护甲减伤比例限制在 0%–100%。本条解释伤害类型，不代表整座塔的所有技能与召唤单位都使用相同类型。"
+            ],
+            "id": "damage-resolution",
+            "title": "混合伤害的护甲结算",
+            "kind": "damage-rule",
+            "sources": [
+              {
+                "file": "all/utils.lua",
+                "symbol": "function U.calc_protection",
+                "line": 1979
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "hasSpecificReview": true
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "aura_arcane_burst"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_arcane_burst"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_arrow_arcane_slumber"
+        },
+        {
+          "role": "减益/破甲",
+          "description": "效果降低目标的物理护甲或魔法护甲。",
+          "source": "mod_arrow_arcane"
+        }
+      ]
+    },
+    {
+      "id": "tower_wizard",
+      "name": "魔典学者",
+      "description": "胆敢打断学者研究的敌人，将面临可怕的后果。",
+      "families": [
+        "mage"
+      ],
+      "roles": [
+        "直接输出",
+        "范围伤害",
+        "持续伤害",
+        "控制",
+        "增伤辅助"
+      ],
+      "image": "/encyclopedia/thumbs/tower_wizard.png",
+      "encyclopediaImage": "/encyclopedia/tower_wizard.png",
+      "encyclopediaOrder": 87,
+      "encyclopediaListed": true,
+      "encyclopediaSprite": "kr6_encyclopedia_towers_0012",
+      "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0012",
+      "sourceGame": 6,
+      "portraitSprite": "kr6_info_portraits_towers_0004",
+      "price": 280,
+      "level": 1,
+      "towerType": "wizard",
+      "canBeBuffed": true,
+      "unlock": {
+        "status": "level",
+        "level": 202,
+        "label": "第 202 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level202_data.lua"
+      },
+      "attack": {
+        "damageMin": 37,
+        "damageMax": 67,
+        "cooldown": 2,
+        "dps": 26,
+        "range": 190,
+        "rallyRange": null,
+        "damageType": "魔法",
+        "damageTypeValue": 4,
+        "kind": "bullet",
+        "confidence": "精确",
+        "scope": "单枚普攻弹丸参数（每轮两枚）"
+      },
+      "soldier": null,
+      "powers": [
+        {
+          "id": "skill_a",
+          "name": "火炎法书",
+          "icon": "/skills/tower_wizard--skill_a.png",
+          "iconSprite": "kr6_quickmenu_special_icons_wizard_0001",
+          "maxLevel": 3,
+          "priceBase": 120,
+          "priceIncrement": 120,
+          "descriptions": [
+            {
+              "key": "TOWER_WIZARD_SKILL_A_DESCRIPTION_1",
+              "text": "每20秒向道路投出火焰法球，造成60点法术爆炸伤害，并使敌人每0.25秒受到2点真实伤害，持续4秒。"
+            },
+            {
+              "key": "TOWER_WIZARD_SKILL_A_DESCRIPTION_2",
+              "text": "每20秒向道路投出火焰法球，造成120点法术爆炸伤害，并使敌人每0.25秒受到3点真实伤害，持续4秒。"
+            },
+            {
+              "key": "TOWER_WIZARD_SKILL_A_DESCRIPTION_3",
+              "text": "每20秒向道路投出火焰法球，造成180点法术爆炸伤害，并使敌人每0.25秒受到4点真实伤害，持续4秒。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 120,
+              "cumulativePrice": 120,
+              "description": "每20秒向道路投出火焰法球，造成60点法术爆炸伤害，并使敌人每0.25秒受到2点真实伤害，持续4秒。",
+              "descriptionKey": "TOWER_WIZARD_SKILL_A_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 20,
+                  "unit": "秒"
+                },
+                {
+                  "label": "伤害下限",
+                  "value": 60,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 60,
+                  "unit": ""
+                }
+              ]
+            },
+            {
+              "level": 2,
+              "price": 120,
+              "cumulativePrice": 240,
+              "description": "每20秒向道路投出火焰法球，造成120点法术爆炸伤害，并使敌人每0.25秒受到3点真实伤害，持续4秒。",
+              "descriptionKey": "TOWER_WIZARD_SKILL_A_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 20,
+                  "unit": "秒"
+                },
+                {
+                  "label": "伤害下限",
+                  "value": 120,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 120,
+                  "unit": ""
+                }
+              ]
+            },
+            {
+              "level": 3,
+              "price": 120,
+              "cumulativePrice": 360,
+              "description": "每20秒向道路投出火焰法球，造成180点法术爆炸伤害，并使敌人每0.25秒受到4点真实伤害，持续4秒。",
+              "descriptionKey": "TOWER_WIZARD_SKILL_A_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 20,
+                  "unit": "秒"
+                },
+                {
+                  "label": "伤害下限",
+                  "value": 180,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 180,
+                  "unit": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "name": "知识之卷",
+          "icon": "/skills/tower_wizard--skill_b.png",
+          "iconSprite": "kr6_quickmenu_special_icons_wizard_0002",
+          "maxLevel": 3,
+          "priceBase": 225,
+          "priceIncrement": 225,
+          "descriptions": [
+            {
+              "key": "TOWER_WIZARD_SKILL_B_DESCRIPTION_1",
+              "text": "每25秒，使射程内所有防御塔获得50%伤害增益，持续8秒。"
+            },
+            {
+              "key": "TOWER_WIZARD_SKILL_B_DESCRIPTION_2",
+              "text": "每25秒，使射程内所有防御塔获得75%伤害增益，持续10秒。"
+            },
+            {
+              "key": "TOWER_WIZARD_SKILL_B_DESCRIPTION_3",
+              "text": "每25秒，使射程内所有防御塔获得100%伤害增益，持续12秒。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 225,
+              "cumulativePrice": 225,
+              "description": "每25秒，使射程内所有防御塔获得50%伤害增益，持续8秒。",
+              "descriptionKey": "TOWER_WIZARD_SKILL_B_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 225,
+              "cumulativePrice": 450,
+              "description": "每25秒，使射程内所有防御塔获得75%伤害增益，持续10秒。",
+              "descriptionKey": "TOWER_WIZARD_SKILL_B_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 225,
+              "cumulativePrice": 675,
+              "description": "每25秒，使射程内所有防御塔获得100%伤害增益，持续12秒。",
+              "descriptionKey": "TOWER_WIZARD_SKILL_B_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "name": "备份抄本",
+          "icon": "/skills/tower_wizard--skill_c.png",
+          "iconSprite": "kr6_quickmenu_special_icons_wizard_0003",
+          "maxLevel": 3,
+          "priceBase": 150,
+          "priceIncrement": 160,
+          "descriptions": [
+            {
+              "key": "TOWER_WIZARD_SKILL_C_DESCRIPTION_1",
+              "text": "每25秒向道路投出一本魔法书，释放3道魔法攻击，每道造成42-76点魔法伤害。"
+            },
+            {
+              "key": "TOWER_WIZARD_SKILL_C_DESCRIPTION_2",
+              "text": "每25秒向道路投出一本魔法书，释放5道魔法攻击，每道造成52-92点魔法伤害。"
+            },
+            {
+              "key": "TOWER_WIZARD_SKILL_C_DESCRIPTION_3",
+              "text": "每25秒向道路投出一本魔法书，释放8道魔法攻击，每道造成62-108点魔法伤害。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 150,
+              "cumulativePrice": 150,
+              "description": "每25秒向道路投出一本魔法书，释放3道魔法攻击，每道造成42-76点魔法伤害。",
+              "descriptionKey": "TOWER_WIZARD_SKILL_C_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 160,
+              "cumulativePrice": 310,
+              "description": "每25秒向道路投出一本魔法书，释放5道魔法攻击，每道造成52-92点魔法伤害。",
+              "descriptionKey": "TOWER_WIZARD_SKILL_C_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 160,
+              "cumulativePrice": 470,
+              "description": "每25秒向道路投出一本魔法书，释放8道魔法攻击，每道造成62-108点魔法伤害。",
+              "descriptionKey": "TOWER_WIZARD_SKILL_C_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/mage_towers.lua",
+        "nameKey": "TOWER_WIZARD_NAME",
+        "descriptionKey": "TOWER_WIZARD_DESCRIPTION",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
+        "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
+        "unlock": "kr1/data/levels/level202_data.lua"
+      },
+      "units": [],
+      "mechanics": {
+        "reviewedVersion": "2.0.9.3",
+        "items": [
+          {
+            "summary": "每轮普攻发射两枚 37–67 点魔法伤害弹丸；基础冷却 2 秒。",
+            "details": [
+              "第二枚有 50% 概率改打列表中的第二目标，但它须与原目标相距小于 50；否则两枚集中攻击原目标。",
+              "两枚之间等待 0.15 秒乘塔冷却系数；热身、技能动作和目标失效会影响实际节奏。",
+              "上方面板为单枚参数。两枚都命中同一目标时，该轮基础总伤害 74–134；仅按冷却估算为 52 DPS，未计动作与其他影响。"
+            ],
+            "id": "wizard-double-bolt",
+            "title": "普攻每轮两弹，可能分给邻近敌人",
+            "kind": "intrinsic",
+            "sources": [
+              {
+                "file": "kr1/mage_towers.lua",
+                "symbol": "RT(\"tower_wizard\"",
+                "line": 4548
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.tower_wizard.update",
+                "line": 32837
+              }
+            ]
+          },
+          {
+            "summary": "火焰书直接伤害参数为 60 / 120 / 180 点魔法爆炸伤害，落点范围 60。",
+            "details": [
+              "另附 2 / 3 / 4 点一跳的燃烧，模板持续 4 秒、每 0.25 秒结算；实际跳数受调度、刷新和目标状态影响。",
+              "脚本把燃烧等级倍率写进弹丸伤害系数，同时先除回直接伤害，不能把直接伤害再次乘以燃烧升级倍率。直接爆炸还受爆心距离、工程效率与目标抗性影响。"
+            ],
+            "id": "wizard-firebook",
+            "title": "火焰书的直接伤害与燃烧分开缩放",
+            "kind": "skill-interaction",
+            "sources": [
+              {
+                "file": "kr1/mage_towers.lua",
+                "symbol": "RT(\"tower_wizard\"",
+                "line": 4548
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.tower_wizard.update",
+                "line": 32837
+              },
+              {
+                "file": "all/scripts.lua",
+                "symbol": "function scripts.bomb.update",
+                "line": 2714
+              },
+              {
+                "file": "all/scripts.lua",
+                "symbol": "function scripts.mod_dps.update",
+                "line": 6027
+              }
+            ]
+          },
+          {
+            "summary": "技能冷却 25 秒，为周围可接受效果的塔增加 50 / 75 / 100% 伤害倍率，持续 8 / 10 / 12 秒。",
+            "details": [
+              "施法前必须先找到范围内敌人；随后按当前塔攻击范围扫描受益塔，并检查效果许可、封锁及筛选标记。",
+              "通用函数向伤害倍率加上增量，与其他塔伤害加成按加法合并；不能把每种增伤一律相乘。现有兵营士兵也按通用函数同步获得增量。"
+            ],
+            "id": "wizard-empower",
+            "title": "知识卷轴给周围塔加伤害倍率",
+            "kind": "skill-interaction",
+            "sources": [
+              {
+                "file": "kr1/mage_towers.lua",
+                "symbol": "RT(\"tower_wizard\"",
+                "line": 4548
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.tower_wizard.update",
+                "line": 32837
+              },
+              {
+                "file": "all/scripts.lua",
+                "symbol": "function scripts.mod_tower_factors.insert",
+                "line": 6653
+              },
+              {
+                "file": "all/script_utils.lua",
+                "symbol": "function SU.insert_tower_damage_factor_buff",
+                "line": 4634
+              }
+            ]
+          },
+          {
+            "summary": "初次投掷按 50 点直接命中参数处理；书本再弹向附近道路节点，落地后发射 3 / 5 / 8 枚魔法弹。",
+            "details": [
+              "副本搜索范围固定 200；各级单枚伤害为 42–76 / 52–92 / 62–108。",
+              "副本会逐枚重新找敌人；找不到敌人时弹丸射向随机落点，仍消耗数量。它不是在整个持续时间内无限射击，也不能保证所有弹丸都命中。",
+              "落地点会避开配置的不可用地形；数量耗尽后等待并淡出。"
+            ],
+            "id": "wizard-copies",
+            "title": "备用副本落地后发射有限弹丸",
+            "kind": "skill-interaction",
+            "sources": [
+              {
+                "file": "kr1/mage_towers.lua",
+                "symbol": "RT(\"tower_wizard\"",
+                "line": 4548
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.tower_wizard.update",
+                "line": 32837
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.controller_tower_wizard_book_bounce.update",
+                "line": 33150
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.aura_wizard_skill_c.update",
+                "line": 33183
+              }
+            ]
+          },
+          {
+            "summary": "自带大招冷却 36 秒，对选中且仍存活的敌人造成 600 点魔法伤害。",
+            "details": [
+              "半径 45 内符合条件的地面敌人接受 1 秒眩晕；周围敌人不会同时分到这 600 点伤害。",
+              "伤害与周围眩晕分开判定；选中目标失效时，也不能把陨星按全范围伤害计入 DPS。"
+            ],
+            "id": "wizard-ultimate",
+            "title": "自带陨星：单体伤害、周围眩晕",
+            "kind": "intrinsic",
+            "sources": [
+              {
+                "file": "kr1/mage_towers.lua",
+                "symbol": "RT(\"tower_wizard\"",
+                "line": 4548
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.tower_wizard.update",
+                "line": 32837
+              },
+              {
+                "file": "kr1/tower_scripts.lua",
+                "symbol": "function scripts.mod_wizard_ultimate.update",
+                "line": 33253
+              }
+            ]
+          },
+          {
+            "summary": "按目标魔抗减去本次攻击的魔法穿透值计算减伤。",
+            "details": [
+              "最终护甲减伤比例限制在 0%–100%。本条解释伤害类型，不代表整座塔的所有技能与召唤单位都使用相同类型。"
+            ],
+            "id": "damage-resolution",
+            "title": "魔法伤害的护甲结算",
+            "kind": "damage-rule",
+            "sources": [
+              {
+                "file": "all/utils.lua",
+                "symbol": "function U.calc_protection",
+                "line": 1979
+              },
+              {
+                "file": "all/constants.lua",
+                "symbol": "DAMAGE_PHYSICAL =",
+                "line": 109
+              }
+            ]
+          }
+        ],
+        "pending": [],
+        "hasSpecificReview": true
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bullet_firebook_wizard.damage_radius / area"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_firebook_aura"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_stun_ultimate_wizard"
+        },
+        {
+          "role": "增伤辅助",
+          "description": "知识卷轴给周围塔增加伤害倍率。",
+          "source": "wizard-empower"
+        },
+        {
+          "role": "增伤辅助",
+          "description": "为受益防御塔提供伤害增益。",
+          "source": "wizard-knowledge"
+        }
+      ]
+    }
+  ],
+  "supportEffects": [
+    {
+      "id": "crossbow-eagle",
+      "sourceType": "tower",
+      "sourceTowerId": "tower_crossbow",
+      "skillId": "eagle",
+      "name": "驯鹰者",
+      "mode": "aura",
+      "levels": [
+        {
+          "level": 1,
+          "radius": 170,
+          "rangeBonus": 0.05,
+          "speedBonus": 0.15
+        },
+        {
+          "level": 2,
+          "radius": 210,
+          "rangeBonus": 0.075,
+          "speedBonus": 0.2
+        },
+        {
+          "level": 3,
+          "radius": 250,
+          "rangeBonus": 0.1,
+          "speedBonus": 0.25
+        }
+      ],
+      "note": "范围倍率与其他增距来源相乘；攻速加成加入攻速除数。",
+      "review": {
+        "reviewedVersion": "2.0.9.3",
+        "sources": [
+          "kr1/archer_towers.lua",
+          "kr1/game_scripts.lua",
+          "kr1/tower_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/systems/mod_lifecycle.lua"
+        ],
+        "valid": true,
+        "invalidFiles": []
+      },
+      "icon": null
+    },
+    {
+      "id": "pirate-watcher",
+      "sourceType": "tower",
+      "sourceTowerId": "tower_pirate_watchtower",
+      "skillId": "watcher",
+      "name": "眺望",
+      "mode": "aura",
+      "levels": [
+        {
+          "level": 1,
+          "radius": 250,
+          "rangeBonus": 0.1
+        },
+        {
+          "level": 2,
+          "radius": 250,
+          "rangeBonus": 0.2
+        },
+        {
+          "level": 3,
+          "radius": 250,
+          "rangeBonus": 0.3
+        }
+      ],
+      "note": "只改变攻击范围；对兵营塔显示为集结范围。",
+      "review": {
+        "reviewedVersion": "2.0.9.3",
+        "sources": [
+          "kr1/archer_towers.lua",
+          "kr1/game_scripts.lua",
+          "kr1/tower_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/systems/mod_lifecycle.lua"
+        ],
+        "valid": true,
+        "invalidFiles": []
+      },
+      "icon": null
+    },
+    {
+      "id": "archers-eye",
+      "sourceType": "tower",
+      "sourceTowerId": "tower_archers",
+      "skillId": "skill_b",
+      "name": "苍穹之眼",
+      "mode": "aura",
+      "radiusUsesSourceRange": true,
+      "rangeFalloff": {
+        "edgeFactor": 0.5
+      },
+      "levels": [
+        {
+          "level": 1,
+          "radius": 200,
+          "rangeBonus": 0.15
+        },
+        {
+          "level": 2,
+          "radius": 200,
+          "rangeBonus": 0.25
+        },
+        {
+          "level": 3,
+          "radius": 200,
+          "rangeBonus": 0.35
+        }
+      ],
+      "note": "覆盖范围随源塔当前攻击范围变化。增距 = 中心加成 × (1 − 距离/半径 ÷ 2)，边缘仅一半；按游戏椭圆距离计算。同类只保留实际倍率最高者。结果按当前位置首次获得光环计算；移动后较弱倍率不会自动替换旧倍率。",
+      "excludeTowerIds": [],
+      "review": {
+        "reviewedVersion": "2.0.9.3",
+        "sources": [
+          "kr1/archer_towers.lua",
+          "kr1/tower_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/systems/mod_lifecycle.lua"
+        ],
+        "valid": true,
+        "invalidFiles": []
+      },
+      "icon": null
+    },
+    {
+      "id": "high-elven-sentinel",
+      "sourceType": "tower",
+      "sourceTowerId": "tower_high_elven",
+      "skillId": "sentinel",
+      "name": "元素赐福",
+      "mode": "aura",
+      "levels": [
+        {
+          "level": 1,
+          "radius": 180,
+          "damageBonus": 0.135,
+          "speedBonus": 0.09
+        },
+        {
+          "level": 2,
+          "radius": 240,
+          "damageBonus": 0.18,
+          "speedBonus": 0.12
+        },
+        {
+          "level": 3,
+          "radius": 300,
+          "damageBonus": 0.225,
+          "speedBonus": 0.15
+        }
+      ],
+      "note": "伤害百分比与其他增伤来源相加。",
+      "review": {
+        "reviewedVersion": "2.0.9.3",
+        "sources": [
+          "kr1/mage_towers.lua",
+          "kr1/game_scripts.lua",
+          "kr1/tower_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/systems/mod_lifecycle.lua"
+        ],
+        "valid": true,
+        "invalidFiles": []
+      },
+      "icon": null
+    },
+    {
+      "id": "arcane-empowerment",
+      "sourceType": "tower",
+      "sourceTowerId": "tower_arcane_wizard_lvl4",
+      "skillId": "empowerment",
+      "name": "强化光环",
+      "mode": "aura",
+      "levels": [
+        {
+          "level": 1,
+          "radius": 240,
+          "damageBonus": 0.15
+        },
+        {
+          "level": 2,
+          "radius": 240,
+          "damageBonus": 0.25
+        },
+        {
+          "level": 3,
+          "radius": 240,
+          "damageBonus": 0.4
+        }
+      ],
+      "note": "同种强化光环取有效最高等级。",
+      "excludeTowerIds": [],
+      "review": {
+        "reviewedVersion": "2.0.9.3",
+        "sources": [
+          "kr1/mage_towers.lua",
+          "kr1/tower_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/systems/mod_lifecycle.lua"
+        ],
+        "valid": true,
+        "invalidFiles": []
+      },
+      "icon": null
+    },
+    {
+      "id": "wizard-knowledge",
+      "sourceType": "tower",
+      "sourceTowerId": "tower_wizard",
+      "skillId": "skill_b",
+      "name": "知识之卷",
+      "mode": "temporary",
+      "radiusUsesSourceRange": true,
+      "levels": [
+        {
+          "level": 1,
+          "radius": 190,
+          "damageBonus": 0.5,
+          "duration": 8,
+          "cycle": 25
+        },
+        {
+          "level": 2,
+          "radius": 190,
+          "damageBonus": 0.75,
+          "duration": 10,
+          "cycle": 25
+        },
+        {
+          "level": 3,
+          "radius": 190,
+          "damageBonus": 1,
+          "duration": 12,
+          "cycle": 25
+        }
+      ],
+      "note": "源塔攻击范围内有敌人时才释放，强化范围内通过可强化、未封锁与可见性检查的塔，包含自身；覆盖半径随源塔增距变化。同类高等级替换低等级，同级刷新持续时间；与其他增伤百分比相加，结果为持续期峰值。25 秒为基础冷却，会受源塔攻速增益影响。",
+      "excludeTowerIds": [],
+      "review": {
+        "reviewedVersion": "2.0.9.3",
+        "sources": [
+          "kr1/mage_towers.lua",
+          "kr1/tower_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/systems/mod_lifecycle.lua"
+        ],
+        "valid": true,
+        "invalidFiles": []
+      },
+      "icon": null
+    },
+    {
+      "id": "furnace-heat",
+      "sourceType": "tower",
+      "sourceTowerId": "tower_melting_furnace",
+      "skillId": "heat",
+      "name": "摩擦生热",
+      "mode": "aura",
+      "levels": [
+        {
+          "level": 1,
+          "radius": 291.5,
+          "damageBonus": 0.15
+        },
+        {
+          "level": 2,
+          "radius": 291.5,
+          "damageBonus": 0.3
+        }
+      ],
+      "note": "常驻增伤光环。",
+      "review": {
+        "reviewedVersion": "2.0.9.3",
+        "sources": [
+          "kr1/engineer_towers.lua",
+          "kr1/tower_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/systems/mod_lifecycle.lua"
+        ],
+        "valid": true,
+        "invalidFiles": []
+      },
+      "icon": null
+    },
+    {
+      "id": "furnace-fuel",
+      "sourceType": "tower",
+      "sourceTowerId": "tower_melting_furnace",
+      "skillId": "fuel",
+      "name": "燃料爆燃",
+      "mode": "temporary",
+      "levels": [
+        {
+          "level": 1,
+          "radius": 291.5,
+          "speedBonus": 0.5,
+          "duration": 10,
+          "cycle": 30
+        }
+      ],
+      "note": "每 30 秒触发、持续 10 秒；结果显示生效期间的峰值。",
+      "review": {
+        "reviewedVersion": "2.0.9.3",
+        "sources": [
+          "kr1/engineer_towers.lua",
+          "kr1/tower_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/systems/mod_lifecycle.lua"
+        ],
+        "valid": true,
+        "invalidFiles": []
+      },
+      "icon": null
+    },
+    {
+      "id": "dark-elf-hunt",
+      "sourceType": "tower",
+      "sourceTowerId": "tower_dark_elf_lvl4",
+      "skillId": "skill_buff",
+      "excludeTowerIds": [
+        "tower_dark_elf_lvl4"
+      ],
+      "name": "猎杀戾气",
+      "mode": "triggered",
+      "levels": [
+        {
+          "level": 1,
+          "radius": 225,
+          "damagePerTrigger": 0.008,
+          "triggerCap": 20
+        },
+        {
+          "level": 2,
+          "radius": 225,
+          "damagePerTrigger": 0.008,
+          "triggerCap": 50
+        },
+        {
+          "level": 3,
+          "radius": 225,
+          "damagePerTrigger": 0.008,
+          "triggerCap": 9999999
+        }
+      ],
+      "note": "标记目标死亡后，灵魂随机传给 225 范围内另一座塔；无其他塔时回到自身。这里只计算其他塔每次 0.8% 的当前增伤，不包括暮光长弓自身的固定伤害与攻速成长；升级后源码另按每次 8% 重放增伤。",
+      "review": {
+        "reviewedVersion": "2.0.9.3",
+        "sources": [
+          "kr1/archer_towers.lua",
+          "kr1/tower_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/systems/mod_lifecycle.lua"
+        ],
+        "valid": true,
+        "invalidFiles": []
+      },
+      "icon": null
+    },
+    {
+      "id": "denas-resource-management",
+      "sourceType": "hero",
+      "sourceHeroId": "hero_denas",
+      "skillId": "resource_management",
+      "name": "资源调配",
+      "mode": "passive",
+      "requiresBuffable": false,
+      "levels": [
+        {
+          "level": 1,
+          "radius": 0,
+          "priceMultiplier": 0.95
+        }
+      ],
+      "note": "迪纳斯登场时将所有塔模板价格乘以 0.95 并向下取整；不受 tower.can_be_mod 限制。",
+      "icon": "/heroes/thumbs/hero_denas.png"
+    },
+    {
+      "id": "denas-tower-buff",
+      "sourceType": "hero",
+      "sourceHeroId": "hero_denas",
+      "skillId": "tower_buff",
+      "name": "皇家号令",
+      "mode": "temporary",
+      "levels": [
+        {
+          "level": 1,
+          "radius": 200,
+          "rangeBonus": 0.25,
+          "speedBonus": 0.25,
+          "duration": 5,
+          "cycle": 11.7
+        },
+        {
+          "level": 2,
+          "radius": 200,
+          "rangeBonus": 0.25,
+          "speedBonus": 0.25,
+          "duration": 8,
+          "cycle": 11.7
+        },
+        {
+          "level": 3,
+          "radius": 200,
+          "rangeBonus": 0.25,
+          "speedBonus": 0.25,
+          "duration": 11,
+          "cycle": 11.7
+        }
+      ],
+      "note": "范围乘以 1.25；模板冷却系数 0.75 经共享函数转换为攻速除数 +0.25，与其他攻速增益相加。显示技能生效期间的峰值。",
+      "review": {
+        "reviewedVersion": "2.0.9.3",
+        "sources": [
+          "kr1/heroes.lua",
+          "kr1/hero_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/systems/mod_lifecycle.lua"
+        ],
+        "valid": true,
+        "invalidFiles": []
+      },
+      "icon": "/heroes/thumbs/hero_denas.png"
+    },
+    {
+      "id": "priest-consecrate",
+      "sourceType": "hero",
+      "sourceHeroId": "hero_priest",
+      "skillId": "consecrate",
+      "name": "神圣祝颂",
+      "mode": "temporary",
+      "levels": [
+        {
+          "level": 1,
+          "radius": 160,
+          "damageBonus": 0.18,
+          "duration": 8,
+          "cycle": 8
+        },
+        {
+          "level": 2,
+          "radius": 160,
+          "damageBonus": 0.24,
+          "duration": 15,
+          "cycle": 8
+        },
+        {
+          "level": 3,
+          "radius": 160,
+          "damageBonus": 0.3,
+          "duration": 22,
+          "cycle": 8
+        }
+      ],
+      "note": "每次选择范围内最近的一座未祝颂塔；伤害加成同时传递给兵营士兵。",
+      "icon": "/heroes/thumbs/hero_priest.png"
+    },
+    {
+      "id": "minotaur-roar-of-fury",
+      "sourceType": "hero",
+      "sourceHeroId": "hero_minotaur",
+      "skillId": "roaroffury",
+      "name": "野牛怒吼",
+      "mode": "temporary",
+      "levels": [
+        {
+          "level": 1,
+          "radius": 0,
+          "damageBonus": 0.25,
+          "duration": 4,
+          "cycle": 15
+        },
+        {
+          "level": 2,
+          "radius": 0,
+          "damageBonus": 0.5,
+          "duration": 4,
+          "cycle": 15
+        },
+        {
+          "level": 3,
+          "radius": 0,
+          "damageBonus": 0.75,
+          "duration": 4,
+          "cycle": 15
+        }
+      ],
+      "note": "对全场所有可被强化且未封锁的塔生效，显示 4 秒持续期内的峰值。",
+      "icon": "/heroes/thumbs/hero_minotaur.png"
+    },
+    {
+      "id": "phoenix-flaming-path",
+      "sourceType": "hero",
+      "sourceHeroId": "hero_phoenix",
+      "skillId": "flaming_path",
+      "name": "余烬之地",
+      "mode": "temporary",
+      "levels": [
+        {
+          "level": 1,
+          "radius": 125,
+          "flatDps": 15,
+          "duration": 6.5,
+          "cycle": 30
+        },
+        {
+          "level": 2,
+          "radius": 125,
+          "flatDps": 30,
+          "duration": 6.5,
+          "cycle": 30
+        },
+        {
+          "level": 3,
+          "radius": 125,
+          "flatDps": 45,
+          "duration": 6.5,
+          "cycle": 30
+        }
+      ],
+      "note": "附着到附近一座塔，每 2 秒造成 30/60/90 点范围真实伤害；额外 DPS 按持续期峰值计入。",
+      "icon": "/heroes/thumbs/hero_phoenix.png"
+    },
+    {
+      "id": "space-elf-spatial-distortion",
+      "sourceType": "hero",
+      "sourceHeroId": "hero_space_elf",
+      "skillId": "spatial_distortion",
+      "name": "空间扭曲",
+      "mode": "temporary",
+      "levels": [
+        {
+          "level": 1,
+          "radius": 0,
+          "damageBonus": 0.04,
+          "rangeBonus": 0.04,
+          "speedBonus": 0.04,
+          "duration": 6,
+          "cycle": 25
+        },
+        {
+          "level": 2,
+          "radius": 0,
+          "damageBonus": 0.06,
+          "rangeBonus": 0.06,
+          "speedBonus": 0.06,
+          "duration": 7,
+          "cycle": 23
+        },
+        {
+          "level": 3,
+          "radius": 0,
+          "damageBonus": 0.08,
+          "rangeBonus": 0.08,
+          "speedBonus": 0.08,
+          "duration": 8,
+          "cycle": 20
+        }
+      ],
+      "note": "对全场所有可强化塔同时生效；模板冷却系数经共享函数转换为攻速除数 +0.04/+0.06/+0.08，与其他攻速增益相加。",
+      "review": {
+        "reviewedVersion": "2.0.9.3",
+        "sources": [
+          "kr1/heroes.lua",
+          "kr1/hero_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/systems/mod_lifecycle.lua"
+        ],
+        "valid": true,
+        "invalidFiles": []
+      },
+      "icon": "/heroes/thumbs/hero_space_elf.png"
+    },
+    {
+      "id": "lava-hotheaded",
+      "sourceType": "hero",
+      "sourceHeroId": "hero_lava",
+      "skillId": "hotheaded",
+      "name": "烈焰之心",
+      "mode": "triggered",
+      "levels": [
+        {
+          "level": 1,
+          "radius": 180,
+          "damageBonus": 0.2,
+          "duration": 6
+        },
+        {
+          "level": 2,
+          "radius": 180,
+          "damageBonus": 0.3,
+          "duration": 6
+        },
+        {
+          "level": 3,
+          "radius": 180,
+          "damageBonus": 0.4,
+          "duration": 6
+        }
+      ],
+      "note": "喀拉托复活时强化周围塔 6 秒；结果显示触发后的峰值。",
+      "icon": "/heroes/thumbs/hero_lava.png"
+    },
+    {
+      "id": "oloch-hellish-infusion",
+      "sourceType": "hero",
+      "sourceHeroId": "hero_oloch",
+      "skillId": "hellish_infusion",
+      "name": "地狱注入",
+      "mode": "temporary",
+      "levels": [
+        {
+          "level": 1,
+          "radius": 170,
+          "damageBonus": 0.1,
+          "duration": 6,
+          "cycle": 18
+        },
+        {
+          "level": 2,
+          "radius": 170,
+          "damageBonus": 0.2,
+          "duration": 6,
+          "cycle": 18
+        },
+        {
+          "level": 3,
+          "radius": 170,
+          "damageBonus": 0.3,
+          "duration": 6,
+          "cycle": 18
+        }
+      ],
+      "note": "强化椭圆范围内全部可强化塔；显示 6 秒持续期内的峰值。",
+      "icon": "/heroes/thumbs/hero_oloch.png"
+    }
+  ],
+  "technologyTrees": [
+    {
+      "id": 1,
+      "name": "科技一",
+      "source": "kr1/upgrades.lua",
+      "maxLevel": 6,
+      "technologies": [
+        {
+          "id": "archer_salvage",
+          "family": "archer",
+          "level": 1,
+          "price": 1,
+          "icon": "/technologies/1/archer_salvage.png",
+          "iconSprite": "Upgrades_Icons_0013",
+          "name": "资源回收",
+          "description": "神射手防御塔价格下降5%。",
+          "modifiers": [
+            {
+              "metric": "price",
+              "operation": "multiply",
+              "value": 0.95,
+              "rounding": "ceil"
+            }
+          ]
+        },
+        {
+          "id": "archer_eagle_eye",
+          "family": "archer",
+          "level": 2,
+          "price": 1,
+          "icon": "/technologies/1/archer_eagle_eye.png",
+          "iconSprite": "Upgrades_Icons_0014",
+          "name": "鹰眼",
+          "description": "提高箭塔25%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.25
+            }
+          ]
+        },
+        {
+          "id": "archer_piercing",
+          "family": "archer",
+          "level": 3,
+          "price": 2,
+          "icon": "/technologies/1/archer_piercing.png",
+          "iconSprite": "Upgrades_Icons_0015",
+          "name": "穿刺射击",
+          "description": "箭矢忽略敌人10点护甲。",
+          "modifiers": []
+        },
+        {
+          "id": "archer_far_shots",
+          "family": "archer",
+          "level": 4,
+          "price": 2,
+          "icon": "/technologies/1/archer_far_shots.png",
+          "iconSprite": "Upgrades_Icons_0016",
+          "name": "远程射击",
+          "description": "提高箭塔5%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.05
+            }
+          ]
+        },
+        {
+          "id": "archer_precision",
+          "family": "archer",
+          "level": 5,
+          "price": 3,
+          "icon": "/technologies/1/archer_precision.png",
+          "iconSprite": "Upgrades_Icons_0017",
+          "name": "精准射击",
+          "description": "神射手攻击时有10%几率造成双倍伤害。",
+          "modifiers": [
+            {
+              "metric": "expectedDps",
+              "operation": "multiply",
+              "value": 1.1
+            }
+          ]
+        },
+        {
+          "id": "archer_el_bloodletting_shoot",
+          "family": "archer",
+          "level": 6,
+          "price": 4,
+          "icon": "/technologies/1/archer_el_bloodletting_shoot.png",
+          "iconSprite": "kr3_Upgrades_Icons_0005",
+          "name": "放血射击",
+          "description": "弓箭手攻击时有15%几率导致重伤流血，在3秒内造成箭矢造成伤害230%的真实伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "barrack_survival",
+          "family": "barrack",
+          "level": 1,
+          "price": 1,
+          "icon": "/technologies/1/barrack_survival.png",
+          "iconSprite": "Upgrades_Icons_0008",
+          "name": "体魄训练",
+          "description": "提高士兵10%生命值。",
+          "modifiers": [
+            {
+              "metric": "soldierHp",
+              "operation": "multiply",
+              "value": 1.1
+            }
+          ]
+        },
+        {
+          "id": "barrack_better_armor",
+          "family": "barrack",
+          "level": 2,
+          "price": 1,
+          "icon": "/technologies/1/barrack_better_armor.png",
+          "iconSprite": "Upgrades_Icons_0009",
+          "name": "精良护甲",
+          "description": "提高士兵10点护甲。",
+          "modifiers": [
+            {
+              "metric": "soldierArmor",
+              "operation": "add",
+              "value": 0.1
+            }
+          ]
+        },
+        {
+          "id": "barrack_improved_deployment",
+          "family": "barrack",
+          "level": 3,
+          "price": 2,
+          "icon": "/technologies/1/barrack_improved_deployment.png",
+          "iconSprite": "Upgrades_Icons_0010",
+          "name": "部署改良",
+          "description": "增加20%调集范围，并缩短士兵训练时间20%。",
+          "modifiers": [
+            {
+              "metric": "rallyRange",
+              "operation": "multiply",
+              "value": 1.2
+            },
+            {
+              "metric": "respawn",
+              "operation": "multiply",
+              "value": 0.8
+            }
+          ]
+        },
+        {
+          "id": "barrack_survival_2",
+          "family": "barrack",
+          "level": 4,
+          "price": 2,
+          "icon": "/technologies/1/barrack_survival_2.png",
+          "iconSprite": "Upgrades_Icons_0011",
+          "name": "耐力训练",
+          "description": "提高士兵9%生命值。",
+          "modifiers": [
+            {
+              "metric": "soldierHp",
+              "operation": "multiply",
+              "value": 1.09
+            }
+          ]
+        },
+        {
+          "id": "barrack_barbed_armor",
+          "family": "barrack",
+          "level": 5,
+          "price": 3,
+          "icon": "/technologies/1/barrack_barbed_armor.png",
+          "iconSprite": "Upgrades_Icons_0012",
+          "name": "尖刺护甲",
+          "description": "所有友方单位在受到攻击时，回敬攻击原数值10%的真实伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "barrack_el_enchanted_armor",
+          "family": "barrack",
+          "level": 6,
+          "price": 4,
+          "icon": "/technologies/1/barrack_el_enchanted_armor.png",
+          "iconSprite": "kr3_Upgrades_Icons_0008",
+          "name": "附魔护甲",
+          "description": "提高士兵10点魔抗和10%免伤。",
+          "modifiers": [
+            {
+              "metric": "soldierMagicArmor",
+              "operation": "add",
+              "value": 0.1
+            }
+          ]
+        },
+        {
+          "id": "mage_spell_reach",
+          "family": "mage",
+          "level": 1,
+          "price": 1,
+          "icon": "/technologies/1/mage_spell_reach.png",
+          "iconSprite": "Upgrades_Icons_0018",
+          "name": "法术延伸",
+          "description": "提高法师塔15%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.15
+            }
+          ]
+        },
+        {
+          "id": "mage_arcane_shatter",
+          "family": "mage",
+          "level": 2,
+          "price": 1,
+          "icon": "/technologies/1/mage_arcane_shatter.png",
+          "iconSprite": "Upgrades_Icons_0019",
+          "name": "奥术粉碎",
+          "description": "魔法攻击每次命中，都会摧毁敌人一部分物理护甲。",
+          "modifiers": []
+        },
+        {
+          "id": "mage_hermetic_study",
+          "family": "mage",
+          "level": 3,
+          "price": 2,
+          "icon": "/technologies/1/mage_hermetic_study.png",
+          "iconSprite": "Upgrades_Icons_0020",
+          "name": "玄奥研究",
+          "description": "法师塔建造和升级费用降低9%。",
+          "modifiers": [
+            {
+              "metric": "price",
+              "operation": "multiply",
+              "value": 0.91,
+              "rounding": "ceil"
+            }
+          ]
+        },
+        {
+          "id": "mage_empowered_magic",
+          "family": "mage",
+          "level": 4,
+          "price": 2,
+          "icon": "/technologies/1/mage_empowered_magic.png",
+          "iconSprite": "Upgrades_Icons_0021",
+          "name": "强化魔力",
+          "description": "提高法师塔15%攻击伤害。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.15
+            }
+          ]
+        },
+        {
+          "id": "mage_slow_curse",
+          "family": "mage",
+          "level": 5,
+          "price": 3,
+          "icon": "/technologies/1/mage_slow_curse.png",
+          "iconSprite": "Upgrades_Icons_0022",
+          "name": "缓慢诅咒",
+          "description": "魔法攻击在一定时间内使敌人减速50%。",
+          "modifiers": []
+        },
+        {
+          "id": "mage_brilliance",
+          "family": "mage",
+          "level": 6,
+          "price": 4,
+          "icon": "/technologies/1/mage_brilliance.png",
+          "iconSprite": "kr2_Upgrades_Icons_0015",
+          "name": "魔法闪耀",
+          "description": "法师塔根据已有法师塔数量获得18%-36%的普攻伤害加成。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "table",
+              "values": [
+                1.18,
+                1.21,
+                1.24,
+                1.27,
+                1.29,
+                1.31,
+                1.33,
+                1.35,
+                1.36
+              ]
+            }
+          ]
+        },
+        {
+          "id": "engineer_concentrated_fire",
+          "family": "engineer",
+          "level": 1,
+          "price": 1,
+          "icon": "/technologies/1/engineer_concentrated_fire.png",
+          "iconSprite": "Upgrades_Icons_0023",
+          "name": "集中火力",
+          "description": "提高火炮25%攻击伤害。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.25
+            }
+          ]
+        },
+        {
+          "id": "engineer_range_finder",
+          "family": "engineer",
+          "level": 2,
+          "price": 1,
+          "icon": "/technologies/1/engineer_range_finder.png",
+          "iconSprite": "Upgrades_Icons_0024",
+          "name": "测距仪",
+          "description": "提高火炮10%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.1,
+              "excludeTowerIds": [
+                "tower_mech",
+                "tower_balloon"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "engineer_field_logistics",
+          "family": "engineer",
+          "level": 3,
+          "price": 2,
+          "icon": "/technologies/1/engineer_field_logistics.png",
+          "iconSprite": "Upgrades_Icons_0025",
+          "name": "战地后勤",
+          "description": "火炮建造和升级费用降低10%。",
+          "modifiers": [
+            {
+              "metric": "price",
+              "operation": "multiply",
+              "value": 0.9,
+              "rounding": "floor"
+            }
+          ]
+        },
+        {
+          "id": "engineer_industrialization",
+          "family": "engineer",
+          "level": 4,
+          "price": 3,
+          "icon": "/technologies/1/engineer_industrialization.png",
+          "iconSprite": "Upgrades_Icons_0026",
+          "name": "工业化",
+          "description": "火炮技能费用降低20%。",
+          "modifiers": []
+        },
+        {
+          "id": "engineer_efficiency",
+          "family": "engineer",
+          "level": 5,
+          "price": 3,
+          "icon": "/technologies/1/engineer_efficiency.png",
+          "iconSprite": "Upgrades_Icons_0027",
+          "name": "智能瞄准",
+          "description": "火炮的溅射和连锁闪电伤害不会递减。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.25,
+              "includeTowerIds": [
+                "tower_rotten_forest",
+                "tower_ignis_altar",
+                "tower_sandworm"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "engineer_gnomish_tinkering",
+          "family": "engineer",
+          "level": 6,
+          "price": 4,
+          "icon": "/technologies/1/engineer_gnomish_tinkering.png",
+          "iconSprite": "kr2_Upgrades_Icons_0019",
+          "name": "侏儒技术",
+          "description": "火炮技能冷却速度提高12%，雷电攻击冷却速度提高10%。",
+          "modifiers": [
+            {
+              "metric": "cooldown",
+              "operation": "multiply",
+              "value": 0.9,
+              "includeTowerIds": [
+                "tower_tesla",
+                "tower_frankenstein"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "rain_blazing_skies",
+          "family": "rain",
+          "level": 1,
+          "price": 2,
+          "icon": "/technologies/1/rain_blazing_skies.png",
+          "iconSprite": "Upgrades_Icons_0003",
+          "name": "炽焰天空",
+          "description": "陨石伤害提升至60-90点，数量提升至5颗。",
+          "modifiers": []
+        },
+        {
+          "id": "rain_scorched_earth",
+          "family": "rain",
+          "level": 2,
+          "price": 2,
+          "icon": "/technologies/1/rain_scorched_earth.png",
+          "iconSprite": "Upgrades_Icons_0004",
+          "name": "焦土大地",
+          "description": "陨石点燃地面，灼烧经过的敌人，持续5秒，每秒造成10-20点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "rain_bigger_and_meaner",
+          "family": "rain",
+          "level": 3,
+          "price": 3,
+          "icon": "/technologies/1/rain_bigger_and_meaner.png",
+          "iconSprite": "Upgrades_Icons_0005",
+          "name": "速度与激情",
+          "description": "陨石伤害提高至90-120点，爆炸半径提高25%。火雨冷却时间缩短至70秒。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.25
+            }
+          ]
+        },
+        {
+          "id": "rain_blazing_earth",
+          "family": "rain",
+          "level": 4,
+          "price": 3,
+          "icon": "/technologies/1/rain_blazing_earth.png",
+          "iconSprite": "Upgrades_Icons_0006",
+          "name": "炽焰大地",
+          "description": "焦土持续时间提升至10秒，每秒造成20-30点物理伤害。火雨冷却时间缩短至60秒。",
+          "modifiers": []
+        },
+        {
+          "id": "rain_cataclysm",
+          "family": "rain",
+          "level": 5,
+          "price": 3,
+          "icon": "/technologies/1/rain_cataclysm.png",
+          "iconSprite": "Upgrades_Icons_0007",
+          "name": "大灾变",
+          "description": "陨石伤害提高至150-180点，并在随机位置降下相同数量的额外陨石。",
+          "modifiers": []
+        },
+        {
+          "id": "rain_armaggedon",
+          "family": "rain",
+          "level": 6,
+          "price": 4,
+          "icon": "/technologies/1/rain_armaggedon.png",
+          "iconSprite": "kr2_Upgrades_Icons_0025",
+          "name": "末日浩劫",
+          "description": "陨石、额外陨石数量提升至6枚，并使额外陨石瞄准敌人落下。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_1",
+          "family": "reinforcement",
+          "level": 1,
+          "price": 2,
+          "icon": "/technologies/1/reinforcement_level_1.png",
+          "iconSprite": "Upgrades_Icons_0028",
+          "name": "营养良好",
+          "description": "营养良好的农夫具有50点生命值，攻击造成1-3点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_2",
+          "family": "reinforcement",
+          "level": 2,
+          "price": 3,
+          "icon": "/technologies/1/reinforcement_level_2.png",
+          "iconSprite": "Upgrades_Icons_0029",
+          "name": "义勇部队",
+          "description": "义勇部队具有70点生命值与10点护甲，攻击造成2-4点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_3",
+          "family": "reinforcement",
+          "level": 3,
+          "price": 3,
+          "icon": "/technologies/1/reinforcement_level_3.png",
+          "iconSprite": "Upgrades_Icons_0030",
+          "name": "勇士部队",
+          "description": "勇士部队具有90点生命值与20点护甲，攻击造成3-6点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_4",
+          "family": "reinforcement",
+          "level": 4,
+          "price": 3,
+          "icon": "/technologies/1/reinforcement_level_4.png",
+          "iconSprite": "Upgrades_Icons_0001",
+          "name": "军团士兵",
+          "description": "军团士兵具有110点生命值与30点护甲，攻击造成6-10点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_5",
+          "family": "reinforcement",
+          "level": 5,
+          "price": 4,
+          "icon": "/technologies/1/reinforcement_level_5.png",
+          "iconSprite": "Upgrades_Icons_0002",
+          "name": "长矛投掷",
+          "description": "军团士兵学会投矛，可瞄准地面和飞行敌人，造成24-40点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_6",
+          "family": "reinforcement",
+          "level": 6,
+          "price": 4,
+          "icon": "/technologies/1/reinforcement_level_6.png",
+          "iconSprite": "kr3_Upgrades_Icons_0029",
+          "name": "胜利呼唤",
+          "description": "提升援军在场的时间2秒，并加快援军技能的冷却2秒。",
+          "modifiers": []
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "科技四",
+      "source": "kr1/upgrades.lua",
+      "maxLevel": 6,
+      "technologies": [
+        {
+          "id": "archer_salvage",
+          "family": "archer",
+          "level": 1,
+          "price": 1,
+          "icon": "/technologies/4/archer_salvage.png",
+          "iconSprite": "Upgrades_Icons_0013",
+          "name": "资源回收",
+          "description": "神射手防御塔价格下降5%。",
+          "modifiers": [
+            {
+              "metric": "price",
+              "operation": "multiply",
+              "value": 0.95,
+              "rounding": "ceil"
+            }
+          ]
+        },
+        {
+          "id": "archer_eagle_eye",
+          "family": "archer",
+          "level": 2,
+          "price": 1,
+          "icon": "/technologies/4/archer_eagle_eye.png",
+          "iconSprite": "Upgrades_Icons_0014",
+          "name": "鹰眼",
+          "description": "提高箭塔25%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.25
+            }
+          ]
+        },
+        {
+          "id": "archer_logger",
+          "family": "archer",
+          "level": 3,
+          "price": 2,
+          "icon": "/technologies/4/archer_logger.png",
+          "iconSprite": "kr2_Upgrades_Icons_0002",
+          "name": "伐木工",
+          "description": "降低箭塔技能价格10%。",
+          "modifiers": []
+        },
+        {
+          "id": "archer_far_shots",
+          "family": "archer",
+          "level": 4,
+          "price": 2,
+          "icon": "/technologies/4/archer_far_shots.png",
+          "iconSprite": "Upgrades_Icons_0016",
+          "name": "远程射击",
+          "description": "提高箭塔5%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.05
+            }
+          ]
+        },
+        {
+          "id": "archer_fly_killer",
+          "family": "archer",
+          "level": 5,
+          "price": 3,
+          "icon": "/technologies/4/archer_fly_killer.png",
+          "iconSprite": "kr2_Upgrades_Icons_0004",
+          "name": "防空特训",
+          "description": "箭塔伤害提高8%，且所有箭矢瞄准空军时额外提高25%伤害。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.08
+            }
+          ]
+        },
+        {
+          "id": "archer_el_bloodletting_shoot",
+          "family": "archer",
+          "level": 6,
+          "price": 4,
+          "icon": "/technologies/4/archer_el_bloodletting_shoot.png",
+          "iconSprite": "kr3_Upgrades_Icons_0005",
+          "name": "放血射击",
+          "description": "弓箭手攻击时有15%几率导致重伤流血，在3秒内造成箭矢造成伤害230%的真实伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "barrack_survival",
+          "family": "barrack",
+          "level": 1,
+          "price": 1,
+          "icon": "/technologies/4/barrack_survival.png",
+          "iconSprite": "Upgrades_Icons_0008",
+          "name": "体魄训练",
+          "description": "提高士兵10%生命值。",
+          "modifiers": [
+            {
+              "metric": "soldierHp",
+              "operation": "multiply",
+              "value": 1.1
+            }
+          ]
+        },
+        {
+          "id": "barrack_better_armor",
+          "family": "barrack",
+          "level": 2,
+          "price": 1,
+          "icon": "/technologies/4/barrack_better_armor.png",
+          "iconSprite": "Upgrades_Icons_0009",
+          "name": "精良护甲",
+          "description": "提高士兵10点护甲。",
+          "modifiers": [
+            {
+              "metric": "soldierArmor",
+              "operation": "add",
+              "value": 0.1
+            }
+          ]
+        },
+        {
+          "id": "barrack_improved_deployment",
+          "family": "barrack",
+          "level": 3,
+          "price": 2,
+          "icon": "/technologies/4/barrack_improved_deployment.png",
+          "iconSprite": "Upgrades_Icons_0010",
+          "name": "部署改良",
+          "description": "增加25%调集范围，并缩短士兵训练时间20%。",
+          "modifiers": [
+            {
+              "metric": "rallyRange",
+              "operation": "multiply",
+              "value": 1.25
+            },
+            {
+              "metric": "respawn",
+              "operation": "multiply",
+              "value": 0.8
+            }
+          ]
+        },
+        {
+          "id": "barrack_survival_2",
+          "family": "barrack",
+          "level": 4,
+          "price": 2,
+          "icon": "/technologies/4/barrack_survival_2.png",
+          "iconSprite": "Upgrades_Icons_0011",
+          "name": "耐力训练",
+          "description": "提高士兵5%生命值。",
+          "modifiers": [
+            {
+              "metric": "soldierHp",
+              "operation": "multiply",
+              "value": 1.05
+            }
+          ]
+        },
+        {
+          "id": "barrack_skill_master",
+          "family": "barrack",
+          "level": 5,
+          "price": 3,
+          "icon": "/technologies/4/barrack_skill_master.png",
+          "iconSprite": "kr2_Upgrades_Icons_0007",
+          "name": "王牌教官",
+          "description": "兵营的建造和升级费用、技能费用降低10%。",
+          "modifiers": [
+            {
+              "metric": "price",
+              "operation": "multiply",
+              "value": 0.9,
+              "rounding": "floor"
+            }
+          ]
+        },
+        {
+          "id": "barrack_el_enchanted_armor",
+          "family": "barrack",
+          "level": 6,
+          "price": 4,
+          "icon": "/technologies/4/barrack_el_enchanted_armor.png",
+          "iconSprite": "kr3_Upgrades_Icons_0008",
+          "name": "附魔护甲",
+          "description": "提高士兵10点魔抗和10%免伤。",
+          "modifiers": [
+            {
+              "metric": "soldierMagicArmor",
+              "operation": "add",
+              "value": 0.1
+            }
+          ]
+        },
+        {
+          "id": "mage_spell_reach",
+          "family": "mage",
+          "level": 1,
+          "price": 1,
+          "icon": "/technologies/4/mage_spell_reach.png",
+          "iconSprite": "Upgrades_Icons_0018",
+          "name": "法术延伸",
+          "description": "提高法师塔15%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.15
+            }
+          ]
+        },
+        {
+          "id": "mage_empowered_magic",
+          "family": "mage",
+          "level": 2,
+          "price": 1,
+          "icon": "/technologies/4/mage_empowered_magic.png",
+          "iconSprite": "Upgrades_Icons_0019",
+          "name": "强化魔力",
+          "description": "提高法师塔15%攻击伤害。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.15
+            }
+          ]
+        },
+        {
+          "id": "mage_rune_analysis",
+          "family": "mage",
+          "level": 3,
+          "price": 2,
+          "icon": "/technologies/4/mage_rune_analysis.png",
+          "iconSprite": "Upgrades_Icons_0020",
+          "name": "符文解析",
+          "description": "法师塔建造和升级费用、技能价格降低6%。",
+          "modifiers": [
+            {
+              "metric": "price",
+              "operation": "multiply",
+              "value": 0.94,
+              "rounding": "ceil"
+            }
+          ]
+        },
+        {
+          "id": "mage_slow_curse",
+          "family": "mage",
+          "level": 4,
+          "price": 2,
+          "icon": "/technologies/4/mage_slow_curse.png",
+          "iconSprite": "Upgrades_Icons_0022",
+          "name": "缓慢诅咒",
+          "description": "魔法攻击在一定时间内使敌人减速50%。",
+          "modifiers": []
+        },
+        {
+          "id": "mage_harmony",
+          "family": "mage",
+          "level": 5,
+          "price": 3,
+          "icon": "/technologies/4/mage_harmony.png",
+          "iconSprite": "kr2_Upgrades_Icons_0011",
+          "name": "和谐本征",
+          "description": "法师塔攻击范围提高7%，伤害提高7%，且法球伤害不再浮动。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.07
+            },
+            {
+              "metric": "damage",
+              "operation": "average",
+              "value": 1.07
+            }
+          ]
+        },
+        {
+          "id": "mage_purge_field",
+          "family": "mage",
+          "level": 6,
+          "price": 4,
+          "icon": "/technologies/4/mage_purge_field.png",
+          "iconSprite": "Upgrades_Icons_0021",
+          "name": "肃清立场",
+          "description": "法师塔根据射程范围内人数，提高全伤害14%-30%。",
+          "modifiers": []
+        },
+        {
+          "id": "engineer_concentrated_fire",
+          "family": "engineer",
+          "level": 1,
+          "price": 1,
+          "icon": "/technologies/4/engineer_concentrated_fire.png",
+          "iconSprite": "Upgrades_Icons_0023",
+          "name": "集中火力",
+          "description": "提高火炮25%攻击伤害。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.25
+            }
+          ]
+        },
+        {
+          "id": "engineer_range_finder",
+          "family": "engineer",
+          "level": 2,
+          "price": 1,
+          "icon": "/technologies/4/engineer_range_finder.png",
+          "iconSprite": "Upgrades_Icons_0024",
+          "name": "测距仪",
+          "description": "提高火炮10%攻击范围。",
+          "modifiers": [
+            {
+              "metric": "range",
+              "operation": "multiply",
+              "value": 1.1,
+              "excludeTowerIds": [
+                "tower_mech",
+                "tower_balloon"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "engineer_emergency_expansion",
+          "family": "engineer",
+          "level": 3,
+          "price": 2,
+          "icon": "/technologies/4/engineer_emergency_expansion.png",
+          "iconSprite": "Upgrades_Icons_0025",
+          "name": "紧急扩建",
+          "description": "火炮建造和升级费用降低25%，攻击伤害下降12%。",
+          "modifiers": [
+            {
+              "metric": "price",
+              "operation": "multiply",
+              "value": 0.75,
+              "rounding": "floor"
+            },
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 0.88
+            }
+          ]
+        },
+        {
+          "id": "engineer_industrialization",
+          "family": "engineer",
+          "level": 4,
+          "price": 3,
+          "icon": "/technologies/4/engineer_industrialization.png",
+          "iconSprite": "Upgrades_Icons_0026",
+          "name": "工业化",
+          "description": "火炮技能费用降低20%。",
+          "modifiers": []
+        },
+        {
+          "id": "engineer_efficiency",
+          "family": "engineer",
+          "level": 5,
+          "price": 3,
+          "icon": "/technologies/4/engineer_efficiency.png",
+          "iconSprite": "Upgrades_Icons_0027",
+          "name": "智能瞄准",
+          "description": "火炮的溅射和连锁闪电伤害不会递减。",
+          "modifiers": [
+            {
+              "metric": "damage",
+              "operation": "multiply",
+              "value": 1.25,
+              "includeTowerIds": [
+                "tower_rotten_forest",
+                "tower_ignis_altar",
+                "tower_sandworm"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "engineer_gnomish_tinkering",
+          "family": "engineer",
+          "level": 6,
+          "price": 4,
+          "icon": "/technologies/4/engineer_gnomish_tinkering.png",
+          "iconSprite": "kr2_Upgrades_Icons_0019",
+          "name": "侏儒技术",
+          "description": "火炮技能冷却速度提高12%，雷电攻击冷却速度提高10%。",
+          "modifiers": [
+            {
+              "metric": "cooldown",
+              "operation": "multiply",
+              "value": 0.9,
+              "includeTowerIds": [
+                "tower_tesla",
+                "tower_frankenstein"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "thunder_level_1",
+          "family": "rain",
+          "level": 1,
+          "price": 2,
+          "icon": "/technologies/4/thunder_level_1.png",
+          "iconSprite": "kr3_Upgrades_Icons_0021",
+          "name": "闪电箭",
+          "description": "闪电箭数量提高至6发。",
+          "modifiers": []
+        },
+        {
+          "id": "thunder_level_2",
+          "family": "rain",
+          "level": 2,
+          "price": 2,
+          "icon": "/technologies/4/thunder_level_2.png",
+          "iconSprite": "kr3_Upgrades_Icons_0022",
+          "name": "咆哮狂风",
+          "description": "闪电箭伤害提升至80-100点，冷却时间缩短至60秒。",
+          "modifiers": []
+        },
+        {
+          "id": "thunder_level_3",
+          "family": "rain",
+          "level": 3,
+          "price": 3,
+          "icon": "/technologies/4/thunder_level_3.png",
+          "iconSprite": "kr3_Upgrades_Icons_0023",
+          "name": "闪电风暴",
+          "description": "闪电箭数量提升至8发，同时伴有狂风，减速所有敌人40%。",
+          "modifiers": []
+        },
+        {
+          "id": "thunder_level_4",
+          "family": "rain",
+          "level": 4,
+          "price": 3,
+          "icon": "/technologies/4/thunder_level_4.png",
+          "iconSprite": "kr3_Upgrades_Icons_0024",
+          "name": "季风来袭",
+          "description": "闪电箭伤害提升至110-130点，狂风减速效果提升至60%。",
+          "modifiers": []
+        },
+        {
+          "id": "thunder_level_5",
+          "family": "rain",
+          "level": 5,
+          "price": 3,
+          "icon": "/technologies/4/thunder_level_5.png",
+          "iconSprite": "kr3_Upgrades_Icons_0025",
+          "name": "狂怒风暴",
+          "description": "闪电箭伤害提升至150-200点，随机对其他敌人施放6发闪电箭。额外闪电箭每发造成50-90点伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "thunder_typhoon",
+          "family": "rain",
+          "level": 6,
+          "price": 4,
+          "icon": "/technologies/4/thunder_typhoon.png",
+          "iconSprite": "kr3_Upgrades_Icons_0021",
+          "name": "洗礼",
+          "description": "闪电箭与额外闪电箭的数量提升至10发，狂风减速效果提升至75%，且狂风会额外持续4秒，期间减速效果逐渐减弱。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_1",
+          "family": "reinforcement",
+          "level": 1,
+          "price": 2,
+          "icon": "/technologies/4/reinforcement_level_1.png",
+          "iconSprite": "Upgrades_Icons_0028",
+          "name": "营养良好",
+          "description": "营养良好的农夫具有50点生命值，攻击造成1-3点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_2",
+          "family": "reinforcement",
+          "level": 2,
+          "price": 3,
+          "icon": "/technologies/4/reinforcement_level_2.png",
+          "iconSprite": "Upgrades_Icons_0029",
+          "name": "义勇部队",
+          "description": "义勇部队具有70点生命值与10点护甲，攻击造成2-4点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_3",
+          "family": "reinforcement",
+          "level": 3,
+          "price": 3,
+          "icon": "/technologies/4/reinforcement_level_3.png",
+          "iconSprite": "Upgrades_Icons_0030",
+          "name": "勇士部队",
+          "description": "勇士部队具有90点生命值与20点护甲，攻击造成3-6点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_4",
+          "family": "reinforcement",
+          "level": 4,
+          "price": 3,
+          "icon": "/technologies/4/reinforcement_level_4.png",
+          "iconSprite": "Upgrades_Icons_0001",
+          "name": "军团士兵",
+          "description": "军团士兵具有110点生命值与30点护甲，攻击造成6-10点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_5",
+          "family": "reinforcement",
+          "level": 5,
+          "price": 4,
+          "icon": "/technologies/4/reinforcement_level_5.png",
+          "iconSprite": "Upgrades_Icons_0002",
+          "name": "长矛投掷",
+          "description": "军团士兵学会投矛，可瞄准地面和飞行敌人，造成24-40点物理伤害。",
+          "modifiers": []
+        },
+        {
+          "id": "reinforcement_level_6",
+          "family": "reinforcement",
+          "level": 6,
+          "price": 4,
+          "icon": "/technologies/4/reinforcement_level_6.png",
+          "iconSprite": "kr3_Upgrades_Icons_0029",
+          "name": "胜利呼唤",
+          "description": "提升援军在场的时间1秒，并加快援军技能的冷却2.5秒。",
+          "modifiers": []
+        }
+      ]
+    }
+  ],
+  "heroes": [],
+  "enemies": []
+}

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { Download, ExternalLink, RefreshCw, Trophy } from '@lucide/vue'
-import { heroById, towerById } from '../data'
+import { doveData, heroById, towerById } from '../data'
 import manifest from '../data/rating-manifest.json'
 import methodology from '../data/rating-methodology.json'
 import { publicAssetUrl } from '../lib/public-assets'
@@ -76,6 +76,7 @@ const feedbackUrl = computed(() => {
       <div><strong>{{ summary.failedTrials }}</strong><span>附录失败轮次 · 不评级</span></div>
     </div>
     <p class="rating-notice">固定靶场的原生自动能力基准，保留自动技能、反击与召唤物。手动大招和实战操作尚未完整覆盖；快速档与标准档分别校准，不直接混排。本站其他百科页面仍使用各自标注的数据版本。</p>
+    <p v-if="summary.commitHash !== doveData.metadata.commitHash" class="rating-notice" role="note">版本提示：本页为 Dove {{ summary.gameVersion }} 的历史实测，当前百科已同步至 {{ doveData.metadata.gameVersion }}。新版新增对象与机制改动尚未重新测评，不能将旧天梯直接视为新版排名。</p>
 
     <div class="rating-controls">
       <label>测评档位<select v-model="profile" aria-label="测评档位"><option value="standard">标准 · 60 秒 × 5 种子</option><option value="quick">快速 · 30 秒 × 3 种子</option></select></label>

@@ -1,6 +1,10 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, reactive, ref } from 'vue'
+import { computed, onBeforeUnmount, onMounted, ref, toRefs } from 'vue'
+import NumberField from '../components/NumberField.vue'
+import { loadEnemyPanel, resetCalculator, useWorkspace } from '../composables/useWorkspace'
+import { numberError } from '../lib/input-validation'
 import { familyLabels } from '../data'
+import { Button } from '../components/ui/button'
 import { buildSimulationTechnologies, calculationRules } from '../lib/calculation-rules'
 import {
   calculateBuffs,
@@ -37,14 +41,6 @@ const props = defineProps<{
   technologyTrees: TechnologyTree[]
 }>()
 defineEmits<{ open: [tower: Tower] }>()
-
-interface EffectState {
-  enabled: boolean
-  level: number
-  triggers: number
-  sourceRange: number
-  distancePercent: number
-}
 
 interface DamageCurveGroup {
   id: string
@@ -85,65 +81,46 @@ const damageCurveGroups: DamageCurveGroup[] = [
     className: 'series-against',
   },
 ]
-const targetId = ref('tower_ranger')
-const technologyTreeId = ref(props.technologyTrees[0]?.id || 1)
-const technologyLevels = reactive<Record<TowerFamily, number>>({
-  archer: 0,
-  barrack: 0,
-  mage: 0,
-  engineer: 0,
-})
-const mageTowerCount = ref(1)
-const nearbyEnemyCount = ref(1)
-const attackSource = ref<'tower' | 'custom'>('tower')
-const demoDamageType = ref<DamageTypeId>('true')
-const customDamage = reactive({
-  min: 100,
-  max: 100,
-})
-const customAttackInterval = ref(1)
-const dummy = reactive({
-  hp: 1000,
-  armor: 10,
-  magicArmor: 10,
-  flying: false,
-})
-const enemyPresetId = ref('')
-const enemyPresetDifficulty = ref(2)
+const workspace = useWorkspace()
+const config = workspace.calculator
+const { targetId, supportSourceFilter, supportSearch, technologyTreeId, mageTowerCount, nearbyEnemyCount,
+  attackSource, demoDamageType, customAttackInterval, enemyPresetId, enemyPresetDifficulty,
+  simulationSeed, attackPage, curveDefense, curveFocusGroupId, loadedEnemy, notice } = toRefs(config)
+const technologyLevels = config.technologyLevels
+const customDamage = config.customDamage
+const dummy = config.dummy
+const state = config.effects
+function resetConfiguration() {
+  resetCalculator(workspace, props.effects, props.technologyTrees)
+}
+
+function resetSupportFilters() {
+  supportSourceFilter.value = 'all'
+  supportSearch.value = ''
+}
+
+function scrollToResults() {
+  const panel = document.getElementById('calculator-results')
+  panel?.scrollIntoView({
+    behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start',
+  })
+  panel?.focus({ preventScroll: true })
+}
 const enemyPresetOptions = computed(() => [...new Map(props.enemies.map((enemy) => [enemy.id, enemy])).values()])
 const enemyPreset = computed(() => props.enemies.find((enemy) => enemy.id === enemyPresetId.value))
 const enemyPresetStats = computed(() => enemyPreset.value?.statsByDifficulty.find((variant) => variant.difficulty === enemyPresetDifficulty.value))
 function loadEnemyPreset() {
-  const stats = enemyPresetStats.value?.stats
-  if (!stats || stats.hp === null) return
-  dummy.hp = stats.hp
-  dummy.armor = (stats.armor || 0) * 100
-  dummy.magicArmor = (stats.magicArmor || 0) * 100
-  dummy.flying = enemyPreset.value!.flying
-  attackPage.value = 1
+  if (enemyPreset.value) loadEnemyPanel(config, enemyPreset.value, enemyPresetDifficulty.value)
 }
-const simulationSeed = ref(2058)
-const attackPage = ref(1)
-const curveDefense = ref(10)
-const curveFocusGroupId = ref<string | null>(null)
+const enemyPanelStatus = computed(() => {
+  if (enemyPreset.value && (!loadedEnemy.value || loadedEnemy.value.id !== enemyPresetId.value || loadedEnemy.value.difficulty !== enemyPresetDifficulty.value)) return '待载入'
+  if (!loadedEnemy.value) return '自定义面板'
+  return (['hp', 'armor', 'magicArmor', 'flying'] as const).some(key => dummy[key] !== loadedEnemy.value![key]) ? '已修改' : '已载入'
+})
 const curveChartHost = ref<HTMLElement | null>(null)
 const curveChartWidth = ref(760)
 const attackPageSize = 25
 let curveResizeObserver: ResizeObserver | undefined
-const state = reactive<Record<string, EffectState>>(
-  Object.fromEntries(
-    props.effects.map((effect) => [
-      effect.id,
-      {
-        enabled: false,
-        level: effect.levels.at(-1)?.level || 1,
-        triggers: 0,
-        sourceRange: effect.levels[0]?.radius || 0,
-        distancePercent: 100,
-      },
-    ]),
-  ),
-)
 
 const selectedTower = computed(
   () => props.towers.find((tower) => tower.id === targetId.value) || props.towers[0],
@@ -170,14 +147,14 @@ const selectedEffects = computed<SupportSelection[]>(() =>
 const technologySelection = computed<TechnologySelection>(() => ({
   treeId: technologyTreeId.value,
   levels: { ...technologyLevels },
-  mageTowerCount: mageTowerCount.value,
-  nearbyEnemyCount: nearbyEnemyCount.value,
+  mageTowerCount: Number.isFinite(mageTowerCount.value) ? mageTowerCount.value : 1,
+  nearbyEnemyCount: Number.isFinite(nearbyEnemyCount.value) ? nearbyEnemyCount.value : 1,
 }))
 const result = computed(() =>
   calculateBuffs(
     selectedTower.value,
     props.effects,
-    selectedEffects.value,
+    selectedEffects.value.filter(selection => !effectInputError(props.effects.find(effect => effect.id === selection.effectId)!)),
     props.technologyTrees,
     technologySelection.value,
   ),
@@ -185,6 +162,21 @@ const result = computed(() =>
 const activeAttackInterval = computed(() => attackSource.value === 'tower' ? result.value.cooldown || 0 : customAttackInterval.value)
 const sourceById = computed(() => new Map(props.towers.map((tower) => [tower.id, tower])))
 const heroById = computed(() => new Map(props.heroes.map((hero) => [hero.id, hero])))
+const supportFilterOptions = computed(() => [
+  { id: 'all' as const, name: '全部', count: props.effects.length },
+  { id: 'tower' as const, name: '防御塔', count: props.effects.filter((effect) => effect.sourceType === 'tower').length },
+  { id: 'hero' as const, name: '英雄', count: props.effects.filter((effect) => effect.sourceType === 'hero').length },
+  { id: 'selected' as const, name: '已启用', count: props.effects.filter((effect) => state[effect.id]?.enabled).length },
+])
+const visibleSupportEffects = computed(() => {
+  const query = supportSearch.value.trim().toLowerCase()
+  return props.effects.filter((effect) => {
+    const matchesSource = supportSourceFilter.value === 'all' ||
+      (supportSourceFilter.value === 'selected' ? state[effect.id]?.enabled : effect.sourceType === supportSourceFilter.value)
+    const matchesQuery = !query || `${effect.name} ${effectSourceName(effect)}`.toLowerCase().includes(query)
+    return matchesSource && matchesQuery
+  })
+})
 const needsMageTowerCount = computed(() =>
   result.value.appliedTechnologies.some(
     (technology) => technology.technologyId === 'mage_brilliance',
@@ -195,6 +187,33 @@ const needsNearbyEnemyCount = computed(() =>
     (technology) => technology.technologyId === 'mage_purge_field',
   ),
 )
+function effectInputError(effect: SupportEffect) {
+  const item = state[effect.id]!
+  if (effect.radiusUsesSourceRange && numberError(item.sourceRange, 1)) return '源塔覆盖半径：' + numberError(item.sourceRange, 1)
+  if (effect.rangeFalloff && numberError(item.distancePercent, 0, 100)) return '距离比例：' + numberError(item.distancePercent, 0, 100)
+  const level = selectedLevel(effect)
+  if (level.damagePerTrigger && numberError(item.triggers, 0, level.triggerCap ?? Infinity, true)) return '获益次数：' + numberError(item.triggers, 0, level.triggerCap ?? Infinity, true)
+  return ''
+}
+const buffInputErrors = computed(() => [
+  needsMageTowerCount.value && numberError(mageTowerCount.value, 1, 9, true),
+  needsNearbyEnemyCount.value && numberError(nearbyEnemyCount.value, 0, 30, true),
+  ...props.effects.filter(effect => state[effect.id]?.enabled && supportAppliesToTower(effect, selectedTower.value)).map(effectInputError),
+].filter(Boolean))
+const customDamageError = computed(() => customDamage.min > customDamage.max ? '最低伤害不能大于最高伤害' : '')
+const simulationErrors = computed(() => [
+  ...(attackSource.value === 'tower' ? buffInputErrors.value : [
+    numberError(customAttackInterval.value, 0.01), numberError(customDamage.min, 0, 999999),
+    numberError(customDamage.max, 0, 999999), customDamageError.value,
+  ]),
+  numberError(dummy.hp, 0, 9999999), numberError(dummy.armor, 0, 100), numberError(dummy.magicArmor, 0, 100),
+].filter(Boolean))
+function effectStatus(effect: SupportEffect) {
+  if (effect.review?.valid === false) return '未参与 · 来源待复核'
+  if (!supportAppliesToTower(effect, selectedTower.value)) return '未参与 · 不适用当前目标'
+  if (effectInputError(effect)) return '未参与 · 参数待修正'
+  return '已参与计算'
+}
 const towerDamageType = computed(() =>
   damageTypeFromGame(
     selectedTower.value.attack.damageTypeValue,
@@ -304,7 +323,7 @@ const damageSequence = computed(() =>
     damageType: activeDamageType.value,
     damageMin: activeDamageMin.value,
     damageMax: activeDamageMax.value,
-    hp: dummy.hp,
+    hp: simulationErrors.value.length ? 0 : dummy.hp,
     armor: dummy.armor,
     magicArmor: dummy.magicArmor,
     attackInterval: activeAttackInterval.value,
@@ -381,6 +400,7 @@ function selectedLevel(effect: SupportEffect): SupportLevel {
 function effectSummary(effect: SupportEffect) {
   if (effect.review?.valid === false) return '来源已变化，等待复核后恢复计算'
   if (!supportAppliesToTower(effect, selectedTower.value)) return '该效果不作用于当前目标塔'
+  if (effectInputError(effect)) return effectInputError(effect)
   const level = resolveSupportLevel(effect, {
     effectId: effect.id, level: state[effect.id]!.level,
     sourceRange: state[effect.id]!.sourceRange, distanceRatio: state[effect.id]!.distancePercent / 100,
@@ -446,6 +466,7 @@ function resetDamageDemo() {
   customDamage.max = 100
   customAttackInterval.value = 1
   enemyPresetId.value = ''
+  loadedEnemy.value = null
   enemyPresetDifficulty.value = 2
   dummy.hp = 1000
   dummy.armor = 10
@@ -510,13 +531,26 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
+    <div class="workspace-toolbar"><span>当前会话保留配置与页面位置</span><Button variant="outline" size="sm" @click="resetConfiguration">重置计算配置</Button></div>
+    <p v-if="notice" class="workspace-notice" role="status">{{ notice }}</p>
+    <div class="mobile-result-strip" role="region" aria-label="实时计算结果速览">
+      <p v-if="buffInputErrors.length" class="field-error">请修正增益参数后查看结果</p>
+      <dl v-else>
+        <div><dt>伤害</dt><dd>{{ formatNumber(result.damageMin) }}–{{ formatNumber(result.damageMax) }}</dd></div>
+        <div><dt>{{ result.rangeLabel }}</dt><dd>{{ formatNumber(result.range) }}</dd></div>
+        <div><dt>攻击间隔</dt><dd>{{ formatNumber(result.cooldown) }}s</dd></div>
+        <div><dt>理论 DPS</dt><dd>{{ formatNumber(result.dps) }}</dd></div>
+      </dl>
+      <Button variant="ghost" size="sm" @click="scrollToResults">完整结果 ↓</Button>
+    </div>
+
     <div class="calculator-layout">
       <div class="calculator-controls">
         <section class="lab-card target-selector-card">
           <div class="lab-step"><span>01</span><div><b>选择目标塔</b><small>TARGET TOWER</small></div></div>
           <label class="tower-select-label">
             <span>防御塔</span>
-            <select v-model="targetId">
+            <select id="calculator-target" v-model="targetId">
               <option v-for="tower in towers" :key="tower.id" :value="tower.id">
                 {{ tower.name }} · {{ tower.families.map((item) => familyLabels[item]).join('/') }} · {{ tower.id }}
               </option>
@@ -558,14 +592,8 @@ onBeforeUnmount(() => {
                 </option>
               </select>
             </label>
-            <label v-if="needsMageTowerCount">
-              <span>场上法师塔</span>
-              <input v-model.number="mageTowerCount" type="number" min="1" max="9" />
-            </label>
-            <label v-if="needsNearbyEnemyCount">
-              <span>射程内敌人</span>
-              <input v-model.number="nearbyEnemyCount" type="number" min="0" max="30" />
-            </label>
+            <NumberField v-if="needsMageTowerCount" v-model="mageTowerCount" label="场上法师塔" :min="1" :max="9" integer />
+            <NumberField v-if="needsNearbyEnemyCount" v-model="nearbyEnemyCount" label="射程内敌人" :min="0" :max="30" integer />
           </div>
 
           <div v-if="result.appliedTechnologies.length" class="technology-preview">
@@ -590,18 +618,31 @@ onBeforeUnmount(() => {
         </section>
 
         <section class="lab-card support-selector-card">
-          <div class="lab-step"><span>03</span><div><b>配置辅助来源</b><small>SUPPORT SOURCES</small></div></div>
-          <p class="technology-empty">勾选表示目标处于覆盖范围且效果正在生效；临时增益按持续期峰值计算。同类光环不重复叠加。守卫骑士团的守护鼓舞强化英雄，不计入防御塔增伤。</p>
+          <div id="calculator-supports" tabindex="-1" class="lab-step"><span>03</span><div><b>配置辅助来源</b><small>SUPPORT SOURCES</small></div></div>
+          <p class="support-intro">勾选目标正在获得的效果。临时增益按持续期峰值计算，同类光环取最高。</p>
+          <div class="support-toolbar">
+            <div class="support-source-tabs" role="group" aria-label="辅助来源类型">
+              <Button v-for="filter in supportFilterOptions" :key="filter.id" variant="ghost" size="sm"
+                :aria-pressed="supportSourceFilter === filter.id" @click="supportSourceFilter = filter.id">
+                {{ filter.name }} <span>{{ filter.count }}</span>
+              </Button>
+            </div>
+            <input v-model="supportSearch" class="support-search" type="search" aria-label="搜索辅助效果或来源" placeholder="搜索技能或来源" />
+          </div>
+          <div class="support-list-status">
+            <span role="status">显示 {{ visibleSupportEffects.length }} 项 · 实际生效 {{ result.applied.length }} 项</span>
+            <Button variant="ghost" size="sm" :disabled="!selectedEffects.length" @click="resetSupports">清空全部辅助</Button>
+          </div>
           <div class="support-list">
             <article
-              v-for="effect in effects"
+              v-for="effect in visibleSupportEffects"
               :key="effect.id"
               class="support-option"
-              :class="{ enabled: state[effect.id]?.enabled }"
+              :class="{ enabled: state[effect.id]?.enabled, unavailable: !supportAppliesToTower(effect, selectedTower) }"
             >
               <label class="support-toggle">
-                <input v-model="state[effect.id]!.enabled" type="checkbox" :disabled="!supportAppliesToTower(effect, selectedTower)" :aria-label="`启用${effect.name}`" />
-                <span></span>
+                <input v-model="state[effect.id]!.enabled" type="checkbox" :disabled="!state[effect.id]?.enabled && !supportAppliesToTower(effect, selectedTower)" :aria-label="`启用${effect.name}`" />
+                <span aria-hidden="true"></span>
               </label>
               <img :src="effectIcon(effect)" :alt="`${effect.name}技能图标`" />
               <div class="support-copy">
@@ -611,41 +652,36 @@ onBeforeUnmount(() => {
                 </div>
                 <p>{{ effectSummary(effect) || '条件触发型辅助' }}</p>
                 <span class="effect-meta">
-                  {{ selectedLevel(effect).radius ? `半径 ${effect.radiusUsesSourceRange ? state[effect.id]!.sourceRange : selectedLevel(effect).radius}` : '全场' }}
+                  {{ effect.radiusUsesSourceRange && !Number.isFinite(state[effect.id]!.sourceRange) ? '覆盖半径待填写' : selectedLevel(effect).radius ? `半径 ${effect.radiusUsesSourceRange ? state[effect.id]!.sourceRange : selectedLevel(effect).radius}` : '全场' }}
                   · {{ effectModeLabel(effect) }}
                   <template v-if="selectedLevel(effect).duration"> · {{ selectedLevel(effect).duration }}s</template>
+                  <template v-if="selectedLevel(effect).cycle"> · 基础冷却 {{ selectedLevel(effect).cycle }}s</template>
                 </span>
               </div>
-              <div class="support-inputs">
+              <div v-if="state[effect.id]?.enabled && supportAppliesToTower(effect, selectedTower)" class="support-inputs">
                 <label>
                   <span>技能等级</span>
                   <select v-model.number="state[effect.id]!.level" :disabled="!state[effect.id]?.enabled">
                     <option v-for="level in effect.levels" :key="level.level" :value="level.level">Lv.{{ level.level }}</option>
                   </select>
                 </label>
-                <label v-if="selectedLevel(effect).damagePerTrigger">
-                  <span>目标获益次数</span>
-                  <input
-                    v-model.number="state[effect.id]!.triggers"
-                    type="number"
-                    min="0"
-                    :max="selectedLevel(effect).triggerCap"
-                    :disabled="!state[effect.id]?.enabled"
-                  />
-                </label>
-                <label v-if="effect.radiusUsesSourceRange">
-                  <span>源塔当前覆盖半径</span>
-                  <input v-model.number="state[effect.id]!.sourceRange" type="number" min="1" :disabled="!state[effect.id]?.enabled" />
-                </label>
-                <label v-if="effect.rangeFalloff">
-                  <span>两塔椭圆距离 / 半径（%）</span>
-                  <input v-model.number="state[effect.id]!.distancePercent" type="number" min="0" max="100" :disabled="!state[effect.id]?.enabled" />
-                </label>
+                <NumberField v-if="selectedLevel(effect).damagePerTrigger" v-model="state[effect.id]!.triggers" label="目标获益次数" :min="0" :max="selectedLevel(effect).triggerCap" integer />
+                <NumberField v-if="effect.radiusUsesSourceRange" v-model="state[effect.id]!.sourceRange" label="源塔当前覆盖半径" :min="1" />
+                <NumberField v-if="effect.rangeFalloff" v-model="state[effect.id]!.distancePercent" label="两塔椭圆距离 / 半径（%）" :min="0" :max="100" />
               </div>
-              <p class="support-note">{{ effect.note }}</p>
+              <p v-if="state[effect.id]?.enabled" class="effect-status" :class="{ inactive: !supportAppliesToTower(effect, selectedTower) || effectInputError(effect) }">{{ effectStatus(effect) }}</p>
+              <details class="support-rules">
+                <summary>触发与叠加规则<span v-if="state[effect.id]?.enabled"> · 已启用</span></summary>
+                <p class="support-note">{{ effect.note }}</p>
+              </details>
             </article>
           </div>
-          <button class="text-button" type="button" @click="resetSupports">清空全部辅助</button>
+          <div v-if="!visibleSupportEffects.length" class="support-empty">
+            <strong>{{ supportSourceFilter === 'selected' && !selectedEffects.length ? '尚未启用辅助效果' : '没有匹配的辅助效果' }}</strong>
+            <p>查看全部来源，或缩短搜索关键词。</p>
+            <Button variant="outline" size="sm" @click="resetSupportFilters">查看全部来源</Button>
+          </div>
+          <p class="support-footnote">守卫骑士团的守护鼓舞强化英雄，塔的增伤计算中不包含该效果。</p>
         </section>
 
         <section class="lab-card damage-lab-card">
@@ -886,10 +922,7 @@ onBeforeUnmount(() => {
               </template>
 
               <div v-else class="damage-demo-fields custom-attack-fields">
-                <label>
-                  <span>攻击间隔（秒）</span>
-                  <input v-model.number="customAttackInterval" type="number" min="0.01" step="0.01" />
-                </label>
+                <NumberField v-model="customAttackInterval" label="攻击间隔（秒）" :min="0.01" :step="0.01" />
                 <label>
                   <span>伤害类型</span>
                   <select v-model="demoDamageType">
@@ -902,17 +935,11 @@ onBeforeUnmount(() => {
                     </option>
                   </select>
                 </label>
-                <label>
-                  <span>最低伤害</span>
-                  <input v-model.number="customDamage.min" type="number" min="0" max="999999" step="1" />
-                </label>
-                <label>
-                  <span>最高伤害</span>
-                  <input v-model.number="customDamage.max" type="number" min="0" max="999999" step="1" />
-                </label>
+                <NumberField v-model="customDamage.min" label="最低伤害" :min="0" :max="999999" :error="customDamageError" />
+                <NumberField v-model="customDamage.max" label="最高伤害" :min="0" :max="999999" :error="customDamageError" />
               </div>
 
-              <div class="damage-demo-title dummy-title">
+              <div id="calculator-dummy" tabindex="-1" class="damage-demo-title dummy-title">
                 <div><strong>配置傀儡</strong><small>TRAINING DUMMY</small></div>
               </div>
               <div class="damage-demo-fields enemy-preset-fields">
@@ -931,20 +958,12 @@ onBeforeUnmount(() => {
                 </label>
                 <button type="button" class="text-button" :disabled="!enemyPresetStats || enemyPresetStats.stats.hp === null" @click="loadEnemyPreset">载入面板</button>
               </div>
+              <p class="enemy-panel-status" role="status"><b>{{ enemyPanelStatus }}</b><span v-if="loadedEnemy">当前面板来源：{{ loadedEnemy.name }} · {{ ['休闲', '普通', '老兵', '不可能'][loadedEnemy.difficulty - 1] }}<template v-if="enemyPanelStatus === '待载入'">；选择已变化，点击“载入面板”后应用</template></span><span v-else-if="enemyPreset">选择敌人后，点击“载入面板”应用</span></p>
               <p v-if="enemyPreset" class="dummy-effective-armor">载入生命、双抗与飞行属性后仍可编辑；不计该敌人的免疫、护盾和特殊脚本。</p>
               <div class="damage-demo-fields dummy-fields">
-                <label>
-                  <span>生命值</span>
-                  <input v-model.number="dummy.hp" type="number" min="0" max="9999999" step="1" />
-                </label>
-                <label>
-                  <span>护甲 (%)</span>
-                  <input v-model.number="dummy.armor" type="number" min="0" max="100" step="1" />
-                </label>
-                <label>
-                  <span>魔抗 (%)</span>
-                  <input v-model.number="dummy.magicArmor" type="number" min="0" max="100" step="1" />
-                </label>
+                <NumberField v-model="dummy.hp" label="生命值" :min="0" :max="9999999" />
+                <NumberField v-model="dummy.armor" label="护甲 (%)" :min="0" :max="100" />
+                <NumberField v-model="dummy.magicArmor" label="魔抗 (%)" :min="0" :max="100" />
               </div>
               <label class="dummy-trait-toggle">
                 <input v-model="dummy.flying" type="checkbox" />
@@ -954,15 +973,16 @@ onBeforeUnmount(() => {
                   <small>用于触发只对飞行敌人生效的科技</small>
                 </div>
               </label>
-              <p v-if="simulationArmorIgnore" class="dummy-effective-armor">
+              <p v-if="simulationArmorIgnore && !simulationErrors.length" class="dummy-effective-armor">
                 穿刺射击：护甲 {{ formatNumber(Math.max(0, Number(dummy.armor) || 0)) }}% → 有效护甲 {{ formatNumber(effectiveDummyArmor) }}%
               </p>
-              <p v-if="simulationArmorReductionPerHit" class="dummy-effective-armor">
+              <p v-if="simulationArmorReductionPerHit && !simulationErrors.length" class="dummy-effective-armor">
                 连续破甲：每次命中后降低 {{ formatNumber(simulationArmorReductionPerHit) }} 点，模拟结束时剩余 {{ formatNumber(damageSequence.finalArmor) }}% 护甲。
               </p>
             </div>
 
-            <div class="dummy-stage" aria-live="polite">
+            <p v-if="simulationErrors.length" class="validation-notice" role="alert">请修正上方输入后查看模拟结果。</p>
+            <div v-else class="dummy-stage" aria-live="polite">
               <div class="dummy-stage-heading">
                 <div>
                   <span>结算结果</span>
@@ -1021,7 +1041,7 @@ onBeforeUnmount(() => {
             </div>
           </div>
 
-          <div class="attack-history">
+          <div v-if="!simulationErrors.length" class="attack-history">
             <div class="attack-history-heading">
               <div>
                 <strong>逐次攻击记录</strong>
@@ -1096,7 +1116,7 @@ onBeforeUnmount(() => {
         </section>
       </div>
 
-      <aside class="result-console">
+      <aside id="calculator-results" class="result-console" aria-label="完整计算结果" tabindex="-1">
         <div class="console-heading">
           <div><span>LIVE RESULT</span><strong>实时结果</strong></div>
           <span class="live-chip"><i></i> SCRIPT RULES</span>
@@ -1110,6 +1130,8 @@ onBeforeUnmount(() => {
           </span>
         </div>
 
+        <p v-if="buffInputErrors.length" class="validation-notice" role="alert">增益参数需要修正，结果暂不显示。</p>
+        <template v-else>
         <div class="result-stat-list">
           <article>
             <div><span>单次伤害</span><small>DAMAGE</small></div>
@@ -1183,6 +1205,7 @@ onBeforeUnmount(() => {
         </div>
 
         <div v-if="result.warning" class="console-warning">{{ result.warning }}</div>
+        </template>
         <div class="console-footnote">
           <b>计算口径</b>
           <p>科技先修正游戏基础模板，再叠加防御塔与英雄辅助。临时和条件触发效果显示生效期间的峰值，并在效果卡中保留持续时间与触发条件。</p>
