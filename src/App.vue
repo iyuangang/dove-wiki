@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { Castle, Skull, Swords, Sparkles, History, FlaskConical, Columns2, BookOpen } from '@lucide/vue'
+import { computed, defineAsyncComponent, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { Castle, Skull, Swords, Sparkles, History, FlaskConical, Columns2, BookOpen, Trophy } from '@lucide/vue'
 import DetailPanel from './components/DetailPanel.vue'
 import { Badge } from './components/ui/badge'
 import { Tabs, TabsList, TabsTrigger } from './components/ui/tabs'
@@ -14,11 +14,13 @@ import EnemyView from './views/EnemyView.vue'
 import HeroView from './views/HeroView.vue'
 import TechnologyView from './views/TechnologyView.vue'
 import UpdateHistoryView from './views/UpdateHistoryView.vue'
+import ratingManifest from './data/rating-manifest.json'
+const RatingView = defineAsyncComponent(() => import('./views/RatingView.vue'))
 import type { Tower } from './types'
 
 const activeTab = ref<TabId>(tabFromHash(window.location.hash))
-const navIcons = { catalog: Castle, enemies: Skull, heroes: Swords, technology: Sparkles, updates: History, calculator: FlaskConical, compare: Columns2, data: BookOpen }
-const activeSnapshot = computed(() => activeTab.value === 'heroes' ? doveData.metadata.heroSnapshot || doveData.metadata : doveData.metadata)
+const navIcons = { catalog: Castle, enemies: Skull, heroes: Swords, tierlist: Trophy, technology: Sparkles, updates: History, calculator: FlaskConical, compare: Columns2, data: BookOpen }
+const activeSnapshot = computed(() => activeTab.value === 'tierlist' ? ratingManifest : activeTab.value === 'heroes' ? doveData.metadata.heroSnapshot || doveData.metadata : doveData.metadata)
 const mobileNavOpen = ref(false)
 const selectedTowerId = ref<string | null>(null)
 const selectedTower = computed<Tower | null>(() =>
@@ -183,6 +185,7 @@ function openTower(tower: Tower) {
         :towers="towers"
         @open="openTower"
       />
+      <RatingView v-else-if="activeTab === 'tierlist'" />
       <DataView
         v-else-if="activeTab === 'data'"
         :data="doveData"
