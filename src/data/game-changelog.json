@@ -1,7 +1,44 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-21T02:28:53.908Z",
+  "generatedAt": "2026-10-21T02:51:28.905Z",
   "releases": [
+    {
+      "id": "2.0.9.8-8c10091108e5",
+      "version": "2.0.9.8",
+      "previousVersion": "2.0.9.7",
+      "contentVersion": "5.6.12",
+      "commitHash": "8c10091108e554d8643e787989ac69afc7fc7a18",
+      "previousCommitHash": "b99bbc865ed80606991f2f800433b8bc033ac33b",
+      "detectedAt": "2026-10-21T02:51:28.905Z",
+      "summary": {
+        "changeCount": 1,
+        "categoryCounts": {
+          "hero": 0,
+          "tower": 1,
+          "enemy": 0,
+          "technology": 0
+        },
+        "kindCounts": {
+          "added": 1,
+          "removed": 0,
+          "balance": 0,
+          "content": 0
+        }
+      },
+      "changes": [
+        {
+          "id": "tower:tower_alchemist:added:main",
+          "category": "tower",
+          "kind": "added",
+          "entityId": "tower_alchemist",
+          "entityName": "炼金术士小屋",
+          "title": "新增防御塔：炼金术士小屋",
+          "description": "新增防御塔，定位为直接输出、范围伤害、控制、召唤/拦截。",
+          "image": "/encyclopedia/thumbs/tower_alchemist.png",
+          "details": []
+        }
+      ]
+    },
     {
       "id": "2.0.9.7-b99bbc865ed8",
       "version": "2.0.9.7",

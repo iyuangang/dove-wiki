@@ -83,16 +83,16 @@
   },
   "metadata": {
     "title": "王国保卫战鸽子版 WIKI",
-    "gameVersion": "2.0.9.7",
+    "gameVersion": "2.0.9.8",
     "contentVersion": "5.6.12",
     "gameId": "kingdom_rush_dove",
-    "commitHash": "b99bbc865ed80606991f2f800433b8bc033ac33b",
-    "generatedAt": "2026-10-21T02:28:53.908Z",
+    "commitHash": "8c10091108e554d8643e787989ac69afc7fc7a18",
+    "generatedAt": "2026-10-21T02:51:28.905Z",
     "sourceRoot": "C:\\Users\\hhyg2\\AppData\\Local\\王国保卫战Dove版\\KingdomRushDove",
     "heroSnapshot": {
-      "gameVersion": "2.0.9.7",
-      "commitHash": "b99bbc865ed80606991f2f800433b8bc033ac33b",
-      "generatedAt": "2026-10-21T02:28:53.910Z",
+      "gameVersion": "2.0.9.8",
+      "commitHash": "8c10091108e554d8643e787989ac69afc7fc7a18",
+      "generatedAt": "2026-10-21T02:51:28.908Z",
       "sourceRoot": "C:\\Users\\hhyg2\\AppData\\Local\\王国保卫战Dove版\\KingdomRushDove"
     },
     "assumptions": [
@@ -103,11 +103,11 @@
     ]
   },
   "summary": {
-    "towerCount": 103,
-    "portraitCount": 103,
-    "encyclopediaImageCount": 91,
+    "towerCount": 104,
+    "portraitCount": 104,
+    "encyclopediaImageCount": 92,
     "portraitFallbackCount": 12,
-    "skillIconCount": 224,
+    "skillIconCount": 227,
     "technologyTreeCount": 4,
     "technologyCount": 144,
     "heroCount": 79,
@@ -117,10 +117,10 @@
     "supportTowerCount": 8,
     "supportHeroCount": 7,
     "supportEffectCount": 17,
-    "levelUnlockCount": 69,
+    "levelUnlockCount": 70,
     "defaultUnlockCount": 34,
     "unlockAnomalyCount": 0,
-    "exactDamageCount": 102
+    "exactDamageCount": 103
   },
   "validation": {
     "warnings": [
@@ -103814,6 +103814,338 @@
       ]
     },
     {
+      "id": "tower_alchemist",
+      "name": "炼金术士小屋",
+      "description": "投出爆炸性化学药剂的疯狂炼金术士，其威力甚至可以跟女巫最危险的魔药相提并论。",
+      "families": [
+        "engineer"
+      ],
+      "roles": [
+        "直接输出",
+        "范围伤害",
+        "控制",
+        "召唤/拦截"
+      ],
+      "image": "/encyclopedia/thumbs/tower_alchemist.png",
+      "encyclopediaImage": "/encyclopedia/tower_alchemist.png",
+      "encyclopediaOrder": 85,
+      "encyclopediaListed": true,
+      "encyclopediaSprite": "kr6_encyclopedia_towers_0048",
+      "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0048",
+      "sourceGame": 6,
+      "portraitSprite": "kr6_info_portraits_towers_0031",
+      "price": 300,
+      "level": 1,
+      "towerType": "alchemist",
+      "canBeBuffed": true,
+      "unlock": {
+        "status": "level",
+        "level": 214,
+        "label": "第 214 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level214_data.lua"
+      },
+      "attack": {
+        "damageMin": 64,
+        "damageMax": 80,
+        "cooldown": 3.74,
+        "dps": 19.25133689839572,
+        "range": 160,
+        "rallyRange": null,
+        "damageType": "真实",
+        "damageTypeValue": 1,
+        "kind": "bullet",
+        "confidence": "精确",
+        "scope": "单目标基础攻击"
+      },
+      "soldier": null,
+      "powers": [
+        {
+          "id": "skill_a",
+          "name": "黏液喷溅",
+          "icon": "/skills/tower_alchemist--skill_a.png",
+          "iconSprite": "kr6_quickmenu_special_icons_alchemist_0001",
+          "maxLevel": 3,
+          "priceBase": 100,
+          "priceIncrement": 100,
+          "descriptions": [
+            {
+              "key": "TOWER_ALCHEMIST_SKILL_A_DESCRIPTION_1",
+              "text": "每20秒，大釜中喷涌出8瓶药水，使敌人减速40%，持续5秒。"
+            },
+            {
+              "key": "TOWER_ALCHEMIST_SKILL_A_DESCRIPTION_2",
+              "text": "每20秒，大釜中喷涌出10瓶药水，使敌人减速55%，持续6秒。"
+            },
+            {
+              "key": "TOWER_ALCHEMIST_SKILL_A_DESCRIPTION_3",
+              "text": "每20秒，大釜中喷涌出12瓶药水，使敌人减速70%，持续7秒。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 100,
+              "cumulativePrice": 100,
+              "description": "每20秒，大釜中喷涌出8瓶药水，使敌人减速40%，持续5秒。",
+              "descriptionKey": "TOWER_ALCHEMIST_SKILL_A_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 100,
+              "cumulativePrice": 200,
+              "description": "每20秒，大釜中喷涌出10瓶药水，使敌人减速55%，持续6秒。",
+              "descriptionKey": "TOWER_ALCHEMIST_SKILL_A_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 100,
+              "cumulativePrice": 300,
+              "description": "每20秒，大釜中喷涌出12瓶药水，使敌人减速70%，持续7秒。",
+              "descriptionKey": "TOWER_ALCHEMIST_SKILL_A_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "name": "实验人员",
+          "icon": "/skills/tower_alchemist--skill_b.png",
+          "iconSprite": "kr6_quickmenu_special_icons_alchemist_0002",
+          "maxLevel": 3,
+          "priceBase": 150,
+          "priceIncrement": 150,
+          "descriptions": [
+            {
+              "key": "TOWER_ALCHEMIST_SKILL_B_DESCRIPTION_1",
+              "text": "召唤一名饮下特殊药剂、暂时化为怪物的助手。此单位拥有150点生命值，造成16-24点真实伤害；离场或阵亡后12秒可再次召唤。"
+            },
+            {
+              "key": "TOWER_ALCHEMIST_SKILL_B_DESCRIPTION_2",
+              "text": "召唤一名饮下特殊药剂、暂时化为怪物的助手。此单位拥有300点生命值，造成32-48点真实伤害；离场或阵亡后12秒可再次召唤。"
+            },
+            {
+              "key": "TOWER_ALCHEMIST_SKILL_B_DESCRIPTION_3",
+              "text": "召唤一名饮下特殊药剂、暂时化为怪物的助手。此单位拥有350点生命值，造成64-96点真实伤害；离场或阵亡后12秒可再次召唤。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 150,
+              "cumulativePrice": 150,
+              "description": "召唤一名饮下特殊药剂、暂时化为怪物的助手。此单位拥有150点生命值，造成16-24点真实伤害；离场或阵亡后12秒可再次召唤。",
+              "descriptionKey": "TOWER_ALCHEMIST_SKILL_B_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 150,
+              "cumulativePrice": 300,
+              "description": "召唤一名饮下特殊药剂、暂时化为怪物的助手。此单位拥有300点生命值，造成32-48点真实伤害；离场或阵亡后12秒可再次召唤。",
+              "descriptionKey": "TOWER_ALCHEMIST_SKILL_B_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 150,
+              "cumulativePrice": 450,
+              "description": "召唤一名饮下特殊药剂、暂时化为怪物的助手。此单位拥有350点生命值，造成64-96点真实伤害；离场或阵亡后12秒可再次召唤。",
+              "descriptionKey": "TOWER_ALCHEMIST_SKILL_B_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "name": "完美配方",
+          "icon": "/skills/tower_alchemist--skill_c.png",
+          "iconSprite": "kr6_quickmenu_special_icons_alchemist_0003",
+          "maxLevel": 3,
+          "priceBase": 200,
+          "priceIncrement": 200,
+          "descriptions": [
+            {
+              "key": "TOWER_ALCHEMIST_SKILL_C_DESCRIPTION_1",
+              "text": "普通攻击命中时追加10-16点爆炸伤害，并将持续伤害提升至5-7点。"
+            },
+            {
+              "key": "TOWER_ALCHEMIST_SKILL_C_DESCRIPTION_2",
+              "text": "普通攻击命中时追加28-46点爆炸伤害，并将持续伤害提升至6-8点。"
+            },
+            {
+              "key": "TOWER_ALCHEMIST_SKILL_C_DESCRIPTION_3",
+              "text": "普通攻击命中时追加46-68点爆炸伤害，并将持续伤害提升至7-9点。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 200,
+              "cumulativePrice": 200,
+              "description": "普通攻击命中时追加10-16点爆炸伤害，并将持续伤害提升至5-7点。",
+              "descriptionKey": "TOWER_ALCHEMIST_SKILL_C_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "伤害下限",
+                  "value": 10,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 16,
+                  "unit": ""
+                }
+              ]
+            },
+            {
+              "level": 2,
+              "price": 200,
+              "cumulativePrice": 400,
+              "description": "普通攻击命中时追加28-46点爆炸伤害，并将持续伤害提升至6-8点。",
+              "descriptionKey": "TOWER_ALCHEMIST_SKILL_C_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "伤害下限",
+                  "value": 28,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 46,
+                  "unit": ""
+                }
+              ]
+            },
+            {
+              "level": 3,
+              "price": 200,
+              "cumulativePrice": 600,
+              "description": "普通攻击命中时追加46-68点爆炸伤害，并将持续伤害提升至7-9点。",
+              "descriptionKey": "TOWER_ALCHEMIST_SKILL_C_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "伤害下限",
+                  "value": 46,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 68,
+                  "unit": ""
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/engineer_towers.lua",
+        "nameKey": "TOWER_ALCHEMIST_NAME",
+        "descriptionKey": "TOWER_ALCHEMIST_DESCRIPTION",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
+        "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
+        "unlock": "kr1/data/levels/level214_data.lua"
+      },
+      "units": [
+        {
+          "id": "soldier_alchemist",
+          "name": "九龙形态鲍勃",
+          "relatedPowerIds": [
+            "skill_b"
+          ],
+          "count": null,
+          "rallyRange": null,
+          "controllable": false,
+          "note": "模板基准值，未代入技能升级；技能带来的属性变化见逐级说明。",
+          "stats": {
+            "hp": 150,
+            "armor": 0,
+            "magicArmor": 0,
+            "speed": 50,
+            "respawn": null,
+            "regen": null,
+            "regenCooldown": 1,
+            "lifetime": null,
+            "attacks": [
+              {
+                "id": "melee-1",
+                "name": "近战",
+                "damageMin": 16,
+                "damageMax": 24,
+                "damageType": "真实",
+                "cooldown": 1.5,
+                "range": 70,
+                "radius": null,
+                "targets": null,
+                "chance": 1,
+                "disabled": false,
+                "source": "soldier_alchemist.melee.attacks[1]"
+              }
+            ]
+          },
+          "variants": [],
+          "source": "kr1/engineer_towers.lua",
+          "scriptSource": null
+        }
+      ],
+      "mechanics": {
+        "reviewedVersion": "2.0.9.3",
+        "items": [],
+        "pending": [
+          "真实伤害的护甲结算"
+        ],
+        "hasSpecificReview": false
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "aura_alchemist_hit_green"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bullet_alchemist_basic.damage_radius / area"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_alchemist_skill_a_slow"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
+    },
+    {
       "id": "tower_archers",
       "name": "弓兵要塞",
       "description": "驻守高塔的弓箭手，能凭借射程优势从远处歼灭来犯之敌。",
@@ -103828,7 +104160,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_archers.png",
       "encyclopediaImage": "/encyclopedia/tower_archers.png",
-      "encyclopediaOrder": 85,
+      "encyclopediaOrder": 86,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr6_encyclopedia_towers_0004",
       "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0004",
@@ -104166,7 +104498,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_elf_ranger.png",
       "encyclopediaImage": "/encyclopedia/tower_elf_ranger.png",
-      "encyclopediaOrder": 86,
+      "encyclopediaOrder": 87,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr6_encyclopedia_towers_0020",
       "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0020",
@@ -104457,7 +104789,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_wizard.png",
       "encyclopediaImage": "/encyclopedia/tower_wizard.png",
-      "encyclopediaOrder": 87,
+      "encyclopediaOrder": 88,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr6_encyclopedia_towers_0012",
       "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0012",
@@ -104767,7 +105099,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_knights.png",
       "encyclopediaImage": "/encyclopedia/tower_knights.png",
-      "encyclopediaOrder": 88,
+      "encyclopediaOrder": 89,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr6_encyclopedia_towers_0008",
       "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0008",
@@ -105083,7 +105415,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_wildcat.png",
       "encyclopediaImage": "/encyclopedia/tower_wildcat.png",
-      "encyclopediaOrder": 89,
+      "encyclopediaOrder": 90,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr6_encyclopedia_towers_0028",
       "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0028",
@@ -105405,7 +105737,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_sunray_master.png",
       "encyclopediaImage": "/encyclopedia/tower_sunray_master.png",
-      "encyclopediaOrder": 90,
+      "encyclopediaOrder": 91,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr6_encyclopedia_towers_0032",
       "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0032",
@@ -105789,7 +106121,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_miners.png",
       "encyclopediaImage": "/encyclopedia/tower_miners.png",
-      "encyclopediaOrder": 91,
+      "encyclopediaOrder": 92,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr6_encyclopedia_towers_0036",
       "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0036",
@@ -106163,7 +106495,7 @@
       ],
       "image": "/portraits/tower_archer_1.png",
       "encyclopediaImage": "/portraits/tower_archer_1.png",
-      "encyclopediaOrder": 92,
+      "encyclopediaOrder": 93,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106237,7 +106569,7 @@
       ],
       "image": "/portraits/tower_archer_2.png",
       "encyclopediaImage": "/portraits/tower_archer_2.png",
-      "encyclopediaOrder": 93,
+      "encyclopediaOrder": 94,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106311,7 +106643,7 @@
       ],
       "image": "/portraits/tower_archer_3.png",
       "encyclopediaImage": "/portraits/tower_archer_3.png",
-      "encyclopediaOrder": 94,
+      "encyclopediaOrder": 95,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106385,7 +106717,7 @@
       ],
       "image": "/portraits/tower_mage_1.png",
       "encyclopediaImage": "/portraits/tower_mage_1.png",
-      "encyclopediaOrder": 95,
+      "encyclopediaOrder": 96,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106459,7 +106791,7 @@
       ],
       "image": "/portraits/tower_mage_2.png",
       "encyclopediaImage": "/portraits/tower_mage_2.png",
-      "encyclopediaOrder": 96,
+      "encyclopediaOrder": 97,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106533,7 +106865,7 @@
       ],
       "image": "/portraits/tower_mage_3.png",
       "encyclopediaImage": "/portraits/tower_mage_3.png",
-      "encyclopediaOrder": 97,
+      "encyclopediaOrder": 98,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106608,7 +106940,7 @@
       ],
       "image": "/portraits/tower_engineer_1.png",
       "encyclopediaImage": "/portraits/tower_engineer_1.png",
-      "encyclopediaOrder": 98,
+      "encyclopediaOrder": 99,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106688,7 +107020,7 @@
       ],
       "image": "/portraits/tower_engineer_2.png",
       "encyclopediaImage": "/portraits/tower_engineer_2.png",
-      "encyclopediaOrder": 99,
+      "encyclopediaOrder": 100,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106768,7 +107100,7 @@
       ],
       "image": "/portraits/tower_engineer_3.png",
       "encyclopediaImage": "/portraits/tower_engineer_3.png",
-      "encyclopediaOrder": 100,
+      "encyclopediaOrder": 101,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106847,7 +107179,7 @@
       ],
       "image": "/portraits/tower_barrack_1.png",
       "encyclopediaImage": "/portraits/tower_barrack_1.png",
-      "encyclopediaOrder": 101,
+      "encyclopediaOrder": 102,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106966,7 +107298,7 @@
       ],
       "image": "/portraits/tower_barrack_2.png",
       "encyclopediaImage": "/portraits/tower_barrack_2.png",
-      "encyclopediaOrder": 102,
+      "encyclopediaOrder": 103,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -107085,7 +107417,7 @@
       ],
       "image": "/portraits/tower_barrack_3.png",
       "encyclopediaImage": "/portraits/tower_barrack_3.png",
-      "encyclopediaOrder": 103,
+      "encyclopediaOrder": 104,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
