@@ -53,3 +53,19 @@ jobs:
           test -f dist/index.html
           test -d dist/assets
           grep -q '/dove-wiki/assets/' dist/index.html
+
+      - name: Install browser for UI regression checks
+        run: npx playwright install --with-deps chromium
+
+      - name: Check browser workflows at four widths
+        run: npx playwright test
+
+      - name: Save browser regression report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: browser-regression-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7

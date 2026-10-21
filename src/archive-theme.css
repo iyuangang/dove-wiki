@@ -636,6 +636,29 @@ input::placeholder, .search-box input::placeholder { color: #8c9888; opacity: 1;
   .hero-card-body { padding: var(--space-4); }
   .hero-card-footer { padding: var(--space-3) var(--space-4); }
 }
+.dossier-actions, .workspace-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+.dossier-actions { margin: var(--space-4) 0 var(--space-6); }
+.dossier-actions [data-variant="default"] { color: var(--primary-foreground); font-weight: 600; }
+.dossier-actions > span, .workspace-toolbar > span { color: var(--muted); font-size: var(--text-xs); }
+.workspace-toolbar { justify-content: space-between; margin: 0 0 var(--space-4); }
+.workspace-notice, .enemy-panel-status, .validation-notice { padding: var(--space-3) var(--space-4); border: 1px solid var(--line); border-radius: 8px; background: var(--surface-900); font-size: var(--text-sm); overflow-wrap: anywhere; }
+.workspace-notice { color: var(--green); margin-bottom: var(--space-4); }
+.enemy-panel-status { display: flex; flex-wrap: wrap; gap: var(--space-2); margin: var(--space-3) 0; }
+.enemy-panel-status b { color: var(--gold); }
+.enemy-panel-status span { color: var(--muted); font-size: var(--text-xs); }
+.number-field { min-width: 0; }
+.number-field .field-error { display: block; white-space: normal; }
+.field-error, .validation-notice, .effect-status.inactive { color: var(--red); font-size: var(--text-xs); }
+.validation-notice { align-self: start; margin: var(--space-4) 0; border-color: var(--red); }
+input[aria-invalid="true"] { border-color: var(--red); }
+.effect-status { grid-column: 2 / -1; margin: 0; font-size: var(--text-xs); color: var(--green); }
+#calculator-target, #calculator-supports, #calculator-dummy, #compare-left, #compare-right { scroll-margin-top: calc(var(--sticky-offset) + 16px); }
+#calculator-supports:focus-visible, #calculator-dummy:focus-visible, [role="dialog"]:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+@media (max-width: 680px) {
+  .dossier-actions > button { flex: 1 1 140px; white-space: normal; height: auto; min-height: 44px; }
+  #calculator-target, #calculator-supports, #calculator-dummy { scroll-margin-top: calc(var(--sticky-offset) + 128px); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }

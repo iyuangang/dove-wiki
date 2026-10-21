@@ -2,6 +2,7 @@ export const navigationTabs = [
   { id: 'catalog', label: '塔典', eyebrow: 'CATALOG' },
   { id: 'enemies', label: '敌人', eyebrow: 'ENEMIES' },
   { id: 'heroes', label: '英雄', eyebrow: 'HEROES' },
+  { id: 'tierlist', label: '强度天梯', eyebrow: 'COMBAT LAB' },
   { id: 'technology', label: '科技', eyebrow: 'TECH' },
   { id: 'updates', label: '更新', eyebrow: 'UPDATES' },
   { id: 'calculator', label: '辅助计算', eyebrow: 'BUFF LAB' },

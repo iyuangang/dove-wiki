@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { Castle, Skull, Swords, Sparkles, History, FlaskConical, Columns2, BookOpen } from '@lucide/vue'
+import { computed, defineAsyncComponent, nextTick, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
+import { Castle, Skull, Swords, Sparkles, History, FlaskConical, Columns2, BookOpen, Trophy } from '@lucide/vue'
 import DetailPanel from './components/DetailPanel.vue'
 import { Badge } from './components/ui/badge'
 import { Tabs, TabsList, TabsTrigger } from './components/ui/tabs'
@@ -14,11 +14,16 @@ import EnemyView from './views/EnemyView.vue'
 import HeroView from './views/HeroView.vue'
 import TechnologyView from './views/TechnologyView.vue'
 import UpdateHistoryView from './views/UpdateHistoryView.vue'
-import type { Tower } from './types'
+import ratingManifest from './data/rating-manifest.json'
+const RatingView = defineAsyncComponent(() => import('./views/RatingView.vue'))
+import type { Enemy, Tower } from './types'
+import { createWorkspace, loadEnemyPanel, workspaceKey } from './composables/useWorkspace'
 
+const workspace = createWorkspace(doveData.supportEffects, doveData.technologyTrees)
+provide(workspaceKey, workspace)
 const activeTab = ref<TabId>(tabFromHash(window.location.hash))
-const navIcons = { catalog: Castle, enemies: Skull, heroes: Swords, technology: Sparkles, updates: History, calculator: FlaskConical, compare: Columns2, data: BookOpen }
-const activeSnapshot = computed(() => activeTab.value === 'heroes' ? doveData.metadata.heroSnapshot || doveData.metadata : doveData.metadata)
+const navIcons = { catalog: Castle, enemies: Skull, heroes: Swords, tierlist: Trophy, technology: Sparkles, updates: History, calculator: FlaskConical, compare: Columns2, data: BookOpen }
+const activeSnapshot = computed(() => activeTab.value === 'tierlist' ? ratingManifest : activeTab.value === 'heroes' ? doveData.metadata.heroSnapshot || doveData.metadata : doveData.metadata)
 const mobileNavOpen = ref(false)
 const selectedTowerId = ref<string | null>(null)
 const selectedTower = computed<Tower | null>(() =>
@@ -28,7 +33,9 @@ const activeTabMeta = computed(() => tabs.find((tab) => tab.id === activeTab.val
 
 let routeInitialized = false
 
-watch(activeTab, async (tab) => {
+watch(activeTab, async (tab, previousTab) => {
+  if (previousTab) workspace.scroll[previousTab] = window.scrollY
+  selectedTowerId.value = null
   const targetHash = hashForTab(tab)
 
   if (window.location.hash !== targetHash) {
@@ -40,7 +47,7 @@ watch(activeTab, async (tab) => {
   mobileNavOpen.value = false
   document.title = `${activeTabMeta.value.label} | 王国保卫战鸽子版 WIKI`
   await nextTick()
-  window.scrollTo({ top: 0 })
+  window.scrollTo({ top: workspace.scroll[tab] || 0, behavior: 'instant' })
 }, { immediate: true })
 
 function syncTabFromAddress() {
@@ -79,6 +86,37 @@ onBeforeUnmount(() => {
 
 function openTower(tower: Tower) {
   selectedTowerId.value = tower.id
+}
+async function enterTool(tab: TabId, focusId: string) {
+  workspace.scroll[tab] = 0
+  selectedTowerId.value = null
+  selectTab(tab)
+  await nextTick()
+  document.getElementById(focusId)?.focus({ preventScroll: true })
+  document.getElementById(focusId)?.scrollIntoView({ block: 'start', behavior: 'instant' })
+}
+function calculateTower(tower: Tower) {
+  workspace.calculator.targetId = tower.id
+  workspace.calculator.notice = '已选用 ' + tower.name + '；保留现有科技、辅助与傀儡参数。'
+  enterTool('calculator', 'calculator-target')
+}
+function enableSupport(effectIds: string[]) {
+  for (const id of effectIds) {
+    if (workspace.calculator.effects[id]) workspace.calculator.effects[id].enabled = true
+  }
+  workspace.calculator.supportSourceFilter = 'selected'
+  workspace.calculator.supportSearch = ''
+  workspace.calculator.notice = '已启用所选来源的辅助；请查看各效果是否适用于当前目标塔。'
+  enterTool('calculator', 'calculator-supports')
+}
+function calculateEnemy(enemy: Enemy, difficulty: number) {
+  if (!loadEnemyPanel(workspace.calculator, enemy, difficulty)) return
+  workspace.calculator.notice = '已载入 ' + enemy.name + ' 的敌人面板；保留当前攻击和辅助配置。'
+  enterTool('calculator', 'calculator-dummy')
+}
+function compareTower(tower: Tower, side: 'left' | 'right') {
+  workspace.compare[side === 'left' ? 'leftId' : 'rightId'] = tower.id
+  enterTool('compare', 'compare-' + side)
 }
 </script>
 
@@ -163,12 +201,14 @@ function openTower(tower: Tower) {
       <EnemyView
         v-else-if="activeTab === 'enemies'"
         :enemies="enemies"
+        @calculate="calculateEnemy"
       />
       <HeroView
         v-else-if="activeTab === 'heroes'"
         :heroes="heroes"
         :effects="doveData.supportEffects"
         :data-version="activeSnapshot.gameVersion"
+        @support="enableSupport"
       />
       <TechnologyView
         v-else-if="activeTab === 'technology'"
@@ -183,6 +223,7 @@ function openTower(tower: Tower) {
         :towers="towers"
         @open="openTower"
       />
+      <RatingView v-else-if="activeTab === 'tierlist'" />
       <DataView
         v-else-if="activeTab === 'data'"
         :data="doveData"
@@ -197,6 +238,6 @@ function openTower(tower: Tower) {
       <span>{{ doveData.summary.encyclopediaImageCount }} 套塔百科图 · {{ doveData.summary.enemyCount }} 个敌人槽位 · {{ doveData.summary.heroCount }} 位英雄 · {{ doveData.summary.technologyTreeCount }} 套科技方案</span>
     </footer>
 
-    <DetailPanel :tower="selectedTower" @close="selectedTowerId = null" />
+    <DetailPanel :tower="selectedTower" :effects="doveData.supportEffects" @close="selectedTowerId = null" @calculate="calculateTower" @support="enableSupport" @compare="compareTower" />
   </Tabs>
 </template>

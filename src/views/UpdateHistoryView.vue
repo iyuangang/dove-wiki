@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, toRefs } from 'vue'
+import { useWorkspace } from '../composables/useWorkspace'
 import { Badge } from '../components/ui/badge'
 import type {
   GameChangeCategory,
@@ -12,9 +13,7 @@ const props = defineProps<{ history: GameChangelog }>()
 type CategoryFilter = 'all' | GameChangeCategory
 type KindFilter = 'all' | GameChangeKind
 
-const query = ref('')
-const categoryFilter = ref<CategoryFilter>('all')
-const kindFilter = ref<KindFilter>('all')
+const { query, categoryFilter, kindFilter } = toRefs(useWorkspace().updates)
 
 const categoryOptions: Array<{ id: CategoryFilter; label: string }> = [
   { id: 'all', label: '全部内容' },

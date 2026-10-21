@@ -1,14 +1,16 @@
 <script setup lang="ts">
-import { onBeforeUnmount, watch } from 'vue'
+import { computed, onBeforeUnmount, watch } from 'vue'
+import { Button } from './ui/button'
 import DossierNav from './DossierNav.vue'
 import { familyLabels } from '../data'
 import { formatNumber } from '../lib/calculator'
-import type { Tower } from '../types'
+import type { SupportEffect, Tower } from '../types'
 import TowerUnitCard from './TowerUnitCard.vue'
 import TowerMechanics from './TowerMechanics.vue'
 
-const props = defineProps<{ tower: Tower | null }>()
-const emit = defineEmits<{ close: [] }>()
+const props = defineProps<{ tower: Tower | null; effects: SupportEffect[] }>()
+const emit = defineEmits<{ close: []; calculate: [tower: Tower]; support: [effectIds: string[]]; compare: [tower: Tower, side: 'left' | 'right'] }>()
+const sourceEffects = computed(() => props.effects.filter(effect => effect.sourceTowerId === props.tower?.id && effect.review?.valid !== false))
 
 function onKeydown(event: KeyboardEvent) {
   if (event.key === 'Escape') emit('close')
@@ -54,6 +56,12 @@ onBeforeUnmount(() => {
             </div>
           </div>
 
+          <div class="dossier-actions">
+            <Button @click="$emit('calculate', tower)">作为计算目标</Button>
+            <Button v-if="sourceEffects.length" variant="outline" @click="$emit('support', sourceEffects.map(effect => effect.id))">启用该塔辅助</Button>
+            <Button variant="outline" @click="$emit('compare', tower, 'left')">加入左侧对比</Button>
+            <Button variant="outline" @click="$emit('compare', tower, 'right')">加入右侧对比</Button>
+          </div>
           <p class="detail-description">{{ tower.description }}</p>
 
           <div class="detail-stat-grid">
