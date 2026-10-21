@@ -25,9 +25,14 @@ describe('快照发布兼容与审阅证据', () => {
   })
   it('拒绝未知数据格式和无效来源上的已核实结论', () => {
     expect(() => validateSnapshot({ ...data, schemaVersion: 999 }, manifest, contract)).toThrow('不支持数据格式')
+    // A new game version may legitimately withdraw every reviewed tower claim.
+    // Inject a claim so this negative case also exercises that snapshot state.
+    const claimed = structuredClone(data)
     const broken = structuredClone(manifest)
-    broken.reviews.towers.invalidFiles.push(data.towers.find((tower) => tower.mechanics.items.length).mechanics.items[0].sources[0].file)
-    expect(() => validateSnapshot(data, broken, contract)).toThrow('有效审阅指纹')
+    const file = Object.keys(broken.reviews.towers.files)[0]
+    claimed.towers[0].mechanics.items.push({ id: 'invalid-test-claim', sources: [{ file }] })
+    broken.reviews.towers.invalidFiles = [...new Set([...broken.reviews.towers.invalidFiles, file])]
+    expect(() => validateSnapshot(claimed, broken, contract)).toThrow('有效审阅指纹')
   })
   it('拒绝旧运行结果，缺失字段都进入可追溯清单', () => {
     expect(() => validateRaw({ metadata: { runId: 'old-run' } }, 'new-run')).toThrow('本次运行')

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, toRefs } from 'vue'
+import { useWorkspace } from '../composables/useWorkspace'
 import { familyLabels } from '../data'
 import { formatNumber } from '../lib/calculator'
 import type { Tower } from '../types'
@@ -7,8 +8,7 @@ import type { Tower } from '../types'
 const props = defineProps<{ towers: Tower[] }>()
 defineEmits<{ open: [tower: Tower] }>()
 
-const leftId = ref('tower_ranger')
-const rightId = ref('tower_high_elven')
+const { leftId, rightId } = toRefs(useWorkspace().compare)
 const left = computed(() => props.towers.find((tower) => tower.id === leftId.value) || props.towers[0])
 const right = computed(() => props.towers.find((tower) => tower.id === rightId.value) || props.towers[1])
 const attackComparable = computed(() => left.value.attack.scope === right.value.attack.scope && left.value.attack.damageTypeValue === right.value.attack.damageTypeValue)
@@ -33,14 +33,14 @@ function statClass(leftValue: number | null, rightValue: number | null, side: 'l
     <div class="compare-picker-grid">
       <label class="compare-picker left">
         <span>左侧防御塔</span>
-        <select v-model="leftId">
+        <select id="compare-left" v-model="leftId">
           <option v-for="tower in towers" :key="tower.id" :value="tower.id">{{ tower.name }} · {{ tower.id }}</option>
         </select>
       </label>
       <div class="versus-mark">VS</div>
       <label class="compare-picker right">
         <span>右侧防御塔</span>
-        <select v-model="rightId">
+        <select id="compare-right" v-model="rightId">
           <option v-for="tower in towers" :key="tower.id" :value="tower.id">{{ tower.name }} · {{ tower.id }}</option>
         </select>
       </label>

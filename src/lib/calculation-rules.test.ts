@@ -1,7 +1,11 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { doveData, towerById } from '../data'
 import { buildSimulationTechnologies, calculationRules, purgeDamageBonus } from './calculation-rules'
 import { calculateBuffs } from './calculator'
+
+vi.mock('../data/dove-data.json', async () => ({
+  default: (await import('../../tools/test-fixtures/calculator-2.0.9.3.json')).default,
+}))
 
 describe('已审阅计算规则与叠加边界', () => {
   it('肃清立场遵守人数上下限，异常输入保持有限数值', () => {

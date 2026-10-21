@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, ref, toRefs, watch } from 'vue'
 import { Search, ArrowUpRight, Footprints, SlidersHorizontal } from '@lucide/vue'
+import { useWorkspace } from '../composables/useWorkspace'
 import DossierNav from '../components/DossierNav.vue'
 import { Badge } from '../components/ui/badge'
 import { Button } from '../components/ui/button'
@@ -8,10 +9,13 @@ import type { Hero, SupportEffect } from '../types'
 
 const props = defineProps<{ heroes: Hero[]; effects: SupportEffect[]; dataVersion: string }>()
 
-const query = ref('')
-const sourceGame = ref(0)
-const supportOnly = ref(false)
-const movementFilter = ref('')
+const emit = defineEmits<{ support: [effectIds: string[]] }>()
+const { query, sourceGame, supportOnly, movementFilter } = toRefs(useWorkspace().heroes)
+function enableHeroSupport() {
+  const ids = (supportByHero.value.get(selectedHero.value?.id || '') || []).filter(effect => effect.review?.valid !== false).map(effect => effect.id)
+  selectedHero.value = null
+  emit('support', ids)
+}
 const movementOptions = computed(() => [...new Set(props.heroes.flatMap((hero) => hero.details.movement.tags))])
 const selectedHero = ref<Hero | null>(null)
 const profileLabels = ['耐久', '近战', '远程', '技能']
@@ -208,6 +212,7 @@ onBeforeUnmount(() => {
             </div>
           </div>
 
+          <div v-if="supportByHero.get(selectedHero.id)?.some(effect => effect.review?.valid !== false)" class="dossier-actions"><Button @click="enableHeroSupport">启用英雄辅助</Button></div>
           <p class="hero-detail-description">{{ selectedHero.description }}</p>
 
           <dl class="hero-detail-stats">

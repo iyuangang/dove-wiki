@@ -1,6 +1,11 @@
-import { describe, expect, it } from 'vitest'
+import { describe, expect, it, vi } from 'vitest'
 import { doveData } from '../data'
 import { calculateBuffs, resolveSupportLevel } from './calculator'
+
+// Formula expectations belong to this reviewed snapshot, independently of live syncs.
+vi.mock('../data/dove-data.json', async () => ({
+  default: (await import('../../tools/test-fixtures/calculator-2.0.9.3.json')).default,
+}))
 
 const tower = doveData.towers.find((item) => item.id === 'tower_ranger')!
 

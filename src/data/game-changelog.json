@@ -1,7 +1,227 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-10T08:15:53.996Z",
+  "generatedAt": "2026-10-21T02:51:28.905Z",
   "releases": [
+    {
+      "id": "2.0.9.8-8c10091108e5",
+      "version": "2.0.9.8",
+      "previousVersion": "2.0.9.7",
+      "contentVersion": "5.6.12",
+      "commitHash": "8c10091108e554d8643e787989ac69afc7fc7a18",
+      "previousCommitHash": "b99bbc865ed80606991f2f800433b8bc033ac33b",
+      "detectedAt": "2026-10-21T02:51:28.905Z",
+      "summary": {
+        "changeCount": 1,
+        "categoryCounts": {
+          "hero": 0,
+          "tower": 1,
+          "enemy": 0,
+          "technology": 0
+        },
+        "kindCounts": {
+          "added": 1,
+          "removed": 0,
+          "balance": 0,
+          "content": 0
+        }
+      },
+      "changes": [
+        {
+          "id": "tower:tower_alchemist:added:main",
+          "category": "tower",
+          "kind": "added",
+          "entityId": "tower_alchemist",
+          "entityName": "炼金术士小屋",
+          "title": "新增防御塔：炼金术士小屋",
+          "description": "新增防御塔，定位为直接输出、范围伤害、控制、召唤/拦截。",
+          "image": "/encyclopedia/thumbs/tower_alchemist.png",
+          "details": []
+        }
+      ]
+    },
+    {
+      "id": "2.0.9.7-b99bbc865ed8",
+      "version": "2.0.9.7",
+      "previousVersion": "2.0.9.3",
+      "contentVersion": "5.6.12",
+      "commitHash": "b99bbc865ed80606991f2f800433b8bc033ac33b",
+      "previousCommitHash": "731afe683e16e3adbfe162cf2b7452cc7bd2f867",
+      "detectedAt": "2026-10-21T02:28:53.908Z",
+      "summary": {
+        "changeCount": 8,
+        "categoryCounts": {
+          "hero": 0,
+          "tower": 7,
+          "enemy": 0,
+          "technology": 1
+        },
+        "kindCounts": {
+          "added": 2,
+          "removed": 0,
+          "balance": 2,
+          "content": 4
+        }
+      },
+      "changes": [
+        {
+          "id": "tower:tower_arcane:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_arcane",
+          "entityName": "奥术弓手塔",
+          "title": "数值调整防御塔：奥术弓手塔",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_arcane.png",
+          "details": [
+            {
+              "field": "睡眠箭矢 · 基础价格",
+              "before": "225",
+              "after": "250",
+              "delta": "+25（+11.1%）",
+              "direction": "increase"
+            },
+            {
+              "field": "睡眠箭矢 · 升级价格",
+              "before": "75",
+              "after": "100",
+              "delta": "+25（+33.3%）",
+              "direction": "increase"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_arcane:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_arcane",
+          "entityName": "奥术弓手塔",
+          "title": "内容调整防御塔：奥术弓手塔",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_arcane.png",
+          "details": [
+            {
+              "field": "睡眠箭矢 · 技能说明",
+              "before": "奥术弓手有6%概率射出催眠箭矢，造成4倍伤害并使敌人睡眠2秒。奥术爆发有30%概率使敌人进入睡眠状态。；奥术弓手有8%概率射出催眠箭矢，造成4倍伤害并使敌人睡眠2秒。奥术爆发有40%概率使敌人进入睡眠状态。；奥术弓手有10%概率射出催眠箭矢，造成4倍伤害并使敌人睡眠2秒。奥术爆发有50%概率使敌人进入睡眠状态。",
+              "after": "奥术弓手伤害提升18%，并有6%概率附带催眠效果，使敌人睡眠2秒。奥术爆发有30%概率使敌人进入睡眠状态。；奥术弓手伤害提升27%，并有8%概率附带催眠效果，使敌人睡眠2秒。奥术爆发有40%概率使敌人进入睡眠状态。；奥术弓手伤害提升36%，并有10%概率附带催眠效果，使敌人睡眠2秒。奥术爆发有50%概率使敌人进入睡眠状态。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_culverine:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_culverine",
+          "entityName": "矮人扩散炮",
+          "title": "数值调整防御塔：矮人扩散炮",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_culverine.png",
+          "details": [
+            {
+              "field": "硫磺爆裂 · 基础价格",
+              "before": "150",
+              "after": "200",
+              "delta": "+50（+33.3%）",
+              "direction": "increase"
+            },
+            {
+              "field": "硫磺爆裂 · 升级价格",
+              "before": "150",
+              "after": "180",
+              "delta": "+30（+20.0%）",
+              "direction": "increase"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_culverine:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_culverine",
+          "entityName": "矮人扩散炮",
+          "title": "内容调整防御塔：矮人扩散炮",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_culverine.png",
+          "details": [
+            {
+              "field": "硫磺爆裂 · 技能说明",
+              "before": "每16秒发射一颗硫磺爆弹，对敌群造成70-90点爆炸伤害，并留下硫磺云降低其中敌人100%的魔法抗性，持续6秒。；每16秒发射一颗硫磺爆弹，对敌群造成120-160点爆炸伤害，并留下硫磺云降低其中敌人100%的魔法抗性，持续8秒。；每16秒发射一颗硫磺爆弹，对敌群造成170-230点爆炸伤害，并留下硫磺云降低其中敌人100%的魔法抗性，持续10秒。",
+              "after": "每16秒发射一颗硫磺爆弹，对敌群造成98-126点破魔伤害，并留下硫磺云，降低其中敌人100%魔法抗性，持续6秒。；每16秒发射一颗硫磺爆弹，对敌群造成168-224点破魔伤害，并留下硫磺云，降低其中敌人100%魔法抗性，持续8秒。；每16秒发射一颗硫磺爆弹，对敌群造成238-322点破魔伤害，并留下硫磺云，降低其中敌人100%魔法抗性，持续10秒。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "锋利弹片 · 技能说明",
+              "before": "此塔的每次普通攻击都会摧毁敌人3%的物理护甲。；此塔的每次普通攻击都会摧毁敌人5%的物理护甲。；此塔的每次普通攻击都会摧毁敌人7%的物理护甲。",
+              "after": "每次普通攻击摧毁敌人3点护甲。；每次普通攻击摧毁敌人5点护甲。；每次普通攻击摧毁敌人7点护甲。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_wildcat:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_wildcat",
+          "entityName": "野猫女猎手",
+          "title": "内容调整防御塔：野猫女猎手",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_wildcat.png",
+          "details": [
+            {
+              "field": "狩猎箭雨 · 技能说明",
+              "before": "每隔12秒，发射特制的弓箭，在空中散裂为8支箭矢落下，每支对敌人造成8-12点破魔伤害。；每隔12秒，发射特制的弓箭，在空中散裂为10支箭矢落下，每支对敌人造成13-16点破魔伤害。；每隔12秒，发射特制的弓箭，在空中散裂为12支箭矢落下，每支对敌人造成18-22点破魔伤害。",
+              "after": "每隔12秒，发射特制的弓箭，在空中散裂为14支箭矢落下，每支对敌人造成8-12点破魔伤害。；每隔12秒，发射特制的弓箭，在空中散裂为14支箭矢落下，每支对敌人造成18-22点破魔伤害。；每隔12秒，发射特制的弓箭，在空中散裂为20支箭矢落下，每支对敌人造成18-23点破魔伤害。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_sunray_master:added:main",
+          "category": "tower",
+          "kind": "added",
+          "entityId": "tower_sunray_master",
+          "entityName": "日耀大师",
+          "title": "新增防御塔：日耀大师",
+          "description": "新增防御塔，定位为直接输出、范围伤害、控制、召唤/拦截、减益/破甲。",
+          "image": "/encyclopedia/thumbs/tower_sunray_master.png",
+          "details": []
+        },
+        {
+          "id": "tower:tower_miners:added:main",
+          "category": "tower",
+          "kind": "added",
+          "entityId": "tower_miners",
+          "entityName": "淘金矮人",
+          "title": "新增防御塔：淘金矮人",
+          "description": "新增防御塔，定位为直接输出、范围伤害、控制、召唤/拦截、经济辅助。",
+          "image": "/encyclopedia/thumbs/tower_miners.png",
+          "details": []
+        },
+        {
+          "id": "technology:2:barrack_bodies:content:main",
+          "category": "technology",
+          "kind": "content",
+          "entityId": "2:barrack_bodies",
+          "entityName": "人海战术",
+          "title": "内容调整科技：人海战术",
+          "description": "",
+          "image": "/technologies/2/barrack_bodies.png",
+          "details": [
+            {
+              "field": "科技说明",
+              "before": "士兵生命上限降低20%，但是兵营的人数上限提升一名。特殊兵营的人数不提升，但是伤害提升30%。",
+              "after": "士兵生命上限降低20%，但是兵营的人数上限提升1名。特殊兵营的人数不提升，但是伤害提升30%。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        }
+      ]
+    },
     {
       "id": "2.0.9.3-731afe683e16",
       "version": "2.0.9.3",
