@@ -14,8 +14,17 @@ const pageErrors = new WeakMap<Page, string[]>()
 
 async function navigate(page: Page, label: string) {
   const tab = page.getByRole('tab', { name: label, exact: true })
-  if (!(await tab.isVisible())) await page.getByRole('button', { name: '展开导航', exact: true }).click()
+  const toggle = page.getByRole('button', { name: /^(展开|收起)导航$/ })
+  const mobile = await toggle.isVisible()
+  // A closing menu can still be visually present during its CSS transition.
+  // Use the actual disclosure state rather than that transient visibility.
+  if (mobile) {
+    if (await toggle.getAttribute('aria-expanded') !== 'true') await toggle.click()
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true')
+  }
   await tab.click()
+  await expect(tab).toHaveAttribute('aria-selected', 'true')
+  if (mobile) await expect(toggle).toHaveAttribute('aria-expanded', 'false')
 }
 async function openTower(page: Page, id: string) {
   await navigate(page, '塔典')
