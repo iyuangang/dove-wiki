@@ -311,7 +311,7 @@ test('天梯保留两档实测、分类和版本边界，直接地址可刷新',
   await expect(page.locator('.rating-board')).toBeVisible()
   await expect(page.locator('.rating-facts')).toContainText(ratingManifest.profiles.quick.coreTrials.toLocaleString('en-US'))
   await expect(page.locator('.rating-section-heading').first()).toContainText(`已评级 ${ratingManifest.profiles.quick.groupCounts.tower_final} / ${ratingManifest.profiles.quick.groupCounts.tower_final}`)
-  await expect(page.getByText(`Game v${ratingManifest.profiles.quick.gameVersion}`, { exact: true })).toBeVisible()
+  await expect(page.locator('.version-badge')).toContainText(`Game v${ratingManifest.profiles.quick.gameVersion}`)
   await expect(page.getByRole('img', { name: /八维雷达图/ })).toBeVisible()
   await noOverflow(page)
   await page.reload()
