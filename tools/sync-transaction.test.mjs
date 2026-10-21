@@ -41,6 +41,20 @@ describe('同步快照事务', () => {
     try { expect(await readFile(join(root, 'src/data/dove-data.json'), 'utf8')).toBe('old data') }
     finally { await transaction.close() }
   }))
+  it('天梯目录和清单整体替换失败时恢复JSON与压缩证据', async () => fixture(async root => {
+    await put(root, 'public/rating/standard/results.json', 'old results')
+    await put(root, 'public/rating/standard/raw/a.json.gz', 'old evidence')
+    await put(root, 'src/data/rating-manifest.json', 'old manifest')
+    const transaction = await beginSync(root)
+    try {
+      await put(transaction.stageRoot, 'public/rating/standard/results.json', 'new results')
+      await put(transaction.stageRoot, 'src/data/rating-manifest.json', 'new manifest')
+      await expect(transaction.promote(['public/rating','src/data/rating-manifest.json'], () => { throw new Error('interrupted') })).rejects.toThrow('interrupted')
+      expect(await readFile(join(root,'public/rating/standard/results.json'),'utf8')).toBe('old results')
+      expect(await readFile(join(root,'public/rating/standard/raw/a.json.gz'),'utf8')).toBe('old evidence')
+      expect(await readFile(join(root,'src/data/rating-manifest.json'),'utf8')).toBe('old manifest')
+    } finally { await transaction.close() }
+  }))
   it('拒绝并发同步及非生成路径', async () => fixture(async (root) => {
     const transaction = await beginSync(root)
     try {

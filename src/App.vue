@@ -23,7 +23,8 @@ const workspace = createWorkspace(doveData.supportEffects, doveData.technologyTr
 provide(workspaceKey, workspace)
 const activeTab = ref<TabId>(tabFromHash(window.location.hash))
 const navIcons = { catalog: Castle, enemies: Skull, heroes: Swords, tierlist: Trophy, technology: Sparkles, updates: History, calculator: FlaskConical, compare: Columns2, data: BookOpen }
-const activeSnapshot = computed(() => activeTab.value === 'tierlist' ? ratingManifest : activeTab.value === 'heroes' ? doveData.metadata.heroSnapshot || doveData.metadata : doveData.metadata)
+const ratingProfile = ref<'standard' | 'quick'>('standard')
+const activeSnapshot = computed(() => activeTab.value === 'tierlist' ? ratingManifest.profiles[ratingProfile.value] : activeTab.value === 'heroes' ? doveData.metadata.heroSnapshot || doveData.metadata : doveData.metadata)
 const mobileNavOpen = ref(false)
 const selectedTowerId = ref<string | null>(null)
 const selectedTower = computed<Tower | null>(() =>
@@ -223,7 +224,7 @@ function compareTower(tower: Tower, side: 'left' | 'right') {
         :towers="towers"
         @open="openTower"
       />
-      <RatingView v-else-if="activeTab === 'tierlist'" />
+      <RatingView v-else-if="activeTab === 'tierlist'" @profile-change="ratingProfile = $event" />
       <DataView
         v-else-if="activeTab === 'data'"
         :data="doveData"

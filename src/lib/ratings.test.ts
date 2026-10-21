@@ -5,7 +5,7 @@ import path from 'node:path'
 import { createHash } from 'node:crypto'
 import { gunzipSync } from 'node:zlib'
 import manifest from '../data/rating-manifest.json'
-import { axesFor, filterRatings, radarPolygon, ratingTier, type RatingDataset } from './ratings'
+import { validRatingCoverage, axesFor, filterRatings, radarPolygon, ratingTier, type RatingDataset } from './ratings'
 
 const publicDir = fileURLToPath(new URL('../../public/', import.meta.url))
 const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex')
@@ -19,13 +19,12 @@ describe('发布的原生强度测评', () => {
       expect(hash(bytes)).toBe(p.sha256)
       expect(data.summary.profile).toBe(id)
       expect(data.summary.coreFailed).toBe(0)
-      expect(data.summary.coreTrials).toBe(id === 'standard' ? 15145 : 9087)
-      expect(data.objects.filter(r => r.core)).toHaveLength(261)
-      expect(data.objects.filter(r => r.group === 'hero_melee')).toHaveLength(79)
-      expect(data.objects.filter(r => r.group === 'hero_ranged')).toHaveLength(79)
-      expect(data.objects.filter(r => r.group === 'tower_final')).toHaveLength(91)
-      expect(data.objects.filter(r => r.group === 'tower_lower')).toHaveLength(12)
-      expect(data.objects.filter(r => r.group === 'tower_special')).toHaveLength(18)
+      expect(validRatingCoverage(data)).toBe(true)
+      expect(data.summary.coreTrials).toBe(p.coreTrials)
+      expect(data.objects.filter(r => r.core).every(r => r.state === 'complete')).toBe(true)
+      const coreRounds = data.objects.filter(r => r.core).reduce((sum,r) => sum + r.successfulTrials, 0)
+      expect(coreRounds).toBe(p.coreTrials)
+
     })
     it(`${id} 所有已发布分数可用固定参照复算，辅助单轴不被综合分覆盖`, () => {
       for (const row of data.objects) {
@@ -51,12 +50,23 @@ describe('发布的原生强度测评', () => {
         expect(hash(compressed)).toBe(row.evidence.gzipSha256)
         expect(hash(gunzipSync(compressed))).toBe(row.evidence.sha256)
       }
-      expect(seen.size).toBe(206)
+      expect(seen.size).toBe(data.summary.templates)
       for (const group of new Set(data.objects.map(r => r.group))) for (const role of ['output', 'defense', 'support']) {
         expect(existsSync(path.join(publicDir, `rating/${id}/${group}_${role}.png`))).toBe(true)
       }
     })
   }
+  it('支持新增原版塔，同时拒绝漏项和重复对象', () => {
+    const data = structuredClone(profiles[0]!.data)
+    const tower = structuredClone(data.objects.find(r => r.core && r.kind === 'tower')!)
+    tower.id = 'tower_future'; tower.templateId = tower.id
+    data.objects.push(tower); data.summary.templates++; data.summary.coreTrials += tower.successfulTrials
+    expect(validRatingCoverage(data)).toBe(true)
+    data.objects.push(tower)
+    expect(validRatingCoverage(data)).toBe(false)
+    data.objects.pop(); data.objects.pop()
+    expect(validRatingCoverage(data)).toBe(false)
+  })
   it('按模式隔离搜索、正确处理失败项与零能力雷达', () => {
     const data = profiles[0]!.data
     const ranged = filterRatings(data.objects, 'hero_ranged', 'output', ' HERO_ALLERIA ')

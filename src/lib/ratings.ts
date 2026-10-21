@@ -51,3 +51,14 @@ export function ratingNumber(value: number | null | undefined, raw = false) {
     maximumFractionDigits: raw && value !== 0 && Math.abs(value) < 1 ? 4 : raw ? 2 : 1,
   })
 }
+
+export function validRatingCoverage(data: RatingDataset) {
+  const ids = new Set(data.objects.map(r => r.id))
+  const templates = new Set(data.objects.map(r => r.templateId))
+  const core = data.objects.filter(r => r.core)
+  const melee = data.objects.filter(r => r.group === 'hero_melee').length
+  return data.schema === 1 && data.summary.coreFailed === 0 && ids.size === data.objects.length &&
+    templates.size === data.summary.templates && melee > 0 && melee === data.objects.filter(r => r.group === 'hero_ranged').length &&
+    data.objects.some(r => r.group === 'tower_final') && core.every(r => r.state === 'complete' && r.failedTrials === 0) &&
+    core.reduce((sum, r) => sum + r.successfulTrials, 0) === data.summary.coreTrials
+}
