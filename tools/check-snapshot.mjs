@@ -1,3 +1,4 @@
+import { generateSiteIndex } from './site-index.mjs'
 import { readFile } from 'node:fs/promises'
 import { snapshotHash, validateAssets, validateSnapshot } from './snapshot-validation.mjs'
 import { validateContract } from './sync-rating-contract.mjs'
@@ -13,3 +14,5 @@ if (snapshotHash(dataText) !== manifest.dataHash) throw new Error('数据快照�
 const { fileURLToPath } = await import('node:url')
 const assets = await validateAssets(data, fileURLToPath(root))
 console.log(`[dove-wiki] 快照格式、审阅证据与 ${assets} 个资源引用校验通过。`)
+
+await generateSiteIndex(fileURLToPath(root), true)

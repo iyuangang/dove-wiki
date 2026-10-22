@@ -15,15 +15,15 @@
     },
     "ratings": {
       "inputs": {
-        "src/data/rating-manifest.json": "09d8a22c4e6c442b4b01152e927680f2ecee9a08877533033ed3112801b08b16",
+        "src/data/rating-manifest.json": "260e55a0f09ed358abd924a3a01204a16bf0a7d0d565693fe96cc602a1ccfdda",
         "src/data/rating-methodology.json": "eb4384f11a688f246ad99fa9c81a64ec35e0321f6d9b175e90a31075adaa05ef"
       },
-      "file": "ratings-bf6ee268613afd987150.ndjson.gz",
-      "sha256": "49453efe41aeb4cadd248e452a4c7432653c8fe7cb7514dfdf311d0e8acc23b0",
-      "treeSha256": "bf6ee268613afd987150fe0d88945939f5af8a0c53dea8feb802ec3cacafb160",
+      "file": "ratings-05d8720ef1567581e8a0.ndjson.gz",
+      "sha256": "237b5b6ffc18bbb168c6ca7d54003a37dd44c4bdfe42232df30b9319e5841bbb",
+      "treeSha256": "05d8720ef1567581e8a08736c3604e89883791cff1a7abaf47afd61cb36c32ae",
       "files": 465,
-      "bytes": 29300338,
-      "url": null
+      "bytes": 29454133,
+      "url": "https://github.com/iyuangang/dove-wiki/releases/download/data-assets/ratings-05d8720ef1567581e8a0.ndjson.gz"
     }
   }
 }

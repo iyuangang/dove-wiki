@@ -1,3 +1,4 @@
+import { seedVariation } from './rating-variation.mjs'
 import { readFile, writeFile, mkdir, copyFile, readdir, rm, cp } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
 import os from 'node:os'
@@ -112,7 +113,7 @@ for (const [profile, sourceDir] of Object.entries(sources)) {
     }
     return { id: r.id, templateId: r.template_id, name: r.name, kind: r.kind, group: r.group, core, state: r.state,
       primaryAvailable: r.primary_available ?? null, successfulTrials: r.successful_trials, failedTrials: r.failed_trials,
-      cost: r.cost ?? null, scores, ratings, notes: r.notes || {}, annotation: r.annotation_limitation || '',
+      variation: seedVariation(original,scores,ratingContract), cost: r.cost ?? null, scores, ratings, notes: r.notes || {}, annotation: r.annotation_limitation || '',
       errors: original.errors.slice(0, 3), evidence: evidence[r.template_id] }
   })
   if (coreTrials !== s.core_trials) throw new Error('Formal coverage mismatch: ' + profile)

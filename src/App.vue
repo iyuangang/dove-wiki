@@ -1,34 +1,45 @@
 <script setup lang="ts">
-import { computed, defineAsyncComponent, nextTick, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
+import { computed, defineAsyncComponent, nextTick, onBeforeUnmount, onMounted, provide, ref, shallowRef, watch } from 'vue'
 import { Castle, Skull, Swords, Sparkles, History, FlaskConical, Columns2, BookOpen, Trophy } from '@lucide/vue'
-import DetailPanel from './components/DetailPanel.vue'
+const DetailPanel = defineAsyncComponent(() => import('./components/DetailPanel.vue'))
 import { Badge } from './components/ui/badge'
 import { Tabs, TabsList, TabsTrigger } from './components/ui/tabs'
-import { doveData, enemies, gameChangelog, heroes, siteVersion, towerById, towers } from './data'
+import siteIndex from './data/site-index.json'
+import type { DoveData, GameChangelog } from './types'
+const fullData = shallowRef<typeof import('./data') | null>(null)
+const loadFailure = ref('')
+let dataPromise: Promise<void> | null = null
+function ensureData() { return dataPromise ||= import('./data').then(d => { fullData.value = d }).catch(e => { loadFailure.value = String(e); dataPromise = null; throw e }) }
+const doveData = computed(() => fullData.value?.doveData || siteIndex as unknown as DoveData)
+const towers = computed(() => fullData.value?.towers || [])
+const heroes = computed(() => fullData.value?.heroes || [])
+const enemies = computed(() => fullData.value?.enemies || [])
+const gameChangelog = computed(() => fullData.value?.gameChangelog as GameChangelog)
+const siteVersion = import.meta.env.VITE_APP_VERSION?.trim() || 'dev'
 import { hashForTab, navigationTabs as tabs, tabFromHash, type TabId } from './lib/navigation'
-import CalculatorView from './views/CalculatorView.vue'
-import CatalogView from './views/CatalogView.vue'
-import CompareView from './views/CompareView.vue'
-import DataView from './views/DataView.vue'
-import EnemyView from './views/EnemyView.vue'
-import HeroView from './views/HeroView.vue'
-import TechnologyView from './views/TechnologyView.vue'
-import UpdateHistoryView from './views/UpdateHistoryView.vue'
+const CalculatorView = defineAsyncComponent(() => import('./views/CalculatorView.vue'))
+const CatalogView = defineAsyncComponent(() => import('./views/CatalogView.vue'))
+const CompareView = defineAsyncComponent(() => import('./views/CompareView.vue'))
+const DataView = defineAsyncComponent(() => import('./views/DataView.vue'))
+const EnemyView = defineAsyncComponent(() => import('./views/EnemyView.vue'))
+const HeroView = defineAsyncComponent(() => import('./views/HeroView.vue'))
+const TechnologyView = defineAsyncComponent(() => import('./views/TechnologyView.vue'))
+const UpdateHistoryView = defineAsyncComponent(() => import('./views/UpdateHistoryView.vue'))
 import ratingManifest from './data/rating-manifest.json'
 const RatingView = defineAsyncComponent(() => import('./views/RatingView.vue'))
 import type { Enemy, Tower } from './types'
 import { createWorkspace, loadEnemyPanel, workspaceKey } from './composables/useWorkspace'
 
-const workspace = createWorkspace(doveData.supportEffects, doveData.technologyTrees)
+const workspace = createWorkspace(siteIndex.supportEffects, siteIndex.technologyTrees)
 provide(workspaceKey, workspace)
 const activeTab = ref<TabId>(tabFromHash(window.location.hash))
 const navIcons = { catalog: Castle, enemies: Skull, heroes: Swords, tierlist: Trophy, technology: Sparkles, updates: History, calculator: FlaskConical, compare: Columns2, data: BookOpen }
 const ratingProfile = ref<'standard' | 'quick'>('standard')
-const activeSnapshot = computed(() => activeTab.value === 'tierlist' ? ratingManifest.profiles[ratingProfile.value] : activeTab.value === 'heroes' ? doveData.metadata.heroSnapshot || doveData.metadata : doveData.metadata)
+const activeSnapshot = computed(() => activeTab.value === 'tierlist' ? ratingManifest.profiles[ratingProfile.value] : activeTab.value === 'heroes' ? doveData.value.metadata.heroSnapshot || doveData.value.metadata : doveData.value.metadata)
 const mobileNavOpen = ref(false)
 const selectedTowerId = ref<string | null>(null)
 const selectedTower = computed<Tower | null>(() =>
-  selectedTowerId.value ? towerById.get(selectedTowerId.value) || null : null,
+  selectedTowerId.value ? fullData.value?.towerById.get(selectedTowerId.value) || null : null,
 )
 const activeTabMeta = computed(() => tabs.find((tab) => tab.id === activeTab.value) ?? tabs[0])
 
@@ -37,7 +48,7 @@ let routeInitialized = false
 watch(activeTab, async (tab, previousTab) => {
   if (previousTab) workspace.scroll[previousTab] = window.scrollY
   selectedTowerId.value = null
-  const targetHash = hashForTab(tab)
+  const targetHash = hashForTab(tab) + (tab === 'tierlist' && tabFromHash(window.location.hash) === tab ? (window.location.hash.includes('?') ? '?' + window.location.hash.split('?')[1] : '') : '')
 
   if (window.location.hash !== targetHash) {
     const routeUrl = `${window.location.pathname}${window.location.search}${targetHash}`
@@ -47,13 +58,14 @@ watch(activeTab, async (tab, previousTab) => {
   routeInitialized = true
   mobileNavOpen.value = false
   document.title = `${activeTabMeta.value.label} | 王国保卫战鸽子版 WIKI`
+  if (tab !== 'tierlist') { try { await ensureData() } catch { return } }
   await nextTick()
   window.scrollTo({ top: workspace.scroll[tab] || 0, behavior: 'instant' })
 }, { immediate: true })
 
 function syncTabFromAddress() {
   const tab = tabFromHash(window.location.hash)
-  const canonicalHash = hashForTab(tab)
+  const canonicalHash = hashForTab(tab) + (tab === 'tierlist' && window.location.hash.startsWith('#/tierlist?') ? '?' + window.location.hash.split('?')[1] : '')
 
   if (window.location.hash !== canonicalHash) {
     const routeUrl = `${window.location.pathname}${window.location.search}${canonicalHash}`
@@ -92,7 +104,14 @@ async function enterTool(tab: TabId, focusId: string) {
   workspace.scroll[tab] = 0
   selectedTowerId.value = null
   selectTab(tab)
+  await ensureData()
   await nextTick()
+  const deadline=performance.now()+5000
+  while(activeTab.value === tab && !document.getElementById(focusId) && performance.now()<deadline) {
+    await new Promise<void>(resolve => requestAnimationFrame(() => resolve()))
+  }
+  if(activeTab.value !== tab)return
+  await new Promise<void>(resolve => requestAnimationFrame(() => resolve()))
   document.getElementById(focusId)?.focus({ preventScroll: true })
   document.getElementById(focusId)?.scrollIntoView({ block: 'start', behavior: 'instant' })
 }
@@ -184,8 +203,10 @@ function compareTower(tower: Tower, side: 'left' | 'right') {
     </header>
 
     <main>
+      <p v-if="loadFailure" class="page-width" role="alert">页面数据读取失败，请刷新重试：{{ loadFailure }}</p>
+      <p v-else-if="activeTab !== 'tierlist' && !fullData" class="page-width" role="status">正在读取百科数据……</p>
       <CatalogView
-        v-if="activeTab === 'catalog'"
+        v-else-if="activeTab === 'catalog'"
         :towers="towers"
         :summary="doveData.summary"
         @open="openTower"
@@ -239,6 +260,6 @@ function compareTower(tower: Tower, side: 'left' | 'right') {
       <span>{{ doveData.summary.encyclopediaImageCount }} 套塔百科图 · {{ doveData.summary.enemyCount }} 个敌人槽位 · {{ doveData.summary.heroCount }} 位英雄 · {{ doveData.summary.technologyTreeCount }} 套科技方案</span>
     </footer>
 
-    <DetailPanel :tower="selectedTower" :effects="doveData.supportEffects" @close="selectedTowerId = null" @calculate="calculateTower" @support="enableSupport" @compare="compareTower" />
+    <DetailPanel v-if="selectedTower && fullData" :tower="selectedTower" :effects="doveData.supportEffects" @close="selectedTowerId = null" @calculate="calculateTower" @support="enableSupport" @compare="compareTower" />
   </Tabs>
 </template>

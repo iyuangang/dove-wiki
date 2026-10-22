@@ -5,6 +5,7 @@ export interface RatingValue { value: number | null; grade: string; raw?: number
 export interface RatingObject {
   id: string; templateId: string; name: string; kind: 'hero' | 'tower'; group: string; core: boolean; state: string
   primaryAvailable: boolean | null; successfulTrials: number; failedTrials: number; cost: number | null
+  variation?: Record<string, {n:number;min:number;max:number;sd:number;crossesGrade:boolean} | null>
   scores: Record<string, RatingValue>; ratings: Record<RatingRole, RatingValue>
   notes: Record<string, string>; annotation: string; errors: string[]
   evidence: { file: string; sha256: string; gzipSha256: string; bytes: number; compressedBytes: number }

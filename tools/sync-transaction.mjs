@@ -5,7 +5,7 @@ import { dirname, isAbsolute, join, relative, resolve } from 'node:path'
 export const generatedPaths = [
   'public/portraits', 'public/encyclopedia', 'public/skills', 'public/heroes',
   'public/enemies', 'public/technologies', 'public/damage-types',
-  'src/data/dove-data.json', 'src/data/game-changelog.json', 'src/data/snapshot-manifest.json',
+  'src/data/dove-data.json', 'src/data/site-index.json', 'src/data/game-changelog.json', 'src/data/snapshot-manifest.json',
 ]
 
 export const ratingPaths = ['public/rating', 'src/data/rating-manifest.json', 'src/data/rating-methodology.json', 'src/data/rating-contract.json', 'data/asset-lock.json']

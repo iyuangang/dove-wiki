@@ -62,7 +62,8 @@ jobs:
             invalid_path=0
             while IFS= read -r path; do
               case "$path" in
-                src/data/dove-data.json|src/data/game-changelog.json|src/data/snapshot-manifest.json|src/data/rating-manifest.json|src/data/rating-methodology.json|src/data/rating-contract.json|data/asset-lock.json|public/encyclopedia/*|public/skills/*|public/portraits/*|public/heroes/*|public/enemies/*|public/technologies/*|public/damage-types/*)
+                src/data/site-index.json
+            src/data/site-index.json|src/data/dove-data.json|src/data/game-changelog.json|src/data/snapshot-manifest.json|src/data/rating-manifest.json|src/data/rating-methodology.json|src/data/rating-contract.json|data/asset-lock.json|public/encyclopedia/*|public/skills/*|public/portraits/*|public/heroes/*|public/enemies/*|public/technologies/*|public/damage-types/*)
                   ;;
                 *)
                   echo "Data-only release contains a non-generated file: $path"

@@ -54,6 +54,7 @@ jobs:
           fi
 
           data_paths=(
+            src/data/site-index.json
             src/data/dove-data.json
             src/data/game-changelog.json
             src/data/snapshot-manifest.json

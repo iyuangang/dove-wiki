@@ -1,7 +1,11 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { Download, ExternalLink, RefreshCw, Trophy } from '@lucide/vue'
-import { doveData, heroById, towerById } from '../data'
+import siteIndex from '../data/site-index.json'
+import { publicAssetUrl } from '../lib/public-assets'
+import { readRatingRoute, writeRatingRoute } from '../lib/rating-route'
+import { cohortComparison, feedbackBundle } from '../lib/rating-insights'
+const initial = readRatingRoute(window.location.hash)
 import manifest from '../data/rating-manifest.json'
 import methodology from '../data/rating-methodology.json'
 import metricGuide from '../data/rating-contract.json'
@@ -9,12 +13,12 @@ import { axesFor, filterRatings, radarPoint, radarPolygon, ratingAxes, ratingGro
 import { loadRatingDataset, ratingAssetUrl } from '../lib/rating-loader'
 
 const emit = defineEmits<{ profileChange: [profile: RatingProfile] }>()
-const profile = ref<RatingProfile>('standard')
+const profile = ref<RatingProfile>(initial.profile)
 watch(profile, value => emit('profileChange', value), { immediate: true })
-const role = ref<RatingRole>('output')
-const group = ref('hero_ranged')
-const search = ref('')
-const selectedId = ref('')
+const role = ref<RatingRole>(initial.role)
+const group = ref(initial.group)
+const search = ref(initial.q)
+const selectedId = ref(initial.id)
 const dataset = ref<RatingDataset | null>(null)
 const loading = ref(false)
 const failure = ref('')
@@ -49,13 +53,33 @@ function roleWeights(id: RatingRole) {
     return `${label} ${Math.round(weight * 100)}%`
   }).join(' · ')
 }
-const image = (row: RatingObject) => row.kind === 'hero' ? heroById.get(row.templateId)?.thumbnail : towerById.get(row.templateId)?.image
+const image = (row: RatingObject) => publicAssetUrl((siteIndex.portraits as Record<string,string>)[row.templateId] || '')
 const polygon = computed(() => selected.value ? radarPolygon(selected.value) : null)
 const ring = (value: number) => axes.value.map((_, i) => radarPoint(i, value).join(',')).join(' ')
 const point = (i: number, value: number) => radarPoint(i, value)
 const labelPoint = (i: number) => radarPoint(i, 100, 173)
 const file = (name: string) => ratingAssetUrl(`rating/${profile.value}/${name}`, summary.value.sha256)
 const evidenceUrl = computed(() => selected.value ? ratingAssetUrl(selected.value.evidence.file, selected.value.evidence.gzipSha256) : '')
+const comparison = computed(() => dataset.value && selected.value ? cohortComparison(dataset.value,selected.value) : [])
+const shareStatus = ref('')
+function syncRoute() { const r=readRatingRoute(window.location.hash);profile.value=r.profile;group.value=r.group;role.value=r.role;selectedId.value=r.id;search.value=r.q }
+window.addEventListener('hashchange',syncRoute);window.addEventListener('popstate',syncRoute)
+onBeforeUnmount(()=>{window.removeEventListener('hashchange',syncRoute);window.removeEventListener('popstate',syncRoute)})
+watch([profile,group,role,selectedId,search],()=>{
+  if(!window.location.hash.startsWith('#/tierlist'))return
+  const hash=writeRatingRoute({profile:profile.value,group:group.value,role:role.value,id:selectedId.value,q:search.value})
+  window.history.replaceState(null,'',window.location.pathname+window.location.search+hash)
+})
+async function copyLink() {
+  const hash=writeRatingRoute({profile:profile.value,group:group.value,role:role.value,id:selected.value?.id||'',q:search.value})
+  window.history.replaceState(null,'',window.location.pathname+window.location.search+hash)
+  try { await navigator.clipboard.writeText(window.location.href);shareStatus.value='链接已复制' } catch { shareStatus.value='请复制浏览器地址栏中的链接' }
+}
+function downloadFeedback() {
+  if(!dataset.value||!selected.value)return
+  const url=URL.createObjectURL(new Blob([JSON.stringify(feedbackBundle(dataset.value,selected.value,window.location.href),null,2)],{type:'application/json'}))
+  const a=document.createElement('a');a.href=url;a.download=selected.value.id+'-feedback.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)
+}
 const feedbackUrl = computed(() => {
   const row = selected.value
   const body = `游戏版本 / 提交：${summary.value.gameVersion} / ${summary.value.commitHash}\n批次：${summary.value.runId}\n对象：${row?.name || ''} / ${row?.id || ''}\n档位：${profile.value}\n场景ID / 种子：\n预期机制与依据：\n实际现象与原始证据：\n复现步骤或视频：\n建议修正：采集错误 / 场景遗漏 / 指标定义 / 权重偏好\n验收方法：`
@@ -77,7 +101,7 @@ const feedbackUrl = computed(() => {
       <div><strong>{{ summary.failedTrials }}</strong><span>附录失败轮次 · 不评级</span></div>
     </div>
     <p class="rating-notice">固定靶场的原生自动能力基准，保留自动技能、反击与召唤物。手动大招和实战操作尚未完整覆盖；快速档与标准档分别校准，不直接混排。本站其他百科页面仍使用各自标注的数据版本。</p>
-    <p v-if="summary.commitHash !== doveData.metadata.commitHash" class="rating-notice" role="note">历史实测：本页测于 Dove {{ summary.gameVersion }}（提交 {{ summary.commitHash.slice(0, 12) }}），当前百科已同步至 {{ doveData.metadata.gameVersion }}（提交 {{ doveData.metadata.commitHash.slice(0, 12) }}）。新增对象与机制改动尚未重新测评，不能将旧天梯直接视为新版排名。</p>
+    <p v-if="summary.commitHash !== siteIndex.metadata.commitHash" class="rating-notice" role="note">历史实测：本页测于 Dove {{ summary.gameVersion }}（提交 {{ summary.commitHash.slice(0, 12) }}），当前百科已同步至 {{ siteIndex.metadata.gameVersion }}（提交 {{ siteIndex.metadata.commitHash.slice(0, 12) }}）。新增对象与机制改动尚未重新测评，不能将旧天梯直接视为新版排名。</p>
     <p class="rating-caption">参照来源：本档完整原版实测的正值中位数 · {{ summary.coreTrials.toLocaleString() }} 轮正式样本完整 · 评分定义 {{ metricGuide.contractVersion }} / 评分版本 {{ metricGuide.scoreVersion }}。快速、标准及个人基准各自独立。</p>
 
     <div class="rating-controls">
@@ -86,7 +110,7 @@ const feedbackUrl = computed(() => {
       <label>评价方向<select v-model="role" aria-label="评价方向"><option v-for="(label, id) in ratingRoles" :key="id" :value="id">{{ label }}</option></select></label>
       <label class="rating-search">搜索对象<input v-model="search" aria-label="搜索对象" type="search" placeholder="名称 / 模板 ID" /></label>
     </div>
-    <div class="rating-links"><a :href="file(`${group}_${role}.png`)" download><Download :size="15" />此分类完整天梯图</a><a :href="file('native_scores.csv')" download>本档完整 CSV</a><a :href="file('results.json')" download>指标与来源 JSON</a><button type="button" @click="scrollTo(methodsSection)">测评标准与局限</button></div>
+    <div class="rating-links"><button type="button" @click="copyLink">复制当前筛选与对象链接</button><span role="status">{{ shareStatus }}</span><a :href="file(`${group}_${role}.png`)" download><Download :size="15" />此分类完整天梯图</a><a :href="file('native_scores.csv')" download>本档完整 CSV</a><a :href="file('results.json')" download>指标与来源 JSON</a><button type="button" @click="scrollTo(methodsSection)">测评标准与局限</button></div>
 
     <details class="rating-guide">
       <summary>{{ metricGuide.title }} · {{ group.startsWith('hero') ? '英雄' : '防御塔' }}</summary>
@@ -133,6 +157,11 @@ const feedbackUrl = computed(() => {
           </svg>
           <div class="rating-table-wrap"><table class="rating-table"><caption>八维能力与固定参照</caption><thead><tr><th>维度</th><th>实测指标</th><th>固定参照</th><th>分数</th><th>等级</th></tr></thead><tbody><tr v-for="key in axes" :key="key"><th>{{ ratingAxes[key] }}</th><td>{{ ratingNumber(selected.scores[key].raw, true) }}</td><td>{{ ratingNumber(selected.scores[key].reference, true) }}</td><td>{{ ratingNumber(selected.scores[key].value) }}</td><td>{{ selected.scores[key].grade }}</td></tr></tbody></table></div>
         </div>
+        <details class="rating-provenance"><summary>原版最高、中位数与种子波动</summary>
+          <p>仅比较当前类别的成功原版对象；中位数包含真实零值，与评分使用的正值中位数不同。未封顶分保留超出100分的幅度。观测范围不是置信区间；跨等级线表示该项对种子敏感。</p>
+          <div class="rating-table-wrap"><table class="rating-table"><thead><tr><th>维度</th><th>未封顶分</th><th>原版最高者 / 指标</th><th>较最高</th><th>原版中位数</th><th>较中位</th><th>种子数 / 观测范围</th></tr></thead><tbody><tr v-for="c in comparison" :key="c.key"><th>{{ c.label }}</th><td>{{ ratingNumber(selected.scores[c.key]?.uncapped) }}</td><td>{{ c.top }} / {{ ratingNumber(c.best,true) }}</td><td>{{ c.versusTop }}</td><td>{{ ratingNumber(c.median,true) }}</td><td>{{ c.versusMedian }}</td><td v-if="selected.variation?.[c.key]">{{ selected.variation[c.key]!.n }} / {{ ratingNumber(selected.variation[c.key]!.min,true) }}–{{ ratingNumber(selected.variation[c.key]!.max,true) }}<strong v-if="selected.variation[c.key]!.crossesGrade"> · 跨等级线</strong></td><td v-else>归档未提供；见逐轮证据</td></tr></tbody></table></div>
+        </details>
+        <button type="button" class="rating-jump" @click="downloadFeedback">下载本对象反馈资料（填写现象后自行提交）</button>
         <p v-if="selected.annotation" class="rating-caption">{{ selected.annotation }}</p>
         <div class="rating-links"><a :href="evidenceUrl" download><Download :size="15" />逐轮原始证据（JSON.gz）</a><a :href="feedbackUrl" target="_blank" rel="noopener noreferrer"><ExternalLink :size="15" />反馈机制与遗漏</a></div>
         <details class="rating-provenance"><summary>站位、前置条件与证据校验</summary><dl><template v-for="(value, key) in selected.notes" :key="key"><dt>{{ key }}</dt><dd>{{ value }}</dd></template><dt v-if="selected.cost !== null">金币成本</dt><dd v-if="selected.cost !== null">{{ ratingNumber(selected.cost, true) }}</dd><dt>原始 JSON SHA-256</dt><dd><code>{{ selected.evidence.sha256 }}</code></dd></dl><pre v-if="selected.errors.length">{{ selected.errors.join('\n\n') }}</pre><p>下载后解压可查看每场景、种子、普通伤害、秒杀、普攻与召唤物证据。原始文件中的采集时临时分数，可能与最终完整参照重新计算的天梯分数不同。</p></details>

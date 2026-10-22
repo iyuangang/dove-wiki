@@ -7,7 +7,7 @@ import { homedir } from 'node:os'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { resolveDovePaths } from './dove-paths.mjs'
 
-export const dataPaths = ['src/data/dove-data.json', 'src/data/game-changelog.json', 'src/data/snapshot-manifest.json',
+export const dataPaths = ['src/data/site-index.json', 'src/data/dove-data.json', 'src/data/game-changelog.json', 'src/data/snapshot-manifest.json',
   'src/data/rating-manifest.json', 'src/data/rating-methodology.json', 'src/data/rating-contract.json', 'data/asset-lock.json']
 const hash = bytes => createHash('sha256').update(bytes).digest('hex')
 const json = async file => JSON.parse(await readFile(file, 'utf8'))
