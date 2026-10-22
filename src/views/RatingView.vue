@@ -1,10 +1,12 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, defineAsyncComponent, onBeforeUnmount, ref, watch } from 'vue'
 import { Download, ExternalLink, RefreshCw, Trophy } from '@lucide/vue'
 import siteIndex from '../data/site-index.json'
 import { publicAssetUrl } from '../lib/public-assets'
 import { readRatingRoute, writeRatingRoute } from '../lib/rating-route'
 import { cohortComparison, feedbackBundle } from '../lib/rating-insights'
+const ExperimentViewer=defineAsyncComponent(()=>import('../components/ExperimentViewer.vue'))
+const showExperiments=ref(false)
 const initial = readRatingRoute(window.location.hash)
 import manifest from '../data/rating-manifest.json'
 import methodology from '../data/rating-methodology.json'
@@ -168,6 +170,8 @@ const feedbackUrl = computed(() => {
       </section>
     </template>
 
+    <div class="rating-links"><button type="button" :aria-expanded="showExperiments" @click="showExperiments=!showExperiments">独立实验室（机动、辅助、生存与同预算）</button></div>
+    <ExperimentViewer v-if="showExperiments" />
     <section id="rating-methods" ref="methodsSection" class="rating-methods" aria-labelledby="rating-method-title">
       <h2 id="rating-method-title">测评标准与专业玩家审阅</h2>
       <p>各轴正值中位数对应 70 分：<code>min(100, 70 × √(实测指标 / 固定参照))</code>。英雄近远程共用英雄参照；塔只以本档常规最终阶级塔建立参照。缺失与失败不填零分。</p>
