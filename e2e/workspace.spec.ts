@@ -298,7 +298,7 @@ test('塔与英雄弹窗保持键盘焦点并恢复打开按钮', async ({ page 
   await expect(heroOpener).toBeFocused()
 })
 
-test('天梯保留两档实测、分类和版本边界，直接地址可刷新', async ({ page }) => {
+test('天梯保留两档实测、分类和版本边界，说明跟随类别切换，直接地址可刷新', async ({ page }, testInfo) => {
   let first = true
   await page.route('**/rating/standard/results.json*', async route => {
     if (first) { first = false; await route.fulfill({ contentType: 'application/json', body: '{"previousRelease":true}' }) }
@@ -310,7 +310,24 @@ test('天梯保留两档实测、分类和版本边界，直接地址可刷新',
   if (ratingManifest.commitHash !== snapshot.metadata.commitHash) {
     await expect(page.getByRole('note')).toContainText(`当前百科已同步至 ${snapshot.metadata.gameVersion}`)
   }
+  const guide = page.locator('.rating-guide')
+  await guide.locator('summary').click()
+  await expect(guide.locator('dt')).toHaveCount(8)
+  await expect(guide).toContainText('英雄挨打时，能坚持多久？')
+  await expect(guide).toContainText('瞬移、变形、动作等待和冷却都计入')
+  await expect(guide).toContainText('未评测表示暂时不能可靠给分')
+  await noOverflow(page)
+  await guide.scrollIntoViewIfNeeded()
+  await page.screenshot({ path: testInfo.outputPath('hero-metric-guide.png') })
   await page.getByRole('combobox', { name: '对象类别', exact: true }).selectOption('tower_final')
+  await expect(guide.locator('dt')).toHaveCount(8)
+  await expect(guide).toContainText('士兵能拦住多少怪、拦多久？')
+  await expect(guide).toContainText('花这些金币，买到多少输出和拦截？')
+  await expect(guide).not.toContainText('英雄挨打时，能坚持多久？')
+  await noOverflow(page)
+  await guide.scrollIntoViewIfNeeded()
+  await page.screenshot({ path: testInfo.outputPath('tower-metric-guide.png') })
+  await guide.locator('summary').click()
   await expect(page.locator('.rating-section-heading').first()).toContainText(`已评级 ${ratingManifest.profiles.standard.groupCounts.tower_final} / ${ratingManifest.profiles.standard.groupCounts.tower_final}`)
   await page.getByRole('combobox', { name: '测评档位', exact: true }).selectOption('quick')
   await expect(page.locator('.rating-board')).toBeVisible()
