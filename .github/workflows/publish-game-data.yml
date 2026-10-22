@@ -100,11 +100,10 @@ jobs:
       - name: Verify main code with synced data
         env:
           VITE_APP_VERSION: ${{ steps.release.outputs.tag }}
-          VITE_BASE_PATH: /dove-wiki/
         run: |
           npm run check:data
           npm test
-          npm run build
+          VITE_BASE_PATH=/dove-wiki/ npm run build
 
       - name: Create isolated data release tag
         shell: bash
