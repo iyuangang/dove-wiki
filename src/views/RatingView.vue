@@ -4,6 +4,7 @@ import { Download, ExternalLink, RefreshCw, Trophy } from '@lucide/vue'
 import { doveData, heroById, towerById } from '../data'
 import manifest from '../data/rating-manifest.json'
 import methodology from '../data/rating-methodology.json'
+import metricGuide from '../data/rating-guide.json'
 import { axesFor, filterRatings, radarPoint, radarPolygon, ratingAxes, ratingGroups, ratingNumber, ratingRoles, ratingTier, ratingTiers, type RatingDataset, type RatingObject, type RatingProfile, type RatingRole } from '../lib/ratings'
 import { loadRatingDataset, ratingAssetUrl } from '../lib/rating-loader'
 
@@ -79,6 +80,20 @@ const feedbackUrl = computed(() => {
     </div>
     <div class="rating-links"><a :href="file(`${group}_${role}.png`)" download><Download :size="15" />此分类完整天梯图</a><a :href="file('native_scores.csv')" download>本档完整 CSV</a><a :href="file('results.json')" download>指标与来源 JSON</a><button type="button" @click="scrollTo(methodsSection)">测评标准与局限</button></div>
 
+    <details class="rating-guide">
+      <summary>{{ metricGuide.title }} · {{ group.startsWith('hero') ? '英雄' : '防御塔' }}</summary>
+      <p>{{ metricGuide.intro }}</p>
+      <dl class="rating-guide-list">
+        <div v-for="key in axes" :key="key">
+          <dt>{{ metricGuide.axes[key].label }}<span>{{ metricGuide.axes[key].question }}</span></dt>
+          <dd>{{ metricGuide.axes[key].plain }}</dd>
+        </div>
+      </dl>
+      <p>{{ metricGuide.reading }}</p>
+      <p class="rating-guide-scale">{{ metricGuide.scale }}</p>
+      <p>{{ metricGuide.combat }}</p>
+    </details>
+
     <p v-if="loading" class="rating-state" role="status">正在读取并校验{{ profile === 'standard' ? '标准' : '快速' }}档结果……</p>
     <div v-else-if="failure" class="rating-state rating-error" role="alert"><p>{{ failure }}。未加载的数据不会生成等级。</p><button type="button" @click="retry++"><RefreshCw :size="16" />重新读取</button></div>
     <template v-else-if="dataset">
@@ -153,6 +168,15 @@ const feedbackUrl = computed(() => {
 .rating-detail{scroll-margin-top:130px}
 .rating-links a,.rating-links button{display:inline-flex;align-items:center;gap:7px;color:var(--gold);text-underline-offset:4px;text-decoration:underline}
 .rating-links a:hover,.rating-links button:hover{color:var(--ink)}
+.rating-guide{margin:24px 0;padding:4px 20px;border:1px solid var(--line-bright);border-radius:10px;background:var(--panel)}
+.rating-page .rating-guide>summary{font-size:16px;font-weight:600}
+.rating-guide p{font-size:13px;color:var(--muted);line-height:1.85;margin:14px 0}
+.rating-guide-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}
+.rating-guide-list>div{padding:16px;border:1px solid var(--line);border-radius:6px;min-width:0}
+.rating-guide-list dt{font-size:16px;font-weight:600;color:var(--gold);line-height:1.7}
+.rating-guide-list dt span{display:block;font-size:14px;font-weight:500;color:var(--ink);margin-top:4px}
+.rating-guide-list dd{margin:8px 0 0;font-size:13px;color:var(--muted);line-height:1.85;overflow-wrap:anywhere}
+.rating-guide p.rating-guide-scale{color:var(--gold);padding:12px 14px;background:#e4c18408;border-left:2px solid var(--gold-soft)}
 .rating-board,.rating-detail,.rating-methods{margin-top:32px;padding:24px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
 .rating-section-heading{display:flex;align-items:center;justify-content:space-between;gap:16px}
 .rating-section-heading h2,.rating-methods h2{margin:0;font-size:21px;color:var(--ink)}
@@ -237,6 +261,8 @@ const feedbackUrl = computed(() => {
 .rating-controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .rating-controls label{min-width:0}
 .rating-board,.rating-detail,.rating-methods{padding:16px}
+.rating-guide{padding:4px 16px}
+.rating-guide-list{grid-template-columns:1fr}
 .rating-evidence-grid{grid-template-columns:1fr}
 .rating-radar{margin:auto}
 .rating-section-heading{align-items:start;flex-wrap:wrap}
