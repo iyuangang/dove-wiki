@@ -229,6 +229,8 @@ git push origin v1.4.0
 
 ## 测评数据与生成资源
 
+维护者可运行 `.\Update-And-Publish.cmd` 一键同步测评、百科并发布数据版本，详见 [使用说明](docs/publish-updates.md)。脚本在独立工作目录执行，通过 PR 和 CI 合入 dev，再运行数据发布工作流，不直接向 main 提交。
+
 生成图片和测评附件由GitHub Releases资源包托管，不提交 `public` 下的生成目录。CI和发布工作流按 `data/asset-lock.json` 下载、核验并缓存；失败时停止构建，不拿旧包补新清单。普通PR只读下载，不需要仓库写入密钥。
 
 完成强度测评中心后台标准测量并启用基准后，在wiki运行 `npm run ratings:sync -- --profile standard --publish`。快速档使用 `--profile quick`。提交天梯清单、测评说明和资源清单，按既有PR流程合入；数据发布工作流同时支持百科和天梯更新。资源包上传仅准备构建输入，网站上线仍由Release and deploy控制。

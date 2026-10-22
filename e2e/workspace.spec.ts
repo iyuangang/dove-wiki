@@ -299,6 +299,11 @@ test('塔与英雄弹窗保持键盘焦点并恢复打开按钮', async ({ page 
 })
 
 test('天梯保留两档实测、分类和版本边界，直接地址可刷新', async ({ page }) => {
+  let first = true
+  await page.route('**/rating/standard/results.json*', async route => {
+    if (first) { first = false; await route.fulfill({ contentType: 'application/json', body: '{"previousRelease":true}' }) }
+    else await route.continue()
+  })
   await navigate(page, '强度天梯')
   await expect(page.locator('.rating-section-heading').first()).toContainText(`已评级 ${ratingManifest.profiles.standard.groupCounts.hero_ranged} / ${ratingManifest.profiles.standard.groupCounts.hero_ranged}`)
   await expect(page.locator('.rating-facts')).toContainText(ratingManifest.profiles.standard.coreTrials.toLocaleString('en-US'))
@@ -317,4 +322,24 @@ test('天梯保留两档实测、分类和版本边界，直接地址可刷新',
   await page.reload()
   await expect(page).toHaveURL(/#\/tierlist$/)
   await expect(page.locator('.rating-board')).toBeVisible()
+})
+
+test('天梯自动重取旧缓存，持续校验失败时不展示等级并支持重新读取', async ({ page }) => {
+  let requests = 0
+  let corrupted = true
+  await page.route('**/rating/standard/results.json*', async route => {
+    requests++
+    expect(new URL(route.request().url()).searchParams.get('sha256')).toBe(ratingManifest.profiles.standard.sha256)
+    if (corrupted) await route.fulfill({ contentType: 'application/json', body: '{"cachedPreviousRelease":true}' })
+    else await route.continue()
+  })
+  await page.goto('./#/tierlist')
+  await expect(page.getByText('结果文件校验不一致，请刷新后重试', { exact: false })).toBeVisible()
+  expect(requests).toBe(2)
+  await expect(page.locator('.rating-board')).toHaveCount(0)
+  await expect(page.getByRole('img', { name: /八维雷达图/ })).toHaveCount(0)
+  corrupted = false
+  await page.getByRole('button', { name: '重新读取', exact: true }).click()
+  await expect(page.locator('.rating-board')).toBeVisible()
+  await expect(page.getByRole('img', { name: /八维雷达图/ })).toBeVisible()
 })
