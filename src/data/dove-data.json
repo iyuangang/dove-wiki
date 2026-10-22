@@ -83,16 +83,16 @@
   },
   "metadata": {
     "title": "王国保卫战鸽子版 WIKI",
-    "gameVersion": "2.0.9.8",
+    "gameVersion": "2.0.9.9",
     "contentVersion": "5.6.12",
     "gameId": "kingdom_rush_dove",
-    "commitHash": "8c10091108e554d8643e787989ac69afc7fc7a18",
-    "generatedAt": "2026-10-21T02:51:28.905Z",
+    "commitHash": "8addcaccde09332ef2f1019397312d744f824f9e",
+    "generatedAt": "2026-10-22T02:45:31.475Z",
     "sourceRoot": "C:\\Users\\hhyg2\\AppData\\Local\\王国保卫战Dove版\\KingdomRushDove",
     "heroSnapshot": {
-      "gameVersion": "2.0.9.8",
-      "commitHash": "8c10091108e554d8643e787989ac69afc7fc7a18",
-      "generatedAt": "2026-10-21T02:51:28.908Z",
+      "gameVersion": "2.0.9.9",
+      "commitHash": "8addcaccde09332ef2f1019397312d744f824f9e",
+      "generatedAt": "2026-10-22T02:45:31.478Z",
       "sourceRoot": "C:\\Users\\hhyg2\\AppData\\Local\\王国保卫战Dove版\\KingdomRushDove"
     },
     "assumptions": [
@@ -103,11 +103,11 @@
     ]
   },
   "summary": {
-    "towerCount": 104,
-    "portraitCount": 104,
-    "encyclopediaImageCount": 92,
+    "towerCount": 105,
+    "portraitCount": 105,
+    "encyclopediaImageCount": 93,
     "portraitFallbackCount": 12,
-    "skillIconCount": 227,
+    "skillIconCount": 230,
     "technologyTreeCount": 4,
     "technologyCount": 144,
     "heroCount": 79,
@@ -118,9 +118,9 @@
     "supportHeroCount": 7,
     "supportEffectCount": 17,
     "levelUnlockCount": 70,
-    "defaultUnlockCount": 34,
+    "defaultUnlockCount": 35,
     "unlockAnomalyCount": 0,
-    "exactDamageCount": 103
+    "exactDamageCount": 104
   },
   "validation": {
     "warnings": [
@@ -89025,10 +89025,10 @@
         "source": "kr1/data/levels/level52_data.lua"
       },
       "attack": {
-        "damageMin": 14,
+        "damageMin": 15,
         "damageMax": 19,
         "cooldown": 0.8,
-        "dps": 20.625,
+        "dps": 21.25,
         "range": 200,
         "rallyRange": null,
         "damageType": "混合",
@@ -104485,6 +104485,385 @@
       ]
     },
     {
+      "id": "tower_crossbows",
+      "name": "诅咒弩手",
+      "description": "随着领主堕入魔道，瓦拉杜勒的远程士兵也开始借助黑暗力量来保卫他们的土地。",
+      "families": [
+        "archer"
+      ],
+      "roles": [
+        "直接输出",
+        "范围伤害",
+        "控制",
+        "持续伤害",
+        "召唤/拦截"
+      ],
+      "image": "/encyclopedia/thumbs/tower_crossbows.png",
+      "encyclopediaImage": "/encyclopedia/tower_crossbows.png",
+      "encyclopediaOrder": 87,
+      "encyclopediaListed": true,
+      "encyclopediaSprite": "kr6_encyclopedia_towers_0044",
+      "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0044",
+      "sourceGame": 6,
+      "portraitSprite": "kr6_info_portraits_towers_0035",
+      "price": 250,
+      "level": 1,
+      "towerType": "crossbows",
+      "canBeBuffed": true,
+      "unlock": {
+        "status": "default",
+        "label": "默认可用（未列入初始锁定表）",
+        "source": "kr1/data/slot_template.lua"
+      },
+      "attack": {
+        "damageMin": 19,
+        "damageMax": 30,
+        "cooldown": 1.5,
+        "dps": 16.333333333333332,
+        "range": 190,
+        "rallyRange": null,
+        "damageType": "物理",
+        "damageTypeValue": 2,
+        "kind": "bullet",
+        "confidence": "精确",
+        "scope": "单目标基础攻击"
+      },
+      "soldier": null,
+      "powers": [
+        {
+          "id": "skill_a",
+          "name": "腐化狂暴",
+          "icon": "/skills/tower_crossbows--skill_a.png",
+          "iconSprite": "kr6_quickmenu_special_icons_crossbows_0001",
+          "maxLevel": 3,
+          "priceBase": 230,
+          "priceIncrement": 190,
+          "descriptions": [
+            {
+              "key": "TOWER_CROSSBOWS_SKILL_A_DESCRIPTION_1",
+              "text": "每隔20秒，进入狂暴状态，大幅提升攻击速度并造成普攻2.5倍混合伤害，持续4秒。"
+            },
+            {
+              "key": "TOWER_CROSSBOWS_SKILL_A_DESCRIPTION_2",
+              "text": "每隔20秒，进入狂暴状态，大幅提升攻击速度并造成普攻2.5倍混合伤害，持续6秒。"
+            },
+            {
+              "key": "TOWER_CROSSBOWS_SKILL_A_DESCRIPTION_3",
+              "text": "每隔20秒，进入狂暴状态，大幅提升攻击速度并造成普攻2.5倍混合伤害，持续8秒。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 230,
+              "cumulativePrice": 230,
+              "description": "每隔20秒，进入狂暴状态，大幅提升攻击速度并造成普攻2.5倍混合伤害，持续4秒。",
+              "descriptionKey": "TOWER_CROSSBOWS_SKILL_A_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 20,
+                  "unit": "秒"
+                },
+                {
+                  "label": "持续时间",
+                  "value": 4,
+                  "unit": "秒"
+                },
+                {
+                  "label": "伤害倍率",
+                  "value": 2.5,
+                  "unit": "倍"
+                }
+              ]
+            },
+            {
+              "level": 2,
+              "price": 190,
+              "cumulativePrice": 420,
+              "description": "每隔20秒，进入狂暴状态，大幅提升攻击速度并造成普攻2.5倍混合伤害，持续6秒。",
+              "descriptionKey": "TOWER_CROSSBOWS_SKILL_A_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 20,
+                  "unit": "秒"
+                },
+                {
+                  "label": "持续时间",
+                  "value": 6,
+                  "unit": "秒"
+                },
+                {
+                  "label": "伤害倍率",
+                  "value": 2.5,
+                  "unit": "倍"
+                }
+              ]
+            },
+            {
+              "level": 3,
+              "price": 190,
+              "cumulativePrice": 610,
+              "description": "每隔20秒，进入狂暴状态，大幅提升攻击速度并造成普攻2.5倍混合伤害，持续8秒。",
+              "descriptionKey": "TOWER_CROSSBOWS_SKILL_A_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 20,
+                  "unit": "秒"
+                },
+                {
+                  "label": "持续时间",
+                  "value": 8,
+                  "unit": "秒"
+                },
+                {
+                  "label": "伤害倍率",
+                  "value": 2.5,
+                  "unit": "倍"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "name": "恐惧因子",
+          "icon": "/skills/tower_crossbows--skill_b.png",
+          "iconSprite": "kr6_quickmenu_special_icons_crossbows_0002",
+          "maxLevel": 2,
+          "priceBase": 210,
+          "priceIncrement": 200,
+          "descriptions": [
+            {
+              "key": "TOWER_CROSSBOWS_SKILL_B_DESCRIPTION_1",
+              "text": "使攻击附带诅咒，令敌人每0.5秒受到1点魔法伤害，持续4秒。重复诅咒时，刷新持续时间并叠加伤害。敌人被诅咒弩手击杀时，触发诅咒爆发，对周围敌人造成10点魔法伤害、施加诅咒，并使他们减速20%。"
+            },
+            {
+              "key": "TOWER_CROSSBOWS_SKILL_B_DESCRIPTION_2",
+              "text": "使攻击附带诅咒，令敌人每0.5秒受到2点魔法伤害，持续4秒。重复诅咒时，刷新持续时间并叠加伤害。敌人被诅咒弩手击杀时，触发诅咒爆发，对周围敌人造成20点魔法伤害、施加诅咒，并使他们减速20%。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 210,
+              "cumulativePrice": 210,
+              "description": "使攻击附带诅咒，令敌人每0.5秒受到1点魔法伤害，持续4秒。重复诅咒时，刷新持续时间并叠加伤害。敌人被诅咒弩手击杀时，触发诅咒爆发，对周围敌人造成10点魔法伤害、施加诅咒，并使他们减速20%。",
+              "descriptionKey": "TOWER_CROSSBOWS_SKILL_B_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 200,
+              "cumulativePrice": 410,
+              "description": "使攻击附带诅咒，令敌人每0.5秒受到2点魔法伤害，持续4秒。重复诅咒时，刷新持续时间并叠加伤害。敌人被诅咒弩手击杀时，触发诅咒爆发，对周围敌人造成20点魔法伤害、施加诅咒，并使他们减速20%。",
+              "descriptionKey": "TOWER_CROSSBOWS_SKILL_B_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "name": "诅咒弩箭",
+          "icon": "/skills/tower_crossbows--skill_c.png",
+          "iconSprite": "kr6_quickmenu_special_icons_crossbows_0003",
+          "maxLevel": 3,
+          "priceBase": 210,
+          "priceIncrement": 190,
+          "descriptions": [
+            {
+              "key": "TOWER_CROSSBOWS_SKILL_C_DESCRIPTION_1",
+              "text": "每20秒发射一支强力弩箭，造成120-180点真实伤害。强力弩箭有10%概率秒杀敌人，且每层诅咒提升该概率1%。"
+            },
+            {
+              "key": "TOWER_CROSSBOWS_SKILL_C_DESCRIPTION_2",
+              "text": "每20秒发射一支强力弩箭，造成240-360点真实伤害。强力弩箭有20%概率秒杀敌人，且每层诅咒提升该概率1%。"
+            },
+            {
+              "key": "TOWER_CROSSBOWS_SKILL_C_DESCRIPTION_3",
+              "text": "每20秒发射一支强力弩箭，造成360-540点真实伤害。强力弩箭有30%概率秒杀敌人，且每层诅咒提升该概率1%。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 210,
+              "cumulativePrice": 210,
+              "description": "每20秒发射一支强力弩箭，造成120-180点真实伤害。强力弩箭有10%概率秒杀敌人，且每层诅咒提升该概率1%。",
+              "descriptionKey": "TOWER_CROSSBOWS_SKILL_C_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 20,
+                  "unit": "秒"
+                },
+                {
+                  "label": "伤害下限",
+                  "value": 120,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 180,
+                  "unit": ""
+                }
+              ]
+            },
+            {
+              "level": 2,
+              "price": 190,
+              "cumulativePrice": 400,
+              "description": "每20秒发射一支强力弩箭，造成240-360点真实伤害。强力弩箭有20%概率秒杀敌人，且每层诅咒提升该概率1%。",
+              "descriptionKey": "TOWER_CROSSBOWS_SKILL_C_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 20,
+                  "unit": "秒"
+                },
+                {
+                  "label": "伤害下限",
+                  "value": 240,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 360,
+                  "unit": ""
+                }
+              ]
+            },
+            {
+              "level": 3,
+              "price": 190,
+              "cumulativePrice": 590,
+              "description": "每20秒发射一支强力弩箭，造成360-540点真实伤害。强力弩箭有30%概率秒杀敌人，且每层诅咒提升该概率1%。",
+              "descriptionKey": "TOWER_CROSSBOWS_SKILL_C_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 20,
+                  "unit": "秒"
+                },
+                {
+                  "label": "伤害下限",
+                  "value": 360,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 540,
+                  "unit": ""
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/archer_towers.lua",
+        "nameKey": "TOWER_CROSSBOWS_NAME",
+        "descriptionKey": "TOWER_CROSSBOWS_DESCRIPTION",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
+        "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
+        "unlock": "kr1/data/slot_template.lua"
+      },
+      "units": [
+        {
+          "id": "soldier_crossbows_ult",
+          "name": "灵魂骑士",
+          "relatedPowerIds": [],
+          "count": null,
+          "rallyRange": null,
+          "controllable": false,
+          "note": "模板基准值，未代入技能升级；技能带来的属性变化见逐级说明。",
+          "stats": {
+            "hp": 250,
+            "armor": 0.8,
+            "magicArmor": 0.2,
+            "speed": 50,
+            "respawn": null,
+            "regen": null,
+            "regenCooldown": 1,
+            "lifetime": null,
+            "attacks": [
+              {
+                "id": "melee-1",
+                "name": "近战",
+                "damageMin": 32,
+                "damageMax": 48,
+                "damageType": "物理",
+                "cooldown": 1.5,
+                "range": 70,
+                "radius": null,
+                "targets": null,
+                "chance": 1,
+                "disabled": false,
+                "source": "soldier_crossbows_ult.melee.attacks[1]"
+              }
+            ]
+          },
+          "variants": [],
+          "source": "kr1/archer_towers.lua",
+          "scriptSource": null
+        }
+      ],
+      "mechanics": {
+        "reviewedVersion": "2.0.9.3",
+        "items": [],
+        "pending": [
+          "物理伤害的护甲结算"
+        ],
+        "hasSpecificReview": false
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "aura_crossbows_skill_b"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_crossbows_skill_b_slow"
+        },
+        {
+          "role": "持续伤害",
+          "description": "附加效果在持续时间内多次造成伤害。",
+          "source": "mod_crossbows_skill_b_weak"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        }
+      ]
+    },
+    {
       "id": "tower_elf_ranger",
       "name": "精灵精英游侠",
       "description": "凭借对毒药的知识与高超的箭技，守护森林安宁，驱逐危害的游侠。",
@@ -104498,7 +104877,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_elf_ranger.png",
       "encyclopediaImage": "/encyclopedia/tower_elf_ranger.png",
-      "encyclopediaOrder": 87,
+      "encyclopediaOrder": 88,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr6_encyclopedia_towers_0020",
       "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0020",
@@ -104789,7 +105168,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_wizard.png",
       "encyclopediaImage": "/encyclopedia/tower_wizard.png",
-      "encyclopediaOrder": 88,
+      "encyclopediaOrder": 89,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr6_encyclopedia_towers_0012",
       "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0012",
@@ -105099,7 +105478,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_knights.png",
       "encyclopediaImage": "/encyclopedia/tower_knights.png",
-      "encyclopediaOrder": 89,
+      "encyclopediaOrder": 90,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr6_encyclopedia_towers_0008",
       "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0008",
@@ -105415,7 +105794,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_wildcat.png",
       "encyclopediaImage": "/encyclopedia/tower_wildcat.png",
-      "encyclopediaOrder": 90,
+      "encyclopediaOrder": 91,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr6_encyclopedia_towers_0028",
       "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0028",
@@ -105737,7 +106116,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_sunray_master.png",
       "encyclopediaImage": "/encyclopedia/tower_sunray_master.png",
-      "encyclopediaOrder": 91,
+      "encyclopediaOrder": 92,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr6_encyclopedia_towers_0032",
       "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0032",
@@ -106121,7 +106500,7 @@
       ],
       "image": "/encyclopedia/thumbs/tower_miners.png",
       "encyclopediaImage": "/encyclopedia/tower_miners.png",
-      "encyclopediaOrder": 92,
+      "encyclopediaOrder": 93,
       "encyclopediaListed": true,
       "encyclopediaSprite": "kr6_encyclopedia_towers_0036",
       "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0036",
@@ -106495,7 +106874,7 @@
       ],
       "image": "/portraits/tower_archer_1.png",
       "encyclopediaImage": "/portraits/tower_archer_1.png",
-      "encyclopediaOrder": 93,
+      "encyclopediaOrder": 94,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106569,7 +106948,7 @@
       ],
       "image": "/portraits/tower_archer_2.png",
       "encyclopediaImage": "/portraits/tower_archer_2.png",
-      "encyclopediaOrder": 94,
+      "encyclopediaOrder": 95,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106643,7 +107022,7 @@
       ],
       "image": "/portraits/tower_archer_3.png",
       "encyclopediaImage": "/portraits/tower_archer_3.png",
-      "encyclopediaOrder": 95,
+      "encyclopediaOrder": 96,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106717,7 +107096,7 @@
       ],
       "image": "/portraits/tower_mage_1.png",
       "encyclopediaImage": "/portraits/tower_mage_1.png",
-      "encyclopediaOrder": 96,
+      "encyclopediaOrder": 97,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106791,7 +107170,7 @@
       ],
       "image": "/portraits/tower_mage_2.png",
       "encyclopediaImage": "/portraits/tower_mage_2.png",
-      "encyclopediaOrder": 97,
+      "encyclopediaOrder": 98,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106865,7 +107244,7 @@
       ],
       "image": "/portraits/tower_mage_3.png",
       "encyclopediaImage": "/portraits/tower_mage_3.png",
-      "encyclopediaOrder": 98,
+      "encyclopediaOrder": 99,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106940,7 +107319,7 @@
       ],
       "image": "/portraits/tower_engineer_1.png",
       "encyclopediaImage": "/portraits/tower_engineer_1.png",
-      "encyclopediaOrder": 99,
+      "encyclopediaOrder": 100,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -107020,7 +107399,7 @@
       ],
       "image": "/portraits/tower_engineer_2.png",
       "encyclopediaImage": "/portraits/tower_engineer_2.png",
-      "encyclopediaOrder": 100,
+      "encyclopediaOrder": 101,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -107100,7 +107479,7 @@
       ],
       "image": "/portraits/tower_engineer_3.png",
       "encyclopediaImage": "/portraits/tower_engineer_3.png",
-      "encyclopediaOrder": 101,
+      "encyclopediaOrder": 102,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -107179,7 +107558,7 @@
       ],
       "image": "/portraits/tower_barrack_1.png",
       "encyclopediaImage": "/portraits/tower_barrack_1.png",
-      "encyclopediaOrder": 102,
+      "encyclopediaOrder": 103,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -107298,7 +107677,7 @@
       ],
       "image": "/portraits/tower_barrack_2.png",
       "encyclopediaImage": "/portraits/tower_barrack_2.png",
-      "encyclopediaOrder": 103,
+      "encyclopediaOrder": 104,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -107417,7 +107796,7 @@
       ],
       "image": "/portraits/tower_barrack_3.png",
       "encyclopediaImage": "/portraits/tower_barrack_3.png",
-      "encyclopediaOrder": 104,
+      "encyclopediaOrder": 105,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
