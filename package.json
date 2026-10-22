@@ -16,6 +16,7 @@
     "assets:pack": "node tools/assets.mjs pack",
     "assets:publish": "node tools/assets.mjs publish",
     "ratings:sync": "node tools/import-ratings.mjs",
+    "publish:update": "node tools/publish-update.mjs",
     "predev": "npm run assets:restore",
     "prebuild": "npm run assets:restore",
     "pretest": "npm run assets:restore",

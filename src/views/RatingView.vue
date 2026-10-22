@@ -4,8 +4,8 @@ import { Download, ExternalLink, RefreshCw, Trophy } from '@lucide/vue'
 import { doveData, heroById, towerById } from '../data'
 import manifest from '../data/rating-manifest.json'
 import methodology from '../data/rating-methodology.json'
-import { publicAssetUrl } from '../lib/public-assets'
-import { validRatingCoverage, axesFor, filterRatings, radarPoint, radarPolygon, ratingAxes, ratingGroups, ratingNumber, ratingRoles, ratingTier, ratingTiers, type RatingDataset, type RatingObject, type RatingProfile, type RatingRole } from '../lib/ratings'
+import { axesFor, filterRatings, radarPoint, radarPolygon, ratingAxes, ratingGroups, ratingNumber, ratingRoles, ratingTier, ratingTiers, type RatingDataset, type RatingObject, type RatingProfile, type RatingRole } from '../lib/ratings'
+import { loadRatingDataset, ratingAssetUrl } from '../lib/rating-loader'
 
 const emit = defineEmits<{ profileChange: [profile: RatingProfile] }>()
 const profile = ref<RatingProfile>('standard')
@@ -28,16 +28,7 @@ watch([profile, retry], async ([current], _, cleanup) => {
   cleanup(() => abort.abort())
   loading.value = true; dataset.value = null; failure.value = ''
   try {
-    const source = manifest.profiles[current]
-    const response = await fetch(publicAssetUrl(source.file), { signal: abort.signal })
-    if (!response.ok) throw new Error(`读取结果失败（HTTP ${response.status}）`)
-    const bytes = await response.arrayBuffer()
-    if (crypto.subtle) {
-      const hash = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(n => n.toString(16).padStart(2, '0')).join('')
-      if (hash !== source.sha256) throw new Error('结果文件校验不一致，请刷新后重试')
-    }
-    const result = JSON.parse(new TextDecoder().decode(bytes)) as RatingDataset
-    if (!validRatingCoverage(result) || result.summary.profile !== current || result.summary.gameVersion !== source.gameVersion) throw new Error('测评格式或完整性检查未通过')
+    const result = await loadRatingDataset(manifest.profiles[current], current, abort.signal)
     if (!abort.signal.aborted) dataset.value = result
   } catch (error) {
     if (!abort.signal.aborted) failure.value = error instanceof Error ? error.message : '无法读取测评结果'
@@ -55,8 +46,8 @@ const polygon = computed(() => selected.value ? radarPolygon(selected.value) : n
 const ring = (value: number) => axes.value.map((_, i) => radarPoint(i, value).join(',')).join(' ')
 const point = (i: number, value: number) => radarPoint(i, value)
 const labelPoint = (i: number) => radarPoint(i, 100, 173)
-const file = (name: string) => publicAssetUrl(`rating/${profile.value}/${name}`)
-const evidenceUrl = computed(() => selected.value ? publicAssetUrl(selected.value.evidence.file) : '')
+const file = (name: string) => ratingAssetUrl(`rating/${profile.value}/${name}`, summary.value.sha256)
+const evidenceUrl = computed(() => selected.value ? ratingAssetUrl(selected.value.evidence.file, selected.value.evidence.gzipSha256) : '')
 const feedbackUrl = computed(() => {
   const row = selected.value
   const body = `游戏版本 / 提交：${summary.value.gameVersion} / ${summary.value.commitHash}\n批次：${summary.value.runId}\n对象：${row?.name || ''} / ${row?.id || ''}\n档位：${profile.value}\n场景ID / 种子：\n预期机制与依据：\n实际现象与原始证据：\n复现步骤或视频：\n建议修正：采集错误 / 场景遗漏 / 指标定义 / 权重偏好\n验收方法：`
@@ -131,7 +122,7 @@ const feedbackUrl = computed(() => {
       <div class="rating-table-wrap"><table class="rating-table rating-weights"><tbody><tr><th>输出</th><td>对单 25% · 对群 35% · 对空 15% · 攻坚 25%</td></tr><tr><th>守线</th><td>生存（英雄）／拦截（塔）40% · 辅助 25% · 控场 35%</td></tr><tr><th>辅助</th><td>辅助 70% · 控场 30%</td></tr></tbody></table></div>
       <p class="rating-caption">手动大招、复杂地形、特殊敌人、长冷却、成长和阵容协同仍需补充测试。等级针对当前固定靶场，不代表玩家操作上限或完整 Boss 战胜率。</p>
       <details><summary>展开完整标准、场景参数、已知局限与反馈清单</summary><div class="rating-method-text" v-html="methodology.html"></div></details>
-      <div class="rating-links"><a :href="publicAssetUrl('rating/methodology.md')" download>下载完整测评标准</a><a :href="feedbackUrl" target="_blank" rel="noopener noreferrer">提交可复现的修正建议</a></div>
+      <div class="rating-links"><a :href="ratingAssetUrl('rating/methodology.md', methodology.sha256)" download>下载完整测评标准</a><a :href="feedbackUrl" target="_blank" rel="noopener noreferrer">提交可复现的修正建议</a></div>
       <details v-if="dataset" class="rating-provenance"><summary>本档版本、采集协议与源文件指纹</summary><p>批次 <code>{{ dataset.summary.runId }}</code></p><p>游戏提交 <code>{{ dataset.summary.commitHash }}</code></p><p>{{ dataset.summary.protocol }} / {{ dataset.summary.mobilityProtocol }}</p><p>源汇总 SHA-256 <code>{{ dataset.provenance.sourceSummarySha256 }}</code></p><pre>{{ JSON.stringify(dataset.provenance.measurementSources, null, 2) }}</pre><a :href="file('evidence-manifest.json')" download>下载原始证据文件校验清单</a></details>
     </section>
   </section>

@@ -4,6 +4,8 @@
 
 ## 推荐流程
 
+现在可在后台测评完成并启用基准后，直接在 wiki 运行 `.\Update-And-Publish.cmd`，同步天梯、百科并等待网站发布。未启用基准时使用 `--run-directory "完整批次目录"`。详见[一键同步与发布](publish-updates.md)。下面保留单独导入和手动维护步骤。
+
 在强度测评中心插件目录完成：
 
 ```powershell
