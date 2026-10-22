@@ -1,10 +1,12 @@
 import { readFile } from 'node:fs/promises'
 import { snapshotHash, validateAssets, validateSnapshot } from './snapshot-validation.mjs'
+import { validateContract } from './sync-rating-contract.mjs'
 
 const root = new URL('../', import.meta.url)
 const readJson = async (path) => JSON.parse(await readFile(new URL(path, root), 'utf8'))
 const dataText = await readFile(new URL('src/data/dove-data.json', root), 'utf8')
 const data = JSON.parse(dataText)
+validateContract(await readJson('src/data/rating-contract.json'))
 const manifest = await readJson('src/data/snapshot-manifest.json')
 validateSnapshot(data, manifest, await readJson('src/data-contract.json'))
 if (snapshotHash(dataText) !== manifest.dataHash) throw new Error('数据快照与清单哈希不一致，请重新同步。')

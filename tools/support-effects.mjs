@@ -220,7 +220,7 @@ const towerSources = {
   tower_archers: ['kr1/archer_towers.lua'],
   tower_wizard: ['kr1/mage_towers.lua'],
 }
-const commonSources = ['kr1/tower_scripts.lua', 'all/templates.lua', 'all/scripts.lua', 'all/script_utils.lua', 'all/systems/mod_lifecycle.lua']
+const commonSources = ['kr1/tower_scripts.lua', 'all/templates.lua', 'all/scripts.lua', 'all/script_utils.lua', 'all/systems/mod_lifecycle.lua', 'all/utils.lua']
 
 // Maintained after reading the installed source; sync only checks these hashes.
 export async function loadSupportReview(gameDir, reviewUrl = new URL('./support-effects-review.json', import.meta.url)) {

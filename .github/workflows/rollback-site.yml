@@ -1,0 +1,50 @@
+name: Roll back published website
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Existing release to restore, for example v1.7.5
+        required: true
+        type: string
+permissions:
+  contents: read
+concurrency:
+  group: github-pages-production
+  cancel-in-progress: false
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download and verify an existing immutable release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          VERSION: ${{ inputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$VERSION" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]
+          mkdir release site
+          gh release download "$VERSION" -p "dove-wiki-${VERSION}.zip" -p "dove-wiki-${VERSION}.zip.sha256" -D release
+          (cd release && sha256sum -c "dove-wiki-${VERSION}.zip.sha256")
+          if unzip -Z -1 "release/dove-wiki-${VERSION}.zip" | grep -Eq '(^/|(^|/)\.\.(/|$)|\\)'; then exit 1; fi
+          unzip -q "release/dove-wiki-${VERSION}.zip" -d site
+          test -f site/index.html
+          test -d site/assets
+          grep -q '/dove-wiki/assets/' site/index.html
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - name: Upload verified release
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: site
+      - name: Deploy prior release
+        id: deployment
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0

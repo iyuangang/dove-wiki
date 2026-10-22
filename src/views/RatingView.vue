@@ -4,7 +4,7 @@ import { Download, ExternalLink, RefreshCw, Trophy } from '@lucide/vue'
 import { doveData, heroById, towerById } from '../data'
 import manifest from '../data/rating-manifest.json'
 import methodology from '../data/rating-methodology.json'
-import metricGuide from '../data/rating-guide.json'
+import metricGuide from '../data/rating-contract.json'
 import { axesFor, filterRatings, radarPoint, radarPolygon, ratingAxes, ratingGroups, ratingNumber, ratingRoles, ratingTier, ratingTiers, type RatingDataset, type RatingObject, type RatingProfile, type RatingRole } from '../lib/ratings'
 import { loadRatingDataset, ratingAssetUrl } from '../lib/rating-loader'
 
@@ -42,6 +42,13 @@ const axes = computed(() => axesFor(selected.value?.kind || (group.value.startsW
 const rankedCount = computed(() => rows.value.filter(r => ratingTier(r, role.value) !== '未评测').length)
 const tiers = computed(() => ratingTiers.map(grade => ({ grade, rows: rows.value.filter(r => ratingTier(r, role.value) === grade) })).filter(t => t.rows.length))
 const currentGroup = computed(() => ratingGroups.find(g => g[0] === group.value)?.[1])
+const gradeCaption = metricGuide.tiers.map(t => `${t.grade} ${t.exclusive ? '>' : '≥'} ${t.min}`).join(' · ') + ' · 无 = 0'
+function roleWeights(id: RatingRole) {
+  return Object.entries(metricGuide.weights.hero[id]).map(([key, weight]) => {
+    const label = key === 'survival' ? '生存（英雄）／拦截（塔）' : metricGuide.axes[key as keyof typeof metricGuide.axes].label
+    return `${label} ${Math.round(weight * 100)}%`
+  }).join(' · ')
+}
 const image = (row: RatingObject) => row.kind === 'hero' ? heroById.get(row.templateId)?.thumbnail : towerById.get(row.templateId)?.image
 const polygon = computed(() => selected.value ? radarPolygon(selected.value) : null)
 const ring = (value: number) => axes.value.map((_, i) => radarPoint(i, value).join(',')).join(' ')
@@ -70,7 +77,8 @@ const feedbackUrl = computed(() => {
       <div><strong>{{ summary.failedTrials }}</strong><span>附录失败轮次 · 不评级</span></div>
     </div>
     <p class="rating-notice">固定靶场的原生自动能力基准，保留自动技能、反击与召唤物。手动大招和实战操作尚未完整覆盖；快速档与标准档分别校准，不直接混排。本站其他百科页面仍使用各自标注的数据版本。</p>
-    <p v-if="summary.commitHash !== doveData.metadata.commitHash" class="rating-notice" role="note">版本提示：本页为 Dove {{ summary.gameVersion }} 的历史实测，当前百科已同步至 {{ doveData.metadata.gameVersion }}。新版新增对象与机制改动尚未重新测评，不能将旧天梯直接视为新版排名。</p>
+    <p v-if="summary.commitHash !== doveData.metadata.commitHash" class="rating-notice" role="note">历史实测：本页测于 Dove {{ summary.gameVersion }}（提交 {{ summary.commitHash.slice(0, 12) }}），当前百科已同步至 {{ doveData.metadata.gameVersion }}（提交 {{ doveData.metadata.commitHash.slice(0, 12) }}）。新增对象与机制改动尚未重新测评，不能将旧天梯直接视为新版排名。</p>
+    <p class="rating-caption">参照来源：本档完整原版实测的正值中位数 · {{ summary.coreTrials.toLocaleString() }} 轮正式样本完整 · 评分定义 {{ metricGuide.contractVersion }} / 评分版本 {{ metricGuide.scoreVersion }}。快速、标准及个人基准各自独立。</p>
 
     <div class="rating-controls">
       <label>测评档位<select v-model="profile" aria-label="测评档位"><option value="standard">标准 · 60 秒 × 5 种子</option><option value="quick">快速 · 30 秒 × 3 种子</option></select></label>
@@ -99,7 +107,7 @@ const feedbackUrl = computed(() => {
     <template v-else-if="dataset">
       <section class="rating-board" aria-labelledby="rating-board-title">
         <div class="rating-section-heading"><h2 id="rating-board-title">{{ currentGroup }} · {{ ratingRoles[role] }}</h2><span>已评级 {{ rankedCount }} / {{ rows.length }}</span></div>
-        <p class="rating-caption">S ≥ 90 · A ≥ 75 · B ≥ 60 · C ≥ 45 · D ≥ 25 · E &gt; 0 · 无 = 0。同分按未封顶综合值、模板 ID 排序。点选对象后，<button class="rating-jump" type="button" @click="scrollTo(detailSection)">查看所选对象的八维能力 ↓</button></p>
+        <p class="rating-caption">{{ gradeCaption }}。同分按未封顶综合值、模板 ID 排序。点选对象后，<button class="rating-jump" type="button" @click="scrollTo(detailSection)">查看所选对象的八维能力 ↓</button></p>
         <div v-for="tier in tiers" :key="tier.grade" class="rating-tier" :data-grade="tier.grade">
           <div class="rating-tier-label"><strong>{{ tier.grade }}</strong><span>{{ tier.rows.length }}</span></div>
           <div class="rating-members">
@@ -134,7 +142,7 @@ const feedbackUrl = computed(() => {
     <section id="rating-methods" ref="methodsSection" class="rating-methods" aria-labelledby="rating-method-title">
       <h2 id="rating-method-title">测评标准与专业玩家审阅</h2>
       <p>各轴正值中位数对应 70 分：<code>min(100, 70 × √(实测指标 / 固定参照))</code>。英雄近远程共用英雄参照；塔只以本档常规最终阶级塔建立参照。缺失与失败不填零分。</p>
-      <div class="rating-table-wrap"><table class="rating-table rating-weights"><tbody><tr><th>输出</th><td>对单 25% · 对群 35% · 对空 15% · 攻坚 25%</td></tr><tr><th>守线</th><td>生存（英雄）／拦截（塔）40% · 辅助 25% · 控场 35%</td></tr><tr><th>辅助</th><td>辅助 70% · 控场 30%</td></tr></tbody></table></div>
+      <div class="rating-table-wrap"><table class="rating-table rating-weights"><tbody><tr v-for="(label, id) in ratingRoles" :key="id"><th>{{ label }}</th><td>{{ roleWeights(id) }}</td></tr></tbody></table></div>
       <p class="rating-caption">手动大招、复杂地形、特殊敌人、长冷却、成长和阵容协同仍需补充测试。等级针对当前固定靶场，不代表玩家操作上限或完整 Boss 战胜率。</p>
       <details><summary>展开完整标准、场景参数、已知局限与反馈清单</summary><div class="rating-method-text" v-html="methodology.html"></div></details>
       <div class="rating-links"><a :href="ratingAssetUrl('rating/methodology.md', methodology.sha256)" download>下载完整测评标准</a><a :href="feedbackUrl" target="_blank" rel="noopener noreferrer">提交可复现的修正建议</a></div>

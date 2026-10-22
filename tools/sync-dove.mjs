@@ -462,6 +462,8 @@ function normalizeTechnologyModifiers(technologyId, technology) {
           'tower_rotten_forest',
           'tower_ignis_altar',
           'tower_sandworm',
+          'tower_culverine',
+          'tower_alchemist',
         ],
       }),
     )

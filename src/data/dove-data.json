@@ -2,17 +2,19 @@
   "schemaVersion": 2,
   "calculationRules": {
     "version": 1,
-    "reviewedVersion": "2.0.9.3",
-    "gameCommit": "731afe683e16e3adbfe162cf2b7452cc7bd2f867",
-    "reviewedAt": "2026-10-10",
+    "reviewedVersion": "2.0.9.9",
+    "gameCommit": "7b0ab70aad95121ed10a62eb6e00b33ce21e1146",
+    "reviewedAt": "2026-10-22",
     "note": "人工核对科技钩子、修饰器模板及伤害/持续伤害结算。同步不得更新指纹；变化后条件与概率规则停止计算，等待复核。",
     "files": {
-      "kr1/upgrades.lua": "44c9e73126171f2bda1140877ff696e53b5cb1666e9e781ff72542836168f3f5",
+      "kr1/upgrades.lua": "35416f9b31dda5ded1a4b1698f04342c945bb2bf953bf1d325d18aeec1fa3ee6",
       "kr1/game_templates.lua": "93756fe782e43de9c32616d97573ca572a0c4f63467e16ac1036763b40865336",
-      "kr1/game_scripts.lua": "d78c9cc9d4c6df87a1383089eb8661a6dc1add31270e9c218c6969731a875fe0",
+      "kr1/game_scripts.lua": "1f93712c4c1a3bad051fba3dae9dddce2e642f8bc33f1508c240415db5e50cdb",
       "all/templates.lua": "f83d5091f593ac92ee8edef0e9384269f0b2c89c81b7e2f559a8472178db21b8",
-      "all/scripts.lua": "2d73332e1dccd0bbddd6f51b2990fa36370d7a85020539f1f2651325620c7394",
-      "all/systems/health.lua": "fe28639c2c537ff39842010905ea414e4299502c1a6e50b5188bba487951ec16"
+      "all/scripts.lua": "456c22bf263742a2b1052c4c8234a8f19223053419f7584b085a5890060f6e0c",
+      "all/systems/health.lua": "dd553cde987f992057a2785c3dbb1a1e6e5288108205bd70783aa1ed0fecbc4f",
+      "all/utils.lua": "3752e659815a2ccffda984895b7cfb90efa1af6c744763325899ea1365ccedeb",
+      "kr1/tower_scripts.lua": "db17308b39e9db6d6219e6e8c4137efa5ba5c47c2f18ed96fe4d161400bd3b48"
     },
     "simulationTechnologyIds": [
       "archer_piercing",
@@ -33,7 +35,9 @@
       "tower_frankenstein",
       "tower_rotten_forest",
       "tower_ignis_altar",
-      "tower_sandworm"
+      "tower_sandworm",
+      "tower_culverine",
+      "tower_alchemist"
     ],
     "parameters": {
       "piercingArmor": 10,
@@ -73,26 +77,22 @@
       "purgePerEnemy": 0.01,
       "purgeEnemyCap": 30
     },
-    "valid": false,
-    "invalidFiles": [
-      "kr1/upgrades.lua",
-      "kr1/game_scripts.lua",
-      "all/scripts.lua",
-      "all/systems/health.lua"
-    ]
+    "auditDocument": "docs/mechanics-review-2.0.9.9.md",
+    "valid": true,
+    "invalidFiles": []
   },
   "metadata": {
     "title": "王国保卫战鸽子版 WIKI",
     "gameVersion": "2.0.9.9",
     "contentVersion": "5.6.12",
     "gameId": "kingdom_rush_dove",
-    "commitHash": "8addcaccde09332ef2f1019397312d744f824f9e",
-    "generatedAt": "2026-10-22T02:45:31.475Z",
+    "commitHash": "7b0ab70aad95121ed10a62eb6e00b33ce21e1146",
+    "generatedAt": "2026-10-22T09:58:32.487Z",
     "sourceRoot": "C:\\Users\\hhyg2\\AppData\\Local\\王国保卫战Dove版\\KingdomRushDove",
     "heroSnapshot": {
       "gameVersion": "2.0.9.9",
-      "commitHash": "8addcaccde09332ef2f1019397312d744f824f9e",
-      "generatedAt": "2026-10-22T02:45:31.478Z",
+      "commitHash": "7b0ab70aad95121ed10a62eb6e00b33ce21e1146",
+      "generatedAt": "2026-10-22T09:58:32.491Z",
       "sourceRoot": "C:\\Users\\hhyg2\\AppData\\Local\\王国保卫战Dove版\\KingdomRushDove"
     },
     "assumptions": [
@@ -2405,7 +2405,7 @@
       ],
       "note": "范围倍率与其他增距来源相乘；攻速加成加入攻速除数。",
       "review": {
-        "reviewedVersion": "2.0.9.3",
+        "reviewedVersion": "2.0.9.9",
         "sources": [
           "kr1/archer_towers.lua",
           "kr1/game_scripts.lua",
@@ -2413,16 +2413,11 @@
           "all/templates.lua",
           "all/scripts.lua",
           "all/script_utils.lua",
-          "all/systems/mod_lifecycle.lua"
+          "all/systems/mod_lifecycle.lua",
+          "all/utils.lua"
         ],
-        "valid": false,
-        "invalidFiles": [
-          "kr1/archer_towers.lua",
-          "kr1/game_scripts.lua",
-          "kr1/tower_scripts.lua",
-          "all/scripts.lua",
-          "all/script_utils.lua"
-        ]
+        "valid": true,
+        "invalidFiles": []
       },
       "icon": null
     },
@@ -2452,7 +2447,7 @@
       ],
       "note": "只改变攻击范围；对兵营塔显示为集结范围。",
       "review": {
-        "reviewedVersion": "2.0.9.3",
+        "reviewedVersion": "2.0.9.9",
         "sources": [
           "kr1/archer_towers.lua",
           "kr1/game_scripts.lua",
@@ -2460,16 +2455,11 @@
           "all/templates.lua",
           "all/scripts.lua",
           "all/script_utils.lua",
-          "all/systems/mod_lifecycle.lua"
+          "all/systems/mod_lifecycle.lua",
+          "all/utils.lua"
         ],
-        "valid": false,
-        "invalidFiles": [
-          "kr1/archer_towers.lua",
-          "kr1/game_scripts.lua",
-          "kr1/tower_scripts.lua",
-          "all/scripts.lua",
-          "all/script_utils.lua"
-        ]
+        "valid": true,
+        "invalidFiles": []
       },
       "icon": null
     },
@@ -2504,22 +2494,18 @@
       "note": "覆盖范围随源塔当前攻击范围变化。增距 = 中心加成 × (1 − 距离/半径 ÷ 2)，边缘仅一半；按游戏椭圆距离计算。同类只保留实际倍率最高者。结果按当前位置首次获得光环计算；移动后较弱倍率不会自动替换旧倍率。",
       "excludeTowerIds": [],
       "review": {
-        "reviewedVersion": "2.0.9.3",
+        "reviewedVersion": "2.0.9.9",
         "sources": [
           "kr1/archer_towers.lua",
           "kr1/tower_scripts.lua",
           "all/templates.lua",
           "all/scripts.lua",
           "all/script_utils.lua",
-          "all/systems/mod_lifecycle.lua"
+          "all/systems/mod_lifecycle.lua",
+          "all/utils.lua"
         ],
-        "valid": false,
-        "invalidFiles": [
-          "kr1/archer_towers.lua",
-          "kr1/tower_scripts.lua",
-          "all/scripts.lua",
-          "all/script_utils.lua"
-        ]
+        "valid": true,
+        "invalidFiles": []
       },
       "icon": null
     },
@@ -2552,7 +2538,7 @@
       ],
       "note": "伤害百分比与其他增伤来源相加。",
       "review": {
-        "reviewedVersion": "2.0.9.3",
+        "reviewedVersion": "2.0.9.9",
         "sources": [
           "kr1/mage_towers.lua",
           "kr1/game_scripts.lua",
@@ -2560,16 +2546,11 @@
           "all/templates.lua",
           "all/scripts.lua",
           "all/script_utils.lua",
-          "all/systems/mod_lifecycle.lua"
+          "all/systems/mod_lifecycle.lua",
+          "all/utils.lua"
         ],
-        "valid": false,
-        "invalidFiles": [
-          "kr1/mage_towers.lua",
-          "kr1/game_scripts.lua",
-          "kr1/tower_scripts.lua",
-          "all/scripts.lua",
-          "all/script_utils.lua"
-        ]
+        "valid": true,
+        "invalidFiles": []
       },
       "icon": null
     },
@@ -2600,22 +2581,18 @@
       "note": "同种强化光环取有效最高等级。",
       "excludeTowerIds": [],
       "review": {
-        "reviewedVersion": "2.0.9.3",
+        "reviewedVersion": "2.0.9.9",
         "sources": [
           "kr1/mage_towers.lua",
           "kr1/tower_scripts.lua",
           "all/templates.lua",
           "all/scripts.lua",
           "all/script_utils.lua",
-          "all/systems/mod_lifecycle.lua"
+          "all/systems/mod_lifecycle.lua",
+          "all/utils.lua"
         ],
-        "valid": false,
-        "invalidFiles": [
-          "kr1/mage_towers.lua",
-          "kr1/tower_scripts.lua",
-          "all/scripts.lua",
-          "all/script_utils.lua"
-        ]
+        "valid": true,
+        "invalidFiles": []
       },
       "icon": null
     },
@@ -2653,22 +2630,18 @@
       "note": "源塔攻击范围内有敌人时才释放，强化范围内通过可强化、未封锁与可见性检查的塔，包含自身；覆盖半径随源塔增距变化。同类高等级替换低等级，同级刷新持续时间；与其他增伤百分比相加，结果为持续期峰值。25 秒为基础冷却，会受源塔攻速增益影响。",
       "excludeTowerIds": [],
       "review": {
-        "reviewedVersion": "2.0.9.3",
+        "reviewedVersion": "2.0.9.9",
         "sources": [
           "kr1/mage_towers.lua",
           "kr1/tower_scripts.lua",
           "all/templates.lua",
           "all/scripts.lua",
           "all/script_utils.lua",
-          "all/systems/mod_lifecycle.lua"
+          "all/systems/mod_lifecycle.lua",
+          "all/utils.lua"
         ],
-        "valid": false,
-        "invalidFiles": [
-          "kr1/mage_towers.lua",
-          "kr1/tower_scripts.lua",
-          "all/scripts.lua",
-          "all/script_utils.lua"
-        ]
+        "valid": true,
+        "invalidFiles": []
       },
       "icon": null
     },
@@ -2693,22 +2666,18 @@
       ],
       "note": "常驻增伤光环。",
       "review": {
-        "reviewedVersion": "2.0.9.3",
+        "reviewedVersion": "2.0.9.9",
         "sources": [
           "kr1/engineer_towers.lua",
           "kr1/tower_scripts.lua",
           "all/templates.lua",
           "all/scripts.lua",
           "all/script_utils.lua",
-          "all/systems/mod_lifecycle.lua"
+          "all/systems/mod_lifecycle.lua",
+          "all/utils.lua"
         ],
-        "valid": false,
-        "invalidFiles": [
-          "kr1/engineer_towers.lua",
-          "kr1/tower_scripts.lua",
-          "all/scripts.lua",
-          "all/script_utils.lua"
-        ]
+        "valid": true,
+        "invalidFiles": []
       },
       "icon": null
     },
@@ -2730,22 +2699,18 @@
       ],
       "note": "每 30 秒触发、持续 10 秒；结果显示生效期间的峰值。",
       "review": {
-        "reviewedVersion": "2.0.9.3",
+        "reviewedVersion": "2.0.9.9",
         "sources": [
           "kr1/engineer_towers.lua",
           "kr1/tower_scripts.lua",
           "all/templates.lua",
           "all/scripts.lua",
           "all/script_utils.lua",
-          "all/systems/mod_lifecycle.lua"
+          "all/systems/mod_lifecycle.lua",
+          "all/utils.lua"
         ],
-        "valid": false,
-        "invalidFiles": [
-          "kr1/engineer_towers.lua",
-          "kr1/tower_scripts.lua",
-          "all/scripts.lua",
-          "all/script_utils.lua"
-        ]
+        "valid": true,
+        "invalidFiles": []
       },
       "icon": null
     },
@@ -2781,22 +2746,18 @@
       ],
       "note": "标记目标死亡后，灵魂随机传给 225 范围内另一座塔；无其他塔时回到自身。这里只计算其他塔每次 0.8% 的当前增伤，不包括暮光长弓自身的固定伤害与攻速成长；升级后源码另按每次 8% 重放增伤。",
       "review": {
-        "reviewedVersion": "2.0.9.3",
+        "reviewedVersion": "2.0.9.9",
         "sources": [
           "kr1/archer_towers.lua",
           "kr1/tower_scripts.lua",
           "all/templates.lua",
           "all/scripts.lua",
           "all/script_utils.lua",
-          "all/systems/mod_lifecycle.lua"
+          "all/systems/mod_lifecycle.lua",
+          "all/utils.lua"
         ],
-        "valid": false,
-        "invalidFiles": [
-          "kr1/archer_towers.lua",
-          "kr1/tower_scripts.lua",
-          "all/scripts.lua",
-          "all/script_utils.lua"
-        ]
+        "valid": true,
+        "invalidFiles": []
       },
       "icon": null
     },
@@ -2853,20 +2814,18 @@
       ],
       "note": "范围乘以 1.25；模板冷却系数 0.75 经共享函数转换为攻速除数 +0.25，与其他攻速增益相加。显示技能生效期间的峰值。",
       "review": {
-        "reviewedVersion": "2.0.9.3",
+        "reviewedVersion": "2.0.9.9",
         "sources": [
           "kr1/heroes.lua",
           "kr1/hero_scripts.lua",
           "all/templates.lua",
           "all/scripts.lua",
           "all/script_utils.lua",
-          "all/systems/mod_lifecycle.lua"
+          "all/systems/mod_lifecycle.lua",
+          "all/utils.lua"
         ],
-        "valid": false,
-        "invalidFiles": [
-          "all/scripts.lua",
-          "all/script_utils.lua"
-        ]
+        "valid": true,
+        "invalidFiles": []
       },
       "icon": "/heroes/thumbs/hero_denas.png"
     },
@@ -3007,20 +2966,18 @@
       ],
       "note": "对全场所有可强化塔同时生效；模板冷却系数经共享函数转换为攻速除数 +0.04/+0.06/+0.08，与其他攻速增益相加。",
       "review": {
-        "reviewedVersion": "2.0.9.3",
+        "reviewedVersion": "2.0.9.9",
         "sources": [
           "kr1/heroes.lua",
           "kr1/hero_scripts.lua",
           "all/templates.lua",
           "all/scripts.lua",
           "all/script_utils.lua",
-          "all/systems/mod_lifecycle.lua"
+          "all/systems/mod_lifecycle.lua",
+          "all/utils.lua"
         ],
-        "valid": false,
-        "invalidFiles": [
-          "all/scripts.lua",
-          "all/script_utils.lua"
-        ]
+        "valid": true,
+        "invalidFiles": []
       },
       "icon": "/heroes/thumbs/hero_space_elf.png"
     },
@@ -3990,7 +3947,9 @@
                 "tower_frankenstein",
                 "tower_rotten_forest",
                 "tower_ignis_altar",
-                "tower_sandworm"
+                "tower_sandworm",
+                "tower_culverine",
+                "tower_alchemist"
               ]
             }
           ]
@@ -5462,30 +5421,10 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "boss-dodge",
-            "title": "对首领的格挡限制",
-            "summary": "首领来源的攻击，在通常的格挡判定外还有一次额外检查。",
-            "facts": [
-              "额外检查通过概率为 50%；这不是最终格挡率，仍要结合技能提供的格挡概率。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_gerald\"",
-                "line": 30
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_gerald =",
-                "line": 280
-              }
-            ]
-          }
-        ],
+        "items": [],
         "pending": [
-          "地面寻路"
+          "地面寻路",
+          "对首领的格挡限制"
         ],
         "sources": [
           {
@@ -5651,30 +5590,10 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "pet-rally",
-            "title": "调动时带领宠物",
-            "summary": "更改集结点时，会为已召唤的野猫一同设置新的目标位置。",
-            "facts": [
-              "只作用于已经存在的宠物；调动指令本身不会额外召唤宠物。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_alleria\"",
-                "line": 213
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_alleria =",
-                "line": 613
-              }
-            ]
-          }
-        ],
+        "items": [],
         "pending": [
-          "地面寻路"
+          "地面寻路",
+          "调动时带领宠物"
         ],
         "sources": [
           {
@@ -6903,31 +6822,10 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "oni-missing-health",
-            "title": "失血增伤与减伤",
-            "summary": "按当前已损失生命比例，动态增加伤害加值并降低受伤倍率。",
-            "facts": [
-              "伤害加值 = 已损失生命比例 × 当前技能的狂怒上限；受伤倍率减量 = 已损失生命比例 × 当前技能的不屈上限。",
-              "以当前血量持续重算；回血后这两项收益会随之降低。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_oni\"",
-                "line": 1528
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_oni =",
-                "line": 6812
-              }
-            ]
-          }
-        ],
+        "items": [],
         "pending": [
-          "地面寻路"
+          "地面寻路",
+          "失血增伤与减伤"
         ],
         "sources": [
           {
@@ -7562,31 +7460,10 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "swiftness",
-            "title": "迅捷同时改变移动与动作",
-            "summary": "迅捷升级会提高自身移速和近战接敌距离，并调整角色动作帧率。",
-            "facts": [
-              "各次技能升级的移速倍率为 1.4 / 1.3 / 1.2，按升级触发顺序乘入当前数值。",
-              "因此模板基础移速不代表满级实际移速，攻击动作耗时也不能只看冷却字段。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_mirage\"",
-                "line": 2121
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_mirage =",
-                "line": 908
-              }
-            ]
-          }
-        ],
+        "items": [],
         "pending": [
-          "地面寻路"
+          "地面寻路",
+          "迅捷同时改变移动与动作"
         ],
         "sources": [
           {
@@ -8173,30 +8050,10 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "pet-rally",
-            "title": "调动时带领宠物",
-            "summary": "更改集结点时，会围绕目标位置重新分配已召唤野猪的站位。",
-            "facts": [
-              "只作用于已经存在的宠物；调动指令本身不会额外召唤宠物。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_beastmaster\"",
-                "line": 2698
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_beastmaster =",
-                "line": 3007
-              }
-            ]
-          }
-        ],
+        "items": [],
         "pending": [
-          "地面寻路"
+          "地面寻路",
+          "调动时带领宠物"
         ],
         "sources": [
           {
@@ -8967,11 +8824,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "地面 / 腾云移动",
-          "tags": [
-            "地面",
-            "变形加速"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 108,
           "terrain": [
             "陆地",
@@ -8997,31 +8851,11 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "travel-form",
-            "title": "腾云移动",
-            "summary": "普通战斗状态与赶路形态分开处理；赶路飞行不代表常驻飞行单位。",
-            "facts": [
-              "直线距离大于 300，或已生成的路径点含水面、浅水、不可步行地形时触发。",
-              "移速增加 108，无外部增益时为 216。",
-              "特殊移动结束后恢复原移速；可经过的地形与可选集结点分别受寻路规则限制。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_monkey_god\"",
-                "line": 5884
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_monkey_god =",
-                "line": 10216
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "腾云移动",
+          "地面寻路"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -9382,10 +9216,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "常驻飞行",
-          "tags": [
-            "飞行"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 90,
           "terrain": [
             "陆地",
@@ -9418,30 +9250,10 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "flying",
-            "title": "常驻飞行单位",
-            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
-            "facts": [
-              "基础导航忽略地面路径拐点，直接向目的地移动。",
-              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_dragon\"",
-                "line": 3759
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_dragon =",
-                "line": 7681
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "常驻飞行单位"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -10115,11 +9927,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "步行 / 技能潜地",
-          "tags": [
-            "地面",
-            "潜地"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 60,
           "terrain": [
             "陆地",
@@ -10149,31 +9958,11 @@
             "disabled": true
           }
         ],
-        "items": [
-          {
-            "id": "burrow",
-            "title": "技能潜地",
-            "summary": "潜地技能解锁后，调动距离大于 100 时入地赶路。",
-            "facts": [
-              "英雄 Lv.1 首次解锁；未解锁时步行。",
-              "入地时增加 40 基础移速，随后还会按技能等级加速。",
-              "解锁后可经过水面和浅水；目标集结点仍使用独立的地面限制。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_crab\"",
-                "line": 5257
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_crab =",
-                "line": 9311
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "技能潜地",
+          "地面寻路"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -10535,10 +10324,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "常驻飞行",
-          "tags": [
-            "飞行"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 100,
           "terrain": [
             "陆地",
@@ -10571,30 +10358,10 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "flying",
-            "title": "常驻飞行单位",
-            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
-            "facts": [
-              "基础导航忽略地面路径拐点，直接向目的地移动。",
-              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_dracolich\"",
-                "line": 3163
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_dracolich =",
-                "line": 5245
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "常驻飞行单位"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -11526,11 +11293,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "集结点传送",
-          "tags": [
-            "地面",
-            "传送"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 81,
           "terrain": [
             "陆地",
@@ -11553,50 +11317,12 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "xin-rally",
-            "title": "调动即传送",
-            "summary": "每次处理新的集结点，都在出发动画结束后直接移动到目标点。",
-            "facts": [
-              "这段调动逻辑没有最短距离阈值。",
-              "如果出发时正在阻挡敌人，会眩晕被阻挡目标，并生成短暂替身接替阻挡；本体到达后替身死亡。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_xin\"",
-                "line": 9083
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_xin =",
-                "line": 15716
-              }
-            ]
-          },
-          {
-            "id": "xin-cleanse",
-            "title": "驭体于灵状态清除异常",
-            "summary": "驭体于灵状态激活时，每隔约 10 帧检查并移除带毒、眩晕或流血标记的效果。",
-            "facts": [
-              "该检查位于未眩晕的行为分支；不能据此视为永久眩晕免疫。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_xin\"",
-                "line": 9083
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_xin =",
-                "line": 15716
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "调动即传送",
+          "地面寻路",
+          "驭体于灵状态清除异常"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -12984,10 +12710,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "常驻飞行",
-          "tags": [
-            "飞行"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 105,
           "terrain": [
             "陆地",
@@ -13020,30 +12744,10 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "flying",
-            "title": "常驻飞行单位",
-            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
-            "facts": [
-              "基础导航忽略地面路径拐点，直接向目的地移动。",
-              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_phoenix\"",
-                "line": 8060
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_phoenix =",
-                "line": 14323
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "常驻飞行单位"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -13234,10 +12938,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "常驻飞行",
-          "tags": [
-            "飞行"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 198,
           "terrain": [
             "陆地",
@@ -13270,30 +12972,10 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "flying",
-            "title": "常驻飞行单位",
-            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
-            "facts": [
-              "基础导航忽略地面路径拐点，直接向目的地移动。",
-              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_faustus\"",
-                "line": 9343
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_faustus =",
-                "line": 16197
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "常驻飞行单位"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -14043,10 +13725,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "常驻飞行",
-          "tags": [
-            "飞行"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 54,
           "terrain": [
             "陆地",
@@ -14079,51 +13759,11 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "flying",
-            "title": "常驻飞行单位",
-            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
-            "facts": [
-              "基础导航忽略地面路径拐点，直接向目的地移动。",
-              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_wilbur\"",
-                "line": 6862
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_wilbur =",
-                "line": 12117
-              }
-            ]
-          },
-          {
-            "id": "engine-speed",
-            "title": "引擎影响飞行速度",
-            "summary": "升级时以基础引擎速度乘以当前引擎技能倍率，重新设置飞行速度。",
-            "facts": [
-              "引擎基准速度 54；技能倍率依次为 1.2 / 1.4 / 1.6。",
-              "倍率覆盖当前引擎系数，不是每升一级继续相乘。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_wilbur\"",
-                "line": 6862
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_wilbur =",
-                "line": 12117
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "常驻飞行单位",
+          "引擎影响飞行速度"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -14269,32 +13909,10 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "berserker",
-            "title": "残血缩短攻击冷却",
-            "summary": "生命比例越低，普通近战、第二近战招式与第一项定时技能的冷却越短。",
-            "facts": [
-              "冷却倍率 = 生命比例 × 0.5 + 0.5。",
-              "满血为 1 倍冷却，半血为 0.75 倍，濒死趋近 0.5 倍。",
-              "只改变上述攻击冷却，不代表伤害翻倍或所有技能都获得相同加速。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_bolverk\"",
-                "line": 10070
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_bolverk =",
-                "line": 17230
-              }
-            ]
-          }
-        ],
+        "items": [],
         "pending": [
-          "地面寻路"
+          "地面寻路",
+          "残血缩短攻击冷却"
         ],
         "sources": [
           {
@@ -14666,11 +14284,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "步行 / 条件跳跃",
-          "tags": [
-            "地面",
-            "跳跃"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 60,
           "terrain": [
             "陆地",
@@ -14693,30 +14308,11 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "raelyn-jump",
-            "title": "按横向距离跳跃",
-            "summary": "目标点与当前位置的横向距离大于 125 且小于 300 时，调动改为跳跃。",
-            "facts": [
-              "检查的是横向距离绝对值，不是直线距离；恰好 125 或 300 时不触发。",
-              "其余距离走通用移动逻辑；跳跃耗时受动作帧率影响。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_raelyn\"",
-                "line": 10940
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_raelyn =",
-                "line": 20282
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "按横向距离跳跃",
+          "地面寻路"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -14884,11 +14480,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "地面 / 树行移动",
-          "tags": [
-            "地面",
-            "变形加速"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 75,
           "terrain": [
             "陆地",
@@ -14918,31 +14511,11 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "travel-form",
-            "title": "树行移动",
-            "summary": "普通战斗状态与赶路形态分开处理；赶路飞行不代表常驻飞行单位。",
-            "facts": [
-              "直线距离大于 75，或已生成的路径点含水面、浅水、不可步行地形时触发。",
-              "移速增加 95，无外部增益时为 170。",
-              "特殊移动结束后恢复原移速；可经过的地形与可选集结点分别受寻路规则限制。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "E:register_t(\"hero_muyrn\"",
-                "line": 14304
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_muyrn =",
-                "line": 28722
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "树行移动",
+          "地面寻路"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -15312,11 +14885,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "地面 / 迷雾移动",
-          "tags": [
-            "地面",
-            "变形加速"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 75,
           "terrain": [
             "陆地",
@@ -15346,31 +14916,11 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "travel-form",
-            "title": "迷雾移动",
-            "summary": "普通战斗状态与赶路形态分开处理；赶路飞行不代表常驻飞行单位。",
-            "facts": [
-              "直线距离大于 90，或已生成的路径点含水面、浅水、不可步行地形时触发。",
-              "移速增加 95，无外部增益时为 170。",
-              "特殊移动结束后恢复原移速；可经过的地形与可选集结点分别受寻路规则限制。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_hunter\"",
-                "line": 10272
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_hunter =",
-                "line": 17595
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "迷雾移动",
+          "地面寻路"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -15538,11 +15088,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "地面 / 黏液移动",
-          "tags": [
-            "地面",
-            "变形加速"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 75,
           "terrain": [
             "陆地",
@@ -15565,32 +15112,11 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "travel-form",
-            "title": "黏液移动",
-            "summary": "普通战斗状态与赶路形态分开处理；赶路飞行不代表常驻飞行单位。",
-            "facts": [
-              "直线距离大于 72，或已生成的路径点含水面、浅水、不可步行地形时触发。",
-              "移速增加 95，无外部增益时为 170。",
-              "特殊移动结束后恢复原移速；可经过的地形与可选集结点分别受寻路规则限制。",
-              "已处于战斗变身状态时，不进入黏液赶路形态。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_venom\"",
-                "line": 11282
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_venom =",
-                "line": 20795
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "黏液移动",
+          "地面寻路"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -15758,10 +15284,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "常驻飞行",
-          "tags": [
-            "飞行"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 120,
           "terrain": [
             "陆地",
@@ -15794,30 +15318,10 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "flying",
-            "title": "常驻飞行单位",
-            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
-            "facts": [
-              "基础导航忽略地面路径拐点，直接向目的地移动。",
-              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_bird\"",
-                "line": 16205
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_bird =",
-                "line": 34101
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "常驻飞行单位"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -16388,11 +15892,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "地面 / 喷气飞行",
-          "tags": [
-            "地面",
-            "变形加速"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 45,
           "terrain": [
             "陆地",
@@ -16425,31 +15926,11 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "travel-form",
-            "title": "喷气飞行",
-            "summary": "普通战斗状态与赶路形态分开处理；赶路飞行不代表常驻飞行单位。",
-            "facts": [
-              "直线距离大于 80，或已生成的路径点含水面、浅水、不可步行地形时触发。",
-              "移速增加 110，无外部增益时为 155。",
-              "特殊移动结束后恢复原移速；可经过的地形与可选集结点分别受寻路规则限制。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_robot\"",
-                "line": 15816
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_robot =",
-                "line": 32767
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "喷气飞行",
+          "地面寻路"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -16617,10 +16098,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "常驻飞行",
-          "tags": [
-            "飞行"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 120,
           "terrain": [
             "陆地",
@@ -16653,30 +16132,10 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "flying",
-            "title": "常驻飞行单位",
-            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
-            "facts": [
-              "基础导航忽略地面路径拐点，直接向目的地移动。",
-              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_lumenir\"",
-                "line": 13044
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_lumenir =",
-                "line": 25757
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "常驻飞行单位"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -16849,10 +16308,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "常驻飞行",
-          "tags": [
-            "飞行"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 100,
           "terrain": [
             "陆地",
@@ -16885,50 +16342,11 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "flying",
-            "title": "常驻飞行单位",
-            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
-            "facts": [
-              "基础导航忽略地面路径拐点，直接向目的地移动。",
-              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_dragon_gem\"",
-                "line": 11640
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_dragon_gem =",
-                "line": 21742
-              }
-            ]
-          },
-          {
-            "id": "travel-charge",
-            "title": "移动触发蓄能",
-            "summary": "一次调动完成后，实际起终点距离大于 250 时施加蓄能效果。",
-            "facts": [
-              "检查的是本次起终点距离，不是沿途累计路程；短距离反复移动不会直接累加到阈值。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_dragon_gem\"",
-                "line": 11640
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_dragon_gem =",
-                "line": 21742
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "常驻飞行单位",
+          "移动触发蓄能"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -17306,10 +16724,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "常驻飞行",
-          "tags": [
-            "飞行"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 130,
           "terrain": [
             "陆地",
@@ -17342,30 +16758,10 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "flying",
-            "title": "常驻飞行单位",
-            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
-            "facts": [
-              "基础导航忽略地面路径拐点，直接向目的地移动。",
-              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_dragon_bone\"",
-                "line": 12522
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_dragon_bone =",
-                "line": 24601
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "常驻飞行单位"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -17533,11 +16929,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "地面 / 腾云移动",
-          "tags": [
-            "地面",
-            "变形加速"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 80,
           "terrain": [
             "陆地",
@@ -17563,31 +16956,11 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "travel-form",
-            "title": "腾云移动",
-            "summary": "普通战斗状态与赶路形态分开处理；赶路飞行不代表常驻飞行单位。",
-            "facts": [
-              "直线距离大于 150，或已生成的路径点含水面、浅水、不可步行地形时触发。",
-              "移速乘以 2.2，无外部增益时为 176。",
-              "特殊移动结束后恢复原移速；可经过的地形与可选集结点分别受寻路规则限制。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_wukong\"",
-                "line": 13664
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_wukong =",
-                "line": 26913
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "腾云移动",
+          "地面寻路"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -17755,10 +17128,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "常驻飞行",
-          "tags": [
-            "飞行"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 130,
           "terrain": [
             "陆地",
@@ -17791,51 +17162,11 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "flying",
-            "title": "常驻飞行单位",
-            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
-            "facts": [
-              "基础导航忽略地面路径拐点，直接向目的地移动。",
-              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "E:register_t(\"hero_dragon_arb\"",
-                "line": 14760
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_dragon_arb =",
-                "line": 29824
-              }
-            ]
-          },
-          {
-            "id": "flight-easing",
-            "title": "飞行加速与减速",
-            "summary": "调动飞行有起步加速和接近目的地时的减速，实际行程并非恒速。",
-            "facts": [
-              "起步加速参数为 0.7 秒；距离目的地 50 以内切换为接近减速。",
-              "同方向连续改点会衔接上一段速度变化，不能简单按距离除以基础移速推算。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "E:register_t(\"hero_dragon_arb\"",
-                "line": 14760
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_dragon_arb =",
-                "line": 29824
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "常驻飞行单位",
+          "飞行加速与减速"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -18408,10 +17739,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "常驻飞行",
-          "tags": [
-            "飞行"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 190,
           "terrain": [
             "陆地",
@@ -18444,30 +17773,10 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "flying",
-            "title": "常驻飞行单位",
-            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
-            "facts": [
-              "基础导航忽略地面路径拐点，直接向目的地移动。",
-              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_dragon_sun\"",
-                "line": 17973
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_dragon_sun =",
-                "line": 37294
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "常驻飞行单位"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -18640,10 +17949,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "常驻飞行",
-          "tags": [
-            "飞行"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 90,
           "terrain": [
             "陆地",
@@ -18676,30 +17983,10 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "flying",
-            "title": "常驻飞行单位",
-            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
-            "facts": [
-              "基础导航忽略地面路径拐点，直接向目的地移动。",
-              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_eiskalt\"",
-                "line": 18177
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_eiskalt =",
-                "line": 38808
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "常驻飞行单位"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -18872,10 +18159,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "常驻飞行",
-          "tags": [
-            "飞行"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 55,
           "terrain": [
             "陆地",
@@ -18908,30 +18193,10 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "flying",
-            "title": "常驻飞行单位",
-            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
-            "facts": [
-              "基础导航忽略地面路径拐点，直接向目的地移动。",
-              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_dianyun\"",
-                "line": 19230
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_dianyun =",
-                "line": 40113
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "常驻飞行单位"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -19307,10 +18572,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "常驻飞行",
-          "tags": [
-            "飞行"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 90,
           "terrain": [
             "陆地",
@@ -19343,30 +18606,10 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "flying",
-            "title": "常驻飞行单位",
-            "summary": "模板带有飞行目标标记，普通攻击采用空中英雄逻辑。",
-            "facts": [
-              "基础导航忽略地面路径拐点，直接向目的地移动。",
-              "仍受本英雄的目的地地形限制；“飞行”不表示所有地图位置都可选。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_beresad\"",
-                "line": 18819
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_beresad =",
-                "line": 39625
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "常驻飞行单位"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -19950,11 +19193,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "地面 / 蝙蝠移动",
-          "tags": [
-            "地面",
-            "变形加速"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 66,
           "terrain": [
             "陆地",
@@ -19980,32 +19220,11 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "travel-form",
-            "title": "蝙蝠移动",
-            "summary": "普通战斗状态与赶路形态分开处理；赶路飞行不代表常驻飞行单位。",
-            "facts": [
-              "直线距离大于 120，或已生成的路径点含水面、浅水、不可步行地形时触发。",
-              "移速乘以 2.5，无外部增益时为 165。",
-              "特殊移动结束后恢复原移速；可经过的地形与可选集结点分别受寻路规则限制。",
-              "强化状态期间不进入蝙蝠赶路形态。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_margosa\"",
-                "line": 20735
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_margosa =",
-                "line": 42084
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "蝙蝠移动",
+          "地面寻路"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -20596,11 +19815,8 @@
       "details": {
         "reviewedVersion": "2.0.8.9",
         "movement": {
-          "label": "奔跑 / 火箭跳",
-          "tags": [
-            "地面",
-            "跳跃"
-          ],
+          "label": "移动机制待核实",
+          "tags": [],
           "baseSpeed": 81,
           "terrain": [
             "陆地",
@@ -20630,31 +19846,11 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "tramin-jetpack",
-            "title": "长距离火箭跳",
-            "summary": "调动距离小于 160 时奔跑，否则使用喷气背包跳跃。",
-            "facts": [
-              "距离按集结中心与角色站位偏移校正后计算。",
-              "抛物线飞行阶段为 0.9 秒，不含起跳与落地动画。",
-              "起跳时清除饮酒效果。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_tramin\"",
-                "line": 21655
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_tramin =",
-                "line": 43486
-              }
-            ]
-          }
+        "items": [],
+        "pending": [
+          "长距离火箭跳",
+          "地面寻路"
         ],
-        "pending": [],
         "sources": [
           {
             "file": "kr1/heroes.lua",
@@ -21058,41 +20254,10 @@
             "disabled": false
           }
         ],
-        "items": [
-          {
-            "id": "naga-fight",
-            "title": "低于八成生命时增伤",
-            "summary": "当前生命严格低于最大生命的 80% 时，自带控制器将输出倍率乘以 1.5。",
-            "facts": [
-              "回到 80% 或以上时撤销这项倍率；连续处于低血量状态不会每帧重复相乘。",
-              "这是基础被动，无需购买技能；地面调动仍走通用英雄寻路。"
-            ],
-            "sources": [
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"hero_naga\"",
-                "line": 22468
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.hero_naga =",
-                "line": 44686
-              },
-              {
-                "file": "kr1/heroes.lua",
-                "symbol": "RT(\"controller_hero_naga_fight_to_win_or_die\"",
-                "line": 22644
-              },
-              {
-                "file": "kr1/hero_scripts.lua",
-                "symbol": "scripts.controller_hero_naga_fight_to_win_or_die =",
-                "line": 44985
-              }
-            ]
-          }
-        ],
+        "items": [],
         "pending": [
-          "地面寻路"
+          "地面寻路",
+          "低于八成生命时增伤"
         ],
         "sources": [
           {

@@ -8,7 +8,7 @@ export const generatedPaths = [
   'src/data/dove-data.json', 'src/data/game-changelog.json', 'src/data/snapshot-manifest.json',
 ]
 
-export const ratingPaths = ['public/rating', 'src/data/rating-manifest.json', 'src/data/rating-methodology.json', 'data/asset-lock.json']
+export const ratingPaths = ['public/rating', 'src/data/rating-manifest.json', 'src/data/rating-methodology.json', 'src/data/rating-contract.json', 'data/asset-lock.json']
 const allGeneratedPaths = [...generatedPaths, ...ratingPaths]
 
 const managed = (path) => !isAbsolute(path) && !path.split(/[\\/]/).some((part) => part === '..' || part === '.') &&
