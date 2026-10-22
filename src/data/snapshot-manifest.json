@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "gameCommit": "8c10091108e554d8643e787989ac69afc7fc7a18",
+  "gameCommit": "8addcaccde09332ef2f1019397312d744f824f9e",
   "reviews": {
     "towers": {
       "version": "2.0.9.3",
@@ -82,5 +82,5 @@
       ]
     }
   },
-  "dataHash": "6379d2462f5fe6db4e0d102b03b82ae1c71c41d69e187c73353e4f541f75d40f"
+  "dataHash": "d8f16a67ae1103ba8b0f9d01af2b500f1cc8d23608150aef641d2071f343364b"
 }
