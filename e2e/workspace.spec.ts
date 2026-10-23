@@ -337,7 +337,7 @@ test('天梯保留两档实测、分类和版本边界，说明跟随类别切�
   await expect(page.getByRole('img', { name: /八维雷达图/ })).toBeVisible()
   await noOverflow(page)
   await page.reload()
-  await expect(page).toHaveURL(/#\/tierlist$/)
+  await expect(page).toHaveURL(/#\/tierlist\?profile=quick&group=tower_final&role=output$/)
   await expect(page.locator('.rating-board')).toBeVisible()
 })
 

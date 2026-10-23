@@ -1,9 +1,11 @@
+import contract from '../data/rating-contract.json'
 export type RatingProfile = 'standard' | 'quick'
 export type RatingRole = 'output' | 'defense' | 'support'
 export interface RatingValue { value: number | null; grade: string; raw?: number | null; reference?: number | null; uncapped?: number | null }
 export interface RatingObject {
   id: string; templateId: string; name: string; kind: 'hero' | 'tower'; group: string; core: boolean; state: string
   primaryAvailable: boolean | null; successfulTrials: number; failedTrials: number; cost: number | null
+  variation?: Record<string, {n:number;min:number;max:number;sd:number;crossesGrade:boolean} | null>
   scores: Record<string, RatingValue>; ratings: Record<RatingRole, RatingValue>
   notes: Record<string, string>; annotation: string; errors: string[]
   evidence: { file: string; sha256: string; gzipSha256: string; bytes: number; compressedBytes: number }
@@ -15,17 +17,12 @@ export interface RatingDataset {
   references: Record<string, Record<string, number>>
   provenance: { sourceSummarySha256: string; measurementSources: Record<string, string>; rawEvidence: string }
 }
-export const ratingGroups = [
-  ['hero_melee', '英雄 · 近战'], ['hero_ranged', '英雄 · 远程'], ['tower_final', '防御塔 · 最终阶级'],
-  ['tower_lower', '防御塔 · 过渡阶级'], ['tower_special', '关卡特殊塔 · 附录'],
-  ['hero_special_melee', '特殊英雄 · 近战附录'], ['hero_special_ranged', '特殊英雄 · 远程附录'],
-] as const
-export const ratingRoles = { output: '输出', defense: '守线', support: '辅助' } as const
-export const ratingAxes = { single: '对单', swarm: '对群', air: '对空', siege: '攻坚', control: '控场', survival: '生存', block: '拦截', support: '辅助', mobility: '机动', economy: '性价比' } as const
-export const axesFor = (kind: 'hero' | 'tower') => kind === 'hero'
-  ? ['single', 'swarm', 'air', 'siege', 'control', 'survival', 'support', 'mobility'] as const
-  : ['single', 'swarm', 'air', 'siege', 'control', 'block', 'support', 'economy'] as const
-export const ratingTiers = ['S', 'A', 'B', 'C', 'D', 'E', '无', '未评测']
+export type RatingAxis = keyof typeof contract.axes
+export const ratingGroups = contract.groups
+export const ratingRoles = Object.fromEntries(contract.roles) as Record<RatingRole, string>
+export const ratingAxes = Object.fromEntries(Object.entries(contract.axes).map(([key, item]) => [key, item.label])) as Record<RatingAxis, string>
+export const axesFor = (kind: 'hero' | 'tower') => contract.axisOrders[kind] as RatingAxis[]
+export const ratingTiers = [...contract.tiers.map(t => t.grade), '无', '未评测']
 export function ratingTier(row: RatingObject, role: RatingRole) {
   return row.state === 'complete' && row.ratings[role].value !== null ? row.ratings[role].grade : '未评测'
 }

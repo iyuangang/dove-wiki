@@ -13,7 +13,7 @@ export interface LoadedEnemy {
   flying: boolean
 }
 
-function calculatorDefaults(effects: SupportEffect[], trees: TechnologyTree[]) {
+function calculatorDefaults(effects: { id: string; levels: { level: number; radius?: number | null }[] }[], trees: Pick<TechnologyTree, 'id'>[]) {
   return {
     targetId: 'tower_ranger',
     supportSourceFilter: 'all' as 'all' | 'tower' | 'hero' | 'selected',
@@ -37,7 +37,7 @@ function calculatorDefaults(effects: SupportEffect[], trees: TechnologyTree[]) {
   }
 }
 
-export function createWorkspace(effects: SupportEffect[], trees: TechnologyTree[]) {
+export function createWorkspace(effects: { id: string; levels: { level: number; radius?: number | null }[] }[], trees: Pick<TechnologyTree, 'id'>[]) {
   return reactive({
     calculator: calculatorDefaults(effects, trees),
     catalog: { search: '', family: 'all' as 'all' | TowerFamily, role: 'all', unlock: 'all' as 'all' | UnlockStatus, sort: 'encyclopedia' as 'encyclopedia' | 'name' | 'damage' | 'range' | 'unlock' },

@@ -1,0 +1,32 @@
+name: 测评机制或遗漏反馈
+description: 提供可复现的场景和原始证据，协助改进正式或实验测评
+title: "[测评反馈] "
+body:
+  - type: textarea
+    id: identity
+    attributes:
+      label: 测评身份
+      description: 粘贴反馈资料中的游戏版本、提交、批次、对象 ID、档位、场景和种子。
+    validations:
+      required: true
+  - type: textarea
+    id: observation
+    attributes:
+      label: 预期与实际现象
+      description: 说明复现步骤、预期机制的依据，附反馈 JSON 或原始轮次、视频链接。
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: 建议归类
+      options:
+        - 采集错误
+        - 场景遗漏
+        - 指标定义
+        - 权重偏好
+        - 实验建议
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 建议修正与验收方法

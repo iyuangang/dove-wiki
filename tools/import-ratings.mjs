@@ -1,3 +1,4 @@
+import { seedVariation } from './rating-variation.mjs'
 import { readFile, writeFile, mkdir, copyFile, readdir, rm, cp } from 'node:fs/promises'
 import { existsSync } from 'node:fs'
 import os from 'node:os'
@@ -8,6 +9,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createHash } from 'node:crypto'
 import { gzipSync } from 'node:zlib'
+import { syncRatingContract, validateDatasetScores } from './sync-rating-contract.mjs'
 
 const projectRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..')
 let root = projectRoot
@@ -37,6 +39,11 @@ const profiles = { ...previousManifest.profiles }
 const transaction = await beginSync(projectRoot)
 try {
 root = transaction.stageRoot
+await mkdir(path.join(root, 'src/data'), { recursive: true })
+await copyFile(path.join(projectRoot, 'src/data/rating-contract.json'), path.join(root, 'src/data/rating-contract.json'))
+const pluginDir = option('--plugin-dir') || path.join(process.env.APPDATA || path.join(os.homedir(), 'AppData/Roaming'), 'LOVE/kingdom_rush_dove/plugins/Meta_Rating_Center')
+await syncRatingContract(root, pluginDir, { required: false })
+const ratingContract = await json(path.join(root, 'src/data/rating-contract.json'))
 await mkdir(path.join(root, 'public'), { recursive: true })
 await cp(path.join(projectRoot, 'public/rating'), path.join(root, 'public/rating'), { recursive: true })
 await mkdir(path.join(root, 'data'), { recursive: true })
@@ -106,7 +113,7 @@ for (const [profile, sourceDir] of Object.entries(sources)) {
     }
     return { id: r.id, templateId: r.template_id, name: r.name, kind: r.kind, group: r.group, core, state: r.state,
       primaryAvailable: r.primary_available ?? null, successfulTrials: r.successful_trials, failedTrials: r.failed_trials,
-      cost: r.cost ?? null, scores, ratings, notes: r.notes || {}, annotation: r.annotation_limitation || '',
+      variation: seedVariation(original,scores,ratingContract), cost: r.cost ?? null, scores, ratings, notes: r.notes || {}, annotation: r.annotation_limitation || '',
       errors: original.errors.slice(0, 3), evidence: evidence[r.template_id] }
   })
   if (coreTrials !== s.core_trials) throw new Error('Formal coverage mismatch: ' + profile)
@@ -118,6 +125,7 @@ for (const [profile, sourceDir] of Object.entries(sources)) {
   const dataset = { schema: 1, summary, objects, references: input.references || s.references,
     provenance: { sourceSummarySha256: sha(await readFile(path.join(sourceDir, 'native_reference.json'))), measurementSources: input.source_fingerprints || input.environment.measurement_sources,
       rawEvidence: 'Unmodified native session JSON compressed with gzip; capture-time provisional scores may differ from final cohort scores.' } }
+  validateDatasetScores(dataset, ratingContract)
   await save(path.join(outputDir, 'results.json'), dataset)
   await copyFile(path.join(sourceDir, 'native_scores.csv'), path.join(outputDir, 'native_scores.csv'))
   const pictures = (await readdir(sourceDir)).filter(f => /^(hero|tower).*_(output|defense|support)\.png$/.test(f))

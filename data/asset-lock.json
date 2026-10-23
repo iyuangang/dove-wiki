@@ -3,8 +3,8 @@
   "bundles": {
     "game": {
       "inputs": {
-        "src/data/dove-data.json": "d8f16a67ae1103ba8b0f9d01af2b500f1cc8d23608150aef641d2071f343364b",
-        "src/data/snapshot-manifest.json": "872452e621b679ee5c05701032cfcd4f39079e00d68dd4b02f6c41ec1419b0cb"
+        "src/data/dove-data.json": "6cf676bde71cc9d133fb0acda16ef7e9511384b673b87f61ff74eb7a63d411f7",
+        "src/data/snapshot-manifest.json": "92cdbba53c49924128b24595ad30e0fec96f5320e640951bdaa5447ee78fa774"
       },
       "file": "game-dcf7731effb6b99afef9.ndjson.gz",
       "sha256": "5892f868f235d24ca252494dd4cc1cc2bba1f80056cd885e15d4c6c15819dbb3",
@@ -15,15 +15,15 @@
     },
     "ratings": {
       "inputs": {
-        "src/data/rating-manifest.json": "09d8a22c4e6c442b4b01152e927680f2ecee9a08877533033ed3112801b08b16",
-        "src/data/rating-methodology.json": "45c32f81ad1e3f88e81567e06cf75677f700660870a8eff13c49cd326199dd56"
+        "src/data/rating-manifest.json": "260e55a0f09ed358abd924a3a01204a16bf0a7d0d565693fe96cc602a1ccfdda",
+        "src/data/rating-methodology.json": "eb4384f11a688f246ad99fa9c81a64ec35e0321f6d9b175e90a31075adaa05ef"
       },
-      "file": "ratings-21de416a25673545b003.ndjson.gz",
-      "sha256": "02637b0958d823c629ad7bdc7341863b75e43de363d730828994667f48943f62",
-      "treeSha256": "21de416a25673545b003ad3d67639ad4f91a462c0208a56b88765add1f07aed8",
+      "file": "ratings-05d8720ef1567581e8a0.ndjson.gz",
+      "sha256": "237b5b6ffc18bbb168c6ca7d54003a37dd44c4bdfe42232df30b9319e5841bbb",
+      "treeSha256": "05d8720ef1567581e8a08736c3604e89883791cff1a7abaf47afd61cb36c32ae",
       "files": 465,
-      "bytes": 29303907,
-      "url": "https://github.com/iyuangang/dove-wiki/releases/download/data-assets/ratings-21de416a25673545b003.ndjson.gz"
+      "bytes": 29454133,
+      "url": "https://github.com/iyuangang/dove-wiki/releases/download/data-assets/ratings-05d8720ef1567581e8a0.ndjson.gz"
     }
   }
 }

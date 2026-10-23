@@ -7,8 +7,8 @@ import { homedir } from 'node:os'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { resolveDovePaths } from './dove-paths.mjs'
 
-export const dataPaths = ['src/data/dove-data.json', 'src/data/game-changelog.json', 'src/data/snapshot-manifest.json',
-  'src/data/rating-manifest.json', 'src/data/rating-methodology.json', 'data/asset-lock.json']
+export const dataPaths = ['src/data/site-index.json', 'src/data/dove-data.json', 'src/data/game-changelog.json', 'src/data/snapshot-manifest.json',
+  'src/data/rating-manifest.json', 'src/data/rating-methodology.json', 'src/data/rating-contract.json', 'data/asset-lock.json']
 const hash = bytes => createHash('sha256').update(bytes).digest('hex')
 const json = async file => JSON.parse(await readFile(file, 'utf8'))
 const delay = ms => new Promise(done => setTimeout(done, ms))
@@ -90,9 +90,12 @@ export async function createPlan(root, options, run = command) {
   const game = JSON.parse(await git(['show', `${released}:src/data/dove-data.json`]))
   const methodology = JSON.parse(await git(['show', `${released}:src/data/rating-methodology.json`]))
   const gameCommit = (await readFile(join(paths.gameDir, 'current_version_commit_hash.txt'), 'utf8')).trim()
+  const contractSource = join(saveRoot, 'plugins/Meta_Rating_Center/data/rating_contract.json')
+  const contractSha = existsSync(contractSource) ? hash(await readFile(contractSource)) : null
+  const releasedContract = contractSha ? await git(['show', `${released}:src/data/rating-contract.json`]).catch(() => null) : null
   return { profile: options.profile, source, sourceSha: hash(bytes), measuredGameVersion: summary.game_version, runId: summary.run_id,
-    ...paths, gameCommit, methods, methodsSha, version,
-    unchanged: manifest.profiles[options.profile]?.sourceSummarySha256 === hash(bytes) && game.metadata.commitHash === gameCommit && methodology.sha256 === methodsSha }
+    ...paths, gameCommit, methods, methodsSha, version, contractSource: contractSha ? contractSource : null, contractSha,
+    unchanged: manifest.profiles[options.profile]?.sourceSummarySha256 === hash(bytes) && game.metadata.commitHash === gameCommit && methodology.sha256 === methodsSha && (!contractSha || releasedContract !== null && hash(releasedContract.trimEnd()) === hash((await readFile(contractSource, 'utf8')).trimEnd())) }
 }
 
 export function assertDataPaths(files) {
@@ -120,6 +123,7 @@ export async function publish(state, { root, run = command, save, poll = delay, 
   const setPhase = async phase => { state.phase = phase; await save(state) }
   const node = (file, args = [], env = {}) => run(process.execPath, [join(state.worktree, file), ...args], { cwd: state.worktree, env })
   if (hash(await readFile(join(state.source, 'native_reference.json'))) !== state.sourceSha || hash(await readFile(state.methods)) !== state.methodsSha) throw new Error('输入批次或说明在本次发布期间改变，请使用 --new-run 开始新的发布')
+  if (state.contractSha && hash(await readFile(state.contractSource)) !== state.contractSha) throw new Error('评分定义在发布期间改变，请使用 --new-run 开始新的发布')
   if (state.phase === 'created') {
     log('1/6 在独立目录同步测评和游戏，执行本地检查……')
     if (!existsSync(join(state.worktree, '.git'))) {

@@ -78,7 +78,7 @@ describe('一键发布命令与版本', () => {
   it('用参数数组运行命令，保留含空格和元字符的路径及 porcelain 首列', async () => {
     expect(await command(process.execPath, ['-e', 'process.stdout.write(process.argv[1])', ' M src/a & b.json\n'], { capture: true })).toBe(' M src/a & b.json')
   })
-  it('只允许六个生成数据文件，拒绝代码和 public 图片进入提交', () => {
+  it('只允许生成数据与评分定义文件，拒绝代码和 public 图片进入提交', () => {
     expect(() => assertDataPaths(dataPaths)).not.toThrow()
     expect(() => assertDataPaths(['src/App.vue'])).toThrow()
     expect(() => assertDataPaths(['public/rating/results.json'])).toThrow()
