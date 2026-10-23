@@ -1,3 +1,4 @@
+import { generateSiteIndex } from './site-index.mjs'
 import { spawnSync } from 'node:child_process'
 import { existsSync, readFileSync } from 'node:fs'
 import {
@@ -462,6 +463,8 @@ function normalizeTechnologyModifiers(technologyId, technology) {
           'tower_rotten_forest',
           'tower_ignis_altar',
           'tower_sandworm',
+          'tower_culverine',
+          'tower_alchemist',
         ],
       }),
     )
@@ -795,10 +798,11 @@ async function finishSnapshot(transaction, data, changelog, manifest, previous, 
   const dataText = `${JSON.stringify(data, null, 2)}\n`
   manifest.dataHash = snapshotHash(dataText)
   await writeFile(join(transaction.stageRoot, 'src/data/dove-data.json'), dataText)
+  await generateSiteIndex(transaction.stageRoot)
   await writeFile(join(transaction.stageRoot, 'src/data/snapshot-manifest.json'), `${JSON.stringify(manifest, null, 2)}\n`)
   if (changelog) await writeFile(join(transaction.stageRoot, 'src/data/game-changelog.json'), `${JSON.stringify(changelog, null, 2)}\n`)
   if (!checkOnly) await transaction.promote(heroesOnly
-    ? ['public/heroes', 'src/data/dove-data.json', 'src/data/snapshot-manifest.json']
+    ? ['public/heroes', 'src/data/site-index.json', 'src/data/dove-data.json', 'src/data/snapshot-manifest.json']
     : generatedPaths)
   console.log(`[dove-wiki] ${checkOnly ? '检查通过，正式快照未修改' : '完整快照已发布'}；${assetCount} 个资源引用有效。差异报告：tools/.tmp/sync-report.json`)
 }

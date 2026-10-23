@@ -1,16 +1,18 @@
 {
   "version": 1,
-  "reviewedVersion": "2.0.9.3",
-  "gameCommit": "731afe683e16e3adbfe162cf2b7452cc7bd2f867",
-  "reviewedAt": "2026-10-10",
+  "reviewedVersion": "2.0.9.9",
+  "gameCommit": "7b0ab70aad95121ed10a62eb6e00b33ce21e1146",
+  "reviewedAt": "2026-10-22",
   "note": "人工核对科技钩子、修饰器模板及伤害/持续伤害结算。同步不得更新指纹；变化后条件与概率规则停止计算，等待复核。",
   "files": {
-    "kr1/upgrades.lua": "44c9e73126171f2bda1140877ff696e53b5cb1666e9e781ff72542836168f3f5",
+    "kr1/upgrades.lua": "35416f9b31dda5ded1a4b1698f04342c945bb2bf953bf1d325d18aeec1fa3ee6",
     "kr1/game_templates.lua": "93756fe782e43de9c32616d97573ca572a0c4f63467e16ac1036763b40865336",
-    "kr1/game_scripts.lua": "d78c9cc9d4c6df87a1383089eb8661a6dc1add31270e9c218c6969731a875fe0",
+    "kr1/game_scripts.lua": "1f93712c4c1a3bad051fba3dae9dddce2e642f8bc33f1508c240415db5e50cdb",
     "all/templates.lua": "f83d5091f593ac92ee8edef0e9384269f0b2c89c81b7e2f559a8472178db21b8",
-    "all/scripts.lua": "2d73332e1dccd0bbddd6f51b2990fa36370d7a85020539f1f2651325620c7394",
-    "all/systems/health.lua": "fe28639c2c537ff39842010905ea414e4299502c1a6e50b5188bba487951ec16"
+    "all/scripts.lua": "456c22bf263742a2b1052c4c8234a8f19223053419f7584b085a5890060f6e0c",
+    "all/systems/health.lua": "dd553cde987f992057a2785c3dbb1a1e6e5288108205bd70783aa1ed0fecbc4f",
+    "all/utils.lua": "3752e659815a2ccffda984895b7cfb90efa1af6c744763325899ea1365ccedeb",
+    "kr1/tower_scripts.lua": "db17308b39e9db6d6219e6e8c4137efa5ba5c47c2f18ed96fe4d161400bd3b48"
   },
   "simulationTechnologyIds": [
     "archer_piercing",
@@ -31,7 +33,9 @@
     "tower_frankenstein",
     "tower_rotten_forest",
     "tower_ignis_altar",
-    "tower_sandworm"
+    "tower_sandworm",
+    "tower_culverine",
+    "tower_alchemist"
   ],
   "parameters": {
     "piercingArmor": 10,
@@ -70,5 +74,6 @@
     "purgeBase": 0.14,
     "purgePerEnemy": 0.01,
     "purgeEnemyCap": 30
-  }
+  },
+  "auditDocument": "docs/mechanics-review-2.0.9.9.md"
 }

@@ -23,6 +23,7 @@ watch(
     if (tower) window.addEventListener('keydown', onKeydown)
     else window.removeEventListener('keydown', onKeydown)
   },
+  { immediate: true },
 )
 
 onBeforeUnmount(() => {
