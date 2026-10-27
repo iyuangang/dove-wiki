@@ -78,21 +78,30 @@
       "purgeEnemyCap": 30
     },
     "auditDocument": "docs/mechanics-review-2.0.9.9.md",
-    "valid": true,
-    "invalidFiles": []
+    "valid": false,
+    "invalidFiles": [
+      "kr1/upgrades.lua",
+      "kr1/game_templates.lua",
+      "kr1/game_scripts.lua",
+      "all/templates.lua",
+      "all/scripts.lua",
+      "all/systems/health.lua",
+      "all/utils.lua",
+      "kr1/tower_scripts.lua"
+    ]
   },
   "metadata": {
     "title": "王国保卫战鸽子版 WIKI",
-    "gameVersion": "2.0.9.9",
+    "gameVersion": "2.1.0.3",
     "contentVersion": "5.6.12",
     "gameId": "kingdom_rush_dove",
-    "commitHash": "7b0ab70aad95121ed10a62eb6e00b33ce21e1146",
-    "generatedAt": "2026-10-22T09:58:32.487Z",
+    "commitHash": "f2fc4c393d0832aedabe2e866c2fb447eabda3ff",
+    "generatedAt": "2026-10-27T02:06:21.048Z",
     "sourceRoot": "C:\\Users\\hhyg2\\AppData\\Local\\王国保卫战Dove版\\KingdomRushDove",
     "heroSnapshot": {
-      "gameVersion": "2.0.9.9",
-      "commitHash": "7b0ab70aad95121ed10a62eb6e00b33ce21e1146",
-      "generatedAt": "2026-10-22T09:58:32.491Z",
+      "gameVersion": "2.1.0.3",
+      "commitHash": "f2fc4c393d0832aedabe2e866c2fb447eabda3ff",
+      "generatedAt": "2026-10-27T02:06:21.051Z",
       "sourceRoot": "C:\\Users\\hhyg2\\AppData\\Local\\王国保卫战Dove版\\KingdomRushDove"
     },
     "assumptions": [
@@ -103,11 +112,11 @@
     ]
   },
   "summary": {
-    "towerCount": 105,
-    "portraitCount": 105,
-    "encyclopediaImageCount": 93,
+    "towerCount": 109,
+    "portraitCount": 109,
+    "encyclopediaImageCount": 97,
     "portraitFallbackCount": 12,
-    "skillIconCount": 230,
+    "skillIconCount": 242,
     "technologyTreeCount": 4,
     "technologyCount": 144,
     "heroCount": 79,
@@ -117,16 +126,19 @@
     "supportTowerCount": 8,
     "supportHeroCount": 7,
     "supportEffectCount": 17,
-    "levelUnlockCount": 70,
-    "defaultUnlockCount": 35,
-    "unlockAnomalyCount": 0,
-    "exactDamageCount": 104
+    "levelUnlockCount": 74,
+    "defaultUnlockCount": 34,
+    "unlockAnomalyCount": 1,
+    "exactDamageCount": 108
   },
   "validation": {
     "warnings": [
+      "1 座初始锁定塔没有关卡解锁记录。",
       "1 座塔没有可统一折算的基础伤害。"
     ],
-    "unlockAnomalies": [],
+    "unlockAnomalies": [
+      "tower_crossbows"
+    ],
     "noUnifiedDamage": [
       "tower_baby_ashbite"
     ],
@@ -2416,8 +2428,16 @@
           "all/systems/mod_lifecycle.lua",
           "all/utils.lua"
         ],
-        "valid": true,
-        "invalidFiles": []
+        "valid": false,
+        "invalidFiles": [
+          "kr1/archer_towers.lua",
+          "kr1/game_scripts.lua",
+          "kr1/tower_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/utils.lua"
+        ]
       },
       "icon": null
     },
@@ -2458,8 +2478,16 @@
           "all/systems/mod_lifecycle.lua",
           "all/utils.lua"
         ],
-        "valid": true,
-        "invalidFiles": []
+        "valid": false,
+        "invalidFiles": [
+          "kr1/archer_towers.lua",
+          "kr1/game_scripts.lua",
+          "kr1/tower_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/utils.lua"
+        ]
       },
       "icon": null
     },
@@ -2504,8 +2532,15 @@
           "all/systems/mod_lifecycle.lua",
           "all/utils.lua"
         ],
-        "valid": true,
-        "invalidFiles": []
+        "valid": false,
+        "invalidFiles": [
+          "kr1/archer_towers.lua",
+          "kr1/tower_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/utils.lua"
+        ]
       },
       "icon": null
     },
@@ -2549,8 +2584,16 @@
           "all/systems/mod_lifecycle.lua",
           "all/utils.lua"
         ],
-        "valid": true,
-        "invalidFiles": []
+        "valid": false,
+        "invalidFiles": [
+          "kr1/mage_towers.lua",
+          "kr1/game_scripts.lua",
+          "kr1/tower_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/utils.lua"
+        ]
       },
       "icon": null
     },
@@ -2591,8 +2634,15 @@
           "all/systems/mod_lifecycle.lua",
           "all/utils.lua"
         ],
-        "valid": true,
-        "invalidFiles": []
+        "valid": false,
+        "invalidFiles": [
+          "kr1/mage_towers.lua",
+          "kr1/tower_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/utils.lua"
+        ]
       },
       "icon": null
     },
@@ -2640,8 +2690,15 @@
           "all/systems/mod_lifecycle.lua",
           "all/utils.lua"
         ],
-        "valid": true,
-        "invalidFiles": []
+        "valid": false,
+        "invalidFiles": [
+          "kr1/mage_towers.lua",
+          "kr1/tower_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/utils.lua"
+        ]
       },
       "icon": null
     },
@@ -2676,8 +2733,15 @@
           "all/systems/mod_lifecycle.lua",
           "all/utils.lua"
         ],
-        "valid": true,
-        "invalidFiles": []
+        "valid": false,
+        "invalidFiles": [
+          "kr1/engineer_towers.lua",
+          "kr1/tower_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/utils.lua"
+        ]
       },
       "icon": null
     },
@@ -2709,8 +2773,15 @@
           "all/systems/mod_lifecycle.lua",
           "all/utils.lua"
         ],
-        "valid": true,
-        "invalidFiles": []
+        "valid": false,
+        "invalidFiles": [
+          "kr1/engineer_towers.lua",
+          "kr1/tower_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/utils.lua"
+        ]
       },
       "icon": null
     },
@@ -2756,8 +2827,15 @@
           "all/systems/mod_lifecycle.lua",
           "all/utils.lua"
         ],
-        "valid": true,
-        "invalidFiles": []
+        "valid": false,
+        "invalidFiles": [
+          "kr1/archer_towers.lua",
+          "kr1/tower_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/utils.lua"
+        ]
       },
       "icon": null
     },
@@ -2824,8 +2902,15 @@
           "all/systems/mod_lifecycle.lua",
           "all/utils.lua"
         ],
-        "valid": true,
-        "invalidFiles": []
+        "valid": false,
+        "invalidFiles": [
+          "kr1/heroes.lua",
+          "kr1/hero_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/utils.lua"
+        ]
       },
       "icon": "/heroes/thumbs/hero_denas.png"
     },
@@ -2976,8 +3061,15 @@
           "all/systems/mod_lifecycle.lua",
           "all/utils.lua"
         ],
-        "valid": true,
-        "invalidFiles": []
+        "valid": false,
+        "invalidFiles": [
+          "kr1/heroes.lua",
+          "kr1/hero_scripts.lua",
+          "all/templates.lua",
+          "all/scripts.lua",
+          "all/script_utils.lua",
+          "all/utils.lua"
+        ]
       },
       "icon": "/heroes/thumbs/hero_space_elf.png"
     },
@@ -14121,7 +14213,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "E:register_t(\"hero_vesper\"",
-            "line": 13989
+            "line": 13987
           }
         ]
       }
@@ -14520,7 +14612,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "E:register_t(\"hero_muyrn\"",
-            "line": 14304
+            "line": 14302
           }
         ]
       }
@@ -14722,7 +14814,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_builder\"",
-            "line": 15443
+            "line": 15439
           }
         ]
       }
@@ -15326,7 +15418,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_bird\"",
-            "line": 16205
+            "line": 16201
           }
         ]
       }
@@ -15725,7 +15817,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_mecha\"",
-            "line": 17291
+            "line": 17287
           }
         ]
       }
@@ -15935,7 +16027,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_robot\"",
-            "line": 15816
+            "line": 15812
           }
         ]
       }
@@ -16140,7 +16232,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_lumenir\"",
-            "line": 13044
+            "line": 13042
           }
         ]
       }
@@ -16766,7 +16858,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_dragon_bone\"",
-            "line": 12522
+            "line": 12520
           }
         ]
       }
@@ -16965,7 +17057,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_wukong\"",
-            "line": 13664
+            "line": 13662
           }
         ]
       }
@@ -17171,7 +17263,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "E:register_t(\"hero_dragon_arb\"",
-            "line": 14760
+            "line": 14758
           }
         ]
       }
@@ -17373,7 +17465,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_lava\"",
-            "line": 16616
+            "line": 16612
           }
         ]
       }
@@ -17576,7 +17668,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_spider\"",
-            "line": 16957
+            "line": 16953
           }
         ]
       }
@@ -17781,7 +17873,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_dragon_sun\"",
-            "line": 17973
+            "line": 17969
           }
         ]
       }
@@ -17991,7 +18083,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_eiskalt\"",
-            "line": 18177
+            "line": 18173
           }
         ]
       }
@@ -18201,7 +18293,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_dianyun\"",
-            "line": 19230
+            "line": 19226
           }
         ]
       }
@@ -18409,7 +18501,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_asra\"",
-            "line": 18548
+            "line": 18544
           }
         ]
       }
@@ -18614,7 +18706,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_beresad\"",
-            "line": 18819
+            "line": 18815
           }
         ]
       }
@@ -18814,7 +18906,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_orc\"",
-            "line": 20107
+            "line": 20103
           }
         ]
       }
@@ -19021,7 +19113,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_oloch\"",
-            "line": 20353
+            "line": 20349
           }
         ]
       }
@@ -19229,7 +19321,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_margosa\"",
-            "line": 20735
+            "line": 20731
           }
         ]
       }
@@ -19436,7 +19528,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_mortemis\"",
-            "line": 20978
+            "line": 20974
           }
         ]
       }
@@ -19643,7 +19735,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_jigou\"",
-            "line": 21334
+            "line": 21330
           }
         ]
       }
@@ -19855,7 +19947,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_tramin\"",
-            "line": 21655
+            "line": 21651
           }
         ]
       }
@@ -20055,7 +20147,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_tank\"",
-            "line": 21959
+            "line": 21955
           }
         ]
       }
@@ -20263,7 +20355,7 @@
           {
             "file": "kr1/heroes.lua",
             "symbol": "RT(\"hero_naga\"",
-            "line": 22468
+            "line": 22464
           }
         ]
       }
@@ -84175,8 +84267,8 @@
         "dps": 14.666666666666666,
         "range": 175,
         "rallyRange": null,
-        "damageType": "未标注",
-        "damageTypeValue": null,
+        "damageType": "物理范围",
+        "damageTypeValue": 8,
         "kind": "area",
         "confidence": "精确",
         "scope": "单目标基础攻击"
@@ -91662,9 +91754,9 @@
         "source": "kr1/data/levels/level106_data.lua"
       },
       "attack": {
-        "damageMin": 10,
-        "damageMax": 20,
-        "cooldown": 1.2,
+        "damageMin": 15,
+        "damageMax": 30,
+        "cooldown": 1.8,
         "dps": 12.5,
         "range": 220,
         "rallyRange": null,
@@ -101712,8 +101804,8 @@
         "dps": 13,
         "range": 176,
         "rallyRange": null,
-        "damageType": "未标注",
-        "damageTypeValue": null,
+        "damageType": "物理",
+        "damageTypeValue": 2,
         "kind": "area",
         "confidence": "精确",
         "scope": "单目标基础攻击"
@@ -103014,7 +103106,7 @@
         "damageMax": 80,
         "cooldown": 3.74,
         "dps": 19.25133689839572,
-        "range": 160,
+        "range": 165,
         "rallyRange": null,
         "damageType": "真实",
         "damageTypeValue": 1,
@@ -103676,8 +103768,8 @@
       "towerType": "crossbows",
       "canBeBuffed": true,
       "unlock": {
-        "status": "default",
-        "label": "默认可用（未列入初始锁定表）",
+        "status": "missing",
+        "label": "游戏数据未配置解锁关卡（初始为锁定）",
         "source": "kr1/data/slot_template.lua"
       },
       "attack": {
@@ -104990,7 +105082,7 @@
       },
       "soldier": {
         "count": 2,
-        "hp": 235,
+        "hp": 240,
         "armor": 0.4,
         "magicArmor": 0,
         "respawn": 12
@@ -105185,7 +105277,7 @@
           "controllable": true,
           "note": "模板基准值，未代入技能升级；技能带来的属性变化见逐级说明。",
           "stats": {
-            "hp": 235,
+            "hp": 240,
             "armor": 0.4,
             "magicArmor": 0,
             "speed": 125,
@@ -105318,100 +105410,52 @@
           "icon": "/skills/tower_sunray_master--skill_a.png",
           "iconSprite": "kr6_quickmenu_special_icons_sunray_master_0001",
           "maxLevel": 3,
-          "priceBase": 200,
-          "priceIncrement": 100,
+          "priceBase": 140,
+          "priceIncrement": 140,
           "descriptions": [
             {
               "key": "TOWER_SUNRAY_MASTER_SKILL_A_DESCRIPTION_1",
-              "text": "召唤2个小型土元素与敌人战斗。元素拥有100点生命值，15点护甲，且可造成3-5点物理伤害。"
+              "text": "召唤1个小型土元素与敌人战斗。元素拥有180点生命值，25点护甲，且可造成5-7点物理伤害。"
             },
             {
               "key": "TOWER_SUNRAY_MASTER_SKILL_A_DESCRIPTION_2",
-              "text": "召唤2个小型土元素与敌人战斗。元素拥有140点生命值，20点护甲，且可造成4-6点物理伤害。"
+              "text": "召唤2个小型土元素与敌人战斗。元素拥有180点生命值，25点护甲，且可造成5-7点物理伤害。"
             },
             {
               "key": "TOWER_SUNRAY_MASTER_SKILL_A_DESCRIPTION_3",
-              "text": "召唤2个小型土元素与敌人战斗。元素拥有180点生命值，25点护甲，且可造成5-7点物理伤害。"
+              "text": "召唤3个小型土元素与敌人战斗。元素拥有180点生命值，25点护甲，且可造成5-7点物理伤害。"
             }
           ],
           "levels": [
             {
               "level": 1,
-              "price": 200,
-              "cumulativePrice": 200,
-              "description": "召唤2个小型土元素与敌人战斗。元素拥有100点生命值，15点护甲，且可造成3-5点物理伤害。",
+              "price": 140,
+              "cumulativePrice": 140,
+              "description": "召唤1个小型土元素与敌人战斗。元素拥有180点生命值，25点护甲，且可造成5-7点物理伤害。",
               "descriptionKey": "TOWER_SUNRAY_MASTER_SKILL_A_DESCRIPTION_1",
               "descriptionSource": "level",
               "unresolved": false,
-              "parameters": [
-                {
-                  "label": "伤害下限",
-                  "value": 3,
-                  "unit": ""
-                },
-                {
-                  "label": "伤害上限",
-                  "value": 5,
-                  "unit": ""
-                },
-                {
-                  "label": "生命",
-                  "value": 100,
-                  "unit": ""
-                }
-              ]
+              "parameters": []
             },
             {
               "level": 2,
-              "price": 100,
-              "cumulativePrice": 300,
-              "description": "召唤2个小型土元素与敌人战斗。元素拥有140点生命值，20点护甲，且可造成4-6点物理伤害。",
+              "price": 140,
+              "cumulativePrice": 280,
+              "description": "召唤2个小型土元素与敌人战斗。元素拥有180点生命值，25点护甲，且可造成5-7点物理伤害。",
               "descriptionKey": "TOWER_SUNRAY_MASTER_SKILL_A_DESCRIPTION_2",
               "descriptionSource": "level",
               "unresolved": false,
-              "parameters": [
-                {
-                  "label": "伤害下限",
-                  "value": 4,
-                  "unit": ""
-                },
-                {
-                  "label": "伤害上限",
-                  "value": 6,
-                  "unit": ""
-                },
-                {
-                  "label": "生命",
-                  "value": 140,
-                  "unit": ""
-                }
-              ]
+              "parameters": []
             },
             {
               "level": 3,
-              "price": 100,
-              "cumulativePrice": 400,
-              "description": "召唤2个小型土元素与敌人战斗。元素拥有180点生命值，25点护甲，且可造成5-7点物理伤害。",
+              "price": 140,
+              "cumulativePrice": 420,
+              "description": "召唤3个小型土元素与敌人战斗。元素拥有180点生命值，25点护甲，且可造成5-7点物理伤害。",
               "descriptionKey": "TOWER_SUNRAY_MASTER_SKILL_A_DESCRIPTION_3",
               "descriptionSource": "level",
               "unresolved": false,
-              "parameters": [
-                {
-                  "label": "伤害下限",
-                  "value": 5,
-                  "unit": ""
-                },
-                {
-                  "label": "伤害上限",
-                  "value": 7,
-                  "unit": ""
-                },
-                {
-                  "label": "生命",
-                  "value": 180,
-                  "unit": ""
-                }
-              ]
+              "parameters": []
             }
           ]
         },
@@ -105572,14 +105616,16 @@
         {
           "id": "soldier_sunray_master",
           "name": "soldier_sunray_master",
-          "relatedPowerIds": [],
+          "relatedPowerIds": [
+            "skill_a"
+          ],
           "count": null,
           "rallyRange": 150,
           "controllable": true,
           "note": "模板基准值，未代入技能升级；技能带来的属性变化见逐级说明。",
           "stats": {
-            "hp": 100,
-            "armor": 0.15,
+            "hp": 180,
+            "armor": 0.25,
             "magicArmor": 0,
             "speed": 60,
             "respawn": 12,
@@ -105590,8 +105636,8 @@
               {
                 "id": "melee-1",
                 "name": "近战",
-                "damageMin": 3,
-                "damageMax": 5,
+                "damageMin": 5,
+                "damageMax": 7,
                 "damageType": "物理",
                 "cooldown": 2,
                 "range": 70,
@@ -106027,6 +106073,1354 @@
       ]
     },
     {
+      "id": "tower_tree",
+      "name": "铁木树人",
+      "description": "栖息于金色林地的古老树人，性情暴烈却又强大可靠。它们能连根拔起走上战场，把入侵者碾碎或直接埋进土里。",
+      "families": [
+        "engineer"
+      ],
+      "roles": [
+        "直接输出",
+        "范围伤害",
+        "召唤/拦截",
+        "减益/破甲"
+      ],
+      "image": "/encyclopedia/thumbs/tower_tree.png",
+      "encyclopediaImage": "/encyclopedia/tower_tree.png",
+      "encyclopediaOrder": 94,
+      "encyclopediaListed": true,
+      "encyclopediaSprite": "kr6_encyclopedia_towers_0056",
+      "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0056",
+      "sourceGame": 6,
+      "portraitSprite": "kr6_info_portraits_towers_0016",
+      "price": 335,
+      "level": 1,
+      "towerType": "tree",
+      "canBeBuffed": true,
+      "unlock": {
+        "status": "level",
+        "level": 216,
+        "label": "第 216 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level216_data.lua"
+      },
+      "attack": {
+        "damageMin": 35,
+        "damageMax": 55,
+        "cooldown": 3,
+        "dps": 15,
+        "range": 160,
+        "rallyRange": 160,
+        "damageType": "物理范围",
+        "damageTypeValue": 8,
+        "kind": "area",
+        "confidence": "精确",
+        "scope": "单目标基础攻击"
+      },
+      "soldier": null,
+      "powers": [
+        {
+          "id": "skill_a",
+          "name": "迷乱花粉",
+          "icon": "/skills/tower_tree--skill_a.png",
+          "iconSprite": "kr6_quickmenu_special_icons_tree_0001",
+          "maxLevel": 3,
+          "priceBase": 150,
+          "priceIncrement": 150,
+          "descriptions": [
+            {
+              "key": "TOWER_TREE_SKILL_A_DESCRIPTION_1",
+              "text": "每隔20秒，树人哥哥释放迷乱花粉，使周围一半敌人被策反，且所有敌人受伤提高20%，每0.25秒受到4点真实伤害，持续2秒。"
+            },
+            {
+              "key": "TOWER_TREE_SKILL_A_DESCRIPTION_2",
+              "text": "每隔20秒，树人哥哥释放迷乱花粉，使周围一半敌人被策反，且所有敌人受伤提高20%，每0.25秒受到5点真实伤害，持续3秒。"
+            },
+            {
+              "key": "TOWER_TREE_SKILL_A_DESCRIPTION_3",
+              "text": "每隔20秒，树人哥哥释放迷乱花粉，使周围一半敌人被策反，且所有敌人受伤提高20%，每0.25秒受到6点真实伤害，持续4秒。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 150,
+              "cumulativePrice": 150,
+              "description": "每隔20秒，树人哥哥释放迷乱花粉，使周围一半敌人被策反，且所有敌人受伤提高20%，每0.25秒受到4点真实伤害，持续2秒。",
+              "descriptionKey": "TOWER_TREE_SKILL_A_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 20,
+                  "unit": "秒"
+                },
+                {
+                  "label": "持续时间",
+                  "value": 2,
+                  "unit": "秒"
+                }
+              ]
+            },
+            {
+              "level": 2,
+              "price": 150,
+              "cumulativePrice": 300,
+              "description": "每隔20秒，树人哥哥释放迷乱花粉，使周围一半敌人被策反，且所有敌人受伤提高20%，每0.25秒受到5点真实伤害，持续3秒。",
+              "descriptionKey": "TOWER_TREE_SKILL_A_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 20,
+                  "unit": "秒"
+                },
+                {
+                  "label": "持续时间",
+                  "value": 3,
+                  "unit": "秒"
+                }
+              ]
+            },
+            {
+              "level": 3,
+              "price": 150,
+              "cumulativePrice": 450,
+              "description": "每隔20秒，树人哥哥释放迷乱花粉，使周围一半敌人被策反，且所有敌人受伤提高20%，每0.25秒受到6点真实伤害，持续4秒。",
+              "descriptionKey": "TOWER_TREE_SKILL_A_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 20,
+                  "unit": "秒"
+                },
+                {
+                  "label": "持续时间",
+                  "value": 4,
+                  "unit": "秒"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "name": "大自然之手",
+          "icon": "/skills/tower_tree--skill_b.png",
+          "iconSprite": "kr6_quickmenu_special_icons_tree_0002",
+          "maxLevel": 3,
+          "priceBase": 270,
+          "priceIncrement": 90,
+          "descriptions": [
+            {
+              "key": "TOWER_TREE_SKILL_B_DESCRIPTION_1",
+              "text": "每25秒，树人弟弟将一名生命值不超过3000的敌人埋入土中。"
+            },
+            {
+              "key": "TOWER_TREE_SKILL_B_DESCRIPTION_2",
+              "text": "每25秒，树人弟弟将一名生命值不超过4000的敌人埋入土中。"
+            },
+            {
+              "key": "TOWER_TREE_SKILL_B_DESCRIPTION_3",
+              "text": "每25秒，树人弟弟将一名生命值不超过5000的敌人埋入土中。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 270,
+              "cumulativePrice": 270,
+              "description": "每25秒，树人弟弟将一名生命值不超过3000的敌人埋入土中。",
+              "descriptionKey": "TOWER_TREE_SKILL_B_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 90,
+              "cumulativePrice": 360,
+              "description": "每25秒，树人弟弟将一名生命值不超过4000的敌人埋入土中。",
+              "descriptionKey": "TOWER_TREE_SKILL_B_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 90,
+              "cumulativePrice": 450,
+              "description": "每25秒，树人弟弟将一名生命值不超过5000的敌人埋入土中。",
+              "descriptionKey": "TOWER_TREE_SKILL_B_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "name": "盘根错节",
+          "icon": "/skills/tower_tree--skill_c.png",
+          "iconSprite": "kr6_quickmenu_special_icons_tree_0003",
+          "maxLevel": 3,
+          "priceBase": 120,
+          "priceIncrement": 120,
+          "descriptions": [
+            {
+              "key": "TOWER_TREE_SKILL_C_DESCRIPTION_1",
+              "text": "每14秒，树人哥哥将树根沿路径蔓延，缠绕最多4名敌人，持续2秒。"
+            },
+            {
+              "key": "TOWER_TREE_SKILL_C_DESCRIPTION_2",
+              "text": "每14秒，树人哥哥将树根沿路径蔓延，缠绕最多5名敌人，持续3秒。"
+            },
+            {
+              "key": "TOWER_TREE_SKILL_C_DESCRIPTION_3",
+              "text": "每14秒，树人哥哥将树根沿路径蔓延，缠绕最多6名敌人，持续4秒。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 120,
+              "cumulativePrice": 120,
+              "description": "每14秒，树人哥哥将树根沿路径蔓延，缠绕最多4名敌人，持续2秒。",
+              "descriptionKey": "TOWER_TREE_SKILL_C_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 14,
+                  "unit": "秒"
+                },
+                {
+                  "label": "目标上限",
+                  "value": 4,
+                  "unit": ""
+                }
+              ]
+            },
+            {
+              "level": 2,
+              "price": 120,
+              "cumulativePrice": 240,
+              "description": "每14秒，树人哥哥将树根沿路径蔓延，缠绕最多5名敌人，持续3秒。",
+              "descriptionKey": "TOWER_TREE_SKILL_C_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 14,
+                  "unit": "秒"
+                },
+                {
+                  "label": "目标上限",
+                  "value": 5,
+                  "unit": ""
+                }
+              ]
+            },
+            {
+              "level": 3,
+              "price": 120,
+              "cumulativePrice": 360,
+              "description": "每14秒，树人哥哥将树根沿路径蔓延，缠绕最多6名敌人，持续4秒。",
+              "descriptionKey": "TOWER_TREE_SKILL_C_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 14,
+                  "unit": "秒"
+                },
+                {
+                  "label": "目标上限",
+                  "value": 6,
+                  "unit": ""
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/engineer_towers.lua",
+        "nameKey": "TOWER_TREE_NAME",
+        "descriptionKey": "TOWER_TREE_DESCRIPTION",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
+        "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
+        "unlock": "kr1/data/levels/level216_data.lua"
+      },
+      "units": [
+        {
+          "id": "soldier_tree",
+          "name": "soldier_tree",
+          "relatedPowerIds": [
+            "skill_b"
+          ],
+          "count": null,
+          "rallyRange": 160,
+          "controllable": true,
+          "note": "模板基准值，未代入技能升级；技能带来的属性变化见逐级说明。",
+          "stats": {
+            "hp": 1000,
+            "armor": 0.15,
+            "magicArmor": 0,
+            "speed": 35,
+            "respawn": 20,
+            "regen": null,
+            "regenCooldown": 2,
+            "lifetime": null,
+            "attacks": [
+              {
+                "id": "melee-1",
+                "name": "近战",
+                "damageMin": 46,
+                "damageMax": 74,
+                "damageType": "物理范围",
+                "cooldown": 3,
+                "range": 70,
+                "radius": 60,
+                "targets": null,
+                "chance": 1,
+                "disabled": false,
+                "source": "soldier_tree.melee.attacks[1]"
+              }
+            ]
+          },
+          "variants": [],
+          "source": "kr1/engineer_towers.lua",
+          "scriptSource": null
+        },
+        {
+          "id": "soldier_tree_ultimate_seedling",
+          "name": "soldier_tree_ultimate_seedling",
+          "relatedPowerIds": [],
+          "count": null,
+          "rallyRange": null,
+          "controllable": false,
+          "note": "模板基准值，未代入技能升级；技能带来的属性变化见逐级说明。",
+          "stats": {
+            "hp": 60,
+            "armor": 0,
+            "magicArmor": 0,
+            "speed": 50,
+            "respawn": null,
+            "regen": null,
+            "regenCooldown": 1,
+            "lifetime": null,
+            "attacks": [
+              {
+                "id": "melee-1",
+                "name": "近战",
+                "damageMin": 6,
+                "damageMax": 10,
+                "damageType": "物理",
+                "cooldown": 1,
+                "range": 70,
+                "radius": null,
+                "targets": null,
+                "chance": 1,
+                "disabled": false,
+                "source": "soldier_tree_ultimate_seedling.melee.attacks[1]"
+              }
+            ]
+          },
+          "variants": [],
+          "source": "kr1/engineer_towers.lua",
+          "scriptSource": null
+        }
+      ],
+      "mechanics": {
+        "reviewedVersion": "2.0.9.3",
+        "items": [],
+        "pending": [
+          "爆炸 / 猛击伤害的护甲结算"
+        ],
+        "hasSpecificReview": false
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "范围光环向敌人施加伤害效果。",
+          "source": "aura_tree_attack"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "soldier_tree.damage_radius / area"
+        },
+        {
+          "role": "召唤/拦截",
+          "description": "具有驻防或召唤单位；飞行单位不等同于地面阻挡。",
+          "source": "units / barrack"
+        },
+        {
+          "role": "减益/破甲",
+          "description": "效果降低敌人输出或提高敌人受到的伤害。",
+          "source": "mod_tree_skill_a_weak"
+        }
+      ]
+    },
+    {
+      "id": "tower_light_priestess",
+      "name": "光明女祭司",
+      "description": "在她们的祈祷与神圣魔法之下，没有同伴会遭受死亡的威胁，也没有敌人能毫发无伤地离开。",
+      "families": [
+        "mage"
+      ],
+      "roles": [
+        "直接输出",
+        "控制"
+      ],
+      "image": "/encyclopedia/thumbs/tower_light_priestess.png",
+      "encyclopediaImage": "/encyclopedia/tower_light_priestess.png",
+      "encyclopediaOrder": 95,
+      "encyclopediaListed": true,
+      "encyclopediaSprite": "kr6_encyclopedia_towers_0040",
+      "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0040",
+      "sourceGame": 6,
+      "portraitSprite": "kr6_info_portraits_towers_0015",
+      "price": 260,
+      "level": 1,
+      "towerType": "light_priestess",
+      "canBeBuffed": true,
+      "unlock": {
+        "status": "level",
+        "level": 217,
+        "label": "第 217 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level217_data.lua"
+      },
+      "attack": {
+        "damageMin": 47,
+        "damageMax": 82,
+        "cooldown": 1.5,
+        "dps": 43,
+        "range": 200,
+        "rallyRange": null,
+        "damageType": "魔法",
+        "damageTypeValue": 4,
+        "kind": "bullet",
+        "confidence": "精确",
+        "scope": "单目标基础攻击"
+      },
+      "soldier": null,
+      "powers": [
+        {
+          "id": "skill_a",
+          "name": "守护圣域",
+          "icon": "/skills/tower_light_priestess--skill_a.png",
+          "iconSprite": "kr6_quickmenu_special_icons_light_priestess_0001",
+          "maxLevel": 3,
+          "priceBase": 200,
+          "priceIncrement": 175,
+          "descriptions": [
+            {
+              "key": "TOWER_LIGHT_PRIESTESS_SKILL_A_DESCRIPTION_1",
+              "text": "每16秒，施展圣光庇佑一群我方单位，使其在4秒内恢复96点生命值，并在期间提升10点护甲。"
+            },
+            {
+              "key": "TOWER_LIGHT_PRIESTESS_SKILL_A_DESCRIPTION_2",
+              "text": "每16秒，施展圣光庇佑一群我方单位，使其在4秒内恢复128点生命值，并在期间提升20点护甲。"
+            },
+            {
+              "key": "TOWER_LIGHT_PRIESTESS_SKILL_A_DESCRIPTION_3",
+              "text": "每16秒，施展圣光庇佑一群我方单位，使其在4秒内恢复192点生命值，并在期间提升30点护甲。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 200,
+              "cumulativePrice": 200,
+              "description": "每16秒，施展圣光庇佑一群我方单位，使其在4秒内恢复96点生命值，并在期间提升10点护甲。",
+              "descriptionKey": "TOWER_LIGHT_PRIESTESS_SKILL_A_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "持续时间",
+                  "value": 4,
+                  "unit": "秒"
+                }
+              ]
+            },
+            {
+              "level": 2,
+              "price": 175,
+              "cumulativePrice": 375,
+              "description": "每16秒，施展圣光庇佑一群我方单位，使其在4秒内恢复128点生命值，并在期间提升20点护甲。",
+              "descriptionKey": "TOWER_LIGHT_PRIESTESS_SKILL_A_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "持续时间",
+                  "value": 4,
+                  "unit": "秒"
+                }
+              ]
+            },
+            {
+              "level": 3,
+              "price": 175,
+              "cumulativePrice": 550,
+              "description": "每16秒，施展圣光庇佑一群我方单位，使其在4秒内恢复192点生命值，并在期间提升30点护甲。",
+              "descriptionKey": "TOWER_LIGHT_PRIESTESS_SKILL_A_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "持续时间",
+                  "value": 4,
+                  "unit": "秒"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "name": "沉默光环",
+          "icon": "/skills/tower_light_priestess--skill_b.png",
+          "iconSprite": "kr6_quickmenu_special_icons_light_priestess_0002",
+          "maxLevel": 3,
+          "priceBase": 150,
+          "priceIncrement": 100,
+          "descriptions": [
+            {
+              "key": "TOWER_LIGHT_PRIESTESS_SKILL_B_DESCRIPTION_1",
+              "text": "每20秒，沉默并减速此塔周围的敌人40%，持续6秒。"
+            },
+            {
+              "key": "TOWER_LIGHT_PRIESTESS_SKILL_B_DESCRIPTION_2",
+              "text": "每20秒，沉默并减速此塔周围的敌人40%，持续8秒。"
+            },
+            {
+              "key": "TOWER_LIGHT_PRIESTESS_SKILL_B_DESCRIPTION_3",
+              "text": "每20秒，沉默并减速此塔周围的敌人40%，持续10秒。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 150,
+              "cumulativePrice": 150,
+              "description": "每20秒，沉默并减速此塔周围的敌人40%，持续6秒。",
+              "descriptionKey": "TOWER_LIGHT_PRIESTESS_SKILL_B_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "移动速度倍率",
+                  "value": 0.6,
+                  "unit": "倍"
+                }
+              ]
+            },
+            {
+              "level": 2,
+              "price": 100,
+              "cumulativePrice": 250,
+              "description": "每20秒，沉默并减速此塔周围的敌人40%，持续8秒。",
+              "descriptionKey": "TOWER_LIGHT_PRIESTESS_SKILL_B_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "移动速度倍率",
+                  "value": 0.6,
+                  "unit": "倍"
+                }
+              ]
+            },
+            {
+              "level": 3,
+              "price": 100,
+              "cumulativePrice": 350,
+              "description": "每20秒，沉默并减速此塔周围的敌人40%，持续10秒。",
+              "descriptionKey": "TOWER_LIGHT_PRIESTESS_SKILL_B_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "移动速度倍率",
+                  "value": 0.6,
+                  "unit": "倍"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "name": "帕那刻亚的祝福",
+          "icon": "/skills/tower_light_priestess--skill_c.png",
+          "iconSprite": "kr6_quickmenu_special_icons_light_priestess_0003",
+          "maxLevel": 3,
+          "priceBase": 150,
+          "priceIncrement": 120,
+          "descriptions": [
+            {
+              "key": "TOWER_LIGHT_PRIESTESS_SKILL_C_DESCRIPTION_1",
+              "text": "每18秒，祝福范围内的一座防御塔，使其攻击伤害提升50%，持续9秒。"
+            },
+            {
+              "key": "TOWER_LIGHT_PRIESTESS_SKILL_C_DESCRIPTION_2",
+              "text": "每18秒，祝福范围内的一座防御塔，使其攻击伤害提升85%，持续9秒。"
+            },
+            {
+              "key": "TOWER_LIGHT_PRIESTESS_SKILL_C_DESCRIPTION_3",
+              "text": "每18秒，祝福范围内的一座防御塔，使其攻击伤害提升120%，持续9秒。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 150,
+              "cumulativePrice": 150,
+              "description": "每18秒，祝福范围内的一座防御塔，使其攻击伤害提升50%，持续9秒。",
+              "descriptionKey": "TOWER_LIGHT_PRIESTESS_SKILL_C_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "持续时间",
+                  "value": 9,
+                  "unit": "秒"
+                },
+                {
+                  "label": "伤害倍率",
+                  "value": 1.5,
+                  "unit": "倍"
+                }
+              ]
+            },
+            {
+              "level": 2,
+              "price": 120,
+              "cumulativePrice": 270,
+              "description": "每18秒，祝福范围内的一座防御塔，使其攻击伤害提升85%，持续9秒。",
+              "descriptionKey": "TOWER_LIGHT_PRIESTESS_SKILL_C_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "持续时间",
+                  "value": 9,
+                  "unit": "秒"
+                },
+                {
+                  "label": "伤害倍率",
+                  "value": 1.85,
+                  "unit": "倍"
+                }
+              ]
+            },
+            {
+              "level": 3,
+              "price": 120,
+              "cumulativePrice": 390,
+              "description": "每18秒，祝福范围内的一座防御塔，使其攻击伤害提升120%，持续9秒。",
+              "descriptionKey": "TOWER_LIGHT_PRIESTESS_SKILL_C_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "持续时间",
+                  "value": 9,
+                  "unit": "秒"
+                },
+                {
+                  "label": "伤害倍率",
+                  "value": 2.2,
+                  "unit": "倍"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/mage_towers.lua",
+        "nameKey": "TOWER_LIGHT_PRIESTESS_NAME",
+        "descriptionKey": "TOWER_LIGHT_PRIESTESS_DESCRIPTION",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
+        "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
+        "unlock": "kr1/data/levels/level217_data.lua"
+      },
+      "units": [],
+      "mechanics": {
+        "reviewedVersion": "2.0.9.3",
+        "items": [],
+        "pending": [
+          "魔法伤害的护甲结算"
+        ],
+        "hasSpecificReview": false
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "减速效果。",
+          "source": "mod_light_priestess_skill_b_slow"
+        }
+      ]
+    },
+    {
+      "id": "tower_forger",
+      "name": "奥术幻铸师",
+      "description": "阿坎尼亚城的魔导士，运用无边无际的想象力将魔法锻造成危险的武器。",
+      "families": [
+        "mage"
+      ],
+      "roles": [
+        "直接输出",
+        "范围伤害",
+        "控制"
+      ],
+      "image": "/encyclopedia/thumbs/tower_forger.png",
+      "encyclopediaImage": "/encyclopedia/tower_forger.png",
+      "encyclopediaOrder": 96,
+      "encyclopediaListed": true,
+      "encyclopediaSprite": "kr6_encyclopedia_towers_0052",
+      "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0052",
+      "sourceGame": 6,
+      "portraitSprite": "kr6_info_portraits_towers_0038",
+      "price": 280,
+      "level": 1,
+      "towerType": "forger",
+      "canBeBuffed": true,
+      "unlock": {
+        "status": "level",
+        "level": 218,
+        "label": "第 218 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level218_data.lua"
+      },
+      "attack": {
+        "damageMin": 56,
+        "damageMax": 68,
+        "cooldown": 2.9,
+        "dps": 21.379310344827587,
+        "range": 190,
+        "rallyRange": null,
+        "damageType": "魔法",
+        "damageTypeValue": 4,
+        "kind": "bullet",
+        "confidence": "精确",
+        "scope": "单目标基础攻击"
+      },
+      "soldier": null,
+      "powers": [
+        {
+          "id": "skill_a",
+          "name": "斩裂圆锯",
+          "icon": "/skills/tower_forger--skill_a.png",
+          "iconSprite": "kr6_quickmenu_special_icons_forger_0001",
+          "maxLevel": 3,
+          "priceBase": 250,
+          "priceIncrement": 250,
+          "descriptions": [
+            {
+              "key": "TOWER_FORGER_SKILL_A_DESCRIPTION_1",
+              "text": "每隔18秒，召出三枚旋转的能量圆刃沿道路割裂前行，每0.25秒对命中的敌人造成35-50点魔法伤害。"
+            },
+            {
+              "key": "TOWER_FORGER_SKILL_A_DESCRIPTION_2",
+              "text": "每隔18秒，召出三枚旋转的能量圆刃沿道路割裂前行，每0.25秒对命中的敌人造成70-100点魔法伤害。"
+            },
+            {
+              "key": "TOWER_FORGER_SKILL_A_DESCRIPTION_3",
+              "text": "每隔18秒，召出三枚旋转的能量圆刃沿道路割裂前行，每0.25秒对命中的敌人造成105-150点魔法伤害。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 250,
+              "cumulativePrice": 250,
+              "description": "每隔18秒，召出三枚旋转的能量圆刃沿道路割裂前行，每0.25秒对命中的敌人造成35-50点魔法伤害。",
+              "descriptionKey": "TOWER_FORGER_SKILL_A_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "伤害下限",
+                  "value": 35,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 50,
+                  "unit": ""
+                }
+              ]
+            },
+            {
+              "level": 2,
+              "price": 250,
+              "cumulativePrice": 500,
+              "description": "每隔18秒，召出三枚旋转的能量圆刃沿道路割裂前行，每0.25秒对命中的敌人造成70-100点魔法伤害。",
+              "descriptionKey": "TOWER_FORGER_SKILL_A_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "伤害下限",
+                  "value": 70,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 100,
+                  "unit": ""
+                }
+              ]
+            },
+            {
+              "level": 3,
+              "price": 250,
+              "cumulativePrice": 750,
+              "description": "每隔18秒，召出三枚旋转的能量圆刃沿道路割裂前行，每0.25秒对命中的敌人造成105-150点魔法伤害。",
+              "descriptionKey": "TOWER_FORGER_SKILL_A_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "伤害下限",
+                  "value": 105,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 150,
+                  "unit": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "name": "棱光守卫",
+          "icon": "/skills/tower_forger--skill_b.png",
+          "iconSprite": "kr6_quickmenu_special_icons_forger_0002",
+          "maxLevel": 3,
+          "priceBase": 210,
+          "priceIncrement": 210,
+          "descriptions": [
+            {
+              "key": "TOWER_FORGER_SKILL_B_DESCRIPTION_1",
+              "text": "每隔20秒，在道路上召唤2颗水晶，每颗每秒造成80-120点魔法伤害。水晶在造成总计300点伤害，或经过10秒后碎裂。"
+            },
+            {
+              "key": "TOWER_FORGER_SKILL_B_DESCRIPTION_2",
+              "text": "每隔20秒，在道路上召唤2颗水晶，每颗每秒造成160-240点魔法伤害。水晶在造成总计600点伤害，或经过10秒后碎裂。"
+            },
+            {
+              "key": "TOWER_FORGER_SKILL_B_DESCRIPTION_3",
+              "text": "每隔20秒，在道路上召唤2颗水晶，每颗每秒造成240-320点魔法伤害。水晶在造成总计900点伤害，或经过10秒后碎裂。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 210,
+              "cumulativePrice": 210,
+              "description": "每隔20秒，在道路上召唤2颗水晶，每颗每秒造成80-120点魔法伤害。水晶在造成总计300点伤害，或经过10秒后碎裂。",
+              "descriptionKey": "TOWER_FORGER_SKILL_B_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "持续时间",
+                  "value": 10,
+                  "unit": "秒"
+                },
+                {
+                  "label": "伤害下限",
+                  "value": 20,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 30,
+                  "unit": ""
+                }
+              ]
+            },
+            {
+              "level": 2,
+              "price": 210,
+              "cumulativePrice": 420,
+              "description": "每隔20秒，在道路上召唤2颗水晶，每颗每秒造成160-240点魔法伤害。水晶在造成总计600点伤害，或经过10秒后碎裂。",
+              "descriptionKey": "TOWER_FORGER_SKILL_B_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "持续时间",
+                  "value": 10,
+                  "unit": "秒"
+                },
+                {
+                  "label": "伤害下限",
+                  "value": 40,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 60,
+                  "unit": ""
+                }
+              ]
+            },
+            {
+              "level": 3,
+              "price": 210,
+              "cumulativePrice": 630,
+              "description": "每隔20秒，在道路上召唤2颗水晶，每颗每秒造成240-320点魔法伤害。水晶在造成总计900点伤害，或经过10秒后碎裂。",
+              "descriptionKey": "TOWER_FORGER_SKILL_B_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "持续时间",
+                  "value": 10,
+                  "unit": "秒"
+                },
+                {
+                  "label": "伤害下限",
+                  "value": 60,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 80,
+                  "unit": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "name": "硬光监狱",
+          "icon": "/skills/tower_forger--skill_c.png",
+          "iconSprite": "kr6_quickmenu_special_icons_forger_0003",
+          "maxLevel": 3,
+          "priceBase": 160,
+          "priceIncrement": 200,
+          "descriptions": [
+            {
+              "key": "TOWER_FORGER_SKILL_C_DESCRIPTION_1",
+              "text": "每隔21秒，将最多2名敌人束缚在能量监牢中，持续4秒。"
+            },
+            {
+              "key": "TOWER_FORGER_SKILL_C_DESCRIPTION_2",
+              "text": "每隔21秒，将最多3名敌人束缚在能量监牢中，持续6秒。"
+            },
+            {
+              "key": "TOWER_FORGER_SKILL_C_DESCRIPTION_3",
+              "text": "每隔21秒，将最多4名敌人束缚在能量监牢中，持续8秒。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 160,
+              "cumulativePrice": 160,
+              "description": "每隔21秒，将最多2名敌人束缚在能量监牢中，持续4秒。",
+              "descriptionKey": "TOWER_FORGER_SKILL_C_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "目标上限",
+                  "value": 2,
+                  "unit": ""
+                }
+              ]
+            },
+            {
+              "level": 2,
+              "price": 200,
+              "cumulativePrice": 360,
+              "description": "每隔21秒，将最多3名敌人束缚在能量监牢中，持续6秒。",
+              "descriptionKey": "TOWER_FORGER_SKILL_C_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "目标上限",
+                  "value": 3,
+                  "unit": ""
+                }
+              ]
+            },
+            {
+              "level": 3,
+              "price": 200,
+              "cumulativePrice": 560,
+              "description": "每隔21秒，将最多4名敌人束缚在能量监牢中，持续8秒。",
+              "descriptionKey": "TOWER_FORGER_SKILL_C_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "目标上限",
+                  "value": 4,
+                  "unit": ""
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/mage_towers.lua",
+        "nameKey": "TOWER_FORGER_NAME",
+        "descriptionKey": "TOWER_FORGER_DESCRIPTION",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
+        "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
+        "unlock": "kr1/data/levels/level218_data.lua"
+      },
+      "units": [],
+      "mechanics": {
+        "reviewedVersion": "2.0.9.3",
+        "items": [],
+        "pending": [
+          "魔法伤害的护甲结算"
+        ],
+        "hasSpecificReview": false
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "范围伤害",
+          "description": "攻击或技能具有范围伤害判定。",
+          "source": "bullet_forger_basic.damage_radius / area"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_forger_skill_c_stun"
+        }
+      ]
+    },
+    {
+      "id": "tower_sentry",
+      "name": "哨兵瞭望塔",
+      "description": "无人能躲过这些神枪手的鹰眼与准星——除非在他们的射击盲区内。",
+      "families": [
+        "archer"
+      ],
+      "roles": [
+        "直接输出",
+        "控制"
+      ],
+      "image": "/encyclopedia/thumbs/tower_sentry.png",
+      "encyclopediaImage": "/encyclopedia/tower_sentry.png",
+      "encyclopediaOrder": 97,
+      "encyclopediaListed": true,
+      "encyclopediaSprite": "kr6_encyclopedia_towers_0080",
+      "encyclopediaThumbSprite": "kr6_encyclopedia_tower_thumbs_0080",
+      "sourceGame": 6,
+      "portraitSprite": "kr6_info_portraits_towers_0037",
+      "price": 260,
+      "level": 1,
+      "towerType": "sentry",
+      "canBeBuffed": true,
+      "unlock": {
+        "status": "level",
+        "level": 207,
+        "label": "第 207 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level207_data.lua"
+      },
+      "attack": {
+        "damageMin": 160,
+        "damageMax": 180,
+        "cooldown": 5,
+        "dps": 34,
+        "range": 2500,
+        "rallyRange": null,
+        "damageType": "枪伤",
+        "damageTypeValue": 64,
+        "kind": "bullet",
+        "confidence": "精确",
+        "scope": "单目标基础攻击"
+      },
+      "soldier": null,
+      "powers": [
+        {
+          "id": "skill_a",
+          "name": "战势勃勃",
+          "icon": "/skills/tower_sentry--skill_a.png",
+          "iconSprite": "kr6_quickmenu_special_icons_sentry_0001",
+          "maxLevel": 3,
+          "priceBase": 225,
+          "priceIncrement": 150,
+          "descriptions": [
+            {
+              "key": "TOWER_SENTRY_SKILL_A_DESCRIPTION_1",
+              "text": "弹夹容量提升至2发，可在不换弹的情况下连续射击。"
+            },
+            {
+              "key": "TOWER_SENTRY_SKILL_A_DESCRIPTION_2",
+              "text": "弹夹容量提升至3发，可在不换弹的情况下连续射击。"
+            },
+            {
+              "key": "TOWER_SENTRY_SKILL_A_DESCRIPTION_3",
+              "text": "弹夹容量提升至4发，可在不换弹的情况下连续射击。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 225,
+              "cumulativePrice": 225,
+              "description": "弹夹容量提升至2发，可在不换弹的情况下连续射击。",
+              "descriptionKey": "TOWER_SENTRY_SKILL_A_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 150,
+              "cumulativePrice": 375,
+              "description": "弹夹容量提升至3发，可在不换弹的情况下连续射击。",
+              "descriptionKey": "TOWER_SENTRY_SKILL_A_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 150,
+              "cumulativePrice": 525,
+              "description": "弹夹容量提升至4发，可在不换弹的情况下连续射击。",
+              "descriptionKey": "TOWER_SENTRY_SKILL_A_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "name": "致命射杀",
+          "icon": "/skills/tower_sentry--skill_b.png",
+          "iconSprite": "kr6_quickmenu_special_icons_sentry_0002",
+          "maxLevel": 3,
+          "priceBase": 325,
+          "priceIncrement": 200,
+          "descriptions": [
+            {
+              "key": "TOWER_SENTRY_SKILL_B_DESCRIPTION_1",
+              "text": "攻击使敌人流血，在4秒内造成48-80点真实伤害；与敌人的每1点距离提供0.1%伤害加成。"
+            },
+            {
+              "key": "TOWER_SENTRY_SKILL_B_DESCRIPTION_2",
+              "text": "攻击使敌人流血，在4秒内造成112-176点真实伤害；与敌人的每1点距离提供0.1%伤害加成。"
+            },
+            {
+              "key": "TOWER_SENTRY_SKILL_B_DESCRIPTION_3",
+              "text": "攻击使敌人流血，在4秒内造成176-272点真实伤害；与敌人的每1点距离提供0.1%伤害加成。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 325,
+              "cumulativePrice": 325,
+              "description": "攻击使敌人流血，在4秒内造成48-80点真实伤害；与敌人的每1点距离提供0.1%伤害加成。",
+              "descriptionKey": "TOWER_SENTRY_SKILL_B_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 2,
+              "price": 200,
+              "cumulativePrice": 525,
+              "description": "攻击使敌人流血，在4秒内造成112-176点真实伤害；与敌人的每1点距离提供0.1%伤害加成。",
+              "descriptionKey": "TOWER_SENTRY_SKILL_B_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            },
+            {
+              "level": 3,
+              "price": 200,
+              "cumulativePrice": 725,
+              "description": "攻击使敌人流血，在4秒内造成176-272点真实伤害；与敌人的每1点距离提供0.1%伤害加成。",
+              "descriptionKey": "TOWER_SENTRY_SKILL_B_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": []
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "name": "守卫猎犬",
+          "icon": "/skills/tower_sentry--skill_c.png",
+          "iconSprite": "kr6_quickmenu_special_icons_sentry_0003",
+          "maxLevel": 3,
+          "priceBase": 180,
+          "priceIncrement": 180,
+          "descriptions": [
+            {
+              "key": "TOWER_SENTRY_SKILL_C_DESCRIPTION_1",
+              "text": "每隔8秒，召唤忠诚的看门犬，短暂阻挡并攻击防御塔盲区内的敌人3次，造成75-90点物理伤害。"
+            },
+            {
+              "key": "TOWER_SENTRY_SKILL_C_DESCRIPTION_2",
+              "text": "每隔8秒，召唤忠诚的看门犬，短暂阻挡并攻击防御塔盲区内的敌人3次，造成150-180点物理伤害。"
+            },
+            {
+              "key": "TOWER_SENTRY_SKILL_C_DESCRIPTION_3",
+              "text": "每隔8秒，召唤忠诚的看门犬，短暂阻挡并攻击防御塔盲区内的敌人3次，造成225-270点物理伤害。"
+            }
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "price": 180,
+              "cumulativePrice": 180,
+              "description": "每隔8秒，召唤忠诚的看门犬，短暂阻挡并攻击防御塔盲区内的敌人3次，造成75-90点物理伤害。",
+              "descriptionKey": "TOWER_SENTRY_SKILL_C_DESCRIPTION_1",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 8,
+                  "unit": "秒"
+                },
+                {
+                  "label": "伤害下限",
+                  "value": 25,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 30,
+                  "unit": ""
+                }
+              ]
+            },
+            {
+              "level": 2,
+              "price": 180,
+              "cumulativePrice": 360,
+              "description": "每隔8秒，召唤忠诚的看门犬，短暂阻挡并攻击防御塔盲区内的敌人3次，造成150-180点物理伤害。",
+              "descriptionKey": "TOWER_SENTRY_SKILL_C_DESCRIPTION_2",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 8,
+                  "unit": "秒"
+                },
+                {
+                  "label": "伤害下限",
+                  "value": 50,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 60,
+                  "unit": ""
+                }
+              ]
+            },
+            {
+              "level": 3,
+              "price": 180,
+              "cumulativePrice": 540,
+              "description": "每隔8秒，召唤忠诚的看门犬，短暂阻挡并攻击防御塔盲区内的敌人3次，造成225-270点物理伤害。",
+              "descriptionKey": "TOWER_SENTRY_SKILL_C_DESCRIPTION_3",
+              "descriptionSource": "level",
+              "unresolved": false,
+              "parameters": [
+                {
+                  "label": "冷却",
+                  "value": 8,
+                  "unit": "秒"
+                },
+                {
+                  "label": "伤害下限",
+                  "value": 75,
+                  "unit": ""
+                },
+                {
+                  "label": "伤害上限",
+                  "value": 90,
+                  "unit": ""
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/archer_towers.lua",
+        "nameKey": "TOWER_SENTRY_NAME",
+        "descriptionKey": "TOWER_SENTRY_DESCRIPTION",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
+        "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
+        "unlock": "kr1/data/levels/level207_data.lua"
+      },
+      "units": [],
+      "mechanics": {
+        "reviewedVersion": "2.0.9.3",
+        "items": [],
+        "pending": [
+          "枪弹伤害的护甲结算"
+        ],
+        "hasSpecificReview": false
+      },
+      "roleEvidence": [
+        {
+          "role": "直接输出",
+          "description": "基础攻击具有可读取伤害。",
+          "source": "computed_info.damage_min"
+        },
+        {
+          "role": "控制",
+          "description": "眩晕效果。",
+          "source": "mod_sentry_skill_c_stun"
+        }
+      ]
+    },
+    {
       "id": "tower_archer_1",
       "name": "弓兵塔",
       "description": "弓兵可以从远处打击敌人。",
@@ -106039,7 +107433,7 @@
       ],
       "image": "/portraits/tower_archer_1.png",
       "encyclopediaImage": "/portraits/tower_archer_1.png",
-      "encyclopediaOrder": 94,
+      "encyclopediaOrder": 98,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106113,7 +107507,7 @@
       ],
       "image": "/portraits/tower_archer_2.png",
       "encyclopediaImage": "/portraits/tower_archer_2.png",
-      "encyclopediaOrder": 95,
+      "encyclopediaOrder": 99,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106187,7 +107581,7 @@
       ],
       "image": "/portraits/tower_archer_3.png",
       "encyclopediaImage": "/portraits/tower_archer_3.png",
-      "encyclopediaOrder": 96,
+      "encyclopediaOrder": 100,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106261,7 +107655,7 @@
       ],
       "image": "/portraits/tower_mage_1.png",
       "encyclopediaImage": "/portraits/tower_mage_1.png",
-      "encyclopediaOrder": 97,
+      "encyclopediaOrder": 101,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106335,7 +107729,7 @@
       ],
       "image": "/portraits/tower_mage_2.png",
       "encyclopediaImage": "/portraits/tower_mage_2.png",
-      "encyclopediaOrder": 98,
+      "encyclopediaOrder": 102,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106409,7 +107803,7 @@
       ],
       "image": "/portraits/tower_mage_3.png",
       "encyclopediaImage": "/portraits/tower_mage_3.png",
-      "encyclopediaOrder": 99,
+      "encyclopediaOrder": 103,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106484,7 +107878,7 @@
       ],
       "image": "/portraits/tower_engineer_1.png",
       "encyclopediaImage": "/portraits/tower_engineer_1.png",
-      "encyclopediaOrder": 100,
+      "encyclopediaOrder": 104,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106564,7 +107958,7 @@
       ],
       "image": "/portraits/tower_engineer_2.png",
       "encyclopediaImage": "/portraits/tower_engineer_2.png",
-      "encyclopediaOrder": 101,
+      "encyclopediaOrder": 105,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106644,7 +108038,7 @@
       ],
       "image": "/portraits/tower_engineer_3.png",
       "encyclopediaImage": "/portraits/tower_engineer_3.png",
-      "encyclopediaOrder": 102,
+      "encyclopediaOrder": 106,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106723,7 +108117,7 @@
       ],
       "image": "/portraits/tower_barrack_1.png",
       "encyclopediaImage": "/portraits/tower_barrack_1.png",
-      "encyclopediaOrder": 103,
+      "encyclopediaOrder": 107,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106842,7 +108236,7 @@
       ],
       "image": "/portraits/tower_barrack_2.png",
       "encyclopediaImage": "/portraits/tower_barrack_2.png",
-      "encyclopediaOrder": 104,
+      "encyclopediaOrder": 108,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
@@ -106961,7 +108355,7 @@
       ],
       "image": "/portraits/tower_barrack_3.png",
       "encyclopediaImage": "/portraits/tower_barrack_3.png",
-      "encyclopediaOrder": 105,
+      "encyclopediaOrder": 109,
       "encyclopediaListed": false,
       "encyclopediaSprite": null,
       "encyclopediaThumbSprite": null,
