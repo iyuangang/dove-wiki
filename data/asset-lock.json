@@ -3,27 +3,27 @@
   "bundles": {
     "game": {
       "inputs": {
-        "src/data/dove-data.json": "6cf676bde71cc9d133fb0acda16ef7e9511384b673b87f61ff74eb7a63d411f7",
-        "src/data/snapshot-manifest.json": "92cdbba53c49924128b24595ad30e0fec96f5320e640951bdaa5447ee78fa774"
+        "src/data/dove-data.json": "16753a66844984aa8f647d13f16ba1acc23a43e69de9e2cf02906c3bb85c0f79",
+        "src/data/snapshot-manifest.json": "c7836aee46dd26756a37edc9996d8d650781831ef7e02d713a815244742acffc"
       },
-      "file": "game-dcf7731effb6b99afef9.ndjson.gz",
-      "sha256": "5892f868f235d24ca252494dd4cc1cc2bba1f80056cd885e15d4c6c15819dbb3",
-      "treeSha256": "dcf7731effb6b99afef9654409cb82e39053898c5f51d650847053986dd34f4f",
-      "files": 1535,
-      "bytes": 46205139,
-      "url": "https://github.com/iyuangang/dove-wiki/releases/download/data-assets/game-dcf7731effb6b99afef9.ndjson.gz"
+      "file": "game-89d01be02c82cdbd6b25.ndjson.gz",
+      "sha256": "1ba1dd030e0d1d8fc0188f6636395a6b6af2fc96c5eca52f3bed4f005f4558b1",
+      "treeSha256": "89d01be02c82cdbd6b25b96580ffce57df3d8dea5180fabc693544a67861f76e",
+      "files": 1559,
+      "bytes": 46942158,
+      "url": "https://github.com/iyuangang/dove-wiki/releases/download/data-assets/game-89d01be02c82cdbd6b25.ndjson.gz"
     },
     "ratings": {
       "inputs": {
-        "src/data/rating-manifest.json": "260e55a0f09ed358abd924a3a01204a16bf0a7d0d565693fe96cc602a1ccfdda",
-        "src/data/rating-methodology.json": "eb4384f11a688f246ad99fa9c81a64ec35e0321f6d9b175e90a31075adaa05ef"
+        "src/data/rating-manifest.json": "0d16bd1dc6fe1565dbf9e4edeee17260ce860e3a130f13527c02f28b038411e8",
+        "src/data/rating-methodology.json": "d7620079b320f312f7e9a6a9b4a4829a2283e536a6f1e35f1aba9ada62d179cf"
       },
-      "file": "ratings-05d8720ef1567581e8a0.ndjson.gz",
-      "sha256": "237b5b6ffc18bbb168c6ca7d54003a37dd44c4bdfe42232df30b9319e5841bbb",
-      "treeSha256": "05d8720ef1567581e8a08736c3604e89883791cff1a7abaf47afd61cb36c32ae",
-      "files": 465,
-      "bytes": 29454133,
-      "url": "https://github.com/iyuangang/dove-wiki/releases/download/data-assets/ratings-05d8720ef1567581e8a0.ndjson.gz"
+      "file": "ratings-240761daf619dd452a0c.ndjson.gz",
+      "sha256": "f399bec82df7dac846c582527360a63459eb57c6c8a4e63edd195eb582fab979",
+      "treeSha256": "240761daf619dd452a0c620117d7199e8820f115e5519da4294ddf6ddd679106",
+      "files": 469,
+      "bytes": 30007678,
+      "url": "https://github.com/iyuangang/dove-wiki/releases/download/data-assets/ratings-240761daf619dd452a0c.ndjson.gz"
     }
   }
 }
