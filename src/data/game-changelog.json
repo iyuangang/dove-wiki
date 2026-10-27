@@ -1,7 +1,193 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-22T09:55:12.691Z",
+  "generatedAt": "2026-10-27T02:06:21.048Z",
   "releases": [
+    {
+      "id": "2.1.0.3-f2fc4c393d08",
+      "version": "2.1.0.3",
+      "previousVersion": "2.0.9.9",
+      "contentVersion": "5.6.12",
+      "commitHash": "f2fc4c393d0832aedabe2e866c2fb447eabda3ff",
+      "previousCommitHash": "7b0ab70aad95121ed10a62eb6e00b33ce21e1146",
+      "detectedAt": "2026-10-27T02:06:21.048Z",
+      "summary": {
+        "changeCount": 9,
+        "categoryCounts": {
+          "hero": 0,
+          "tower": 9,
+          "enemy": 0,
+          "technology": 0
+        },
+        "kindCounts": {
+          "added": 4,
+          "removed": 0,
+          "balance": 4,
+          "content": 1
+        }
+      },
+      "changes": [
+        {
+          "id": "tower:tower_arborean_emissary_lvl4:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_arborean_emissary_lvl4",
+          "entityName": "树灵使者",
+          "title": "数值调整防御塔：树灵使者",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_arborean_emissary_lvl4.png",
+          "details": [
+            {
+              "field": "最低伤害",
+              "before": "10",
+              "after": "15",
+              "delta": "+5（+50.0%）",
+              "direction": "increase"
+            },
+            {
+              "field": "最高伤害",
+              "before": "20",
+              "after": "30",
+              "delta": "+10（+50.0%）",
+              "direction": "increase"
+            },
+            {
+              "field": "攻击间隔",
+              "before": "1.2",
+              "after": "1.8",
+              "delta": "+0.6（+50.0%）",
+              "direction": "increase"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_alchemist:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_alchemist",
+          "entityName": "炼金术士小屋",
+          "title": "数值调整防御塔：炼金术士小屋",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_alchemist.png",
+          "details": [
+            {
+              "field": "攻击范围",
+              "before": "160",
+              "after": "165",
+              "delta": "+5（+3.1%）",
+              "direction": "increase"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_wildcat:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_wildcat",
+          "entityName": "野猫女猎手",
+          "title": "数值调整防御塔：野猫女猎手",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_wildcat.png",
+          "details": [
+            {
+              "field": "士兵生命",
+              "before": "235",
+              "after": "240",
+              "delta": "+5（+2.1%）",
+              "direction": "increase"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_sunray_master:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_sunray_master",
+          "entityName": "日耀大师",
+          "title": "数值调整防御塔：日耀大师",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_sunray_master.png",
+          "details": [
+            {
+              "field": "小型元素 · 基础价格",
+              "before": "200",
+              "after": "140",
+              "delta": "-60（-30.0%）",
+              "direction": "decrease"
+            },
+            {
+              "field": "小型元素 · 升级价格",
+              "before": "100",
+              "after": "140",
+              "delta": "+40（+40.0%）",
+              "direction": "increase"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_sunray_master:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_sunray_master",
+          "entityName": "日耀大师",
+          "title": "内容调整防御塔：日耀大师",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_sunray_master.png",
+          "details": [
+            {
+              "field": "小型元素 · 技能说明",
+              "before": "召唤2个小型土元素与敌人战斗。元素拥有100点生命值，15点护甲，且可造成3-5点物理伤害。；召唤2个小型土元素与敌人战斗。元素拥有140点生命值，20点护甲，且可造成4-6点物理伤害。；召唤2个小型土元素与敌人战斗。元素拥有180点生命值，25点护甲，且可造成5-7点物理伤害。",
+              "after": "召唤1个小型土元素与敌人战斗。元素拥有180点生命值，25点护甲，且可造成5-7点物理伤害。；召唤2个小型土元素与敌人战斗。元素拥有180点生命值，25点护甲，且可造成5-7点物理伤害。；召唤3个小型土元素与敌人战斗。元素拥有180点生命值，25点护甲，且可造成5-7点物理伤害。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_tree:added:main",
+          "category": "tower",
+          "kind": "added",
+          "entityId": "tower_tree",
+          "entityName": "铁木树人",
+          "title": "新增防御塔：铁木树人",
+          "description": "新增防御塔，定位为直接输出、范围伤害、召唤/拦截、减益/破甲。",
+          "image": "/encyclopedia/thumbs/tower_tree.png",
+          "details": []
+        },
+        {
+          "id": "tower:tower_light_priestess:added:main",
+          "category": "tower",
+          "kind": "added",
+          "entityId": "tower_light_priestess",
+          "entityName": "光明女祭司",
+          "title": "新增防御塔：光明女祭司",
+          "description": "新增防御塔，定位为直接输出、控制。",
+          "image": "/encyclopedia/thumbs/tower_light_priestess.png",
+          "details": []
+        },
+        {
+          "id": "tower:tower_forger:added:main",
+          "category": "tower",
+          "kind": "added",
+          "entityId": "tower_forger",
+          "entityName": "奥术幻铸师",
+          "title": "新增防御塔：奥术幻铸师",
+          "description": "新增防御塔，定位为直接输出、范围伤害、控制。",
+          "image": "/encyclopedia/thumbs/tower_forger.png",
+          "details": []
+        },
+        {
+          "id": "tower:tower_sentry:added:main",
+          "category": "tower",
+          "kind": "added",
+          "entityId": "tower_sentry",
+          "entityName": "哨兵瞭望塔",
+          "title": "新增防御塔：哨兵瞭望塔",
+          "description": "新增防御塔，定位为直接输出、控制。",
+          "image": "/encyclopedia/thumbs/tower_sentry.png",
+          "details": []
+        }
+      ]
+    },
     {
       "id": "2.0.9.9-7b0ab70aad95",
       "version": "2.0.9.9",
