@@ -349,6 +349,19 @@ describe('游戏百科顺序与图像', () => {
       })
     }
 
-    expect(doveData.validation.unlockAnomalies).toEqual([])
+    // 2.1.0.3 locks this tower in slot_template.lua but supplies no level unlock.
+    // Keep the source anomaly visible; a changed build must be reviewed again.
+    const reviewedAnomalies: Record<string, string[]> = {
+      f2fc4c393d0832aedabe2e866c2fb447eabda3ff: ['tower_crossbows'],
+    }
+    const expectedAnomalies = reviewedAnomalies[doveData.metadata.commitHash] ?? []
+    expect(doveData.validation.unlockAnomalies).toEqual(expectedAnomalies)
+    for (const id of expectedAnomalies) {
+      expect(towerById.get(id)?.unlock).toEqual({
+        status: 'missing',
+        label: '游戏数据未配置解锁关卡（初始为锁定）',
+        source: 'kr1/data/slot_template.lua',
+      })
+    }
   })
 })
