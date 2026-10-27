@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "gameCommit": "7b0ab70aad95121ed10a62eb6e00b33ce21e1146",
+  "gameCommit": "f2fc4c393d0832aedabe2e866c2fb447eabda3ff",
   "reviews": {
     "towers": {
       "version": "2.0.9.3",
@@ -35,8 +35,12 @@
         "all/script_utils.lua",
         "all/scripts.lua",
         "kr1/archer_towers.lua",
+        "all/animation_db.lua",
         "all/utils.lua",
+        "all/constants.lua",
         "kr1/mage_towers.lua",
+        "all/templates.lua",
+        "kr1/foundamental_towers.lua",
         "kr1/data/game_animations.bin"
       ]
     },
@@ -51,6 +55,7 @@
       "reviewedAt": "2026-10-08",
       "audit": "docs/mechanics-review-2.0.8.9.md",
       "invalidFiles": [
+        "kr1/heroes.lua",
         "kr1/hero_scripts.lua",
         "all/script_utils.lua"
       ]
@@ -74,8 +79,20 @@
         "all/utils.lua": "3752e659815a2ccffda984895b7cfb90efa1af6c744763325899ea1365ccedeb"
       },
       "auditDocument": "docs/mechanics-review-2.0.9.9.md",
-      "invalidFiles": []
+      "invalidFiles": [
+        "kr1/archer_towers.lua",
+        "kr1/mage_towers.lua",
+        "kr1/engineer_towers.lua",
+        "kr1/tower_scripts.lua",
+        "kr1/game_scripts.lua",
+        "all/templates.lua",
+        "all/scripts.lua",
+        "all/script_utils.lua",
+        "kr1/heroes.lua",
+        "kr1/hero_scripts.lua",
+        "all/utils.lua"
+      ]
     }
   },
-  "dataHash": "6cf676bde71cc9d133fb0acda16ef7e9511384b673b87f61ff74eb7a63d411f7"
+  "dataHash": "16753a66844984aa8f647d13f16ba1acc23a43e69de9e2cf02906c3bb85c0f79"
 }
