@@ -14,12 +14,13 @@ export function mergeHeroSnapshot(previous, heroes, snapshot) {
 }
 
 // Sync never renews these fingerprints. Changed scripts need another review.
-export async function loadHeroReview(gameDir) {
+export async function loadHeroReview(gameDir, templateSources = []) {
   const review = JSON.parse(await readFile(new URL('./hero-details-review.json', import.meta.url), 'utf8'))
-  const files = new Map(await Promise.all(Object.entries(review.files).map(async ([file, hash]) => {
+  const paths = [...new Set([...Object.keys(review.files), ...templateSources])]
+  const files = new Map(await Promise.all(paths.map(async file => {
     try {
       const text = (await readFile(join(gameDir, file), 'utf8')).replace(/\r\n/g, '\n')
-      return [file, { text, valid: sourceHash(text) === hash }]
+      return [file, { text, valid: Boolean(review.files[file] && sourceHash(text) === review.files[file]) }]
     } catch { return [file, { text: '', valid: false }] }
   })))
   return { version: review.version, files, manifest: review }
@@ -30,10 +31,12 @@ export function buildHeroDetails(raw, review) {
   const speed = n(b.motion?.max_speed)
   const items = []
   const pending = []
+  const templateSource = raw.template_sources?.[0] || TEMPLATE
+  if (templateSource !== TEMPLATE && !review.files.get(templateSource)?.valid) pending.push('新版英雄专属机制尚未完成源码复核')
   const templateAnchor = ['hero_vesper', 'hero_muyrn', 'hero_dragon_arb'].includes(raw.id) ? `E:register_t("${raw.id}"` : `RT("${raw.id}"`
   const scriptAnchor = `scripts.${raw.id} =`
   function add(id, title, summary, facts = [], anchors = []) {
-    const sources = [[TEMPLATE, templateAnchor], ...anchors].map(([file, symbol]) => {
+    const sources = [[templateSource, templateAnchor], ...anchors].map(([file, symbol]) => {
       const source = review.files.get(file)
       const index = source?.text.indexOf(symbol) ?? -1
       return { file, symbol, line: index < 0 ? null : source.text.slice(0, index).split('\n').length, valid: Boolean(source?.valid && index >= 0) }
@@ -190,8 +193,8 @@ export function buildHeroDetails(raw, review) {
   }
   const terrain = b.nav_grid || {}
   const terrainLabels = (mask) => [[1, '陆地'], [2, '水面'], [4, '悬崖'], [256, '不可步行区域'], [512, '浅水'], [1024, '精灵地形'], [2048, '冰面']].filter(([flag]) => (mask & flag) !== 0).map(([, name]) => name)
-  const baseSources = [{ file: TEMPLATE, symbol: templateAnchor, line: null }]
-  const base = review.files.get(TEMPLATE)
+  const baseSources = [{ file: templateSource, symbol: templateAnchor, line: null }]
+  const base = review.files.get(templateSource)
   const baseIndex = base?.text.indexOf(templateAnchor) ?? -1
   if (baseIndex >= 0) baseSources[0].line = base.text.slice(0, baseIndex).split('\n').length
   if (pending.length) { label = '移动机制待核实'; tags = [] }

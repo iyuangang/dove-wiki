@@ -386,12 +386,13 @@ export interface DoveData {
   metadata: {
     title: string
     gameVersion: string
+    gameBranch?: string | null
     contentVersion: string
     gameId: string
     commitHash: string
     generatedAt: string
     sourceRoot: string
-    heroSnapshot?: { gameVersion: string; commitHash: string; generatedAt: string; sourceRoot: string }
+    heroSnapshot?: { gameVersion: string; gameBranch?: string | null; commitHash: string; generatedAt: string; sourceRoot: string }
     assumptions: string[]
   }
   summary: {

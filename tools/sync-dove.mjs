@@ -19,6 +19,7 @@ import { buildPowerLevels, buildTowerUnits } from './tower-details.mjs'
 import { inferTowerRoles } from './tower-roles.mjs'
 import { buildTowerMechanics, loadMechanicReview } from './tower-mechanics.mjs'
 import { buildHeroDetails, loadHeroReview, mergeHeroSnapshot } from './hero-details.mjs'
+import { heroRoomMetadata } from './hero-roster.mjs'
 import { normalizeEnemy } from './enemy-data.mjs'
 import { beginSync, generatedPaths } from './sync-transaction.mjs'
 import { enemyValidation, snapshotHash, validateAssets, validateRaw, validateSnapshot } from './snapshot-validation.mjs'
@@ -578,13 +579,8 @@ function heroAbilityDescription(rawHero, name) {
 }
 
 function normalizeHero(rawHero, localization) {
-  const token = rawHero.id.replace(/^hero_/, '').toUpperCase()
+  const { token, specialties, sources } = heroRoomMetadata(rawHero, localization)
   const levelStats = rawHero.template?.hero?.level_stats || {}
-  const specialText = localization[`HERO_${token}_SPECIAL`] || ''
-  const specialties = specialText
-    .split(/[，,]/)
-    .map((item) => item.trim())
-    .filter(Boolean)
   const skills = Object.entries(rawHero.template?.hero?.skills || {})
     .map(([skillId, skill]) => ({
       id: skillId,
@@ -635,12 +631,7 @@ function normalizeHero(rawHero, localization) {
       rangedDamageMax: lastFinite(levelStats.ranged_damage_max),
     },
     skills,
-    sources: {
-      template: rawHero.template_exists ? 'kr1/heroes.lua + kr1/data/balance.lua' : null,
-      roster: 'kr1-desktop/data/map_data.lua → hero_data',
-      localization: '_assets/kr1-desktop/strings/zh-Hans.lua',
-      portrait: '_assets/kr1-desktop/images/fullhd/hero_room.lua',
-    },
+    sources,
   }
 }
 
@@ -879,11 +870,12 @@ async function sync(transaction) {
   validateRaw(raw, runId)
   await writeFile(join(rawDir, 'dove-raw.json'), JSON.stringify(raw))
   if (heroesOnly) {
-    const review = await loadHeroReview(gameDir)
+    const review = await loadHeroReview(gameDir, raw.heroes.flatMap(hero => hero.template_sources || []))
     const heroes = raw.heroes.map((hero) => ({ ...normalizeHero(hero, raw.localization), details: buildHeroDetails(hero, review) }))
     const versionSource = await readFile(join(gameDir, 'version.lua'), 'utf8')
     const snapshot = {
       gameVersion: /^\s*id\s*=\s*["']([^"']+)/m.exec(versionSource)?.[1] || 'unknown',
+      gameBranch: raw.metadata.gameBranch || null,
       commitHash: (await readFile(join(gameDir, 'current_version_commit_hash.txt'), 'utf8')).trim(),
       generatedAt: new Date().toISOString(), sourceRoot: gameDir,
     }
@@ -956,7 +948,7 @@ async function sync(transaction) {
     (total, tree) => total + tree.technologies.length,
     0,
   )
-  const heroReview = await loadHeroReview(gameDir)
+  const heroReview = await loadHeroReview(gameDir, raw.heroes.flatMap(hero => hero.template_sources || []))
   const heroes = raw.heroes.map((hero) => ({
     ...normalizeHero(hero, raw.localization),
     details: buildHeroDetails(hero, heroReview),
@@ -979,12 +971,13 @@ async function sync(transaction) {
     metadata: {
       title: '王国保卫战鸽子版 WIKI',
       gameVersion,
+      gameBranch: raw.metadata.gameBranch || null,
       contentVersion,
       gameId,
       commitHash,
       generatedAt: new Date().toISOString(),
       sourceRoot: gameDir,
-      heroSnapshot: { gameVersion, commitHash, generatedAt: new Date().toISOString(), sourceRoot: gameDir },
+      heroSnapshot: { gameVersion, gameBranch: raw.metadata.gameBranch || null, commitHash, generatedAt: new Date().toISOString(), sourceRoot: gameDir },
       assumptions: [
         '科技树可在辅助计算中选择；条件触发、概率与特殊目标效果不强行折算进基础面板。',
         '英雄增益按游戏脚本的峰值生效状态计算；持续时间、冷却和触发条件单独标注。',

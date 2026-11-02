@@ -12,7 +12,7 @@ export interface RatingObject {
 }
 export interface RatingDataset {
   schema: number
-  summary: { profile: RatingProfile; gameVersion: string; commitHash: string; runId: string; asOf: string; seconds: number; repeats: number; templates: number; trials: number; coreTrials: number; coreFailed: number; failedTrials: number; protocol: string; mobilityProtocol: string }
+  summary: { profile: RatingProfile; gameVersion: string; gameBranch?: string | null; commitHash: string; runId: string; asOf: string; seconds: number; repeats: number; templates: number; trials: number; coreTrials: number; coreFailed: number; failedTrials: number; protocol: string; mobilityProtocol: string }
   objects: RatingObject[]
   references: Record<string, Record<string, number>>
   provenance: { sourceSummarySha256: string; measurementSources: Record<string, string>; rawEvidence: string }

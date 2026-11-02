@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { gameVersionLabel } from './lib/game-version'
 import { computed, defineAsyncComponent, nextTick, onBeforeUnmount, onMounted, provide, ref, shallowRef, watch } from 'vue'
 import { Castle, Skull, Swords, Sparkles, History, FlaskConical, Columns2, BookOpen, Trophy } from '@lucide/vue'
 const DetailPanel = defineAsyncComponent(() => import('./components/DetailPanel.vue'))
@@ -197,7 +198,7 @@ function compareTower(tower: Tower, side: 'left' | 'right') {
 
       <Badge variant="outline" class="version-badge">
         <span class="status-dot"></span>
-        <span>Game v{{ activeSnapshot.gameVersion }}</span>
+        <span>Game v{{ gameVersionLabel(activeSnapshot) }}</span>
         <strong>Site {{ siteVersion }}</strong>
       </Badge>
     </header>

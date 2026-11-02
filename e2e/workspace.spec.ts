@@ -306,6 +306,10 @@ test('天梯保留两档实测、分类和版本边界，说明跟随类别切�
   })
   await navigate(page, '强度天梯')
   await expect(page.locator('.rating-section-heading').first()).toContainText(`已评级 ${ratingManifest.profiles.standard.groupCounts.hero_ranged} / ${ratingManifest.profiles.standard.groupCounts.hero_ranged}`)
+  if ('gameBranch' in ratingManifest.profiles.standard && ratingManifest.profiles.standard.gameBranch === 'dev') {
+    await expect(page.locator('.rating-stamp')).toContainText('开发预览版')
+    await expect(page.locator('.version-badge')).toContainText('开发预览版')
+  }
   await expect(page.locator('.rating-facts')).toContainText(ratingManifest.profiles.standard.coreTrials.toLocaleString('en-US'))
   if (ratingManifest.commitHash !== snapshot.metadata.commitHash) {
     await expect(page.getByRole('note')).toContainText(`当前百科已同步至 ${snapshot.metadata.gameVersion}`)
