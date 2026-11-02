@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { gameVersionLabel } from '../lib/game-version'
 import { computed, defineAsyncComponent, onBeforeUnmount, ref, watch } from 'vue'
 import { Download, ExternalLink, RefreshCw, Trophy } from '@lucide/vue'
 import siteIndex from '../data/site-index.json'
@@ -94,7 +95,7 @@ const feedbackUrl = computed(() => {
     <header class="rating-heading">
       <div><div class="eyebrow"><span></span> COMBAT LAB · NATIVE BENCHMARK</div><h1>强度<em>天梯</em></h1>
         <p>英雄分别评测近战与远程，常规防御塔按阶级独立比较。选择用途，查看八维能力与实测证据。</p></div>
-      <div class="rating-stamp"><Trophy :size="26" aria-hidden="true" /><strong>Dove {{ summary.gameVersion }}</strong><span>{{ summary.asOf }} 实测 · {{ profile === 'standard' ? '标准' : '快速' }}档</span></div>
+      <div class="rating-stamp"><Trophy :size="26" aria-hidden="true" /><strong>Dove {{ gameVersionLabel(summary) }}</strong><span>{{ summary.asOf }} 实测 · {{ profile === 'standard' ? '标准' : '快速' }}档</span></div>
     </header>
     <div class="rating-facts" aria-label="本档测评覆盖">
       <div><strong>{{ summary.coreTrials.toLocaleString() }}</strong><span>正式轮次 · 全部成功</span></div>
@@ -103,7 +104,7 @@ const feedbackUrl = computed(() => {
       <div><strong>{{ summary.failedTrials }}</strong><span>附录失败轮次 · 不评级</span></div>
     </div>
     <p class="rating-notice">固定靶场的原生自动能力基准，保留自动技能、反击与召唤物。手动大招和实战操作尚未完整覆盖；快速档与标准档分别校准，不直接混排。本站其他百科页面仍使用各自标注的数据版本。</p>
-    <p v-if="summary.commitHash !== siteIndex.metadata.commitHash" class="rating-notice" role="note">历史实测：本页测于 Dove {{ summary.gameVersion }}（提交 {{ summary.commitHash.slice(0, 12) }}），当前百科已同步至 {{ siteIndex.metadata.gameVersion }}（提交 {{ siteIndex.metadata.commitHash.slice(0, 12) }}）。新增对象与机制改动尚未重新测评，不能将旧天梯直接视为新版排名。</p>
+    <p v-if="summary.commitHash !== siteIndex.metadata.commitHash" class="rating-notice" role="note">历史实测：本页测于 Dove {{ gameVersionLabel(summary) }}（提交 {{ summary.commitHash.slice(0, 12) }}），当前百科已同步至 {{ siteIndex.metadata.gameVersion }}（提交 {{ siteIndex.metadata.commitHash.slice(0, 12) }}）。新增对象与机制改动尚未重新测评，不能将旧天梯直接视为新版排名。</p>
     <p class="rating-caption">参照来源：本档完整原版实测的正值中位数 · {{ summary.coreTrials.toLocaleString() }} 轮正式样本完整 · 评分定义 {{ metricGuide.contractVersion }} / 评分版本 {{ metricGuide.scoreVersion }}。快速、标准及个人基准各自独立。</p>
 
     <div class="rating-controls">

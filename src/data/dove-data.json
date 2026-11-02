@@ -92,17 +92,19 @@
   },
   "metadata": {
     "title": "王国保卫战鸽子版 WIKI",
-    "gameVersion": "2.1.0.3",
+    "gameVersion": "2.1.0.6",
+    "gameBranch": "dev",
     "contentVersion": "5.6.12",
     "gameId": "kingdom_rush_dove",
-    "commitHash": "f2fc4c393d0832aedabe2e866c2fb447eabda3ff",
-    "generatedAt": "2026-10-27T02:06:21.048Z",
-    "sourceRoot": "C:\\Users\\hhyg2\\AppData\\Local\\王国保卫战Dove版\\KingdomRushDove",
+    "commitHash": "4de3c0b894526ea8ad1e58e1ddd3ecee072bee15",
+    "generatedAt": "2026-11-02T03:42:47.228Z",
+    "sourceRoot": "C:\\Users\\hhyg2\\AppData\\Local\\王国保卫战Dove版-开发预览版\\KingdomRushDove",
     "heroSnapshot": {
-      "gameVersion": "2.1.0.3",
-      "commitHash": "f2fc4c393d0832aedabe2e866c2fb447eabda3ff",
-      "generatedAt": "2026-10-27T02:06:21.051Z",
-      "sourceRoot": "C:\\Users\\hhyg2\\AppData\\Local\\王国保卫战Dove版\\KingdomRushDove"
+      "gameVersion": "2.1.0.6",
+      "gameBranch": "dev",
+      "commitHash": "4de3c0b894526ea8ad1e58e1ddd3ecee072bee15",
+      "generatedAt": "2026-11-02T03:42:47.232Z",
+      "sourceRoot": "C:\\Users\\hhyg2\\AppData\\Local\\王国保卫战Dove版-开发预览版\\KingdomRushDove"
     },
     "assumptions": [
       "科技树可在辅助计算中选择；条件触发、概率与特殊目标效果不强行折算进基础面板。",
@@ -119,26 +121,23 @@
     "skillIconCount": 242,
     "technologyTreeCount": 4,
     "technologyCount": 144,
-    "heroCount": 79,
+    "heroCount": 91,
     "enemyCount": 354,
     "uniqueEnemyCount": 350,
     "enemyImageCount": 350,
     "supportTowerCount": 8,
     "supportHeroCount": 7,
     "supportEffectCount": 17,
-    "levelUnlockCount": 74,
+    "levelUnlockCount": 75,
     "defaultUnlockCount": 34,
-    "unlockAnomalyCount": 1,
+    "unlockAnomalyCount": 0,
     "exactDamageCount": 108
   },
   "validation": {
     "warnings": [
-      "1 座初始锁定塔没有关卡解锁记录。",
       "1 座塔没有可统一折算的基础伤害。"
     ],
-    "unlockAnomalies": [
-      "tower_crossbows"
-    ],
+    "unlockAnomalies": [],
     "noUnifiedDamage": [
       "tower_baby_ashbite"
     ],
@@ -5363,20 +5362,12 @@
       "name": "杰拉尔德爵士",
       "description": "正义的守护者， 黑暗的惩戒者， 无辜民众的保护者， 邪魔歪道的粉碎者， 光之追寻者杰拉尔德堪称利尼维亚军队中最异乎寻常的人物！",
       "specialties": [
-        "神圣支援",
-        "鼓舞",
         "惩戒之盾",
-        "神圣打击"
+        "神圣打击",
+        "鼓舞",
+        "神圣支援"
       ],
       "abilities": [
-        {
-          "name": "神圣支援",
-          "description": "每隔13秒，爵士召唤一名可调集的皇家近卫协助战斗。皇家近卫拥有250点生命值，40点护甲，每次攻击造成10-30点物理伤害，驻场14秒。"
-        },
-        {
-          "name": "鼓舞",
-          "description": "每隔8.33秒，在身边至少有2名友军时，杰拉尔德会敲盾鼓舞他们，立刻恢复友军30%最大生命值，并在接下来的6秒内提升友军16点伤害，15点护甲和15点魔法抗性。抗性提升与恢复效果对英雄减半。"
-        },
         {
           "name": "惩戒之盾",
           "description": "杰拉尔德每次受到近战攻击时，有75%的概率举盾反击，免疫并造成本次攻击伤害200%的真实伤害。面对BOSS单位时，盾反概率×50%；受到范围攻击时，盾反概率×60%。"
@@ -5384,6 +5375,14 @@
         {
           "name": "神圣打击",
           "description": "每隔8秒，杰拉尔德发动神圣打击，对55范围内敌人造成108-180点法术伤害，并使其沉默4秒。"
+        },
+        {
+          "name": "鼓舞",
+          "description": "每隔8.33秒，在身边至少有2名友军时，杰拉尔德会敲盾鼓舞他们，立刻恢复友军30%最大生命值，并在接下来的6秒内提升友军16点伤害，15点护甲和15点魔法抗性。抗性提升与恢复效果对英雄减半。"
+        },
+        {
+          "name": "神圣支援",
+          "description": "每隔13秒，爵士召唤一名可调集的皇家近卫协助战斗。皇家近卫拥有250点生命值，40点护甲，每次攻击造成10-30点物理伤害，驻场14秒。"
         }
       ],
       "image": "/heroes/hero_gerald.png",
@@ -5481,10 +5480,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_gerald/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -5515,14 +5514,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路",
           "对首领的格挡限制"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_gerald/templates.lua",
             "symbol": "RT(\"hero_gerald\"",
-            "line": 30
+            "line": 281
           }
         ]
       }
@@ -5643,10 +5643,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_alleria/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -5684,14 +5684,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路",
           "调动时带领宠物"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_alleria/templates.lua",
             "symbol": "RT(\"hero_alleria\"",
-            "line": 213
+            "line": 328
           }
         ]
       }
@@ -5782,10 +5783,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_malik/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -5816,13 +5817,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_malik/templates.lua",
             "symbol": "RT(\"hero_malik\"",
-            "line": 884
+            "line": 232
           }
         ]
       }
@@ -5914,10 +5916,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_bolin/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -5948,13 +5950,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_bolin/templates.lua",
             "symbol": "RT(\"hero_bolin\"",
-            "line": 400
+            "line": 419
           }
         ]
       }
@@ -5965,8 +5968,8 @@
       "description": "解除利尼维亚的奥术力量禁制， 释放神秘风暴， 镇压你的敌人！一切只凭他的奥术秘法和对知识的渴求。",
       "specialties": [
         "幻影",
-        "奥术风暴",
-        "幻影·奥术风暴"
+        "幻影·奥术风暴",
+        "奥术风暴"
       ],
       "abilities": [
         {
@@ -5974,12 +5977,12 @@
           "description": "每隔10.97秒，马格努斯创造6个幻影分身，分身拥有主英雄15%的生命值，30%的普攻伤害，持续10秒。"
         },
         {
-          "name": "奥术风暴",
-          "description": "每隔14.83秒，马格努斯召唤奥术风暴，在目标区域内降下16枚奥术雨滴，每枚雨滴对40范围内敌人造成25点真实伤害。"
-        },
-        {
           "name": "幻影·奥术风暴",
           "description": "马格努斯的幻影分身会释放弱化的奥术风暴，每个幻影分身释放的奥术风暴拥有主英雄奥术风暴80%的作用范围，造成40%的魔法伤害。"
+        },
+        {
+          "name": "奥术风暴",
+          "description": "每隔14.83秒，马格努斯召唤奥术风暴，在目标区域内降下16枚奥术雨滴，每枚雨滴对40范围内敌人造成25点真实伤害。"
         }
       ],
       "image": "/heroes/hero_magnus.png",
@@ -6053,10 +6056,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_magnus/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -6094,14 +6097,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "远距离传送",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_magnus/templates.lua",
             "symbol": "RT(\"hero_magnus\"",
-            "line": 592
+            "line": 411
           }
         ]
       }
@@ -6111,18 +6115,18 @@
       "name": "炎之魔神",
       "description": "以群星烈火焚尽王国的敌人！以炼狱之火吞噬一切邪恶， 以愤怒烈焰铸就最终胜利！",
       "specialties": [
-        "烈焰喷涌",
         "暴怒狂焰",
+        "烈焰喷涌",
         "烈火附身"
       ],
       "abilities": [
         {
-          "name": "烈焰喷涌",
-          "description": "每隔3.5秒，伊格努斯化为火球，快速穿梭至另一名敌人面前，再穿梭回来，期间保持无敌，并对身边25范围内敌人每0.03秒造成20-30点真实伤害。若穿梭导致了目标死亡，伊格努斯将额外寻找目标穿梭。"
-        },
-        {
           "name": "暴怒狂焰",
           "description": "每隔4.8秒，伊格努斯释放暴怒狂焰，对周围90范围内的敌人造成60-70点真实伤害，并恢复25%最大生命值。"
+        },
+        {
+          "name": "烈焰喷涌",
+          "description": "每隔3.5秒，伊格努斯化为火球，快速穿梭至另一名敌人面前，再穿梭回来，期间保持无敌，并对身边25范围内敌人每0.03秒造成20-30点真实伤害。若穿梭导致了目标死亡，伊格努斯将额外寻找目标穿梭。"
         },
         {
           "name": "烈火附身",
@@ -6188,10 +6192,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_ignus/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -6222,13 +6226,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_ignus/templates.lua",
             "symbol": "RT(\"hero_ignus\"",
-            "line": 753
+            "line": 474
           }
         ]
       }
@@ -6319,10 +6324,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_denas/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -6360,13 +6365,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_denas/templates.lua",
             "symbol": "RT(\"hero_denas\"",
-            "line": 1003
+            "line": 467
           }
         ]
       }
@@ -6453,10 +6459,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_elora/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -6494,13 +6500,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_elora/templates.lua",
             "symbol": "RT(\"hero_elora\"",
-            "line": 1352
+            "line": 315
           }
         ]
       }
@@ -6591,10 +6598,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_ingvar/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -6625,13 +6632,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_ingvar/templates.lua",
             "symbol": "RT(\"hero_ingvar\"",
-            "line": 1207
+            "line": 255
           }
         ]
       }
@@ -6643,7 +6651,7 @@
       "specialties": [
         "摧甲钢锯",
         "弹射锯片",
-        "伐伐伐木！"
+        "伐伐伐木"
       ],
       "abilities": [
         {
@@ -6655,7 +6663,7 @@
           "description": "每隔7.57秒，钢锯发射一枚高速飞行的锯片，造成45-60点物理伤害，并在击中目标后弹射至最多11个附近敌人，弹射范围为160。"
         },
         {
-          "name": "伐伐伐木！",
+          "name": "伐伐伐木",
           "description": "每隔21.67秒，钢锯祭出巨型电钻，强行秒杀面前的敌人，并获得双倍的金币。"
         }
       ],
@@ -6726,10 +6734,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_hacksaw/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -6767,13 +6775,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_hacksaw/templates.lua",
             "symbol": "RT(\"hero_hacksaw\"",
-            "line": 1651
+            "line": 197
           }
         ]
       }
@@ -6882,10 +6891,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_oni/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -6916,14 +6925,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路",
           "失血增伤与减伤"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_oni/templates.lua",
             "symbol": "RT(\"hero_oni\"",
-            "line": 1528
+            "line": 264
           }
         ]
       }
@@ -7010,10 +7020,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_thor/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -7051,13 +7061,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_thor/templates.lua",
             "symbol": "RT(\"hero_thor\"",
-            "line": 1753
+            "line": 287
           }
         ]
       }
@@ -7068,8 +7079,8 @@
       "description": "一个神话……一个传说……大师中的大师……能使用一切力量的人。天十是智慧与力量的典范。仅仅是他的存在，就让整个王国为之颤抖。更不用说激怒他的后果会是怎样了……",
       "specialties": [
         "钢铁时间",
-        "火焰冲刺",
-        "巨叟撼地"
+        "巨叟撼地",
+        "火焰冲刺"
       ],
       "abilities": [
         {
@@ -7077,12 +7088,12 @@
           "description": "每隔10秒，若周围敌人数量不少于3，天十进入钢铁状态，移速提升至75。并免疫基础伤害类型，持续12秒。在钢铁状态下，天十每隔2秒高速旋转，对50范围内敌人进行2连击，每次攻击造成27-54点物理伤害。在调集距离较远时，天十将主动退出钢铁状态，返还对应冷却，并传送至调集位置。该技能在钢铁状态下不进入冷却。"
         },
         {
-          "name": "火焰冲刺",
-          "description": "每隔23秒，天十感召天地，召唤5枚火球，每枚火球对60范围内敌人造成40-70点真实伤害。火球落地后产生焦土，每隔1秒对65范围内敌人造成10-20点物理伤害，持续5秒。每隔双倍冷却，天十还会释放一次本技能的增强版本，召唤一坨两倍大小的火球。"
-        },
-        {
           "name": "巨叟撼地",
           "description": "在钢铁状态下，天十每隔9秒高高跃起，对40范围内敌人造成70-90点真实伤害，同时震碎地面，激起6片裂片，每片裂片对40范围内敌人造成20-40点物理伤害，并有25%概率使其眩晕3秒。"
+        },
+        {
+          "name": "火焰冲刺",
+          "description": "每隔23秒，天十感召天地，召唤5枚火球，每枚火球对60范围内敌人造成40-70点真实伤害。火球落地后产生焦土，每隔1秒对65范围内敌人造成10-20点物理伤害，持续5秒。每隔双倍冷却，天十还会释放一次本技能的增强版本，召唤一坨两倍大小的火球。"
         }
       ],
       "image": "/heroes/hero_10yr.png",
@@ -7144,10 +7155,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_10yr/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -7178,14 +7189,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "远距离传送",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_10yr/templates.lua",
             "symbol": "RT(\"hero_10yr\"",
-            "line": 1898
+            "line": 819
           }
         ]
       }
@@ -7197,8 +7209,8 @@
       "specialties": [
         "血色连斩",
         "沙漠勇士",
-        "反伤刺甲",
-        "沙漠之心"
+        "沙漠之心",
+        "反伤刺甲"
       ],
       "abilities": [
         {
@@ -7210,12 +7222,12 @@
           "description": "每隔10秒，沙王唤醒4名沙漠勇士，一同作战。沙漠勇士拥有140点生命值，每次攻击造成2-6点物理伤害，驻场9秒，且无惧剧毒，不会狼人化、尸骸化。"
         },
         {
-          "name": "反伤刺甲",
-          "description": "沙王额外获得60点反甲。"
-        },
-        {
           "name": "沙漠之心",
           "description": "阿尔里奇的心与沙漠和族人们紧密连结。远距离调遣时，阿尔里奇会化身沙卷风，提升自身60点移速。在沙漠勇士的躯体消散时，他们的灵魂会飘向阿尔里奇，使阿尔里奇恢复沙漠勇士最大生命值10%的生命，并减少血色连斩10%的剩余冷却时间。"
+        },
+        {
+          "name": "反伤刺甲",
+          "description": "沙王额外获得60点反甲。"
         }
       ],
       "image": "/heroes/hero_alric.png",
@@ -7331,10 +7343,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_alric/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -7365,14 +7377,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "沙化移动",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_alric/templates.lua",
             "symbol": "RT(\"hero_alric\"",
-            "line": 2543
+            "line": 276
           }
         ]
       }
@@ -7513,10 +7526,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_mirage/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -7554,14 +7567,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路",
           "迅捷同时改变移动与动作"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_mirage/templates.lua",
             "symbol": "RT(\"hero_mirage\"",
-            "line": 2121
+            "line": 507
           }
         ]
       }
@@ -7702,10 +7716,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_pirate/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -7743,13 +7757,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_pirate/templates.lua",
             "symbol": "RT(\"hero_pirate\"",
-            "line": 3495
+            "line": 506
           }
         ]
       }
@@ -7917,10 +7932,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_wizard/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -7958,14 +7973,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "远距离传送",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_wizard/templates.lua",
             "symbol": "RT(\"hero_wizard\"",
-            "line": 2333
+            "line": 464
           }
         ]
       }
@@ -8110,10 +8126,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_beastmaster/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -8144,14 +8160,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路",
           "调动时带领宠物"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_beastmaster/templates.lua",
             "symbol": "RT(\"hero_beastmaster\"",
-            "line": 2698
+            "line": 624
           }
         ]
       }
@@ -8193,7 +8210,7 @@
       "thumbnail": "/heroes/thumbs/hero_voodoo_witch.png",
       "sourceGame": 2,
       "availableLevel": 34,
-      "startingLevel": 4,
+      "startingLevel": 1,
       "profileStats": [
         6,
         5,
@@ -8314,10 +8331,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_voodoo_witch/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -8355,13 +8372,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_voodoo_witch/templates.lua",
             "symbol": "RT(\"hero_voodoo_witch\"",
-            "line": 5010
+            "line": 570
           }
         ]
       }
@@ -8512,10 +8530,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_alien/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -8553,13 +8571,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_alien/templates.lua",
             "symbol": "RT(\"hero_alien\"",
-            "line": 4570
+            "line": 441
           }
         ]
       }
@@ -8570,7 +8589,7 @@
       "description": "拥有神秘东方力量的武僧，肉体与精神都臻于完美，是黑虎阿福的师兄。",
       "specialties": [
         "虎型拳",
-        "蛇形拳",
+        "蛇型拳",
         "豹形拳",
         "龙形拳",
         "鹤形拳",
@@ -8582,7 +8601,7 @@
           "description": "每隔6.4秒，库绍施展虎型拳，造成120点真实伤害，并恢复自身30点生命值。"
         },
         {
-          "name": "蛇形拳",
+          "name": "蛇型拳",
           "description": "每隔11.2秒，库绍对非boss敌人施展蛇形拳，造成100点物理伤害并使敌人的伤害降低64%。"
         },
         {
@@ -8735,10 +8754,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_monk/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -8769,13 +8788,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_monk/templates.lua",
             "symbol": "RT(\"hero_monk\"",
-            "line": 4837
+            "line": 388
           }
         ]
       }
@@ -8817,7 +8837,7 @@
       "thumbnail": "/heroes/thumbs/hero_monkey_god.png",
       "sourceGame": 2,
       "availableLevel": 37,
-      "startingLevel": 5,
+      "startingLevel": 1,
       "profileStats": [
         5,
         5,
@@ -8908,10 +8928,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_monkey_god/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -8945,14 +8965,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "腾云移动",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_monkey_god/templates.lua",
             "symbol": "RT(\"hero_monkey_god\"",
-            "line": 5884
+            "line": 344
           }
         ]
       }
@@ -8989,7 +9010,7 @@
       "thumbnail": "/heroes/thumbs/hero_giant.png",
       "sourceGame": 2,
       "availableLevel": 38,
-      "startingLevel": 5,
+      "startingLevel": 1,
       "profileStats": [
         7,
         5,
@@ -9102,10 +9123,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_giant/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -9143,13 +9164,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_giant/templates.lua",
             "symbol": "RT(\"hero_giant\"",
-            "line": 5459
+            "line": 370
           }
         ]
       }
@@ -9300,10 +9322,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_dragon/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -9344,13 +9366,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "常驻飞行单位"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_dragon/templates.lua",
             "symbol": "RT(\"hero_dragon\"",
-            "line": 3759
+            "line": 663
           }
         ]
       }
@@ -9491,10 +9514,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_priest/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -9532,14 +9555,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "光翼传送",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_priest/templates.lua",
             "symbol": "RT(\"hero_priest\"",
-            "line": 2983
+            "line": 435
           }
         ]
       }
@@ -9549,15 +9573,11 @@
       "name": "鲁林·长胡子",
       "description": "鲁林·长胡子是矮人部族优秀的战士，掌握着大地的力量。他的“巨”锤能把一切敌人砸个粉碎！",
       "specialties": [
-        "矮人亲卫",
         "重锤",
-        "大地之力"
+        "大地之力",
+        "矮人亲卫"
       ],
       "abilities": [
-        {
-          "name": "矮人亲卫",
-          "description": "每隔14秒，鲁林召唤可调集的矮人亲卫协助战斗，驻场12秒。矮人亲卫数值与矮人大厅的士兵相同，技能等级同本技能等级。"
-        },
         {
           "name": "重锤",
           "description": "每隔8秒，鲁林挥动重锤，对60范围内敌人造成120-140点真实伤害。"
@@ -9565,11 +9585,15 @@
         {
           "name": "大地之力",
           "description": "每隔25秒，鲁林使用大地之力，身形变为2.5倍，恢复25%最大生命值的生命，并挥动重锤，造成范围伤害与2秒眩晕，范围与伤害均为重锤技能的2.5倍。"
+        },
+        {
+          "name": "矮人亲卫",
+          "description": "每隔14秒，鲁林召唤可调集的矮人亲卫协助战斗，驻场12秒。矮人亲卫数值与矮人大厅的士兵相同，技能等级同本技能等级。"
         }
       ],
       "image": "/heroes/hero_dwarf.png",
       "thumbnail": "/heroes/thumbs/hero_dwarf.png",
-      "sourceGame": 2,
+      "sourceGame": 1,
       "availableLevel": 40,
       "startingLevel": 1,
       "profileStats": [
@@ -9648,10 +9672,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_dwarf/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -9682,13 +9706,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_dwarf/templates.lua",
             "symbol": "RT(\"hero_dwarf\"",
-            "line": 6114
+            "line": 264
           }
         ]
       }
@@ -9730,7 +9755,7 @@
       "thumbnail": "/heroes/thumbs/hero_minotaur.png",
       "sourceGame": 2,
       "availableLevel": 41,
-      "startingLevel": 5,
+      "startingLevel": 1,
       "profileStats": [
         5,
         5,
@@ -9839,10 +9864,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_minotaur/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -9873,13 +9898,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_minotaur/templates.lua",
             "symbol": "RT(\"hero_minotaur\"",
-            "line": 5659
+            "line": 544
           }
         ]
       }
@@ -9916,7 +9942,7 @@
       "thumbnail": "/heroes/thumbs/hero_crab.png",
       "sourceGame": 2,
       "availableLevel": 42,
-      "startingLevel": 5,
+      "startingLevel": 1,
       "profileStats": [
         7,
         5,
@@ -10011,10 +10037,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_crab/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -10052,14 +10078,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "技能潜地",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_crab/templates.lua",
             "symbol": "RT(\"hero_crab\"",
-            "line": 5257
+            "line": 451
           }
         ]
       }
@@ -10210,10 +10237,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_van_helsing/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -10251,13 +10278,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_van_helsing/templates.lua",
             "symbol": "RT(\"hero_van_helsing\"",
-            "line": 4105
+            "line": 500
           }
         ]
       }
@@ -10267,17 +10295,13 @@
       "name": "波恩哈特",
       "description": "生前是精灵的神灵，死后是邪佞的噩梦。死亡没能让它安息，却让它获得了更强大的力量。",
       "specialties": [
-        "凋零",
         "脊雨",
         "疾病新星",
         "死亡之触",
-        "亡灵眷属"
+        "亡灵眷属",
+        "凋零"
       ],
       "abilities": [
-        {
-          "name": "凋零",
-          "description": "波恩哈特的攻击会使敌人感染瘟疫，持续4秒，每1秒造成6点真实伤害。当感染瘟疫的敌人死亡时，会触发尸爆，对60范围内敌人造成90点真实伤害。"
-        },
         {
           "name": "脊雨",
           "description": "每隔18秒，波恩哈特向随机敌人发射10根脊柱，每根对50范围内敌人造成20-44点真实伤害。该技能不会主动对空军释放。"
@@ -10293,6 +10317,10 @@
         {
           "name": "亡灵眷属",
           "description": "每隔13.5秒，波恩哈特召唤亡灵眷属协助战斗，驻场40秒。亡灵眷属拥有160点生命值，每次攻击造成6-10点物理伤害。"
+        },
+        {
+          "name": "凋零",
+          "description": "波恩哈特的攻击会使敌人感染瘟疫，持续4秒，每1秒造成6点真实伤害。当感染瘟疫的敌人死亡时，会触发尸爆，对60范围内敌人造成90点真实伤害。"
         }
       ],
       "image": "/heroes/hero_dracolich.png",
@@ -10408,10 +10436,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_dracolich/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -10452,13 +10480,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "常驻飞行单位"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_dracolich/templates.lua",
             "symbol": "RT(\"hero_dracolich\"",
-            "line": 3163
+            "line": 672
           }
         ]
       }
@@ -10493,7 +10522,7 @@
       ],
       "image": "/heroes/hero_vampiress.png",
       "thumbnail": "/heroes/thumbs/hero_vampiress.png",
-      "sourceGame": 2,
+      "sourceGame": 1,
       "availableLevel": 47,
       "startingLevel": 1,
       "profileStats": [
@@ -10554,10 +10583,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_vampiress/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -10588,14 +10617,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "蝙蝠赶路",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_vampiress/templates.lua",
             "symbol": "RT(\"hero_vampiress\"",
-            "line": 4444
+            "line": 275
           }
         ]
       }
@@ -10605,18 +10635,14 @@
       "name": "艾莉丹",
       "description": "本是拥有卓越魔法天赋的法师学徒，却因仰慕精灵公主走上了游侠的道路。艾利丹是精灵王国最年轻有为的游侠将军。",
       "specialties": [
-        "连射",
         "迅闪",
         "双刃",
         "箭猪",
+        "连射",
         "箭雨",
         "护卫"
       ],
       "abilities": [
-        {
-          "name": "连射",
-          "description": "每隔9秒，艾莉丹连续射出10发箭矢，每发都造成面板伤害。"
-        },
         {
           "name": "迅闪",
           "description": "受到攻击时，艾莉丹有60%概率闪避并反击，造成30-50点物理伤害，并使双刃的冷却减少1秒。"
@@ -10628,6 +10654,10 @@
         {
           "name": "箭猪",
           "description": "每射击命中同一敌人，便使艾莉丹对该敌人的射击伤害提升8点。"
+        },
+        {
+          "name": "连射",
+          "description": "每隔9秒，艾莉丹连续射出10发箭矢，每发都造成面板伤害。"
         },
         {
           "name": "箭雨",
@@ -10777,10 +10807,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_elves_archer/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -10818,13 +10848,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_elves_archer/templates.lua",
             "symbol": "RT(\"hero_elves_archer\"",
-            "line": 6242
+            "line": 466
           }
         ]
       }
@@ -10866,7 +10897,7 @@
       "thumbnail": "/heroes/thumbs/hero_arivan.png",
       "sourceGame": 3,
       "availableLevel": 51,
-      "startingLevel": 3,
+      "startingLevel": 1,
       "profileStats": [
         5,
         6,
@@ -10979,10 +11010,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_arivan/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -11020,13 +11051,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_arivan/templates.lua",
             "symbol": "RT(\"hero_arivan\"",
-            "line": 7733
+            "line": 633
           }
         ]
       }
@@ -11068,7 +11100,7 @@
       "thumbnail": "/heroes/thumbs/hero_bravebark.png",
       "sourceGame": 3,
       "availableLevel": 52,
-      "startingLevel": 5,
+      "startingLevel": 1,
       "profileStats": [
         6,
         5,
@@ -11181,10 +11213,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_bravebark/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -11215,14 +11247,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "远距离传送",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_bravebark/templates.lua",
             "symbol": "RT(\"hero_bravebark\"",
-            "line": 8372
+            "line": 504
           }
         ]
       }
@@ -11264,7 +11297,7 @@
       "thumbnail": "/heroes/thumbs/hero_xin.png",
       "sourceGame": 3,
       "availableLevel": 53,
-      "startingLevel": 5,
+      "startingLevel": 1,
       "profileStats": [
         6,
         4,
@@ -11377,10 +11410,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_xin/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -11411,15 +11444,16 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "调动即传送",
           "地面寻路",
           "驭体于灵状态清除异常"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_xin/templates.lua",
             "symbol": "RT(\"hero_xin\"",
-            "line": 9083
+            "line": 513
           }
         ]
       }
@@ -11466,7 +11500,7 @@
       "thumbnail": "/heroes/thumbs/hero_elves_denas.png",
       "sourceGame": 3,
       "availableLevel": 54,
-      "startingLevel": 5,
+      "startingLevel": 1,
       "profileStats": [
         7,
         4,
@@ -11583,10 +11617,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_elves_denas/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -11624,13 +11658,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_elves_denas/templates.lua",
             "symbol": "RT(\"hero_elves_denas\"",
-            "line": 7528
+            "line": 410
           }
         ]
       }
@@ -11672,7 +11707,7 @@
       "thumbnail": "/heroes/thumbs/hero_rag.png",
       "sourceGame": 3,
       "availableLevel": 56,
-      "startingLevel": 5,
+      "startingLevel": 1,
       "profileStats": [
         5,
         4,
@@ -11785,10 +11820,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_rag/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -11826,13 +11861,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_rag/templates.lua",
             "symbol": "RT(\"hero_rag\"",
-            "line": 9618
+            "line": 511
           }
         ]
       }
@@ -11874,7 +11910,7 @@
       "thumbnail": "/heroes/thumbs/hero_durax.png",
       "sourceGame": 3,
       "availableLevel": 57,
-      "startingLevel": 5,
+      "startingLevel": 1,
       "profileStats": [
         5,
         8,
@@ -11987,10 +12023,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_durax/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -12028,14 +12064,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "棱晶移动",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_durax/templates.lua",
             "symbol": "RT(\"hero_durax\"",
-            "line": 7366
+            "line": 364
           }
         ]
       }
@@ -12077,7 +12114,7 @@
       "thumbnail": "/heroes/thumbs/hero_catha.png",
       "sourceGame": 3,
       "availableLevel": 58,
-      "startingLevel": 4,
+      "startingLevel": 1,
       "profileStats": [
         5,
         3,
@@ -12190,10 +12227,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_catha/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -12231,13 +12268,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_catha/templates.lua",
             "symbol": "RT(\"hero_catha\"",
-            "line": 8601
+            "line": 368
           }
         ]
       }
@@ -12248,15 +12286,19 @@
       "description": "曾经是暮光精灵的王子，现在是毁家灭国的复仇者，雷格森的利刃和他的怒火一样永不停息。",
       "specialties": [
         "刃舞",
+        "影袭",
         "死战之志",
         "异能魔刃",
-        "影袭",
         "死吻"
       ],
       "abilities": [
         {
           "name": "刃舞",
           "description": "每隔12秒，雷格森挥舞双刃，对100范围内敌人造成90-180点物理伤害。"
+        },
+        {
+          "name": "影袭",
+          "description": "每隔30秒，雷格森跃入暗影，短时间内5次突袭敌人，施展刃舞，并在归来时激活异能魔刃。"
         },
         {
           "name": "死战之志",
@@ -12267,10 +12309,6 @@
           "description": "每隔25秒，雷格森强化双刃，持续6秒。强化期间，雷格森的普攻无法闪避，每次造成140点真实伤害，且有4.5%概率秒杀非BOSS敌人。"
         },
         {
-          "name": "影袭",
-          "description": "每隔30秒，雷格森跃入暗影，短时间内5次突袭敌人，施展刃舞，并在归来时激活异能魔刃。"
-        },
-        {
           "name": "死吻",
           "description": "每隔40秒，雷格森锁定身边生命值高于750的最大单位并秒杀之。若目标为BOSS，则改为造成2000点真实伤害。"
         }
@@ -12279,7 +12317,7 @@
       "thumbnail": "/heroes/thumbs/hero_regson.png",
       "sourceGame": 3,
       "availableLevel": 59,
-      "startingLevel": 5,
+      "startingLevel": 1,
       "profileStats": [
         7,
         5,
@@ -12392,10 +12430,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_regson/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -12426,13 +12464,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_regson/templates.lua",
             "symbol": "RT(\"hero_regson\"",
-            "line": 6458
+            "line": 513
           }
         ]
       }
@@ -12479,7 +12518,7 @@
       "thumbnail": "/heroes/thumbs/hero_lilith.png",
       "sourceGame": 3,
       "availableLevel": 60,
-      "startingLevel": 5,
+      "startingLevel": 1,
       "profileStats": [
         6,
         5,
@@ -12592,10 +12631,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_lilith/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -12633,13 +12672,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_lilith/templates.lua",
             "symbol": "RT(\"hero_lilith\"",
-            "line": 8809
+            "line": 579
           }
         ]
       }
@@ -12651,9 +12691,9 @@
       "specialties": [
         "净化",
         "焚祭",
-        "余烬之地",
         "炽焰后裔",
-        "火焰之环"
+        "火焰之环",
+        "余烬之地"
       ],
       "abilities": [
         {
@@ -12665,23 +12705,23 @@
           "description": "凤凰死亡时，将坠落对80范围内敌人造成190-350点物理伤害，并留下一枚凤凰蛋。凤凰蛋每0.2秒对50范围内敌人造成10点真实伤害，并在复活时对90范围内敌人造成120-180点真实伤害。每隔45秒，凤凰会主动使用焚祭。"
         },
         {
-          "name": "余烬之地",
-          "description": "每隔14.4秒，凤凰产下一枚蛋，驻场180秒。被触发时，对55范围内敌人造成200-400点真实伤害。"
-        },
-        {
           "name": "炽焰后裔",
           "description": "每隔22秒，凤凰发射4枚火羽追踪并攻击敌人，每枚火羽造成45-80点真实伤害。"
         },
         {
           "name": "火焰之环",
           "description": "每隔30秒，凤凰增益一座防御塔，持续6.5秒，使其每隔2秒对125范围内敌人造成90点真实伤害。"
+        },
+        {
+          "name": "余烬之地",
+          "description": "每隔14.4秒，凤凰产下一枚蛋，驻场180秒。被触发时，对55范围内敌人造成200-400点真实伤害。"
         }
       ],
       "image": "/heroes/hero_phoenix.png",
       "thumbnail": "/heroes/thumbs/hero_phoenix.png",
       "sourceGame": 3,
       "availableLevel": 61,
-      "startingLevel": 5,
+      "startingLevel": 1,
       "profileStats": [
         5,
         6,
@@ -12794,10 +12834,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_phoenix/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -12838,13 +12878,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "常驻飞行单位"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_phoenix/templates.lua",
             "symbol": "RT(\"hero_phoenix\"",
-            "line": 8060
+            "line": 531
           }
         ]
       }
@@ -12891,7 +12932,7 @@
       "thumbnail": "/heroes/thumbs/hero_faustus.png",
       "sourceGame": 3,
       "availableLevel": 62,
-      "startingLevel": 5,
+      "startingLevel": 1,
       "profileStats": [
         6,
         6,
@@ -13022,10 +13063,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_faustus/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -13066,13 +13107,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "常驻飞行单位"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_faustus/templates.lua",
             "symbol": "RT(\"hero_faustus\"",
-            "line": 9343
+            "line": 510
           }
         ]
       }
@@ -13109,7 +13151,7 @@
       "thumbnail": "/heroes/thumbs/hero_veznan.png",
       "sourceGame": 3,
       "availableLevel": 63,
-      "startingLevel": 5,
+      "startingLevel": 1,
       "profileStats": [
         3,
         5,
@@ -13222,10 +13264,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_veznan/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -13263,14 +13305,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "远距离传送",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_veznan/templates.lua",
             "symbol": "RT(\"hero_veznan\"",
-            "line": 7131
+            "line": 411
           }
         ]
       }
@@ -13280,14 +13323,14 @@
       "name": "布鲁斯",
       "description": "布鲁斯是一个披着浑白皮毛的狮人战士，拥有锐利的爪牙与精神。他王者气概的咆哮总是让敌人闻风丧胆。",
       "specialties": [
-        "流血利爪",
+        "流血利刃",
         "王者咆哮",
         "野蛮撕咬",
         "雄狮守卫"
       ],
       "abilities": [
         {
-          "name": "流血利爪",
+          "name": "流血利刃",
           "description": "布鲁斯每次攻击有0.2概率使敌人流血，持续5秒，每0.37秒造成9点真实伤害。对流血或中毒的敌人，布鲁斯每次攻击额外造成75点残暴伤害。"
         },
         {
@@ -13307,7 +13350,7 @@
       "thumbnail": "/heroes/thumbs/hero_bruce.png",
       "sourceGame": 3,
       "availableLevel": 64,
-      "startingLevel": 5,
+      "startingLevel": 1,
       "profileStats": [
         6,
         6,
@@ -13420,10 +13463,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_bruce/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -13454,13 +13497,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_bruce/templates.lua",
             "symbol": "RT(\"hero_bruce\"",
-            "line": 9878
+            "line": 346
           }
         ]
       }
@@ -13502,7 +13546,7 @@
       "thumbnail": "/heroes/thumbs/hero_lynn.png",
       "sourceGame": 3,
       "availableLevel": 67,
-      "startingLevel": 5,
+      "startingLevel": 1,
       "profileStats": [
         6,
         6,
@@ -13619,10 +13663,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_lynn/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -13653,13 +13697,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_lynn/templates.lua",
             "symbol": "RT(\"hero_lynn\"",
-            "line": 6634
+            "line": 400
           }
         ]
       }
@@ -13696,7 +13741,7 @@
       "thumbnail": "/heroes/thumbs/hero_wilbur.png",
       "sourceGame": 3,
       "availableLevel": 69,
-      "startingLevel": 5,
+      "startingLevel": 1,
       "profileStats": [
         6,
         7,
@@ -13809,10 +13854,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_wilbur/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -13853,14 +13898,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "常驻飞行单位",
           "引擎影响飞行速度"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_wilbur/templates.lua",
             "symbol": "RT(\"hero_wilbur\"",
-            "line": 6862
+            "line": 519
           }
         ]
       }
@@ -13890,9 +13936,9 @@
       ],
       "image": "/heroes/hero_bolverk.png",
       "thumbnail": "/heroes/thumbs/hero_bolverk.png",
-      "sourceGame": 3,
+      "sourceGame": 1,
       "availableLevel": 70,
-      "startingLevel": 5,
+      "startingLevel": 1,
       "profileStats": [
         5,
         5,
@@ -13969,10 +14015,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_bolverk/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -14003,14 +14049,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路",
           "残血缩短攻击冷却"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_bolverk/templates.lua",
             "symbol": "RT(\"hero_bolverk\"",
-            "line": 10070
+            "line": 139
           }
         ]
       }
@@ -14165,10 +14212,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_vesper/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -14206,14 +14253,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "远距离传送",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_vesper/templates.lua",
             "symbol": "E:register_t(\"hero_vesper\"",
-            "line": 13987
+            "line": 633
           }
         ]
       }
@@ -14368,10 +14416,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_raelyn/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -14402,14 +14450,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "按横向距离跳跃",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_raelyn/templates.lua",
             "symbol": "RT(\"hero_raelyn\"",
-            "line": 10940
+            "line": 451
           }
         ]
       }
@@ -14564,10 +14613,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_muyrn/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -14605,14 +14654,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "树行移动",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_muyrn/templates.lua",
             "symbol": "E:register_t(\"hero_muyrn\"",
-            "line": 14302
+            "line": 948
           }
         ]
       }
@@ -14622,15 +14672,15 @@
       "name": "托雷斯",
       "description": "奥布杜尔是一位才华横溢的工程师，在战场上他不仅能召唤工人帮助作战，还能部署防御炮台摧毁敌人。",
       "specialties": [
-        "加班加点",
+        "正在施工",
         "午休时间",
-        "拆迁专家",
-        "防御炮台",
-        "铁球横扫"
+        "拆迁达人",
+        "防御塔楼",
+        "破城钢球"
       ],
       "abilities": [
         {
-          "name": "加班加点",
+          "name": "正在施工",
           "description": "每隔11秒，召唤两名工人并肩作战，各拥有100点生命值，驻场12秒，每次攻击造成6-12点物理伤害。"
         },
         {
@@ -14638,15 +14688,15 @@
           "description": "每隔26秒，生命值低于40%时，奥布杜尔停下战斗享用小吃，恢复375点生命。"
         },
         {
-          "name": "拆迁专家",
+          "name": "拆迁达人",
           "description": "每隔16秒，奥布杜尔快速旋转手中的木梁，在1.25秒中眩晕敌人，并每0.25秒对100范围敌人造成15-24点物理伤害。"
         },
         {
-          "name": "防御炮台",
+          "name": "防御塔楼",
           "description": "每隔30秒，奥布杜尔在路径上建造一座临时炮台，持续15秒，每次攻击造成24-36点物理伤害，并使敌人晕眩0.25秒。"
         },
         {
-          "name": "铁球横扫",
+          "name": "破城钢球",
           "description": "每隔35秒，奥布杜尔朝路径上扔出一个巨大钢球，造成300点破甲伤害，并使敌人眩晕2秒。"
         }
       ],
@@ -14767,10 +14817,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_builder/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -14808,13 +14858,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_builder/templates.lua",
             "symbol": "RT(\"hero_builder\"",
-            "line": 15439
+            "line": 580
           }
         ]
       }
@@ -14969,10 +15020,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_hunter/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -15010,14 +15061,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "迷雾移动",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_hunter/templates.lua",
             "symbol": "RT(\"hero_hunter\"",
-            "line": 10272
+            "line": 1627
           }
         ]
       }
@@ -15172,10 +15224,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_venom/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -15206,14 +15258,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "黏液移动",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_venom/templates.lua",
             "symbol": "RT(\"hero_venom\"",
-            "line": 11282
+            "line": 976
           }
         ]
       }
@@ -15368,10 +15421,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_bird/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -15412,13 +15465,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "常驻飞行单位"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_bird/templates.lua",
             "symbol": "RT(\"hero_bird\"",
-            "line": 16201
+            "line": 787
           }
         ]
       }
@@ -15573,10 +15627,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_space_elf/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -15614,15 +15668,16 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "远距离传送",
           "近距离形态移动",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_space_elf/templates.lua",
             "symbol": "RT(\"hero_space_elf\"",
-            "line": 10563
+            "line": 1066
           }
         ]
       }
@@ -15777,10 +15832,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_mecha/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -15811,13 +15866,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_mecha/templates.lua",
             "symbol": "RT(\"hero_mecha\"",
-            "line": 17287
+            "line": 1213
           }
         ]
       }
@@ -15976,10 +16032,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_robot/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -16020,14 +16076,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "喷气飞行",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_robot/templates.lua",
             "symbol": "RT(\"hero_robot\"",
-            "line": 15812
+            "line": 1396
           }
         ]
       }
@@ -16182,10 +16239,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_lumenir/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -16226,13 +16283,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "常驻飞行单位"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_lumenir/templates.lua",
             "symbol": "RT(\"hero_lumenir\"",
-            "line": 13042
+            "line": 1053
           }
         ]
       }
@@ -16392,10 +16450,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_dragon_gem/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -16436,14 +16494,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "常驻飞行单位",
           "移动触发蓄能"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_dragon_gem/templates.lua",
             "symbol": "RT(\"hero_dragon_gem\"",
-            "line": 11640
+            "line": 1678
           }
         ]
       }
@@ -16598,10 +16657,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_witch/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -16642,13 +16701,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_witch/templates.lua",
             "symbol": "RT(\"hero_witch\"",
-            "line": 12050
+            "line": 1357
           }
         ]
       }
@@ -16658,18 +16718,14 @@
       "name": "波恩哈特",
       "description": "维兹南在征战途中解救了波恩哈特，为了偿还人情，波恩哈特心甘情愿献出自己的力量，飞遍大陆，搜寻可能威胁到黑巫师大计的魔法师。",
       "specialties": [
-        "瘟疫",
         "脊骨骤雨",
         "瘟神毒雾",
         "爆发感染",
         "疫病灾星",
-        "化骨为龙"
+        "化骨为龙",
+        "瘟疫"
       ],
       "abilities": [
-        {
-          "name": "瘟疫",
-          "description": "波恩哈特的攻击附带持续4秒的瘟疫效果。瘟疫每0.25秒造成1点物理伤害，持续4秒。当感染者死亡时，会在其位置爆炸，对60范围内敌人造成15-30点爆炸伤害。"
-        },
         {
           "name": "脊骨骤雨",
           "description": "每隔20秒，波恩哈特向敌人射出8根脊骨，每根造成46-70点真实伤害，并使其眩晕0.25秒。"
@@ -16689,6 +16745,10 @@
         {
           "name": "化骨为龙",
           "description": "每隔36秒，波恩哈特召唤2只小骨龙，各拥有234点生命值，驻场25秒，每次攻击造成27-40点物理伤害。"
+        },
+        {
+          "name": "瘟疫",
+          "description": "波恩哈特的攻击附带持续4秒的瘟疫效果。瘟疫每0.25秒造成1点物理伤害，持续4秒。当感染者死亡时，会在其位置爆炸，对60范围内敌人造成15-30点爆炸伤害。"
         }
       ],
       "image": "/heroes/hero_dragon_bone.png",
@@ -16808,10 +16868,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_dragon_bone/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -16852,13 +16912,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "常驻飞行单位"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_dragon_bone/templates.lua",
             "symbol": "RT(\"hero_dragon_bone\"",
-            "line": 12520
+            "line": 1257
           }
         ]
       }
@@ -17013,10 +17074,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_wukong/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -17050,14 +17111,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "腾云移动",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_wukong/templates.lua",
             "symbol": "RT(\"hero_wukong\"",
-            "line": 13662
+            "line": 1266
           }
         ]
       }
@@ -17212,10 +17274,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_dragon_arb/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -17256,14 +17318,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "常驻飞行单位",
           "飞行加速与减速"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_dragon_arb/templates.lua",
             "symbol": "E:register_t(\"hero_dragon_arb\"",
-            "line": 14758
+            "line": 2436
           }
         ]
       }
@@ -17276,8 +17339,8 @@
         "暴怒猛击",
         "烈焰之心",
         "双倍麻烦",
-        "狂野喷发",
-        "烈焰席卷"
+        "烈炎席卷",
+        "狂野喷发"
       ],
       "abilities": [
         {
@@ -17293,12 +17356,12 @@
           "description": "每隔20秒，喀拉托投掷熔岩球，爆炸造成75点爆炸伤害，并召唤一只熔岩团，持续战斗10秒。"
         },
         {
-          "name": "狂野喷发",
-          "description": "每隔48秒，喀拉托向路径喷射6发熔岩弹，每发造成200点真实伤害，并使敌人灼烧4秒。"
+          "name": "烈炎席卷",
+          "description": "每隔30秒，喀拉托向周围敌人甩出熔岩，每0.25秒造成15点真实伤害，持续4秒。"
         },
         {
-          "name": "烈焰席卷",
-          "description": "每隔30秒，喀拉托向周围敌人甩出熔岩，每0.25秒造成15点真实伤害，持续4秒。"
+          "name": "狂野喷发",
+          "description": "每隔48秒，喀拉托向路径喷射6发熔岩弹，每发造成200点真实伤害，并使敌人灼烧4秒。"
         }
       ],
       "image": "/heroes/hero_lava.png",
@@ -17418,10 +17481,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_lava/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -17459,13 +17522,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_lava/templates.lua",
             "symbol": "RT(\"hero_lava\"",
-            "line": 16612
+            "line": 692
           }
         ]
       }
@@ -17620,10 +17684,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_spider/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -17661,14 +17725,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "掘地转移",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_spider/templates.lua",
             "symbol": "RT(\"hero_spider\"",
-            "line": 16953
+            "line": 734
           }
         ]
       }
@@ -17823,10 +17888,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_dragon_sun/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -17867,13 +17932,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "常驻飞行单位"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_dragon_sun/templates.lua",
             "symbol": "RT(\"hero_dragon_sun\"",
-            "line": 17969
+            "line": 1793
           }
         ]
       }
@@ -18033,10 +18099,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_eiskalt/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -18077,13 +18143,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "常驻飞行单位"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_eiskalt/templates.lua",
             "symbol": "RT(\"hero_eiskalt\"",
-            "line": 18173
+            "line": 680
           }
         ]
       }
@@ -18093,18 +18160,14 @@
       "name": "电云",
       "description": "传说在千年之前，天空中有两条神龙争斗，落败的那条被封印在无尽之海，获胜的那条被尊为风暴龙王，名曰电云。",
       "specialties": [
-        "孔明灯",
         "闪电打击",
         "暴风领主",
         "神圣雨露",
-        "至尊波",
-        "雷电之子"
+        "势崩江河",
+        "雷电之子",
+        "孔明灯"
       ],
       "abilities": [
-        {
-          "name": "孔明灯",
-          "description": "电云附近200范围内死亡的敌人会化为孔明灯，额外产出1枚金币。"
-        },
         {
           "name": "闪电打击",
           "description": "每隔18秒，发射一道闪电，在6个敌人之间弹射，每次造成50点法术伤害。"
@@ -18118,12 +18181,16 @@
           "description": "每隔18秒，降下神圣之雨，每0.5秒为周围友军回复24点生命值，持续5秒。"
         },
         {
-          "name": "至尊波",
+          "name": "势崩江河",
           "description": "每隔21秒，电云以自己为中心释放数道能量波，击晕路径上的敌人4秒。"
         },
         {
           "name": "雷电之子",
           "description": "每隔32秒，召唤一个雷电之子，自动攻击附近的敌人，每次造成120-180点法术伤害，最多攻击15次。"
+        },
+        {
+          "name": "孔明灯",
+          "description": "电云附近200范围内死亡的敌人会化为孔明灯，额外产出1枚金币。"
         }
       ],
       "image": "/heroes/hero_dianyun.png",
@@ -18243,10 +18310,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_dianyun/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -18287,13 +18354,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "常驻飞行单位"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_dianyun/templates.lua",
             "symbol": "RT(\"hero_dianyun\"",
-            "line": 19226
+            "line": 680
           }
         ]
       }
@@ -18453,10 +18521,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_asra/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -18494,14 +18562,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "远距离传送",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_asra/templates.lua",
             "symbol": "RT(\"hero_asra\"",
-            "line": 18544
+            "line": 286
           }
         ]
       }
@@ -18511,31 +18580,36 @@
       "name": "贝雷萨德",
       "description": "贝雷萨德那毁天灭地的力量，足以让最勇猛的战士也闻风丧胆。作为一条远古黑龙，他的怒火可以焚尽一切。",
       "specialties": [
-        "龙息术",
-        "恐惧之龙",
-        "龙之爪牙",
-        "湮灭射线",
-        "地狱火雨"
+        "金之欲",
+        "爆炎",
+        "惧龙",
+        "龙生",
+        "片甲不留",
+        "地狱火"
       ],
       "abilities": [
         {
-          "name": "龙息术",
+          "name": "金之欲",
+          "description": "被贝雷萨德普攻杀死的敌人额外掉落6枚金币，被地狱火杀死的敌人额外掉落3枚金币。"
+        },
+        {
+          "name": "爆炎",
           "description": "每隔20秒，贝雷萨德喷出灼热的火焰，灼烧前方区域，留下持续5秒的焦土，每0.2秒造成7点真实伤害。"
         },
         {
-          "name": "恐惧之龙",
+          "name": "惧龙",
           "description": "每隔22秒，发出震耳欲聋的咆哮，恐惧最多6名敌人，使其逃跑并加速50%，持续7秒。"
         },
         {
-          "name": "龙之爪牙",
+          "name": "龙生",
           "description": "每隔35秒，发射一个傀儡，落地时造成40-60点爆炸伤害。傀儡拥有500点生命值，每次攻击造成42-63点物理伤害，驻场20秒。傀儡无法恢复生命值，但也不受火焰、剧毒、流血、狼人化、尸骸化的影响。"
         },
         {
-          "name": "湮灭射线",
+          "name": "片甲不留",
           "description": "每隔50秒，射出一道湮灭光线，秒杀目标，并对附近敌人造成80-120点真实伤害。该技能只会对生命值高于750的敌人释放。"
         },
         {
-          "name": "地狱火雨",
+          "name": "地狱火",
           "description": "每隔56秒，召唤地狱火雨，每0.25秒对所有敌人造成9点真实伤害，持续4秒。"
         }
       ],
@@ -18656,10 +18730,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_beresad/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -18700,13 +18774,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "常驻飞行单位"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_beresad/templates.lua",
             "symbol": "RT(\"hero_beresad\"",
-            "line": 18815
+            "line": 568
           }
         ]
       }
@@ -18716,29 +18791,21 @@
       "name": "维鲁克",
       "description": "维鲁克是一位备受尊敬的兽人部落勇士，曾经为了支持好战分子中的一位领袖，毅然逃出角斗坑，摆脱了自己奴隶的身份。重获自由的他，目前正致力于援助他那些身陷困境的绿皮同僚。",
       "specialties": [
-        "战之欲",
-        "角斗立场",
-        "蛮力",
         "瞄准砍击",
+        "蛮力",
         "振臂一呼",
-        "好战分子"
+        "好战分子",
+        "战之欲",
+        "角斗立场"
       ],
       "abilities": [
         {
-          "name": "战之欲",
-          "description": "每隔1秒，维鲁克恢复18点生命值。"
-        },
-        {
-          "name": "角斗立场",
-          "description": "处于战斗状态时，维鲁克提升自身伤害24%，每4秒叠加1层，最多叠加5层。"
+          "name": "瞄准砍击",
+          "description": "每隔15秒，维鲁克连续斩击两次，每次造成180点残暴伤害。"
         },
         {
           "name": "蛮力",
           "description": "每隔14秒，维鲁克猛砍地面，造成范围普攻伤害，并使附近敌人眩晕4秒。"
-        },
-        {
-          "name": "瞄准砍击",
-          "description": "每隔15秒，维鲁克连续斩击两次，每次造成180点残暴伤害。"
         },
         {
           "name": "振臂一呼",
@@ -18747,6 +18814,14 @@
         {
           "name": "好战分子",
           "description": "维鲁克将一名投矛哥布林编入援军，每次近战攻击造成28-42点物理伤害，远程攻击造成29-43点物理伤害，驻场16秒。"
+        },
+        {
+          "name": "战之欲",
+          "description": "每隔1秒，维鲁克恢复18点生命值。"
+        },
+        {
+          "name": "角斗立场",
+          "description": "处于战斗状态时，维鲁克提升自身伤害24%，每4秒叠加1层，最多叠加5层。"
         }
       ],
       "image": "/heroes/hero_orc.png",
@@ -18866,10 +18941,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_orc/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -18900,13 +18975,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_orc/templates.lua",
             "symbol": "RT(\"hero_orc\"",
-            "line": 20103
+            "line": 246
           }
         ]
       }
@@ -18916,18 +18992,14 @@
       "name": "奥洛克",
       "description": "恶魔奥洛克受过黑暗技艺方面的训练，曾帮助维兹南越狱，以换取他的一部分力量。现在他一边协助维兹南作战，一边等待着时机来实行自己那阴险的计划，好让这份协定变得对他有利。",
       "specialties": [
-        "炼狱业火",
         "自我复制",
         "岩浆喷发",
         "地狱注入",
         "恶魔飞爆",
-        "孤立缄印"
+        "孤立缄印",
+        "炼狱业火"
       ],
       "abilities": [
-        {
-          "name": "炼狱业火",
-          "description": "奥洛克阵亡后爆炸，对70范围内的敌人造成600点物理伤害。"
-        },
         {
           "name": "自我复制",
           "description": "每隔25秒，奥洛克制造出两个自己的幻象来攻击敌人，拥有300点生命值，每次攻击造成24-72点法术伤害，持续10秒。分身继承恶魔飞爆和炼狱业火技能，且可自由调集。"
@@ -18947,6 +19019,10 @@
         {
           "name": "孤立缄印",
           "description": "每隔16秒，将最多10名敌人传送回一段距离，并对他们造成90点法术爆炸伤害。"
+        },
+        {
+          "name": "炼狱业火",
+          "description": "奥洛克阵亡后爆炸，对70范围内的敌人造成600点物理伤害。"
         }
       ],
       "image": "/heroes/hero_oloch.png",
@@ -19066,10 +19142,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_oloch/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -19107,13 +19183,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_oloch/templates.lua",
             "symbol": "RT(\"hero_oloch\"",
-            "line": 20349
+            "line": 420
           }
         ]
       }
@@ -19123,14 +19200,18 @@
       "name": "苦楝夫人",
       "description": "在瓦西里勋爵落败时所受的伤，早已深深地铭刻在了苦楝夫人的记忆里。她在一座与世隔绝的洞穴里恢复了元气。而她的实力和她对利尼瑞亚的仇恨都与日俱增。现在她重返人间，只为满足自己对血的渴望。",
       "specialties": [
+        "嗜血本能",
         "熟吸蝙蝠",
         "绝望迷雾",
         "黑暗呼唤",
         "吸血鬼之触",
-        "野兽形态",
-        "嗜血本能"
+        "野兽形态"
       ],
       "abilities": [
+        {
+          "name": "嗜血本能",
+          "description": "苦楝夫人免疫剧毒，普通攻击造成残暴伤害。远距离调遣时，苦楝夫人化身蝙蝠高速飞行。"
+        },
         {
           "name": "熟吸蝙蝠",
           "description": "召唤一只吸血蝙蝠伴她作战，每隔0.5秒攻击一次，每次造成12-28点物理伤害。"
@@ -19150,10 +19231,6 @@
         {
           "name": "野兽形态",
           "description": "每隔40秒，当生命值耗尽或附近有敌人时，苦楝夫人变身为渴血的野兽，生命值恢复至全满，普通攻击变为真实伤害，伤害提升175%，攻击速度与移动速度大幅提升，吸血效果强化，持续20秒。变身期间使用绝望迷雾或黑暗呼唤将提前退出野兽形态。"
-        },
-        {
-          "name": "嗜血本能",
-          "description": "苦楝夫人免疫剧毒，普通攻击造成残暴伤害。远距离调遣时，苦楝夫人化身蝙蝠高速飞行。"
         }
       ],
       "image": "/heroes/hero_margosa.png",
@@ -19277,10 +19354,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_margosa/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -19314,14 +19391,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "蝙蝠移动",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_margosa/templates.lua",
             "symbol": "RT(\"hero_margosa\"",
-            "line": 20731
+            "line": 550
           }
         ]
       }
@@ -19331,6 +19409,7 @@
       "name": "墨忒弥斯",
       "description": "老巫师王因不愿死去，而以自己的人性为代价，换取了巫术的不传之秘。现在他以不死人的身份加入了维兹南的军队，只为追求当初许诺给他的黑暗力量。",
       "specialties": [
+        "巫妖",
         "夜鬼哭",
         "腐朽之地",
         "无望之人",
@@ -19339,6 +19418,10 @@
         "黑暗军"
       ],
       "abilities": [
+        {
+          "name": "巫妖",
+          "description": "普通攻击发射灵魂弹幕，并吸收所造成伤害的50%转化为自身生命值。"
+        },
         {
           "name": "夜鬼哭",
           "description": "每隔27秒，墨忒弥斯利用死者痛苦的低语控制3名敌人的心神，使其惊恐逃跑，持续8秒。"
@@ -19481,10 +19564,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_mortemis/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -19522,13 +19605,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_mortemis/templates.lua",
             "symbol": "RT(\"hero_mortemis\"",
-            "line": 20974
+            "line": 472
           }
         ]
       }
@@ -19538,14 +19622,18 @@
       "name": "极狗",
       "description": "这头凶蛮可怕的野兽原本被囚禁在北国冰山，从沉睡中醒来只为向维兹南俯首听命。它会按照主人的号令，毫不容情地粉碎一切敌人。",
       "specialties": [
+        "雪人血",
         "雪球",
         "霜冻吐息",
         "猛击大地",
         "冰川形态",
-        "冰区",
-        "雪人血"
+        "冰区"
       ],
       "abilities": [
+        {
+          "name": "雪人血",
+          "description": "极狗的自愈能力极强，每隔0.2秒恢复6点生命值。"
+        },
         {
           "name": "雪球",
           "description": "每隔10秒，极狗向敌人投掷一块冻结的石头，对60范围内敌人造成160-195点爆炸伤害。"
@@ -19565,10 +19653,6 @@
         {
           "name": "冰区",
           "description": "每隔44秒，极狗制造出一块布满冰雪的区域，沿敌阵路径延伸，对沿途敌人造成275点物理伤害，并使其移动速度降低60%，持续6秒。"
-        },
-        {
-          "name": "雪人血",
-          "description": "极狗的自愈能力极强，每隔0.2秒恢复6点生命值。"
         }
       ],
       "image": "/heroes/hero_jigou.png",
@@ -19688,10 +19772,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_jigou/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -19729,13 +19813,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_jigou/templates.lua",
             "symbol": "RT(\"hero_jigou\"",
-            "line": 21330
+            "line": 423
           }
         ]
       }
@@ -19745,14 +19830,18 @@
       "name": "特拉敏大师",
       "description": "头脑机敏绝伦的特拉敏，曾是好战分子们那些绝妙发明背后的主创，现在俨然已经成为维兹南的部队中最不可或缺的核心人物之一。充裕的研究经费让他得以肆意发挥自己的天赋，而他的成果也完全对得起这笔投入。",
       "specialties": [
+        "火箭跳",
         "自爆机器人",
         "饮硝狂奔",
         "闪光弹",
         "火箭弹幕",
-        "疯狂炸弹人",
-        "火箭跳"
+        "疯狂炸弹人"
       ],
       "abilities": [
+        {
+          "name": "火箭跳",
+          "description": "远距离调遣时，特拉敏驱散特殊效果，并用火箭跳跃快速转移。"
+        },
         {
           "name": "自爆机器人",
           "description": "每隔20秒，向敌人投掷一个自爆机器人，落地后沿路径冲向敌人并自爆，对30范围内敌人造成56-104点爆炸伤害。"
@@ -19772,10 +19861,6 @@
         {
           "name": "疯狂炸弹人",
           "description": "每隔56秒，投下一个能造出炸弹的盒子，放出10颗炸弹沿路径前进，每颗爆炸对敌人造成200点爆炸伤害。"
-        },
-        {
-          "name": "火箭跳",
-          "description": "远距离调遣时，特拉敏驱散特殊效果，并用火箭跳跃快速转移。"
         }
       ],
       "image": "/heroes/hero_tramin.png",
@@ -19899,10 +19984,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_tramin/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -19940,14 +20025,15 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "长距离火箭跳",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_tramin/templates.lua",
             "symbol": "RT(\"hero_tramin\"",
-            "line": 21651
+            "line": 486
           }
         ]
       }
@@ -20107,10 +20193,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_tank/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -20141,13 +20227,14 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_tank/templates.lua",
             "symbol": "RT(\"hero_tank\"",
-            "line": 21955
+            "line": 829
           }
         ]
       }
@@ -20157,14 +20244,22 @@
       "name": "浚湃",
       "description": "很久之前，骄傲自矜的深渊恶魔曾黯然落败，但维兹南的呼唤，给了它们救赎的机会。征服者浚湃自效忠维兹南后，便随时做好了上阵杀敌的准备，屠戮四方，绝不留情。",
       "specialties": [
+        "背水一战",
+        "水花四溅",
         "潮汐",
         "勇气旗帜",
         "那伽之凝视",
-        "水花四溅",
-        "深渊恐怖",
-        "背水一战"
+        "深渊恐怖"
       ],
       "abilities": [
+        {
+          "name": "背水一战",
+          "description": "浚湃的生命值低于80%时，造成的伤害提升50%。"
+        },
+        {
+          "name": "水花四溅",
+          "description": "每隔9秒，浚湃猛击地面制造震荡波，对75范围内的最多8名敌人造成90点法术伤害。"
+        },
         {
           "name": "潮汐",
           "description": "每隔18秒，浚湃掀起一阵怒涛，沿路径奔涌10次，每次造成36点物理伤害，影响45范围内的敌人，并使其眩晕2秒。"
@@ -20178,16 +20273,8 @@
           "description": "每隔22秒，浚湃凝视6名敌人，使其永久沉默，并减速50%，持续7秒。"
         },
         {
-          "name": "水花四溅",
-          "description": "每隔9秒，浚湃猛击地面制造震荡波，对75范围内的最多8名敌人造成90点法术伤害。"
-        },
-        {
           "name": "深渊恐怖",
           "description": "每隔32秒，浚湃召唤深渊恐怖，驻留8秒，每0.2秒对80范围内的敌人造成30点物理伤害。"
-        },
-        {
-          "name": "背水一战",
-          "description": "浚湃的生命值低于80%时，造成的伤害提升50%。"
         }
       ],
       "image": "/heroes/hero_naga.png",
@@ -20307,10 +20394,10 @@
         }
       ],
       "sources": {
-        "template": "kr1/heroes.lua + kr1/data/balance.lua",
-        "roster": "kr1-desktop/data/map_data.lua → hero_data",
+        "template": "kr1/heroes/hero_naga/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
-        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room.lua"
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
       },
       "details": {
         "reviewedVersion": "2.0.8.9",
@@ -20348,14 +20435,2374 @@
         ],
         "items": [],
         "pending": [
+          "新版英雄专属机制尚未完成源码复核",
           "地面寻路",
           "低于八成生命时增伤"
         ],
         "sources": [
           {
-            "file": "kr1/heroes.lua",
+            "file": "kr1/heroes/hero_naga/templates.lua",
             "symbol": "RT(\"hero_naga\"",
-            "line": 22464
+            "line": 551
+          }
+        ]
+      }
+    },
+    {
+      "id": "hero_gerald_kr6",
+      "name": "杰拉尔德",
+      "description": "从卫兹南带来的浩劫中幸存后，杰拉尔德回到过去，肩负起了阻止黑暗巫师染指“艾纳妮之泪”的使命。",
+      "specialties": [
+        "鼓舞勇气",
+        "复仇之盾",
+        "命运幸存者",
+        "百炼精钢",
+        "战斗活力",
+        "神圣之刃"
+      ],
+      "abilities": [
+        {
+          "name": "鼓舞勇气",
+          "description": "每隔15秒，杰拉尔德鼓舞105范围内的友军，使其护甲与魔法抗性提升40%，持续10秒。"
+        },
+        {
+          "name": "复仇之盾",
+          "description": "每隔20秒，杰拉尔德获得一面护盾，提升40%护甲与魔法抗性，持续12秒，并将受到近战伤害的150%反射给攻击者。"
+        },
+        {
+          "name": "命运幸存者",
+          "description": "每隔40秒，杰拉尔德在受到致命伤害时扭转死亡，恢复100%最大生命值，并将攻击者传送回后方。"
+        },
+        {
+          "name": "百炼精钢",
+          "description": "杰拉尔德有35%的概率格挡近战攻击。"
+        },
+        {
+          "name": "战斗活力",
+          "description": "杰拉尔德每秒恢复3%最大生命值。"
+        },
+        {
+          "name": "神圣之刃",
+          "description": "每隔25秒，杰拉尔德对目标造成600点真实伤害，并眩晕目标1秒；目标周围50范围内的敌人受到305点真实伤害并被眩晕。"
+        }
+      ],
+      "image": "/heroes/hero_gerald_kr6.png",
+      "thumbnail": "/heroes/thumbs/hero_gerald_kr6.png",
+      "sourceGame": 6,
+      "availableLevel": 201,
+      "startingLevel": 1,
+      "profileStats": [
+        7,
+        5,
+        4,
+        4
+      ],
+      "maxStats": {
+        "hp": 608,
+        "armor": 0.5,
+        "magicArmor": null,
+        "meleeDamageMin": 38,
+        "meleeDamageMax": 53,
+        "rangedDamageMin": null,
+        "rangedDamageMax": null
+      },
+      "skills": [
+        {
+          "id": "battle_vigor",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "divine_blade",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "hardened_steel",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "inspire_courage",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 2,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 5,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 8,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "shield_of_retribution",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 3,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 6,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 9,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "fated_survivor",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 4,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 7,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 10,
+              "skillLevel": 3
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/heroes/hero_gerald_kr6/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
+      },
+      "details": {
+        "reviewedVersion": "2.0.8.9",
+        "movement": {
+          "label": "移动机制待核实",
+          "tags": [],
+          "baseSpeed": 65,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1.67,
+            "range": 60,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [],
+        "pending": [
+          "新版英雄专属机制尚未完成源码复核",
+          "地面寻路"
+        ],
+        "sources": [
+          {
+            "file": "kr1/heroes/hero_gerald_kr6/templates.lua",
+            "symbol": "RT(\"hero_gerald_kr6\"",
+            "line": 469
+          }
+        ]
+      }
+    },
+    {
+      "id": "hero_zefira",
+      "name": "泽菲拉",
+      "description": "魔力的掌控，对她已如呼吸一般稀松平常。泽菲拉渴求更高境界的挑战，于是离开学院，与杰拉尔德一同踏上了旅途。",
+      "specialties": [
+        "眩光之锤",
+        "护身剑阵",
+        "星界闪现",
+        "削弱光环",
+        "法术精通",
+        "魔能长矛"
+      ],
+      "abilities": [
+        {
+          "name": "眩光之锤",
+          "description": "每隔10秒，泽菲拉以魔能之锤重击敌人，对55范围内的敌人造成127-167点法术伤害，并眩晕1秒。"
+        },
+        {
+          "name": "护身剑阵",
+          "description": "每隔18秒，泽菲拉在近战接敌时召唤环绕剑阵，提升自身30%护甲与魔法抗性，持续6秒，并对周围敌人造成共96点魔法伤害，同时使其减速25%。"
+        },
+        {
+          "name": "星界闪现",
+          "description": "长距离移动时，泽菲拉会传送至目标位置，并获得80%伤害增益，持续8秒。"
+        },
+        {
+          "name": "削弱光环",
+          "description": "泽菲拉周围75范围内的敌人护甲与魔法抗性降低30%。"
+        },
+        {
+          "name": "法术精通",
+          "description": "泽菲拉的近战普通攻击有20%的概率造成双倍伤害。"
+        },
+        {
+          "name": "魔能长矛",
+          "description": "每隔30秒，泽菲拉召来21支魔能长矛，沿道路造成总计1050点魔法伤害。"
+        }
+      ],
+      "image": "/heroes/hero_zefira.png",
+      "thumbnail": "/heroes/thumbs/hero_zefira.png",
+      "sourceGame": 6,
+      "availableLevel": 202,
+      "startingLevel": 1,
+      "profileStats": [
+        6,
+        5,
+        7,
+        4
+      ],
+      "maxStats": {
+        "hp": 406,
+        "armor": 0.2,
+        "magicArmor": null,
+        "meleeDamageMin": 23,
+        "meleeDamageMax": 58,
+        "rangedDamageMin": 21,
+        "rangedDamageMax": 52
+      },
+      "skills": [
+        {
+          "id": "talent_1",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "talent_2",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 1,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 4,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 7,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_a",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 2,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 5,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 8,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 3,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 6,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 9,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "ultimate",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 5,
+              "skillLevel": 1
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/heroes/hero_zefira/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
+      },
+      "details": {
+        "reviewedVersion": "2.0.8.9",
+        "movement": {
+          "label": "移动机制待核实",
+          "tags": [],
+          "baseSpeed": 120,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1.2,
+            "range": 72,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 1.2,
+            "range": 150,
+            "minRange": 70,
+            "disabled": false
+          }
+        ],
+        "items": [],
+        "pending": [
+          "新版英雄专属机制尚未完成源码复核",
+          "远距离传送",
+          "变形移动",
+          "地面寻路"
+        ],
+        "sources": [
+          {
+            "file": "kr1/heroes/hero_zefira/templates.lua",
+            "symbol": "RT(\"hero_zefira\"",
+            "line": 532
+          }
+        ]
+      }
+    },
+    {
+      "id": "hero_bolin_kr6",
+      "name": "博林",
+      "description": "“博林·火炮杀手”——他原是西部防壁警备队的领袖，然而在兽人部队的入侵下城墙已遭到突破，他只得加入杰拉尔德的部队，一同击退绿皮怪物所带来的威胁。",
+      "specialties": [
+        "烟雾迫击炮",
+        "地雷阵",
+        "巨人杀手",
+        "穿透弹",
+        "爆裂弹",
+        "火力压制"
+      ],
+      "abilities": [
+        {
+          "name": "烟雾迫击炮",
+          "description": "每隔16秒，博林向200-300范围内的敌人发射3枚迫击炮弹，每枚对区域内敌人造成26-35点爆炸伤害，并留下持续4秒的烟雾，使烟雾中的敌人减速40%。"
+        },
+        {
+          "name": "地雷阵",
+          "description": "每隔6秒，博林在自身周围布设一枚地雷。地雷会持续存在，直到敌人靠近时引爆，对范围内敌人造成32-48点爆炸伤害。最多可同时存在8枚地雷。"
+        },
+        {
+          "name": "巨人杀手",
+          "description": "博林的普通攻击额外造成相当于目标最大生命值3%的伤害。对Boss的效果会减弱。"
+        },
+        {
+          "name": "穿透弹",
+          "description": "博林的普通攻击会无视敌人25%的护甲。"
+        },
+        {
+          "name": "爆裂弹",
+          "description": "每隔5次射击，博林的下一发子弹会对范围内敌人造成32-48点爆炸伤害，范围为50。"
+        },
+        {
+          "name": "火力压制",
+          "description": "每隔35秒，当附近有至少3名敌人，或存在生命值不低于500的敌人时，博林会向200范围内的敌人连续射击8发。"
+        }
+      ],
+      "image": "/heroes/hero_bolin_kr6.png",
+      "thumbnail": "/heroes/thumbs/hero_bolin_kr6.png",
+      "sourceGame": 6,
+      "availableLevel": 204,
+      "startingLevel": 1,
+      "profileStats": [
+        4,
+        4,
+        8,
+        2
+      ],
+      "maxStats": {
+        "hp": 348,
+        "armor": 0.15,
+        "magicArmor": null,
+        "meleeDamageMin": 21,
+        "meleeDamageMax": 30,
+        "rangedDamageMin": 50,
+        "rangedDamageMax": 76
+      },
+      "skills": [
+        {
+          "id": "talent_1",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "talent_2",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "skill_a",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 2,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 5,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 8,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 3,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 6,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 9,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 4,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 7,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 10,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "ultimate",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 5,
+              "skillLevel": 1
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/heroes/hero_bolin_kr6/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
+      },
+      "details": {
+        "reviewedVersion": "2.0.8.9",
+        "movement": {
+          "label": "移动机制待核实",
+          "tags": [],
+          "baseSpeed": 75,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 40,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 2.75,
+            "range": 200,
+            "minRange": 70,
+            "disabled": false
+          }
+        ],
+        "items": [],
+        "pending": [
+          "新版英雄专属机制尚未完成源码复核",
+          "地面寻路"
+        ],
+        "sources": [
+          {
+            "file": "kr1/heroes/hero_bolin_kr6/templates.lua",
+            "symbol": "RT(\"hero_bolin_kr6\"",
+            "line": 1068
+          }
+        ]
+      }
+    },
+    {
+      "id": "hero_connor",
+      "name": "康纳",
+      "description": "自幼失去双亲的康纳加入了圣殿骑士团，并很快以无所畏惧的勇士之姿崭露头角。“就算生来一无所有，活着就是要赢得一切”是他奉行的信条。",
+      "specialties": [
+        "动脉斩击",
+        "复仇反击",
+        "裂地斩",
+        "为战而生",
+        "圣杯",
+        "圣殿狂怒"
+      ],
+      "abilities": [
+        {
+          "name": "动脉斩击",
+          "description": "每隔16秒，康纳挥舞长剑，对170范围内的敌人造成120-183点物理伤害，并在8秒内额外造成32点真实伤害。"
+        },
+        {
+          "name": "复仇反击",
+          "description": "每隔25秒，在格挡状态下康纳会格挡下一次敌人的近战攻击并反击，造成226-336点物理伤害。"
+        },
+        {
+          "name": "裂地斩",
+          "description": "每隔22秒，康纳巨剑斩裂大地，在地面产生8道裂隙，每道裂隙对敌人造成172-249点物理伤害。"
+        },
+        {
+          "name": "为战而生",
+          "description": "当康纳的生命值低于最大生命值的40%时，他的技能伤害提升40%。"
+        },
+        {
+          "name": "圣杯",
+          "description": "每隔180秒，康纳在阵亡时可以100%的总生命值复活。"
+        },
+        {
+          "name": "圣殿狂怒",
+          "description": "每隔30秒，当生命值低于80%时，康纳大力怒吼，使周围的敌人眩晕1秒，并且自身获得42.86%攻击速度、100%攻击伤害、30%移动速度，持续10秒。"
+        }
+      ],
+      "image": "/heroes/hero_connor.png",
+      "thumbnail": "/heroes/thumbs/hero_connor.png",
+      "sourceGame": 6,
+      "availableLevel": 208,
+      "startingLevel": 1,
+      "profileStats": [
+        5,
+        3,
+        5,
+        5
+      ],
+      "maxStats": {
+        "hp": 713,
+        "armor": 0.25,
+        "magicArmor": null,
+        "meleeDamageMin": 55,
+        "meleeDamageMax": 80,
+        "rangedDamageMin": null,
+        "rangedDamageMax": null
+      },
+      "skills": [
+        {
+          "id": "talent_1",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "talent_2",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "skill_a",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 2,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 5,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 8,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 3,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 6,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 9,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 4,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 7,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 10,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "ultimate",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 5,
+              "skillLevel": 1
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/heroes/hero_connor/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
+      },
+      "details": {
+        "reviewedVersion": "2.0.8.9",
+        "movement": {
+          "label": "移动机制待核实",
+          "tags": [],
+          "baseSpeed": 87.5,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": null,
+            "range": 78,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [],
+        "pending": [
+          "新版英雄专属机制尚未完成源码复核",
+          "地面寻路"
+        ],
+        "sources": [
+          {
+            "file": "kr1/heroes/hero_connor/templates.lua",
+            "symbol": "RT(\"hero_connor\"",
+            "line": 712
+          }
+        ]
+      }
+    },
+    {
+      "id": "hero_myriath",
+      "name": "杰米娜",
+      "description": "凭借对奥术力量的掌控，杰米娜能制造出魔能幻象，同时与多名敌人交战，这使她成为一名令人生畏的对手。",
+      "specialties": [
+        "幻象冲刺",
+        "守护替身",
+        "镜像斩击",
+        "实体之光",
+        "最终幻象",
+        "幻象军团"
+      ],
+      "abilities": [
+        {
+          "name": "幻象冲刺",
+          "description": "每隔6秒，创造幻象冲向一名敌人，造成52-78点法术伤害，并阻挡其行进。"
+        },
+        {
+          "name": "守护替身",
+          "description": "每隔10秒，杰米娜回避敌人的攻击，并留下幻象继续与敌人战斗。"
+        },
+        {
+          "name": "镜像斩击",
+          "description": "杰米娜与所有战斗中的幻象同时斩击当前所阻挡的敌人，各自造成60-108点法术伤害。"
+        },
+        {
+          "name": "实体之光",
+          "description": "杰米娜幻象的最大生命值提升25点，持续时间延长2秒。"
+        },
+        {
+          "name": "最终幻象",
+          "description": "杰米娜的幻象在死亡时会爆炸，对范围内敌人造成70-105点法术伤害。"
+        },
+        {
+          "name": "幻象军团",
+          "description": "杰米娜释放成群的幻象沿道路冲锋，对接触的敌人造成87-130点法术伤害，并生成至多3名幻象。"
+        }
+      ],
+      "image": "/heroes/hero_myriath.png",
+      "thumbnail": "/heroes/thumbs/hero_myriath.png",
+      "sourceGame": 6,
+      "availableLevel": 206,
+      "startingLevel": 1,
+      "profileStats": [
+        2,
+        0,
+        5,
+        6
+      ],
+      "maxStats": {
+        "hp": 379,
+        "armor": 0,
+        "magicArmor": null,
+        "meleeDamageMin": 41,
+        "meleeDamageMax": 61,
+        "rangedDamageMin": 41,
+        "rangedDamageMax": 61
+      },
+      "skills": [
+        {
+          "id": "talent_1",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "talent_2",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "skill_a",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 2,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 5,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 8,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 3,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 6,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 9,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 4,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 7,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 10,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "ultimate",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 5,
+              "skillLevel": 1
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/heroes/hero_myriath/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
+      },
+      "details": {
+        "reviewedVersion": "2.0.8.9",
+        "movement": {
+          "label": "移动机制待核实",
+          "tags": [],
+          "baseSpeed": 112.5,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1.5,
+            "range": 60,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 1.5,
+            "range": 125,
+            "minRange": 70,
+            "disabled": false
+          }
+        ],
+        "items": [],
+        "pending": [
+          "新版英雄专属机制尚未完成源码复核",
+          "地面寻路"
+        ],
+        "sources": [
+          {
+            "file": "kr1/heroes/hero_myriath/templates.lua",
+            "symbol": "RT(\"hero_myriath\"",
+            "line": 1038
+          }
+        ]
+      }
+    },
+    {
+      "id": "hero_malik_kr6",
+      "name": "马利克",
+      "description": "马利克曾是血石矿场的一名奴隶。为了报答使他获得自由的恩情，他来到利尼维亚，尽一己之力为恩人而战。至于他最终如何在战锤要塞找到自己真正的归宿，那又是另外一段故事了。",
+      "specialties": [
+        "坚不可摧",
+        "地震",
+        "毁灭重锤",
+        "击敌锤",
+        "孤狼战士",
+        "战锤旋风"
+      ],
+      "abilities": [
+        {
+          "name": "坚不可摧",
+          "description": "每隔18秒，马利克获得一层生命护盾，数值相当于他当前阻挡敌人最大生命值的50%，持续6秒。"
+        },
+        {
+          "name": "地震",
+          "description": "每隔20秒，马利克跃起砸击地面，对120范围内的敌人造成102-148点物理伤害，并使其眩晕7秒。"
+        },
+        {
+          "name": "毁灭重锤",
+          "description": "每隔40秒，马利克短暂蓄力后挥动战锤，将当前阻挡的敌人击飞至地图之外（目标最大生命值不超过1500）。"
+        },
+        {
+          "name": "击敌锤",
+          "description": "马利克的普通攻击会对70范围内的所有敌人造成伤害。"
+        },
+        {
+          "name": "孤狼战士",
+          "description": "当周围150范围内没有友方单位时，马利克造成的伤害提高25%。"
+        },
+        {
+          "name": "战锤旋风",
+          "description": "每隔28秒，马利克高速旋转5秒，对周围敌人造成总计340-490点物理伤害，并使其减速40%。"
+        }
+      ],
+      "image": "/heroes/hero_malik_kr6.png",
+      "thumbnail": "/heroes/thumbs/hero_malik_kr6.png",
+      "sourceGame": 6,
+      "availableLevel": 203,
+      "startingLevel": 1,
+      "profileStats": [
+        9,
+        0,
+        3,
+        5.5
+      ],
+      "maxStats": {
+        "hp": 883,
+        "armor": 0,
+        "magicArmor": null,
+        "meleeDamageMin": 39,
+        "meleeDamageMax": 60,
+        "rangedDamageMin": null,
+        "rangedDamageMax": null
+      },
+      "skills": [
+        {
+          "id": "talent_1",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "talent_2",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "skill_a",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 2,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 5,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 8,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 3,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 6,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 9,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 4,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 7,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 10,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "ultimate",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 5,
+              "skillLevel": 1
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/heroes/hero_malik_kr6/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
+      },
+      "details": {
+        "reviewedVersion": "2.0.8.9",
+        "movement": {
+          "label": "移动机制待核实",
+          "tags": [],
+          "baseSpeed": 75,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1.5,
+            "range": 78,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [],
+        "pending": [
+          "新版英雄专属机制尚未完成源码复核",
+          "地面寻路"
+        ],
+        "sources": [
+          {
+            "file": "kr1/heroes/hero_malik_kr6/templates.lua",
+            "symbol": "RT(\"hero_malik_kr6\"",
+            "line": 769
+          }
+        ]
+      }
+    },
+    {
+      "id": "hero_rhodes",
+      "name": "罗德",
+      "description": "起初，罗德只是一个普通的土元素。然而，在暴云寺院的术士们所做的魔法实验中，嵌在他胸口的“烈阳宝石”赋予了他自我意识，并使他获得了守护众人的能力。",
+      "specialties": [
+        "日光射线",
+        "坚硬外壳",
+        "回旋冲击",
+        "不动如山",
+        "势不可挡",
+        "太阳耀斑"
+      ],
+      "abilities": [
+        {
+          "name": "日光射线",
+          "description": "每隔8秒，罗德从胸前的宝石射出一道光束，对一名敌人造成114-174点真实伤害。"
+        },
+        {
+          "name": "坚硬外壳",
+          "description": "每隔22秒，当罗德生命值低于30%或持续格挡5秒时，罗德恢复95%自身总生命值，且提升50%护甲，持续6秒。"
+        },
+        {
+          "name": "回旋冲击",
+          "description": "每隔16秒，罗德将自身化为陀螺沿道路冲锋，对75范围内的敌人造成33-53点物理伤害，并使其减速30%，持续4秒。"
+        },
+        {
+          "name": "不动如山",
+          "description": "当生命值高于75%时，罗德获得20%额外护甲。"
+        },
+        {
+          "name": "势不可挡",
+          "description": "罗德不再受到眩晕与减速效果影响。"
+        },
+        {
+          "name": "太阳耀斑",
+          "description": "每隔35秒，罗德释放一道强大的阳能射线沿道路推进，对命中的每名敌人每0.25秒造成84-122点真实伤害，并使其减速50%，持续1秒。"
+        }
+      ],
+      "image": "/heroes/hero_rhodes.png",
+      "thumbnail": "/heroes/thumbs/hero_rhodes.png",
+      "sourceGame": 6,
+      "availableLevel": 213,
+      "startingLevel": 1,
+      "profileStats": [
+        7,
+        5,
+        3,
+        5.5
+      ],
+      "maxStats": {
+        "hp": 1055,
+        "armor": 0.5,
+        "magicArmor": null,
+        "meleeDamageMin": 51,
+        "meleeDamageMax": 75,
+        "rangedDamageMin": null,
+        "rangedDamageMax": null
+      },
+      "skills": [
+        {
+          "id": "talent_1",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "talent_2",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "skill_a",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 2,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 5,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 8,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 3,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 6,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 9,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 4,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 7,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 10,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "ultimate",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 5,
+              "skillLevel": 1
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/heroes/hero_rhodes/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
+      },
+      "details": {
+        "reviewedVersion": "2.0.8.9",
+        "movement": {
+          "label": "移动机制待核实",
+          "tags": [],
+          "baseSpeed": 40,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1.5,
+            "range": 93.6,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [],
+        "pending": [
+          "新版英雄专属机制尚未完成源码复核",
+          "地面寻路"
+        ],
+        "sources": [
+          {
+            "file": "kr1/heroes/hero_rhodes/templates.lua",
+            "symbol": "RT(\"hero_rhodes\"",
+            "line": 976
+          }
+        ]
+      }
+    },
+    {
+      "id": "hero_ashbite",
+      "name": "阿什比特",
+      "description": "在上一次征程结束后，红龙阿什比特已与迪纳斯王子及其部下结下情谊，跟随他们从南方来到了北方，就此效忠于利尼维亚王室。",
+      "specialties": [
+        "炽热吐息",
+        "灼热喷嚏",
+        "开饭时间",
+        "红焰",
+        "熔融之怒",
+        "野火弹幕"
+      ],
+      "abilities": [
+        {
+          "name": "炽热吐息",
+          "description": "每隔16秒，阿什比特喷吐出锥状火焰，每0.25秒对范围内敌人造成9-12点真实伤害，持续2秒。"
+        },
+        {
+          "name": "灼热喷嚏",
+          "description": "每隔20秒，阿什比特打出喷嚏，使敌人眩晕4秒，并留下余烬，在8秒内造成128点真实伤害。"
+        },
+        {
+          "name": "开饭时间",
+          "description": "每隔30秒，阿什比特降落至地面战斗8秒，每下撕咬造成80-120点物理伤害。若以此击杀敌人，恢复自身40%的总生命值。移动时取消技能。"
+        },
+        {
+          "name": "红焰",
+          "description": "阿什比特的普通攻击也会使敌人燃烧，在4秒内造成32点真实伤害。"
+        },
+        {
+          "name": "熔融之怒",
+          "description": "因阿什比特的能力受到燃烧的敌人，每秒降低1%的护甲。"
+        },
+        {
+          "name": "野火弹幕",
+          "description": "每隔35秒，阿什比特朝道路喷出3颗火焰弹，每颗对70范围内的敌人造成64-96点范围真实伤害。"
+        }
+      ],
+      "image": "/heroes/hero_ashbite.png",
+      "thumbnail": "/heroes/thumbs/hero_ashbite.png",
+      "sourceGame": 6,
+      "availableLevel": 212,
+      "startingLevel": 1,
+      "profileStats": [
+        10,
+        3,
+        10,
+        4
+      ],
+      "maxStats": {
+        "hp": 500,
+        "armor": 0.23,
+        "magicArmor": null,
+        "meleeDamageMin": null,
+        "meleeDamageMax": null,
+        "rangedDamageMin": 48,
+        "rangedDamageMax": 72
+      },
+      "skills": [
+        {
+          "id": "talent_1",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "talent_2",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "skill_a",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 2,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 5,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 8,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 3,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 6,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 9,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 4,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 7,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 10,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "ultimate",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 5,
+              "skillLevel": 1
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/heroes/hero_ashbite/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
+      },
+      "details": {
+        "reviewedVersion": "2.0.8.9",
+        "movement": {
+          "label": "移动机制待核实",
+          "tags": [],
+          "baseSpeed": 150,
+          "terrain": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 2,
+            "range": 120,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 2,
+            "range": 220,
+            "minRange": 50,
+            "disabled": false
+          }
+        ],
+        "items": [],
+        "pending": [
+          "新版英雄专属机制尚未完成源码复核",
+          "常驻飞行单位"
+        ],
+        "sources": [
+          {
+            "file": "kr1/heroes/hero_ashbite/templates.lua",
+            "symbol": "RT(\"hero_ashbite\"",
+            "line": 845
+          }
+        ]
+      }
+    },
+    {
+      "id": "hero_drakkan",
+      "name": "德拉坎",
+      "description": "德拉坎，阿坎尼亚城的守护者，法师们用纯粹奥术能量制成的活体兵器。他唯一的使命就是阻止卫兹南大军的入侵。",
+      "specialties": [
+        "灭能脉冲",
+        "魔能解构",
+        "双重魔龙",
+        "相位跃迁",
+        "奥术亲和",
+        "奥术风暴"
+      ],
+      "abilities": [
+        {
+          "name": "灭能脉冲",
+          "description": "每隔15秒，德拉坎向目标区域发射一道能量波，在1.5秒内造成78-114点魔法伤害，并沉默敌人12秒。"
+        },
+        {
+          "name": "魔能解构",
+          "description": "每隔18秒，德拉坎俯冲至地面并引发爆炸，对90范围内的敌人造成86-120点魔法伤害。"
+        },
+        {
+          "name": "双重魔龙",
+          "description": "每隔28秒，德拉坎创造一个魔能分身，为他战斗16秒。"
+        },
+        {
+          "name": "相位跃迁",
+          "description": "在长距离移动时，德拉坎会传送到目的地。"
+        },
+        {
+          "name": "奥术亲和",
+          "description": "德拉坎的技能冷却时间缩短20%。"
+        },
+        {
+          "name": "奥术风暴",
+          "description": "每隔40秒，德拉坎召唤7颗魔法陨石。每颗陨石对70范围内的敌人造成42-63点魔法伤害。"
+        }
+      ],
+      "image": "/heroes/hero_drakkan.png",
+      "thumbnail": "/heroes/thumbs/hero_drakkan.png",
+      "sourceGame": 6,
+      "availableLevel": 218,
+      "startingLevel": 1,
+      "profileStats": [
+        9,
+        2,
+        8,
+        4
+      ],
+      "maxStats": {
+        "hp": 478,
+        "armor": 0.18,
+        "magicArmor": null,
+        "meleeDamageMin": 11,
+        "meleeDamageMax": 11,
+        "rangedDamageMin": 44,
+        "rangedDamageMax": 65
+      },
+      "skills": [
+        {
+          "id": "talent_1",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "talent_2",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "skill_a",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 2,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 5,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 8,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 3,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 6,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 9,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 4,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 7,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 10,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "ultimate",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 5,
+              "skillLevel": 1
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/heroes/hero_drakkan/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
+      },
+      "details": {
+        "reviewedVersion": "2.0.8.9",
+        "movement": {
+          "label": "移动机制待核实",
+          "tags": [],
+          "baseSpeed": 105,
+          "terrain": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "水面",
+            "悬崖",
+            "不可步行区域",
+            "浅水",
+            "精灵地形",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": null,
+            "range": null,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 2,
+            "range": 220,
+            "minRange": 50,
+            "disabled": false
+          }
+        ],
+        "items": [],
+        "pending": [
+          "新版英雄专属机制尚未完成源码复核",
+          "远距离传送",
+          "常驻飞行单位"
+        ],
+        "sources": [
+          {
+            "file": "kr1/heroes/hero_drakkan/templates.lua",
+            "symbol": "RT(\"hero_drakkan\"",
+            "line": 748
+          }
+        ]
+      }
+    },
+    {
+      "id": "hero_ignus_kr6",
+      "name": "伊格纳斯",
+      "description": "掌控火焰魔法绝非易事，因为它危险而不稳定。伊格纳斯并未因此退缩，反而潜心钻研，直至自己成为火焰的化身。",
+      "specialties": [
+        "火球术",
+        "热浪",
+        "烈焰突袭",
+        "熔火核心",
+        "逆熵",
+        "超新星"
+      ],
+      "abilities": [
+        {
+          "name": "火球术",
+          "description": "每隔10秒，伊格纳斯向120范围内的敌人投掷火球，造成189-282点真实伤害。"
+        },
+        {
+          "name": "热浪",
+          "description": "每隔18秒，当附近有至少3名敌人时，伊格纳斯释放火焰爆炸，对100范围内的敌人造成165-312点真实伤害。"
+        },
+        {
+          "name": "烈焰突袭",
+          "description": "每隔15秒，伊格纳斯在至多3名敌人之间猛撞，对每个目标造成226-340点真实伤害。"
+        },
+        {
+          "name": "熔火核心",
+          "description": "伊格纳斯每秒对50范围内的敌人造成12点真实伤害。"
+        },
+        {
+          "name": "逆熵",
+          "description": "每当伊格纳斯施放任一技能时，恢复自身28%的总生命值。"
+        },
+        {
+          "name": "超新星",
+          "description": "每隔30秒，伊格纳斯高速飞行3秒，制造火焰龙卷，每隔0.25秒对80范围内的敌人造成38-58点真实伤害。"
+        }
+      ],
+      "image": "/heroes/hero_ignus_kr6.png",
+      "thumbnail": "/heroes/thumbs/hero_ignus_kr6.png",
+      "sourceGame": 6,
+      "availableLevel": 211,
+      "startingLevel": 1,
+      "profileStats": [
+        2,
+        0,
+        7,
+        8
+      ],
+      "maxStats": {
+        "hp": 651,
+        "armor": 0,
+        "magicArmor": null,
+        "meleeDamageMin": 16,
+        "meleeDamageMax": 21,
+        "rangedDamageMin": null,
+        "rangedDamageMax": null
+      },
+      "skills": [
+        {
+          "id": "talent_1",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "talent_2",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "skill_a",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 2,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 5,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 8,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 3,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 6,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 9,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 4,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 7,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 10,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "ultimate",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 5,
+              "skillLevel": 1
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/heroes/hero_ignus_kr6/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
+      },
+      "details": {
+        "reviewedVersion": "2.0.8.9",
+        "movement": {
+          "label": "移动机制待核实",
+          "tags": [],
+          "baseSpeed": 87.5,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 0,
+            "range": 78,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [],
+        "pending": [
+          "新版英雄专属机制尚未完成源码复核",
+          "地面寻路"
+        ],
+        "sources": [
+          {
+            "file": "kr1/heroes/hero_ignus_kr6/templates.lua",
+            "symbol": "RT(\"hero_ignus_kr6\"",
+            "line": 834
+          }
+        ]
+      }
+    },
+    {
+      "id": "hero_oni_kr6",
+      "name": "鬼侍",
+      "description": "来自冥界，形若厉鬼的武者。对恶魔恨之入骨的鬼侍，不仅决心追至天涯海角也要将恶魔赶尽杀绝，更势必要阻止恶魔与卫兹南间缔下进一步的契约。",
+      "specialties": [
+        "灭魂斩",
+        "冥界专注",
+        "瞬狱闪",
+        "二段剑斩",
+        "对决恶鬼",
+        "千本刃"
+      ],
+      "abilities": [
+        {
+          "name": "灭魂斩",
+          "description": "每隔24秒，鬼侍将力量凝聚于刀刃之中，猛烈劈向一名敌人造成643-670点真实伤害。"
+        },
+        {
+          "name": "冥界专注",
+          "description": "当生命值低于50%时，鬼侍可切换为防御姿态，在3秒内恢复自身144%的生命值。"
+        },
+        {
+          "name": "瞬狱闪",
+          "description": "每隔18秒，鬼侍传送至周围最强大的敌人身旁施展三连斩击，每一击造成173-263点物理伤害，并永久降低目标10%的护甲。"
+        },
+        {
+          "name": "二段剑斩",
+          "description": "在施展任一技能后，鬼侍的下一次普通攻击会造成100%额外伤害。"
+        },
+        {
+          "name": "对决恶鬼",
+          "description": "在持续与同一名敌人交战期间，鬼侍可恢复造成攻击伤害50%的生命值。"
+        },
+        {
+          "name": "千本刃",
+          "description": "每隔38秒，鬼侍将武士刀刺入地面，召唤无数阵亡战士的兵刃，对范围内的敌人造成436-490点真实伤害。"
+        }
+      ],
+      "image": "/heroes/hero_oni_kr6.png",
+      "thumbnail": "/heroes/thumbs/hero_oni_kr6.png",
+      "sourceGame": 6,
+      "availableLevel": 218,
+      "startingLevel": 1,
+      "profileStats": [
+        4,
+        3.5,
+        8,
+        3.5
+      ],
+      "maxStats": {
+        "hp": 781,
+        "armor": 0.37,
+        "magicArmor": null,
+        "meleeDamageMin": 50,
+        "meleeDamageMax": 74,
+        "rangedDamageMin": null,
+        "rangedDamageMax": null
+      },
+      "skills": [
+        {
+          "id": "talent_1",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "talent_2",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "skill_a",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 2,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 5,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 8,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 3,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 6,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 9,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 4,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 7,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 10,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "ultimate",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 5,
+              "skillLevel": 1
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/heroes/hero_oni_kr6/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
+      },
+      "details": {
+        "reviewedVersion": "2.0.8.9",
+        "movement": {
+          "label": "移动机制待核实",
+          "tags": [],
+          "baseSpeed": 87.5,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 2,
+            "range": 60,
+            "minRange": null,
+            "disabled": false
+          }
+        ],
+        "items": [],
+        "pending": [
+          "新版英雄专属机制尚未完成源码复核",
+          "地面寻路"
+        ],
+        "sources": [
+          {
+            "file": "kr1/heroes/hero_oni_kr6/templates.lua",
+            "symbol": "RT(\"hero_oni_kr6\"",
+            "line": 604
+          }
+        ]
+      }
+    },
+    {
+      "id": "hero_illiana",
+      "name": "伊莉安娜",
+      "description": "为了实现绘制世界地图的梦想，伊莉安娜带着她的龙伙伴“斯帕奇”，跟随艾莉瑞雅跨越海洋，来到新大陆，展开了冒险。",
+      "specialties": [
+        "捉到了！",
+        "闪光爆弹",
+        "轻松到手",
+        "精灵敏捷",
+        "欢乐飞行",
+        "斯帕奇，使出燃尽！"
+      ],
+      "abilities": [
+        {
+          "name": "捉到了！",
+          "description": "每隔12秒，斯帕奇吐出一团火球，最多在敌人间弹射2次，造成75-105点真实伤害，并使被标记的敌人护甲降低25%。"
+        },
+        {
+          "name": "闪光爆弹",
+          "description": "每隔15秒，伊莉安娜发射一枚闪光爆弹，眩晕100范围内的敌人6秒。"
+        },
+        {
+          "name": "轻松到手",
+          "description": "每隔12秒，斯帕奇俯冲向165范围内一名受到眩晕或定身的敌人，对其造成92-134点物理伤害。"
+        },
+        {
+          "name": "精灵敏捷",
+          "description": "伊莉安娜有40%的概率闪避敌人的近战攻击。"
+        },
+        {
+          "name": "欢乐飞行",
+          "description": "在飞行时，伊莉安娜的攻击造成100%的额外伤害。"
+        },
+        {
+          "name": "斯帕奇，使出燃尽！",
+          "description": "每隔35秒，斯帕奇向道路喷吐出妖精火焰，对命中的敌人造成55-85点真实伤害，并在原地留下持续3秒的燃烧地表，每秒造成12-20点真实伤害。"
+        }
+      ],
+      "image": "/heroes/hero_illiana.png",
+      "thumbnail": "/heroes/thumbs/hero_illiana.png",
+      "sourceGame": 6,
+      "availableLevel": 205,
+      "startingLevel": 1,
+      "profileStats": [
+        4,
+        6,
+        5,
+        3
+      ],
+      "maxStats": {
+        "hp": 230,
+        "armor": 0,
+        "magicArmor": null,
+        "meleeDamageMin": 10,
+        "meleeDamageMax": 16,
+        "rangedDamageMin": 16,
+        "rangedDamageMax": 31
+      },
+      "skills": [
+        {
+          "id": "talent_1",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "talent_2",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 0,
+              "skillLevel": 1
+            }
+          ]
+        },
+        {
+          "id": "skill_a",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 2,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 5,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 8,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_b",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 3,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 6,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 9,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "skill_c",
+          "maxLevel": 3,
+          "unlockLevels": [
+            {
+              "heroLevel": 4,
+              "skillLevel": 1
+            },
+            {
+              "heroLevel": 7,
+              "skillLevel": 2
+            },
+            {
+              "heroLevel": 10,
+              "skillLevel": 3
+            }
+          ]
+        },
+        {
+          "id": "ultimate",
+          "maxLevel": 1,
+          "unlockLevels": [
+            {
+              "heroLevel": 5,
+              "skillLevel": 1
+            }
+          ]
+        }
+      ],
+      "sources": {
+        "template": "kr1/heroes/hero_illiana/templates.lua",
+        "roster": "kr1/heroes/registry.lua → declarations",
+        "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
+        "portrait": "_assets/kr1-desktop/images/fullhd/hero_room"
+      },
+      "details": {
+        "reviewedVersion": "2.0.8.9",
+        "movement": {
+          "label": "移动机制待核实",
+          "tags": [],
+          "baseSpeed": 70,
+          "terrain": [
+            "陆地",
+            "冰面"
+          ],
+          "destinations": [
+            "陆地",
+            "冰面"
+          ]
+        },
+        "respawnSeconds": 15,
+        "regenInterval": 1,
+        "regenHitDelay": 1,
+        "attacks": [
+          {
+            "kind": "近战",
+            "cooldown": 1,
+            "range": 60,
+            "minRange": null,
+            "disabled": false
+          },
+          {
+            "kind": "远程",
+            "cooldown": 1,
+            "range": 165,
+            "minRange": 70,
+            "disabled": false
+          }
+        ],
+        "items": [],
+        "pending": [
+          "新版英雄专属机制尚未完成源码复核",
+          "远距离传送",
+          "变形移动",
+          "地面寻路"
+        ],
+        "sources": [
+          {
+            "file": "kr1/heroes/hero_illiana/templates.lua",
+            "symbol": "RT(\"hero_illiana\"",
+            "line": 1883
           }
         ]
       }
@@ -103768,9 +106215,10 @@
       "towerType": "crossbows",
       "canBeBuffed": true,
       "unlock": {
-        "status": "missing",
-        "label": "游戏数据未配置解锁关卡（初始为锁定）",
-        "source": "kr1/data/slot_template.lua"
+        "status": "level",
+        "level": 215,
+        "label": "第 215 关开始可用，通关后永久解锁",
+        "source": "kr1/data/levels/level215_data.lua"
       },
       "attack": {
         "damageMin": 19,
@@ -104042,7 +106490,7 @@
         "localization": "_assets/kr1-desktop/strings/zh-Hans.lua",
         "portrait": "_assets/kr1-desktop/images/fullhd/gui_portraits.lua",
         "encyclopedia": "kr1-desktop/data/map_data.lua + encyclopedia.lua + encyclopedia_creeps.lua",
-        "unlock": "kr1/data/slot_template.lua"
+        "unlock": "kr1/data/levels/level215_data.lua"
       },
       "units": [
         {
@@ -104151,10 +106599,10 @@
         "source": "kr1/data/levels/level205_data.lua"
       },
       "attack": {
-        "damageMin": 59,
+        "damageMin": 60,
         "damageMax": 70,
         "cooldown": 1.5,
-        "dps": 43,
+        "dps": 43.333333333333336,
         "range": 235,
         "rallyRange": null,
         "damageType": "物理",
@@ -104171,8 +106619,8 @@
           "icon": "/skills/tower_elf_ranger--skill_a.png",
           "iconSprite": "kr6_quickmenu_special_icons_rangers_0001",
           "maxLevel": 3,
-          "priceBase": 200,
-          "priceIncrement": 200,
+          "priceBase": 190,
+          "priceIncrement": 190,
           "descriptions": [
             {
               "key": "TOWER_ELF_RANGER_SKILL_A_DESCRIPTION_1",
@@ -104190,8 +106638,8 @@
           "levels": [
             {
               "level": 1,
-              "price": 200,
-              "cumulativePrice": 200,
+              "price": 190,
+              "cumulativePrice": 190,
               "description": "每15秒连射3发涂有毒药的箭矢，使目标中毒，在3秒内持续受到共计24点剧毒伤害。",
               "descriptionKey": "TOWER_ELF_RANGER_SKILL_A_DESCRIPTION_1",
               "descriptionSource": "level",
@@ -104200,8 +106648,8 @@
             },
             {
               "level": 2,
-              "price": 200,
-              "cumulativePrice": 400,
+              "price": 190,
+              "cumulativePrice": 380,
               "description": "每15秒连射3发涂有毒药的箭矢，使目标中毒，在6秒内持续受到共计96点剧毒伤害。",
               "descriptionKey": "TOWER_ELF_RANGER_SKILL_A_DESCRIPTION_2",
               "descriptionSource": "level",
@@ -104210,8 +106658,8 @@
             },
             {
               "level": 3,
-              "price": 200,
-              "cumulativePrice": 600,
+              "price": 190,
+              "cumulativePrice": 570,
               "description": "每15秒连射3发涂有毒药的箭矢，使目标中毒，在9秒内持续受到共计216点剧毒伤害。",
               "descriptionKey": "TOWER_ELF_RANGER_SKILL_A_DESCRIPTION_3",
               "descriptionSource": "level",
@@ -104226,28 +106674,28 @@
           "icon": "/skills/tower_elf_ranger--skill_b.png",
           "iconSprite": "kr6_quickmenu_special_icons_rangers_0002",
           "maxLevel": 3,
-          "priceBase": 150,
+          "priceBase": 200,
           "priceIncrement": 150,
           "descriptions": [
             {
               "key": "TOWER_ELF_RANGER_SKILL_B_DESCRIPTION_1",
-              "text": "每25秒射出一发蓄力箭矢，对目标造成90-135点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续6秒。"
+              "text": "每18秒射出一发蓄力箭矢，对目标造成90-135点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续6秒。"
             },
             {
               "key": "TOWER_ELF_RANGER_SKILL_B_DESCRIPTION_2",
-              "text": "每25秒射出一发蓄力箭矢，对目标造成135-205点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续7秒。"
+              "text": "每18秒射出一发蓄力箭矢，对目标造成135-205点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续6秒。"
             },
             {
               "key": "TOWER_ELF_RANGER_SKILL_B_DESCRIPTION_3",
-              "text": "每25秒射出一发蓄力箭矢，对目标造成180-270点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续9秒。"
+              "text": "每18秒射出一发蓄力箭矢，对目标造成180-270点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续6秒。"
             }
           ],
           "levels": [
             {
               "level": 1,
-              "price": 150,
-              "cumulativePrice": 150,
-              "description": "每25秒射出一发蓄力箭矢，对目标造成90-135点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续6秒。",
+              "price": 200,
+              "cumulativePrice": 200,
+              "description": "每18秒射出一发蓄力箭矢，对目标造成90-135点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续6秒。",
               "descriptionKey": "TOWER_ELF_RANGER_SKILL_B_DESCRIPTION_1",
               "descriptionSource": "level",
               "unresolved": false,
@@ -104267,8 +106715,8 @@
             {
               "level": 2,
               "price": 150,
-              "cumulativePrice": 300,
-              "description": "每25秒射出一发蓄力箭矢，对目标造成135-205点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续7秒。",
+              "cumulativePrice": 350,
+              "description": "每18秒射出一发蓄力箭矢，对目标造成135-205点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续6秒。",
               "descriptionKey": "TOWER_ELF_RANGER_SKILL_B_DESCRIPTION_2",
               "descriptionSource": "level",
               "unresolved": false,
@@ -104288,8 +106736,8 @@
             {
               "level": 3,
               "price": 150,
-              "cumulativePrice": 450,
-              "description": "每25秒射出一发蓄力箭矢，对目标造成180-270点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续9秒。",
+              "cumulativePrice": 500,
+              "description": "每18秒射出一发蓄力箭矢，对目标造成180-270点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续6秒。",
               "descriptionKey": "TOWER_ELF_RANGER_SKILL_B_DESCRIPTION_3",
               "descriptionSource": "level",
               "unresolved": false,
@@ -104314,8 +106762,8 @@
           "icon": "/skills/tower_elf_ranger--skill_c.png",
           "iconSprite": "kr6_quickmenu_special_icons_rangers_0003",
           "maxLevel": 3,
-          "priceBase": 200,
-          "priceIncrement": 200,
+          "priceBase": 190,
+          "priceIncrement": 190,
           "descriptions": [
             {
               "key": "TOWER_ELF_RANGER_SKILL_C_DESCRIPTION_1",
@@ -104333,8 +106781,8 @@
           "levels": [
             {
               "level": 1,
-              "price": 200,
-              "cumulativePrice": 200,
+              "price": 190,
+              "cumulativePrice": 190,
               "description": "箭矢现在可在目标周围的敌人间弹射3次，每次弹射造成先前40%的伤害。",
               "descriptionKey": "TOWER_ELF_RANGER_SKILL_C_DESCRIPTION_1",
               "descriptionSource": "level",
@@ -104343,8 +106791,8 @@
             },
             {
               "level": 2,
-              "price": 200,
-              "cumulativePrice": 400,
+              "price": 190,
+              "cumulativePrice": 380,
               "description": "箭矢现在可在目标周围的敌人间弹射3次，每次弹射造成先前65%的伤害。",
               "descriptionKey": "TOWER_ELF_RANGER_SKILL_C_DESCRIPTION_2",
               "descriptionSource": "level",
@@ -104353,8 +106801,8 @@
             },
             {
               "level": 3,
-              "price": 200,
-              "cumulativePrice": 600,
+              "price": 190,
+              "cumulativePrice": 570,
               "description": "箭矢现在可在目标周围的敌人间弹射3次，每次弹射造成先前80%的伤害。",
               "descriptionKey": "TOWER_ELF_RANGER_SKILL_C_DESCRIPTION_3",
               "descriptionSource": "level",

@@ -396,6 +396,30 @@ local function load_encyclopedia_index()
 end
 
 local function load_hero_index()
+	local registry_file = io.open(join_path(game_root, "kr1/heroes/registry.lua"), "rb")
+	if registry_file then
+		registry_file:close()
+		local registry = require("heroes.registry")
+		registry:init()
+		local entries = {}
+		-- Offline encyclopedia export explicitly requests every declared hero.
+		for _, declaration in ipairs(registry.declarations) do
+			registry:ensure_template(declaration.name)
+			local room = declaration.room or {}
+			local portrait, thumb = room.portrait_image or "", room.thumb_image or ""
+			local sources = {}
+			for _, path in ipairs(declaration.templates or {}) do sources[#sources + 1] = "kr1/" .. path:gsub("%.", "/") .. ".lua" end
+			entries[#entries + 1] = {
+				id = declaration.name,
+				from_kr = room.from_kr or declaration.from_kr or tonumber(portrait:match("^kr(%d+)_") or portrait:match("_kr(%d+)_")) or 1,
+				available_level = room.available_level, starting_level = room.starting_level,
+				stats = room.stats, portrait_sprite = portrait, thumb_sprite = thumb,
+				room_special_order = declaration.room_special_order or {},
+				template_sources = sources, roster_source = "kr1/heroes/registry.lua → declarations",
+			}
+		end
+		return entries
+	end
 	local path = join_path(game_root, "kr1-desktop/data/map_data.lua")
 	local handle = assert(io.open(path, "rb"))
 	local source = handle:read("*a")
@@ -460,9 +484,12 @@ local function build_raw_export(entity_db)
 	local hero_room_atlas = load_atlas_table("_assets/kr1-desktop/images/fullhd/hero_room.lua")
 	local upgrades_atlas = load_atlas_table("_assets/kr1-desktop/images/fullhd/upgrades.lua")
 	local hero_index = load_hero_index()
-	local hero_skill_descriptions = load_lua_table(
-		"_assets/kr1-desktop/strings/hero_room_special.lua"
-	)
+	local hero_skill_descriptions = {}
+	local legacy_descriptions = io.open(join_path(game_root, "_assets/kr1-desktop/strings/hero_room_special.lua"), "rb")
+	if legacy_descriptions then
+		legacy_descriptions:close()
+		hero_skill_descriptions = load_lua_table("_assets/kr1-desktop/strings/hero_room_special.lua")
+	end
 	local bit_lib = require("bit")
 	local tower_menus = require("data.tower_menus_data")
 	local upgrades = require("kr1.upgrades")
@@ -651,13 +678,30 @@ local function build_raw_export(entity_db)
 	for _, hero_entry in ipairs(hero_index) do
 		local template = entity_db.entities[hero_entry.id]
 		local record = copy_jsonable(hero_entry, 4)
+		if hero_entry.room_special_order and template then
+			local prefix = "HERO_ROOM_" .. (template.info.i18n_key or hero_entry.id):upper():gsub("^HERO_", "") .. "_"
+			record.specialties, record.skill_descriptions = {}, {}
+			for _, id in ipairs(hero_entry.room_special_order) do
+				local name = localization[prefix .. id .. "_NAME"]
+				local desc = localization[prefix .. id .. "_DESC"]
+				if name then
+					record.specialties[#record.specialties + 1] = name
+					if desc then
+						local U = require("utils")
+						local complete = true
+						for expression in desc:gmatch("%%%$(.-)%%%$") do if U.eval_text_expr(expression, {}) == nil then complete = false end end
+						if complete then record.skill_descriptions[name] = U.format_text_expr(desc, {}) end
+					end
+				end
+			end
+		end
 		record.template_exists = template ~= nil
 		record.portrait_atlas = copy_jsonable(
 			hero_room_atlas[hero_entry.portrait_sprite] or hero_room_atlas[hero_entry.thumb_sprite],
 			4
 		)
 		record.thumb_atlas = copy_jsonable(hero_room_atlas[hero_entry.thumb_sprite], 4)
-		record.skill_descriptions = copy_jsonable(
+		record.skill_descriptions = record.skill_descriptions or copy_jsonable(
 			hero_skill_descriptions[hero_entry.id] or hero_skill_descriptions.default or {},
 			3
 		)
@@ -801,7 +845,14 @@ local function build_raw_export(entity_db)
 		enemies[#enemies + 1] = record
 	end
 
-	local technology_lists = copy_jsonable(upgrades.list, 5)
+	local technology_lists = {}
+	local technology_ids = {}
+	for id in pairs(upgrades.list) do technology_ids[#technology_ids + 1] = id end
+	table.sort(technology_ids, function(a, b) return tonumber(a) < tonumber(b) end)
+	for _, id in ipairs(technology_ids) do
+		local entry = upgrades.list[id]
+		technology_lists[#technology_lists + 1] = copy_jsonable(entry.techs or entry, 5)
+	end
 	for _, technology_list in ipairs(technology_lists) do
 		for _, technology in pairs(technology_list) do
 			local from_kr = tonumber(technology.from_kr) or 1
@@ -813,7 +864,7 @@ local function build_raw_export(entity_db)
 	end
 
 	return {
-		metadata = {runId = os.getenv("DOVE_RUN_ID"), enemyDifficultySource = "all/difficulty.lua"},
+		metadata = {runId = os.getenv("DOVE_RUN_ID"), gameBranch = require("version").branch, enemyDifficultySource = "all/difficulty.lua"},
 		localization = localization,
 		technology = {
 			display_order = copy_jsonable(upgrades.display_order, 3),
@@ -1105,7 +1156,7 @@ function love.load()
 			template_bases[name] = base
 			return register(self, name, base)
 		end
-		entity_db:load()
+		if entity_db.ensure_loaded then entity_db:ensure_loaded() else entity_db:load() end
 
 		local count = 0
 		for _ in pairs(entity_db.entities) do

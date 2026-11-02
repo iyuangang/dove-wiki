@@ -1,7 +1,1322 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-27T02:06:21.048Z",
+  "generatedAt": "2026-11-02T03:32:54.331Z",
   "releases": [
+    {
+      "id": "2.1.0.6-4de3c0b89452",
+      "version": "2.1.0.6",
+      "previousVersion": "2.1.0.3",
+      "contentVersion": "5.6.12",
+      "commitHash": "4de3c0b894526ea8ad1e58e1ddd3ecee072bee15",
+      "previousCommitHash": "f2fc4c393d0832aedabe2e866c2fb447eabda3ff",
+      "detectedAt": "2026-11-02T03:32:54.331Z",
+      "summary": {
+        "changeCount": 60,
+        "categoryCounts": {
+          "hero": 58,
+          "tower": 2,
+          "enemy": 0,
+          "technology": 0
+        },
+        "kindCounts": {
+          "added": 12,
+          "removed": 0,
+          "balance": 22,
+          "content": 26
+        }
+      },
+      "changes": [
+        {
+          "id": "hero:hero_gerald:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_gerald",
+          "entityName": "杰拉尔德爵士",
+          "title": "内容调整英雄：杰拉尔德爵士",
+          "description": "",
+          "image": "/heroes/thumbs/hero_gerald.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "神圣支援；鼓舞；惩戒之盾；神圣打击",
+              "after": "惩戒之盾；神圣打击；鼓舞；神圣支援",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_magnus:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_magnus",
+          "entityName": "马格纳斯·灾祸魔导",
+          "title": "内容调整英雄：马格纳斯·灾祸魔导",
+          "description": "",
+          "image": "/heroes/thumbs/hero_magnus.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "幻影；奥术风暴；幻影·奥术风暴",
+              "after": "幻影；幻影·奥术风暴；奥术风暴",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_ignus:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_ignus",
+          "entityName": "炎之魔神",
+          "title": "内容调整英雄：炎之魔神",
+          "description": "",
+          "image": "/heroes/thumbs/hero_ignus.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "烈焰喷涌；暴怒狂焰；烈火附身",
+              "after": "暴怒狂焰；烈焰喷涌；烈火附身",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_hacksaw:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_hacksaw",
+          "entityName": "钢锯",
+          "title": "内容调整英雄：钢锯",
+          "description": "",
+          "image": "/heroes/thumbs/hero_hacksaw.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "摧甲钢锯；弹射锯片；伐伐伐木！",
+              "after": "摧甲钢锯；弹射锯片；伐伐伐木",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "新增能力：伐伐伐木",
+              "before": "无",
+              "after": "每隔21.67秒，钢锯祭出巨型电钻，强行秒杀面前的敌人，并获得双倍的金币。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "移除能力：伐伐伐木！",
+              "before": "每隔21.67秒，钢锯祭出巨型电钻，强行秒杀面前的敌人，并获得双倍的金币。",
+              "after": "无",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_10yr:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_10yr",
+          "entityName": "天十",
+          "title": "内容调整英雄：天十",
+          "description": "",
+          "image": "/heroes/thumbs/hero_10yr.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "钢铁时间；火焰冲刺；巨叟撼地",
+              "after": "钢铁时间；巨叟撼地；火焰冲刺",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_alric:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_alric",
+          "entityName": "阿尔里奇",
+          "title": "内容调整英雄：阿尔里奇",
+          "description": "",
+          "image": "/heroes/thumbs/hero_alric.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "血色连斩；沙漠勇士；反伤刺甲；沙漠之心",
+              "after": "血色连斩；沙漠勇士；沙漠之心；反伤刺甲",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_voodoo_witch:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_voodoo_witch",
+          "entityName": "女巫",
+          "title": "数值调整英雄：女巫",
+          "description": "",
+          "image": "/heroes/thumbs/hero_voodoo_witch.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "4",
+              "after": "1",
+              "delta": "-3（-75.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_monk:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_monk",
+          "entityName": "库绍",
+          "title": "内容调整英雄：库绍",
+          "description": "",
+          "image": "/heroes/thumbs/hero_monk.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "虎型拳；蛇形拳；豹形拳；龙形拳；鹤形拳；诸武精通",
+              "after": "虎型拳；蛇型拳；豹形拳；龙形拳；鹤形拳；诸武精通",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "新增能力：蛇型拳",
+              "before": "无",
+              "after": "每隔11.2秒，库绍对非boss敌人施展蛇形拳，造成100点物理伤害并使敌人的伤害降低64%。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "移除能力：蛇形拳",
+              "before": "每隔11.2秒，库绍对非boss敌人施展蛇形拳，造成100点物理伤害并使敌人的伤害降低64%。",
+              "after": "无",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_monkey_god:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_monkey_god",
+          "entityName": "塞塔姆",
+          "title": "数值调整英雄：塞塔姆",
+          "description": "",
+          "image": "/heroes/thumbs/hero_monkey_god.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "5",
+              "after": "1",
+              "delta": "-4（-80.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_giant:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_giant",
+          "entityName": "格劳尔",
+          "title": "数值调整英雄：格劳尔",
+          "description": "",
+          "image": "/heroes/thumbs/hero_giant.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "5",
+              "after": "1",
+              "delta": "-4（-80.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_dwarf:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_dwarf",
+          "entityName": "鲁林·长胡子",
+          "title": "内容调整英雄：鲁林·长胡子",
+          "description": "",
+          "image": "/heroes/thumbs/hero_dwarf.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "矮人亲卫；重锤；大地之力",
+              "after": "重锤；大地之力；矮人亲卫",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_minotaur:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_minotaur",
+          "entityName": "卡兹",
+          "title": "数值调整英雄：卡兹",
+          "description": "",
+          "image": "/heroes/thumbs/hero_minotaur.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "5",
+              "after": "1",
+              "delta": "-4（-80.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_crab:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_crab",
+          "entityName": "巨蟹",
+          "title": "数值调整英雄：巨蟹",
+          "description": "",
+          "image": "/heroes/thumbs/hero_crab.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "5",
+              "after": "1",
+              "delta": "-4（-80.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_dracolich:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_dracolich",
+          "entityName": "波恩哈特",
+          "title": "内容调整英雄：波恩哈特",
+          "description": "",
+          "image": "/heroes/thumbs/hero_dracolich.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "凋零；脊雨；疾病新星；死亡之触；亡灵眷属",
+              "after": "脊雨；疾病新星；死亡之触；亡灵眷属；凋零",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_elves_archer:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_elves_archer",
+          "entityName": "艾莉丹",
+          "title": "内容调整英雄：艾莉丹",
+          "description": "",
+          "image": "/heroes/thumbs/hero_elves_archer.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "连射；迅闪；双刃；箭猪；箭雨；护卫",
+              "after": "迅闪；双刃；箭猪；连射；箭雨；护卫",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_arivan:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_arivan",
+          "entityName": "埃里汎",
+          "title": "数值调整英雄：埃里汎",
+          "description": "",
+          "image": "/heroes/thumbs/hero_arivan.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "3",
+              "after": "1",
+              "delta": "-2（-66.7%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_bravebark:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_bravebark",
+          "entityName": "无畏树人",
+          "title": "数值调整英雄：无畏树人",
+          "description": "",
+          "image": "/heroes/thumbs/hero_bravebark.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "5",
+              "after": "1",
+              "delta": "-4（-80.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_xin:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_xin",
+          "entityName": "鑫",
+          "title": "数值调整英雄：鑫",
+          "description": "",
+          "image": "/heroes/thumbs/hero_xin.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "5",
+              "after": "1",
+              "delta": "-4（-80.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_elves_denas:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_elves_denas",
+          "entityName": "迪纳斯王子",
+          "title": "数值调整英雄：迪纳斯王子",
+          "description": "",
+          "image": "/heroes/thumbs/hero_elves_denas.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "5",
+              "after": "1",
+              "delta": "-4（-80.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_rag:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_rag",
+          "entityName": "瑞兹与大瑞格",
+          "title": "数值调整英雄：瑞兹与大瑞格",
+          "description": "",
+          "image": "/heroes/thumbs/hero_rag.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "5",
+              "after": "1",
+              "delta": "-4（-80.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_durax:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_durax",
+          "entityName": "杜拉斯",
+          "title": "数值调整英雄：杜拉斯",
+          "description": "",
+          "image": "/heroes/thumbs/hero_durax.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "5",
+              "after": "1",
+              "delta": "-4（-80.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_catha:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_catha",
+          "entityName": "卡莎",
+          "title": "数值调整英雄：卡莎",
+          "description": "",
+          "image": "/heroes/thumbs/hero_catha.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "4",
+              "after": "1",
+              "delta": "-3（-75.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_regson:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_regson",
+          "entityName": "雷格森",
+          "title": "数值调整英雄：雷格森",
+          "description": "",
+          "image": "/heroes/thumbs/hero_regson.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "5",
+              "after": "1",
+              "delta": "-4（-80.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_regson:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_regson",
+          "entityName": "雷格森",
+          "title": "内容调整英雄：雷格森",
+          "description": "",
+          "image": "/heroes/thumbs/hero_regson.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "刃舞；死战之志；异能魔刃；影袭；死吻",
+              "after": "刃舞；影袭；死战之志；异能魔刃；死吻",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_lilith:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_lilith",
+          "entityName": "莉莉斯",
+          "title": "数值调整英雄：莉莉斯",
+          "description": "",
+          "image": "/heroes/thumbs/hero_lilith.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "5",
+              "after": "1",
+              "delta": "-4（-80.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_phoenix:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_phoenix",
+          "entityName": "凤凰",
+          "title": "数值调整英雄：凤凰",
+          "description": "",
+          "image": "/heroes/thumbs/hero_phoenix.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "5",
+              "after": "1",
+              "delta": "-4（-80.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_phoenix:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_phoenix",
+          "entityName": "凤凰",
+          "title": "内容调整英雄：凤凰",
+          "description": "",
+          "image": "/heroes/thumbs/hero_phoenix.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "净化；焚祭；余烬之地；炽焰后裔；火焰之环",
+              "after": "净化；焚祭；炽焰后裔；火焰之环；余烬之地",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_faustus:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_faustus",
+          "entityName": "浮士德",
+          "title": "数值调整英雄：浮士德",
+          "description": "",
+          "image": "/heroes/thumbs/hero_faustus.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "5",
+              "after": "1",
+              "delta": "-4（-80.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_veznan:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_veznan",
+          "entityName": "维兹南",
+          "title": "数值调整英雄：维兹南",
+          "description": "",
+          "image": "/heroes/thumbs/hero_veznan.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "5",
+              "after": "1",
+              "delta": "-4（-80.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_bruce:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_bruce",
+          "entityName": "布鲁斯",
+          "title": "数值调整英雄：布鲁斯",
+          "description": "",
+          "image": "/heroes/thumbs/hero_bruce.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "5",
+              "after": "1",
+              "delta": "-4（-80.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_bruce:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_bruce",
+          "entityName": "布鲁斯",
+          "title": "内容调整英雄：布鲁斯",
+          "description": "",
+          "image": "/heroes/thumbs/hero_bruce.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "流血利爪；王者咆哮；野蛮撕咬；雄狮守卫",
+              "after": "流血利刃；王者咆哮；野蛮撕咬；雄狮守卫",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "新增能力：流血利刃",
+              "before": "无",
+              "after": "布鲁斯每次攻击有0.2概率使敌人流血，持续5秒，每0.37秒造成9点真实伤害。对流血或中毒的敌人，布鲁斯每次攻击额外造成75点残暴伤害。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "移除能力：流血利爪",
+              "before": "布鲁斯每次攻击有0.2概率使敌人流血，持续5秒，每0.37秒造成9点真实伤害。对流血或中毒的敌人，布鲁斯每次攻击额外造成75点残暴伤害。",
+              "after": "无",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_lynn:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_lynn",
+          "entityName": "莉恩",
+          "title": "数值调整英雄：莉恩",
+          "description": "",
+          "image": "/heroes/thumbs/hero_lynn.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "5",
+              "after": "1",
+              "delta": "-4（-80.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_wilbur:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_wilbur",
+          "entityName": "威尔伯",
+          "title": "数值调整英雄：威尔伯",
+          "description": "",
+          "image": "/heroes/thumbs/hero_wilbur.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "5",
+              "after": "1",
+              "delta": "-4（-80.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_bolverk:balance:main",
+          "category": "hero",
+          "kind": "balance",
+          "entityId": "hero_bolverk",
+          "entityName": "波尔维克",
+          "title": "数值调整英雄：波尔维克",
+          "description": "",
+          "image": "/heroes/thumbs/hero_bolverk.png",
+          "details": [
+            {
+              "field": "初始等级",
+              "before": "5",
+              "after": "1",
+              "delta": "-4（-80.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_builder:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_builder",
+          "entityName": "托雷斯",
+          "title": "内容调整英雄：托雷斯",
+          "description": "",
+          "image": "/heroes/thumbs/hero_builder.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "加班加点；午休时间；拆迁专家；防御炮台；铁球横扫",
+              "after": "正在施工；午休时间；拆迁达人；防御塔楼；破城钢球",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "新增能力：正在施工",
+              "before": "无",
+              "after": "每隔11秒，召唤两名工人并肩作战，各拥有100点生命值，驻场12秒，每次攻击造成6-12点物理伤害。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "新增能力：拆迁达人",
+              "before": "无",
+              "after": "每隔16秒，奥布杜尔快速旋转手中的木梁，在1.25秒中眩晕敌人，并每0.25秒对100范围敌人造成15-24点物理伤害。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "新增能力：防御塔楼",
+              "before": "无",
+              "after": "每隔30秒，奥布杜尔在路径上建造一座临时炮台，持续15秒，每次攻击造成24-36点物理伤害，并使敌人晕眩0.25秒。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "新增能力：破城钢球",
+              "before": "无",
+              "after": "每隔35秒，奥布杜尔朝路径上扔出一个巨大钢球，造成300点破甲伤害，并使敌人眩晕2秒。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "移除能力：加班加点",
+              "before": "每隔11秒，召唤两名工人并肩作战，各拥有100点生命值，驻场12秒，每次攻击造成6-12点物理伤害。",
+              "after": "无",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "移除能力：拆迁专家",
+              "before": "每隔16秒，奥布杜尔快速旋转手中的木梁，在1.25秒中眩晕敌人，并每0.25秒对100范围敌人造成15-24点物理伤害。",
+              "after": "无",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "移除能力：防御炮台",
+              "before": "每隔30秒，奥布杜尔在路径上建造一座临时炮台，持续15秒，每次攻击造成24-36点物理伤害，并使敌人晕眩0.25秒。",
+              "after": "无",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "移除能力：铁球横扫",
+              "before": "每隔35秒，奥布杜尔朝路径上扔出一个巨大钢球，造成300点破甲伤害，并使敌人眩晕2秒。",
+              "after": "无",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_dragon_bone:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_dragon_bone",
+          "entityName": "波恩哈特",
+          "title": "内容调整英雄：波恩哈特",
+          "description": "",
+          "image": "/heroes/thumbs/hero_dragon_bone.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "瘟疫；脊骨骤雨；瘟神毒雾；爆发感染；疫病灾星；化骨为龙",
+              "after": "脊骨骤雨；瘟神毒雾；爆发感染；疫病灾星；化骨为龙；瘟疫",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_lava:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_lava",
+          "entityName": "喀拉托",
+          "title": "内容调整英雄：喀拉托",
+          "description": "",
+          "image": "/heroes/thumbs/hero_lava.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "暴怒猛击；烈焰之心；双倍麻烦；狂野喷发；烈焰席卷",
+              "after": "暴怒猛击；烈焰之心；双倍麻烦；烈炎席卷；狂野喷发",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "新增能力：烈炎席卷",
+              "before": "无",
+              "after": "每隔30秒，喀拉托向周围敌人甩出熔岩，每0.25秒造成15点真实伤害，持续4秒。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "移除能力：烈焰席卷",
+              "before": "每隔30秒，喀拉托向周围敌人甩出熔岩，每0.25秒造成15点真实伤害，持续4秒。",
+              "after": "无",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_dianyun:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_dianyun",
+          "entityName": "电云",
+          "title": "内容调整英雄：电云",
+          "description": "",
+          "image": "/heroes/thumbs/hero_dianyun.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "孔明灯；闪电打击；暴风领主；神圣雨露；至尊波；雷电之子",
+              "after": "闪电打击；暴风领主；神圣雨露；势崩江河；雷电之子；孔明灯",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "新增能力：势崩江河",
+              "before": "无",
+              "after": "每隔21秒，电云以自己为中心释放数道能量波，击晕路径上的敌人4秒。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "移除能力：至尊波",
+              "before": "每隔21秒，电云以自己为中心释放数道能量波，击晕路径上的敌人4秒。",
+              "after": "无",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_beresad:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_beresad",
+          "entityName": "贝雷萨德",
+          "title": "内容调整英雄：贝雷萨德",
+          "description": "",
+          "image": "/heroes/thumbs/hero_beresad.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "龙息术；恐惧之龙；龙之爪牙；湮灭射线；地狱火雨",
+              "after": "金之欲；爆炎；惧龙；龙生；片甲不留；地狱火",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "新增能力：金之欲",
+              "before": "无",
+              "after": "被贝雷萨德普攻杀死的敌人额外掉落6枚金币，被地狱火杀死的敌人额外掉落3枚金币。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "新增能力：爆炎",
+              "before": "无",
+              "after": "每隔20秒，贝雷萨德喷出灼热的火焰，灼烧前方区域，留下持续5秒的焦土，每0.2秒造成7点真实伤害。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "新增能力：惧龙",
+              "before": "无",
+              "after": "每隔22秒，发出震耳欲聋的咆哮，恐惧最多6名敌人，使其逃跑并加速50%，持续7秒。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "新增能力：龙生",
+              "before": "无",
+              "after": "每隔35秒，发射一个傀儡，落地时造成40-60点爆炸伤害。傀儡拥有500点生命值，每次攻击造成42-63点物理伤害，驻场20秒。傀儡无法恢复生命值，但也不受火焰、剧毒、流血、狼人化、尸骸化的影响。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "新增能力：片甲不留",
+              "before": "无",
+              "after": "每隔50秒，射出一道湮灭光线，秒杀目标，并对附近敌人造成80-120点真实伤害。该技能只会对生命值高于750的敌人释放。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "新增能力：地狱火",
+              "before": "无",
+              "after": "每隔56秒，召唤地狱火雨，每0.25秒对所有敌人造成9点真实伤害，持续4秒。",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "移除能力：龙息术",
+              "before": "每隔20秒，贝雷萨德喷出灼热的火焰，灼烧前方区域，留下持续5秒的焦土，每0.2秒造成7点真实伤害。",
+              "after": "无",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "移除能力：恐惧之龙",
+              "before": "每隔22秒，发出震耳欲聋的咆哮，恐惧最多6名敌人，使其逃跑并加速50%，持续7秒。",
+              "after": "无",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "移除能力：龙之爪牙",
+              "before": "每隔35秒，发射一个傀儡，落地时造成40-60点爆炸伤害。傀儡拥有500点生命值，每次攻击造成42-63点物理伤害，驻场20秒。傀儡无法恢复生命值，但也不受火焰、剧毒、流血、狼人化、尸骸化的影响。",
+              "after": "无",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "移除能力：湮灭射线",
+              "before": "每隔50秒，射出一道湮灭光线，秒杀目标，并对附近敌人造成80-120点真实伤害。该技能只会对生命值高于750的敌人释放。",
+              "after": "无",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "移除能力：地狱火雨",
+              "before": "每隔56秒，召唤地狱火雨，每0.25秒对所有敌人造成9点真实伤害，持续4秒。",
+              "after": "无",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_orc:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_orc",
+          "entityName": "维鲁克",
+          "title": "内容调整英雄：维鲁克",
+          "description": "",
+          "image": "/heroes/thumbs/hero_orc.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "战之欲；角斗立场；蛮力；瞄准砍击；振臂一呼；好战分子",
+              "after": "瞄准砍击；蛮力；振臂一呼；好战分子；战之欲；角斗立场",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_oloch:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_oloch",
+          "entityName": "奥洛克",
+          "title": "内容调整英雄：奥洛克",
+          "description": "",
+          "image": "/heroes/thumbs/hero_oloch.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "炼狱业火；自我复制；岩浆喷发；地狱注入；恶魔飞爆；孤立缄印",
+              "after": "自我复制；岩浆喷发；地狱注入；恶魔飞爆；孤立缄印；炼狱业火",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_margosa:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_margosa",
+          "entityName": "苦楝夫人",
+          "title": "内容调整英雄：苦楝夫人",
+          "description": "",
+          "image": "/heroes/thumbs/hero_margosa.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "熟吸蝙蝠；绝望迷雾；黑暗呼唤；吸血鬼之触；野兽形态；嗜血本能",
+              "after": "嗜血本能；熟吸蝙蝠；绝望迷雾；黑暗呼唤；吸血鬼之触；野兽形态",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_mortemis:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_mortemis",
+          "entityName": "墨忒弥斯",
+          "title": "内容调整英雄：墨忒弥斯",
+          "description": "",
+          "image": "/heroes/thumbs/hero_mortemis.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "夜鬼哭；腐朽之地；无望之人；不死人之奴；腐朽近卫；黑暗军",
+              "after": "巫妖；夜鬼哭；腐朽之地；无望之人；不死人之奴；腐朽近卫；黑暗军",
+              "delta": null,
+              "direction": "changed"
+            },
+            {
+              "field": "新增能力：巫妖",
+              "before": "无",
+              "after": "普通攻击发射灵魂弹幕，并吸收所造成伤害的50%转化为自身生命值。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_jigou:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_jigou",
+          "entityName": "极狗",
+          "title": "内容调整英雄：极狗",
+          "description": "",
+          "image": "/heroes/thumbs/hero_jigou.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "雪球；霜冻吐息；猛击大地；冰川形态；冰区；雪人血",
+              "after": "雪人血；雪球；霜冻吐息；猛击大地；冰川形态；冰区",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_tramin:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_tramin",
+          "entityName": "特拉敏大师",
+          "title": "内容调整英雄：特拉敏大师",
+          "description": "",
+          "image": "/heroes/thumbs/hero_tramin.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "自爆机器人；饮硝狂奔；闪光弹；火箭弹幕；疯狂炸弹人；火箭跳",
+              "after": "火箭跳；自爆机器人；饮硝狂奔；闪光弹；火箭弹幕；疯狂炸弹人",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_naga:content:main",
+          "category": "hero",
+          "kind": "content",
+          "entityId": "hero_naga",
+          "entityName": "浚湃",
+          "title": "内容调整英雄：浚湃",
+          "description": "",
+          "image": "/heroes/thumbs/hero_naga.png",
+          "details": [
+            {
+              "field": "能力列表",
+              "before": "潮汐；勇气旗帜；那伽之凝视；水花四溅；深渊恐怖；背水一战",
+              "after": "背水一战；水花四溅；潮汐；勇气旗帜；那伽之凝视；深渊恐怖",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        },
+        {
+          "id": "hero:hero_gerald_kr6:added:main",
+          "category": "hero",
+          "kind": "added",
+          "entityId": "hero_gerald_kr6",
+          "entityName": "杰拉尔德",
+          "title": "新增英雄：杰拉尔德",
+          "description": "新增可用英雄，包含 6 项能力。",
+          "image": "/heroes/thumbs/hero_gerald_kr6.png",
+          "details": []
+        },
+        {
+          "id": "hero:hero_zefira:added:main",
+          "category": "hero",
+          "kind": "added",
+          "entityId": "hero_zefira",
+          "entityName": "泽菲拉",
+          "title": "新增英雄：泽菲拉",
+          "description": "新增可用英雄，包含 6 项能力。",
+          "image": "/heroes/thumbs/hero_zefira.png",
+          "details": []
+        },
+        {
+          "id": "hero:hero_bolin_kr6:added:main",
+          "category": "hero",
+          "kind": "added",
+          "entityId": "hero_bolin_kr6",
+          "entityName": "博林",
+          "title": "新增英雄：博林",
+          "description": "新增可用英雄，包含 6 项能力。",
+          "image": "/heroes/thumbs/hero_bolin_kr6.png",
+          "details": []
+        },
+        {
+          "id": "hero:hero_connor:added:main",
+          "category": "hero",
+          "kind": "added",
+          "entityId": "hero_connor",
+          "entityName": "康纳",
+          "title": "新增英雄：康纳",
+          "description": "新增可用英雄，包含 6 项能力。",
+          "image": "/heroes/thumbs/hero_connor.png",
+          "details": []
+        },
+        {
+          "id": "hero:hero_myriath:added:main",
+          "category": "hero",
+          "kind": "added",
+          "entityId": "hero_myriath",
+          "entityName": "杰米娜",
+          "title": "新增英雄：杰米娜",
+          "description": "新增可用英雄，包含 6 项能力。",
+          "image": "/heroes/thumbs/hero_myriath.png",
+          "details": []
+        },
+        {
+          "id": "hero:hero_malik_kr6:added:main",
+          "category": "hero",
+          "kind": "added",
+          "entityId": "hero_malik_kr6",
+          "entityName": "马利克",
+          "title": "新增英雄：马利克",
+          "description": "新增可用英雄，包含 6 项能力。",
+          "image": "/heroes/thumbs/hero_malik_kr6.png",
+          "details": []
+        },
+        {
+          "id": "hero:hero_rhodes:added:main",
+          "category": "hero",
+          "kind": "added",
+          "entityId": "hero_rhodes",
+          "entityName": "罗德",
+          "title": "新增英雄：罗德",
+          "description": "新增可用英雄，包含 6 项能力。",
+          "image": "/heroes/thumbs/hero_rhodes.png",
+          "details": []
+        },
+        {
+          "id": "hero:hero_ashbite:added:main",
+          "category": "hero",
+          "kind": "added",
+          "entityId": "hero_ashbite",
+          "entityName": "阿什比特",
+          "title": "新增英雄：阿什比特",
+          "description": "新增可用英雄，包含 6 项能力。",
+          "image": "/heroes/thumbs/hero_ashbite.png",
+          "details": []
+        },
+        {
+          "id": "hero:hero_drakkan:added:main",
+          "category": "hero",
+          "kind": "added",
+          "entityId": "hero_drakkan",
+          "entityName": "德拉坎",
+          "title": "新增英雄：德拉坎",
+          "description": "新增可用英雄，包含 6 项能力。",
+          "image": "/heroes/thumbs/hero_drakkan.png",
+          "details": []
+        },
+        {
+          "id": "hero:hero_ignus_kr6:added:main",
+          "category": "hero",
+          "kind": "added",
+          "entityId": "hero_ignus_kr6",
+          "entityName": "伊格纳斯",
+          "title": "新增英雄：伊格纳斯",
+          "description": "新增可用英雄，包含 6 项能力。",
+          "image": "/heroes/thumbs/hero_ignus_kr6.png",
+          "details": []
+        },
+        {
+          "id": "hero:hero_oni_kr6:added:main",
+          "category": "hero",
+          "kind": "added",
+          "entityId": "hero_oni_kr6",
+          "entityName": "鬼侍",
+          "title": "新增英雄：鬼侍",
+          "description": "新增可用英雄，包含 6 项能力。",
+          "image": "/heroes/thumbs/hero_oni_kr6.png",
+          "details": []
+        },
+        {
+          "id": "hero:hero_illiana:added:main",
+          "category": "hero",
+          "kind": "added",
+          "entityId": "hero_illiana",
+          "entityName": "伊莉安娜",
+          "title": "新增英雄：伊莉安娜",
+          "description": "新增可用英雄，包含 6 项能力。",
+          "image": "/heroes/thumbs/hero_illiana.png",
+          "details": []
+        },
+        {
+          "id": "tower:tower_elf_ranger:balance:main",
+          "category": "tower",
+          "kind": "balance",
+          "entityId": "tower_elf_ranger",
+          "entityName": "精灵精英游侠",
+          "title": "数值调整防御塔：精灵精英游侠",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_elf_ranger.png",
+          "details": [
+            {
+              "field": "最低伤害",
+              "before": "59",
+              "after": "60",
+              "delta": "+1（+1.7%）",
+              "direction": "increase"
+            },
+            {
+              "field": "淬毒箭矢 · 基础价格",
+              "before": "200",
+              "after": "190",
+              "delta": "-10（-5.0%）",
+              "direction": "decrease"
+            },
+            {
+              "field": "淬毒箭矢 · 升级价格",
+              "before": "200",
+              "after": "190",
+              "delta": "-10（-5.0%）",
+              "direction": "decrease"
+            },
+            {
+              "field": "刺藤射击 · 基础价格",
+              "before": "150",
+              "after": "200",
+              "delta": "+50（+33.3%）",
+              "direction": "increase"
+            },
+            {
+              "field": "林地弹射 · 基础价格",
+              "before": "200",
+              "after": "190",
+              "delta": "-10（-5.0%）",
+              "direction": "decrease"
+            },
+            {
+              "field": "林地弹射 · 升级价格",
+              "before": "200",
+              "after": "190",
+              "delta": "-10（-5.0%）",
+              "direction": "decrease"
+            }
+          ]
+        },
+        {
+          "id": "tower:tower_elf_ranger:content:main",
+          "category": "tower",
+          "kind": "content",
+          "entityId": "tower_elf_ranger",
+          "entityName": "精灵精英游侠",
+          "title": "内容调整防御塔：精灵精英游侠",
+          "description": "",
+          "image": "/encyclopedia/thumbs/tower_elf_ranger.png",
+          "details": [
+            {
+              "field": "刺藤射击 · 技能说明",
+              "before": "每25秒射出一发蓄力箭矢，对目标造成90-135点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续6秒。；每25秒射出一发蓄力箭矢，对目标造成135-205点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续7秒。；每25秒射出一发蓄力箭矢，对目标造成180-270点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续9秒。",
+              "after": "每18秒射出一发蓄力箭矢，对目标造成90-135点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续6秒。；每18秒射出一发蓄力箭矢，对目标造成135-205点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续6秒。；每18秒射出一发蓄力箭矢，对目标造成180-270点物理伤害，并使其眩晕2秒。同时生长出刺藤，使周围的敌人减速60%，持续6秒。",
+              "delta": null,
+              "direction": "changed"
+            }
+          ]
+        }
+      ]
+    },
     {
       "id": "2.1.0.3-f2fc4c393d08",
       "version": "2.1.0.3",
