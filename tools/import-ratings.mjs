@@ -118,6 +118,7 @@ for (const [profile, sourceDir] of Object.entries(sources)) {
   })
   if (coreTrials !== s.core_trials) throw new Error('Formal coverage mismatch: ' + profile)
   const summary = { profile, gameVersion: s.game_version, commitHash: s.commit, runId: s.run_id, asOf: dates.sort().at(-1),
+    gameBranch: s.game_branch || input.environment?.game_branch || null,
     seconds: profile === 'standard' ? 60 : 30, repeats: profile === 'standard' ? 5 : 3,
     templates: s.templates_total ?? s.templates, trials: s.trials_complete ?? s.attempted_trials, coreTrials,
     objectCount: objects.length, groupCounts, sourceSummarySha256: sha(await readFile(path.join(sourceDir, 'native_reference.json'))),

@@ -25,6 +25,19 @@ function facts(details, id) {
 }
 
 describe('英雄行为来源与移动分类', () => {
+  it('迁移后的模板使用真实模块路径且不继承旧文件的审阅状态', () => {
+    const { raw, review } = fixture('hero_new')
+    raw.template_sources = ['kr1/heroes/hero_new/templates.lua']
+    const result = buildHeroDetails(raw, review)
+    expect(result.sources[0].file).toBe(raw.template_sources[0])
+    expect(result.sources[0].line).toBeNull()
+    expect(result.pending).toContain('新版英雄专属机制尚未完成源码复核')
+    expect(result.movement.tags).toEqual([])
+    review.files.set(raw.template_sources[0], { text: '\nRT("hero_new"', valid: false })
+    const located = buildHeroDetails(raw, review)
+    expect(located.sources[0].line).toBe(2)
+    expect(located.pending).toContain('新版英雄专属机制尚未完成源码复核')
+  })
   it('英雄单独更新保留塔、敌人、科技、辅助与原始版本，不产生跨版本覆盖', () => {
     const previous = { metadata: { gameVersion: 'old' }, summary: { heroCount: 1, towerCount: 94 }, towers: [{ id: 'tower' }], enemies: [{ id: 'enemy' }], technologyTrees: [1], supportEffects: [2], validation: { warnings: [] } }
     const next = mergeHeroSnapshot(previous, [{ id: 'hero' }], { gameVersion: 'new' })
